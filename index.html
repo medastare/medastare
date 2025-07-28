@@ -1,66 +1,106 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MedaStaré</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      height: 100vh;
-      font-family: 'ins', sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
       background: linear-gradient(135deg, #1A1A40, #FFD700);
       color: white;
+      height: 100vh;
+      overflow: hidden;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
-      position: relative;
-    }
-
-    h1 {
-      font-size: 3em;
-      font-weight: bold;
-      background: linear-gradient(90deg, #FFD700, white);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    p {
-      font-size: 1.2em;
-      color: rgba(255, 255, 255, 0.8);
+      font-family: 'Segoe UI', sans-serif;
     }
 
     .stars {
       position: absolute;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(white 1px, transparent 1px);
-      background-size: 3px 3px;
-      animation: moveStars 120s linear infinite;
-      opacity: 0.25;
-      z-index: 0;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      overflow: hidden;
     }
 
-    @keyframes moveStars {
-      from { transform: translate(0, 0); }
-      to { transform: translate(-50%, -50%); }
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      animation: move 5s linear infinite;
     }
 
-    .content {
-      position: relative;
-      z-index: 1;
+    @keyframes move {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+
+    .title {
+      z-index: 2;
       text-align: center;
+      animation: glow 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #fff, 0 0 10px #FFD700; }
+      to { text-shadow: 0 0 20px #fff, 0 0 40px #FFD700; }
+    }
+
+    .title h1 {
+      font-size: 3.5rem;
+      background: linear-gradient(to right, #FFD700, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shine 5s linear infinite;
+    }
+
+    @keyframes shine {
+      0% { background-position: 0%; }
+      100% { background-position: 200%; }
+    }
+
+    .title p {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      color: #f1f1f1;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <div class="stars"></div>
-  <div class="content">
+  <div class="stars">
+    <!-- Yıldızları JS ile ekleyeceğiz -->
+  </div>
+
+  <div class="title">
     <h1>MedaStaré</h1>
     <p>Tarzını konuşturacağın evren çok yakında.</p>
   </div>
+
+  <script>
+    // Yıldız efektleri otomatik olarak oluşturuluyor
+    const stars = document.querySelector('.stars');
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.classList.add('star');
+      star.style.left = `${Math.random() * 100}%`;
+      star.style.top = `${Math.random() * 100}%`;
+      star.style.animationDuration = `${Math.random() * 3 + 2}s`;
+      stars.appendChild(star);
+    }
+  </script>
 </body>
 </html>
