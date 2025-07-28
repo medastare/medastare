@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MedaStaré</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap');
+
     * {
       margin: 0;
       padding: 0;
@@ -12,95 +14,79 @@
     }
 
     body {
-      background: linear-gradient(135deg, #1A1A40, #FFD700);
-      color: white;
+      font-family: 'Outfit', sans-serif;
       height: 100vh;
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-family: 'Segoe UI', sans-serif;
+      color: #fff;
+      background: linear-gradient(-45deg, #1a1a40, #4b0082, #ffd700, #8b0000);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      position: relative;
+    }
+
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
     }
 
     .stars {
       position: absolute;
       width: 100%;
       height: 100%;
-      background: transparent;
-      overflow: hidden;
+      background: transparent url('https://raw.githubusercontent.com/JulianLaval/canvas-particle-network/master/demo/bg.png') repeat;
+      animation: stars 100s linear infinite;
+      z-index: 1;
+      opacity: 0.3;
     }
 
-    .star {
-      position: absolute;
-      width: 2px;
-      height: 2px;
-      background: white;
-      animation: move 5s linear infinite;
+    @keyframes stars {
+      from {background-position: 0 0;}
+      to {background-position: -10000px 5000px;}
     }
 
-    @keyframes move {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-    }
-
-    .title {
+    .container {
+      position: relative;
       z-index: 2;
       text-align: center;
-      animation: glow 2.5s ease-in-out infinite alternate;
+      padding: 0 2rem;
     }
 
-    @keyframes glow {
-      from { text-shadow: 0 0 5px #fff, 0 0 10px #FFD700; }
-      to { text-shadow: 0 0 20px #fff, 0 0 40px #FFD700; }
+    h1 {
+      font-size: 4rem;
+      color: #FFD700;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.5);
+      animation: float 3s ease-in-out infinite;
     }
 
-    .title h1 {
-      font-size: 3.5rem;
-      background: linear-gradient(to right, #FFD700, #ffffff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shine 5s linear infinite;
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
     }
 
-    @keyframes shine {
-      0% { background-position: 0%; }
-      100% { background-position: 200%; }
+    p {
+      font-size: 1.4rem;
+      margin-top: 1.5rem;
+      color: #ffffffcc;
+      animation: floatText 6s ease-in-out infinite;
     }
 
-    .title p {
-      font-size: 1.2rem;
-      margin-top: 1rem;
-      color: #f1f1f1;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes floatText {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(5px); }
+      100% { transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <div class="stars">
-    <!-- Yıldızları JS ile ekleyeceğiz -->
-  </div>
-
-  <div class="title">
+  <div class="stars"></div>
+  <div class="container">
     <h1>MedaStaré</h1>
     <p>Tarzını konuşturacağın evren çok yakında.</p>
   </div>
-
-  <script>
-    // Yıldız efektleri otomatik olarak oluşturuluyor
-    const stars = document.querySelector('.stars');
-    for (let i = 0; i < 100; i++) {
-      const star = document.createElement('div');
-      star.classList.add('star');
-      star.style.left = `${Math.random() * 100}%`;
-      star.style.top = `${Math.random() * 100}%`;
-      star.style.animationDuration = `${Math.random() * 3 + 2}s`;
-      stars.appendChild(star);
-    }
-  </script>
 </body>
 </html>
