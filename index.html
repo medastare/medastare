@@ -1,80 +1,93 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
   <title>MedaStaré</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
+
+    /* Arka plan */
     body {
       margin: 0;
-      overflow: hidden;
-      background: linear-gradient(to bottom right, #1A1A40, #FFD700);
-      color: white;
-      font-family: 'Helvetica Neue', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      padding: 0;
+      background: linear-gradient(135deg, #1A1A40, #FFD700);
       height: 100vh;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+      color: white;
     }
 
+    /* Yıldız Partikülleri */
     .stars {
       position: absolute;
       width: 100%;
       height: 100%;
-      background: transparent;
-      overflow: hidden;
-    }
-
-    .stars::after {
-      content: '';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image: radial-gradient(white 1px, transparent 1px);
-      background-size: 2px 2px;
+      background: url('https://i.ibb.co/fqFKQzT/stars.gif') repeat;
+      background-size: cover;
       animation: moveStars 60s linear infinite;
+      z-index: 0;
+      opacity: 0.15;
     }
 
     @keyframes moveStars {
-      from { transform: translateY(0); }
-      to { transform: translateY(-100%); }
+      0% { background-position: 0 0; }
+      100% { background-position: 1000px 1000px; }
     }
 
+    /* İçerik */
     .content {
       z-index: 2;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       text-align: center;
     }
 
-    .countdown {
-      font-size: 28px;
-      margin-top: 15px;
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #fff, #FFD700, #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 4s infinite linear;
     }
+
+    @keyframes shimmer {
+      0% { background-position: -1000px; }
+      100% { background-position: 1000px; }
+    }
+
+    p {
+      font-size: 1.1rem;
+      font-weight: 300;
+      opacity: 0.8;
+    }
+
+    /* Alt yazı */
+    .footer {
+      position: absolute;
+      bottom: 30px;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #FFD700;
+      opacity: 0.6;
+    }
+
   </style>
 </head>
 <body>
+
   <div class="stars"></div>
+
   <div class="content">
     <h1>MedaStaré</h1>
     <p>Tarzını konuşturacağın evren çok yakında.</p>
-    <div class="countdown" id="countdown"></div>
   </div>
 
-  <script>
-    const countdown = document.getElementById('countdown');
-    const targetDate = new Date("September 15, 2025 00:00:00").getTime();
+  <div class="footer">Bir yıldız doğuyor... 2025</div>
 
-    setInterval(() => {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      countdown.innerHTML = `🚀 ${days}g ${hours}s ${minutes}d ${seconds}sn kaldı`;
-    }, 1000);
-  </script>
 </body>
 </html>
