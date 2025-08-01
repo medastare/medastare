@@ -6,17 +6,15 @@
   <title>MedaStaré</title>
   
   <!-- Favicon -->
-  <!-- Favicon (Tarayıcı sekmesindeki küçük ikon) -->
-<link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
-<!-- Sosyal Medya & SEO için Open Graph -->
-<meta property="og:title" content="MedaStaré – Tarzını Konuştur" />
-<meta property="og:description" content="Tarzını konuşturacağın evren çok yakında." />
-<meta property="og:image" content="https://i.imgur.com/2tGNFaR.jpeg" />
-<meta property="og:url" content="https://medastare.vercel.app" />
-<meta property="og:type" content="website" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="MedaStaré – Tarzını Konuştur" />
+  <meta property="og:description" content="Tarzını konuşturacağın evren çok yakında." />
+  <meta property="og:image" content="https://i.imgur.com/2tGNFaR.jpeg" />
+  <meta property="og:url" content="https://medastare.vercel.app" />
+  <meta property="og:type" content="website" />
 
-  <!-- Stil -->
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&display=swap');
 
@@ -31,13 +29,16 @@
       height: 100vh;
       overflow: hidden;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
+      text-align: center;
       color: #fff;
       background: linear-gradient(-45deg, #1a1a40, #4b0082, #ffd700, #8b0000);
       background-size: 400% 400%;
       animation: gradientBG 15s ease infinite;
       position: relative;
+      padding: 0 16px;
     }
 
     @keyframes gradientBG {
@@ -64,8 +65,8 @@
     .container {
       position: relative;
       z-index: 2;
-      text-align: center;
-      padding: 0 2rem;
+      max-width: 100%;
+      padding: 0 16px;
     }
 
     h1 {
@@ -82,40 +83,41 @@
     }
 
     p {
-  font-size: 1.4rem;
-  margin-top: 1.5rem;
-  color: #ffffffcc;
-  animation: floatText 6s ease-in-out;
-        text-align: center;
-  word-wrap: break-word;
-  padding: 0 16px;
-}
+      font-size: 1.4rem;
+      margin-top: 1.5rem;
+      color: #ffffffcc;
+      animation: floatText 6s ease-in-out;
+      word-wrap: break-word;
+      padding: 0 16px;
+    }
+
     @keyframes floatText {
       0% { transform: translateY(0); }
       50% { transform: translateY(5px); }
       100% { transform: translateY(0); }
     }
+
     .weather-box {
-        max-width: 90vw;
-  box-sizing: border-box;
-  background-color: rgba(255, 255, 255, 0.1);
-  padding: 30px;
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 20px #FFD700;
-  text-align: center;
-  margin-top: 30px;
-  color: white;
-}
+      max-width: 90vw;
+      background-color: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px #FFD700;
+      color: white;
+      margin-top: 2rem;
+      z-index: 2;
+    }
 
-.weather-box h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
+    .weather-box h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
 
-.weather-box p {
-  font-size: 1.2rem;
-}
+    .weather-box p {
+      font-size: 1.2rem;
+      margin: 0.3rem 0;
+    }
   </style>
 </head>
 
@@ -124,52 +126,53 @@
   <div class="container">
     <h1>MedaStaré</h1>
     <p>Tarzını konuşturacağın evren çok yakında.</p>
+    <div class="weather-box" id="weather">
+      <h1>Hava Durumu</h1>
+      <p>Yükleniyor...</p>
+    </div>
   </div>
-  <div class="weather-box" id="weather">
-  <h1>Hava Durumu</h1>
-  <p>Yükleniyor...</p>
-</div>
-</body>
+
   <script>
-  const apiKey = "5b59e8ec9516d5ad5c5427b0ea4da906";
+    const apiKey = "5b59e8ec9516d5ad5c5427b0ea4da906";
 
-  function showWeather(lat, lon) {
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=tr&appid=${apiKey}`;
+    function showWeather(lat, lon) {
+      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=tr&appid=${apiKey}`;
 
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        const city = data.name;
-        const temp = Math.round(data.main.temp);
-        const desc = data.weather[0].description;
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          const city = data.name;
+          const temp = Math.round(data.main.temp);
+          const desc = data.weather[0].description;
 
-        document.getElementById("weather").innerHTML = `
-          <h1>${city}</h1>
-          <p>${desc}</p>
-          <p>${temp}°C</p>
-        `;
-      })
-      .catch((err) => {
-        document.getElementById("weather").innerHTML = `<p>Hava durumu alınamadı.</p>`;
-        console.error(err);
-      });
-  }
-
-  function getLocation() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          showWeather(position.coords.latitude, position.coords.longitude);
-        },
-        () => {
-          document.getElementById("weather").innerHTML = `<p>Konum izni reddedildi.</p>`;
-        }
-      );
-    } else {
-      document.getElementById("weather").innerHTML = `<p>Tarayıcınız konum desteği sunmuyor.</p>`;
+          document.getElementById("weather").innerHTML = `
+            <h1>${city}</h1>
+            <p>${desc}</p>
+            <p>${temp}°C</p>
+          `;
+        })
+        .catch((err) => {
+          document.getElementById("weather").innerHTML = `<p>Hava durumu alınamadı.</p>`;
+          console.error(err);
+        });
     }
-  }
 
-  getLocation();
-</script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            showWeather(position.coords.latitude, position.coords.longitude);
+          },
+          () => {
+            document.getElementById("weather").innerHTML = `<p>Konum izni reddedildi.</p>`;
+          }
+        );
+      } else {
+        document.getElementById("weather").innerHTML = `<p>Tarayıcınız konum desteği sunmuyor.</p>`;
+      }
+    }
+
+    getLocation();
+  </script>
+</body>
 </html>
