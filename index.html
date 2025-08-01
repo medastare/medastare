@@ -93,6 +93,25 @@
       50% { transform: translateY(5px); }
       100% { transform: translateY(0); }
     }
+    .weather-box {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px #FFD700;
+  text-align: center;
+  margin-top: 30px;
+  color: white;
+}
+
+.weather-box h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.weather-box p {
+  font-size: 1.2rem;
+}
   </style>
 </head>
 
@@ -102,5 +121,51 @@
     <h1>MedaStaré</h1>
     <p>Tarzını konuşturacağın evren çok yakında.</p>
   </div>
+  <div class="weather-box" id="weather">
+  <h1>Hava Durumu</h1>
+  <p>Yükleniyor...</p>
+</div>
 </body>
+  <script>
+  const apiKey = "5b59e8ec9516d5ad5c5427b0ea4da906";
+
+  function showWeather(lat, lon) {
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=tr&appid=${apiKey}`;
+
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        const city = data.name;
+        const temp = Math.round(data.main.temp);
+        const desc = data.weather[0].description;
+
+        document.getElementById("weather").innerHTML = `
+          <h1>${city}</h1>
+          <p>${desc}</p>
+          <p>${temp}°C</p>
+        `;
+      })
+      .catch((err) => {
+        document.getElementById("weather").innerHTML = `<p>Hava durumu alınamadı.</p>`;
+        console.error(err);
+      });
+  }
+
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          showWeather(position.coords.latitude, position.coords.longitude);
+        },
+        () => {
+          document.getElementById("weather").innerHTML = `<p>Konum izni reddedildi.</p>`;
+        }
+      );
+    } else {
+      document.getElementById("weather").innerHTML = `<p>Tarayıcınız konum desteği sunmuyor.</p>`;
+    }
+  }
+
+  getLocation();
+</script>
 </html>
