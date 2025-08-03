@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MedaStaré</title>
-  
+
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
@@ -131,27 +131,13 @@
       <p>Yükleniyor...</p>
     </div>
   </div>
-</script>
-          console.error(err);
-        });
-    }
 
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            showWeather(position.coords.latitude, position.coords.longitude);
-          },
-          () => {
-            document.getElementById("weather").innerHTML = `<p>Konum izni reddedildi.</p>`;
-          }
-        );
-      } else {
-        document.getElementById("weather").innerHTML = `<p>Tarayıcınız konum desteği sunmuyor.</p>`;
-      }
-    }
-
-    getLocation();
+  <script>
+    // Konumla hava durumu gösterme - Geçici olarak devre dışı 💫
+    document.getElementById("weather").innerHTML = `
+      <h1>Hava Durumu</h1>
+      <p>Bu özellik şu an devre dışı 💫</p>
+    `;
   </script>
 </body>
 </html>
