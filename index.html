@@ -133,24 +133,13 @@
   </div>
 
   <script>
-    function showWeather(lat, lon) {
-      const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=tr&appid=${apiKey}`;
-
-      fetch(url)
-        .then((res) => res.json())
-        .then((data) => {
-          const city = data.name;
-          const temp = Math.round(data.main.temp);
-          const desc = data.weather[0].description;
-
-          document.getElementById("weather").innerHTML = `
-            <h1>${city}</h1>
-            <p>${desc}</p>
-            <p>${temp}°C</p>
-          `;
-        })
-        .catch((err) => {
-          document.getElementById("weather").innerHTML = `<p>Hava durumu alınamadı.</p>`;
+    <script>
+  // Hava durumu geçici olarak devre dışı 💫
+  document.getElementById("weather").innerHTML = `
+    <h1>Hava Durumu</h1>
+    <p>Bu özellik şu an devre dışı 💫</p>
+  `;
+</script>
           console.error(err);
         });
     }
