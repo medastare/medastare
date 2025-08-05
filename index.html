@@ -4,12 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MedaStaré</title>
-
-  <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -21,64 +18,32 @@
     body {
       font-family: 'Cormorant Garamond', serif;
       height: 100vh;
-      background: #0F0F0F;
-      color: #e5c07b;
+      background-color: #0F0F0F;
+      color: #E8D9B5;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
       text-align: center;
-      overflow: hidden;
-      position: relative;
     }
 
-    .glow {
+    h1 {
       font-size: 4.2rem;
-      font-weight: 700;
+      font-weight: 600;
+      margin-bottom: 1rem;
       letter-spacing: 1px;
-      color: #f0e3c3;
-      text-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-      animation: glowText 3s ease-in-out infinite;
     }
 
-    @keyframes glowText {
-      0% { text-shadow: 0 0 5px rgba(255, 215, 0, 0.1); }
-      50% { text-shadow: 0 0 25px rgba(255, 215, 0, 0.4); }
-      100% { text-shadow: 0 0 5px rgba(255, 215, 0, 0.1); }
-    }
-
-    .slogan {
-      font-size: 1.5rem;
-      margin-top: 1.2rem;
+    p {
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #D6C9A7;
       max-width: 90%;
-      color: #d4c79b;
-      font-weight: 500;
-      opacity: 0.9;
     }
-
-    .spotlight {
-      position: absolute;
-      top: -20%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 800px;
-      height: 800px;
-      background: radial-gradient(circle at center, rgba(255, 223, 130, 0.08), transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .content {
-      z-index: 1;
-    }
-
   </style>
 </head>
 <body>
-  <div class="spotlight"></div>
-  <div class="content">
-    <h1 class="glow">MedaStaré</h1>
-    <p class="slogan">Zarafet evrenin diliyse, MedaStaré senin yıldızın.</p>
-  </div>
+  <h1>MedaStaré</h1>
+  <p>Zarafet evrenin diliyse, MedaStaré senin yıldızın.</p>
 </body>
 </html>
