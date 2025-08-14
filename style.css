@@ -1,44 +1,13 @@
-:root {
-  --light: rgba(255, 215, 120, 0.25); /* altın ışık */
-  --bg1: #000000;
-  --bg2: #0a0a0f; /* koyu lacivertimsi siyah */
+body {
+  background: radial-gradient(circle, #2b1e0f, #000);
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
-html, body {
-  height:100%;
-  background: radial-gradient(circle at center, var(--bg2) 0%, var(--bg1) 100%);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-}
-
-.bg-light {
-  position:absolute;
-  width:800px;
-  height:800px;
-  border-radius:50%;
-  background: radial-gradient(circle, var(--light) 0%, transparent 70%);
-  filter: blur(60px);
-  z-index:0;
-}
-
-.logo {
-  position:relative;
-  z-index:1;
-  width: min(60vw, 420px);
-  height:auto;
-  filter:
-    drop-shadow(0 4px 8px rgba(0,0,0,0.6))
-    drop-shadow(0 0 20px rgba(255,215,120,0.3));
-  transition: transform 0.4s ease, filter 0.4s ease;
-}
-
-/* Hafif hover efekti */
-.logo:hover {
-  transform: scale(1.03);
-  filter:
-    drop-shadow(0 6px 12px rgba(0,0,0,0.7))
-    drop-shadow(0 0 28px rgba(255,215,120,0.4));
+.logo-container img {
+  width: 300px; /* istediğin boyut */
+  filter: drop-shadow(0 0 10px gold);
 }
