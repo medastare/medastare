@@ -1,21 +1,33 @@
-<!doctype html>
-<html lang="tr">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MedaStaré</title>
-
-  <!-- favicon'u silme; dosya kökte kalsın -->
-  <link rel="icon" href="/favicon.ico" sizes="any">
-
-  <link rel="preload" href="medastare-logo.png" as="image">
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedaStaré</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<style>
+    body {
+        margin: 0;
+        background: radial-gradient(circle at center, #1a1a1a, #000000);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+    img {
+        width: 300px;
+        height: auto;
+        border-radius: 15px;
+        box-shadow: 0 10px 40px rgba(255, 215, 0, 0.5);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    img:hover {
+        transform: scale(1.05);
+        box-shadow: 0 20px 60px rgba(255, 215, 0, 0.8);
+    }
+</style>
 </head>
 <body>
-  <main class="hero">
-    <figure class="logo-wrap">
-      <img src="medastare-logo.png" alt="MedaStaré Logo" class="logo">
-    </figure>
-  </main>
+    <img src="medastare-logo.PNG" alt="MedaStaré Logo">
 </body>
 </html>
