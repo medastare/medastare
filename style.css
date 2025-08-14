@@ -1,27 +1,112 @@
-body {
+/* ====== Temel ====== */
+:root{
+  --max-logo-w: min(88vw, 820px);
+  --max-logo-h: 72vh;
+  --star-size: clamp(22px, 3.2vw, 40px);
+  --cycle: 3.8s;        /* yıldız tur süresi */
+  --delay: 1.2s;        /* ilk başlangıç gecikmesi */
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body{
   margin: 0;
-  height: 100vh;
-  background-color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: #000;
+  color: #fff;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  overflow: hidden;
 }
 
-.logo-container {
-  text-align: center;
+/* ====== Altın partikül arkaplan (çok hafif) ====== */
+.sparkle-bg{
+  position: fixed; inset: 0;
+  background:
+    radial-gradient(2px 2px at 20% 30%, rgba(255,215,80,.6) 40%, transparent 60%),
+    radial-gradient(2px 2px at 70% 60%, rgba(255,215,80,.45) 35%, transparent 60%),
+    radial-gradient(1.6px 1.6px at 40% 80%, rgba(255,215,80,.35) 40%, transparent 60%),
+    radial-gradient(1.4px 1.4px at 85% 25%, rgba(255,215,80,.4) 35%, transparent 60%),
+    radial-gradient(1.2px 1.2px at 55% 10%, rgba(255,215,80,.35) 35%, transparent 60%),
+    radial-gradient(1.2px 1.2px at 15% 70%, rgba(255,215,80,.35) 35%, transparent 60%);
+  opacity: .22;
+  filter: blur(.2px);
+  animation: twinkle 7s ease-in-out infinite alternate;
+}
+@keyframes twinkle{
+  from{ opacity: .18; transform: translateY(0px); }
+  to  { opacity: .28; transform: translateY(-3px); }
 }
 
-.logo {
-  max-width: 80%;
-  max-height: 80vh;
-  animation: glow 3s ease-in-out infinite alternate;
+/* ====== Sahne ve Logo ====== */
+.stage{
+  position: relative;
+  height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 4vmin;
 }
 
-@keyframes glow {
-  from {
-    filter: drop-shadow(0 0 5px gold) drop-shadow(0 0 10px gold);
-  }
-  to {
-    filter: drop-shadow(0 0 15px gold) drop-shadow(0 0 30px gold);
+.logo{
+  max-width: var(--max-logo-w);
+  max-height: var(--max-logo-h);
+  width: 100%;
+  height: auto;
+  display: block;
+  filter:
+    drop-shadow(0 0 10px rgba(255,215,80,.25))
+    drop-shadow(0 0 26px rgba(255,215,80,.18));
+  animation: logoGlow 3.2s ease-in-out infinite alternate;
+}
+@keyframes logoGlow{
+  from{ filter: drop-shadow(0 0 6px rgba(255,215,80,.25)) drop-shadow(0 0 14px rgba(255,215,80,.16)); }
+  to  { filter: drop-shadow(0 0 14px rgba(255,215,80,.45)) drop-shadow(0 0 34px rgba(255,215,80,.28)); }
+}
+
+/* ====== Yıldız ve Kuyruk ====== */
+.shooting-wrap{
+  position: absolute;
+  /* logo kutusunun sağ üstüne göre */
+  width: min(88vw, 820px);
+  height: clamp(160px, 35vw, 360px);
+  top: calc(50% - min(36vh, 260px));
+  left: calc(50% - min(44vw, 410px));
+  pointer-events: none;
+}
+
+.trail{
+  position: absolute; inset: 0;
+  opacity: 0;            /* yol sadece yıldız geçerken görünsün */
+  transform-origin: left center;
+  animation: trailFade var(--cycle) ease-in-out var(--delay) infinite;
+}
+@keyframes trailFade{
+  0%, 15%   { opacity: 0; }
+  20%, 65%  { opacity: .9; }
+  80%, 100% { opacity: 0; }
+}
+
+.star{
+  position: absolute;
+  width: var(--star-size);
+  height: var(--star-size);
+  /* Yolu CSS offset-path ile çiziyoruz (kıvrımlı rota) */
+  offset-path: path("M 10 160 C 180 120, 360 60, 590 30");
+  offset-rotate: auto;
+  animation: moveStar var(--cycle) ease-in-out var(--delay) infinite;
+  filter:
+    drop-shadow(0 0 4px rgba(255,215,80,.65))
+    drop-shadow(0 0 10px rgba(255,200,40,.55));
+}
+@keyframes moveStar{
+  0%   { offset-distance: 0%;   opacity: 0;   transform: scale(.85); }
+  10%  { opacity: 1; }
+  50%  { transform: scale(1.02); }
+  70%  { opacity: 1; }
+  100% { offset-distance: 100%; opacity: 0;  transform: scale(.9); }
+}
+
+/* Hareket hassasiyeti olan kullanıcılar için animasyonları kapat */
+@media (prefers-reduced-motion: reduce){
+  .sparkle-bg, .logo, .trail, .star{
+    animation: none !important;
   }
 }
