@@ -1,15 +1,48 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MedaStaré — Powered by AI</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="logo-container">
-    <img src="medastare-logo.PNG" alt="MedaStaré Logo" class="logo">
-  </div>
+  <!-- Çok hafif altın partikül arkaplan -->
+  <div class="sparkle-bg" aria-hidden="true"></div>
+
+  <main class="stage">
+    <!-- LOGO: ismi değiştirme -->
+    <img class="logo" src="medastare-logo.PNG" alt="MedaStaré Logo" />
+
+    <!-- YILDIZ ANİMASYONU -->
+    <div class="shooting-wrap" aria-hidden="true">
+      <!-- Yıldız -->
+      <svg class="star" viewBox="0 0 100 100" width="36" height="36">
+        <polygon points="50,5 61,38 96,38 67,58 78,92 50,72 22,92 33,58 4,38 39,38"
+                 fill="url(#gold)" />
+        <defs>
+          <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%"  stop-color="#FFEB9C"/>
+            <stop offset="50%" stop-color="#FFD24A"/>
+            <stop offset="100%" stop-color="#E6B800"/>
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <!-- Kuyruk/iz -->
+      <svg class="trail" viewBox="0 0 600 200" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="trail-gold" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="rgba(255,222,120,0.0)"/>
+            <stop offset="40%" stop-color="rgba(255,215,80,0.35)"/>
+            <stop offset="100%" stop-color="rgba(230,184,0,0.8)"/>
+          </linearGradient>
+        </defs>
+        <!-- Hafif kavisli bir yol -->
+        <path d="M 10 160 C 180 120, 360 60, 590 30" stroke="url(#trail-gold)" stroke-width="6" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </main>
 </body>
 </html>
