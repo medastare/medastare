@@ -1,15 +1,15 @@
-<!DOCTYPE html>
-<html lang="tr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MedaStaré</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="hero">
-    <h1 class="fade-in">MedaStaré</h1>
-    <p class="fade-in delay">Zarafet evrenin diliyse, MedaStaré senin yıldızın.</p>
-  </div>
-</body>
-</html>
+<section class="hero">
+  <picture>
+    <!-- daha hızlı yükleme için webp -->
+    <source srcset="/assets/img/medastare-hero.webp" type="image/webp">
+    <img class="hero__img" src="/assets/img/medastare-hero.png" alt="MedaStaré — Powered by AI">
+  </picture>
+
+  <h1 class="sr-only">MedaStaré — Powered by AI</h1>
+
+  <!-- yıldız parıltısı -->
+  <span class="star-glow" aria-hidden="true"></span>
+
+  <!-- altın toz animasyonu -->
+  <span class="sparkles" aria-hidden="true"></span>
+</section>
