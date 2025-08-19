@@ -46,9 +46,13 @@
     .hero-bg{
       position:absolute;inset:0;width:100%;height:100%;
       object-fit:contain;object-position:center;
-      transform:translateY(0);transition:transform .5s ease;
-      z-index:0;will-change:transform;
+      transform:translateY(0);
+      /* 👇 fade-in için başlangıç opaklığı 0 */
+      opacity:0;
+      transition:opacity 1.2s ease, transform .5s ease;
+      z-index:0;will-change:transform,opacity;
     }
+    .hero-bg.show{ opacity:1; } /* yüklenince görünür */
     @media (min-width:1024px){ .hero-bg{object-fit:cover;} }
 
     /* Overlay + vignette (efekt 15) */
@@ -60,7 +64,7 @@
       content:"";position:absolute;inset:-12%;
       background:
         radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(0,0,0,.55) 100%),
-        radial-gradient(600px 400px at var(--spot-x) var(--spot-y), rgba(255,255,255,.06), transparent 60%); /* spotlight (3) */
+        radial-gradient(600px 400px at var(--spot-x) var(--spot-y), rgba(255,255,255,.06), transparent 60%);
       z-index:1;pointer-events:none;mix-blend-mode:screen;transition:background-position .2s ease;
       animation:vignettePulse 10s ease-in-out infinite alternate;
     }
@@ -99,11 +103,11 @@
 
     header p{
       font-size:1.1em;color:#eaeaea;font-style:italic;margin:0 0 18px;line-height:1.75;
-      transition:letter-spacing .6s ease; /* efekt 10 */
+      transition:letter-spacing .6s ease;
     }
     header#hero.scrolled p{letter-spacing:.3px}
 
-    /* Glass badge (5) + altın sweep (var) */
+    /* Glass badge */
     .soon{
       display:inline-block;font-size:1.2em;font-weight:700;color:var(--gold);
       text-transform:uppercase;letter-spacing:1px;position:relative;padding:.5em 1.1em;
@@ -111,7 +115,7 @@
       background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
       backdrop-filter:saturate(140%) blur(6px);-webkit-backdrop-filter:saturate(140%) blur(6px);
       box-shadow:0 0 0 1px rgba(212,175,55,.15) inset, 0 12px 36px rgba(0,0,0,.35);
-      overflow:hidden;animation:breath 3.5s ease-in-out infinite; /* nefes */
+      overflow:hidden;animation:breath 3.5s ease-in-out infinite;
     }
     @keyframes breath{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
     .soon::before{
@@ -128,7 +132,6 @@
       position:relative;
     }
     section.show{opacity:1;transform:translateY(0)}
-    /* edge glow (13) */
     section::before{
       content:"";position:absolute;left:0;right:0;top:-1px;height:1px;opacity:0;pointer-events:none;
       background:linear-gradient(90deg, transparent, rgba(212,175,55,.5), transparent);
@@ -155,9 +158,7 @@
     .card:hover{transform:translateY(-3px) scale(var(--pop));box-shadow:0 12px 30px rgba(0,0,0,.35);border-color:rgba(255,215,0,0.24)}
     .card p{margin:0;color:#e0e0e0;font-size:.95em}
 
-    /* micro parallax on cards (7) */
     .card.parallax{transform:translateY(var(--py,0))}
-    /* links underline slide (8) */
     .card a{position:relative}
     .card a::after{
       content:"";position:absolute;left:0;right:100%;bottom:-2px;height:1px;background:currentColor;opacity:.6;
@@ -170,7 +171,6 @@
     .image-break.show{opacity:1;transform:translateY(0) scale(1)}
     .image-break img{width:100%;display:block;border-radius:10px;border:1px solid rgba(212,175,55,0.2);
       box-shadow:0 0 25px rgba(0,0,0,0.6);transition:transform .8s ease}
-    .image-break:hover img{transform:scale(1.015)} /* 9 */
 
     .contact-links{margin-top:10px;text-align:center;display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
     .contact-links a{
@@ -179,14 +179,12 @@
     .contact-links a:hover{
       color:#fff;transform:translateY(-2px) scale(1.06);text-shadow:0 0 10px rgba(212,175,55,.5)
     }
-    /* halo ring (14) */
     .contact-links a::before{
       content:"";position:absolute;inset:-6px;border-radius:8px;box-shadow:0 0 12px rgba(212,175,55,.25);
       opacity:0;transition:opacity .3s ease;pointer-events:none;
     }
     .contact-links a:hover::before{opacity:1}
 
-    /* Scroll-to-top (12) */
     .toTop{
       position:fixed;right:16px;bottom:18px;width:42px;height:42px;border-radius:50%;
       background:rgba(255,255,255,.06);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
@@ -248,7 +246,7 @@
       <p><b>Crunchbase Rank:</b> Rising rapidly from ~2.9M to ~254K in less than 24 hours – accelerating global visibility.</p>
     </div>
     <div class="card">
-      <p><a href="https://medium.com/@medastare.app/medastar%C3%A9-is-now-trending-on-crunchbase-in-fashion-tech-b202ca200438" target="_blank">
+      <p><a href="https://medium.com/@medastare.app/medastar%C3%A9-is-now-trending-on-crunchbase-in-fashion-tech" target="_blank">
         Featured on Medium → MedaStaré is now trending on Crunchbase in Fashion Tech
       </a></p>
     </div>
@@ -290,6 +288,7 @@
     <svg viewBox="0 0 24 24"><path d="M12 5l7 7-1.41 1.41L13 9.83V19h-2V9.83l-4.59 4.58L5 12z"/></svg>
   </button>
 
+  <!-- 🔥 TEK SCRIPT BLOĞU -->
   <script>
     /* Intersection reveal */
     const io=new IntersectionObserver((entries)=>{
@@ -304,6 +303,15 @@
     const scrollbar=document.getElementById('scrollbar');
     const toTop=document.getElementById('toTop');
 
+    /* Görsel load -> FADE-IN */
+    if (heroImg) {
+      if (heroImg.complete) {
+        requestAnimationFrame(()=> heroImg.classList.add('show'));
+      } else {
+        heroImg.addEventListener('load', ()=> heroImg.classList.add('show'));
+      }
+    }
+
     /* Anti-jitter – mobilde ağır efektleri kapat */
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints>0;
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -315,7 +323,7 @@
       const h=window.innerHeight;
       const y=latestScroll;
 
-      /* progress bar (1) */
+      /* progress bar */
       const docH = document.documentElement.scrollHeight - window.innerHeight;
       const p = Math.max(0, Math.min(1, y / (docH||1)));
       scrollbar.style.width = (p*100)+'%';
@@ -337,8 +345,11 @@
       heroContent.style.transform = `translateY(${k*24}px) scale(${1 - k*0.02}) rotateX(var(--rx)) rotateY(var(--ry))`;
       heroContent.style.filter = heavyFX ? `blur(${k*2.2}px)` : 'none';
 
-      /* cards micro-parallax (7) */
-      document.querySelectorAll('.card').forEach((el,idx)=>{
+      /* görsel scroll ile yumuşak fade-out */
+      if (heroImg) heroImg.style.opacity = String(1 - k*0.9);
+
+      /* cards micro-parallax */
+      document.querySelectorAll('.card').forEach((el)=>{
         const rect = el.getBoundingClientRect();
         const py = Math.max(-2, Math.min(2, (rect.top-window.innerHeight/2)/200));
         el.style.setProperty('--py', py+'px');
@@ -379,28 +390,16 @@
       });
     }
 
-    /* Scroll to top (12) */
+    /* Scroll to top */
     toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
 
-    /* Contact: halo hover için position context */
+    /* Contact halo hover */
     document.querySelectorAll('.contact-links a').forEach(a=>{ a.style.position='relative'; });
 
     /* Motion-safe: kullanıcı tercihine saygı */
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
       scrollbar.style.transition='none';
     }
-    /* Hero görseli fade-in */
-function fadeInHero(){
-  if (heroImg) heroImg.classList.add('show');
-}
-if (heroImg){
-  if (heroImg.complete) {
-    requestAnimationFrame(fadeInHero);
-  } else {
-    heroImg.addEventListener('load', fadeInHero, { once: true });
-  }
-  setTimeout(fadeInHero, 2000); // garanti fallback
-}
   </script>
 </body>
 </html>
