@@ -389,6 +389,18 @@
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
       scrollbar.style.transition='none';
     }
+    /* Hero görseli fade-in */
+function fadeInHero(){
+  if (heroImg) heroImg.classList.add('show');
+}
+if (heroImg){
+  if (heroImg.complete) {
+    requestAnimationFrame(fadeInHero);
+  } else {
+    heroImg.addEventListener('load', fadeInHero, { once: true });
+  }
+  setTimeout(fadeInHero, 2000); // garanti fallback
+}
   </script>
 </body>
 </html>
