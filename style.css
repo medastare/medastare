@@ -1,9 +1,13 @@
 header {
   text-align: center;
-  padding: 140px 20px; /* biraz daha yüksek padding */
+  height: 100vh; /* tüm ekranı kapla */
   background: url('showroom.PNG') no-repeat center center;
-  background-size: 220%;  /* %220 yapınca yakınlaşıyor */
-  background-position: center -100px; /* odak noktasını biraz yukarı alır */
+  background-size: cover; /* ekranı tamamen kaplasın */
+  background-position: center; /* ortala */
   position: relative;
   color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* yazıyı tam ortala */
+  padding: 0 20px; /* yanlardan boşluk */
 }
