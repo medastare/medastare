@@ -1,8 +1,8 @@
-/* WOW efekti için animasyonlar */
-@keyframes fadeInUp {
+/* Fade-in efekt */
+@keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(25px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -10,34 +10,12 @@
   }
 }
 
-@keyframes goldenGlow {
-  0% { text-shadow: 0 0 5px rgba(212,175,55,0.3); }
-  50% { text-shadow: 0 0 18px rgba(212,175,55,0.6); }
-  100% { text-shadow: 0 0 5px rgba(212,175,55,0.3); }
-}
-
-/* Header kısmı animasyonla girsin */
-header img, header h1, header p {
+.fade-section {
   opacity: 0;
-  animation: fadeInUp 1.5s ease forwards;
-}
-header h1 {
-  animation-delay: 0.3s;
-}
-header p {
-  animation-delay: 0.6s;
+  animation: fadeUp 1.2s ease forwards;
 }
 
-/* Altın parıltı efekti sadece logoya */
-header h1 {
-  animation: fadeInUp 1.5s ease forwards, goldenGlow 3s infinite ease-in-out;
-}
-
-/* Kartlara hover efekti */
-.card {
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 22px rgba(212,175,55,0.3);
-}
+/* Sıralı efekt için */
+.fade-delay-1 { animation-delay: 0.3s; }
+.fade-delay-2 { animation-delay: 0.6s; }
+.fade-delay-3 { animation-delay: 0.9s; }
