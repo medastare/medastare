@@ -31,30 +31,23 @@
       align-items: center;
       text-align: center;
       color: #fff;
-      overflow: hidden;
-    }
 
-    header::before {
-      content: "";
-      position: absolute;
-      inset: 0;
       background: url('showroom.PNG') no-repeat center center;
-      background-size: cover;
+      background-size: cover;   /* TAM ekran doldurur */
+      background-attachment: fixed;
       background-color: #000;
-      transform: scale(1.2);   /* zoomed in başlasın */
-      transition: transform 0.2s linear;
-      z-index: 0;
+      overflow: hidden;
     }
 
     header::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.55); /* koyu overlay */
+      background: rgba(0,0,0,0.55);
       z-index: 1;
     }
 
-    .header-content {
+    header .header-content {
       position: relative;
       z-index: 2;
       max-width: 720px;
@@ -65,35 +58,68 @@
       transition: all 1.5s ease;
     }
 
-    .header-content.show {
+    header .header-content.show {
       opacity: 1;
       transform: translateY(0) scale(1);
       filter: blur(0);
     }
 
     header p {
-      font-size: 1em;
+      font-size: 1.1em;
       color: #eaeaea;
       font-style: italic;
       margin-bottom: 20px;
+      animation: fadeInUp 2s ease forwards;
     }
 
     .soon {
-      font-size: 1.1em;
+      font-size: 1.2em;
       font-weight: 700;
       color: #d4af37;
       text-transform: uppercase;
       letter-spacing: 1px;
-      animation: pulse 2s infinite;
+      animation: pulse 2s infinite, glow 3s infinite alternate;
     }
 
+    /* === APPLE STYLE EFFECTS === */
+    @keyframes fadeInUp {
+      0% {opacity:0; transform: translateY(40px);}
+      100% {opacity:1; transform: translateY(0);}
+    }
     @keyframes pulse {
       0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.1); opacity: 0.85; }
+      50% { transform: scale(1.1); opacity: 0.9; }
       100% { transform: scale(1); opacity: 1; }
     }
+    @keyframes glow {
+      0% { text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37; }
+      100% { text-shadow: 0 0 20px #fff, 0 0 40px #d4af37; }
+    }
+    @keyframes zoomOut {
+      from { transform: scale(1.2); }
+      to { transform: scale(1); }
+    }
+    @keyframes fadeBlur {
+      0% { opacity:0; filter: blur(10px); }
+      100% { opacity:1; filter: blur(0); }
+    }
+    @keyframes slideInLeft {
+      0% {opacity:0; transform: translateX(-100px);}
+      100% {opacity:1; transform: translateX(0);}
+    }
+    @keyframes slideInRight {
+      0% {opacity:0; transform: translateX(100px);}
+      100% {opacity:1; transform: translateX(0);}
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes scaleIn {
+      0% {opacity:0; transform: scale(0.8);}
+      100% {opacity:1; transform: scale(1);}
+    }
 
-    /* Section */
     section {
       max-width: 880px;
       margin: auto;
@@ -106,6 +132,7 @@
     section.show {
       opacity: 1;
       transform: translateY(0);
+      animation: fadeBlur 1.5s ease forwards;
     }
 
     section h2 {
@@ -114,6 +141,7 @@
       color: #d4af37;
       margin-bottom: 16px;
       font-weight: 600;
+      animation: slideInLeft 1s ease forwards;
     }
 
     .card {
@@ -130,12 +158,14 @@
     .card.show {
       opacity: 1;
       transform: translateY(0);
+      animation: scaleIn 1s ease forwards;
     }
 
     .card p {
       margin: 0;
       color: #e0e0e0;
       font-size: 0.95em;
+      animation: float 6s ease-in-out infinite;
     }
 
     .image-break {
@@ -147,6 +177,7 @@
     .image-break.show {
       opacity: 1;
       transform: translateY(0) scale(1);
+      animation: zoomOut 2s ease forwards;
     }
     .image-break img {
       width: 100%;
@@ -154,6 +185,7 @@
       border: 1px solid rgba(212,175,55,0.2);
       box-shadow: 0 0 25px rgba(0,0,0,0.6);
       display: block;
+      animation: fadeInUp 2s ease forwards;
     }
 
     footer {
@@ -162,6 +194,7 @@
       background: #0a0a0a;
       font-size: 0.8em;
       color: #777;
+      animation: fadeBlur 2s ease forwards;
     }
   </style>
 </head>
@@ -187,9 +220,44 @@
     </div>
   </section>
 
+  <section id="momentum">
+    <h2>Momentum</h2>
+    <div class="card">
+      <p><b>Crunchbase Rank:</b> Rising rapidly from ~2.9M to ~254K in less than 24 hours – accelerating global visibility.</p>
+    </div>
+    <div class="card">
+      <p><a href="https://medium.com/@medastare.app/medastar%C3%A9-is-now-trending-on-crunchbase-in-fashion-tech-b202ca200438" target="_blank">
+        Featured on Medium → MedaStaré is now trending on Crunchbase in Fashion Tech
+      </a></p>
+    </div>
+  </section>
+
+  <section id="future">
+    <h2>Future Potential / Gelecek Potansiyeli</h2>
+    <div class="card">
+      <p><b>EN:</b> With the global fashion & beauty market surpassing $3 Trillion, and the AI-driven segment exceeding $200 Billion, 
+      MedaStaré is uniquely positioned to redefine the intersection of creativity and technology – starting from Turkey, expanding worldwide.</p><br>
+      <p><b>TR:</b> Küresel moda & güzellik pazarı 3 trilyon $’ı, yapay zeka destekli segment ise 200 milyar $’ı aşarken, 
+      MedaStaré yaratıcılık ve teknolojinin kesişimini yeniden tanımlamak için eşsiz bir konumda – Türkiye’den başlayarak dünyaya açılıyor.</p>
+    </div>
+  </section>
+
   <!-- FULL WIDTH IMAGE -->
   <section class="image-break">
     <img src="runway.PNG" alt="MedaStaré Runway">
+  </section>
+
+  <section id="contact">
+    <h2>Contact / İletişim</h2>
+    <div class="card" style="text-align:center;">
+      <p>Email: <a href="mailto:info@medastare.com">info@medastare.com</a></p>
+      <div class="contact-links">
+        <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
+        <a href="https://instagram.com/medastareapp" target="_blank">Instagram</a>
+        <a href="https://tiktok.com/@medastare.app" target="_blank">TikTok</a>
+        <a href="https://linkedin.com/company/medastareapp" target="_blank">LinkedIn</a>
+      </div>
+    </div>
   </section>
 
   <footer>
@@ -197,11 +265,6 @@
   </footer>
 
   <script>
-    // Apple hero image zoom-out
-    window.addEventListener("scroll", () => {
-      const header = document.querySelector("header::before"); 
-    });
-
     // Intersection animations
     const elements = document.querySelectorAll('.card, .image-break, section, .header-content');
     const observer = new IntersectionObserver(entries => {
@@ -212,21 +275,6 @@
       });
     }, { threshold: 0.2 });
     elements.forEach(el => observer.observe(el));
-
-    // Parallax Zoom effect
-    window.addEventListener("scroll", () => {
-      const scrollY = window.scrollY;
-      const header = document.querySelector("header");
-      const bg = header.querySelector("::before");
-    });
-
-    // Pure JS zoom-out
-    window.addEventListener("scroll", () => {
-      const scrolled = window.scrollY;
-      const header = document.querySelector("header");
-      header.style.setProperty("--zoom", 1.2 - scrolled / 1500);
-      document.querySelector("header::before");
-    });
   </script>
 
 </body>
