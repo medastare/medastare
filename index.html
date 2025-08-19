@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MedaStaré – Redefining Fashion with AI</title>
+  <title>MedaStaré – Powered by AI</title>
+  <link rel="icon" href="medastare-logo.PNG" type="image/png">
 
   <!-- Luxury Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
@@ -13,127 +14,158 @@
       margin: 0;
       padding: 0;
       background: #000;
-      color: #e5e5e5;
+      color: #ddd;
       font-family: 'Libre Baskerville', serif;
-      font-size: 1.1em;
-      line-height: 1.8;
-      letter-spacing: 0.4px;
+      line-height: 1.7;
+      letter-spacing: 0.3px;
     }
 
     header {
       text-align: center;
-      padding: 120px 20px 80px;
+      padding: 100px 20px 60px;
+      animation: fadeIn 1.5s ease;
     }
 
     header img {
-      width: 240px;
-      margin-bottom: 35px;
+      width: 200px;
+      margin-bottom: 25px;
+      filter: drop-shadow(0px 0px 10px gold);
     }
 
     header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 3.5em;
-      color: #d4af37; /* Gold */
-      margin-bottom: 20px;
+      font-size: 2.8em;
+      color: #d4af37;
+      margin-bottom: 15px;
       font-weight: 600;
-      letter-spacing: 2px;
+      letter-spacing: 1.2px;
     }
 
     header p {
-      max-width: 720px;
+      max-width: 700px;
       margin: auto;
-      font-size: 1.2em;
+      font-size: 1.1em;
       color: #cfcfcf;
       font-style: italic;
     }
 
     .soon {
-      margin-top: 40px;
-      font-size: 1.4em;
+      margin-top: 30px;
+      font-size: 1.2em;
       font-weight: 600;
       color: #d4af37;
       text-transform: uppercase;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
     }
 
     section {
       max-width: 950px;
       margin: auto;
-      padding: 70px 20px;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 60px 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      animation: fadeIn 2s ease;
     }
 
     section h2 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.8em;
+      font-size: 1.6em;
       color: #d4af37;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       font-weight: 600;
     }
 
-    section p, li {
-      color: #dcdcdc;
+    .card {
+      background: #0a0a0a;
+      border: 1px solid rgba(255, 215, 0, 0.15);
+      border-radius: 10px;
+      padding: 25px;
+      margin: 20px 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 18px rgba(212, 175, 55, 0.3);
+    }
+
+    .card p {
+      margin: 0;
+      color: #e0e0e0;
       font-size: 1.05em;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    ul li {
-      margin: 14px 0;
     }
 
     footer {
       text-align: center;
-      padding: 50px 20px;
+      padding: 40px 20px;
       background: #0a0a0a;
       font-size: 0.9em;
       color: #888;
-      letter-spacing: 0.5px;
     }
 
     a {
       color: #d4af37;
       text-decoration: none;
+      transition: color 0.3s ease;
     }
 
     a:hover {
-      text-decoration: underline;
+      color: #fff;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <!-- LOGO aynı klasörde olmalı -->
     <img src="medastare-logo.PNG" alt="MedaStaré Logo">
     <h1>MedaStaré</h1>
     <p>Powered by AI – Redefining the future of fashion & beauty through personalization, technology, and creativity.</p>
     <div class="soon">Çok Yakında – Tüm Türkiye’de</div>
   </header>
 
-  <section id="about">
-    <h2>About</h2>
-    <p>MedaStaré is the first inclusive AI platform delivering deeply personalized experiences in the fashion & beauty ecosystem. 
-    Our vision is to merge technology, creativity, and elegance to shape the future of style.</p>
+  <section id="mission">
+    <h2>Mission & Vision</h2>
+    <div class="card">
+      <p>At MedaStaré, our mission is to merge fashion, beauty and artificial intelligence into a seamless ecosystem. 
+      Our vision is to empower individuals with technology-driven elegance while leading innovation on a global scale.</p>
+    </div>
   </section>
 
-  <section id="team">
-    <h2>Team</h2>
-    <p><b>Founder & CEO:</b> Medine AK – A visionary leader uniting fashion, technology, and AI with a global growth vision.</p>
+  <section id="momentum">
+    <h2>Momentum</h2>
+    <div class="card">
+      <p><b>Crunchbase Rank:</b> Rising rapidly from ~2.9M to ~254K in less than 24 hours – a clear sign of accelerating momentum.</p>
+    </div>
+    <div class="card">
+      <p><a href="https://medium.com/@medastare.app/medastar%C3%A9-is-now-trending-on-crunchbase-in-fashion-tech-b202ca200438" target="_blank">
+        Featured on Medium → MedaStaré is now trending on Crunchbase in Fashion Tech
+      </a></p>
+    </div>
+  </section>
+
+  <section id="future">
+    <h2>Future Potential</h2>
+    <div class="card">
+      <p>With the global fashion & beauty market surpassing $3 Trillion, and the AI-driven segment exceeding $200 Billion, 
+      MedaStaré is uniquely positioned to redefine the intersection of creativity and technology – starting from Turkey, expanding worldwide.</p>
+    </div>
   </section>
 
   <section id="contact">
     <h2>Contact</h2>
-    <p>Email: <a href="mailto:info@medastare.com">info@medastare.com</a></p>
-    <p>
-      <a href="https://linkedin.com/company/medastareapp" target="_blank">LinkedIn</a> | 
-      <a href="https://instagram.com/medastareapp" target="_blank">Instagram</a> | 
-      <a href="https://tiktok.com/@medastareapp" target="_blank">TikTok</a> | 
-      <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
-    </p>
+    <div class="card">
+      <p>Email: <a href="mailto:info@medastare.com">info@medastare.com</a></p>
+      <p>
+        <a href="https://linkedin.com/company/medastareapp" target="_blank">LinkedIn</a> | 
+        <a href="https://instagram.com/medastareapp" target="_blank">Instagram</a> | 
+        <a href="https://tiktok.com/@medastareapp" target="_blank">TikTok</a> | 
+        <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
+      </p>
+    </div>
   </section>
 
   <footer>
