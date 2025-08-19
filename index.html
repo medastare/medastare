@@ -4,13 +4,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MedaStaré – Redefining Fashion with AI</title>
+
+  <!-- Luxury Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     body {
-      font-family: "Helvetica Neue", Arial, sans-serif;
+      font-family: 'Cinzel', serif;
       margin: 0;
       padding: 0;
-      background: #000;
-      color: #f5f5f5;
+      background: radial-gradient(circle at top, #0d0d0d, #000);
+      color: #dcdcdc;
       line-height: 1.8;
     }
     header {
@@ -19,25 +23,30 @@
       background: linear-gradient(180deg, #000, #111);
     }
     header img {
-      width: 180px;
+      width: 220px;
       margin-bottom: 25px;
+      filter: drop-shadow(0px 0px 15px gold);
     }
     header h1 {
       font-size: 3em;
       color: #ffd700;
       margin-bottom: 15px;
-      letter-spacing: 1px;
+      text-shadow: 0 0 12px #ffcc00, 0 0 24px #ffcc00;
+      letter-spacing: 1.5px;
     }
     header p {
-      font-size: 1.3em;
-      color: #ccc;
-      max-width: 650px;
+      font-size: 1.2em;
+      color: #bfbfbf;
+      max-width: 700px;
       margin: auto;
     }
     section {
       max-width: 1000px;
       margin: auto;
       padding: 60px 30px;
+      background: rgba(20,20,20,0.65);
+      border-radius: 12px;
+      margin-bottom: 40px;
     }
     section h2 {
       color: #ffd700;
@@ -45,6 +54,7 @@
       margin-bottom: 20px;
       border-bottom: 1px solid #444;
       padding-bottom: 10px;
+      text-shadow: 0 0 10px #b8860b;
     }
     ul {
       list-style: none;
@@ -52,17 +62,15 @@
     }
     ul li {
       margin: 12px 0;
-      font-size: 1.1em;
-    }
-    .dual-lang {
-      margin-bottom: 50px;
+      font-size: 1.05em;
+      color: #e6e6e6;
     }
     footer {
       text-align: center;
       padding: 40px 20px;
       background: #111;
       font-size: 0.9em;
-      color: #aaa;
+      color: #888;
     }
     a {
       color: #ffd700;
@@ -76,55 +84,45 @@
 <body>
 
   <header>
-    <img src="images/medastare-logo.png" alt="MedaStaré Logo">
+    <!-- LOGO: Dosyanı aynı klasöre koy, adı "medastare-logo.PNG" olmalı -->
+    <img src="medastare-logo.PNG" alt="MedaStaré Logo">
     <h1>MedaStaré</h1>
     <p>Powered by AI – Redefining the future of fashion & beauty through personalization, technology, and creativity.</p>
   </header>
 
   <section id="about">
-    <div class="dual-lang">
-      <h2>🌍 About / Hakkımızda</h2>
-      <p><b>EN:</b> MedaStaré is the first inclusive AI platform delivering personalized experiences in the fashion & beauty ecosystem.</p>
-      <p><b>TR:</b> MedaStaré, moda & güzellik ekosisteminde kişiselleştirilmiş deneyim sunan ilk kapsayıcı yapay zeka platformudur.</p>
-    </div>
+    <h2>🌍 About / Hakkımızda</h2>
+    <p><b>EN:</b> MedaStaré is the first inclusive AI platform delivering personalized experiences in the fashion & beauty ecosystem.</p>
+    <p><b>TR:</b> MedaStaré, moda & güzellik ekosisteminde kişiselleştirilmiş deneyim sunan ilk kapsayıcı yapay zeka platformudur.</p>
   </section>
 
   <section id="team">
-    <div class="dual-lang">
-      <h2>👥 Team / Ekip</h2>
-      <p><b>EN:</b> <b>Founder & CEO: Medine AK</b> – A visionary leader uniting fashion, technology, and AI with a global growth vision.</p>
-      <p><b>TR:</b> <b>Kurucu & CEO: Medine AK</b> – Moda, teknoloji ve yapay zekâyı birleştiren vizyoner lider.</p>
-    </div>
+    <h2>👥 Team / Ekip</h2>
+    <p><b>Founder & CEO:</b> Medine AK – A visionary leader uniting fashion, technology, and AI with a global growth vision.</p>
   </section>
 
-  <section id="investors">
-    <div class="dual-lang">
-      <h2>📊 Key Highlights / Öne Çıkanlar</h2>
-      <ul>
-        <li>🌍 <b>Global Market Size:</b> $3 Trillion (Fashion & Beauty)</li>
-        <li>🤖 <b>AI-Driven Segment:</b> $200 Billion</li>
-        <li>🚀 <b>Target Market (5 Years):</b> $5 Billion</li>
-        <li>🔥 TikTok → 120k+ views (3 days)</li>
-        <li>📈 Instagram → 60k+ profile visits (1 week), 30k video views (3 days)</li>
-        <li>💡 Crunchbase Rank → From ~2.9M to ~254K in <24h</li>
-        <li>📰 Medium Article → <a href="https://medium.com/@medastare.app/medastar%C3%A9-is-now-trending-on-crunchbase-in-fashion-tech-b202ca200438" target="_blank">Read here</a></li>
-        <li>📑 Patent Applications → In progress (Turkey, EU, USA)</li>
-      </ul>
-    </div>
+  <section id="highlights">
+    <h2>📊 Highlights / Öne Çıkanlar</h2>
+    <ul>
+      <li>🌍 Global Market Size → $3 Trillion</li>
+      <li>🤖 AI-Driven Segment → $200 Billion</li>
+      <li>🚀 Target Market (5 Years) → $5 Billion</li>
+      <li>🔥 TikTok → 120k+ views (3 days)</li>
+      <li>📈 Instagram → 60k+ profile visits (1 week)</li>
+      <li>💡 Crunchbase Rank → From ~2.9M to ~254K in &lt;24h</li>
+      <li>📰 <a href="https://medium.com/@medastare.app/medastar%C3%A9-is-now-trending-on-crunchbase-in-fashion-tech-b202ca200438" target="_blank">Featured on Medium</a></li>
+    </ul>
   </section>
 
   <section id="contact">
-    <div class="dual-lang">
-      <h2>✨ Contact / İletişim</h2>
-      <p>Email: <a href="mailto:info@medastare.com">info@medastare.com</a></p>
-      <p>
-        <a href="https://linkedin.com/company/medastareapp" target="_blank">LinkedIn</a> | 
-        <a href="https://instagram.com/medastareapp" target="_blank">Instagram</a> | 
-        <a href="https://tiktok.com/@medastareapp" target="_blank">TikTok</a> | 
-        <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a> | 
-        <a href="https://medium.com/@medastare.app" target="_blank">Medium</a>
-      </p>
-    </div>
+    <h2>✨ Contact / İletişim</h2>
+    <p>Email: <a href="mailto:info@medastare.com">info@medastare.com</a></p>
+    <p>
+      <a href="https://linkedin.com/company/medastareapp" target="_blank">LinkedIn</a> | 
+      <a href="https://instagram.com/medastareapp" target="_blank">Instagram</a> | 
+      <a href="https://tiktok.com/@medastareapp" target="_blank">TikTok</a> | 
+      <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
+    </p>
   </section>
 
   <footer>
