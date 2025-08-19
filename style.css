@@ -1,29 +1,12 @@
 /* HEADER */
 header {
   position: relative;
-  height: 100vh;             /* ekran boyu kadar */
+  height: 100vh;
   display: flex;
-  justify-content: center;   /* yazıları ortala */
+  justify-content: center;
   align-items: center;
   text-align: center;
   color: #fff;
 
-  background: url('showroom.PNG') no-repeat center center;
-  background-size: cover;    /* 🔥 görseli tam ekrana yay */
-  background-color: #000;    /* kenarlarda boşluk varsa siyah doldur */
-}
-
-header::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.55); /* yazılar için karartma */
-  z-index: 1;
-}
-
-header .header-content {
-  position: relative;
-  z-index: 2;
-  max-width: 720px;
-  padding: 0 20px;
+  background-color: #000;  /* sadece siyah yedek */
 }
