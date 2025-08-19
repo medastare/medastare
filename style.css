@@ -1,25 +1,43 @@
-section h2 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.5em;
-  color: #d4af37;
-  margin-bottom: 18px;
-  font-weight: 600;
-  position: relative;
-  display: inline-block;
-  padding-bottom: 5px;
+/* WOW efekti için animasyonlar */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-section h2::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
-  animation: underline 2s ease forwards;
+@keyframes goldenGlow {
+  0% { text-shadow: 0 0 5px rgba(212,175,55,0.3); }
+  50% { text-shadow: 0 0 18px rgba(212,175,55,0.6); }
+  100% { text-shadow: 0 0 5px rgba(212,175,55,0.3); }
 }
 
-@keyframes underline {
-  to { width: 100%; }
+/* Header kısmı animasyonla girsin */
+header img, header h1, header p {
+  opacity: 0;
+  animation: fadeInUp 1.5s ease forwards;
+}
+header h1 {
+  animation-delay: 0.3s;
+}
+header p {
+  animation-delay: 0.6s;
+}
+
+/* Altın parıltı efekti sadece logoya */
+header h1 {
+  animation: fadeInUp 1.5s ease forwards, goldenGlow 3s infinite ease-in-out;
+}
+
+/* Kartlara hover efekti */
+.card {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 22px rgba(212,175,55,0.3);
 }
