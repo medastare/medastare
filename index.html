@@ -4,16 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MedaStaré – Powered by AI</title>
-  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="icon" href="favicon.png" type="image/png"> <!-- favicon -->
 
   <!-- Luxury Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
-    html {
-      scroll-behavior: smooth; /* smooth scroll */
-    }
-
     body {
       margin: 0;
       padding: 0;
@@ -45,10 +41,9 @@
       position: absolute;
       inset: 0;
       background: url('showroom.PNG') no-repeat center center/cover;
-      transform: scale(1);
-      transition: transform 0.6s ease;
+      transform: translateY(0);
+      transition: transform 0.2s linear;
       z-index: 0;
-      will-change: transform;
     }
 
     header::after {
@@ -62,7 +57,7 @@
     header * {
       position: relative;
       z-index: 2;
-      transition: transform 0.4s ease, opacity 0.4s ease;
+      transition: transform 0.5s ease, opacity 0.5s ease;
     }
 
     header p {
@@ -71,6 +66,8 @@
       font-size: 1em;
       color: #eaeaea;
       font-style: italic;
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .soon {
@@ -80,47 +77,52 @@
       color: #d4af37;
       text-transform: uppercase;
       letter-spacing: 1px;
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    /* Scroll shrink effect */
+    /* Scroll shrink */
     header.shrink p {
-      transform: scale(0.85) translateY(-25px);
-      opacity: 0.75;
+      transform: scale(0.9) translateY(-30px);
+      opacity: 0.8;
     }
     header.shrink .soon {
-      transform: scale(0.9) translateY(-20px);
-      opacity: 0.75;
-    }
-    header.shrink::before {
-      transform: scale(1.15); /* zoom-out */
+      transform: scale(0.9) translateY(-25px);
+      opacity: 0.85;
     }
 
     section {
       max-width: 880px;
       margin: auto;
-      padding: 60px 20px;
+      padding: 45px 20px;
       border-top: 1px solid rgba(255,255,255,0.08);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     section h2 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.6em;
+      font-size: 1.4em;
       color: #d4af37;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       font-weight: 600;
-      text-align: center;
     }
 
     .card {
       background: #0a0a0a;
       border: 1px solid rgba(255, 215, 0, 0.12);
-      border-radius: 10px;
-      padding: 22px;
-      margin: 18px 0;
+      border-radius: 6px;
+      padding: 18px;
+      margin: 12px 0;
       text-align: left;
       opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s cubic-bezier(.19,1,.22,1);
+      transform: translateY(30px);
+      transition: all 0.8s ease;
     }
     .card.show {
       opacity: 1;
@@ -130,54 +132,53 @@
     .card p {
       margin: 0;
       color: #e0e0e0;
-      font-size: 1em;
+      font-size: 0.95em;
     }
 
     /* IMAGE BREAK */
     .image-break {
-      margin: 80px 0;
+      margin: 60px 0;
       opacity: 0;
-      transform: translateY(50px);
-      transition: all 1s cubic-bezier(.19,1,.22,1);
+      transform: translateY(40px) scale(0.95);
+      transition: all 1s ease;
     }
     .image-break.show {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
     .image-break img {
       width: 100%;
-      border-radius: 12px;
+      border-radius: 10px;
       border: 1px solid rgba(212,175,55,0.2);
-      box-shadow: 0 0 40px rgba(0,0,0,0.7);
+      box-shadow: 0 0 25px rgba(0,0,0,0.6);
       display: block;
     }
 
     /* CONTACT LINKS */
     .contact-links {
-      margin-top: 15px;
+      margin-top: 10px;
       text-align: center;
       display: flex;
       justify-content: center;
-      gap: 20px;
+      gap: 18px;
       flex-wrap: wrap;
     }
     .contact-links a {
       color: #d4af37;
-      font-size: 1em;
+      font-size: 0.95em;
       text-decoration: none;
-      transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
+      transition: color 0.3s ease, transform 0.3s ease;
     }
     .contact-links a:hover {
       color: #fff;
-      text-shadow: 0 0 10px #d4af37, 0 0 20px #d4af37;
-      transform: scale(1.05);
+      transform: scale(1.1);
     }
 
     footer {
       text-align: center;
-      padding: 30px 20px;
+      padding: 25px 20px;
       background: #0a0a0a;
-      font-size: 0.85em;
+      font-size: 0.8em;
       color: #777;
     }
   </style>
@@ -247,8 +248,8 @@
   </footer>
 
   <script>
-    // Scroll animation for cards & images
-    const elements = document.querySelectorAll('.card, .image-break');
+    // Scroll animation for cards & images & sections
+    const elements = document.querySelectorAll('.card, .image-break, section');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -258,20 +259,25 @@
     }, { threshold: 0.2 });
     elements.forEach(el => observer.observe(el));
 
-    // Scroll shrink + parallax
+    // Scroll shrink effect + parallax
     window.addEventListener("scroll", () => {
       const header = document.querySelector("header");
-      let scrollY = window.scrollY;
-      if (scrollY > 100) {
+      const scrolled = window.scrollY;
+
+      // shrink yazılar
+      if (scrolled > 100) {
         header.classList.add("shrink");
       } else {
         header.classList.remove("shrink");
       }
 
-      // Parallax effect
-      header.style.setProperty('--scroll', scrollY * 0.4 + "px");
-      header.querySelector("p").style.transform = `translateY(${scrollY * -0.15}px)`;
-      header.querySelector(".soon").style.transform = `translateY(${scrollY * -0.2}px)`;
+      // parallax efekt
+      header.style.setProperty("--scroll", scrolled * 0.4 + "px");
+      header.querySelector("::before");
+      document.querySelector("header").style.setProperty("--y", scrolled * 0.3 + "px");
+      header.style.setProperty("--scale", 1 + scrolled * 0.0005);
+      header.style.setProperty("--opacity", 1 - scrolled * 0.001);
+      header.style.transform = `translateY(${scrolled * 0.2}px)`;
     });
   </script>
 
