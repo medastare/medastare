@@ -4,12 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MedaStaré – Powered by AI</title>
-  <link rel="icon" href="favicon.png" type="image/png"> <!-- favicon eklendi -->
+  <link rel="icon" href="favicon.png" type="image/png">
 
   <!-- Luxury Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
+    html {
+      scroll-behavior: smooth; /* smooth scroll */
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -19,86 +23,104 @@
       font-size: 1em;
       line-height: 1.6;
       letter-spacing: 0.2px;
+      overflow-x: hidden;
     }
 
     /* HEADER */
     header {
       position: relative;
-      height: 100vh; /* tam ekran */
+      text-align: center;
+      height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-end; /* yazılar en alta iner */
+      justify-content: flex-end;
       align-items: center;
-      text-align: center;
-      color: #fff;
+      padding-bottom: 80px;
       overflow: hidden;
-      padding-bottom: 100px; /* alttan boşluk daha fazla */
+      color: #fff;
     }
 
     header::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: url('showroom.PNG') no-repeat center center;
-      background-size: cover; /* tam kapla, boşluk kalmasın */
+      background: url('showroom.PNG') no-repeat center center/cover;
+      transform: scale(1);
+      transition: transform 0.6s ease;
       z-index: 0;
+      will-change: transform;
     }
 
     header::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.45); /* biraz şeffaf overlay */
+      background: rgba(0,0,0,0.55);
       z-index: 1;
     }
 
     header * {
       position: relative;
       z-index: 2;
+      transition: transform 0.4s ease, opacity 0.4s ease;
     }
 
     header p {
       max-width: 680px;
       margin: auto;
-      font-size: 0.85em; /* biraz küçültüldü */
+      font-size: 1em;
       color: #eaeaea;
       font-style: italic;
     }
 
     .soon {
-      margin-top: 18px;
-      font-size: 0.9em;
+      margin-top: 22px;
+      font-size: 1em;
       font-weight: 600;
       color: #d4af37;
       text-transform: uppercase;
       letter-spacing: 1px;
     }
 
+    /* Scroll shrink effect */
+    header.shrink p {
+      transform: scale(0.85) translateY(-25px);
+      opacity: 0.75;
+    }
+    header.shrink .soon {
+      transform: scale(0.9) translateY(-20px);
+      opacity: 0.75;
+    }
+    header.shrink::before {
+      transform: scale(1.15); /* zoom-out */
+    }
+
     section {
       max-width: 880px;
       margin: auto;
-      padding: 45px 20px;
+      padding: 60px 20px;
       border-top: 1px solid rgba(255,255,255,0.08);
     }
 
     section h2 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.4em;
+      font-size: 1.6em;
       color: #d4af37;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       font-weight: 600;
+      text-align: center;
     }
 
     .card {
       background: #0a0a0a;
       border: 1px solid rgba(255, 215, 0, 0.12);
-      border-radius: 6px;
-      padding: 18px;
-      margin: 12px 0;
+      border-radius: 10px;
+      padding: 22px;
+      margin: 18px 0;
       text-align: left;
       opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
+      transform: translateY(40px);
+      transition: all 1s cubic-bezier(.19,1,.22,1);
     }
     .card.show {
       opacity: 1;
@@ -108,15 +130,15 @@
     .card p {
       margin: 0;
       color: #e0e0e0;
-      font-size: 0.95em;
+      font-size: 1em;
     }
 
     /* IMAGE BREAK */
     .image-break {
-      margin: 60px 0;
+      margin: 80px 0;
       opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s ease;
+      transform: translateY(50px);
+      transition: all 1s cubic-bezier(.19,1,.22,1);
     }
     .image-break.show {
       opacity: 1;
@@ -124,36 +146,38 @@
     }
     .image-break img {
       width: 100%;
-      border-radius: 10px;
+      border-radius: 12px;
       border: 1px solid rgba(212,175,55,0.2);
-      box-shadow: 0 0 25px rgba(0,0,0,0.6);
+      box-shadow: 0 0 40px rgba(0,0,0,0.7);
       display: block;
     }
 
     /* CONTACT LINKS */
     .contact-links {
-      margin-top: 10px;
+      margin-top: 15px;
       text-align: center;
       display: flex;
       justify-content: center;
-      gap: 18px;
+      gap: 20px;
       flex-wrap: wrap;
     }
     .contact-links a {
       color: #d4af37;
-      font-size: 0.95em;
+      font-size: 1em;
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: color 0.3s ease, text-shadow 0.3s ease, transform 0.3s ease;
     }
     .contact-links a:hover {
       color: #fff;
+      text-shadow: 0 0 10px #d4af37, 0 0 20px #d4af37;
+      transform: scale(1.05);
     }
 
     footer {
       text-align: center;
-      padding: 25px 20px;
+      padding: 30px 20px;
       background: #0a0a0a;
-      font-size: 0.8em;
+      font-size: 0.85em;
       color: #777;
     }
   </style>
@@ -232,8 +256,23 @@
         }
       });
     }, { threshold: 0.2 });
-
     elements.forEach(el => observer.observe(el));
+
+    // Scroll shrink + parallax
+    window.addEventListener("scroll", () => {
+      const header = document.querySelector("header");
+      let scrollY = window.scrollY;
+      if (scrollY > 100) {
+        header.classList.add("shrink");
+      } else {
+        header.classList.remove("shrink");
+      }
+
+      // Parallax effect
+      header.style.setProperty('--scroll', scrollY * 0.4 + "px");
+      header.querySelector("p").style.transform = `translateY(${scrollY * -0.15}px)`;
+      header.querySelector(".soon").style.transform = `translateY(${scrollY * -0.2}px)`;
+    });
   </script>
 
 </body>
