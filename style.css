@@ -1,13 +1,34 @@
 header {
-  text-align: center;
-  height: 100vh; /* tüm ekranı kapla */
-  background: url('showroom.PNG') no-repeat center center;
-  background-size: cover; /* ekranı tamamen kaplasın */
-  background-position: center; /* ortala */
   position: relative;
-  color: #fff;
+  min-height: 90vh; /* %90 ekran boyu */
   display: flex;
   flex-direction: column;
-  justify-content: center; /* yazıyı tam ortala */
-  padding: 0 20px; /* yanlardan boşluk */
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  overflow: hidden;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("showroom.PNG") no-repeat center -40px / 150%;
+  /* 150% -> yakınlaştırma (çok değil, tam ayarında) */
+  /* -40px -> biraz yukarı kaydırıyor, denge için */
+  z-index: 0;
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 1;
+}
+
+header * {
+  position: relative;
+  z-index: 2;
 }
