@@ -1,17 +1,9 @@
 header {
   text-align: center;
-  padding: 120px 20px;
-  background: url('showroom.PNG') no-repeat center center/cover;
+  padding: 140px 20px; /* biraz daha yüksek padding */
+  background: url('showroom.PNG') no-repeat center center;
+  background-size: 220%;  /* %220 yapınca yakınlaşıyor */
+  background-position: center -100px; /* odak noktasını biraz yukarı alır */
   position: relative;
   color: #fff;
-
-  /* EKLENECEKLER */
-  background-size: 180%;   /* Arka planı daha yakınlaştırır (100% → orijinal) */
-  background-position: center top;  /* Görselin üst tarafını odak yapar */
-}
-header::after {
-  content: "";
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.55); /* Yazıyı korumak için koyu overlay */
 }
