@@ -1,42 +1,15 @@
-/* HEADER */
 header {
   position: relative;
   text-align: center;
   height: 100vh;
-  background: url('showroom.PNG') no-repeat center center;
-  background-size: cover;   /* Görsel dolu gelsin */
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: center;   /* yazılar dikey ortada */
   align-items: center;
-  color: #fff;
-}
-
-header::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.45); /* hafif karartma */
-}
-
-header .overlay {
-  position: relative;
-  z-index: 2;
-  max-width: 750px;
   padding: 0 20px;
-}
-
-header p {
-  font-size: 1em;
-  color: #f0f0f0;
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-header .soon {
-  margin-top: 15px;
-  font-size: 1.1em;
-  font-weight: 700;
-  color: #d4af37;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  overflow: hidden;
+  color: #fff;
+  background: url('showroom.PNG') no-repeat center center;
+  background-size: cover;    /* 🔥 görsel tam ekran dolsun */
+  background-attachment: fixed; /* parallax efekti */
 }
