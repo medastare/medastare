@@ -1,21 +1,29 @@
-/* Fade-in efekt */
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* CARD */
+.card {
+  background: #0a0a0a;
+  border: 1px solid rgba(255, 215, 0, 0.12);
+  border-radius: 6px;
+  padding: 18px;
+  margin: 12px 0;
+  text-align: left;
 
-.fade-section {
   opacity: 0;
-  animation: fadeUp 1.2s ease forwards;
+  transform: translateY(30px);
+  transition: opacity 1.2s ease, transform 1.2s ease; /* 👈 daha yumuşak fade-in */
+}
+.card.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* Sıralı efekt için */
-.fade-delay-1 { animation-delay: 0.3s; }
-.fade-delay-2 { animation-delay: 0.6s; }
-.fade-delay-3 { animation-delay: 0.9s; }
+/* IMAGE BREAK */
+.image-break {
+  margin: 60px 0;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1.5s ease, transform 1.5s ease; /* 👈 fade-in efekti */
+}
+.image-break.show {
+  opacity: 1;
+  transform: translateY(0);
+}
