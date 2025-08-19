@@ -20,8 +20,8 @@
     body{
       margin:0;background:#000;color:#ddd;font-family:'Inter',sans-serif;
       font-size:1em;line-height:1.6;letter-spacing:.2px;overflow-x:hidden;
-      -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
-      scroll-behavior:smooth;
+      -webkit-font-smoothing:antialiasedd; -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility; scroll-behavior:smooth;
       background:
         radial-gradient(1200px 800px at 10% 0%, rgba(212,175,55,0.05), transparent 60%),
         radial-gradient(800px 600px at 90% 20%, rgba(255,255,255,0.04), transparent 60%),
@@ -47,12 +47,11 @@
       position:absolute;inset:0;width:100%;height:100%;
       object-fit:contain;object-position:center;
       transform:translateY(0);
-      /* 👇 fade-in için başlangıç opaklığı 0 */
-      opacity:0;
+      opacity:0; /* fade-in start */
       transition:opacity 1.2s ease, transform .5s ease;
       z-index:0;will-change:transform,opacity;
     }
-    .hero-bg.show{ opacity:1; } /* yüklenince görünür */
+    .hero-bg.show{ opacity:1; }
     @media (min-width:1024px){ .hero-bg{object-fit:cover;} }
 
     /* Overlay + vignette (efekt 15) */
@@ -194,6 +193,66 @@
     .toTop.show{opacity:1;transform:translateY(0)}
     .toTop svg{width:18px;height:18px;fill:var(--gold)}
 
+    /* ===================== ADDED: MODAL + FOOTER STYLES ===================== */
+    .ms-actions{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin:8px 0 0}
+    .ms-btn{
+      background:transparent; color:#e9e9e9; border:1px solid #1d1d1d;
+      padding:.55rem .9rem; border-radius:10px; cursor:pointer; transition:all .25s;
+    }
+    .ms-btn:hover{ border-color:var(--gold); transform:translateY(-1px); }
+
+    .ms-modal{position:fixed; inset:0; display:none; place-items:center; z-index:1000;
+      background:rgba(0,0,0,.55); backdrop-filter:saturate(120%) blur(2px);}
+    .ms-modal[aria-hidden="false"]{display:grid;}
+    .ms-modal__dialog{
+      width:min(680px,92vw); max-height:86vh; overflow:auto;
+      background:linear-gradient(180deg,#121212,#0e0e0e);
+      color:#e9e9e9; border:1px solid #1f1f1f; border-radius:16px;
+      box-shadow:0 20px 60px rgba(0,0,0,.5); padding:1.25rem 1.25rem 1.5rem;
+      transform:scale(.96); opacity:0; animation:ms-pop .22s ease-out forwards;
+    }
+    @keyframes ms-pop{to{transform:scale(1); opacity:1}}
+    .ms-modal__close{
+      position:sticky; top:0; float:right; margin-left:auto; font-size:1.6rem; line-height:1;
+      background:#1a1a1a; color:#e9e9e9; border:1px solid #2a2a2a; border-radius:10px;
+      padding:.25rem .6rem; cursor:pointer; transition:all .2s;
+    }
+    .ms-modal__close:hover{background:#222;border-color:var(--gold); color:var(--gold);}
+    .ms-modal h3{margin:.25rem 0 1rem; font-size:1.2rem}
+    .ms-modal p{color:#d9d9d9}
+
+    /* Footer (Passion style) */
+    .ms-footer{background:#000; color:#e9e9e9; border-top:1px solid #1d1d1d; position:relative}
+    .ms-footer__topglow{
+      position:absolute; inset:0 0 auto 0; height:2px;
+      background:linear-gradient(90deg,transparent, var(--gold), transparent);
+      filter:drop-shadow(0 0 12px var(--gold)); opacity:.35;
+    }
+    .ms-footer__grid{
+      display:grid; gap:2rem; grid-template-columns:repeat(4,minmax(0,1fr));
+      padding:2.25rem clamp(1rem,3vw,2.5rem);
+    }
+    .ms-footer__col h4{color:#f2f2f2; margin:0 0 .75rem}
+    .ms-footer__col a{
+      display:block; color:#b7b7b7; text-decoration:none; padding:.25rem 0;
+      border-bottom:1px solid transparent; width:max-content; transition:color .2s, border .2s;
+    }
+    .ms-footer__col a:hover{color:#fff; border-color:#1f1f1f}
+    .ms-mini-logo{
+      width:32px; height:32px; display:block; margin:0 0 .5rem;
+      filter:drop-shadow(0 0 6px rgba(212,175,55,.28));
+      animation:ms-logoPulse 2.8s ease-in-out infinite;
+    }
+    @keyframes ms-logoPulse{0%,100%{transform:translateY(0); opacity:.95}50%{transform:translateY(-1px); opacity:1}}
+    .ms-license{color:#d6c690; margin:.25rem 0 .5rem}
+    .ms-address{color:#b7b7b7}
+    .ms-footer__bottom{
+      border-top:1px solid #1d1d1d;
+      padding:1rem clamp(1rem,3vw,2.5rem); color:#a9a9a9; text-align:center
+    }
+    @media (max-width:900px){ .ms-footer__grid{grid-template-columns:1fr 1fr} }
+    @media (max-width:560px){ .ms-footer__grid{grid-template-columns:1fr} }
+
     footer{text-align:center;padding:25px 20px;background:#0a0a0a;font-size:.8em;color:#777}
 
     @media (prefers-reduced-motion:reduce){
@@ -227,6 +286,13 @@
         <i>AI destekli – Moda & güzellikte geleceği kişiselleştirme, teknoloji ve yaratıcılıkla yeniden tanımlıyoruz.</i>
       </p>
       <div class="soon">ÇOK YAKINDA – TÜM TÜRKİYE’DE</div>
+
+      <!-- === ADDED: Modal trigger row (görseli bozmadan) === -->
+      <div class="ms-actions" style="margin-top:16px">
+        <button class="ms-btn" data-modal="modal-founder">Founder & CEO</button>
+        <button class="ms-btn" data-modal="modal-company">Company</button>
+        <button class="ms-btn" data-modal="modal-product">Product & Roadmap</button>
+      </div>
     </div>
   </header>
 
@@ -279,8 +345,77 @@
     </div>
   </section>
 
-  <footer>
-    © 2025 MedaStaré Yapay Zekâ ve Teknoloji A.Ş. – All rights reserved.
+  <!-- ===================== ADDED: MODAL COMPONENTS ===================== -->
+  <div class="ms-modal" id="modal-founder" aria-hidden="true" role="dialog" aria-labelledby="mf-title">
+    <div class="ms-modal__dialog" role="document">
+      <button class="ms-modal__close" aria-label="Close">&times;</button>
+      <h3 id="mf-title">Founder & CEO</h3>
+      <p><strong>Medine Ak</strong> — Founder & CEO of MedaStaré. She personally manages end-to-end execution
+        (product, brand, partnerships) and runs multiple tracks in parallel. Even pre-launch, she led the company
+        to trend on Crunchbase and gain international visibility.</p>
+      <hr>
+      <p><em>Genç yaşına rağmen birden fazla süreci eşzamanlı yöneterek ürün geliştirme, marka ve işbirliklerinin
+        tamamını bizzat koordine ediyor; lansman öncesi bile şirketi küresel görünürlüğe taşıdı.</em></p>
+    </div>
+  </div>
+
+  <div class="ms-modal" id="modal-company" aria-hidden="true" role="dialog" aria-labelledby="mc-title">
+    <div class="ms-modal__dialog" role="document">
+      <button class="ms-modal__close" aria-label="Close">&times;</button>
+      <h3 id="mc-title">About MedaStaré</h3>
+      <p>AI-powered fashion & beauty ecosystem: personalized creation tools, pro workflows, and a forthcoming
+        marketplace that connects creators, brands and consumers across MENA & Europe.</p>
+      <ul>
+        <li>Freemium SaaS → Pro plans</li>
+        <li>Enterprise licensing for agencies/brands</li>
+        <li>Upcoming marketplace revenue share</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ms-modal" id="modal-product" aria-hidden="true" role="dialog" aria-labelledby="mp-title">
+    <div class="ms-modal__dialog" role="document">
+      <button class="ms-modal__close" aria-label="Close">&times;</button>
+      <h3 id="mp-title">Product & Roadmap</h3>
+      <p>Today: AI style generation, brand kits, collaboration.<br>
+         Next: API, marketplace launch, creator monetization, partner integrations.</p>
+    </div>
+  </div>
+
+  <!-- ===================== REPLACED: NEW FOOTER ===================== -->
+  <footer class="ms-footer">
+    <div class="ms-footer__topglow" aria-hidden="true"></div>
+    <div class="ms-footer__grid">
+      <div class="ms-footer__col">
+        <img class="ms-mini-logo" src="assets/logo-mini.svg" alt="MedaStaré mini logo" />
+        <p class="ms-license">License / Registry No: <strong>…</strong></p>
+        <p class="ms-address">Address line 1<br/>Address line 2, City ZIP, Country</p>
+      </div>
+
+      <div class="ms-footer__col">
+        <h4>Get Funded</h4>
+        <a href="/pitch">Pitch To Us</a>
+        <a href="/how-it-works">How It Works</a>
+        <a href="/portfolio">Portfolio</a>
+      </div>
+
+      <div class="ms-footer__col">
+        <h4>Company</h4>
+        <a href="/about">About Us</a>
+        <a href="/careers">Careers</a>
+        <a href="/contact">Contact</a>
+      </div>
+
+      <div class="ms-footer__col">
+        <h4>Social</h4>
+        <a href="https://www.linkedin.com/company/medastare" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://x.com/medastare" target="_blank" rel="noopener">X (Twitter)</a>
+        <a href="https://instagram.com/medastare" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+    <div class="ms-footer__bottom">
+      <small>© <span id="ms-year"></span> MedaStaré. All rights reserved.</small>
+    </div>
   </footer>
 
   <!-- To top -->
@@ -288,7 +423,7 @@
     <svg viewBox="0 0 24 24"><path d="M12 5l7 7-1.41 1.41L13 9.83V19h-2V9.83l-4.59 4.58L5 12z"/></svg>
   </button>
 
-  <!-- 🔥 TEK SCRIPT BLOĞU -->
+  <!-- 🔥 TEK SCRIPT BLOĞU (mevcut + modal ekleri) -->
   <script>
     /* Intersection reveal */
     const io=new IntersectionObserver((entries)=>{
@@ -400,6 +535,39 @@
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
       scrollbar.style.transition='none';
     }
+
+    /* ===================== ADDED: MODAL JS + YEAR ===================== */
+    // open modals
+    document.querySelectorAll('[data-modal]').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const m = document.getElementById(btn.dataset.modal);
+        if(!m) return;
+        m.setAttribute('aria-hidden','false');
+        const firstFocus = m.querySelector('button, a, input, [tabindex]:not([tabindex="-1"])');
+        (firstFocus||m).focus();
+      });
+    });
+    // close helpers
+    const closeModal = m=> m && m.setAttribute('aria-hidden','true');
+    document.querySelectorAll('.ms-modal').forEach(m=>{
+      m.addEventListener('click', e=>{
+        if(e.target.classList.contains('ms-modal')) closeModal(m);
+      });
+      m.querySelector('.ms-modal__close').addEventListener('click', ()=>closeModal(m));
+      m.addEventListener('keydown', e=>{
+        if(e.key==='Escape') closeModal(m);
+        // focus trap
+        if(e.key==='Tab'){
+          const f = m.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])');
+          if(!f.length) return;
+          const first=f[0], last=f[f.length-1];
+          if(e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); }
+          else if(!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); }
+        }
+      });
+    });
+    // footer year
+    const y = document.getElementById('ms-year'); if(y) y.textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
