@@ -1,4 +1,4 @@
-/* --- Moving glass highlight for .soon badge --- */
+/* moving glass highlight for .soon badge (cam gibi parıltı) */
 .soon::before{
   content:"";
   position:absolute;
@@ -6,14 +6,13 @@
   left:-30%;
   width:60%;
   height:400%;
-  background:linear-gradient(120deg,transparent 0%, rgba(255,255,255,.25) 50%, transparent 100%);
+  background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.25) 50%, transparent 100%);
   transform:rotate(20deg);
-  animation:shineSwipe 4s ease-in-out infinite !important;
-  will-change:transform;
+  animation:shineSwipe 4s ease-in-out infinite;
   pointer-events:none;
-  /* .soon zaten overflow:hidden; position:relative; */
 }
 
+/* GEREKLİ ANİMASYON TANIMI */
 @keyframes shineSwipe{
   0%   { transform:translateX(-120%) rotate(20deg); }
   100% { transform:translateX(220%)  rotate(20deg); }
