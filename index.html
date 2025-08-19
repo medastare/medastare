@@ -11,9 +11,9 @@
     :root{
       --gold:#d4af37;
       --overlay:0.55;
-      --rx:0deg; --ry:0deg;      /* 3D tilt */
+      --rx:0deg; --ry:0deg;
       --pop:1.04;
-      --spot-x:50%; --spot-y:50%;/* spotlight */
+      --spot-x:50%; --spot-y:50%;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -28,7 +28,6 @@
         #000;
     }
 
-    /* ==== Scroll progress bar (efekt 1) ==== */
     .scrollbar{
       position:fixed;top:0;left:0;height:3px;width:0;
       background:linear-gradient(90deg, rgba(255,255,255,.0), var(--gold), rgba(255,255,255,.0));
@@ -37,7 +36,6 @@
       transition:height .25s ease;
     }
 
-    /* ===== HEADER ===== */
     header#hero{
       position:relative;height:100vh;display:flex;justify-content:center;align-items:center;
       text-align:center;color:#fff;isolation:isolate;overflow:hidden;background:#000;
@@ -47,14 +45,13 @@
       position:absolute;inset:0;width:100%;height:100%;
       object-fit:contain;object-position:center;
       transform:translateY(0);
-      opacity:0; /* fade-in start */
+      opacity:0;
       transition:opacity 1.2s ease, transform .5s ease;
       z-index:0;will-change:transform,opacity;
     }
     .hero-bg.show{ opacity:1; }
     @media (min-width:1024px){ .hero-bg{object-fit:cover;} }
 
-    /* Overlay + vignette (efekt 15) */
     header#hero::after{
       content:"";position:absolute;inset:0;background:rgba(0,0,0,var(--overlay));
       z-index:1;transition:background .4s ease;pointer-events:none;
@@ -69,7 +66,6 @@
     }
     @keyframes vignettePulse{0%{opacity:.95}100%{opacity:1}}
 
-    /* Bokeh orbs (efekt 2) */
     .bokeh{position:absolute;inset:-20% -10%;z-index:1;pointer-events:none;filter:blur(8px)}
     .bokeh span{
       position:absolute;display:block;border-radius:50%;
@@ -83,7 +79,6 @@
       100%{transform:translate3d(-10px,10px,0) scale(1)}
     }
 
-    /* Gold sheen lines (efekt 4) */
     .sheen{
       position:absolute;top:0;left:-30%;width:60%;height:100%;z-index:2;pointer-events:none;
       background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.15) 50%, transparent 100%);
@@ -106,7 +101,6 @@
     }
     header#hero.scrolled p{letter-spacing:.3px}
 
-    /* Glass badge */
     .soon{
       display:inline-block;font-size:1.2em;font-weight:700;color:var(--gold);
       text-transform:uppercase;letter-spacing:1px;position:relative;padding:.5em 1.1em;
@@ -122,9 +116,7 @@
       background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.25) 50%,transparent 100%);
       transform:rotate(20deg);animation:shine 4s ease-in-out infinite;pointer-events:none;
     }
-    @keyframes shine{0%{transform:translateX(-120%) rotate(20deg)}100%{transform:translateX(220%) rotate(20deg)}}
 
-    /* Sections */
     section{
       max-width:880px;margin:auto;padding:45px 20px;border-top:1px solid rgba(255,255,255,0.08);
       opacity:0;transform:translateY(40px);transition:opacity .9s ease, transform .9s ease;will-change:opacity,transform;
@@ -182,8 +174,6 @@
       content:"";position:absolute;inset:-6px;border-radius:8px;box-shadow:0 0 12px rgba(212,175,55,.25);
       opacity:0;transition:opacity .3s ease;pointer-events:none;
     }
-    .contact-links a:hover::before{opacity:1}
-
     .toTop{
       position:fixed;right:16px;bottom:18px;width:42px;height:42px;border-radius:50%;
       background:rgba(255,255,255,.06);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
@@ -193,7 +183,7 @@
     .toTop.show{opacity:1;transform:translateY(0)}
     .toTop svg{width:18px;height:18px;fill:var(--gold)}
 
-    /* ===================== ADDED: MODAL + FOOTER STYLES ===================== */
+    /* ===== MODAL + FOOTER STYLES ===== */
     .ms-actions{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin:8px 0 0}
     .ms-btn{
       background:transparent; color:#e9e9e9; border:1px solid #1d1d1d;
@@ -221,7 +211,6 @@
     .ms-modal h3{margin:.25rem 0 1rem; font-size:1.2rem}
     .ms-modal p{color:#d9d9d9}
 
-    /* Footer */
     .ms-footer{background:#000; color:#e9e9e9; border-top:1px solid #1d1d1d; position:relative}
     .ms-footer__topglow{
       position:absolute; inset:0 0 auto 0; height:2px;
@@ -261,11 +250,9 @@
 </head>
 <body>
 
-  <!-- Scroll progress -->
   <div class="scrollbar" id="scrollbar"></div>
 
   <header id="hero">
-    <!-- Bokeh orbs -->
     <div class="bokeh" aria-hidden="true">
       <span style="width:220px;height:220px;left:10%;top:15%" class="g"></span>
       <span style="width:160px;height:160px;left:70%;top:10%"></span>
@@ -273,10 +260,8 @@
       <span style="width:140px;height:140px;left:20%;top:70%"></span>
     </div>
 
-    <!-- Sheen sweep -->
     <div class="sheen" aria-hidden="true"></div>
 
-    <!-- Görsel -->
     <img class="hero-bg" src="showroom.PNG" alt="MedaStaré showroom">
 
     <div class="header-content" id="heroContent">
@@ -286,7 +271,6 @@
       </p>
       <div class="soon">ÇOK YAKINDA – TÜM TÜRKİYE’DE</div>
 
-      <!-- Modal trigger row -->
       <div class="ms-actions" style="margin-top:16px">
         <button class="ms-btn" data-modal="modal-founder">Founder & CEO</button>
         <button class="ms-btn" data-modal="modal-company">Company</button>
@@ -386,11 +370,10 @@
   <footer class="ms-footer">
     <div class="ms-footer__topglow" aria-hidden="true"></div>
     <div class="ms-footer__grid">
+      <!-- İSTEDİĞİN GİBİ GÜNCELLENEN İLK SÜTUN -->
       <div class="ms-footer__col">
-        <!-- LOGO PNG -->
         <img class="ms-mini-logo" src="medastare-logo.png" alt="MedaStaré logo" />
         <p class="ms-slogan">Yapay Zekâ ve Teknoloji Şirketi</p>
-        <!-- Adres istenmedi, bu alan boş bırakıldı -->
       </div>
 
       <div class="ms-footer__col">
@@ -420,14 +403,11 @@
     </div>
   </footer>
 
-  <!-- To top -->
   <button class="toTop" id="toTop" aria-label="Yukarı çık">
     <svg viewBox="0 0 24 24"><path d="M12 5l7 7-1.41 1.41L13 9.83V19h-2V9.83l-4.59 4.58L5 12z"/></svg>
   </button>
 
-  <!-- SCRIPT -->
   <script>
-    /* Intersection reveal */
     const io=new IntersectionObserver((entries)=>{
       entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }});
     },{threshold:.2});
@@ -440,7 +420,6 @@
     const scrollbar=document.getElementById('scrollbar');
     const toTop=document.getElementById('toTop');
 
-    /* Görsel load -> FADE-IN */
     if (heroImg) {
       if (heroImg.complete) {
         requestAnimationFrame(()=> heroImg.classList.add('show'));
@@ -449,43 +428,34 @@
       }
     }
 
-    /* Anti-jitter – mobilde ağır efektleri kapat */
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints>0;
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-    const heavyFX = !(isTouch || isIOS);  // desktop’ta açık
+    const heavyFX = !(isTouch || isIOS);
 
-    /* Scroll rAF */
     let latestScroll=0,ticking=false;
     function updateOnScroll(){
       const h=window.innerHeight;
       const y=latestScroll;
 
-      /* progress bar */
       const docH = document.documentElement.scrollHeight - window.innerHeight;
       const p = Math.max(0, Math.min(1, y / (docH||1)));
       scrollbar.style.width = (p*100)+'%';
       scrollbar.style.height = y>4 ? '3px':'0px';
 
-      /* header micro state */
       hero.classList.toggle('scrolled', y>40);
 
-      /* parallax */
       if(heroImg) heroImg.style.transform = heavyFX ? `translate3d(0, ${y*0.03}px, 0)` : 'none';
 
-      /* overlay yoğunluğu */
       const ov=Math.max(.45,.55 - (y/h)*0.1);
       hero.style.setProperty('--overlay', ov.toFixed(2));
 
-      /* içerik fade/shift */
       const k=Math.min(1, y/(h*0.8));
       heroContent.style.opacity = String(1 - k*0.35);
       heroContent.style.transform = `translateY(${k*24}px) scale(${1 - k*0.02}) rotateX(var(--rx)) rotateY(var(--ry))`;
       heroContent.style.filter = heavyFX ? `blur(${k*2.2}px)` : 'none';
 
-      /* görsel scroll ile yumuşak fade-out */
       if (heroImg) heroImg.style.opacity = String(1 - k*0.9);
 
-      /* cards micro-parallax */
       document.querySelectorAll('.card').forEach((el)=>{
         const rect = el.getBoundingClientRect();
         const py = Math.max(-2, Math.min(2, (rect.top-window.innerHeight/2)/200));
@@ -493,7 +463,6 @@
         el.classList.add('parallax');
       });
 
-      /* toTop show/hide */
       if(y>400) toTop.classList.add('show'); else toTop.classList.remove('show');
 
       ticking=false;
@@ -505,7 +474,6 @@
     window.addEventListener('scroll', onScroll, {passive:true});
     updateOnScroll();
 
-    /* Spotlight – sadece desktop */
     if(heavyFX){
       hero.addEventListener('mousemove',(e)=>{
         const r=hero.getBoundingClientRect();
@@ -514,7 +482,6 @@
         document.documentElement.style.setProperty('--spot-x', x+'%');
         document.documentElement.style.setProperty('--spot-y', y+'%');
 
-        /* 3D tilt */
         const cx=(e.clientX-(r.left+r.width/2))/(r.width/2);
         const cy=(e.clientY-(r.top+r.height/2))/(r.height/2);
         const tilt=6;
@@ -527,18 +494,14 @@
       });
     }
 
-    /* Scroll to top */
     toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
 
-    /* Contact: halo hover için position context */
     document.querySelectorAll('.contact-links a').forEach(a=>{ a.style.position='relative'; });
 
-    /* Motion-safe */
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
       scrollbar.style.transition='none';
     }
 
-    /* MODAL JS + YEAR */
     document.querySelectorAll('[data-modal]').forEach(btn=>{
       btn.addEventListener('click', ()=>{
         const m = document.getElementById(btn.dataset.modal);
