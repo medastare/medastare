@@ -6,8 +6,8 @@
   <title>MedaStaré – Powered by AI</title>
   <link rel="icon" href="medastare-logo.PNG" type="image/png">
 
-  <!-- Luxury Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Luxury Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     body {
@@ -15,34 +15,32 @@
       padding: 0;
       background: #000;
       color: #ddd;
-      font-family: 'Libre Baskerville', serif;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05em;
       line-height: 1.7;
       letter-spacing: 0.3px;
     }
 
     header {
       text-align: center;
-      padding: 100px 20px 50px;
-      animation: fadeIn 1.5s ease;
+      padding: 90px 20px 50px;
     }
 
     header img {
-      width: 200px;
-      margin-bottom: 20px;
-      filter: drop-shadow(0px 0px 12px rgba(212,175,55,0.8));
+      width: 180px;
+      margin-bottom: 25px;
     }
 
     header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5em;
+      font-size: 2.6em;
       color: #d4af37;
-      margin-bottom: 12px;
+      margin-bottom: 15px;
       font-weight: 600;
-      letter-spacing: 1.2px;
+      letter-spacing: 1px;
     }
 
     header p {
-      max-width: 720px;
+      max-width: 700px;
       margin: auto;
       font-size: 1.05em;
       color: #cfcfcf;
@@ -51,23 +49,21 @@
 
     .soon {
       margin-top: 25px;
-      font-size: 1.15em;
+      font-size: 1.1em;
       font-weight: 600;
       color: #d4af37;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      letter-spacing: 1px;
     }
 
     section {
       max-width: 900px;
       margin: auto;
-      padding: 60px 20px;
-      border-top: 1px solid rgba(255,255,255,0.07);
-      animation: fadeIn 2s ease;
+      padding: 50px 20px;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
 
     section h2 {
-      font-family: 'Playfair Display', serif;
       font-size: 1.5em;
       color: #d4af37;
       margin-bottom: 18px;
@@ -76,45 +72,39 @@
 
     .card {
       background: #0a0a0a;
-      border: 1px solid rgba(255, 215, 0, 0.15);
-      border-radius: 10px;
+      border: 1px solid rgba(255, 215, 0, 0.12);
+      border-radius: 8px;
       padding: 22px;
-      margin: 18px 0;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+      margin: 15px 0;
     }
 
     .card p {
-      margin: 0 0 10px;
+      margin: 0;
       color: #e0e0e0;
       font-size: 1em;
     }
 
-    footer {
+    /* Contact Row */
+    .contact-links {
+      margin-top: 12px;
       text-align: center;
-      padding: 35px 20px;
-      background: #0a0a0a;
-      font-size: 0.85em;
-      color: #888;
     }
-
-    a {
+    .contact-links a {
       color: #d4af37;
+      margin: 0 10px;
+      font-size: 1em;
       text-decoration: none;
-      transition: color 0.3s ease;
     }
-
-    a:hover {
+    .contact-links a:hover {
       color: #fff;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      background: #0a0a0a;
+      font-size: 0.85em;
+      color: #777;
     }
   </style>
 </head>
@@ -124,7 +114,7 @@
     <img src="medastare-logo.PNG" alt="MedaStaré Logo">
     <h1>MedaStaré</h1>
     <p>Powered by AI – Redefining the future of fashion & beauty through personalization, technology, and creativity.<br>
-    <em>AI destekli – Moda & güzellikte geleceği kişiselleştirme, teknoloji ve yaratıcılık ile yeniden tanımlıyoruz.</em></p>
+    <i>AI destekli – Moda & güzellikte geleceği kişiselleştirme, teknoloji ve yaratıcılıkla yeniden tanımlıyoruz.</i></p>
     <div class="soon">Çok Yakında – Tüm Türkiye’de</div>
   </header>
 
@@ -132,23 +122,21 @@
     <h2>Mission & Vision / Misyon & Vizyon</h2>
     <div class="card">
       <p><b>EN:</b> At MedaStaré, our mission is to merge fashion, beauty and artificial intelligence into a seamless ecosystem. 
-      Our vision is to empower individuals with technology-driven elegance while leading innovation on a global scale.</p>
+      Our vision is to empower individuals with technology-driven elegance while leading innovation on a global scale.</p><br>
       <p><b>TR:</b> MedaStaré’de misyonumuz, moda, güzellik ve yapay zekâyı kusursuz bir ekosistemde birleştirmektir. 
       Vizyonumuz, teknolojiyle şekillenen zarafeti insanlara sunarak küresel ölçekte yeniliğe öncülük etmektir.</p>
     </div>
   </section>
 
   <section id="momentum">
-    <h2>Momentum / Yükseliş</h2>
+    <h2>Momentum</h2>
     <div class="card">
-      <p><b>Crunchbase Rank:</b> Rising rapidly from ~2.9M to ~254K in less than 24 hours – a clear sign of accelerating momentum.</p>
-      <p><b>Crunchbase Sıralaması:</b> 24 saatten kısa sürede ~2.9M’den ~254K’ya yükseldi – hızlanan ivmenin açık bir göstergesi.</p>
+      <p><b>Crunchbase Rank:</b> Rising rapidly from ~2.9M to ~254K in less than 24 hours – accelerating global visibility.</p>
     </div>
     <div class="card">
       <p><a href="https://medium.com/@medastare.app/medastar%C3%A9-is-now-trending-on-crunchbase-in-fashion-tech-b202ca200438" target="_blank">
         Featured on Medium → MedaStaré is now trending on Crunchbase in Fashion Tech
       </a></p>
-      <p><em>Medium’da öne çıktı → MedaStaré, Fashion Tech alanında Crunchbase’de trend oluyor.</em></p>
     </div>
   </section>
 
@@ -156,20 +144,22 @@
     <h2>Future Potential / Gelecek Potansiyeli</h2>
     <div class="card">
       <p><b>EN:</b> With the global fashion & beauty market surpassing $3 Trillion, and the AI-driven segment exceeding $200 Billion, 
-      MedaStaré is uniquely positioned to redefine the intersection of creativity and technology – starting from Turkey, expanding worldwide.</p>
-      <p><b>TR:</b> Küresel moda & güzellik pazarı 3 trilyon $’ı, yapay zekâ destekli segment ise 200 milyar $’ı aşarken, 
-      MedaStaré yaratıcılık ve teknolojinin kesişimini yeniden tanımlamak için benzersiz bir konumda – Türkiye’den başlayarak dünyaya açılıyor.</p>
+      MedaStaré is uniquely positioned to redefine the intersection of creativity and technology – starting from Turkey, expanding worldwide.</p><br>
+      <p><b>TR:</b> Küresel moda & güzellik pazarı 3 trilyon $’ı, yapay zeka destekli segment ise 200 milyar $’ı aşarken, 
+      MedaStaré yaratıcılık ve teknolojinin kesişimini yeniden tanımlamak için eşsiz bir konumda – Türkiye’den başlayarak dünyaya açılıyor.</p>
     </div>
   </section>
 
   <section id="contact">
     <h2>Contact / İletişim</h2>
-    <div class="card">
+    <div class="card" style="text-align:center;">
       <p>Email: <a href="mailto:info@medastare.com">info@medastare.com</a></p>
-      <p><a href="https://linkedin.com/company/medastareapp" target="_blank">LinkedIn</a></p>
-      <p><a href="https://instagram.com/medastareapp" target="_blank">Instagram</a></p>
-      <p><a href="https://tiktok.com/@medastareapp" target="_blank">TikTok</a></p>
-      <p><a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a></p>
+      <div class="contact-links">
+        <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a> |
+        <a href="https://instagram.com/medastareapp" target="_blank">Instagram</a> |
+        <a href="https://tiktok.com/@medastareapp" target="_blank">TikTok</a> |
+        <a href="https://linkedin.com/company/medastareapp" target="_blank">LinkedIn</a>
+      </div>
     </div>
   </section>
 
