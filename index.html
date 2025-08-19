@@ -31,10 +31,19 @@
       align-items: center;
       text-align: center;
       color: #fff;
+      overflow: hidden;
+    }
 
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
       background: url('showroom.PNG') no-repeat center center;
-      background-size: cover;   /* 🔥 TAM ekran doldurur */
+      background-size: cover;
       background-color: #000;
+      transform: scale(1.2);   /* zoomed in başlasın */
+      transition: transform 0.2s linear;
+      z-index: 0;
     }
 
     header::after {
@@ -45,11 +54,21 @@
       z-index: 1;
     }
 
-    header .header-content {
+    .header-content {
       position: relative;
       z-index: 2;
       max-width: 720px;
       padding: 0 20px;
+      opacity: 0;
+      transform: translateY(40px) scale(1.05);
+      filter: blur(8px);
+      transition: all 1.5s ease;
+    }
+
+    .header-content.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
     }
 
     header p {
@@ -65,8 +84,16 @@
       color: #d4af37;
       text-transform: uppercase;
       letter-spacing: 1px;
+      animation: pulse 2s infinite;
     }
 
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.85; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Section */
     section {
       max-width: 880px;
       margin: auto;
@@ -111,7 +138,6 @@
       font-size: 0.95em;
     }
 
-    /* IMAGE BREAK */
     .image-break {
       margin: 60px 0;
       opacity: 0;
@@ -128,26 +154,6 @@
       border: 1px solid rgba(212,175,55,0.2);
       box-shadow: 0 0 25px rgba(0,0,0,0.6);
       display: block;
-    }
-
-    /* CONTACT LINKS */
-    .contact-links {
-      margin-top: 10px;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-    .contact-links a {
-      color: #d4af37;
-      font-size: 0.95em;
-      text-decoration: none;
-      transition: color 0.3s ease, transform 0.3s ease;
-    }
-    .contact-links a:hover {
-      color: #fff;
-      transform: scale(1.1);
     }
 
     footer {
@@ -181,44 +187,9 @@
     </div>
   </section>
 
-  <section id="momentum">
-    <h2>Momentum</h2>
-    <div class="card">
-      <p><b>Crunchbase Rank:</b> Rising rapidly from ~2.9M to ~254K in less than 24 hours – accelerating global visibility.</p>
-    </div>
-    <div class="card">
-      <p><a href="https://medium.com/@medastare.app/medastar%C3%A9-is-now-trending-on-crunchbase-in-fashion-tech-b202ca200438" target="_blank">
-        Featured on Medium → MedaStaré is now trending on Crunchbase in Fashion Tech
-      </a></p>
-    </div>
-  </section>
-
-  <section id="future">
-    <h2>Future Potential / Gelecek Potansiyeli</h2>
-    <div class="card">
-      <p><b>EN:</b> With the global fashion & beauty market surpassing $3 Trillion, and the AI-driven segment exceeding $200 Billion, 
-      MedaStaré is uniquely positioned to redefine the intersection of creativity and technology – starting from Turkey, expanding worldwide.</p><br>
-      <p><b>TR:</b> Küresel moda & güzellik pazarı 3 trilyon $’ı, yapay zeka destekli segment ise 200 milyar $’ı aşarken, 
-      MedaStaré yaratıcılık ve teknolojinin kesişimini yeniden tanımlamak için eşsiz bir konumda – Türkiye’den başlayarak dünyaya açılıyor.</p>
-    </div>
-  </section>
-
   <!-- FULL WIDTH IMAGE -->
   <section class="image-break">
     <img src="runway.PNG" alt="MedaStaré Runway">
-  </section>
-
-  <section id="contact">
-    <h2>Contact / İletişim</h2>
-    <div class="card" style="text-align:center;">
-      <p>Email: <a href="mailto:info@medastare.com">info@medastare.com</a></p>
-      <div class="contact-links">
-        <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
-        <a href="https://instagram.com/medastareapp" target="_blank">Instagram</a>
-        <a href="https://tiktok.com/@medastare.app" target="_blank">TikTok</a>
-        <a href="https://linkedin.com/company/medastareapp" target="_blank">LinkedIn</a>
-      </div>
-    </div>
   </section>
 
   <footer>
@@ -226,8 +197,13 @@
   </footer>
 
   <script>
-    // Scroll animation
-    const elements = document.querySelectorAll('.card, .image-break, section');
+    // Apple hero image zoom-out
+    window.addEventListener("scroll", () => {
+      const header = document.querySelector("header::before"); 
+    });
+
+    // Intersection animations
+    const elements = document.querySelectorAll('.card, .image-break, section, .header-content');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -236,6 +212,21 @@
       });
     }, { threshold: 0.2 });
     elements.forEach(el => observer.observe(el));
+
+    // Parallax Zoom effect
+    window.addEventListener("scroll", () => {
+      const scrollY = window.scrollY;
+      const header = document.querySelector("header");
+      const bg = header.querySelector("::before");
+    });
+
+    // Pure JS zoom-out
+    window.addEventListener("scroll", () => {
+      const scrolled = window.scrollY;
+      const header = document.querySelector("header");
+      header.style.setProperty("--zoom", 1.2 - scrolled / 1500);
+      document.querySelector("header::before");
+    });
   </script>
 
 </body>
