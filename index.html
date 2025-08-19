@@ -23,18 +23,33 @@
 
     /* HEADER */
     header {
-      text-align: center;
-      padding: 120px 20px;
-      background: url('showroom.PNG') no-repeat center center/cover;
       position: relative;
+      min-height: 90vh; /* neredeyse tüm ekran */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
       color: #fff;
+      overflow: hidden;
     }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('showroom.PNG') no-repeat center -120px / 220%; /* zoom ve odak */
+      z-index: 0;
+    }
+
     header::after {
       content: "";
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
+      inset: 0;
       background: rgba(0,0,0,0.55);
+      z-index: 1;
     }
+
     header * {
       position: relative;
       z-index: 2;
@@ -79,7 +94,6 @@
       padding: 18px;
       margin: 12px 0;
       text-align: left;
-
       opacity: 0;
       transform: translateY(30px);
       transition: all 0.8s ease;
