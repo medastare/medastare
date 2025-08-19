@@ -1,210 +1,189 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MedaStaré – Powered by AI</title>
-  <link rel="icon" href="favicon.png" type="image/png"> <!-- favicon -->
+  <link rel="icon" href="favicon.png" type="image/png" />
 
   <!-- Luxury Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #000;
-      color: #ddd;
-      font-family: 'Inter', sans-serif;
-      font-size: 1em;
-      line-height: 1.6;
-      letter-spacing: 0.2px;
-      overflow-x: hidden;
+    :root{
+      --gold:#d4af37;
+      --fade: rgba(0,0,0,0.55);
     }
 
-    /* HEADER */
-    header {
-      position: relative;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: #fff;
-
-      background: url('showroom.PNG') no-repeat center center;
-      background-size: cover;   /* TAM ekran doldurur */
-      background-attachment: fixed;
-      background-color: #000;
-      overflow: hidden;
+    /* ====== BASE ====== */
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:#000;
+      color:#ddd;
+      font-family:'Inter', sans-serif;
+      font-size:1em;
+      line-height:1.6;
+      letter-spacing:.2px;
+      overflow-x:hidden;
     }
 
-    header::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.55);
-      z-index: 1;
+    /* ====== HERO / HEADER ====== */
+    header{
+      position:relative;
+      height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:#fff;
+      overflow:hidden;
+      /* parallax anim için değişkenler */
+      --bg-scale:1;
+      --bg-y:0px;
     }
 
-    header .header-content {
-      position: relative;
-      z-index: 2;
-      max-width: 720px;
-      padding: 0 20px;
-      opacity: 0;
-      transform: translateY(40px) scale(1.05);
-      filter: blur(8px);
-      transition: all 1.5s ease;
+    /* Arka planı pseudo ile çiziyoruz -> mobilde contain, masaüstünde cover */
+    header::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:url('showroom.PNG') no-repeat center center;
+      background-size:contain;              /* 🔹 mobil: resim TAMAMEN görünür */
+      transform:translateY(var(--bg-y)) scale(var(--bg-scale));
+      transform-origin:center center;
+      will-change:transform;
+      z-index:0;
     }
 
-    header .header-content.show {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      filter: blur(0);
+    /* koyu overlay */
+    header::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:var(--fade);
+      z-index:1;
     }
 
-    header p {
-      font-size: 1.1em;
-      color: #eaeaea;
-      font-style: italic;
-      margin-bottom: 20px;
-      animation: fadeInUp 2s ease forwards;
+    /* Metinler */
+    .header-content{
+      position:relative;
+      z-index:2;
+      max-width:720px;
+      padding:0 20px;
+      opacity:0;
+      transform:translateY(30px);
+      filter:blur(6px);
+      transition:opacity .8s ease, transform .8s ease, filter .8s ease;
+    }
+    .header-content.show{
+      opacity:1;
+      transform:translateY(0);
+      filter:blur(0);
+    }
+    header p{
+      font-size:1.1em;
+      color:#eaeaea;
+      font-style:italic;
+      margin:0 0 20px 0;
+      animation: fadeInUp 1.2s ease both;
+    }
+    .soon{
+      font-size:1.2em;
+      font-weight:700;
+      color:var(--gold);
+      text-transform:uppercase;
+      letter-spacing:1px;
+      animation: glow 2.8s ease-in-out infinite alternate;
     }
 
-    .soon {
-      font-size: 1.2em;
-      font-weight: 700;
-      color: #d4af37;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      animation: pulse 2s infinite, glow 3s infinite alternate;
+    /* Masaüstünde doldur (Apple hissi), mobilde taşma yok */
+    @media (min-width:768px){
+      header::before{ background-size:cover; }
     }
 
-    /* === APPLE STYLE EFFECTS === */
-    @keyframes fadeInUp {
-      0% {opacity:0; transform: translateY(40px);}
-      100% {opacity:1; transform: translateY(0);}
-    }
-    @keyframes pulse {
-      0% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.1); opacity: 0.9; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    @keyframes glow {
-      0% { text-shadow: 0 0 5px #d4af37, 0 0 10px #d4af37; }
-      100% { text-shadow: 0 0 20px #fff, 0 0 40px #d4af37; }
-    }
-    @keyframes zoomOut {
-      from { transform: scale(1.2); }
-      to { transform: scale(1); }
-    }
-    @keyframes fadeBlur {
-      0% { opacity:0; filter: blur(10px); }
-      100% { opacity:1; filter: blur(0); }
-    }
-    @keyframes slideInLeft {
-      0% {opacity:0; transform: translateX(-100px);}
-      100% {opacity:1; transform: translateX(0);}
-    }
-    @keyframes slideInRight {
-      0% {opacity:0; transform: translateX(100px);}
-      100% {opacity:1; transform: translateX(0);}
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-    @keyframes scaleIn {
-      0% {opacity:0; transform: scale(0.8);}
-      100% {opacity:1; transform: scale(1);}
+    /* Kaydırınca hafif küçülme (Apple-style) */
+    header.shrink .header-content{
+      transform:translateY(-12px) scale(.97);
+      opacity:.95;
     }
 
-    section {
-      max-width: 880px;
-      margin: auto;
-      padding: 45px 20px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s ease;
+    /* ====== SECTIONS ====== */
+    section{
+      max-width:880px;
+      margin:auto;
+      padding:45px 20px;
+      border-top:1px solid rgba(255,255,255,.08);
+      opacity:0;
+      transform:translateY(40px);
+      transition:opacity .9s ease, transform .9s ease;
     }
-    section.show {
-      opacity: 1;
-      transform: translateY(0);
-      animation: fadeBlur 1.5s ease forwards;
-    }
-
-    section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4em;
-      color: #d4af37;
-      margin-bottom: 16px;
-      font-weight: 600;
-      animation: slideInLeft 1s ease forwards;
+    section.show{opacity:1; transform:translateY(0);}
+    section h2{
+      font-family:'Playfair Display', serif;
+      font-size:1.4em;
+      color:var(--gold);
+      margin:0 0 16px 0;
+      font-weight:600;
     }
 
-    .card {
-      background: #0a0a0a;
-      border: 1px solid rgba(255, 215, 0, 0.12);
-      border-radius: 6px;
-      padding: 18px;
-      margin: 12px 0;
-      text-align: left;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
+    .card{
+      background:#0a0a0a;
+      border:1px solid rgba(255,215,0,.12);
+      border-radius:6px;
+      padding:18px;
+      margin:12px 0;
+      text-align:left;
+      opacity:0;
+      transform:translateY(30px);
+      transition:opacity .8s ease, transform .8s ease;
     }
-    .card.show {
-      opacity: 1;
-      transform: translateY(0);
-      animation: scaleIn 1s ease forwards;
+    .card.show{opacity:1; transform:translateY(0);}
+    .card p{margin:0; color:#e0e0e0; font-size:.95em;}
+
+    /* IMAGE BREAK */
+    .image-break{
+      margin:60px 0;
+      opacity:0;
+      transform:translateY(40px) scale(.98);
+      transition:opacity 1s ease, transform 1s ease;
+    }
+    .image-break.show{opacity:1; transform:translateY(0) scale(1);}
+    .image-break img{
+      width:100%;
+      border-radius:10px;
+      border:1px solid rgba(212,175,55,.2);
+      box-shadow:0 0 25px rgba(0,0,0,.6);
+      display:block;
     }
 
-    .card p {
-      margin: 0;
-      color: #e0e0e0;
-      font-size: 0.95em;
-      animation: float 6s ease-in-out infinite;
+    /* ====== FOOTER ====== */
+    footer{
+      text-align:center;
+      padding:25px 20px;
+      background:#0a0a0a;
+      font-size:.8em;
+      color:#777;
     }
 
-    .image-break {
-      margin: 60px 0;
-      opacity: 0;
-      transform: translateY(40px) scale(0.95);
-      transition: all 1s ease;
+    /* ====== Minimal “Apple-like” animasyonlar ====== */
+    @keyframes fadeInUp{
+      from{opacity:0; transform:translateY(30px)}
+      to{opacity:1; transform:translateY(0)}
     }
-    .image-break.show {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      animation: zoomOut 2s ease forwards;
-    }
-    .image-break img {
-      width: 100%;
-      border-radius: 10px;
-      border: 1px solid rgba(212,175,55,0.2);
-      box-shadow: 0 0 25px rgba(0,0,0,0.6);
-      display: block;
-      animation: fadeInUp 2s ease forwards;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px 20px;
-      background: #0a0a0a;
-      font-size: 0.8em;
-      color: #777;
-      animation: fadeBlur 2s ease forwards;
+    @keyframes glow{
+      from{ text-shadow:0 0 6px rgba(212,175,55,.5), 0 0 0 rgba(255,255,255,0); }
+      to{   text-shadow:0 0 12px rgba(212,175,55,.9), 0 0 18px rgba(255,255,255,.25); }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <div class="header-content">
+  <header id="hero">
+    <div class="header-content" id="heroContent">
       <p>
-        Powered by AI – Redefining the future of fashion & beauty through personalization, technology, and creativity.<br>
-        <i>AI destekli – Moda & güzellikte geleceği kişiselleştirme, teknoloji ve yaratıcılıkla yeniden tanımlıyoruz.</i>
+        Powered by AI – Redefining the future of fashion &amp; beauty through personalization, technology, and creativity.<br />
+        <i>AI destekli – Moda &amp; güzellikte geleceği kişiselleştirme, teknoloji ve yaratıcılıkla yeniden tanımlıyoruz.</i>
       </p>
       <div class="soon">ÇOK YAKINDA – TÜM TÜRKİYE’DE</div>
     </div>
@@ -244,18 +223,18 @@
 
   <!-- FULL WIDTH IMAGE -->
   <section class="image-break">
-    <img src="runway.PNG" alt="MedaStaré Runway">
+    <img src="runway.PNG" alt="MedaStaré Runway" />
   </section>
 
   <section id="contact">
     <h2>Contact / İletişim</h2>
     <div class="card" style="text-align:center;">
       <p>Email: <a href="mailto:info@medastare.com">info@medastare.com</a></p>
-      <div class="contact-links">
-        <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
-        <a href="https://instagram.com/medastareapp" target="_blank">Instagram</a>
-        <a href="https://tiktok.com/@medastare.app" target="_blank">TikTok</a>
-        <a href="https://linkedin.com/company/medastareapp" target="_blank">LinkedIn</a>
+      <div class="contact-links" style="display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:10px;">
+        <a href="https://x.com/medastareapp" target="_blank" style="color:#d4af37;text-decoration:none;">X (Twitter)</a>
+        <a href="https://instagram.com/medastareapp" target="_blank" style="color:#d4af37;text-decoration:none;">Instagram</a>
+        <a href="https://tiktok.com/@medastare.app" target="_blank" style="color:#d4af37;text-decoration:none;">TikTok</a>
+        <a href="https://linkedin.com/company/medastareapp" target="_blank" style="color:#d4af37;text-decoration:none;">LinkedIn</a>
       </div>
     </div>
   </section>
@@ -265,16 +244,28 @@
   </footer>
 
   <script>
-    // Intersection animations
-    const elements = document.querySelectorAll('.card, .image-break, section, .header-content');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-        }
+    /* İçerikler görünür olunca fade-in */
+    const els = document.querySelectorAll('.card, .image-break, section');
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('show'); }
       });
-    }, { threshold: 0.2 });
-    elements.forEach(el => observer.observe(el));
+    }, {threshold:0.2});
+    els.forEach(el=>obs.observe(el));
+
+    /* Hero başlangıç animasyonu */
+    window.addEventListener('load', ()=>{
+      document.getElementById('heroContent').classList.add('show');
+    });
+
+    /* iOS uyumlu parallax (background-attachment: fixed KULLANMADIK) */
+    const hero = document.getElementById('hero');
+    window.addEventListener('scroll', ()=>{
+      const y = Math.min(window.scrollY, 400);           // sınırla
+      hero.style.setProperty('--bg-y', (y*0.2)+'px');    // hafif aşağı kaydır
+      hero.style.setProperty('--bg-scale', (1 + y*0.0006)); // çok hafif zoom
+      if (y>80) hero.classList.add('shrink'); else hero.classList.remove('shrink');
+    }, {passive:true});
   </script>
 
 </body>
