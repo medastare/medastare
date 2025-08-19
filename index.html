@@ -79,6 +79,16 @@
       padding: 18px;
       margin: 12px 0;
       text-align: left;
+
+      /* başlangıç efekti */
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .card.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .card p {
@@ -113,26 +123,11 @@
       font-size: 0.8em;
       color: #777;
     }
-
-    /* --- WOW EFFECT --- */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(25px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .fade {
-      opacity: 0;
-      animation: fadeUp 1.2s ease forwards;
-    }
-    .delay-1 { animation-delay: 0.3s; }
-    .delay-2 { animation-delay: 0.6s; }
-    .delay-3 { animation-delay: 0.9s; }
-    .delay-4 { animation-delay: 1.2s; }
-    .delay-5 { animation-delay: 1.5s; }
   </style>
 </head>
 <body>
 
-  <header class="fade delay-1">
+  <header>
     <img src="medastare-logo.PNG" alt="MedaStaré Logo">
     <h1>MedaStaré</h1>
     <p>
@@ -142,7 +137,7 @@
     <div class="soon">Çok Yakında – Tüm Türkiye’de</div>
   </header>
 
-  <section id="mission" class="fade delay-2">
+  <section id="mission">
     <h2>Mission & Vision / Misyon & Vizyon</h2>
     <div class="card">
       <p><b>EN:</b> At MedaStaré, our mission is to merge fashion, beauty and artificial intelligence into a seamless ecosystem. 
@@ -152,19 +147,19 @@
     </div>
   </section>
 
-  <section id="momentum" class="fade delay-3">
+  <section id="momentum">
     <h2>Momentum</h2>
     <div class="card">
       <p><b>Crunchbase Rank:</b> Rising rapidly from ~2.9M to ~254K in less than 24 hours – accelerating global visibility.</p>
     </div>
     <div class="card">
-      <p><a href="https://medium.com/@medastare.app/medastar%C3%A9-is-now-trending-on-crunchbase-in-fashion-tech" target="_blank">
+      <p><a href="https://medium.com/@medastare.app/medastar%C3%A9-is-now-trending-on-crunchbase-in-fashion-tech-b202ca200438" target="_blank">
         Featured on Medium → MedaStaré is now trending on Crunchbase in Fashion Tech
       </a></p>
     </div>
   </section>
 
-  <section id="future" class="fade delay-4">
+  <section id="future">
     <h2>Future Potential / Gelecek Potansiyeli</h2>
     <div class="card">
       <p><b>EN:</b> With the global fashion & beauty market surpassing $3 Trillion, and the AI-driven segment exceeding $200 Billion, 
@@ -174,7 +169,7 @@
     </div>
   </section>
 
-  <section id="contact" class="fade delay-5">
+  <section id="contact">
     <h2>Contact / İletişim</h2>
     <div class="card" style="text-align:center;">
       <p>Email: <a href="mailto:info@medastare.com">info@medastare.com</a></p>
@@ -190,6 +185,22 @@
   <footer>
     © 2025 MedaStaré Teknoloji A.Ş. – All rights reserved.
   </footer>
+
+  <script>
+    // Scroll animation
+    const cards = document.querySelectorAll('.card');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    cards.forEach(card => {
+      observer.observe(card);
+    });
+  </script>
 
 </body>
 </html>
