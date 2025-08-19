@@ -24,14 +24,15 @@
     /* HEADER */
     header {
       position: relative;
-      height: 75vh; /* ekranın %75'i, ferah görünüm */
+      height: 75vh; /* ekranın %75'i */
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-end; /* yazıları alta it */
       align-items: center;
       text-align: center;
       color: #fff;
       overflow: hidden;
+      padding-bottom: 80px; /* yazılarla alt kısım arasında boşluk */
     }
 
     header::before {
@@ -39,7 +40,7 @@
       position: absolute;
       inset: 0;
       background: url('showroom.PNG') no-repeat center center;
-      background-size: cover; /* doğal orantı, zoom yok */
+      background-size: cover;
       z-index: 0;
     }
 
@@ -47,7 +48,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.55); /* koyu filtre */
+      background: rgba(0,0,0,0.55);
       z-index: 1;
     }
 
