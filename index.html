@@ -24,7 +24,7 @@
     /* HEADER */
     header {
       position: relative;
-      min-height: 90vh; /* neredeyse tüm ekran */
+      height: 75vh; /* ekranın %75'i, ferah görünüm */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -38,7 +38,8 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: url('showroom.PNG') no-repeat center -120px / 220%; /* zoom ve odak */
+      background: url('showroom.PNG') no-repeat center center;
+      background-size: cover; /* doğal orantı, zoom yok */
       z-index: 0;
     }
 
@@ -46,7 +47,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.55);
+      background: rgba(0,0,0,0.55); /* koyu filtre */
       z-index: 1;
     }
 
