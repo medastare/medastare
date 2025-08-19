@@ -4,258 +4,149 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>MedaStaré – Powered by AI</title>
-  <meta name="google-site-verification" content="nQDYMuDMDZthwRmTt4w3tyWyGXIKQSB2jAaJCfH3CXM" />
-  <link rel="icon" href="favicon.png" type="image/png" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-0X6RGY78FV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
 
-  gtag('config', 'G-0X6RGY78FV');
-</script>
+  <!-- Verification -->
+  <meta name="google-site-verification" content="nQDYMuDMDZthwRmTt4w3tyWyGXIKQSB2jAaJCfH3CXM" />
+
+  <!-- SEO core -->
+  <link rel="canonical" href="https://medastare.com/">
+  <meta name="description" content="MedaStaré — AI-powered fashion & beauty ecosystem. Personalized creation tools, pro workflows and a marketplace connecting creators, brands and consumers. Türkiye'den dünyaya.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MedaStaré">
+  <meta property="og:title" content="MedaStaré – Powered by AI">
+  <meta property="og:description" content="AI + fashion & beauty: kişiselleştirme, teknoloji ve yaratıcılık.">
+  <meta property="og:url" content="https://medastare.com/">
+  <meta property="og:image" content="https://medastare.com/og-cover.jpg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@medastareapp">
+  <meta name="twitter:title" content="MedaStaré – Powered by AI">
+  <meta name="twitter:description" content="AI + fashion & beauty: kişiselleştirme, teknoloji ve yaratıcılık.">
+  <meta name="twitter:image" content="https://medastare.com/og-cover.jpg">
+
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0X6RGY78FV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0X6RGY78FV');
+  </script>
+
   <style>
-    :root{
-      --gold:#d4af37;
-      --overlay:0.55;
-      --rx:0deg; --ry:0deg;
-      --pop:1.04;
-      --spot-x:50%; --spot-y:50%;
-    }
+    :root{ --gold:#d4af37; --overlay:0.55; --rx:0deg; --ry:0deg; --pop:1.04; --spot-x:50%; --spot-y:50%; }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;background:#000;color:#ddd;font-family:'Inter',sans-serif;
       font-size:1em;line-height:1.6;letter-spacing:.2px;overflow-x:hidden;
-      -webkit-font-smoothing:antialiased;
-      text-rendering:optimizeLegibility; scroll-behavior:smooth;
+      -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;scroll-behavior:smooth;
       background:
         radial-gradient(1200px 800px at 10% 0%, rgba(212,175,55,0.05), transparent 60%),
         radial-gradient(800px 600px at 90% 20%, rgba(255,255,255,0.04), transparent 60%),
         #000;
     }
-
-    .scrollbar{
-      position:fixed;top:0;left:0;height:3px;width:0;
-      background:linear-gradient(90deg, rgba(255,255,255,.0), var(--gold), rgba(255,255,255,.0));
-      box-shadow:0 0 12px rgba(212,175,55,.8);
-      z-index:9999;transform-origin:left;
-      transition:height .25s ease;
-    }
-
-    header#hero{
-      position:relative;height:100vh;display:flex;justify-content:center;align-items:center;
-      text-align:center;color:#fff;isolation:isolate;overflow:hidden;background:#000;
-    }
-
-    .hero-bg{
-      position:absolute;inset:0;width:100%;height:100%;
-      object-fit:contain;object-position:center;
-      transform:translateY(0);
-      opacity:0;
-      transition:opacity 1.2s ease, transform .5s ease;
-      z-index:0;will-change:transform,opacity;
-    }
-    .hero-bg.show{ opacity:1; }
+    .scrollbar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg, rgba(255,255,255,.0), var(--gold), rgba(255,255,255,.0));box-shadow:0 0 12px rgba(212,175,55,.8);z-index:9999;transform-origin:left;transition:height .25s ease;}
+    header#hero{position:relative;height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;color:#fff;isolation:isolate;overflow:hidden;background:#000;}
+    .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;transform:translateY(0);opacity:0;transition:opacity 1.2s ease, transform .5s ease;z-index:0;will-change:transform,opacity;}
+    .hero-bg.show{opacity:1;}
     @media (min-width:1024px){ .hero-bg{object-fit:cover;} }
-
-    header#hero::after{
-      content:"";position:absolute;inset:0;background:rgba(0,0,0,var(--overlay));
-      z-index:1;transition:background .4s ease;pointer-events:none;
-    }
+    header#hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,var(--overlay));z-index:1;transition:background .4s ease;pointer-events:none;}
     header#hero::before{
       content:"";position:absolute;inset:-12%;
-      background:
-        radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(0,0,0,.55) 100%),
-        radial-gradient(600px 400px at var(--spot-x) var(--spot-y), rgba(255,255,255,.06), transparent 60%);
-      z-index:1;pointer-events:none;mix-blend-mode:screen;transition:background-position .2s ease;
-      animation:vignettePulse 10s ease-in-out infinite alternate;
+      background:radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(0,0,0,.55) 100%),
+                 radial-gradient(600px 400px at var(--spot-x) var(--spot-y), rgba(255,255,255,.06), transparent 60%);
+      z-index:1;pointer-events:none;mix-blend-mode:screen;transition:background-position .2s ease;animation:vignettePulse 10s ease-in-out infinite alternate;
     }
     @keyframes vignettePulse{0%{opacity:.95}100%{opacity:1}}
-
     .bokeh{position:absolute;inset:-20% -10%;z-index:1;pointer-events:none;filter:blur(8px)}
-    .bokeh span{
-      position:absolute;display:block;border-radius:50%;
-      background:radial-gradient(circle, rgba(255,255,255,.25), rgba(255,255,255,0));
-      opacity:.16;animation:orb 18s ease-in-out infinite;
-    }
+    .bokeh span{position:absolute;display:block;border-radius:50%;background:radial-gradient(circle, rgba(255,255,255,.25), rgba(255,255,255,0));opacity:.16;animation:orb 18s ease-in-out infinite;}
     .bokeh span.g{background:radial-gradient(circle, rgba(212,175,55,.22), rgba(212,175,55,0))}
-    @keyframes orb{
-      0%{transform:translate3d(0,0,0) scale(1)}
-      50%{transform:translate3d(20px,-30px,0) scale(1.08)}
-      100%{transform:translate3d(-10px,10px,0) scale(1)}
-    }
-
-    .sheen{
-      position:absolute;top:0;left:-30%;width:60%;height:100%;z-index:2;pointer-events:none;
-      background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.15) 50%, transparent 100%);
-      transform:skewX(-20deg);mix-blend-mode:screen;opacity:.0;animation:sheenMove 8s linear infinite;
-    }
+    @keyframes orb{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(20px,-30px,0) scale(1.08)}100%{transform:translate3d(-10px,10px,0) scale(1)}}
+    .sheen{position:absolute;top:0;left:-30%;width:60%;height:100%;z-index:2;pointer-events:none;background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.15) 50%, transparent 100%);transform:skewX(-20deg);mix-blend-mode:screen;opacity:.0;animation:sheenMove 8s linear infinite;}
     @keyframes sheenMove{0%{transform:translateX(-120%) skewX(-20deg)}100%{transform:translateX(220%) skewX(-20deg)}}
-
-    .header-content{
-      position:relative;z-index:3;max-width:720px;padding:0 20px;
-      will-change:transform,opacity,filter;
-      opacity:0;transform:translateY(24px) scale(0.98) rotateX(var(--rx)) rotateY(var(--ry));
-      filter:blur(6px);
-      transition:opacity .9s ease, transform .9s ease, filter .9s ease;
-    }
+    .header-content{position:relative;z-index:3;max-width:720px;padding:0 20px;will-change:transform,opacity,filter;opacity:0;transform:translateY(24px) scale(0.98) rotateX(var(--rx)) rotateY(var(--ry));filter:blur(6px);transition:opacity .9s ease, transform .9s ease, filter .9s ease;}
     .header-content.show{opacity:1;transform:translateY(0) scale(1) rotateX(var(--rx)) rotateY(var(--ry));filter:blur(0)}
-
-    header p{
-      font-size:1.1em;color:#eaeaea;font-style:italic;margin:0 0 18px;line-height:1.75;
-      transition:letter-spacing .6s ease;
-    }
+    header p{font-size:1.1em;color:#eaeaea;font-style:italic;margin:0 0 18px;line-height:1.75;transition:letter-spacing .6s ease;}
     header#hero.scrolled p{letter-spacing:.3px}
-
-    .soon{
-      display:inline-block;font-size:1.2em;font-weight:700;color:var(--gold);
-      text-transform:uppercase;letter-spacing:1px;position:relative;padding:.5em 1.1em;
-      border:1px solid rgba(212,175,55,.35);border-radius:999px;
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      backdrop-filter:saturate(140%) blur(6px);-webkit-backdrop-filter:saturate(140%) blur(6px);
-      box-shadow:0 0 0 1px rgba(212,175,55,.15) inset, 0 12px 36px rgba(0,0,0,.35);
-      overflow:hidden;animation:breath 3.5s ease-in-out infinite;
-    }
+    .soon{display:inline-block;font-size:1.2em;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;position:relative;padding:.5em 1.1em;border:1px solid rgba(212,175,55,.35);border-radius:999px;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));backdrop-filter:saturate(140%) blur(6px);-webkit-backdrop-filter:saturate(140%) blur(6px);box-shadow:0 0 0 1px rgba(212,175,55,.15) inset, 0 12px 36px rgba(0,0,0,.35);overflow:hidden;animation:breath 3.5s ease-in-out infinite;}
     @keyframes breath{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
-    .soon::before{
-      content:"";position:absolute;top:-150%;left:-30%;width:60%;height:400%;
-      background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.25) 50%,transparent 100%);
-      transform:rotate(20deg);animation:shine 4s ease-in-out infinite;pointer-events:none;
-    }
-
-    section{
-      max-width:880px;margin:auto;padding:45px 20px;border-top:1px solid rgba(255,255,255,0.08);
-      opacity:0;transform:translateY(40px);transition:opacity .9s ease, transform .9s ease;will-change:opacity,transform;
-      position:relative;
-    }
+    .soon::before{content:"";position:absolute;top:-150%;left:-30%;width:60%;height:400%;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.25) 50%,transparent 100%);transform:rotate(20deg);animation:shine 4s ease-in-out infinite;pointer-events:none;}
+    section{max-width:880px;margin:auto;padding:45px 20px;border-top:1px solid rgba(255,255,255,0.08);opacity:0;transform:translateY(40px);transition:opacity .9s ease, transform .9s ease;will-change:opacity,transform;position:relative;}
     section.show{opacity:1;transform:translateY(0)}
-    section::before{
-      content:"";position:absolute;left:0;right:0;top:-1px;height:1px;opacity:0;pointer-events:none;
-      background:linear-gradient(90deg, transparent, rgba(212,175,55,.5), transparent);
-      transition:opacity .9s ease;
-    }
+    section::before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;opacity:0;pointer-events:none;background:linear-gradient(90deg, transparent, rgba(212,175,55,.5), transparent);transition:opacity .9s ease;}
     section.show::before{opacity:1}
-
-    section h2{
-      font-family:'Playfair Display',serif;font-size:1.4em;color:var(--gold);margin-bottom:16px;font-weight:600;position:relative
-    }
-    section h2::after{
-      content:"";display:block;margin-top:10px;width:64px;height:2px;
-      background:linear-gradient(90deg,rgba(212,175,55,0),rgba(212,175,55,.8),rgba(212,175,55,0));
-      transform:scaleX(0);transform-origin:left;transition:transform .7s ease .1s
-    }
+    section h2{font-family:'Playfair Display',serif;font-size:1.4em;color:var(--gold);margin-bottom:16px;font-weight:600;position:relative}
+    section h2::after{content:"";display:block;margin-top:10px;width:64px;height:2px;background:linear-gradient(90deg,rgba(212,175,55,0),rgba(212,175,55,.8),rgba(212,175,55,0));transform:scaleX(0);transform-origin:left;transition:transform .7s ease .1s}
     section.show h2::after{transform:scaleX(1)}
-
-    .card{
-      background:#0a0a0a;border:1px solid rgba(255,215,0,0.12);border-radius:6px;padding:18px;margin:12px 0;text-align:left;
-      opacity:0;transform:translateY(24px);
-      transition:opacity .7s ease, transform .7s ease, box-shadow .3s ease, border-color .3s ease
-    }
+    .card{background:#0a0a0a;border:1px solid rgba(255,215,0,0.12);border-radius:6px;padding:18px;margin:12px 0;text-align:left;opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease, box-shadow .3s ease, border-color .3s ease}
     .card.show{opacity:1;transform:translateY(0)}
     .card:hover{transform:translateY(-3px) scale(var(--pop));box-shadow:0 12px 30px rgba(0,0,0,.35);border-color:rgba(255,215,0,0.24)}
     .card p{margin:0;color:#e0e0e0;font-size:.95em}
-
     .card.parallax{transform:translateY(var(--py,0))}
     .card a{position:relative}
-    .card a::after{
-      content:"";position:absolute;left:0;right:100%;bottom:-2px;height:1px;background:currentColor;opacity:.6;
-      transition:right .35s ease;
-    }
+    .card a::after{content:"";position:absolute;left:0;right:100%;bottom:-2px;height:1px;background:currentColor;opacity:.6;transition:right .35s ease;}
     .card a:hover::after{right:0}
-
-    .image-break{margin:60px 0;opacity:0;transform:translateY(32px) scale(0.98);
-      transition:opacity .9s ease, transform .9s ease}
+    .image-break{margin:60px 0;opacity:0;transform:translateY(32px) scale(0.98);transition:opacity .9s ease, transform .9s ease}
     .image-break.show{opacity:1;transform:translateY(0) scale(1)}
-    .image-break img{width:100%;display:block;border-radius:10px;border:1px solid rgba(212,175,55,0.2);
-      box-shadow:0 0 25px rgba(0,0,0,0.6);transition:transform .8s ease}
-
+    .image-break img{width:100%;display:block;border-radius:10px;border:1px solid rgba(212,175,55,0.2);box-shadow:0 0 25px rgba(0,0,0,0.6);transition:transform .8s ease}
     .contact-links{margin-top:10px;text-align:center;display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
-    .contact-links a{
-      color:var(--gold);font-size:.95em;text-decoration:none;transition:color .3s ease, transform .3s ease, text-shadow .3s ease
-    }
-    .contact-links a:hover{
-      color:#fff;transform:translateY(-2px) scale(1.06);text-shadow:0 0 10px rgba(212,175,55,.5)
-    }
-    .contact-links a::before{
-      content:"";position:absolute;inset:-6px;border-radius:8px;box-shadow:0 0 12px rgba(212,175,55,.25);
-      opacity:0;transition:opacity .3s ease;pointer-events:none;
-    }
-    .toTop{
-      position:fixed;right:16px;bottom:18px;width:42px;height:42px;border-radius:50%;
-      background:rgba(255,255,255,.06);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-      border:1px solid rgba(212,175,55,.35);color:#fff;display:grid;place-items:center;
-      cursor:pointer;z-index:9998;opacity:0;transform:translateY(20px);transition:all .4s ease;
-    }
+    .contact-links a{color:var(--gold);font-size:.95em;text-decoration:none;transition:color .3s ease, transform .3s ease, text-shadow .3s ease}
+    .contact-links a:hover{color:#fff;transform:translateY(-2px) scale(1.06);text-shadow:0 0 10px rgba(212,175,55,.5)}
+    .contact-links a::before{content:"";position:absolute;inset:-6px;border-radius:8px;box-shadow:0 0 12px rgba(212,175,55,.25);opacity:0;transition:opacity .3s ease;pointer-events:none;}
+    .toTop{position:fixed;right:16px;bottom:18px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.06);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(212,175,55,.35);color:#fff;display:grid;place-items:center;cursor:pointer;z-index:9998;opacity:0;transform:translateY(20px);transition:all .4s ease;}
     .toTop.show{opacity:1;transform:translateY(0)}
     .toTop svg{width:18px;height:18px;fill:var(--gold)}
-
-    /* ===== MODAL + FOOTER STYLES ===== */
     .ms-actions{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin:8px 0 0}
-    .ms-btn{
-      background:transparent; color:#e9e9e9; border:1px solid #1d1d1d;
-      padding:.55rem .9rem; border-radius:10px; cursor:pointer; transition:all .25s;
-    }
-    .ms-btn:hover{ border-color:var(--gold); transform:translateY(-1px); }
-
-    .ms-modal{position:fixed; inset:0; display:none; place-items:center; z-index:1000;
-      background:rgba(0,0,0,.55); backdrop-filter:saturate(120%) blur(2px);}
+    .ms-btn{background:transparent;color:#e9e9e9;border:1px solid #1d1d1d;padding:.55rem .9rem;border-radius:10px;cursor:pointer;transition:all .25s;}
+    .ms-btn:hover{border-color:var(--gold);transform:translateY(-1px);}
+    .ms-modal{position:fixed;inset:0;display:none;place-items:center;z-index:1000;background:rgba(0,0,0,.55);backdrop-filter:saturate(120%) blur(2px);}
     .ms-modal[aria-hidden="false"]{display:grid;}
-    .ms-modal__dialog{
-      width:min(680px,92vw); max-height:86vh; overflow:auto;
-      background:linear-gradient(180deg,#121212,#0e0e0e);
-      color:#e9e9e9; border:1px solid #1f1f1f; border-radius:16px;
-      box-shadow:0 20px 60px rgba(0,0,0,.5); padding:1.25rem 1.25rem 1.5rem;
-      transform:scale(.96); opacity:0; animation:ms-pop .22s ease-out forwards;
-    }
-    @keyframes ms-pop{to{transform:scale(1); opacity:1}}
-    .ms-modal__close{
-      position:sticky; top:0; float:right; margin-left:auto; font-size:1.6rem; line-height:1;
-      background:#1a1a1a; color:#e9e9e9; border:1px solid #2a2a2a; border-radius:10px;
-      padding:.25rem .6rem; cursor:pointer; transition:all .2s;
-    }
-    .ms-modal__close:hover{background:#222;border-color:var(--gold); color:var(--gold);}
-    .ms-modal h3{margin:.25rem 0 1rem; font-size:1.2rem}
+    .ms-modal__dialog{width:min(680px,92vw);max-height:86vh;overflow:auto;background:linear-gradient(180deg,#121212,#0e0e0e);color:#e9e9e9;border:1px solid #1f1f1f;border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.5);padding:1.25rem 1.25rem 1.5rem;transform:scale(.96);opacity:0;animation:ms-pop .22s ease-out forwards;}
+    @keyframes ms-pop{to{transform:scale(1);opacity:1}}
+    .ms-modal__close{position:sticky;top:0;float:right;margin-left:auto;font-size:1.6rem;line-height:1;background:#1a1a1a;color:#e9e9e9;border:1px solid #2a2a2a;border-radius:10px;padding:.25rem .6rem;cursor:pointer;transition:all .2s;}
+    .ms-modal__close:hover{background:#222;border-color:var(--gold);color:var(--gold);}
+    .ms-modal h3{margin:.25rem 0 1rem;font-size:1.2rem}
     .ms-modal p{color:#d9d9d9}
-
-    .ms-footer{background:#000; color:#e9e9e9; border-top:1px solid #1d1d1d; position:relative}
-    .ms-footer__topglow{
-      position:absolute; inset:0 0 auto 0; height:2px;
-      background:linear-gradient(90deg,transparent, var(--gold), transparent);
-      filter:drop-shadow(0 0 12px var(--gold)); opacity:.35;
-    }
-    .ms-footer__grid{
-      display:grid; gap:2rem; grid-template-columns:repeat(4,minmax(0,1fr));
-      padding:2.25rem clamp(1rem,3vw,2.5rem);
-    }
-    .ms-footer__col h4{color:#f2f2f2; margin:0 0 .75rem}
-    .ms-footer__col a{
-      display:block; color:#b7b7b7; text-decoration:none; padding:.25rem 0;
-      border-bottom:1px solid transparent; width:max-content; transition:color .2s, border .2s;
-    }
-    .ms-footer__col a:hover{color:#fff; border-color:#1f1f1f}
-    .ms-mini-logo{
-      width:40px; height:40px; display:block; margin:0 0 .4rem;
-      filter:drop-shadow(0 0 6px rgba(212,175,55,.28));
-      animation:ms-logoPulse 2.8s ease-in-out infinite;
-    }
-    @keyframes ms-logoPulse{0%,100%{transform:translateY(0); opacity:.95}50%{transform:translateY(-1px); opacity:1}}
-    .ms-slogan{color:#d6c690; margin:.25rem 0 .5rem; font-weight:600}
-    .ms-footer__bottom{
-      border-top:1px solid #1d1d1d;
-      padding:1rem clamp(1rem,3vw,2.5rem); color:#a9a9a9; text-align:center
-    }
+    .ms-footer{background:#000;color:#e9e9e9;border-top:1px solid #1d1d1d;position:relative}
+    .ms-footer__topglow{position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,transparent, var(--gold), transparent);filter:drop-shadow(0 0 12px var(--gold));opacity:.35;}
+    .ms-footer__grid{display:grid;gap:2rem;grid-template-columns:repeat(4,minmax(0,1fr));padding:2.25rem clamp(1rem,3vw,2.5rem);}
+    .ms-footer__col h4{color:#f2f2f2;margin:0 0 .75rem}
+    .ms-footer__col a{display:block;color:#b7b7b7;text-decoration:none;padding:.25rem 0;border-bottom:1px solid transparent;width:max-content;transition:color .2s, border .2s;}
+    .ms-footer__col a:hover{color:#fff;border-color:#1f1f1f}
+    .ms-mini-logo{width:40px;height:40px;display:block;margin:0 0 .4rem;filter:drop-shadow(0 0 6px rgba(212,175,55,.28));animation:ms-logoPulse 2.8s ease-in-out infinite;}
+    @keyframes ms-logoPulse{0%,100%{transform:translateY(0);opacity:.95}50%{transform:translateY(-1px);opacity:1}}
+    .ms-slogan{color:#d6c690;margin:.25rem 0 .5rem;font-weight:600}
+    .ms-footer__bottom{border-top:1px solid #1d1d1d;padding:1rem clamp(1rem,3vw,2.5rem);color:#a9a9a9;text-align:center}
     @media (max-width:900px){ .ms-footer__grid{grid-template-columns:1fr 1fr} }
     @media (max-width:560px){ .ms-footer__grid{grid-template-columns:1fr} }
-
     footer{text-align:center;padding:25px 20px;background:#0a0a0a;font-size:.8em;color:#777}
-
-    @media (prefers-reduced-motion:reduce){
-      *{animation:none!important;transition:none!important}
-    }
+    @media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
   </style>
+
+  <!-- Organization JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Organization",
+    "name":"MedaStaré",
+    "url":"https://medastare.com/",
+    "logo":"https://medastare.com/medastare-logo.png",
+    "sameAs":[
+      "https://www.linkedin.com/company/medastareapp",
+      "https://x.com/medastareapp",
+      "https://instagram.com/medastareapp",
+      "https://www.crunchbase.com/organization/medastar%C3%A9"
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -268,18 +159,14 @@
       <span style="width:280px;height:280px;left:55%;top:60%" class="g"></span>
       <span style="width:140px;height:140px;left:20%;top:70%"></span>
     </div>
-
     <div class="sheen" aria-hidden="true"></div>
-
     <img class="hero-bg" src="showroom.PNG" alt="MedaStaré showroom">
-
     <div class="header-content" id="heroContent">
       <p>
         Powered by AI – Redefining the future of fashion & beauty through personalization, technology, and creativity.<br>
         <i>AI destekli – Moda & güzellikte geleceği kişiselleştirme, teknoloji ve yaratıcılıkla yeniden tanımlıyoruz.</i>
       </p>
       <div class="soon">ÇOK YAKINDA – TÜM TÜRKİYE’DE</div>
-
       <div class="ms-actions" style="margin-top:16px">
         <button class="ms-btn" data-modal="modal-founder">Founder & CEO</button>
         <button class="ms-btn" data-modal="modal-company">Company</button>
@@ -291,32 +178,24 @@
   <section id="mission">
     <h2>Mission & Vision / Misyon & Vizyon</h2>
     <div class="card">
-      <p><b>EN:</b> At MedaStaré, our mission is to merge fashion, beauty and artificial intelligence into a seamless ecosystem. 
-      Our vision is to empower individuals with technology-driven elegance while leading innovation on a global scale.</p><br>
-      <p><b>TR:</b> MedaStaré’de misyonumuz, moda, güzellik ve yapay zekâyı kusursuz bir ekosistemde birleştirmektir. 
-      Vizyonumuz, teknolojiyle şekillenen zarafeti insanlara sunarak küresel ölçekte yeniliğe öncülük etmektir.</p>
+      <p><b>EN:</b> At MedaStaré, our mission is to merge fashion, beauty and artificial intelligence into a seamless ecosystem. Our vision is to empower individuals with technology-driven elegance while leading innovation on a global scale.</p><br>
+      <p><b>TR:</b> MedaStaré’de misyonumuz, moda, güzellik ve yapay zekâyı kusursuz bir ekosistemde birleştirmektir. Vizyonumuz, teknolojiyle şekillenen zarafeti insanlara sunarak küresel ölçekte yeniliğe öncülük etmektir.</p>
     </div>
   </section>
 
   <section id="momentum">
     <h2>Momentum</h2>
+    <div class="card"><p><b>Crunchbase Rank:</b> Rising rapidly from ~2.9M to ~254K in less than 24 hours – accelerating global visibility.</p></div>
     <div class="card">
-      <p><b>Crunchbase Rank:</b> Rising rapidly from ~2.9M to ~254K in less than 24 hours – accelerating global visibility.</p>
-    </div>
-    <div class="card">
-      <p><a href="https://medium.com/@medastare.app/medastar%C3%A9-is-now-trending-on-crunchbase-in-fashion-tech" target="_blank" rel="noopener">
-        Featured on Medium → MedaStaré is now trending on Crunchbase in Fashion Tech
-      </a></p>
+      <p><a href="https://medium.com/@medastare.app/medastar%C3%A9-is-now-trending-on-crunchbase-in-fashion-tech" target="_blank" rel="noopener">Featured on Medium → MedaStaré is now trending on Crunchbase in Fashion Tech</a></p>
     </div>
   </section>
 
   <section id="future">
     <h2>Future Potential / Gelecek Potansiyeli</h2>
     <div class="card">
-      <p><b>EN:</b> With the global fashion & beauty market surpassing $3 Trillion, and the AI-driven segment exceeding $200 Billion, 
-      MedaStaré is uniquely positioned to redefine the intersection of creativity and technology – starting from Turkey, expanding worldwide.</p><br>
-      <p><b>TR:</b> Küresel moda & güzellik pazarı 3 trilyon $’ı, yapay zeka destekli segment ise 200 milyar $’ı aşarken, 
-      MedaStaré yaratıcılık ve teknolojinin kesişimini yeniden tanımlamak için eşsiz bir konumda – Türkiye’den başlayarak dünyaya açılıyor.</p>
+      <p><b>EN:</b> With the global fashion & beauty market surpassing $3 Trillion, and the AI-driven segment exceeding $200 Billion, MedaStaré is uniquely positioned to redefine the intersection of creativity and technology – starting from Turkey, expanding worldwide.</p><br>
+      <p><b>TR:</b> Küresel moda & güzellik pazarı 3 trilyon $’ı, yapay zeka destekli segment ise 200 milyar $’ı aşarken, MedaStaré yaratıcılık ve teknolojinin kesişimini yeniden tanımlamak için eşsiz bir konumda – Türkiye’den başlayarak dünyaya açılıyor.</p>
     </div>
   </section>
 
@@ -342,13 +221,9 @@
     <div class="ms-modal__dialog" role="document">
       <button class="ms-modal__close" aria-label="Close">&times;</button>
       <h3 id="mf-title">Founder & CEO</h3>
-      <p><strong>Medine Ak</strong> — Founder & CEO of MedaStaré. She personally manages end-to-end execution
-        (product, brand, partnerships) and runs multiple tracks in parallel. Even pre-launch, she led the company
-        to trend on Crunchbase and gain international visibility.</p>
+      <p><strong>Medine Ak</strong> — Founder & CEO of MedaStaré. She personally manages end-to-end execution (product, brand, partnerships) and runs multiple tracks in parallel. Even pre-launch, she led the company to trend on Crunchbase and gain international visibility.</p>
       <hr>
-      <p><em>Medine Ak, MedaStaré’nin Kurucusu ve CEO’sudur. Moda, güzellik ve yapay zekâyı bir araya getirme vizyonuyla
-        yaratıcılık ve teknolojiyi harmanlayan yeni bir ekosistem inşa ediyor. Lansman öncesinde dahi şirketi
-        Crunchbase’te trend konuma taşıyarak uluslararası görünürlük elde etti.</em></p>
+      <p><em>Medine Ak, MedaStaré’nin Kurucusu ve CEO’sudur. Moda, güzellik ve yapay zekâyı bir araya getirme vizyonuyla yaratıcılık ve teknolojiyi harmanlayan yeni bir ekosistem inşa ediyor. Lansman öncesinde dahi şirketi Crunchbase’te trend konuma taşıyarak uluslararası görünürlük elde etti.</em></p>
     </div>
   </div>
 
@@ -356,8 +231,7 @@
     <div class="ms-modal__dialog" role="document">
       <button class="ms-modal__close" aria-label="Close">&times;</button>
       <h3 id="mc-title">About MedaStaré</h3>
-      <p>AI-powered fashion & beauty ecosystem: personalized creation tools, pro workflows, and a forthcoming
-        marketplace that connects creators, brands and consumers across MENA & Europe.</p>
+      <p>AI-powered fashion & beauty ecosystem: personalized creation tools, pro workflows, and a forthcoming marketplace that connects creators, brands and consumers across MENA & Europe.</p>
       <ul>
         <li>Freemium SaaS → Pro plans</li>
         <li>Enterprise licensing for agencies/brands</li>
@@ -379,21 +253,23 @@
   <footer class="ms-footer">
     <div class="ms-footer__topglow" aria-hidden="true"></div>
     <div class="ms-footer__grid">
-      <!-- İSTEDİĞİN GİBİ GÜNCELLENEN İLK SÜTUN -->
       <div class="ms-footer__col">
         <img class="ms-mini-logo" src="medastare-logo.PNG" alt="MedaStaré logo" />
         <p class="ms-slogan">Yapay Zekâ ve Teknoloji A.Ş.</p>
       </div>
 
       <div class="ms-footer__col">
-  <h4>Invest With Us</h4>
-  <p style="font-size:0.9em; color:#b7b7b7; margin-bottom:8px;">
-    Explore partnership and investment opportunities with MedaStaré.
-  </p>
-  <a href="/partnership">Partnership</a>
-  <a href="/how-it-works">How It Works</a>
-  <a href="/vision">Our Vision</a>
-</div>
+        <h4>Invest With Us</h4>
+        <p style="font-size:0.9em;color:#b7b7b7;margin-bottom:4px;">
+          Explore partnership and investment opportunities with MedaStaré.
+        </p>
+        <p style="font-size:0.85em;color:#a7a7a7;margin:0 0 8px;">
+          MedaStaré ile iş ortaklığı ve yatırım fırsatlarını keşfedin.
+        </p>
+        <a href="mailto:info@medastare.com?subject=Partnership%20Inquiry">Partnership</a>
+        <a href="mailto:info@medastare.com?subject=How%20It%20Works%20-%20Info">How It Works</a>
+        <a href="mailto:info@medastare.com?subject=Our%20Vision">Our Vision</a>
+      </div>
 
       <div class="ms-footer__col">
         <h4>Company</h4>
@@ -433,11 +309,8 @@
     const toTop=document.getElementById('toTop');
 
     if (heroImg) {
-      if (heroImg.complete) {
-        requestAnimationFrame(()=> heroImg.classList.add('show'));
-      } else {
-        heroImg.addEventListener('load', ()=> heroImg.classList.add('show'));
-      }
+      if (heroImg.complete) { requestAnimationFrame(()=> heroImg.classList.add('show')); }
+      else { heroImg.addEventListener('load', ()=> heroImg.classList.add('show')); }
     }
 
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints>0;
@@ -455,7 +328,6 @@
       scrollbar.style.height = y>4 ? '3px':'0px';
 
       hero.classList.toggle('scrolled', y>40);
-
       if(heroImg) heroImg.style.transform = heavyFX ? `translate3d(0, ${y*0.03}px, 0)` : 'none';
 
       const ov=Math.max(.45,.55 - (y/h)*0.1);
@@ -476,13 +348,9 @@
       });
 
       if(y>400) toTop.classList.add('show'); else toTop.classList.remove('show');
-
       ticking=false;
     }
-    function onScroll(){
-      latestScroll=window.scrollY||window.pageYOffset;
-      if(!ticking){ requestAnimationFrame(updateOnScroll); ticking=true; }
-    }
+    function onScroll(){ latestScroll=window.scrollY||window.pageYOffset; if(!ticking){ requestAnimationFrame(updateOnScroll); ticking=true; } }
     window.addEventListener('scroll', onScroll, {passive:true});
     updateOnScroll();
 
@@ -507,12 +375,9 @@
     }
 
     toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
-
     document.querySelectorAll('.contact-links a').forEach(a=>{ a.style.position='relative'; });
 
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-      scrollbar.style.transition='none';
-    }
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ scrollbar.style.transition='none'; }
 
     document.querySelectorAll('[data-modal]').forEach(btn=>{
       btn.addEventListener('click', ()=>{
@@ -542,6 +407,15 @@
     });
 
     const y = document.getElementById('ms-year'); if(y) y.textContent = new Date().getFullYear();
+
+    /* GA4 – track footer CTA clicks */
+    document.querySelectorAll('a,button').forEach(el=>{
+      if(/invest|partner|partnership|how it works|vision/i.test((el.textContent||'').toLowerCase())){
+        el.addEventListener('click', ()=>{
+          gtag('event','cta_click',{section:'invest_with_us',label:(el.textContent||el.href||'').trim()});
+        });
+      }
+    });
   </script>
 </body>
 </html>
