@@ -1,29 +1,17 @@
-/* CARD */
-.card {
-  background: #0a0a0a;
-  border: 1px solid rgba(255, 215, 0, 0.12);
-  border-radius: 6px;
-  padding: 18px;
-  margin: 12px 0;
-  text-align: left;
+header {
+  text-align: center;
+  padding: 120px 20px;
+  background: url('showroom.PNG') no-repeat center center/cover;
+  position: relative;
+  color: #fff;
 
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1.2s ease, transform 1.2s ease; /* 👈 daha yumuşak fade-in */
+  /* EKLENECEKLER */
+  background-size: 180%;   /* Arka planı daha yakınlaştırır (100% → orijinal) */
+  background-position: center top;  /* Görselin üst tarafını odak yapar */
 }
-.card.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* IMAGE BREAK */
-.image-break {
-  margin: 60px 0;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1.5s ease, transform 1.5s ease; /* 👈 fade-in efekti */
-}
-.image-break.show {
-  opacity: 1;
-  transform: translateY(0);
+header::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.55); /* Yazıyı korumak için koyu overlay */
 }
