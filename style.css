@@ -4,12 +4,14 @@ header {
   height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;   /* yazılar dikey ortada */
+  justify-content: flex-end;  /* yazılar aşağıda */
   align-items: center;
-  padding: 0 20px;
+  padding-bottom: 80px;
   overflow: hidden;
   color: #fff;
+
+  /* 🔥 görsel doğrudan arka plana */
   background: url('showroom.PNG') no-repeat center center;
-  background-size: cover;    /* 🔥 görsel tam ekran dolsun */
-  background-attachment: fixed; /* parallax efekti */
+  background-size: cover;       /* tam ekran kapla */
+  background-attachment: scroll;
 }
