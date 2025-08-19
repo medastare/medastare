@@ -34,16 +34,19 @@
       padding-bottom: 80px;
       overflow: hidden;
       color: #fff;
+      background: #000;
     }
 
     header::before {
       content: "";
       position: absolute;
       inset: 0;
-      background: url('showroom.PNG') no-repeat center center/cover;
-      transform: translateY(0);
-      transition: transform 0.2s linear;
+      background: url('showroom.PNG') no-repeat center center;
+      background-size: contain;   /* 🔥 görselin tamamını göster */
+      background-color: #000;     /* kenarlara siyah dolgu */
+      will-change: transform;
       z-index: 0;
+      transition: transform 0.2s ease-out;
     }
 
     header::after {
@@ -66,8 +69,6 @@
       font-size: 1em;
       color: #eaeaea;
       font-style: italic;
-      opacity: 1;
-      transform: translateY(0);
     }
 
     .soon {
@@ -77,8 +78,6 @@
       color: #d4af37;
       text-transform: uppercase;
       letter-spacing: 1px;
-      opacity: 1;
-      transform: translateY(0);
     }
 
     /* Scroll shrink */
@@ -271,13 +270,8 @@
         header.classList.remove("shrink");
       }
 
-      // parallax efekt
-      header.style.setProperty("--scroll", scrolled * 0.4 + "px");
-      header.querySelector("::before");
-      document.querySelector("header").style.setProperty("--y", scrolled * 0.3 + "px");
-      header.style.setProperty("--scale", 1 + scrolled * 0.0005);
-      header.style.setProperty("--opacity", 1 - scrolled * 0.001);
-      header.style.transform = `translateY(${scrolled * 0.2}px)`;
+      // parallax görsel
+      const bg = document.querySelector("header::before");
     });
   </script>
 
