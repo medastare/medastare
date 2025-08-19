@@ -5,16 +5,15 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>MedaStaré – Powered by AI</title>
   <link rel="icon" href="favicon.png" type="image/png" />
-
-  <!-- Luxury Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
     :root{
       --gold:#d4af37;
       --overlay:0.55;
-      --rx:0deg; --ry:0deg; /* 3D tilt değişkenleri */
+      --rx:0deg; --ry:0deg;      /* 3D tilt */
       --pop:1.04;
+      --spot-x:50%; --spot-y:50%;/* spotlight */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -23,15 +22,27 @@
       font-size:1em;line-height:1.6;letter-spacing:.2px;overflow-x:hidden;
       -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
       scroll-behavior:smooth;
+      background:
+        radial-gradient(1200px 800px at 10% 0%, rgba(212,175,55,0.05), transparent 60%),
+        radial-gradient(800px 600px at 90% 20%, rgba(255,255,255,0.04), transparent 60%),
+        #000;
     }
 
-    /* ===== HEADER (IMG ile) ===== */
+    /* ==== Scroll progress bar (efekt 1) ==== */
+    .scrollbar{
+      position:fixed;top:0;left:0;height:3px;width:0;
+      background:linear-gradient(90deg, rgba(255,255,255,.0), var(--gold), rgba(255,255,255,.0));
+      box-shadow:0 0 12px rgba(212,175,55,.8);
+      z-index:9999;transform-origin:left;
+      transition:height .25s ease;
+    }
+
+    /* ===== HEADER ===== */
     header#hero{
       position:relative;height:100vh;display:flex;justify-content:center;align-items:center;
       text-align:center;color:#fff;isolation:isolate;overflow:hidden;background:#000;
     }
 
-    /* Arka plan görseli: mobilde contain, desktopta cover */
     .hero-bg{
       position:absolute;inset:0;width:100%;height:100%;
       object-fit:contain;object-position:center;
@@ -40,35 +51,45 @@
     }
     @media (min-width:1024px){ .hero-bg{object-fit:cover;} }
 
-    /* Karanlık maske + vignette */
+    /* Overlay + vignette (efekt 15) */
     header#hero::after{
       content:"";position:absolute;inset:0;background:rgba(0,0,0,var(--overlay));
       z-index:1;transition:background .4s ease;pointer-events:none;
     }
     header#hero::before{
       content:"";position:absolute;inset:-12%;
-      background:radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(0,0,0,.55) 100%);
-      z-index:1;pointer-events:none;
+      background:
+        radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(0,0,0,.55) 100%),
+        radial-gradient(600px 400px at var(--spot-x) var(--spot-y), rgba(255,255,255,.06), transparent 60%); /* spotlight (3) */
+      z-index:1;pointer-events:none;mix-blend-mode:screen;transition:background-position .2s ease;
+      animation:vignettePulse 10s ease-in-out infinite alternate;
+    }
+    @keyframes vignettePulse{0%{opacity:.95}100%{opacity:1}}
+
+    /* Bokeh orbs (efekt 2) */
+    .bokeh{position:absolute;inset:-20% -10%;z-index:1;pointer-events:none;filter:blur(8px)}
+    .bokeh span{
+      position:absolute;display:block;border-radius:50%;
+      background:radial-gradient(circle, rgba(255,255,255,.25), rgba(255,255,255,0));
+      opacity:.16;animation:orb 18s ease-in-out infinite;
+    }
+    .bokeh span.g{background:radial-gradient(circle, rgba(212,175,55,.22), rgba(212,175,55,0))}
+    @keyframes orb{
+      0%{transform:translate3d(0,0,0) scale(1)}
+      50%{transform:translate3d(20px,-30px,0) scale(1.08)}
+      100%{transform:translate3d(-10px,10px,0) scale(1)}
     }
 
-    /* Lens flare (Apple tarzı yumuşak ışık) */
-    .lens-flare{
-      position:absolute;top:-30vh;left:-20vw;width:140vw;height:160vh;z-index:1;pointer-events:none;
-      background:
-        radial-gradient(60vw 60vw at 20% 20%, rgba(255,255,255,.07), transparent 60%),
-        radial-gradient(40vw 40vw at 80% 30%, rgba(212,175,55,.10), transparent 60%),
-        radial-gradient(25vw 25vw at 50% 70%, rgba(255,255,255,.06), transparent 70%);
-      mix-blend-mode:screen;
-      animation: flareMove 16s ease-in-out infinite alternate;
-      filter: blur(6px);
+    /* Gold sheen lines (efekt 4) */
+    .sheen{
+      position:absolute;top:0;left:-30%;width:60%;height:100%;z-index:2;pointer-events:none;
+      background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.15) 50%, transparent 100%);
+      transform:skewX(-20deg);mix-blend-mode:screen;opacity:.0;animation:sheenMove 8s linear infinite;
     }
-    @keyframes flareMove{
-      0%{ transform:translate3d(-2%, -2%, 0) rotate(0deg) }
-      100%{ transform:translate3d(2%, 3%, 0) rotate(2deg) }
-    }
+    @keyframes sheenMove{0%{transform:translateX(-120%) skewX(-20deg)}100%{transform:translateX(220%) skewX(-20deg)}}
 
     .header-content{
-      position:relative;z-index:2;max-width:720px;padding:0 20px;
+      position:relative;z-index:3;max-width:720px;padding:0 20px;
       will-change:transform,opacity,filter;
       opacity:0;transform:translateY(24px) scale(0.98) rotateX(var(--rx)) rotateY(var(--ry));
       filter:blur(6px);
@@ -76,19 +97,23 @@
     }
     .header-content.show{opacity:1;transform:translateY(0) scale(1) rotateX(var(--rx)) rotateY(var(--ry));filter:blur(0)}
 
-    header p{font-size:1.1em;color:#eaeaea;font-style:italic;margin:0 0 18px;line-height:1.75}
+    header p{
+      font-size:1.1em;color:#eaeaea;font-style:italic;margin:0 0 18px;line-height:1.75;
+      transition:letter-spacing .6s ease; /* efekt 10 */
+    }
+    header#hero.scrolled p{letter-spacing:.3px}
 
-    /* Glassmorphism + altın sweep */
+    /* Glass badge (5) + altın sweep (var) */
     .soon{
       display:inline-block;font-size:1.2em;font-weight:700;color:var(--gold);
       text-transform:uppercase;letter-spacing:1px;position:relative;padding:.5em 1.1em;
       border:1px solid rgba(212,175,55,.35);border-radius:999px;
       background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      backdrop-filter:saturate(140%) blur(6px);
-      -webkit-backdrop-filter:saturate(140%) blur(6px);
+      backdrop-filter:saturate(140%) blur(6px);-webkit-backdrop-filter:saturate(140%) blur(6px);
       box-shadow:0 0 0 1px rgba(212,175,55,.15) inset, 0 12px 36px rgba(0,0,0,.35);
-      overflow:hidden;
+      overflow:hidden;animation:breath 3.5s ease-in-out infinite; /* nefes */
     }
+    @keyframes breath{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
     .soon::before{
       content:"";position:absolute;top:-150%;left:-30%;width:60%;height:400%;
       background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.25) 50%,transparent 100%);
@@ -96,12 +121,21 @@
     }
     @keyframes shine{0%{transform:translateX(-120%) rotate(20deg)}100%{transform:translateX(220%) rotate(20deg)}}
 
-    /* Bölümler */
+    /* Sections */
     section{
       max-width:880px;margin:auto;padding:45px 20px;border-top:1px solid rgba(255,255,255,0.08);
-      opacity:0;transform:translateY(40px);transition:opacity .9s ease, transform .9s ease;will-change:opacity,transform
+      opacity:0;transform:translateY(40px);transition:opacity .9s ease, transform .9s ease;will-change:opacity,transform;
+      position:relative;
     }
     section.show{opacity:1;transform:translateY(0)}
+    /* edge glow (13) */
+    section::before{
+      content:"";position:absolute;left:0;right:0;top:-1px;height:1px;opacity:0;pointer-events:none;
+      background:linear-gradient(90deg, transparent, rgba(212,175,55,.5), transparent);
+      transition:opacity .9s ease;
+    }
+    section.show::before{opacity:1}
+
     section h2{
       font-family:'Playfair Display',serif;font-size:1.4em;color:var(--gold);margin-bottom:16px;font-weight:600;position:relative
     }
@@ -121,16 +155,46 @@
     .card:hover{transform:translateY(-3px) scale(var(--pop));box-shadow:0 12px 30px rgba(0,0,0,.35);border-color:rgba(255,215,0,0.24)}
     .card p{margin:0;color:#e0e0e0;font-size:.95em}
 
+    /* micro parallax on cards (7) */
+    .card.parallax{transform:translateY(var(--py,0))}
+    /* links underline slide (8) */
+    .card a{position:relative}
+    .card a::after{
+      content:"";position:absolute;left:0;right:100%;bottom:-2px;height:1px;background:currentColor;opacity:.6;
+      transition:right .35s ease;
+    }
+    .card a:hover::after{right:0}
+
     .image-break{margin:60px 0;opacity:0;transform:translateY(32px) scale(0.98);
       transition:opacity .9s ease, transform .9s ease}
     .image-break.show{opacity:1;transform:translateY(0) scale(1)}
     .image-break img{width:100%;display:block;border-radius:10px;border:1px solid rgba(212,175,55,0.2);
       box-shadow:0 0 25px rgba(0,0,0,0.6);transition:transform .8s ease}
-    .image-break:hover img{transform:scale(1.015)}
+    .image-break:hover img{transform:scale(1.015)} /* 9 */
 
     .contact-links{margin-top:10px;text-align:center;display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
-    .contact-links a{color:var(--gold);font-size:.95em;text-decoration:none;transition:color .3s ease, transform .3s ease, text-shadow .3s ease}
-    .contact-links a:hover{color:#fff;transform:translateY(-2px) scale(1.06);text-shadow:0 0 10px rgba(212,175,55,.5)}
+    .contact-links a{
+      color:var(--gold);font-size:.95em;text-decoration:none;transition:color .3s ease, transform .3s ease, text-shadow .3s ease
+    }
+    .contact-links a:hover{
+      color:#fff;transform:translateY(-2px) scale(1.06);text-shadow:0 0 10px rgba(212,175,55,.5)
+    }
+    /* halo ring (14) */
+    .contact-links a::before{
+      content:"";position:absolute;inset:-6px;border-radius:8px;box-shadow:0 0 12px rgba(212,175,55,.25);
+      opacity:0;transition:opacity .3s ease;pointer-events:none;
+    }
+    .contact-links a:hover::before{opacity:1}
+
+    /* Scroll-to-top (12) */
+    .toTop{
+      position:fixed;right:16px;bottom:18px;width:42px;height:42px;border-radius:50%;
+      background:rgba(255,255,255,.06);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+      border:1px solid rgba(212,175,55,.35);color:#fff;display:grid;place-items:center;
+      cursor:pointer;z-index:9998;opacity:0;transform:translateY(20px);transition:all .4s ease;
+    }
+    .toTop.show{opacity:1;transform:translateY(0)}
+    .toTop svg{width:18px;height:18px;fill:var(--gold)}
 
     footer{text-align:center;padding:25px 20px;background:#0a0a0a;font-size:.8em;color:#777}
 
@@ -141,11 +205,22 @@
 </head>
 <body>
 
-  <header id="hero">
-    <!-- Lens flare -->
-    <div class="lens-flare" aria-hidden="true"></div>
+  <!-- Scroll progress -->
+  <div class="scrollbar" id="scrollbar"></div>
 
-    <!-- ARTIK BACKGROUND DEĞİL, IMG -->
+  <header id="hero">
+    <!-- Bokeh orbs -->
+    <div class="bokeh" aria-hidden="true">
+      <span style="width:220px;height:220px;left:10%;top:15%" class="g"></span>
+      <span style="width:160px;height:160px;left:70%;top:10%"></span>
+      <span style="width:280px;height:280px;left:55%;top:60%" class="g"></span>
+      <span style="width:140px;height:140px;left:20%;top:70%"></span>
+    </div>
+
+    <!-- Sheen sweep -->
+    <div class="sheen" aria-hidden="true"></div>
+
+    <!-- Görsel -->
     <img class="hero-bg" src="showroom.PNG" alt="MedaStaré showroom">
 
     <div class="header-content" id="heroContent">
@@ -210,6 +285,11 @@
     © 2025 MedaStaré Yapay Zekâ ve Teknoloji A.Ş. – All rights reserved.
   </footer>
 
+  <!-- To top -->
+  <button class="toTop" id="toTop" aria-label="Yukarı çık">
+    <svg viewBox="0 0 24 24"><path d="M12 5l7 7-1.41 1.41L13 9.83V19h-2V9.83l-4.59 4.58L5 12z"/></svg>
+  </button>
+
   <script>
     /* Intersection reveal */
     const io=new IntersectionObserver((entries)=>{
@@ -218,28 +298,55 @@
     document.querySelectorAll('.header-content, section, .card, .image-break').forEach(el=>io.observe(el));
     document.querySelectorAll('.card').forEach((c,i)=>c.style.transitionDelay=(0.08*i)+'s');
 
-    /* Parallax & overlay — requestAnimationFrame ile pürüzsüz */
     const hero=document.getElementById('hero');
     const heroImg=document.querySelector('.hero-bg');
     const heroContent=document.getElementById('heroContent');
+    const scrollbar=document.getElementById('scrollbar');
+    const toTop=document.getElementById('toTop');
 
-    let latestScroll=0, ticking=false;
+    /* Anti-jitter – mobilde ağır efektleri kapat */
+    const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints>0;
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+    const heavyFX = !(isTouch || isIOS);  // desktop’ta açık
+
+    /* Scroll rAF */
+    let latestScroll=0,ticking=false;
     function updateOnScroll(){
       const h=window.innerHeight;
       const y=latestScroll;
 
-      /* Daha yumuşak parallax (0.05) */
-      if(heroImg){ heroImg.style.transform=`translateY(${y*0.05}px)`; }
+      /* progress bar (1) */
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      const p = Math.max(0, Math.min(1, y / (docH||1)));
+      scrollbar.style.width = (p*100)+'%';
+      scrollbar.style.height = y>4 ? '3px':'0px';
 
-      /* Overlay yoğunluğu küçük aralıkta */
+      /* header micro state */
+      hero.classList.toggle('scrolled', y>40);
+
+      /* parallax (çok düşük, titremesiz) */
+      if(heroImg) heroImg.style.transform = heavyFX ? `translate3d(0, ${y*0.03}px, 0)` : 'none';
+
+      /* overlay yoğunluğu */
       const ov=Math.max(.45,.55 - (y/h)*0.1);
       hero.style.setProperty('--overlay', ov.toFixed(2));
 
-      /* İçerik çok hafif fade/blur/shift */
-      const p=Math.min(1, y/(h*0.8));
-      heroContent.style.opacity=String(1 - p*0.35);
-      heroContent.style.filter=`blur(${p*2.5}px)`;
-      heroContent.style.transform=`translateY(${p*24}px) scale(${1 - p*0.02}) rotateX(var(--rx)) rotateY(var(--ry))`;
+      /* içerik fade/shift */
+      const k=Math.min(1, y/(h*0.8));
+      heroContent.style.opacity = String(1 - k*0.35);
+      heroContent.style.transform = `translateY(${k*24}px) scale(${1 - k*0.02}) rotateX(var(--rx)) rotateY(var(--ry))`;
+      heroContent.style.filter = heavyFX ? `blur(${k*2.2}px)` : 'none';
+
+      /* cards micro-parallax (7) */
+      document.querySelectorAll('.card').forEach((el,idx)=>{
+        const rect = el.getBoundingClientRect();
+        const py = Math.max(-2, Math.min(2, (rect.top-window.innerHeight/2)/200));
+        el.style.setProperty('--py', py+'px');
+        el.classList.add('parallax');
+      });
+
+      /* toTop show/hide */
+      if(y>400) toTop.classList.add('show'); else toTop.classList.remove('show');
 
       ticking=false;
     }
@@ -250,30 +357,37 @@
     window.addEventListener('scroll', onScroll, {passive:true});
     updateOnScroll();
 
-    /* 3D tilt (çok hafif) – CSS variable ile birleşik transform */
-    hero.addEventListener('mousemove',(e)=>{
-      const r=hero.getBoundingClientRect();
-      const cx=(e.clientX-(r.left+r.width/2))/(r.width/2);
-      const cy=(e.clientY-(r.top+r.height/2))/(r.height/2);
-      const tilt=6; /* daha yumuşak */
-      hero.style.setProperty('--ry', `${cx*tilt}deg`);
-      hero.style.setProperty('--rx', `${-cy*tilt}deg`);
-    });
-    hero.addEventListener('mouseleave',()=>{
-      hero.style.setProperty('--ry','0deg');
-      hero.style.setProperty('--rx','0deg');
-    });
+    /* Spotlight (3) – sadece desktop */
+    if(heavyFX){
+      hero.addEventListener('mousemove',(e)=>{
+        const r=hero.getBoundingClientRect();
+        const x=((e.clientX-r.left)/r.width)*100;
+        const y=((e.clientY-r.top)/r.height)*100;
+        document.documentElement.style.setProperty('--spot-x', x+'%');
+        document.documentElement.style.setProperty('--spot-y', y+'%');
 
-    /* Magnetic hover (soon) */
-    const magnet=document.querySelector('.soon');
-    if(magnet){
-      magnet.addEventListener('mousemove',(e)=>{
-        const r=magnet.getBoundingClientRect();
-        const x=((e.clientX-r.left)/r.width-.5)*10;
-        const y=((e.clientY-r.top)/r.height-.5)*10;
-        magnet.style.transform=`translate(${x}px, ${y}px)`;
+        /* 3D tilt */
+        const cx=(e.clientX-(r.left+r.width/2))/(r.width/2);
+        const cy=(e.clientY-(r.top+r.height/2))/(r.height/2);
+        const tilt=6;
+        hero.style.setProperty('--ry', `${cx*tilt}deg`);
+        hero.style.setProperty('--rx', `${-cy*tilt}deg`);
       });
-      magnet.addEventListener('mouseleave',()=> magnet.style.transform='translate(0,0)');
+      hero.addEventListener('mouseleave',()=>{
+        hero.style.setProperty('--ry','0deg');
+        hero.style.setProperty('--rx','0deg');
+      });
+    }
+
+    /* Scroll to top (12) */
+    toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+
+    /* Contact: halo hover için position context */
+    document.querySelectorAll('.contact-links a').forEach(a=>{ a.style.position='relative'; });
+
+    /* Motion-safe: kullanıcı tercihine saygı */
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      scrollbar.style.transition='none';
     }
   </script>
 </body>
