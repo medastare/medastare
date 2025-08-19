@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MedaStaré – Powered by AI</title>
-  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="icon" href="favicon.png" type="image/png"> <!-- favicon eklendi -->
 
   <!-- Luxury Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -23,19 +23,36 @@
 
     /* HEADER */
     header {
-      text-align: center;
-      padding: 120px 20px;
-      background: url('showroom.PNG') no-repeat center center;
-      background-size: 110%; /* görseli biraz büyüttük */
       position: relative;
+      height: 100vh; /* tam ekran */
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end; /* yazılar aşağı */
+      align-items: center;
+      text-align: center;
       color: #fff;
+      overflow: hidden;
+      padding-bottom: 80px; /* alttan boşluk */
     }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url('showroom.PNG') no-repeat center top;
+      background-size: contain; /* kırpma yok, tam göster */
+      background-color: #000; /* görsel yetmezse siyah boşluk doldurur */
+      z-index: 0;
+    }
+
     header::after {
       content: "";
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.55);
+      inset: 0;
+      background: rgba(0,0,0,0.55); /* koyu filtre */
+      z-index: 1;
     }
+
     header * {
       position: relative;
       z-index: 2;
@@ -44,15 +61,14 @@
     header p {
       max-width: 680px;
       margin: auto;
-      font-size: 0.9em;  /* yazıyı küçülttük */
-      line-height: 1.4;
+      font-size: 0.95em;
       color: #eaeaea;
       font-style: italic;
     }
 
     .soon {
       margin-top: 20px;
-      font-size: 0.95em;
+      font-size: 1em;
       font-weight: 600;
       color: #d4af37;
       text-transform: uppercase;
