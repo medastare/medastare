@@ -25,42 +25,38 @@
     /* HEADER */
     header {
       position: relative;
-      text-align: center;
       height: 100vh;
       display: flex;
-      flex-direction: column;
-      justify-content: center;   /* yazılar dikey ortada */
+      justify-content: center;
       align-items: center;
-      padding: 0 20px;
-      overflow: hidden;
+      text-align: center;
       color: #fff;
+
       background: url('showroom.PNG') no-repeat center center;
-      background-size: contain;   /* 🔥 görselin tamamını göster */
-      background-color: #000;     /* boşlukları siyah yap */
-      background-attachment: fixed; /* parallax efekti */
+      background-size: cover;   /* 🔥 TAM ekran doldurur */
+      background-color: #000;
     }
 
     header::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.55);
+      background: rgba(0,0,0,0.55); /* koyu overlay */
       z-index: 1;
     }
 
-    header * {
+    header .header-content {
       position: relative;
       z-index: 2;
-      transition: transform 0.5s ease, opacity 0.5s ease;
-      text-align: center;
+      max-width: 720px;
+      padding: 0 20px;
     }
 
     header p {
-      max-width: 680px;
-      margin: 0 auto 20px;
       font-size: 1em;
       color: #eaeaea;
       font-style: italic;
+      margin-bottom: 20px;
     }
 
     .soon {
@@ -69,16 +65,6 @@
       color: #d4af37;
       text-transform: uppercase;
       letter-spacing: 1px;
-    }
-
-    /* Scroll shrink */
-    header.shrink p {
-      transform: scale(0.9) translateY(-20px);
-      opacity: 0.85;
-    }
-    header.shrink .soon {
-      transform: scale(0.9) translateY(-15px);
-      opacity: 0.85;
     }
 
     section {
@@ -176,11 +162,13 @@
 <body>
 
   <header>
-    <p>
-      Powered by AI – Redefining the future of fashion & beauty through personalization, technology, and creativity.<br>
-      <i>AI destekli – Moda & güzellikte geleceği kişiselleştirme, teknoloji ve yaratıcılıkla yeniden tanımlıyoruz.</i>
-    </p>
-    <div class="soon">ÇOK YAKINDA – TÜM TÜRKİYE’DE</div>
+    <div class="header-content">
+      <p>
+        Powered by AI – Redefining the future of fashion & beauty through personalization, technology, and creativity.<br>
+        <i>AI destekli – Moda & güzellikte geleceği kişiselleştirme, teknoloji ve yaratıcılıkla yeniden tanımlıyoruz.</i>
+      </p>
+      <div class="soon">ÇOK YAKINDA – TÜM TÜRKİYE’DE</div>
+    </div>
   </header>
 
   <section id="mission">
@@ -238,7 +226,7 @@
   </footer>
 
   <script>
-    // Scroll animation for cards & images & sections
+    // Scroll animation
     const elements = document.querySelectorAll('.card, .image-break, section');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -248,16 +236,6 @@
       });
     }, { threshold: 0.2 });
     elements.forEach(el => observer.observe(el));
-
-    // Scroll shrink effect
-    window.addEventListener("scroll", () => {
-      const header = document.querySelector("header");
-      if (window.scrollY > 100) {
-        header.classList.add("shrink");
-      } else {
-        header.classList.remove("shrink");
-      }
-    });
   </script>
 
 </body>
