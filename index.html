@@ -500,6 +500,41 @@
   img:hover {
     filter: brightness(1.25) contrast(
   }
+  <style>
+/* Runway görseli Apple tarzı ışık efekti */
+img[src*="runway.PNG"] {
+  position: relative;
+  z-index: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  display: inline-block;
+  box-shadow: 0 0 25px rgba(180, 220, 255, 0.35),
+              0 0 60px rgba(100, 160, 255, 0.25);
+}
+
+/* Parıltı şeridi */
+img[src*="runway.PNG"]::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(120deg,
+    transparent 0%,
+    rgba(255,255,255,0.6) 50%,
+    transparent 100%);
+  transform: skewX(-20deg);
+  animation: runwayShine 4s ease-in-out infinite;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Hareket animasyonu */
+@keyframes runwayShine {
+  0%   { left: -75%; }
+  100% { left: 125%; }
+}
 </style>
 </body>
 </html>
