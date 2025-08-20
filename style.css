@@ -1,91 +1,121 @@
-/* ===== SOON badge (cam efekti + parıltı + shimmer) ===== */
+/* ========== GLOBAL MICRO ANİMASYON PAKETİ (HTML DEĞİŞİKLİĞİ YOK) ========== */
+
+/* 0) Güvenli mod: kullanıcı 'reduce motion' açıksa ağır efektleri yumuşat */
+@media (prefers-reduced-motion: reduce){
+  .hero-bg, .sheen, .bokeh span, .card, h2::after, .contact-links a { animation: none !important; }
+}
+
+/* 1) Hero görseline çok hafif “slow zoom” (sadece CSS) */
+.hero-bg {
+  animation: heroSlow 22s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes heroSlow {
+  0%,100% { transform: scale(1) translateY(0); opacity: 1; }
+  50%     { transform: scale(1.04) translateY(4px); opacity: 0.98; }
+}
+
+/* 2) Sheen çizgisinin akışı (zaten vardı; biraz pürüzsüzleştirme) */
+.sheen {
+  animation: sheenMove 7.5s linear infinite;
+  will-change: transform;
+}
+@keyframes sheenMove {
+  0%   { transform: translateX(-120%) skewX(-20deg); }
+  100% { transform: translateX(220%)  skewX(-20deg); }
+}
+
+/* 3) Başlıklara (h2) altın çizgi “parıltı kayması” */
+h2 {
+  position: relative;
+}
+h2::after {
+  content:"";
+  position:absolute; left:0; bottom:-6px; height:2px; width:72px;
+  background: linear-gradient(90deg, rgba(212,175,55,0), rgba(212,175,55,.85), rgba(212,175,55,0));
+  animation: underlineGlow 3.2s ease-in-out infinite;
+  transform-origin:left;
+}
+@keyframes underlineGlow {
+  0%,100% { filter: drop-shadow(0 0 0 rgba(212,175,55,0)); transform: scaleX(1); }
+  50%     { filter: drop-shadow(0 0 8px rgba(212,175,55,.65)); transform: scaleX(1.05); }
+}
+
+/* 4) Card’lara “soft float” + hover’da lift (HTML dokunmadan, nth-child ile gecikme) */
+.card { 
+  animation: cardIdle 8s ease-in-out infinite;
+}
+@keyframes cardIdle {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-2px); }
+}
+.card:hover { transform: translateY(-3px) scale(var(--pop,1.03)); }
+
+/* hafif ‘stagger’ gecikmeleri (sadece CSS) */
+.card:nth-of-type(1) { animation-delay: .2s; }
+.card:nth-of-type(2) { animation-delay: .4s; }
+.card:nth-of-type(3) { animation-delay: .6s; }
+.card:nth-of-type(4) { animation-delay: .8s; }
+
+/* 5) Bokeh baloncuklarına çok hafif drift */
+.bokeh span { animation: orb 18s ease-in-out infinite; opacity:.18; }
+@keyframes orb {
+  0%   { transform: translate3d(0,0,0) scale(1); }
+  50%  { transform: translate3d(18px,-22px,0) scale(1.06); }
+  100% { transform: translate3d(-10px,10px,0) scale(1); }
+}
+
+/* 6) Link’lerde altın parıltılı hover (HTML’e dokunmadan) */
+.contact-links a, .card a {
+  transition: color .25s ease, text-shadow .25s ease;
+}
+.contact-links a:hover, .card a:hover {
+  color:#fff;
+  text-shadow: 0 0 10px rgba(212,175,55,.45);
+}
+
+/* 7) “Yukarı Çık” butonuna hafif nabız */
+.toTop.show { animation: toTopPulse 2.8s ease-in-out infinite; }
+@keyframes toTopPulse {
+  0%,100% { transform: translateY(0) scale(1);   box-shadow: 0 0 0 rgba(212,175,55,0); }
+  50%     { transform: translateY(0) scale(1.04); box-shadow: 0 0 12px rgba(212,175,55,.28); }
+}
+
+/* 8) Başlık paragrafına (header p) mikro nefes efekti */
+header#hero p {
+  animation: headerBreath 10s ease-in-out infinite;
+}
+@keyframes headerBreath {
+  0%,100% { letter-spacing:.2px; opacity: .98; }
+  50%     { letter-spacing:.5px; opacity: 1; }
+}
+
+/* 9) SOON rozeti için “cam + shimmer” (senin son bloğunla uyumlu) */
 .soon{
   display:inline-block;
   font:700 1.2em/1 'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
   color:var(--gold);
-  text-transform:uppercase;
-  letter-spacing:1px;
-  position:relative;
-  padding:.5em 1.1em;
-  border-radius:999px;
+  text-transform:uppercase; letter-spacing:1px;
+  position:relative; padding:.5em 1.1em; border-radius:999px;
   border:1px solid rgba(212,175,55,.35);
   background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-  -webkit-backdrop-filter:saturate(140%) blur(6px);
-  backdrop-filter:saturate(140%) blur(6px);
-  box-shadow:0 0 0 1px rgba(212,175,55,.15) inset,
-             0 12px 36px rgba(0,0,0,.35);
-  overflow:hidden;
-  will-change:transform, box-shadow;
-  animation:breath 3.5s ease-in-out infinite,
-             glowPulse 2.5s ease-in-out infinite;
-  z-index:1;
+  -webkit-backdrop-filter:saturate(140%) blur(6px); backdrop-filter:saturate(140%) blur(6px);
+  box-shadow:0 0 0 1px rgba(212,175,55,.15) inset, 0 12px 36px rgba(0,0,0,.35);
+  overflow:hidden; z-index:1; will-change:transform, box-shadow;
+  animation:breath 3.5s ease-in-out infinite, glowPulse 2.5s ease-in-out infinite;
 }
-.soon > *{
-  position:relative;
-  z-index:3;
-}
-
-/* nefes efekti */
-@keyframes breath{
-  0%,100%{ transform:scale(1) }
-  50%   { transform:scale(1.02) }
-}
-
-/* altın parıltı */
-@keyframes glowPulse{
-  0%,100%{
-    box-shadow:0 0 6px rgba(212,175,55,.35),
-               0 0 12px rgba(212,175,55,.22);
-  }
-  50%{
-    box-shadow:0 0 16px rgba(212,175,55,.85),
-               0 0 28px rgba(212,175,55,.55);
-  }
-}
-
-/* hareketli cam şeridi */
 .soon::before{
-  content:"";
-  position:absolute;
-  top:-150%; left:-30%;
-  width:60%; height:400%;
-  background:linear-gradient(120deg,
-    transparent 0%,
-    rgba(255,255,255,.25) 50%,
-    transparent 100%);
+  content:""; position:absolute; top:-150%; left:-30%; width:60%; height:400%;
+  background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.25) 50%,transparent 100%);
   transform:rotate(20deg) translateZ(0);
-  animation:shine 4s ease-in-out infinite;
-  pointer-events:none;
-  z-index:2;
+  animation:shine 4s ease-in-out infinite; pointer-events:none; z-index:2;
 }
-@keyframes shine{
-  0%  { transform:translateX(-120%) rotate(20deg) }
-  100%{ transform:translateX(220%)  rotate(20deg) }
-}
-
-/* ince shimmer çizgisi */
 .soon::after{
-  content:"";
-  position:absolute;
-  top:0; left:-150%;
-  width:80%; height:100%;
-  background:linear-gradient(120deg,
-    transparent,
-    rgba(255,255,255,.18),
-    transparent);
-  transform:translateZ(0);
-  animation:shimmerMove 6s linear infinite;
-  pointer-events:none;
-  z-index:2;
+  content:""; position:absolute; top:0; left:-150%; width:80%; height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.18),transparent);
+  transform:translateZ(0); animation:shimmerMove 6s linear infinite; pointer-events:none; z-index:2;
 }
-@keyframes shimmerMove{
-  0%  { left:-150% }
-  100%{ left:150% }
-}
-
-/* Reduce Motion açık olsa bile bu animasyonlar çalışsın */
-@media (prefers-reduced-motion: reduce){
-  .soon, .soon::before, .soon::after{
-    animation-play-state:running !important;
-  }
-}
+@keyframes breath{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.02)} }
+@keyframes glowPulse{ 0%,100%{ box-shadow:0 0 6px rgba(212,175,55,.35), 0 0 12px rgba(212,175,55,.22)} 50%{ box-shadow:0 0 16px rgba(212,175,55,.85), 0 0 28px rgba(212,175,55,.55)} }
+@keyframes shine{ 0%{transform:translateX(-120%) rotate(20deg)} 100%{transform:translateX(220%) rotate(20deg)} }
+@keyframes shimmerMove{ 0%{left:-150%} 100%{left:150%} }
