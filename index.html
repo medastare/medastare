@@ -195,26 +195,51 @@
       e-postanı bırak.
     </p>
     
-    <!-- FORM BURADA -->
-    <form method="POST" action="https://formspree.io/f/mgzzabcd">
-  <input type="text" name="name" placeholder="Ad / Name" required
-         style="width:48%;padding:12px;margin:5px;border-radius:8px;border:1px solid #ccc;">
-  <input type="email" name="email" placeholder="E-posta / Email" required
-         style="width:48%;padding:12px;margin:5px;border-radius:8px;border:1px solid #ccc;">
-  
-  <button type="submit"
-          style="display:block;width:100%;margin-top:20px;padding:14px 20px;
-                 background:linear-gradient(45deg,gold,#d4af37);
-                 color:#000;font-weight:bold;border:none;border-radius:10px;
-                 font-size:1.1em;cursor:pointer;transition:all 0.3s ease;">
-    🚀 Join the Circle 💎
-  </button>
-</form>
+    <!-- FORM -->
+    <form method="POST" action="https://formspree.io/f/xvgqjvvo" autocomplete="on">
+      <!-- İSİM -->
+      <label for="wl-name" style="display:none;">Ad / Name</label>
+      <input
+        id="wl-name"
+        name="name"
+        type="text"
+        placeholder="Ad / Name"
+        required
+        autocomplete="name"         <!-- tarayıcıya kayıtlı ad ipucu -->
+        autocapitalize="words"      <!-- iOS: İsimde baş harfleri büyüt -->
+        inputmode="text"
+        style="width:48%;padding:12px;margin:5px;border-radius:8px;border:1px solid #ccc;"
+      >
 
-<!-- yazıyı form dışına aldık -->
-<p style="color:#aaa;font-size:0.9em;margin-top:20px;">
-  Unsubscribe anytime.
-</p>
+      <!-- E-POSTA -->
+      <label for="wl-email" style="display:none;">E-posta / Email</label>
+      <input
+        id="wl-email"
+        name="email"
+        type="email"
+        placeholder="E-posta / Email"
+        required
+        autocomplete="email"        <!-- tarayıcıya kayıtlı e-posta ipucu -->
+        autocapitalize="off"
+        autocorrect="off"
+        spellcheck="false"
+        inputmode="email"           <!-- mobilde @ ve . tuşlarını açar -->
+        style="width:48%;padding:12px;margin:5px;border-radius:8px;border:1px solid #ccc;"
+      >
+
+      <button type="submit"
+              style="display:block;width:100%;margin-top:20px;padding:14px 20px;
+                     background:linear-gradient(45deg,gold,#d4af37);
+                     color:#000;font-weight:bold;border:none;border-radius:10px;
+                     font-size:1.1em;cursor:pointer;transition:all 0.3s ease;">
+         Join the Circle 💎
+      </button>
+    </form>
+
+    <!-- yazıyı form dışına aldık -->
+    <p style="color:#aaa;font-size:0.9em;margin-top:20px;">
+      Unsubscribe anytime.
+    </p>
     <!-- /FORM -->
     
     <p id="success-message" style="color:lime; display:none;">
