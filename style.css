@@ -182,3 +182,31 @@ button::before {
   50%  { transform: translateX(40%)  skewX(-12deg); }
   100% { transform: translateX(-40%) skewX(-12deg); }
 }
+/* --- Global: yatay kaymayı kapat --- */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;   /* yatay scroll engellensin */
+}
+
+/* --- Arka plan efekt katmanları taşmasın --- */
+.bg-fx,
+.bg-beams {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;         /* sadece ekran genişliği kadar */
+  height: 100vh;        /* sadece ekran yüksekliği kadar */
+  overflow: hidden;     /* dışarı taşanı kırpar */
+  pointer-events: none; /* tıklamaları engellemesin */
+  z-index: 0;
+}
+
+/* iOS’ta 100vw taşma yapmasın diye */
+.bg-fx * , .bg-beams * {
+  max-width: 100%;
+}
+
+/* Waitlist kutusu kendi içinde kalsın */
+.waitlist-box {
+  box-sizing: border-box;
+  overflow: hidden;     /* ::before efektini içeride tut */
+}
