@@ -566,5 +566,26 @@ document.addEventListener("mousemove", e=>{
   document.documentElement.style.setProperty("--spot-y", e.clientY + "px");
 });
 </script>
+  <style>
+/* Yazılar daha parlak beyaz olsun */
+body, body * {
+  color: rgba(255,255,255,0.92) !important; /* neredeyse beyaz */
+  text-shadow: 0 0 6px rgba(0,0,0,0.5);     /* okunurluğu artırır */
+}
+
+/* Resimlerin net görünmesi için kontrastı biraz açalım */
+img {
+  filter: brightness(1.05) contrast(1.05);
+  transition: filter 0.3s ease;
+}
+
+/* Arka plan efektlerini daha hafif yapıyoruz */
+.apple-fx span{
+  background:radial-gradient(circle, rgba(255,215,0,.08), transparent 70%);
+}
+.apple-fx i{
+  opacity:.08; /* önce .12 idi, düşürdük */
+}
+</style>
 </body>
 </html>
