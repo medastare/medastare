@@ -482,5 +482,40 @@
   50%    { transform:translate3d(20px,-40px,0) scale(1.15); opacity:.8; }
 }
 </style>
+  <style>
+  /* Yazıların okunabilirliğini arttır */
+  body {
+    color: #fff !important;
+  }
+  p, span, li, a, h1, h2, h3, h4, h5, h6 {
+    color: rgba(255,255,255,0.95) !important;
+    text-shadow: 0 0 6px rgba(0,0,0,0.6);
+  }
+
+  /* Resimleri daha net göster */
+  img {
+    filter: brightness(1.1) contrast(1.05);
+    transition: 0.5s ease-in-out;
+  }
+  img:hover {
+    filter: brightness(1.25) contrast(1.15);
+  }
+
+  /* Arka plana hafif siyah overlay – Apple tarzı */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Efektler üstte kalsın ama yazılar kaybolmasın */
+  .apple-fx, .stars {
+    opacity: 0.6;
+    mix-blend-mode: screen;
+  }
+</style>
 </body>
 </html>
