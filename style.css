@@ -16,7 +16,7 @@
   box-shadow:0 0 0 1px rgba(212,175,55,.15) inset, 0 12px 36px rgba(0,0,0,.35);
   overflow:hidden;
 
-  /* Hepsi aynı anda */
+  /* Aynı anda nefes + altın parıltı */
   animation:
     breath 3.5s ease-in-out infinite,
     glowPulse 2.5s ease-in-out infinite;
@@ -30,8 +30,14 @@
 
 /* Altın parlayan glow */
 @keyframes glowPulse {
-  0%,100% { box-shadow:0 0 6px rgba(212,175,55,.4), 0 0 12px rgba(212,175,55,.25); }
-  50%     { box-shadow:0 0 16px rgba(212,175,55,.9), 0 0 28px rgba(212,175,55,.6); }
+  0%,100% {
+    box-shadow:0 0 6px rgba(212,175,55,.4),
+               0 0 12px rgba(212,175,55,.25);
+  }
+  50% {
+    box-shadow:0 0 16px rgba(212,175,55,.9),
+               0 0 28px rgba(212,175,55,.6);
+  }
 }
 
 /* Işıltı kayması */
@@ -42,7 +48,13 @@
   left:-30%;
   width:60%;
   height:400%;
-  background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.25) 50%, transparent 100%);
+  background:linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255,255,255,.25) 50%,
+    transparent 100%
+  );
+  /* Burada sadece rotate, translate'i animasyon yapıyor */
   transform:rotate(20deg);
   animation:shine 4s ease-in-out infinite;
   pointer-events:none;
@@ -56,13 +68,30 @@
 .soon::after {
   content:"";
   position:absolute;
-  top:0; left:-150%;
-  width:80%; height:100%;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,.18),transparent);
+  top:0;
+  left:-150%;
+  width:80%;
+  height:100%;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.18),
+    transparent
+  );
   animation:shimmerMove 6s infinite;
   pointer-events:none;
 }
 @keyframes shimmerMove {
   0%   { left:-150%; }
   100% { left:150%; }
+}
+
+/* Reduce Motion açıksa bile SOON için çalışmaya devam etsin */
+@media (prefers-reduced-motion:reduce){
+  .soon,
+  .soon::before,
+  .soon::after {
+    animation-duration:unset !important;
+    animation-play-state:running !important;
+  }
 }
