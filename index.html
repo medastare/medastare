@@ -588,5 +588,50 @@ img[src*="runway.PNG"]::after {
   100% { left:110%; }
 }
 </style>
+  <!-- ========== Altın ışık şeritleri (çok hafif, Apple vibe) ========== -->
+<style>
+  .light-streaks{
+    position:fixed; inset:0; pointer-events:none;
+    z-index:0;                 /* içerik üzerinde gözüksün ama tıklamayı engellemesin */
+    mix-blend-mode:screen;     /* siyah zeminde altın parlaklık */
+  }
+  .light-streaks span{
+    position:absolute; display:block;
+    width:10vw; min-width:60px; max-width:120px;
+    height:160vh;               /* dikey uzunluk */
+    top:-30vh;                  /* yukarıdan başlasın */
+    background:linear-gradient(
+      to bottom,
+      rgba(212,175,55,0) 0%,
+      rgba(212,175,55,.20) 50%,
+      rgba(212,175,55,0) 100%
+    );
+    filter:blur(12px);
+    opacity:.18;                /* çok hafif olsun */
+    transform:rotate(-10deg);
+    animation:goldSweep 14s linear infinite;
+  }
+
+  /* birkaç şerit – farklı konum ve hızlar */
+  .light-streaks span:nth-child(1){ left:8%;  animation-duration:16s; }
+  .light-streaks span:nth-child(2){ left:28%; animation-duration:13s; animation-delay:-3s; }
+  .light-streaks span:nth-child(3){ left:55%; animation-duration:15s; animation-delay:-6s; }
+  .light-streaks span:nth-child(4){ left:78%; animation-duration:12s; animation-delay:-1s; }
+
+  @keyframes goldSweep{
+    0%   { transform:translateY(-20vh) rotate(-10deg); }
+    100% { transform:translateY(120vh) rotate(-10deg); }
+  }
+
+  /* erişilebilirlik: reduce-motion seçiliyse daha yavaş */
+  @media (prefers-reduced-motion:reduce){
+    .light-streaks span{ animation-duration:28s; }
+  }
+</style>
+
+<div class="light-streaks" aria-hidden="true">
+  <span></span><span></span><span></span><span></span>
+</div>
+<!-- ========== /Altın ışık şeritleri ========== -->
 </body>
 </html>
