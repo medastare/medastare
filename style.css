@@ -1,4 +1,4 @@
-/* ===== SOON badge (cam efekti + parıltı) ===== */
+/* ===== SOON badge (cam efekti + parıltı + shimmer) ===== */
 .soon{
   display:inline-block;
   font:700 1.2em/1 'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
@@ -15,16 +15,27 @@
   box-shadow:0 0 0 1px rgba(212,175,55,.15) inset, 0 12px 36px rgba(0,0,0,.35);
   overflow:hidden;
   will-change:transform, box-shadow;
-  animation:breath 3.5s ease-in-out infinite, glowPulse 2.5s ease-in-out infinite;
+  animation:
+    breath 3.5s ease-in-out infinite,
+    glowPulse 2.5s ease-in-out infinite;
 }
 
-/* nefes */
-@keyframes breath{ 0%,100%{transform:scale(1)} 50%{transform:scale(1.02)} }
+/* nefes efekti */
+@keyframes breath{
+  0%,100%{ transform:scale(1) }
+  50%   { transform:scale(1.02) }
+}
 
 /* altın parıltı */
 @keyframes glowPulse{
-  0%,100%{ box-shadow:0 0 6px rgba(212,175,55,.35), 0 0 12px rgba(212,175,55,.22) }
-  50%    { box-shadow:0 0 16px rgba(212,175,55,.85), 0 0 28px rgba(212,175,55,.55) }
+  0%,100%{
+    box-shadow:0 0 6px rgba(212,175,55,.35),
+               0 0 12px rgba(212,175,55,.22);
+  }
+  50%{
+    box-shadow:0 0 16px rgba(212,175,55,.85),
+               0 0 28px rgba(212,175,55,.55);
+  }
 }
 
 /* hareketli cam şeridi */
@@ -33,7 +44,12 @@
   position:absolute;
   top:-150%; left:-30%;
   width:60%; height:400%;
-  background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.25) 50%,transparent 100%);
+  background:linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255,255,255,.25) 50%,
+    transparent 100%
+  );
   transform:rotate(20deg);
   animation:shine 4s ease-in-out infinite;
   will-change:transform;
@@ -51,20 +67,26 @@
   position:absolute;
   inset:0 auto 0 -150%;
   width:80%;
-  background:linear-gradient(120deg,transparent,rgba(255,255,255,.18),transparent);
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,.18),
+    transparent
+  );
   animation:shimmerMove 6s linear infinite;
   pointer-events:none;
 }
-@keyframes shimmerMove{ 0%{left:-150%} 100%{left:150%} }
+@keyframes shimmerMove{
+  0%  { left:-150% }
+  100%{ left:150% }
+}
 
-/* --- HEDEFLI reduce-motion: ağır efektleri kapat, SOON çalışsın --- */
+/* --- Reduce Motion: diğer efektleri kapat, SOON çalışmaya devam etsin --- */
 @media (prefers-reduced-motion:reduce){
-  /* sayfadaki ağır animasyonları durdur */
   .sheen, .bokeh span, .hero-bg, .header-content, section, .card{
     animation:none !important;
     transition:none !important;
   }
-  /* rozet animasyonları açık kalsın */
   .soon, .soon::before, .soon::after{
     animation-play-state:running !important;
   }
