@@ -8,17 +8,19 @@
   <!-- Verification -->
   <meta name="google-site-verification" content="nQDYMuDMDZthwRmTt4w3tyWyGXIKQSB2jAaJCfH3CXM" />
 
-  <!-- SEO -->
+  <!-- SEO core -->
   <link rel="canonical" href="https://medastare.com/">
   <meta name="description" content="MedaStaré — AI-powered fashion & beauty ecosystem. Personalized creation tools, pro workflows and a marketplace connecting creators, brands and consumers. Türkiye'den dünyaya.">
 
-  <!-- Open Graph / Twitter -->
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MedaStaré">
   <meta property="og:title" content="MedaStaré – Powered by AI">
   <meta property="og:description" content="AI + fashion & beauty: kişiselleştirme, teknoloji ve yaratıcılık.">
   <meta property="og:url" content="https://medastare.com/">
   <meta property="og:image" content="https://medastare.com/og-cover.jpg">
+
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@medastareapp">
   <meta name="twitter:title" content="MedaStaré – Powered by AI">
@@ -26,16 +28,14 @@
   <meta name="twitter:image" content="https://medastare.com/og-cover.jpg">
 
   <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="https://medastare.com/medastare-logo.PNG">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://medastare.com/medastare-logo.PNG">
-  <link rel="icon" type="image/png" sizes="16x16" href="https://medastare.com/medastare-logo.PNG">
-  <meta name="theme-color" content="#000000">
-
-  <!-- Fonts -->
+<link rel="apple-touch-icon" sizes="180x180" href="https://medastare.com/medastare-logo.PNG">
+<link rel="icon" type="image/png" sizes="32x32" href="https://medastare.com/medastare-logo.PNG">
+<link rel="icon" type="image/png" sizes="16x16" href="https://medastare.com/medastare-logo.PNG">
+<meta name="theme-color" content="#000000">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
 
-  <!-- GA4 -->
+  <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0X6RGY78FV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -49,18 +49,14 @@
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-      margin:0;
-      background:#000;         /* BEYAZLIK BİTTİ */
-      color:#fff;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      position:relative;
-      z-index:1;               /* arka plan efektinin üstünde kal */
+  margin:0;
+  background:#000;
+  color:#fff;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  position:relative;
+  z-index:1;
     }
-
-    /* Üst ilerleme çubuğu */
     .scrollbar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg, rgba(255,255,255,.0), var(--gold), rgba(255,255,255,.0));box-shadow:0 0 12px rgba(212,175,55,.8);z-index:9999;transform-origin:left;transition:height .25s ease;}
-
-    /* HERO */
     header#hero{position:relative;height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;color:#fff;isolation:isolate;overflow:hidden;background:#000;}
     .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;transform:translateY(0);opacity:0;transition:opacity 1.2s ease, transform .5s ease;z-index:0;will-change:transform,opacity;}
     .hero-bg.show{opacity:1;}
@@ -86,8 +82,6 @@
     .soon{display:inline-block;font-size:1.2em;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1px;position:relative;padding:.5em 1.1em;border:1px solid rgba(212,175,55,.35);border-radius:999px;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));backdrop-filter:saturate(140%) blur(6px);-webkit-backdrop-filter:saturate(140%) blur(6px);box-shadow:0 0 0 1px rgba(212,175,55,.15) inset, 0 12px 36px rgba(0,0,0,.35);overflow:hidden;animation:breath 3.5s ease-in-out infinite;}
     @keyframes breath{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
     .soon::before{content:"";position:absolute;top:-150%;left:-30%;width:60%;height:400%;background:linear-gradient(120deg,transparent 0%,rgba(255,255,255,.25) 50%,transparent 100%);transform:rotate(20deg);animation:shine 4s ease-in-out infinite;pointer-events:none;}
-
-    /* Bölümler */
     section{max-width:880px;margin:auto;padding:45px 20px;border-top:1px solid rgba(255,255,255,0.08);opacity:0;transform:translateY(40px);transition:opacity .9s ease, transform .9s ease;will-change:opacity,transform;position:relative;}
     section.show{opacity:1;transform:translateY(0)}
     section::before{content:"";position:absolute;left:0;right:0;top:-1px;height:1px;opacity:0;pointer-events:none;background:linear-gradient(90deg, transparent, rgba(212,175,55,.5), transparent);transition:opacity .9s ease;}
@@ -106,19 +100,13 @@
     .image-break{margin:60px 0;opacity:0;transform:translateY(32px) scale(0.98);transition:opacity .9s ease, transform .9s ease}
     .image-break.show{opacity:1;transform:translateY(0) scale(1)}
     .image-break img{width:100%;display:block;border-radius:10px;border:1px solid rgba(212,175,55,0.2);box-shadow:0 0 25px rgba(0,0,0,0.6);transition:transform .8s ease}
-
-    /* Linkler */
     .contact-links{margin-top:10px;text-align:center;display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
     .contact-links a{color:var(--gold);font-size:.95em;text-decoration:none;transition:color .3s ease, transform .3s ease, text-shadow .3s ease}
     .contact-links a:hover{color:#fff;transform:translateY(-2px) scale(1.06);text-shadow:0 0 10px rgba(212,175,55,.5)}
     .contact-links a::before{content:"";position:absolute;inset:-6px;border-radius:8px;box-shadow:0 0 12px rgba(212,175,55,.25);opacity:0;transition:opacity .3s ease;pointer-events:none;}
-
-    /* Back to top */
     .toTop{position:fixed;right:16px;bottom:18px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.06);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(212,175,55,.35);color:#fff;display:grid;place-items:center;cursor:pointer;z-index:9998;opacity:0;transform:translateY(20px);transition:all .4s ease;}
     .toTop.show{opacity:1;transform:translateY(0)}
     .toTop svg{width:18px;height:18px;fill:var(--gold)}
-
-    /* Butonlar & Modaller */
     .ms-actions{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin:8px 0 0}
     .ms-btn{background:transparent;color:#e9e9e9;border:1px solid #1d1d1d;padding:.55rem .9rem;border-radius:10px;cursor:pointer;transition:all .25s;}
     .ms-btn:hover{border-color:var(--gold);transform:translateY(-1px);}
@@ -130,8 +118,6 @@
     .ms-modal__close:hover{background:#222;border-color:var(--gold);color:var(--gold);}
     .ms-modal h3{margin:.25rem 0 1rem;font-size:1.2rem}
     .ms-modal p{color:#d9d9d9}
-
-    /* Footer */
     .ms-footer{background:#000;color:#e9e9e9;border-top:1px solid #1d1d1d;position:relative}
     .ms-footer__topglow{position:absolute;inset:0 0 auto 0;height:2px;background:linear-gradient(90deg,transparent, var(--gold), transparent);filter:drop-shadow(0 0 12px var(--gold));opacity:.35;}
     .ms-footer__grid{display:grid;gap:2rem;grid-template-columns:repeat(4,minmax(0,1fr));padding:2.25rem clamp(1rem,3vw,2.5rem);}
@@ -145,56 +131,10 @@
     @media (max-width:900px){ .ms-footer__grid{grid-template-columns:1fr 1fr} }
     @media (max-width:560px){ .ms-footer__grid{grid-template-columns:1fr} }
     footer{text-align:center;padding:25px 20px;background:#0a0a0a;font-size:.8em;color:#777}
-
-    /* Genel okunabilirlik + görsel düzeltmesi */
-    p, span, li, a, h1, h2, h3, h4, h5, h6 { color: rgba(255,255,255,0.95); text-shadow: 0 0 6px rgba(0,0,0,0.6); }
-    img { filter: brightness(1.1) contrast(1.05); transition: 0.5s ease-in-out; }
-    img:hover { filter: brightness(1.25) contrast(1.05); }  /* KAPATILDI ✅ */
-
-    /* WAITLIST */
-    .waitlist { padding:60px 20px; text-align:center; }
-    .waitlist-box { position: relative; max-width:600px; margin:0 auto; padding:40px; border: 2px solid #FFD700; border-radius:20px; background: rgba(0,0,0,0.65); box-shadow:0 0 30px rgba(255,215,0,0.4); overflow: hidden; z-index: 1; }
-    .waitlist-box::before { content: ""; position: absolute; inset: -3px; border-radius: inherit; padding: 3px; background: conic-gradient(from 0deg,#FFD700,rgba(255,215,0,0) 25%,#FFD700 50%,rgba(255,215,0,0) 75%,#FFD700); animation: spinGlow 6s linear infinite; -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; z-index: 0; }
-    @keyframes spinGlow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg);} }
-    .waitlist-box h2 { font-family:'Playfair Display',serif; font-size:2em; color:#f5f5f5; margin-bottom:15px; letter-spacing:1px; position: relative; z-index: 2; }
-    .waitlist-box p { font-size:1.1em; color:#ddd; margin-bottom:25px; line-height:1.6; position: relative; z-index: 2; }
-    .waitlist-box input { width: 48%; padding: 12px; margin: 5px; border-radius: 8px; border: 1px solid #ccc; font-size: 1em; position: relative; z-index: 2; }
-    .waitlist-box button { display: block; width: 100%; margin-top: 20px; padding: 14px 20px; background: linear-gradient(45deg, gold, #d4af37); color: #000; font-weight: bold; border: none; border-radius: 10px; font-size: 1.1em; cursor: pointer; transition: all 0.3s ease; position: relative; z-index: 2; }
-    .waitlist-box button:hover { background: linear-gradient(45deg, #e6c200, #b8962e); }
-    .waitlist-box .note { color:#aaa; font-size:0.9em; margin-top:20px; }
-
-    /* --- TEK ARKA PLAN EFEKTİ (bg-fx) --- */
-    .bg-fx {
-      position: fixed;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: 0;
-      background:
-        radial-gradient(1200px 800px at 50% 20%, rgba(212,175,55,.06), transparent 65%),
-        radial-gradient(1000px 700px at 80% 80%, rgba(255,255,255,.04), transparent 60%);
-    }
-    .bg-fx span {
-      position: absolute;
-      display: block;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(212,175,55,.25), transparent 70%);
-      animation: floatOrb 25s ease-in-out infinite;
-      will-change: transform, opacity;
-    }
-    .bg-fx span:nth-child(1){ width:200px; height:200px; top:10%; left:15%; animation-delay:0s;}
-    .bg-fx span:nth-child(2){ width:160px; height:160px; top:30%; left:70%; animation-delay:3s;}
-    .bg-fx span:nth-child(3){ width:240px; height:240px; top:60%; left:20%; animation-delay:6s;}
-    .bg-fx span:nth-child(4){ width:120px; height:120px; top:80%; left:50%; animation-delay:9s;}
-    .bg-fx span:nth-child(5){ width:180px; height:180px; top:40%; left:40%; animation-delay:12s;}
-    .bg-fx span:nth-child(6){ width:140px; height:140px; top:15%; left:80%; animation-delay:15s;}
-
-    @keyframes floatOrb { 0%,100% { transform: translate(0,0) scale(1); opacity:0.4; } 50% { transform: translate(20px,-30px) scale(1.1); opacity:0.8; } }
-
     @media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
   </style>
 
-  <!-- Org JSON-LD -->
+  <!-- Organization JSON-LD -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -212,16 +152,14 @@
   </script>
 </head>
 <body>
-
-  <!-- ✨ Tek arka plan efekti -->
-  <div class="bg-fx" aria-hidden="true">
+<body>
+  <!-- ✨ Arka Plan Altın Işık Efekti ✨ -->
+  <div class="bg-fx">
     <span></span><span></span><span></span>
     <span></span><span></span><span></span>
   </div>
-
   <div class="scrollbar" id="scrollbar"></div>
 
-  <!-- HERO -->
   <header id="hero">
     <div class="bokeh" aria-hidden="true">
       <span style="width:220px;height:220px;left:10%;top:15%" class="g"></span>
@@ -244,27 +182,167 @@
       </div>
     </div>
   </header>
+<!-- Waitlist Section -->
+<section class="waitlist" id="waitlist">
+  <div class="waitlist-box">
+    <h2>✨ MedaStaré Waitlist ✨</h2>
 
-  <!-- WAITLIST -->
-  <section class="waitlist" id="waitlist">
-    <div class="waitlist-box">
-      <h2>✨ MedaStaré Waitlist ✨</h2>
-      <p><strong>Step Into MedaStaré / MedaStaré’ye Adım At</strong><br><br>
-      İlk erişim, özel avantajlar ve erken kullanıcı topluluğuna katılmak için e-postanı bırak.</p>
+    <p>
+      <strong>Step Into MedaStaré / MedaStaré’ye Adım At</strong><br><br>
+      İlk erişim, özel avantajlar ve erken kullanıcı topluluğuna katılmak için
+      e-postanı bırak.
+    </p>
 
-      <form method="POST" action="https://formspree.io/f/xvgqjvvo" autocomplete="on">
-        <input id="wl-name" name="name" type="text" placeholder="Ad / Name" required autocomplete="name">
-        <input id="wl-email" name="email" type="email" placeholder="E-posta / Email" required autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email">
-        <button type="submit">Join the Circle 💎</button>
-      </form>
+    <!-- FORM -->
+    <form method="POST" action="https://formspree.io/f/xvgqjvvo" autocomplete="on">
+      <input
+        id="wl-name"
+        name="name"
+        type="text"
+        placeholder="Ad / Name"
+        required
+        autocomplete="name"
+      >
 
-      <p class="note">Unsubscribe anytime.</p>
-      <p id="success-message" style="color:lime; display:none;">✅ Teşekkürler! Kaydın alındı.</p>
-      <p id="error-message" style="color:red; display:none;">❌ Bir hata oldu. Tekrar dene.</p>
-    </div>
-  </section>
+      <input
+        id="wl-email"
+        name="email"
+        type="email"
+        placeholder="E-posta / Email"
+        required
+        autocomplete="email"
+        autocapitalize="off"
+        autocorrect="off"
+        spellcheck="false"
+        inputmode="email"
+      >
 
-  <!-- SECTIONS -->
+      <button type="submit">Join the Circle 💎</button>
+    </form>
+
+    <p class="note">Unsubscribe anytime.</p>
+
+    <p id="success-message" style="color:lime; display:none;">
+      ✅ Teşekkürler! Kaydın alındı.
+    </p>
+    <p id="error-message" style="color:red; display:none;">
+      ❌ Bir hata oldu. Tekrar dene.
+    </p>
+  </div>
+</section>
+
+<style>
+/* Waitlist genel */
+.waitlist {
+  padding:60px 20px;
+  text-align:center;
+}
+
+/* Kutu */
+.waitlist-box {
+  position: relative;
+  max-width:600px;
+  margin:0 auto;
+  padding:40px;
+  border: 2px solid #FFD700; /* sabit altın çerçeve */
+  border-radius:20px;
+  background: rgba(0,0,0,0.65);
+  box-shadow:0 0 30px rgba(255,215,0,0.4);
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Dönen ışık huzmesi */
+.waitlist-box::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  padding: 3px;
+  background: conic-gradient(
+    from 0deg,
+    #FFD700,
+    rgba(255,215,0,0) 25%,
+    #FFD700 50%,
+    rgba(255,215,0,0) 75%,
+    #FFD700
+  );
+  animation: spinGlow 6s linear infinite;
+  -webkit-mask: 
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  z-index: 0;
+}
+
+@keyframes spinGlow {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Başlık */
+.waitlist-box h2 {
+  font-family:'Playfair Display',serif;
+  font-size:2em;
+  color:#f5f5f5;
+  margin-bottom:15px;
+  letter-spacing:1px;
+  position: relative;
+  z-index: 2;
+}
+
+/* Açıklama */
+.waitlist-box p {
+  font-size:1.1em;
+  color:#ddd;
+  margin-bottom:25px;
+  line-height:1.6;
+  position: relative;
+  z-index: 2;
+}
+
+/* Form input */
+.waitlist-box input {
+  width: 48%;
+  padding: 12px;
+  margin: 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  position: relative;
+  z-index: 2;
+}
+
+/* Buton */
+.waitlist-box button {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px 20px;
+  background: linear-gradient(45deg, gold, #d4af37);
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.waitlist-box button:hover {
+  background: linear-gradient(45deg, #e6c200, #b8962e);
+}
+
+/* Not */
+.waitlist-box .note {
+  color:#aaa;
+  font-size:0.9em;
+  margin-top:20px;
+}
+</style>
   <section id="mission">
     <h2>Mission & Vision / Misyon & Vizyon</h2>
     <div class="card">
@@ -350,8 +428,12 @@
 
       <div class="ms-footer__col">
         <h4>Invest & Partner With Us</h4>
-        <p style="font-size:0.9em;color:#b7b7b7;margin-bottom:4px;">Explore partnership and investment opportunities with MedaStaré.</p>
-        <p style="font-size:0.85em;color:#a7a7a7;margin:0 0 8px;">MedaStaré ile iş birliği ve yatırım fırsatlarını keşfedin.</p>
+        <p style="font-size:0.9em;color:#b7b7b7;margin-bottom:4px;">
+          Explore partnership and investment opportunities with MedaStaré.
+        </p>
+        <p style="font-size:0.85em;color:#a7a7a7;margin:0 0 8px;">
+          MedaStaré ile iş birliği ve yatırım fırsatlarını keşfedin.
+        </p>
         <a href="mailto:info@medastare.com?subject=Partnership%20Inquiry">Partnership</a>
         <a href="mailto:info@medastare.com?subject=How%20It%20Works%20-%20Info">How It Works</a>
         <a href="mailto:info@medastare.com?subject=Our%20Vision">Our Vision</a>
@@ -382,7 +464,6 @@
   </button>
 
   <script>
-    /* Reveal on scroll */
     const io=new IntersectionObserver((entries)=>{
       entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }});
     },{threshold:.2});
@@ -462,6 +543,7 @@
     }
 
     toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+    document.querySelectorAll('.contact-links a').forEach(a=>{ a.style.position='relative'; });
 
     if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ scrollbar.style.transition='none'; }
 
@@ -494,7 +576,7 @@
 
     const y = document.getElementById('ms-year'); if(y) y.textContent = new Date().getFullYear();
 
-    /* GA4 – footer CTA */
+    /* GA4 – track footer CTA clicks */
     document.querySelectorAll('a,button').forEach(el=>{
       if(/invest|partner|partnership|how it works|vision/i.test((el.textContent||'').toLowerCase())){
         el.addEventListener('click', ()=>{
@@ -503,5 +585,254 @@
       }
     });
   </script>
+  <!-- ========== Apple-style ambient effects (self-contained) ========== -->
+<div class="apple-fx" aria-hidden="true">
+  <!-- Orb'lar -->
+  <span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span>
+
+  <!-- İnce ışık huzmeleri -->
+  <i></i><i></i><i></i>
+</div>
+
+<style>
+/* Kapsayıcı: sabit, tıklamayı engellemez, içerikten aşağıda */
+.apple-fx{
+  position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+  /* çok hafif vignette */
+  background:
+    radial-gradient(1200px 800px at 50% 20%, rgba(212,175,55,.06), transparent 65%),
+    radial-gradient(1000px 700px at 80% 80%, rgba(255,255,255,.04), transparent 60%);
+  mix-blend-mode:normal;
+  /* üstteki içerik zaten z-index>0; değilse sorun olursa body{position:relative;} ekleyebilirsin */
+}
+
+/* Altın ışıltılı orb'lar */
+.apple-fx span{
+  position:absolute; border-radius:50%;
+  background:radial-gradient(circle, rgba(212,175,55,.28), rgba(212,175,55,0) 70%);
+  filter:blur(2px);
+  animation:fx-float 18s ease-in-out infinite;
+  mix-blend-mode:screen;
+  opacity:.45;
+}
+
+/* 20 adet konum/boyut – istersek çoğaltır/azaltırız */
+.apple-fx span:nth-child(1){ width:200px;height:200px;left:8%; top:18%; animation-delay:0s;}
+.apple-fx span:nth-child(2){ width:260px;height:260px;left:72%;top:22%; animation-delay:1s;}
+.apple-fx span:nth-child(3){ width:140px;height:140px;left:48%;top:58%; animation-delay:2s;}
+.apple-fx span:nth-child(4){ width:190px;height:190px;left:18%;top:72%; animation-delay:3s;}
+.apple-fx span:nth-child(5){ width:120px;height:120px;left:82%;top:68%; animation-delay:4s;}
+.apple-fx span:nth-child(6){ width:160px;height:160px;left:32%;top:38%; animation-delay:5s;}
+.apple-fx span:nth-child(7){ width:220px;height:220px;left:60%;top:78%; animation-delay:6s;}
+.apple-fx span:nth-child(8){ width:110px;height:110px;left:12%;top:50%; animation-delay:7s;}
+.apple-fx span:nth-child(9){ width:280px;height:280px;left:85%;top:40%; animation-delay:8s;}
+.apple-fx span:nth-child(10){width:180px;height:180px;left:45%;top:10%; animation-delay:9s;}
+.apple-fx span:nth-child(11){width:150px;height:150px;left:28%;top:12%; animation-delay:10s;}
+.apple-fx span:nth-child(12){width:220px;height:220px;left:5%; top:85%; animation-delay:11s;}
+.apple-fx span:nth-child(13){width:130px;height:130px;left:66%;top:12%; animation-delay:12s;}
+.apple-fx span:nth-child(14){width:170px;height:170px;left:38%;top:82%; animation-delay:13s;}
+.apple-fx span:nth-child(15){width:210px;height:210px;left:76%;top:88%; animation-delay:14s;}
+.apple-fx span:nth-child(16){width:120px;height:120px;left:24%;top:58%; animation-delay:15s;}
+.apple-fx span:nth-child(17){width:260px;height:260px;left:90%;top:12%; animation-delay:16s;}
+.apple-fx span:nth-child(18){width:140px;height:140px;left:54%;top:32%; animation-delay:17s;}
+.apple-fx span:nth-child(19){width:200px;height:200px;left:10%;top:35%; animation-delay:18s;}
+.apple-fx span:nth-child(20){width:160px;height:160px;left:70%;top:56%; animation-delay:19s;}
+
+@keyframes fx-float{
+  0%,100%{ transform:translate3d(0,0,0) scale(1);   opacity:.45; }
+  50%    { transform:translate3d(20px,-40px,0) scale(1.15); opacity:.8; }
+}
+</style>
+  <style>
+  /* Yazıların okunabilirliğini arttır */
+  body {
+    color: #fff !important;
+  }
+  p, span, li, a, h1, h2, h3, h4, h5, h6 {
+    color: rgba(255,255,255,0.95) !important;
+    text-shadow: 0 0 6px rgba(0,0,0,0.6);
+  }
+
+  /* Resimleri daha net göster */
+  img {
+    filter: brightness(1.1) contrast(1.05);
+    transition: 0.5s ease-in-out;
+  }
+  img:hover {
+    filter: brightness(1.25) contrast(
+  }
+  <style>
+/* Runway görseli Apple tarzı ışık efekti */
+img[src*="runway.PNG"] {
+  position: relative;
+  z-index: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  display: inline-block;
+  box-shadow: 0 0 25px rgba(180, 220, 255, 0.35),
+              0 0 60px rgba(100, 160, 255, 0.25);
+}
+
+/* Parıltı şeridi */
+img[src*="runway.PNG"]::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 50%;
+  height: 200%;
+  background: linear-gradient(120deg,
+    transparent 0%,
+    rgba(255,255,255,0.6) 50%,
+    transparent 100%);
+  transform: skewX(-20deg);
+  animation: runwayShine 4s ease-in-out infinite;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Hareket animasyonu */
+@keyframes runwayShine {
+  0%   { left: -75%; }
+  100% { left: 125%; }
+}
+    <!-- Apple tarzı sarı ışık huzmeleri -->
+<div class="apple-fx" aria-hidden="true">
+  <span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span>
+  <i></i><i></i><i></i>
+</div>
+
+<style>
+.apple-fx {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background: radial-gradient(1200px 800px at 50% 50%, rgba(255, 230, 120, 0.05), transparent),
+              radial-gradient(1000px 700px at 80% 20%, rgba(255, 200, 80, 0.08), transparent);
+}
+
+/* Küçük orb’lar */
+.apple-fx span {
+  position: absolute;
+  width: 200px; height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,230,150,0.35), transparent 70%);
+  animation: orbMove 15s linear infinite;
+}
+.apple-fx span:nth-of-type(2){ top:40%; left:70%; animation-duration:20s;}
+.apple-fx span:nth-of-type(3){ top:70%; left:30%; animation-duration:18s;}
+.apple-fx span:nth-of-type(4){ top:10%; left:20%; animation-duration:22s;}
+
+/* İnce ışık huzmeleri */
+.apple-fx i {
+  position:absolute;
+  display:block;
+  width:200%; height:2px;
+  background:linear-gradient(90deg,transparent,rgba(255,240,180,0.35),transparent);
+  top:20%;
+  animation: fxSweep 12s linear infinite;
+  opacity:.25;
+}
+.apple-fx i:nth-of-type(2){ top:55%; animation-duration:18s;}
+.apple-fx i:nth-of-type(3){ top:80%; animation-duration:20s;}
+
+/* Animasyonlar */
+@keyframes orbMove {
+  0% { transform:translateY(0) rotate(0deg);}
+  100%{ transform:translateY(-50px) rotate(360deg);}
+}
+@keyframes fxSweep {
+  0% { left:-60%; }
+  100% { left:110%; }
+}
+</style>
+  <!-- ========== Altın ışık şeritleri (çok hafif, Apple vibe) ========== -->
+<style>
+  .light-streaks{
+    position:fixed; inset:0; pointer-events:none;
+    z-index:0;                 /* içerik üzerinde gözüksün ama tıklamayı engellemesin */
+    mix-blend-mode:screen;     /* siyah zeminde altın parlaklık */
+  }
+  .light-streaks span{
+    position:absolute; display:block;
+    width:10vw; min-width:60px; max-width:120px;
+    height:160vh;               /* dikey uzunluk */
+    top:-30vh;                  /* yukarıdan başlasın */
+    background:linear-gradient(
+      to bottom,
+      rgba(212,175,55,0) 0%,
+      rgba(212,175,55,.20) 50%,
+      rgba(212,175,55,0) 100%
+    );
+    filter:blur(12px);
+    opacity:.18;                /* çok hafif olsun */
+    transform:rotate(-10deg);
+    animation:goldSweep 14s linear infinite;
+  }
+
+  /* birkaç şerit – farklı konum ve hızlar */
+  .light-streaks span:nth-child(1){ left:8%;  animation-duration:16s; }
+  .light-streaks span:nth-child(2){ left:28%; animation-duration:13s; animation-delay:-3s; }
+  .light-streaks span:nth-child(3){ left:55%; animation-duration:15s; animation-delay:-6s; }
+  .light-streaks span:nth-child(4){ left:78%; animation-duration:12s; animation-delay:-1s; }
+
+  @keyframes goldSweep{
+    0%   { transform:translateY(-20vh) rotate(-10deg); }
+    100% { transform:translateY(120vh) rotate(-10deg); }
+  }
+
+  /* erişilebilirlik: reduce-motion seçiliyse daha yavaş */
+  @media (prefers-reduced-motion:reduce){
+    .light-streaks span{ animation-duration:28s; }
+  }
 </body>
 </html>
+<!-- ✨ Arka Plan Altın Işık Efekti ✨ -->
+<style>
+.bg-fx {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bg-fx span {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(212,175,55,.25), transparent 70%);
+  animation: floatOrb 25s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* 6 tane ışık → performans dostu */
+.bg-fx span:nth-child(1){ width:200px; height:200px; top:10%; left:15%; animation-delay:0s;}
+.bg-fx span:nth-child(2){ width:160px; height:160px; top:30%; left:70%; animation-delay:3s;}
+.bg-fx span:nth-child(3){ width:240px; height:240px; top:60%; left:20%; animation-delay:6s;}
+.bg-fx span:nth-child(4){ width:120px; height:120px; top:80%; left:50%; animation-delay:9s;}
+.bg-fx span:nth-child(5){ width:180px; height:180px; top:40%; left:40%; animation-delay:12s;}
+.bg-fx span:nth-child(6){ width:140px; height:140px; top:15%; left:80%; animation-delay:15s;}
+
+@keyframes floatOrb {
+  0%,100% { transform: translate(0,0) scale(1); opacity:0.4; }
+  50%     { transform: translate(20px,-30px) scale(1.1); opacity:0.8; }
+}
+</style>
+
+<!-- HTML içine body’nin en üstüne şunu ekle -->
+<div class="bg-fx">
+  <span></span><span></span><span></span>
+  <span></span><span></span><span></span>
+</div>
+</script>
+
+
+askim olmamış benim istediğim bu ben bunu koyayim düzeltmem
+gereken yerleri söyle 
