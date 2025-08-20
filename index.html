@@ -505,5 +505,66 @@
 </style>
 <!-- ========== /Apple-style ambient effects ========== -->
 </div>
+  <!-- Apple-style ambient FX -->
+<div class="apple-extra-fx" aria-hidden="true"></div>
+
+<style>
+/* Vignette (karartma efekti) */
+.apple-extra-fx::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.9) 100%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Spotlight efekti (mouse takip) */
+.apple-extra-fx::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(600px circle at var(--spot-x, 50%) var(--spot-y, 50%), rgba(255,215,0,0.08), transparent 70%);
+  mix-blend-mode: screen;
+  z-index: 1;
+  pointer-events: none;
+  transition: background-position 0.2s ease;
+}
+
+/* Stars (küçük parlayan noktalar) */
+.stars {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+.stars span {
+  position: absolute;
+  width: 2px; height: 2px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 50%;
+  animation: twinkle 5s infinite ease-in-out alternate;
+}
+@keyframes twinkle {
+  0% { opacity: 0.2; transform: scale(1);}
+  100%{ opacity: 1; transform: scale(1.5);}
+}
+</style>
+
+<div class="stars">
+  <span style="top:10%;left:20%"></span>
+  <span style="top:30%;left:70%"></span>
+  <span style="top:60%;left:40%"></span>
+  <span style="top:80%;left:80%"></span>
+  <span style="top:50%;left:15%"></span>
+</div>
+
+<script>
+document.addEventListener("mousemove", e=>{
+  document.documentElement.style.setProperty("--spot-x", e.clientX + "px");
+  document.documentElement.style.setProperty("--spot-y", e.clientY + "px");
+});
+</script>
 </body>
 </html>
