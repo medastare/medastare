@@ -1,3 +1,13 @@
+/* Genel reset → kaymayı engeller */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;   /* sağ-sol kaymayı engeller */
+  background: #000;     /* fallback */
+}
+
 /* ===== Background Floating Orbs (optimized) ===== */
 .bg-fx {
   position: fixed;
@@ -13,10 +23,9 @@
   border-radius: 50%;
   background: radial-gradient(circle, rgba(212,175,55,.25), transparent 70%);
   animation: floatOrb 25s ease-in-out infinite;
-  will-change: transform, opacity; /* GPU hızlandırma için */
+  will-change: transform, opacity;
 }
 
-/* orb sayısını 6’ya düşürdüm → performans artar */
 .bg-fx span:nth-child(1){ width:200px; height:200px; top:10%; left:15%; animation-delay:0s;}
 .bg-fx span:nth-child(2){ width:160px; height:160px; top:30%; left:70%; animation-delay:3s;}
 .bg-fx span:nth-child(3){ width:240px; height:240px; top:60%; left:20%; animation-delay:6s;}
@@ -29,13 +38,66 @@
   50%     { transform: translate(20px,-30px) scale(1.1); opacity:0.8; }
 }
 
-/* form input */
+/* ==== Vertical Luxury Gold Beams (background) ==== */
+.bg-beams {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(1200px 800px at 70% 30%, rgba(212,175,55,.08), transparent 60%),
+    radial-gradient(900px 700px at 20% 70%, rgba(212,175,55,.06), transparent 60%),
+    #000;
+}
+
+/* Form input */
 .form-input {
   width: 48%;
   padding: 12px;
   margin: 5px;
   border-radius: 8px;
   border: 1px solid #ccc;
+}
+
+/* Waitlist kutusu */
+.waitlist-box {
+  position: relative;
+  border: 2px solid #FFD700;
+  border-radius: 16px;
+  padding: 24px;
+  background: rgba(0,0,0,0.6);
+  overflow: hidden;
+  z-index: 1;
+  max-width: 600px;    /* kutu taşmayı engeller */
+  margin: 0 auto;      /* ortalar */
+}
+
+/* Dönen ışık huzmesi */
+.waitlist-box::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: inherit;
+  padding: 3px;
+  background: conic-gradient(
+    from 0deg,
+    #FFD700,
+    rgba(255,215,0,0) 25%,
+    #FFD700 50%,
+    rgba(255,215,0,0) 75%,
+    #FFD700
+  );
+  animation: spinGlow 6s linear infinite;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  z-index: 0;
+}
+
+@keyframes spinGlow {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* ===== Button Styling with Apple-like Glow & Halo ===== */
@@ -61,14 +123,12 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* Apple tarzı hover efekti */
 button:hover {
   background: linear-gradient(135deg, #000, #111);
   box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
   transform: translateY(-2px) scale(1.02);
 }
 
-/* Soft pulse halo efekti */
 button::before {
   content: "";
   position: absolute;
@@ -85,55 +145,4 @@ button::before {
 @keyframes halo {
   0%, 100% { transform: scale(1); opacity: 0.4; }
   50%      { transform: scale(1.2); opacity: 0.8; }
-}
-/* Waitlist kutusu */
-.waitlist-box {
-  position: relative;
-  border: 2px solid #FFD700; /* Altın sabit çerçeve */
-  border-radius: 16px;
-  padding: 24px;
-  background: rgba(0,0,0,0.6);
-  overflow: hidden;
-  z-index: 1;
-}
-/* Dönen ışık huzmesi */
-.waitlist-box::before {
-  content: "";
-  position: absolute;
-  inset: -3px; /* border dışında dönecek */
-  border-radius: inherit;
-  padding: 3px;
-  background: conic-gradient(
-    from 0deg,
-    #FFD700,
-    rgba(255,215,0,0) 25%,
-    #FFD700 50%,
-    rgba(255,215,0,0) 75%,
-    #FFD700
-  );
-  animation: spinGlow 6s linear infinite;
-  -webkit-mask: 
-    linear-gradient(#000 0 0) content-box, 
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  z-index: 0;
-}
-
-@keyframes spinGlow {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-/* ==== Vertical Luxury Gold Beams (background) ==== */
-.bg-beams{
-  position:fixed;
-  inset:0;
-  z-index:0;                 /* içeriğin altında kalsın */
-  pointer-events:none;
-  overflow:hidden;
-  /* hafif altın sis */
-  background:
-    radial-gradient(1200px 800px at 70% 30%, rgba(212,175,55,.08), transparent 60%),
-    radial-gradient(900px 700px  at 20% 70%, rgba(212,175,55,.06), transparent 60%),
-    #000; /* fallback */
 }
