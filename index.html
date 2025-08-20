@@ -421,10 +421,89 @@
       }
     });
   </script>
-  <!-- Background FX -->
-<div class="bg-fx">
+  <!-- ========== Apple-style ambient effects (self-contained) ========== -->
+<div class="apple-fx" aria-hidden="true">
+  <!-- Orb'lar -->
   <span></span><span></span><span></span><span></span><span></span>
   <span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span>
+
+  <!-- İnce ışık huzmeleri -->
+  <i></i><i></i><i></i>
+</div>
+
+<style>
+/* Kapsayıcı: sabit, tıklamayı engellemez, içerikten aşağıda */
+.apple-fx{
+  position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+  /* çok hafif vignette */
+  background:
+    radial-gradient(1200px 800px at 50% 20%, rgba(212,175,55,.06), transparent 65%),
+    radial-gradient(1000px 700px at 80% 80%, rgba(255,255,255,.04), transparent 60%);
+  mix-blend-mode:normal;
+  /* üstteki içerik zaten z-index>0; değilse sorun olursa body{position:relative;} ekleyebilirsin */
+}
+
+/* Altın ışıltılı orb'lar */
+.apple-fx span{
+  position:absolute; border-radius:50%;
+  background:radial-gradient(circle, rgba(212,175,55,.28), rgba(212,175,55,0) 70%);
+  filter:blur(2px);
+  animation:fx-float 18s ease-in-out infinite;
+  mix-blend-mode:screen;
+  opacity:.45;
+}
+
+/* 20 adet konum/boyut – istersek çoğaltır/azaltırız */
+.apple-fx span:nth-child(1){ width:200px;height:200px;left:8%; top:18%; animation-delay:0s;}
+.apple-fx span:nth-child(2){ width:260px;height:260px;left:72%;top:22%; animation-delay:1s;}
+.apple-fx span:nth-child(3){ width:140px;height:140px;left:48%;top:58%; animation-delay:2s;}
+.apple-fx span:nth-child(4){ width:190px;height:190px;left:18%;top:72%; animation-delay:3s;}
+.apple-fx span:nth-child(5){ width:120px;height:120px;left:82%;top:68%; animation-delay:4s;}
+.apple-fx span:nth-child(6){ width:160px;height:160px;left:32%;top:38%; animation-delay:5s;}
+.apple-fx span:nth-child(7){ width:220px;height:220px;left:60%;top:78%; animation-delay:6s;}
+.apple-fx span:nth-child(8){ width:110px;height:110px;left:12%;top:50%; animation-delay:7s;}
+.apple-fx span:nth-child(9){ width:280px;height:280px;left:85%;top:40%; animation-delay:8s;}
+.apple-fx span:nth-child(10){width:180px;height:180px;left:45%;top:10%; animation-delay:9s;}
+.apple-fx span:nth-child(11){width:150px;height:150px;left:28%;top:12%; animation-delay:10s;}
+.apple-fx span:nth-child(12){width:220px;height:220px;left:5%; top:85%; animation-delay:11s;}
+.apple-fx span:nth-child(13){width:130px;height:130px;left:66%;top:12%; animation-delay:12s;}
+.apple-fx span:nth-child(14){width:170px;height:170px;left:38%;top:82%; animation-delay:13s;}
+.apple-fx span:nth-child(15){width:210px;height:210px;left:76%;top:88%; animation-delay:14s;}
+.apple-fx span:nth-child(16){width:120px;height:120px;left:24%;top:58%; animation-delay:15s;}
+.apple-fx span:nth-child(17){width:260px;height:260px;left:90%;top:12%; animation-delay:16s;}
+.apple-fx span:nth-child(18){width:140px;height:140px;left:54%;top:32%; animation-delay:17s;}
+.apple-fx span:nth-child(19){width:200px;height:200px;left:10%;top:35%; animation-delay:18s;}
+.apple-fx span:nth-child(20){width:160px;height:160px;left:70%;top:56%; animation-delay:19s;}
+
+@keyframes fx-float{
+  0%,100%{ transform:translate3d(0,0,0) scale(1);   opacity:.45; }
+  50%    { transform:translate3d(20px,-40px,0) scale(1.15); opacity:.8; }
+}
+
+/* İnce ışık huzmeleri (Apple sitesindeki çizgisel highlight'lar gibi) */
+.apple-fx i{
+  position:absolute; display:block; width:55%; height:2px; left:-10%;
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+  top:20%; transform:rotate(-12deg);
+  animation:fx-sweep 9s linear infinite;
+  opacity:.35; mix-blend-mode:screen;
+}
+.apple-fx i:nth-of-type(2){ top:55%; transform:rotate(-6deg); animation-delay:3s;}
+.apple-fx i:nth-of-type(3){ top:80%; transform:rotate(-16deg); animation-delay:6s;}
+
+@keyframes fx-sweep{
+  0%  { left:-60%; }
+  100%{ left:110%; }
+}
+
+/* Reduce Motion: hareketi nazikçe azalt */
+@media (prefers-reduced-motion:reduce){
+  .apple-fx span, .apple-fx i{ animation-duration:0.01ms; animation-iteration-count:1; }
+}
+</style>
+<!-- ========== /Apple-style ambient effects ========== -->
 </div>
 </body>
 </html>
