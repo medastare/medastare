@@ -32,3 +32,28 @@
   0%,100% { transform: translate(0,0) scale(1); opacity:0.5; }
   50%     { transform: translate(30px,-40px) scale(1.15); opacity:0.9; }
 }
+.form-input {
+  width: 48%;
+  padding: 12px;
+  margin: 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+/* buton */
+button {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px 20px;
+  background: linear-gradient(45deg, gold, #d4af37);
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
