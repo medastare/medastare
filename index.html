@@ -481,43 +481,6 @@
   0%,100%{ transform:translate3d(0,0,0) scale(1);   opacity:.45; }
   50%    { transform:translate3d(20px,-40px,0) scale(1.15); opacity:.8; }
 }
-
-/* İnce ışık huzmeleri (Apple sitesindeki çizgisel highlight'lar gibi) */
-.apple-fx i{
-  position:absolute; display:block; width:55%; height:2px; left:-10%;
-  background:linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
-  top:20%; transform:rotate(-12deg);
-  animation:fx-sweep 9s linear infinite;
-  opacity:.35; mix-blend-mode:screen;
-}
-.apple-fx i:nth-of-type(2){ top:55%; transform:rotate(-6deg); animation-delay:3s;}
-.apple-fx i:nth-of-type(3){ top:80%; transform:rotate(-16deg); animation-delay:6s;}
-
-@keyframes fx-sweep{
-  0%  { left:-60%; }
-  100%{ left:110%; }
-}
-
-/* Reduce Motion: hareketi nazikçe azalt */
-@media (prefers-reduced-motion:reduce){
-  .apple-fx span, .apple-fx i{ animation-duration:0.01ms; animation-iteration-count:1; }
-}
-</style>
-<!-- ========== /Apple-style ambient effects ========== -->
-</div>
-  <!-- Apple-style ambient FX -->
-<div class="apple-extra-fx" aria-hidden="true"></div>
-
-<style>
-/* Vignette (karartma efekti) */
-.apple-extra-fx::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at center, rgba(0,0,0,0.25) 0%, rgba(0,0,0,0.9) 100%);
-  z-index: 0;
-  pointer-events: none;
-}
 </style>
 </body>
 </html>
