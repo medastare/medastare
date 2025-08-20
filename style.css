@@ -12,12 +12,17 @@
   background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
   -webkit-backdrop-filter:saturate(140%) blur(6px);
   backdrop-filter:saturate(140%) blur(6px);
-  box-shadow:0 0 0 1px rgba(212,175,55,.15) inset, 0 12px 36px rgba(0,0,0,.35);
+  box-shadow:0 0 0 1px rgba(212,175,55,.15) inset,
+             0 12px 36px rgba(0,0,0,.35);
   overflow:hidden;
   will-change:transform, box-shadow;
-  animation:
-    breath 3.5s ease-in-out infinite,
-    glowPulse 2.5s ease-in-out infinite;
+  animation:breath 3.5s ease-in-out infinite,
+             glowPulse 2.5s ease-in-out infinite;
+  z-index:1;
+}
+.soon > *{
+  position:relative;
+  z-index:3;
 }
 
 /* nefes efekti */
@@ -44,17 +49,14 @@
   position:absolute;
   top:-150%; left:-30%;
   width:60%; height:400%;
-  background:linear-gradient(
-    120deg,
+  background:linear-gradient(120deg,
     transparent 0%,
     rgba(255,255,255,.25) 50%,
-    transparent 100%
-  );
-  transform:rotate(20deg);
+    transparent 100%);
+  transform:rotate(20deg) translateZ(0);
   animation:shine 4s ease-in-out infinite;
-  will-change:transform;
   pointer-events:none;
-  backface-visibility:hidden;
+  z-index:2;
 }
 @keyframes shine{
   0%  { transform:translateX(-120%) rotate(20deg) }
@@ -65,28 +67,24 @@
 .soon::after{
   content:"";
   position:absolute;
-  inset:0 auto 0 -150%;
-  width:80%;
-  background:linear-gradient(
-    120deg,
+  top:0; left:-150%;
+  width:80%; height:100%;
+  background:linear-gradient(120deg,
     transparent,
     rgba(255,255,255,.18),
-    transparent
-  );
+    transparent);
+  transform:translateZ(0);
   animation:shimmerMove 6s linear infinite;
   pointer-events:none;
+  z-index:2;
 }
 @keyframes shimmerMove{
   0%  { left:-150% }
   100%{ left:150% }
 }
 
-/* --- Reduce Motion: diğer efektleri kapat, SOON çalışmaya devam etsin --- */
-@media (prefers-reduced-motion:reduce){
-  .sheen, .bokeh span, .hero-bg, .header-content, section, .card{
-    animation:none !important;
-    transition:none !important;
-  }
+/* Reduce Motion açık olsa bile bu animasyonlar çalışsın */
+@media (prefers-reduced-motion: reduce){
   .soon, .soon::before, .soon::after{
     animation-play-state:running !important;
   }
