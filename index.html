@@ -29,10 +29,10 @@
   <meta name="twitter:image" content="https://medastare.com/og-cover.jpg">
 
   <!-- Favicons -->
-<link rel="apple-touch-icon" sizes="180x180" href="https://medastare.com/medastare-logo.PNG">
-<link rel="icon" type="image/png" sizes="32x32" href="https://medastare.com/medastare-logo.PNG">
-<link rel="icon" type="image/png" sizes="16x16" href="https://medastare.com/medastare-logo.PNG">
-<meta name="theme-color" content="#000000">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://medastare.com/medastare-logo.PNG">
+  <link rel="icon" type="image/png" sizes="32x32" href="https://medastare.com/medastare-logo.PNG">
+  <link rel="icon" type="image/png" sizes="16x16" href="https://medastare.com/medastare-logo.PNG">
+  <meta name="theme-color" content="#000000">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
 
@@ -50,12 +50,12 @@
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
-  margin:0;
-  background:#000;
-  color:#fff;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  position:relative;
-  z-index:1;
+      margin:0;
+      background:#000;
+      color:#fff;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      position:relative;
+      z-index:1;
     }
     .scrollbar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg, rgba(255,255,255,.0), var(--gold), rgba(255,255,255,.0));box-shadow:0 0 12px rgba(212,175,55,.8);z-index:9999;transform-origin:left;transition:height .25s ease;}
     header#hero{position:relative;height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;color:#fff;isolation:isolate;overflow:hidden;background:#000;}
@@ -182,197 +182,93 @@
       </div>
     </div>
   </header>
-<!-- Waitlist Section -->
-<section class="waitlist" id="waitlist">
-  <div class="waitlist-box">
-    <h2>✨ MedaStaré Waitlist ✨</h2>
 
-    <p>
-      <strong>Step Into MedaStaré / MedaStaré’ye Adım At</strong><br><br>
-      İlk erişim, özel avantajlar ve erken kullanıcı topluluğuna katılmak için
-      e-postanı bırak.
-    </p>
+  <!-- Waitlist Section -->
+  <section class="waitlist" id="waitlist">
+    <div class="waitlist-box">
+      <h2>✨ MedaStaré Waitlist ✨</h2>
 
-    <!-- FORM -->
-    <form method="POST" action="https://formspree.io/f/xvgqjvvo" autocomplete="on">
-      <input
-        id="wl-name"
-        name="name"
-        type="text"
-        placeholder="Ad / Name"
-        required
-        autocomplete="name"
-      >
+      <p>
+        <strong>Step Into MedaStaré / MedaStaré’ye Adım At</strong><br><br>
+        İlk erişim, özel avantajlar ve erken kullanıcı topluluğuna katılmak için
+        e-postanı bırak.
+      </p>
 
-      <input
-        id="wl-email"
-        name="email"
-        type="email"
-        placeholder="E-posta / Email"
-        required
-        autocomplete="email"
-        autocapitalize="off"
-        autocorrect="off"
-        spellcheck="false"
-        inputmode="email"
-      >
+      <!-- FORM -->
+      <form method="POST" action="https://formspree.io/f/xvgqjvvo" autocomplete="on">
+        <input id="wl-name" name="name" type="text" placeholder="Ad / Name" required autocomplete="name">
+        <input id="wl-email" name="email" type="email" placeholder="E-posta / Email" required autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email">
+        <button type="submit">Join the Circle 💎</button>
+      </form>
 
-      <button type="submit">Join the Circle 💎</button>
-    </form>
+      <p class="note">Unsubscribe anytime.</p>
 
-    <p class="note">Unsubscribe anytime.</p>
+      <p id="success-message" style="color:lime; display:none;">✅ Teşekkürler! Kaydın alındı.</p>
+      <p id="error-message" style="color:red; display:none;">❌ Bir hata oldu. Tekrar dene.</p>
+    </div>
+  </section>
 
-    <p id="success-message" style="color:lime; display:none;">
-      ✅ Teşekkürler! Kaydın alındı.
-    </p>
-    <p id="error-message" style="color:red; display:none;">
-      ❌ Bir hata oldu. Tekrar dene.
-    </p>
-  </div>
-</section>
+  <style>
+  /* Waitlist genel */
+  .waitlist { padding:60px 20px; text-align:center; }
 
-<style>
-/* Waitlist genel */
-.waitlist {
-  padding:60px 20px;
-  text-align:center;
-}
+  /* Kutu */
+  .waitlist-box {
+    position: relative; max-width:600px; margin:0 auto; padding:40px;
+    border: 2px solid #FFD700; border-radius:20px; background: rgba(0,0,0,0.65);
+    box-shadow:0 0 30px rgba(255,215,0,0.4); overflow: hidden; z-index: 1; text-align: center;
+  }
 
-/* Kutu */
-.waitlist-box {
-  position: relative;
-  max-width:600px;
-  margin:0 auto;
-  padding:40px;
-  border: 2px solid #FFD700;
-  border-radius:20px;
-  background: rgba(0,0,0,0.65);
-  box-shadow:0 0 30px rgba(255,215,0,0.4);
-  overflow: hidden;
-  z-index: 1;
-  text-align: center; /* yazıları ortalar */
-}
+  /* Dönen ışık huzmesi */
+  .waitlist-box::before {
+    content: ""; position: absolute; inset: -3px; border-radius: inherit; padding: 3px;
+    background: conic-gradient(from 0deg, #FFD700, rgba(255,215,0,0) 25%, #FFD700 50%, rgba(255,215,0,0) 75%, #FFD700);
+    animation: spinGlow 6s linear infinite;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor; mask-composite: exclude; z-index: 0;
+  }
+  @keyframes spinGlow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-/* Dönen ışık huzmesi */
-.waitlist-box::before {
-  content: "";
-  position: absolute;
-  inset: -3px;
-  border-radius: inherit;
-  padding: 3px;
-  background: conic-gradient(
-    from 0deg,
-    #FFD700,
-    rgba(255,215,0,0) 25%,
-    #FFD700 50%,
-    rgba(255,215,0,0) 75%,
-    #FFD700
-  );
-  animation: spinGlow 6s linear infinite;
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  z-index: 0;
-}
+  /* Başlık */
+  .waitlist-box h2 { font-family:'Playfair Display',serif; font-size:2em; color:#f5f5f5; margin-bottom:15px; letter-spacing:1px; line-height:1.3; position: relative; z-index: 2; }
 
-@keyframes spinGlow {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
+  /* Açıklama */
+  .waitlist-box p { font-size:1.1em; color:#ddd; margin-bottom:25px; line-height:1.6; max-width: 90%; margin-left: auto; margin-right: auto; position: relative; z-index: 2; }
 
-/* Başlık */
-.waitlist-box h2 {
-  font-family:'Playfair Display',serif;
-  font-size:2em;
-  color:#f5f5f5;
-  margin-bottom:15px;
-  letter-spacing:1px;
-  line-height:1.3;
-  position: relative;
-  z-index: 2;
-}
+  /* Form input */
+  .waitlist-box input {
+    width: 48%; padding: 12px; margin: 5px; border-radius: 8px; border: 1px solid #ccc;
+    font-size: 1em; text-align: center; background: #111; color: #fff; transition: all 0.3s ease; position: relative; z-index: 2;
+  }
 
-/* Açıklama */
-.waitlist-box p {
-  font-size:1.1em;
-  color:#ddd;
-  margin-bottom:25px;
-  line-height:1.6;
-  max-width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  z-index: 2;
-}
+  /* Dolunca sarı efekt */
+  .waitlist-box input:focus,
+  .waitlist-box input:not(:placeholder-shown) { border-color: #FFD700; background: #222; box-shadow: 0 0 12px rgba(255,215,0,0.6); outline: none; }
 
-/* Form input */
-.waitlist-box input {
-  width: 48%;
-  padding: 12px;
-  margin: 5px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1em;
-  text-align: center;
-  background: #111;
-  color: #fff;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 2;
-}
+  /* Buton */
+  .waitlist-box button {
+    display: block; width: 100%; margin-top: 20px; padding: 14px 20px;
+    background: linear-gradient(45deg, gold, #d4af37); color: #000; font-weight: bold; border: none; border-radius: 10px; font-size: 1.1em; cursor: pointer; transition: all 0.3s ease; position: relative; z-index: 2;
+  }
+  .waitlist-box button:hover { background: linear-gradient(45deg, #e6c200, #b8962e); transform: translateY(-2px); }
 
-/* Dolunca sarı efekt */
-.waitlist-box input:focus,
-.waitlist-box input:not(:placeholder-shown) {
-  border-color: #FFD700;
-  background: #222;
-  box-shadow: 0 0 12px rgba(255,215,0,0.6);
-  outline: none;
-}
+  /* Not */
+  .waitlist-box .note { color:#aaa; font-size:0.9em; margin-top:20px; }
+  </style>
 
-/* Buton */
-.waitlist-box button {
-  display: block;
-  width: 100%;
-  margin-top: 20px;
-  padding: 14px 20px;
-  background: linear-gradient(45deg, gold, #d4af37);
-  color: #000;
-  font-weight: bold;
-  border: none;
-  border-radius: 10px;
-  font-size: 1.1em;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 2;
-}
-
-.waitlist-box button:hover {
-  background: linear-gradient(45deg, #e6c200, #b8962e);
-  transform: translateY(-2px);
-}
-
-/* Not */
-.waitlist-box .note {
-  color:#aaa;
-  font-size:0.9em;
-  margin-top:20px;
-}
-</style>
-<section id="momentum">
-  <h2>Momentum</h2>
-  <div class="card">
-    <p><b>Crunchbase Rank:</b> Rising rapidly from ~2.9M to ~254K in less than 24 hours – accelerating global visibility.</p>
-  </div>
-  <div class="card">
-    <p>
-      <a href="https://medium.com/@medastare.app/medastar%C3%A9-is-now-trending-on-crunchbase-in-fashion-tech-b202ca200438" target="_blank" rel="noopener">
-        Featured on Medium → MedaStaré is now trending on Crunchbase in Fashion Tech
-      </a>
-    </p>
-  </div>
-</section>
+  <section id="momentum">
+    <h2>Momentum</h2>
+    <div class="card">
+      <p><b>Crunchbase Rank:</b> Rising rapidly from ~2.9M to ~254K in less than 24 hours – accelerating global visibility.</p>
+    </div>
+    <div class="card">
+      <p>
+        <a href="https://medium.com/@medastare.app/medastar%C3%A9-is-now-trending-on-crunchbase-in-fashion-tech-b202ca200438" target="_blank" rel="noopener">
+          Featured on Medium → MedaStaré is now trending on Crunchbase in Fashion Tech
+        </a>
+      </p>
+    </div>
+  </section>
 
   <section id="future">
     <h2>Future Potential / Gelecek Potansiyeli</h2>
@@ -600,185 +496,109 @@
       }
     });
   </script>
+
   <!-- ========== Apple-style ambient effects (self-contained) ========== -->
-<div class="apple-fx" aria-hidden="true">
-  <!-- Orb'lar -->
-  <span></span><span></span><span></span><span></span><span></span>
-  <span></span><span></span><span></span><span></span><span></span>
-  <span></span><span></span><span></span><span></span><span></span>
-  <span></span><span></span><span></span><span></span>
+  <div class="apple-fx" aria-hidden="true">
+    <!-- Orb'lar -->
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
 
-  <!-- İnce ışık huzmeleri -->
-  <i></i><i></i><i></i>
-</div>
+    <!-- İnce ışık huzmeleri -->
+    <i></i><i></i><i></i>
+  </div>
 
-<style>
-/* Kapsayıcı: sabit, tıklamayı engellemez, içerikten aşağıda */
-.apple-fx{
-  position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
-  /* çok hafif vignette */
-  background:
-    radial-gradient(1200px 800px at 50% 20%, rgba(212,175,55,.06), transparent 65%),
-    radial-gradient(1000px 700px at 80% 80%, rgba(255,255,255,.04), transparent 60%);
-  mix-blend-mode:normal;
-  /* üstteki içerik zaten z-index>0; değilse sorun olursa body{position:relative;} ekleyebilirsin */
-}
+  <style>
+  /* Kapsayıcı: sabit, tıklamayı engellemez, içerikten aşağıda */
+  .apple-fx{
+    position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+    /* çok hafif vignette */
+    background:
+      radial-gradient(1200px 800px at 50% 20%, rgba(212,175,55,.06), transparent 65%),
+      radial-gradient(1000px 700px at 80% 80%, rgba(255,255,255,.04), transparent 60%);
+    mix-blend-mode:normal;
+  }
 
-/* Altın ışıltılı orb'lar */
-.apple-fx span{
-  position:absolute; border-radius:50%;
-  background:radial-gradient(circle, rgba(212,175,55,.28), rgba(212,175,55,0) 70%);
-  filter:blur(2px);
-  animation:fx-float 18s ease-in-out infinite;
-  mix-blend-mode:screen;
-  opacity:.45;
-}
+  /* Altın ışıltılı orb'lar */
+  .apple-fx span{
+    position:absolute; border-radius:50%;
+    background:radial-gradient(circle, rgba(212,175,55,.28), rgba(212,175,55,0) 70%);
+    filter:blur(2px);
+    animation:fx-float 18s ease-in-out infinite;
+    mix-blend-mode:screen;
+    opacity:.45;
+  }
 
-/* 20 adet konum/boyut – istersek çoğaltır/azaltırız */
-.apple-fx span:nth-child(1){ width:200px;height:200px;left:8%; top:18%; animation-delay:0s;}
-.apple-fx span:nth-child(2){ width:260px;height:260px;left:72%;top:22%; animation-delay:1s;}
-.apple-fx span:nth-child(3){ width:140px;height:140px;left:48%;top:58%; animation-delay:2s;}
-.apple-fx span:nth-child(4){ width:190px;height:190px;left:18%;top:72%; animation-delay:3s;}
-.apple-fx span:nth-child(5){ width:120px;height:120px;left:82%;top:68%; animation-delay:4s;}
-.apple-fx span:nth-child(6){ width:160px;height:160px;left:32%;top:38%; animation-delay:5s;}
-.apple-fx span:nth-child(7){ width:220px;height:220px;left:60%;top:78%; animation-delay:6s;}
-.apple-fx span:nth-child(8){ width:110px;height:110px;left:12%;top:50%; animation-delay:7s;}
-.apple-fx span:nth-child(9){ width:280px;height:280px;left:85%;top:40%; animation-delay:8s;}
-.apple-fx span:nth-child(10){width:180px;height:180px;left:45%;top:10%; animation-delay:9s;}
-.apple-fx span:nth-child(11){width:150px;height:150px;left:28%;top:12%; animation-delay:10s;}
-.apple-fx span:nth-child(12){width:220px;height:220px;left:5%; top:85%; animation-delay:11s;}
-.apple-fx span:nth-child(13){width:130px;height:130px;left:66%;top:12%; animation-delay:12s;}
-.apple-fx span:nth-child(14){width:170px;height:170px;left:38%;top:82%; animation-delay:13s;}
-.apple-fx span:nth-child(15){width:210px;height:210px;left:76%;top:88%; animation-delay:14s;}
-.apple-fx span:nth-child(16){width:120px;height:120px;left:24%;top:58%; animation-delay:15s;}
-.apple-fx span:nth-child(17){width:260px;height:260px;left:90%;top:12%; animation-delay:16s;}
-.apple-fx span:nth-child(18){width:140px;height:140px;left:54%;top:32%; animation-delay:17s;}
-.apple-fx span:nth-child(19){width:200px;height:200px;left:10%;top:35%; animation-delay:18s;}
-.apple-fx span:nth-child(20){width:160px;height:160px;left:70%;top:56%; animation-delay:19s;}
+  /* 20 adet konum/boyut */
+  .apple-fx span:nth-child(1){ width:200px;height:200px;left:8%; top:18%; animation-delay:0s;}
+  .apple-fx span:nth-child(2){ width:260px;height:260px;left:72%;top:22%; animation-delay:1s;}
+  .apple-fx span:nth-child(3){ width:140px;height:140px;left:48%;top:58%; animation-delay:2s;}
+  .apple-fx span:nth-child(4){ width:190px;height:190px;left:18%;top:72%; animation-delay:3s;}
+  .apple-fx span:nth-child(5){ width:120px;height:120px;left:82%;top:68%; animation-delay:4s;}
+  .apple-fx span:nth-child(6){ width:160px;height:160px;left:32%;top:38%; animation-delay:5s;}
+  .apple-fx span:nth-child(7){ width:220px;height:220px;left:60%;top:78%; animation-delay:6s;}
+  .apple-fx span:nth-child(8){ width:110px;height:110px;left:12%;top:50%; animation-delay:7s;}
+  .apple-fx span:nth-child(9){ width:280px;height:280px;left:85%;top:40%; animation-delay:8s;}
+  .apple-fx span:nth-child(10){width:180px;height:180px;left:45%;top:10%; animation-delay:9s;}
 
-@keyframes fx-float{
-  0%,100%{ transform:translate3d(0,0,0) scale(1);   opacity:.45; }
-  50%    { transform:translate3d(20px,-40px,0) scale(1.15); opacity:.8; }
-}
-</style>
+  @keyframes fx-float{
+    0%,100%{ transform:translate3d(0,0,0) scale(1);   opacity:.45; }
+    50%    { transform:translate3d(20px,-40px,0) scale(1.15); opacity:.8; }
+  }
+  </style>
+
   <style>
   /* Yazıların okunabilirliğini arttır */
-  body {
-    color: #fff !important;
-  }
-  p, span, li, a, h1, h2, h3, h4, h5, h6 {
-    color: rgba(255,255,255,0.95) !important;
-    text-shadow: 0 0 6px rgba(0,0,0,0.6);
-  }
+  body { color: #fff !important; }
+  p, span, li, a, h1, h2, h3, h4, h5, h6 { color: rgba(255,255,255,0.95) !important; text-shadow: 0 0 6px rgba(0,0,0,0.6); }
 
   /* Resimleri daha net göster */
-  img {
-    filter: brightness(1.1) contrast(1.05);
-    transition: 0.5s ease-in-out;
-  }
-  img:hover {
-    filter: brightness(1.25) contrast(
-  }
+  img { filter: brightness(1.1) contrast(1.05); transition: 0.5s ease-in-out; }
+  img:hover { filter: brightness(1.25) contrast(1.05); }
+  </style>
+
   <style>
-/* Runway görseli Apple tarzı ışık efekti */
-img[src*="runway.PNG"] {
-  position: relative;
-  z-index: 1;
-  border-radius: 12px;
-  overflow: hidden;
-  display: inline-block;
-  box-shadow: 0 0 25px rgba(180, 220, 255, 0.35),
-              0 0 60px rgba(100, 160, 255, 0.25);
-}
+  /* Runway görseli Apple tarzı ışık efekti */
+  img[src*="runway.PNG"] {
+    position: relative;
+    z-index: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    display: inline-block;
+    box-shadow: 0 0 25px rgba(180, 220, 255, 0.35),
+                0 0 60px rgba(100, 160, 255, 0.25);
+  }
+  /* Parıltı şeridi */
+  img[src*="runway.PNG"]::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -75%;
+    width: 50%;
+    height: 200%;
+    background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%);
+    transform: skewX(-20deg);
+    animation: runwayShine 4s ease-in-out infinite;
+    pointer-events: none;
+    border-radius: inherit;
+  }
+  /* Hareket animasyonu */
+  @keyframes runwayShine { 0% { left: -75%; } 100% { left: 125%; } }
+  </style>
 
-/* Parıltı şeridi */
-img[src*="runway.PNG"]::after {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -75%;
-  width: 50%;
-  height: 200%;
-  background: linear-gradient(120deg,
-    transparent 0%,
-    rgba(255,255,255,0.6) 50%,
-    transparent 100%);
-  transform: skewX(-20deg);
-  animation: runwayShine 4s ease-in-out infinite;
-  pointer-events: none;
-  border-radius: inherit;
-}
-
-/* Hareket animasyonu */
-@keyframes runwayShine {
-  0%   { left: -75%; }
-  100% { left: 125%; }
-}
-    <!-- Apple tarzı sarı ışık huzmeleri -->
-<div class="apple-fx" aria-hidden="true">
-  <span></span><span></span><span></span><span></span>
-  <span></span><span></span><span></span><span></span>
-  <i></i><i></i><i></i>
-</div>
-
-<style>
-.apple-fx {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-  background: radial-gradient(1200px 800px at 50% 50%, rgba(255, 230, 120, 0.05), transparent),
-              radial-gradient(1000px 700px at 80% 20%, rgba(255, 200, 80, 0.08), transparent);
-}
-
-/* Küçük orb’lar */
-.apple-fx span {
-  position: absolute;
-  width: 200px; height: 200px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,230,150,0.35), transparent 70%);
-  animation: orbMove 15s linear infinite;
-}
-.apple-fx span:nth-of-type(2){ top:40%; left:70%; animation-duration:20s;}
-.apple-fx span:nth-of-type(3){ top:70%; left:30%; animation-duration:18s;}
-.apple-fx span:nth-of-type(4){ top:10%; left:20%; animation-duration:22s;}
-
-/* İnce ışık huzmeleri */
-.apple-fx i {
-  position:absolute;
-  display:block;
-  width:200%; height:2px;
-  background:linear-gradient(90deg,transparent,rgba(255,240,180,0.35),transparent);
-  top:20%;
-  animation: fxSweep 12s linear infinite;
-  opacity:.25;
-}
-.apple-fx i:nth-of-type(2){ top:55%; animation-duration:18s;}
-.apple-fx i:nth-of-type(3){ top:80%; animation-duration:20s;}
-
-/* Animasyonlar */
-@keyframes orbMove {
-  0% { transform:translateY(0) rotate(0deg);}
-  100%{ transform:translateY(-50px) rotate(360deg);}
-}
-@keyframes fxSweep {
-  0% { left:-60%; }
-  100% { left:110%; }
-}
-</style>
   <!-- ========== Altın ışık şeritleri (çok hafif, Apple vibe) ========== -->
-<style>
+  <style>
   .light-streaks{
     position:fixed; inset:0; pointer-events:none;
-    z-index:0;                 /* içerik üzerinde gözüksün ama tıklamayı engellemesin */
-    mix-blend-mode:screen;     /* siyah zeminde altın parlaklık */
+    z-index:0;
+    mix-blend-mode:screen;
   }
   .light-streaks span{
     position:absolute; display:block;
     width:10vw; min-width:60px; max-width:120px;
-    height:160vh;               /* dikey uzunluk */
-    top:-30vh;                  /* yukarıdan başlasın */
+    height:160vh;
+    top:-30vh;
     background:linear-gradient(
       to bottom,
       rgba(212,175,55,0) 0%,
@@ -786,12 +606,10 @@ img[src*="runway.PNG"]::after {
       rgba(212,175,55,0) 100%
     );
     filter:blur(12px);
-    opacity:.18;                /* çok hafif olsun */
+    opacity:.18;
     transform:rotate(-10deg);
     animation:goldSweep 14s linear infinite;
   }
-
-  /* birkaç şerit – farklı konum ve hızlar */
   .light-streaks span:nth-child(1){ left:8%;  animation-duration:16s; }
   .light-streaks span:nth-child(2){ left:28%; animation-duration:13s; animation-delay:-3s; }
   .light-streaks span:nth-child(3){ left:55%; animation-duration:15s; animation-delay:-6s; }
@@ -801,23 +619,10 @@ img[src*="runway.PNG"]::after {
     0%   { transform:translateY(-20vh) rotate(-10deg); }
     100% { transform:translateY(120vh) rotate(-10deg); }
   }
+  @media (prefers-reduced-motion:reduce){ .light-streaks span{ animation-duration:28s; } }
+  </style>
 
-  /* erişilebilirlik: reduce-motion seçiliyse daha yavaş */
-  @media (prefers-reduced-motion:reduce){
-    .light-streaks span{ animation-duration:28s; }
-  }
+  <!-- Harici JS dosyan varsa -->
   <script src="/main.js" defer></script>
 </body>
 </html>
-@keyframes floatOrb {
-  0%,100% { transform: translate(0,0) scale(1); opacity:0.4; }
-  50%     { transform: translate(20px,-30px) scale(1.1); opacity:0.8; }
-}
-</style>
-
-<!-- HTML içine body’nin en üstüne şunu ekle -->
-<div class="bg-fx">
-  <span></span><span></span><span></span>
-  <span></span><span></span><span></span>
-</div>
-</script>
