@@ -5,10 +5,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>MedaStaré – Powered by AI</title>
 
+  <!-- Structured Data (harici JSON) -->
+  <script type="application/ld+json" src="/schema.org.json"></script>
+
   <!-- Verification -->
   <meta name="google-site-verification" content="nQDYMuDMDZthwRmTt4w3tyWyGXIKQSB2jAaJCfH3CXM" />
 
-  <!-- SEO core -->
+  <!-- SEO -->
   <link rel="canonical" href="https://medastare.com/">
   <meta name="description" content="MedaStaré — AI-powered fashion & beauty ecosystem. Personalized creation tools, pro workflows and a marketplace connecting creators, brands and consumers. Türkiye'den dünyaya.">
 
@@ -28,11 +31,12 @@
   <meta name="twitter:image" content="https://medastare.com/og-cover.jpg">
 
   <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="https://medastare.com/medastare-logo.PNG">
-  <link rel="icon" type="image/png" sizes="32x32" href="https://medastare.com/medastare-logo.PNG">
-  <link rel="icon" type="image/png" sizes="16x16" href="https://medastare.com/medastare-logo.PNG">
+  <link rel="apple-touch-icon" sizes="180x180" href="/medastare-logo.PNG">
+  <link rel="icon" type="image/png" sizes="32x32" href="/medastare-logo.PNG">
+  <link rel="icon" type="image/png" sizes="16x16" href="/medastare-logo.PNG">
   <meta name="theme-color" content="#000000">
 
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
 
@@ -40,23 +44,33 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-0X6RGY78FV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag(){ dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-0X6RGY78FV');
   </script>
 
+  <!-- STYLES -->
   <style>
     :root{ --gold:#d4af37; --overlay:0.55; --rx:0deg; --ry:0deg; --pop:1.04; --spot-x:50%; --spot-y:50%; }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{ margin:0; background:#000; color:#fff; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif; position:relative; z-index:1; }
+    body{
+      margin:0; background:#000; color:#fff;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      position:relative; z-index:1;
+    }
     .scrollbar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg, rgba(255,255,255,.0), var(--gold), rgba(255,255,255,.0));box-shadow:0 0 12px rgba(212,175,55,.8);z-index:9999;transform-origin:left;transition:height .25s ease;}
     header#hero{position:relative;height:100vh;display:flex;justify-content:center;align-items:center;text-align:center;color:#fff;isolation:isolate;overflow:hidden;background:#000;}
     .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;transform:translateY(0);opacity:0;transition:opacity 1.2s ease, transform .5s ease;z-index:0;will-change:transform,opacity;}
     .hero-bg.show{opacity:1;}
     @media (min-width:1024px){ .hero-bg{object-fit:cover;} }
     header#hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,var(--overlay));z-index:1;transition:background .4s ease;pointer-events:none;}
-    header#hero::before{content:"";position:absolute;inset:-12%;background:radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(0,0,0,.55) 100%),radial-gradient(600px 400px at var(--spot-x) var(--spot-y), rgba(255,255,255,.06), transparent 60%);z-index:1;pointer-events:none;mix-blend-mode:screen;transition:background-position .2s ease;animation:vignettePulse 10s ease-in-out infinite alternate;}
+    header#hero::before{
+      content:"";position:absolute;inset:-12%;
+      background:radial-gradient(ellipse at center, rgba(0,0,0,0) 45%, rgba(0,0,0,.55) 100%),
+                 radial-gradient(600px 400px at var(--spot-x) var(--spot-y), rgba(255,255,255,.06), transparent 60%);
+      z-index:1;pointer-events:none;mix-blend-mode:screen;transition:background-position .2s ease;animation:vignettePulse 10s ease-in-out infinite alternate;
+    }
     @keyframes vignettePulse{0%{opacity:.95}100%{opacity:1}}
     .bokeh{position:absolute;inset:-20% -10%;z-index:1;pointer-events:none;filter:blur(8px)}
     .bokeh span{position:absolute;display:block;border-radius:50%;background:radial-gradient(circle, rgba(255,255,255,.25), rgba(255,255,255,0));opacity:.16;animation:orb 18s ease-in-out infinite;}
@@ -122,54 +136,56 @@
     footer{text-align:center;padding:25px 20px;background:#0a0a0a;font-size:.8em;color:#777}
     @media (prefers-reduced-motion:reduce){ *{animation:none!important;transition:none!important} }
 
-    /* Görsel iyileştirme */
-    img{ filter:brightness(1.1) contrast(1.05); transition:.5s ease-in-out; }
-    img:hover{ filter:brightness(1.25) contrast(1.05); }
+    /* Okunabilirlik ufak dokunuş */
+    p, span, li, a, h1, h2, h3, h4, h5, h6 { color: rgba(255,255,255,0.95); text-shadow:0 0 6px rgba(0,0,0,0.6); }
+    img { filter: brightness(1.1) contrast(1.05); transition:.5s ease-in-out; }
+    img:hover { filter: brightness(1.25) contrast(1.08); }
 
-    /* Apple tarzı ambient efekt (tek sürüm) */
-    .apple-fx{ position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
-      background: radial-gradient(1200px 800px at 50% 20%, rgba(212,175,55,.06), transparent 65%),
-                 radial-gradient(1000px 700px at 80% 80%, rgba(255,255,255,.04), transparent 60%); }
-    .apple-fx span{ position:absolute; border-radius:50%;
+    /* Apple tarzı ambient altın orb ve ışıklar */
+    .apple-fx{
+      position:fixed; inset:0; z-index:0; pointer-events:none; overflow:hidden;
+      background:
+        radial-gradient(1200px 800px at 50% 20%, rgba(212,175,55,.06), transparent 65%),
+        radial-gradient(1000px 700px at 80% 80%, rgba(255,255,255,.04), transparent 60%);
+      mix-blend-mode:normal;
+    }
+    .apple-fx span{
+      position:absolute; border-radius:50%;
       background:radial-gradient(circle, rgba(212,175,55,.28), rgba(212,175,55,0) 70%);
-      filter:blur(2px); animation:fx-float 18s ease-in-out infinite; mix-blend-mode:screen; opacity:.45; }
-    @keyframes fx-float{ 0%,100%{transform:translate3d(0,0,0) scale(1);opacity:.45} 50%{transform:translate3d(20px,-40px,0) scale(1.15);opacity:.8} }
-    .light-streaks{ position:fixed; inset:0; pointer-events:none; z-index:0; mix-blend-mode:screen; }
-    .light-streaks span{ position:absolute; display:block; width:10vw; min-width:60px; max-width:120px; height:160vh; top:-30vh;
-      background:linear-gradient(to bottom, rgba(212,175,55,0) 0%, rgba(212,175,55,.20) 50%, rgba(212,175,55,0) 100%);
-      filter:blur(12px); opacity:.18; transform:rotate(-10deg); animation:goldSweep 14s linear infinite; }
-    .light-streaks span:nth-child(1){ left:8%;  animation-duration:16s; }
-    .light-streaks span:nth-child(2){ left:28%; animation-duration:13s; animation-delay:-3s; }
-    .light-streaks span:nth-child(3){ left:55%; animation-duration:15s; animation-delay:-6s; }
-    .light-streaks span:nth-child(4){ left:78%; animation-duration:12s; animation-delay:-1s; }
-    @keyframes goldSweep{ 0%{ transform:translateY(-20vh) rotate(-10deg) } 100%{ transform:translateY(120vh) rotate(-10deg) } }
-  </style>
+      filter:blur(2px); animation:fx-float 18s ease-in-out infinite; mix-blend-mode:screen; opacity:.45;
+    }
+    .apple-fx span:nth-child(1){ width:200px;height:200px;left:8%; top:18%; animation-delay:0s;}
+    .apple-fx span:nth-child(2){ width:260px;height:260px;left:72%;top:22%; animation-delay:1s;}
+    .apple-fx span:nth-child(3){ width:140px;height:140px;left:48%;top:58%; animation-delay:2s;}
+    .apple-fx span:nth-child(4){ width:190px;height:190px;left:18%;top:72%; animation-delay:3s;}
+    .apple-fx span:nth-child(5){ width:120px;height:120px;left:82%;top:68%; animation-delay:4s;}
+    .apple-fx span:nth-child(6){ width:160px;height:160px;left:32%;top:38%; animation-delay:5s;}
+    .apple-fx span:nth-child(7){ width:220px;height:220px;left:60%;top:78%; animation-delay:6s;}
+    .apple-fx span:nth-child(8){ width:110px;height:110px;left:12%;top:50%; animation-delay:7s;}
+    .apple-fx span:nth-child(9){ width:280px;height:280px;left:85%;top:40%; animation-delay:8s;}
+    .apple-fx span:nth-child(10){width:180px;height:180px;left:45%;top:10%; animation-delay:9s;}
+    @keyframes fx-float{ 0%,100%{ transform:translate3d(0,0,0) scale(1); opacity:.45;} 50%{ transform:translate3d(20px,-40px,0) scale(1.15); opacity:.8;} }
 
-  <!-- Organization JSON-LD (doğru yöntem: inline) -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Organization",
-    "name":"MedaStaré",
-    "url":"https://medastare.com/",
-    "logo":"https://medastare.com/medastare-logo.png",
-    "sameAs":[
-      "https://www.linkedin.com/company/medastareapp",
-      "https://x.com/medastareapp",
-      "https://instagram.com/medastareapp",
-      "https://www.crunchbase.com/organization/medastar%C3%A9"
-    ]
-  }
-  </script>
+    /* Visibility hotfix – içerikleri hemen görünür yap */
+    #visibility-hotfix-target .header-content,
+    #visibility-hotfix-target section,
+    #visibility-hotfix-target .card,
+    #visibility-hotfix-target .image-break { opacity:1 !important; transform:none !important; filter:none !important; }
+    #visibility-hotfix-target .hero-bg { opacity:1 !important; }
+  </style>
 </head>
-<body>
-  <!-- Arka plan efektleri -->
+
+<body id="visibility-hotfix-target">
+  <!-- Ambient arka plan -->
   <div class="apple-fx" aria-hidden="true">
     <span></span><span></span><span></span><span></span><span></span>
     <span></span><span></span><span></span><span></span><span></span>
   </div>
-  <div class="light-streaks" aria-hidden="true">
-    <span></span><span></span><span></span><span></span>
+
+  <!-- Altın nokta efektleri -->
+  <div class="bg-fx">
+    <span></span><span></span><span></span>
+    <span></span><span></span><span></span>
   </div>
 
   <div class="scrollbar" id="scrollbar"></div>
@@ -182,9 +198,8 @@
       <span style="width:140px;height:140px;left:20%;top:70%"></span>
     </div>
     <div class="sheen" aria-hidden="true"></div>
-    <!-- JS gecikse bile görünür olsun diye show eklendi -->
-    <img class="hero-bg show" src="showroom.PNG" alt="MedaStaré showroom">
-    <div class="header-content show" id="heroContent">
+    <img class="hero-bg" src="/showroom.PNG" alt="MedaStaré showroom">
+    <div class="header-content" id="heroContent">
       <p>
         Powered by AI – Redefining the future of fashion & beauty through personalization, technology, and creativity.<br>
         <i>AI destekli – Moda & güzellikte geleceği kişiselleştirme, teknoloji ve yaratıcılıkla yeniden tanımlıyoruz.</i>
@@ -198,55 +213,50 @@
     </div>
   </header>
 
-  <!-- Waitlist Section -->
-  <section class="waitlist show" id="waitlist">
+  <!-- Waitlist -->
+  <section class="waitlist" id="waitlist">
     <div class="waitlist-box">
       <h2>✨ MedaStaré Waitlist ✨</h2>
+
       <p>
         <strong>Step Into MedaStaré / MedaStaré’ye Adım At</strong><br><br>
-        İlk erişim, özel avantajlar ve erken kullanıcı topluluğuna katılmak için
-        e-postanı bırak.
+        İlk erişim, özel avantajlar ve erken kullanıcı topluluğuna katılmak için e-postanı bırak.
       </p>
+
       <form method="POST" action="https://formspree.io/f/xvgqjvvo" autocomplete="on">
-        <input id="wl-name"  name="name"  type="text"  placeholder="Ad / Name" required autocomplete="name">
+        <input id="wl-name"  name="name"  type="text"  placeholder="Ad / Name"    required autocomplete="name">
         <input id="wl-email" name="email" type="email" placeholder="E-posta / Email" required autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email">
         <button type="submit">Join the Circle 💎</button>
       </form>
+
       <p class="note">Unsubscribe anytime.</p>
       <p id="success-message" style="color:lime; display:none;">✅ Teşekkürler! Kaydın alındı.</p>
       <p id="error-message"   style="color:red;  display:none;">❌ Bir hata oldu. Tekrar dene.</p>
     </div>
   </section>
 
-  <section id="momentum" class="show">
+  <!-- Momentum -->
+  <section id="momentum">
     <h2>Momentum</h2>
-    <div class="card show">
-      <p><b>Crunchbase Rank:</b> Rising rapidly from ~2.9M to ~254K in less than 24 hours – accelerating global visibility.</p>
-    </div>
-    <div class="card show">
-      <p>
-        <a href="https://medium.com/@medastare.app/medastar%C3%A9-is-now-trending-on-crunchbase-in-fashion-tech-b202ca200438" target="_blank" rel="noopener">
-          Featured on Medium → MedaStaré is now trending on Crunchbase in Fashion Tech
-        </a>
-      </p>
+    <div class="card"><p><b>Crunchbase Rank:</b> Rising rapidly from ~2.9M to ~254K in less than 24 hours – accelerating global visibility.</p></div>
+    <div class="card">
+      <p><a href="https://medium.com/@medastare.app/medastar%C3%A9-is-now-trending-on-crunchbase-in-fashion-tech-b202ca200438" target="_blank" rel="noopener">Featured on Medium → MedaStaré is now trending on Crunchbase in Fashion Tech</a></p>
     </div>
   </section>
 
-  <section id="future" class="show">
+  <section id="future">
     <h2>Future Potential / Gelecek Potansiyeli</h2>
-    <div class="card show">
+    <div class="card">
       <p><b>EN:</b> With the global fashion & beauty market surpassing $3 Trillion, and the AI-driven segment exceeding $200 Billion, MedaStaré is uniquely positioned to redefine the intersection of creativity and technology – starting from Turkey, expanding worldwide.</p><br>
       <p><b>TR:</b> Küresel moda & güzellik pazarı 3 trilyon $’ı, yapay zeka destekli segment ise 200 milyar $’ı aşarken, MedaStaré yaratıcılık ve teknolojinin kesişimini yeniden tanımlamak için eşsiz bir konumda – Türkiye’den başlayarak dünyaya açılıyor.</p>
     </div>
   </section>
 
-  <section class="image-break show">
-    <img src="runway.PNG" alt="MedaStaré Runway">
-  </section>
+  <section class="image-break"><img src="/runway.PNG" alt="MedaStaré Runway"></section>
 
-  <section id="contact" class="show">
+  <section id="contact">
     <h2>Contact / İletişim</h2>
-    <div class="card show" style="text-align:center;">
+    <div class="card" style="text-align:center;">
       <p>Email: <a href="mailto:info@medastare.com">info@medastare.com</a></p>
       <div class="contact-links">
         <a href="https://x.com/medastareapp" target="_blank" rel="noopener">X (Twitter)</a>
@@ -295,7 +305,7 @@
     <div class="ms-footer__topglow" aria-hidden="true"></div>
     <div class="ms-footer__grid">
       <div class="ms-footer__col">
-        <img class="ms-mini-logo" src="medastare-logo.PNG" alt="MedaStaré logo" />
+        <img class="ms-mini-logo" src="/medastare-logo.PNG" alt="MedaStaré logo" />
         <p class="ms-slogan">Yapay Zekâ ve Teknoloji A.Ş.</p>
       </div>
       <div class="ms-footer__col">
@@ -320,19 +330,18 @@
         <a href="https://www.crunchbase.com/organization/medastar%C3%A9" target="_blank" rel="noopener">Crunchbase</a>
       </div>
     </div>
-    <div class="ms-footer__bottom">
-      <small>© <span id="ms-year"></span> MedaStaré. All rights reserved.</small>
-    </div>
+    <div class="ms-footer__bottom"><small>© <span id="ms-year"></span> MedaStaré. All rights reserved.</small></div>
   </footer>
 
   <button class="toTop" id="toTop" aria-label="Yukarı çık">
     <svg viewBox="0 0 24 24"><path d="M12 5l7 7-1.41 1.41L13 9.83V19h-2V9.83l-4.59 4.58L5 12z"/></svg>
   </button>
 
+  <!-- JS -->
+  <script src="/main.js" defer></script>
+
   <script>
-    const io=new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }});
-    },{threshold:.2});
+    const io=new IntersectionObserver((entries)=>{entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('show'); io.unobserve(e.target); }});},{threshold:.2});
     document.querySelectorAll('.header-content, section, .card, .image-break').forEach(el=>io.observe(el));
     document.querySelectorAll('.card').forEach((c,i)=>c.style.transitionDelay=(0.08*i)+'s');
 
@@ -342,10 +351,7 @@
     const scrollbar=document.getElementById('scrollbar');
     const toTop=document.getElementById('toTop');
 
-    if (heroImg) {
-      if (heroImg.complete) { requestAnimationFrame(()=> heroImg.classList.add('show')); }
-      else { heroImg.addEventListener('load', ()=> heroImg.classList.add('show')); }
-    }
+    if (heroImg) { if (heroImg.complete) { requestAnimationFrame(()=> heroImg.classList.add('show')); } else { heroImg.addEventListener('load', ()=> heroImg.classList.add('show')); } }
 
     const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints>0;
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
@@ -394,65 +400,24 @@
         const y=((e.clientY-r.top)/r.height)*100;
         document.documentElement.style.setProperty('--spot-x', x+'%');
         document.documentElement.style.setProperty('--spot-y', y+'%');
-
         const cx=(e.clientX-(r.left+r.width/2))/(r.width/2);
         const cy=(e.clientY-(r.top+r.height/2))/(r.height/2);
         const tilt=6;
         hero.style.setProperty('--ry', `${cx*tilt}deg`);
         hero.style.setProperty('--rx', `${-cy*tilt}deg`);
       });
-      hero.addEventListener('mouseleave',()=>{
-        hero.style.setProperty('--ry','0deg');
-        hero.style.setProperty('--rx','0deg');
-      });
+      hero.addEventListener('mouseleave',()=>{ hero.style.setProperty('--ry','0deg'); hero.style.setProperty('--rx','0deg'); });
     }
 
     toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
 
-    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-      scrollbar.style.transition='none';
-    }
+    const yEl = document.getElementById('ms-year'); if(yEl) yEl.textContent = new Date().getFullYear();
 
-    document.querySelectorAll('[data-modal]').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const m = document.getElementById(btn.dataset.modal);
-        if(!m) return;
-        m.setAttribute('aria-hidden','false');
-        const firstFocus = m.querySelector('button, a, input, [tabindex]:not([tabindex="-1"])');
-        (firstFocus||m).focus();
-      });
-    });
-    const closeModal = m=> m && m.setAttribute('aria-hidden','true');
-    document.querySelectorAll('.ms-modal').forEach(m=>{
-      m.addEventListener('click', e=>{
-        if(e.target.classList.contains('ms-modal')) closeModal(m);
-      });
-      m.querySelector('.ms-modal__close').addEventListener('click', ()=>closeModal(m));
-      m.addEventListener('keydown', e=>{
-        if(e.key==='Escape') closeModal(m);
-        if(e.key==='Tab'){
-          const f = m.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])');
-          if(!f.length) return;
-          const first=f[0], last=f[f.length-1];
-          if(e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); }
-          else if(!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); }
-        }
-      });
-    });
-
-    const y = document.getElementById('ms-year'); if(y) y.textContent = new Date().getFullYear();
-
-    /* GA4 – track footer CTA clicks */
     document.querySelectorAll('a,button').forEach(el=>{
       if(/invest|partner|partnership|how it works|vision/i.test((el.textContent||'').toLowerCase())){
-        el.addEventListener('click', ()=>{
-          gtag('event','cta_click',{section:'invest_with_us',label:(el.textContent||el.href||'').trim()});
-        });
+        el.addEventListener('click', ()=>{ gtag('event','cta_click',{section:'invest_with_us',label:(el.textContent||el.href||'').trim()}); });
       }
     });
   </script>
-
-  <!-- Ana JS dosyan -->
-  <script src="/main.js" defer></script>
 </body>
 </html>
