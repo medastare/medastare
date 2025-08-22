@@ -1,0 +1,13 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "MedaStaré",
+  "url": "https://medastare.com/",
+  "logo": "https://medastare.com/medastare-logo.png",
+  "sameAs": [
+    "https://www.linkedin.com/company/medastareapp",
+    "https://x.com/medastareapp",
+    "https://instagram.com/medastareapp",
+    "https://www.crunchbase.com/organization/medastar%C3%A9"
+  ]
+}
