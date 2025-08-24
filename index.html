@@ -259,6 +259,7 @@
 <!-- About Us / Hakkımızda -->
 <section id="about-section" aria-labelledby="about-title">
   <style>
+    /* Genel alan */
     #about-section {
       background: var(--bg, #0a0a0a);
       color: var(--text, #fff);
@@ -354,7 +355,7 @@
       </div>
       <div class="panel">
         <h3>TR</h3>
-        <p>“MedaStaré – Yapay Zeka ile Moda & Güzelliğin Buluştuğu Yer”  
+        <p>“MedaStaré – Yapay Zekâ ile Moda & Güzelliğin Buluştuğu Yer”  
         Kadınlar tarafından, kadınlara özel. Stili yapay zekâ, yaratıcılık ve kişiselleştirme ile yeniden tanımlıyoruz.</p>
       </div>
     </div>
@@ -362,19 +363,21 @@
 
   <!-- Scroll animasyonu için JS -->
   <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.2 });
-
-    document.querySelectorAll('.headline h2, .panel').forEach((el) => {
-      observer.observe(el);
-    });
+    (function(){
+      const els = document.querySelectorAll('#about-section .headline h2, #about-section .panel');
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      },{threshold:.2});
+      els.forEach(el=>io.observe(el));
+    })();
   </script>
 </section>
+  
   <section id="momentum">
     <h2>Momentum</h2>
     <div class="card">
