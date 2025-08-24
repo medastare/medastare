@@ -6,39 +6,34 @@
 <title>Careers — MedaStaré</title>
 <link rel="icon" href="/favicon.ico" />
 <style>
-  :root{
-    --bg:#0a0a0a; --text:#f2f2f2;
-    --gold1:#ffd65a; --gold2:#e6b800;
-    --card:rgba(255,255,255,.04); --cardBorder:rgba(255,215,0,.18);
-    --maxW:980px;
-  }
-  html,body{margin:0;background:var(--bg);color:var(--text);
-    font-family:system-ui,-apple-system,"SF Pro Text","Segoe UI",sans-serif}
+  :root{--bg:#0a0a0a; --text:#f2f2f2; --gold1:#FFD700; --gold2:#E6B800;
+        --card:rgba(255,255,255,.035); --cardBorder:rgba(255,215,0,.22); --maxW:1100px}
+  html,body{height:100%;margin:0;background:var(--bg);color:var(--text);
+            font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+  .wrap{max-width:var(--maxW);margin:0 auto;padding:80px 24px}
+  .title{margin:0 0 16px;font-size:clamp(28px,5vw,44px);font-weight:800;
+         background:linear-gradient(90deg,var(--gold1),var(--gold2));
+         -webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{opacity:.9;line-height:1.65;margin:0 0 24px}
+  .card{background:var(--card);border:1px solid var(--cardBorder);
+        border-radius:16px;padding:22px;box-shadow:0 10px 28px rgba(0,0,0,.28)}
+  .card h2{margin:0 0 8px;font-size:24px}
+  .btnRow{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0 0}
+  .btn{display:inline-flex;align-items:center;justify-content:center;
+       padding:12px 16px;border-radius:12px;text-decoration:none;
+       border:1px solid var(--cardBorder);color:var(--text);min-width:140px}
+  .btn.gold{border:0;background:linear-gradient(90deg,var(--gold1),var(--gold2));color:#111;
+            box-shadow:0 8px 18px rgba(255,215,0,.22)}
+  .btn:active{transform:translateY(1px)}
+  .topNav{position:sticky;top:0;z-index:5;padding:10px 16px;
+          background:rgba(0,0,0,.35);backdrop-filter:saturate(140%) blur(8px);
+          border-bottom:1px solid rgba(255,215,0,.12)}
+  .topNav a{color:var(--text);text-decoration:none;margin-right:14px;opacity:.9}
   body::before{content:"";position:fixed;inset:0;pointer-events:none;
-    background:radial-gradient(60% 100% at 50% 100%, rgba(255,215,0,.08), transparent);
-    filter:blur(40px)}
-  .topNav{position:sticky;top:0;z-index:10;display:flex;gap:16px;align-items:center;
-    padding:10px 16px;background:rgba(0,0,0,.35);border-bottom:1px solid rgba(255,215,0,.12);
-    backdrop-filter:saturate(140%) blur(8px)}
-  .topNav a{color:var(--text);text-decoration:none;opacity:.9;font-size:14px}
-  .wrap{max-width:var(--maxW);margin:0 auto;padding:64px 20px 28px}
-  .title{margin:0 0 10px;font-weight:800;font-size:clamp(28px,4.6vw,42px);
-    background:linear-gradient(90deg,var(--gold1),var(--gold2));
-    -webkit-background-clip:text;background-clip:text;color:transparent}
-  .lead{opacity:.9;margin:0 0 22px;line-height:1.6;font-size:clamp(14px,3.4vw,17px)}
-  .card{background:var(--card);border:1px solid var(--cardBorder);border-radius:16px;
-    padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.28);overflow:hidden}
-  .card h2{margin:0 0 10px;font-size:20px}
-  .card p{margin:0 0 12px;line-height:1.55;font-size:15px}
-  .btnRow{display:flex;flex-wrap:wrap;gap:10px}
-  .btn{padding:11px 14px;border-radius:12px;border:1px solid var(--cardBorder);
-    text-decoration:none;color:var(--text);font-weight:600;font-size:14px}
-  .btn.gold{border:0;color:#111;background:linear-gradient(90deg,var(--gold1),var(--gold2));
-    box-shadow:0 6px 18px rgba(255,215,0,.22)}
-  .note{margin-top:10px;font-size:13.5px;opacity:.75}
-  footer{max-width:var(--maxW);margin:28px auto 22px;padding:0 20px;opacity:.8}
-  footer hr{border:0;height:1px;background:rgba(255,215,0,.15);margin:20px 0}
-  .copy{font-size:13px}
+               background:radial-gradient(60% 100% at 50% 100%,rgba(255,215,0,.08),transparent);
+               filter:blur(42px)}
+  footer{max-width:var(--maxW);margin:56px auto 28px;padding:0 24px;opacity:.9}
+  footer hr{border:0;height:1px;background:rgba(255,215,0,.15);margin:24px 0}
 </style>
 </head>
 <body>
@@ -50,28 +45,36 @@
 
   <main class="wrap">
     <h1 class="title">Careers</h1>
-    <p class="lead">
-      We’re building the future of fashion-tech. If you’re passionate about AI,
-      personalization and premium digital experiences, you’ll feel at home.
-    </p>
+    <p class="lead">We're building the future of fashion-tech. If you're passionate about AI, personalization and premium digital experiences, you'll feel at home.</p>
 
     <section class="card">
       <h2>Open Roles</h2>
-      <p>We’re preparing our first openings.</p>
-
+      <p>We're preparing our first openings.</p>
       <div class="btnRow">
-        <a class="btn gold" href="#" onclick="alert('Careers — Coming Soon!');return false;">Get Notified</a>
+        <a class="btn gold" href="#" data-notify>Get Notified</a>
         <a class="btn" href="/#waitlist">Join Waitlist</a>
       </div>
-
-      <p class="note">Tip: Add your LinkedIn when you join the waitlist for early consideration.</p>
+      <p style="opacity:.75;margin:14px 0 0">Tip: Add your LinkedIn when you join the waitlist for early consideration.</p>
     </section>
   </main>
 
   <footer>
-    <hr>
-    <div class="copy">© <span id="y"></span> MedaStaré — All rights reserved.</div>
+    <hr />
+    <div>© <span id="y"></span> MedaStaré — All rights reserved.</div>
   </footer>
-  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+
+  <script>
+    // yıl
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // inline onclick yerine güvenli/event-based
+    document.addEventListener('click', function(e){
+      const t = e.target.closest('[data-notify]');
+      if(!t) return;
+      e.preventDefault();
+      // İstersen alert yerine mailto aç: window.location='mailto:info@medastare.com?subject=Careers%20Notifications';
+      alert('Careers – Coming Soon!');
+    });
+  </script>
 </body>
 </html>
