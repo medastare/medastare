@@ -1,90 +1,37 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Careers — MedaStaré</title>
-  <link rel="icon" href="/favicon.ico" />
-  <style>
-    :root{
-      --bg:#0a0a0a; --text:#f2f2f2; --gold1:#FFD700; --gold2:#E6B800;
-      --card:rgba(255,255,255,.035); --cardBorder:rgba(255,215,0,.22);
-      --maxW:1100px;
-    }
-    html,body{height:100%;margin:0;background:var(--bg);color:var(--text);
-      font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-    .wrap{max-width:var(--maxW);margin:0 auto;padding:80px 24px}
-    .title{margin:0 0 10px;font-size:clamp(28px,5vw,44px);font-weight:800;
-      background:linear-gradient(90deg,var(--gold1),var(--gold2));
-      -webkit-background-clip:text;background-clip:text;color:transparent}
-    .lead{opacity:.9;margin:0 0 24px;line-height:1.7}
-    .card{position:relative;background:var(--card);border:1px solid var(--cardBorder);
-      border-radius:16px;padding:22px;box-shadow:0 10px 28px rgba(0,0,0,.28)}
-    .card::before{content:"";position:absolute;inset:0;border-radius:16px;
-      background:radial-gradient(120% 120% at 10% 0%,rgba(255,215,0,.06),transparent 60%);
-      pointer-events:none} /* süs katmanı tıklamayı engellemesin */
-    .h2{margin:0 0 12px;font-size:22px;font-weight:700}
-    .btnRow{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
-    .btn{display:block;width:100%;max-width:220px;text-align:center;
-      padding:12px 16px;border-radius:12px;border:0;cursor:pointer;
-      -webkit-appearance:none;appearance:none;font-weight:700}
-    .btn.gold{background:linear-gradient(90deg,var(--gold1),var(--gold2));color:#111;
-      box-shadow:0 8px 18px rgba(255,215,0,.22)}
-    .btn.outline{background:transparent;color:var(--text);
-      border:1px solid var(--cardBorder)}
-    .btn:active{transform:translateY(1px)}
-    .note{margin-top:10px;opacity:.75}
-    .topNav{position:sticky;top:0;z-index:5;padding:10px 16px;
-      background:rgba(0,0,0,.35);backdrop-filter:saturate(140%) blur(8px);
-      border-bottom:1px solid rgba(255,215,0,.12)}
-    .topNav a{color:var(--text);text-decoration:none;margin-right:14px;opacity:.9}
-    body::before{content:"";position:fixed;inset:0;pointer-events:none;
-      background:radial-gradient(60% 100% at 50% 100%,rgba(255,215,0,.08),transparent);
-      filter:blur(42px)}
-    footer{max-width:var(--maxW);margin:56px auto 28px;padding:0 24px;opacity:.9}
-    footer hr{border:0;height:1px;background:rgba(255,215,0,.15);margin:24px 0}
-  </style>
-</head>
-<body>
-  <nav class="topNav">
-    <a href="/">← Home</a>
-    <a href="/careers.html" aria-current="page">Careers</a>
-    <a href="/contact.html">Contact / Media</a>
-  </nav>
-
-  <main class="wrap">
-    <h1 class="title">Careers</h1>
-    <p class="lead">
-      We’re building the future of fashion-tech. If you’re passionate about AI,
-      personalization and premium digital experiences, you’ll feel at home.
-    </p>
-
-    <section class="card">
-      <h2 class="h2">Open Roles</h2>
-      <p>We’re preparing our first openings.</p>
-
-      <div class="btnRow">
-        <!-- butonu button yaptık ve JS ile click + touchend bağlı -->
-        <button id="notifyBtn" class="btn gold" type="button">Get Notified</button>
-        <a class="btn outline" href="/#waitlist">Join Waitlist</a>
-      </div>
-
-      <p class="note">Tip: Add your LinkedIn when you join the waitlist for early consideration.</p>
-    </section>
-  </main>
-
-  <footer>
-    <hr />
-    <div>© <span id="y"></span> MedaStaré — All rights reserved.</div>
-  </footer>
-
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    function notify(e){ if(e) e.preventDefault(); alert('Careers — Coming Soon!'); }
-    const btn = document.getElementById('notifyBtn');
-    btn.addEventListener('click', notify);
-    btn.addEventListener('touchend', notify, {passive:false}); // iOS için
-  </script>
-</body>
-</html>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Careers — MedaStaré</title>
+<link rel="icon" href="/favicon.ico" />
+<style>
+  :root{
+    --bg:#0a0a0a; --text:#f2f2f2; --muted:#cfcfcf;
+    --gold1:#ffd54a; --gold2:#e6b800;
+    --card:rgba(255,255,255,.035); --cardBorder:rgba(255,215,0,.22);
+    --maxW:1100px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;background:var(--bg);color:var(--text);
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+  .nav{position:sticky;top:0;z-index:10;padding:10px 16px;
+    backdrop-filter:saturate(140%) blur(8px);
+    background:rgba(0,0,0,.35);border-bottom:1px solid rgba(255,215,0,.12)}
+  .nav a{color:var(--text);text-decoration:none;margin-right:14px;opacity:.85}
+  main{max-width:var(--maxW);margin:0 auto;padding:64px 20px 40px}
+  h1{margin:0 0 10px;font-size:clamp(28px,5vw,44px);font-weight:800;
+    background:linear-gradient(90deg,var(--gold1),var(--gold2));
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{color:var(--muted);margin:0 0 26px;line-height:1.6}
+  .card{background:var(--card);border:1px solid var(--cardBorder);
+    border-radius:16px;padding:22px;box-shadow:0 10px 28px rgba(0,0,0,.28)}
+  h2{margin:6px 0 12px;font-size:22px}
+  .actions{display:grid;gap:12px;max-width:420px}
+  .btn{
+    display:inline-block;width:100%;padding:14px 18px;border-radius:14px;border:1px solid var(--cardBorder);
+    color:var(--text);text-decoration:none;text-align:center;font-weight:700
+  }
+  .btn.gold{border:0;background:linear-gradient(90deg,var(--gold1),var(--gold2));color:#111;
+    box-shadow:0 8px 26px rgba(255,215,0,.22)}
+ 
