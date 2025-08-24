@@ -20,16 +20,19 @@
       -webkit-background-clip:text; background-clip:text; color:transparent}
     .lead{opacity:.9; font-size:1.05rem; line-height:1.7; margin:0 0 28px}
     .card{background:var(--card); border:1px solid var(--cardBorder);
-      border-radius:16px; padding:24px; box-shadow:0 10px 28px rgba(0,0,0,.28)}
+      border-radius:16px; padding:28px; box-shadow:0 15px 35px rgba(0,0,0,.35);
+      backdrop-filter:blur(12px); transition:transform .25s ease, box-shadow .25s ease}
+    .card:hover{transform:translateY(-4px); box-shadow:0 20px 45px rgba(0,0,0,.45)}
     .btnRow{display:flex; gap:12px; margin-top:16px; flex-wrap:wrap}
     .btn{padding:12px 16px; border-radius:12px; border:1px solid var(--cardBorder);
-      text-decoration:none; color:var(--text)}
+      text-decoration:none; color:var(--text); transition:transform .2s ease, box-shadow .2s ease}
+    .btn:hover{transform:translateY(-2px); box-shadow:0 6px 14px rgba(255,255,255,.12)}
     .btn.gold{background:linear-gradient(90deg,var(--gold1),var(--gold2)); color:#111; border:0}
+    .btn.gold:hover{box-shadow:0 8px 18px rgba(255,215,0,.25)}
     .topNav{position:sticky; top:0; backdrop-filter:saturate(140%) blur(8px);
       background:rgba(0,0,0,.35); border-bottom:1px solid rgba(255,215,0,.12); padding:10px 16px}
     .topNav a{color:var(--text); text-decoration:none; margin-right:14px; opacity:.85}
     .note{margin-top:12px; font-size:.9rem; opacity:.7}
-    /* soft glow */
     body::before{content:""; position:fixed; inset:0;
       background:radial-gradient(60% 100% at 50% 100%, rgba(255,215,0,.08), transparent);
       filter:blur(42px); pointer-events:none}
