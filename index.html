@@ -256,39 +256,96 @@
   /* Not */
   .waitlist-box .note { color:#aaa; font-size:0.9em; margin-top:20px; }
   </style>
-<!-- About Us / Hakkımızda -->
-<section id="about-section" aria-labelledby="about-title">
-  <div class="about-wrap">
-    <div class="headline">
-      <h2 id="about-title">About Us / Hakkımızda</h2>
+<!-- =================== About Us / Hakkımızda (scoped) =================== -->
+<section id="about-medastare" class="aboutX" aria-labelledby="aboutX-title">
+  <style>
+    /* ----- SCOPE: .aboutX ----- */
+    .aboutX{color:var(--text,#f2f2f2); padding:clamp(56px,8vw,120px) 24px;}
+    .aboutX__wrap{max-width:1100px; margin:0 auto;}
+
+    /* Başlık */
+    .aboutX__headline{ text-align:center; margin:0 0 32px;}
+    .aboutX__headline h2{
+      margin:0;
+      font-size:clamp(32px,5.2vw,56px);
+      font-weight:700;
+      background:linear-gradient(90deg,var(--gold,#FFD700),#FFB700);
+      -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color:transparent; color:transparent;
+      opacity:0; transform:translateY(24px);
+      transition:opacity .9s ease, transform .9s ease;
+    }
+
+    /* Görsel + not */
+    .aboutX__media{ text-align:center; margin:0 0 28px;}
+    .aboutX__media img{
+      width:100%; max-width:800px; border-radius:16px;
+      opacity:0; transform:translateY(16px);
+      transition:opacity .9s ease, transform .9s ease, box-shadow .6s ease;
+    }
+    .aboutX__media img:hover{
+      box-shadow:0 0 30px rgba(255,215,0,.22); transform:translateY(0) scale(1.015);
+    }
+    .aboutX__note{
+      margin:12px 0 0; font-size:14px; color:#a9a9a9; font-style:italic;
+    }
+
+    /* EN / TR kutuları */
+    .aboutX__grid{ display:grid; gap:32px;}
+    @media (min-width:900px){ .aboutX__grid{ grid-template-columns:repeat(2,1fr);} }
+
+    .aboutX__card{
+      background:rgba(255,255,255,.035);
+      border:1px solid rgba(255,215,0,.22);
+      border-radius:16px; padding:24px 24px 22px;
+      box-shadow:0 10px 28px rgba(0,0,0,.25);
+      opacity:0; transform:translateY(32px);
+      transition:opacity .9s ease, transform .9s ease;
+    }
+    .aboutX__card h3{ margin:0 0 10px; font-size:22px; color:var(--gold,#FFD700); }
+    .aboutX__card p{ margin:0 0 14px; line-height:1.6; }
+    .aboutX__dots{ list-style:none; padding:0; margin:0; }
+    .aboutX__dots li{ position:relative; padding-left:1.15rem; margin:.35rem 0; }
+    .aboutX__dots li::before{
+      content:"•"; position:absolute; left:0; top:0; color:var(--gold,#FFD700);
+    }
+
+    /* Scroll görünüm animasyonu (Apple-like fade-up) */
+    .aboutX .is-visible{ opacity:1 !important; transform:translateY(0) !important; }
+  </style>
+
+  <div class="aboutX__wrap">
+    <div class="aboutX__headline">
+      <h2 id="aboutX-title">About Us / Hakkımızda</h2>
     </div>
 
-    <!-- Görsel -->
-    <div class="about__media">
-      <img src="medastare_poweredbyAI.jpg" alt="MedaStaré AI" />
-      <p class="img-note">© MedaStaré – Özel görsel, tüm hakları saklıdır.</p>
+    <!-- GÖRSEL -->
+    <div class="aboutX__media">
+      <!-- görseli repo’da bu adla koymuştun -->
+      <img src="medastare_poweredbyAI.jpg" alt="MedaStaré — Powered by AI">
+      <p class="aboutX__note">© MedaStaré – Özel görsel, tüm hakları saklıdır.</p>
     </div>
 
-    <!-- İçerik -->
-    <div class="panels">
-      <article class="panel">
+    <!-- EN / TR KUTULAR -->
+    <div class="aboutX__grid">
+      <article class="aboutX__card">
         <h3>EN</h3>
-        <p>“MedaStaré – Where AI Meets Fashion & Beauty”  
-        Created by women, for women. Redefining style with artificial intelligence, creativity, and personalization.  
+        <p>“MedaStaré – Where AI Meets Fashion &amp; Beauty”
+        Created by women, for women. Redefining style with artificial intelligence, creativity, and personalization.
         Not just an app, but a movement shaping the future of digital fashion-tech.</p>
-        <ul class="dots">
+        <ul class="aboutX__dots">
           <li>Powered by AI, designed for people.</li>
           <li>Built with vision, crafted with passion.</li>
           <li>From Turkey to the world.</li>
         </ul>
       </article>
 
-      <article class="panel">
+      <article class="aboutX__card">
         <h3>TR</h3>
-        <p>“MedaStaré – Yapay Zeka ile Moda & Güzelliğin Buluştuğu Yer”  
-        Kadınlar tarafından, kadınlara özel. Stili, yapay zekâ, yaratıcılık ve kişiselleştirme ile yeniden tanımlıyoruz.  
+        <p>“MedaStaré – Yapay Zekâ ile Moda &amp; Güzelliğin Buluştuğu Yer”
+        Kadınlar tarafından, kadınlara özel. Stili, yapay zekâ, yaratıcılık ve kişiselleştirme ile yeniden tanımlıyoruz.
         Sadece bir uygulama değil, dijital moda-teknoloji geleceğini şekillendiren bir hareket.</p>
-        <ul class="dots">
+        <ul class="aboutX__dots">
           <li>Yapay zekâ ile güçlendirildi, insanlar için tasarlandı.</li>
           <li>Vizyonla inşa edildi, tutkuyla geliştirildi.</li>
           <li>Türkiye’den dünyaya açılıyor.</li>
@@ -296,40 +353,26 @@
       </article>
     </div>
   </div>
+
+  <script>
+    // sadece bu bölümdeki elemanları izleyelim (çakışmasın)
+    (function(){
+      const root = document.querySelector('#about-medastare');
+      if(!root) return;
+      const els = root.querySelectorAll('.aboutX__headline h2, .aboutX__media img, .aboutX__card');
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
+            e.target.classList.add('is-visible');
+            io.unobserve(e.target);
+          }
+        });
+      },{threshold:.2});
+      els.forEach(el=>io.observe(el));
+    })();
+  </script>
 </section>
-
-<style>
-  .about__media {
-    text-align: center;
-    margin-bottom: 32px;
-  }
-
-  .about__media img {
-    width: 100%;
-    max-width: 800px;
-    border-radius: 16px;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 1.2s ease forwards;
-    transition: transform .6s ease, box-shadow .6s ease;
-  }
-
-  .about__media img:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 30px rgba(255, 215, 0, 0.25);
-  }
-
-  .img-note {
-    font-size: 14px;
-    color: #aaa;
-    margin-top: 12px;
-    font-style: italic;
-  }
-
-  @keyframes fadeInUp {
-    to { opacity: 1; transform: none; }
-  }
-</style>
+<!-- =================== /About Us =================== -->
   
   <section id="momentum">
     <h2>Momentum</h2>
