@@ -260,77 +260,121 @@
 <section id="about-section" aria-labelledby="about-title">
   <style>
     #about-section {
-      background: #0a0a0a;
-      color: #fff;
+      background: var(--bg, #0a0a0a);
+      color: var(--text, #fff);
       padding: clamp(56px, 8vw, 120px) 24px;
       font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-    }
-
-    .about-wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .headline {
       text-align: center;
-      margin-bottom: 48px;
+      position: relative;
     }
 
+    /* Görsel */
+    .about-image {
+      max-width: 420px;
+      margin: 0 auto 40px auto;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.45);
+    }
+
+    .about-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Başlık */
     .headline h2 {
-      font-size: clamp(32px, 5.2vw, 56px);
+      font-size: clamp(32px, 5vw, 52px);
       font-weight: 700;
-      margin: 0;
+      margin-bottom: 48px;
       background: linear-gradient(90deg, #FFD700, #FFB700);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
+    /* Açıklama kutuları */
     .panels {
       display: grid;
-      gap: 32px;
-    }
-    @media(min-width:900px){
-      .panels{grid-template-columns: repeat(2,1fr);}
+      gap: 28px;
+      max-width: 1000px;
+      margin: 0 auto;
     }
 
     .panel {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,215,0,0.2);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,215,0,0.25);
       border-radius: 16px;
-      padding: 28px;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.25);
+      padding: 26px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+      text-align: left;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+      backdrop-filter: blur(8px); /* Apple efekti */
     }
 
     .panel h3 {
-      margin: 0 0 10px;
-      font-size: 22px;
+      margin: 0 0 12px;
+      font-size: 20px;
+      font-weight: 600;
       color: #FFD700;
     }
 
     .panel p {
+      margin: 0;
       line-height: 1.6;
-      margin: 0 0 14px;
+    }
+
+    /* Scroll efekti */
+    .visible {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
     }
   </style>
 
-  <div class="about-wrap">
-    <div class="headline">
-      <h2 id="about-title">About Us / Hakkımızda</h2>
-    </div>
+  <div class="about-image">
+    <img src="medastare_poweredbyAI.jpg" alt="MedaStaré Powered by AI">
+  </div>
 
-    <div class="panels">
-      <div class="panel">
-        <h3>EN</h3>
-        <p>“MedaStaré – Where AI Meets Fashion & Beauty”  
-        Created by women, for women. Redefining style with artificial intelligence, creativity, and personalization.</p>
-      </div>
-      <div class="panel">
-        <h3>TR</h3>
-        <p>“MedaStaré – Yapay Zeka ile Moda & Güzelliğin Buluştuğu Yer”  
-        Kadınlar tarafından, kadınlara özel. Stili yapay zekâ, yaratıcılık ve kişiselleştirme ile yeniden tanımlıyoruz.</p>
-      </div>
+  <div class="headline">
+    <h2 id="about-title">About Us / Hakkımızda</h2>
+  </div>
+
+  <div class="panels">
+    <div class="panel">
+      <h3>EN</h3>
+      <p>“MedaStaré – Where AI Meets Fashion & Beauty”<br>
+      Created by women, for women.<br>
+      Redefining style with artificial intelligence, creativity, and personalization.<br>
+      Not just an app, but a movement shaping the future of digital fashion-tech.<br><br>
+      • Powered by AI, designed for people.<br>
+      • Built with vision, crafted with passion.<br>
+      • From Turkey to the world.</p>
+    </div>
+    <div class="panel">
+      <h3>TR</h3>
+      <p>“MedaStaré – Yapay Zeka ile Moda & Güzelliğin Buluştuğu Yer”<br>
+      Kadınlar tarafından, kadınlara özel.<br>
+      Stili, yapay zekâ, yaratıcılık ve kişiselleştirme ile yeniden tanımlıyoruz.<br>
+      Sadece bir uygulama değil, dijital moda-teknoloji geleceğini şekillendiren bir hareket.<br><br>
+      • Yapay zekâ ile güçlendirildi, insanlar için tasarlandı.<br>
+      • Vizyonla inşa edildi, tutkuyla geliştirildi.<br>
+      • Türkiye’den dünyaya açılıyor.</p>
     </div>
   </div>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.panel').forEach((el) => observer.observe(el));
+  </script>
 </section>
   
   <section id="momentum">
