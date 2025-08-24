@@ -1,4 +1,10 @@
-<!-- HEAD içindeki <style> bloğunu bununla değiştir -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Contact / Media — MedaStaré</title>
+<link rel="icon" href="/favicon.ico" />
 <style>
   :root{
     --bg:#0a0a0a; --text:#f2f2f2;
@@ -6,51 +12,70 @@
     --card:rgba(255,255,255,.04); --cardBorder:rgba(255,215,0,.18);
     --maxW:980px;
   }
-
-  html,body{margin:0; background:var(--bg); color:var(--text);
+  html,body{margin:0;background:var(--bg);color:var(--text);
     font-family:system-ui,-apple-system,"SF Pro Text","Segoe UI",sans-serif}
-
-  /* arkadaki yumuşak ışıltı */
-  body::before{content:""; position:fixed; inset:0; pointer-events:none;
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;
     background:radial-gradient(60% 100% at 50% 100%, rgba(255,215,0,.08), transparent);
     filter:blur(40px)}
-
-  /* sticky üst bar – hafif cam efekti */
-  .topNav{position:sticky; top:0; z-index:10; display:flex; gap:16px;
-    align-items:center; padding:10px 16px;
-    background:rgba(0,0,0,.35); border-bottom:1px solid rgba(255,215,0,.12);
+  .topNav{position:sticky;top:0;z-index:10;display:flex;gap:16px;align-items:center;
+    padding:10px 16px;background:rgba(0,0,0,.35);border-bottom:1px solid rgba(255,215,0,.12);
     backdrop-filter:saturate(140%) blur(8px)}
-  .topNav a{color:var(--text); text-decoration:none; opacity:.9; font-size:14px}
-
-  /* içerik kabı */
-  .wrap{max-width:var(--maxW); margin:0 auto; padding:64px 20px 28px}
-
-  /* başlık */
-  .title{margin:0 0 8px; font-weight:800;
-    font-size:clamp(28px,4.6vw,42px);
+  .topNav a{color:var(--text);text-decoration:none;opacity:.9;font-size:14px}
+  .wrap{max-width:var(--maxW);margin:0 auto;padding:64px 20px 28px}
+  .title{margin:0 0 8px;font-weight:800;font-size:clamp(28px,4.6vw,42px);
     background:linear-gradient(90deg,var(--gold1),var(--gold2));
-    -webkit-background-clip:text; background-clip:text; color:transparent}
-
-  .lead{opacity:.9; margin:0 0 18px; line-height:1.55; font-size:clamp(14px,3.4vw,17px)}
-
-  /* kart */
-  .card{background:var(--card); border:1px solid var(--cardBorder);
-    border-radius:16px; padding:18px; box-shadow:0 8px 24px rgba(0,0,0,.28)}
-  .card h3{margin:0 0 8px; font-size:18px}
-  .card p{margin:0 0 12px; line-height:1.55; font-size:15px}
-
-  /* form */
-  label{display:block; font-weight:600; margin:10px 0 6px; font-size:14px}
-  textarea{width:100%; min-height:150px; resize:vertical; font-size:15px;
-    padding:12px 14px; border-radius:12px; color:var(--text);
-    border:1px solid var(--cardBorder); background:rgba(255,255,255,.04)}
-  .btn{display:inline-block; margin-top:12px; padding:12px 16px; font-weight:700;
-    border-radius:12px; border:0; color:#111; cursor:pointer;
+    -webkit-background-clip:text;background-clip:text;color:transparent}
+  .lead{opacity:.9;margin:0 0 18px;line-height:1.55;font-size:clamp(14px,3.4vw,17px)}
+  .card{background:var(--card);border:1px solid var(--cardBorder);border-radius:16px;
+    padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.28)}
+  .card h3{margin:0 0 8px;font-size:18px}
+  .card p{margin:0 0 12px;line-height:1.55;font-size:15px}
+  label{display:block;font-weight:600;margin:10px 0 6px;font-size:14px}
+  textarea{width:100%;min-height:150px;resize:vertical;font-size:15px;
+    padding:12px 14px;border-radius:12px;color:var(--text);
+    border:1px solid var(--cardBorder);background:rgba(255,255,255,.04)}
+  .btn{display:inline-block;margin-top:12px;padding:12px 16px;font-weight:700;
+    border-radius:12px;border:0;color:#111;cursor:pointer;
     background:linear-gradient(90deg,var(--gold1),var(--gold2));
-    box-shadow:0 6px 18px rgba(255,215,0,.22); transition:transform .15s}
+    box-shadow:0 6px 18px rgba(255,215,0,.22);transition:transform .15s}
   .btn:active{transform:translateY(1px)}
-
-  footer{max-width:var(--maxW); margin:28px auto 22px; padding:0 20px; opacity:.8}
-  footer hr{border:0; height:1px; background:rgba(255,215,0,.15); margin:20px 0}
+  footer{max-width:var(--maxW);margin:28px auto 22px;padding:0 20px;opacity:.8}
+  footer hr{border:0;height:1px;background:rgba(255,215,0,.15);margin:20px 0}
   .copy{font-size:13px}
 </style>
+</head>
+<body>
+  <nav class="topNav">
+    <a href="/">← Home</a>
+    <a href="/careers.html">Careers</a>
+    <a href="/contact.html" aria-current="page">Contact / Media</a>
+  </nav>
+
+  <main class="wrap">
+    <h1 class="title">Contact / Media</h1>
+    <p class="lead">For partnerships, press and general inquiries • İş birlikleri, basın ve genel iletişim</p>
+
+    <section class="card">
+      <h3>EN</h3>
+      <p>Partnerships & media: <a href="mailto:info@medastare.com">info@medastare.com</a></p>
+
+      <h3>TR</h3>
+      <p>İş birlikleri & basın: <a href="mailto:info@medastare.com">info@medastare.com</a></p>
+
+      <label for="msg">Message / Mesaj</label>
+      <textarea id="msg" placeholder="Write your message… / Mesajınızı yazın…"></textarea>
+
+      <button class="btn"
+        onclick="window.location='mailto:info@medastare.com?subject=MedaStaré%20Contact&body='+encodeURIComponent(document.getElementById('msg').value)">
+        Send via Email
+      </button>
+    </section>
+  </main>
+
+  <footer>
+    <hr>
+    <div class="copy">© <span id="y"></span> MedaStaré — All rights reserved.</div>
+  </footer>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
+</body>
+</html>
