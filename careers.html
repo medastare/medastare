@@ -9,70 +9,73 @@
     :root{
       --bg:#0a0a0a; --text:#f2f2f2;
       --gold1:#FFD700; --gold2:#E6B800;
-      --card:rgba(255,255,255,.035); --cardBorder:rgba(255,215,0,.22);
+      --panel:rgba(255,255,255,.035); --panelBorder:rgba(255,215,0,.22);
       --maxW:1100px;
     }
-    html,body{height:100%; background:var(--bg); color:var(--text);
-      font-family:system-ui,-apple-system,"Segoe UI",sans-serif; margin:0}
+    html,body{height:100%; margin:0; background:var(--bg); color:var(--text);
+      font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
+    body::before{content:""; position:fixed; inset:0;
+      background:radial-gradient(60% 100% at 50% 90%, rgba(255,215,0,.08), transparent);
+      filter:blur(42px); pointer-events:none}
     .wrap{max-width:var(--maxW); margin:0 auto; padding:80px 24px}
-    .title{margin:0 0 24px; font-size:clamp(32px,5vw,56px); font-weight:800;
+    .title{margin:0 0 12px; font-size:clamp(32px,5vw,56px); font-weight:800;
       background:linear-gradient(90deg,var(--gold1),var(--gold2));
       -webkit-background-clip:text; background-clip:text; color:transparent}
-    .lead{opacity:.9; font-size:1.05rem; line-height:1.7; margin:0 0 28px}
-    .card{background:var(--card); border:1px solid var(--cardBorder);
-      border-radius:16px; padding:28px; box-shadow:0 15px 35px rgba(0,0,0,.35);
-      backdrop-filter:blur(12px); transition:transform .25s ease, box-shadow .25s ease}
-    .card:hover{transform:translateY(-4px); box-shadow:0 20px 45px rgba(0,0,0,.45)}
+    .lead{opacity:.9; font-size:1.04rem; line-height:1.7; margin:0 0 28px}
+    .card{max-width:720px; margin:0 auto; background:var(--panel);
+      border:1px solid var(--panelBorder); border-radius:16px; padding:24px;
+      box-shadow:0 10px 28px rgba(0,0,0,.28)}
     .btnRow{display:flex; gap:12px; margin-top:16px; flex-wrap:wrap}
-    .btn{padding:12px 16px; border-radius:12px; border:1px solid var(--cardBorder);
-      text-decoration:none; color:var(--text); transition:transform .2s ease, box-shadow .2s ease}
-    .btn:hover{transform:translateY(-2px); box-shadow:0 6px 14px rgba(255,255,255,.12)}
+    .btn{padding:12px 16px; border-radius:12px; text-decoration:none; color:var(--text);
+      border:1px solid var(--panelBorder)}
     .btn.gold{background:linear-gradient(90deg,var(--gold1),var(--gold2)); color:#111; border:0}
-    .btn.gold:hover{box-shadow:0 8px 18px rgba(255,215,0,.25)}
-    .topNav{position:sticky; top:0; backdrop-filter:saturate(140%) blur(8px);
-      background:rgba(0,0,0,.35); border-bottom:1px solid rgba(255,215,0,.12); padding:10px 16px}
-    .topNav a{color:var(--text); text-decoration:none; margin-right:14px; opacity:.85}
     .note{margin-top:12px; font-size:.9rem; opacity:.7}
-    body::before{content:""; position:fixed; inset:0;
-      background:radial-gradient(60% 100% at 50% 100%, rgba(255,215,0,.08), transparent);
-      filter:blur(42px); pointer-events:none}
-    footer{max-width:var(--maxW); margin:64px auto 32px; padding:0 24px; opacity:.9}
+    .topNav{position:sticky; top:0; z-index:10; padding:10px 16px;
+      backdrop-filter:saturate(140%) blur(8px);
+      background:rgba(0,0,0,.35); border-bottom:1px solid rgba(255,215,0,.12)}
+    .topNav a{color:var(--text); text-decoration:none; margin-right:14px; opacity:.9}
+    footer{max-width:var(--maxW); margin:64px auto 32px; padding:0 24px; opacity:.85}
     footer hr{border:0; height:1px; background:rgba(255,215,0,.15); margin:28px 0}
-    .copyright{font-size:.9rem; opacity:.75}
   </style>
 </head>
 <body>
   <nav class="topNav">
     <a href="/">← Home</a>
     <a href="/careers.html" aria-current="page">Careers</a>
-    <a href="/contact.html">Contact</a>
+    <a href="/contact.html">Contact / Media</a>
   </nav>
 
   <main class="wrap">
     <h1 class="title">Careers</h1>
     <p class="lead">
-      We’re building the future of fashion-tech. If you’re passionate about
-      AI, personalization and premium digital experiences, you’ll feel at home.
+      EN — We’re building the future of fashion-tech. If you’re passionate about AI,
+      personalization and premium digital experiences, you’ll feel at home.<br/>
+      TR — Moda-teknolojinin geleceğini inşa ediyoruz. Yapay zekâ, kişiselleştirme ve
+      premium dijital deneyimler ilgi alanınsa doğru yerdesin.
     </p>
 
     <section class="card">
-      <h2 style="margin-top:0">Open Roles</h2>
-      <p>We’re preparing our first openings.</p>
+      <h2 style="margin:0 0 10px">Open Roles / Açık Pozisyonlar</h2>
+      <p>EN — We’re preparing our first openings.  
+      TR — İlk pozisyonlarımızı hazırlıyoruz.</p>
+
       <div class="btnRow">
-        <a class="btn gold" href="#" onclick="alert('Careers – Coming Soon!');return false;">Get Notified</a>
-        <a class="btn" href="/#waitlist">Join Waitlist</a>
+        <a class="btn gold" href="#" onclick="alert('Careers – Coming Soon! / Çok yakında!');return false;">Get Notified / Bildirim Al</a>
+        <a class="btn" href="/#waitlist">Join Waitlist / Ön Kayıt</a>
       </div>
-      <p class="note">Tip: Add your LinkedIn when joining the waitlist for early consideration.</p>
+
+      <p class="note">
+        EN — Tip: Add your LinkedIn when you join the waitlist for early consideration. <br/>
+        TR — İpucu: Ön kayıta LinkedIn’inizi eklerseniz erken değerlendirmeye alınır.
+      </p>
     </section>
   </main>
 
   <footer>
     <hr />
-    <div class="copyright">© <span id="y"></span> MedaStaré — All rights reserved.</div>
+    <div>© <span id="y"></span> MedaStaré — All rights reserved.</div>
   </footer>
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
 </body>
 </html>
