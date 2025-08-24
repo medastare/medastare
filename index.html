@@ -256,126 +256,138 @@
   /* Not */
   .waitlist-box .note { color:#aaa; font-size:0.9em; margin-top:20px; }
   </style>
-<!-- About Us / Hakkımızda -->
-<section id="about-section" aria-labelledby="about-title">
+<!-- ===================== About Us / Hakkımızda ===================== -->
+<section id="about-ai" aria-labelledby="about-title">
   <style>
-    #about-section {
-      background: var(--bg, #0a0a0a);
-      color: var(--text, #fff);
-      padding: clamp(56px, 8vw, 120px) 24px;
-      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-      text-align: center;
-      position: relative;
+    /* ---- Tema / Fallback ---- */
+    #about-ai{
+      --bg:#0a0a0a; --text:#eee; --gold:#FFD700; --gold2:#FFB700;
+      --panel:rgba(255,255,255,.03); --panelBorder:rgba(255,215,0,.22);
+      background:var(--bg); color:var(--text);
+      padding:clamp(56px,8vw,120px) 24px; position:relative; isolation:isolate;
+    }
+    #about-ai::before{
+      content:""; position:absolute; inset:0;
+      background:radial-gradient(60% 100% at 50% 100%, rgba(255,215,0,.08), transparent 60%);
+      filter:blur(40px); z-index:-1;
+    }
+    .about-wrap{max-width:1100px; margin:0 auto;}
+
+    /* ---- HERO görsel (üst) ---- */
+    .ai-hero{position:relative; overflow:hidden; border-radius:24px;
+      box-shadow:0 20px 60px rgba(0,0,0,.45), inset 0 0 0 1px rgba(255,215,0,.18);}
+    .ai-hero img{
+      width:100%; height:auto; display:block;
+      transform:translateY(var(--parallax,0px)) scale(1.02);
+      transition:transform .15s ease-out; will-change:transform;
+    }
+    .ai-hero::after{ /* Apple tarzı yumuşak ışık */
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background:linear-gradient(to bottom, rgba(255,215,0,.06), transparent 28%),
+                 radial-gradient(120% 100% at 50% -10%, rgba(255,255,255,.06), transparent 40%);
+    }
+    .caption{
+      text-align:center; margin:18px auto 52px; opacity:.85; font-size:14px;
+      letter-spacing:.02em;
     }
 
-    /* Görsel */
-    .about-image {
-      max-width: 420px;
-      margin: 0 auto 40px auto;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 10px 35px rgba(0,0,0,0.45);
+    /* ---- Başlık ---- */
+    .headline{text-align:center; margin:0 0 36px;}
+    .headline h2{
+      font-size:clamp(32px,5.2vw,56px); font-weight:800; margin:0;
+      background:linear-gradient(90deg,var(--gold),var(--gold2));
+      -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color:transparent; color:transparent;
+      opacity:0; transform:translateY(30px); transition:all .9s ease;
     }
 
-    .about-image img {
-      width: 100%;
-      height: auto;
-      display: block;
+    /* ---- Paneller ---- */
+    .panels{display:grid; gap:28px;}
+    @media (min-width:900px){.panels{grid-template-columns:repeat(2,1fr);}}
+    .panel{
+      background:var(--panel); border:1px solid var(--panelBorder);
+      border-radius:16px; padding:28px;
+      box-shadow:0 12px 32px rgba(0,0,0,.28); backdrop-filter:saturate(140%) blur(6px);
+      opacity:0; transform:translateY(40px); transition:all .9s ease;
     }
+    .panel h3{margin:0 0 12px; font-size:20px; color:var(--gold); letter-spacing:.04em;}
+    .panel p{line-height:1.62; margin:0 0 12px;}
+    .dots{list-style:none; padding:0; margin:10px 0 0;}
+    .dots li{position:relative; padding-left:1.05rem; margin:.2rem 0;}
+    .dots li::before{content:"•"; position:absolute; left:0; color:var(--gold);}
 
-    /* Başlık */
-    .headline h2 {
-      font-size: clamp(32px, 5vw, 52px);
-      font-weight: 700;
-      margin-bottom: 48px;
-      background: linear-gradient(90deg, #FFD700, #FFB700);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    /* Açıklama kutuları */
-    .panels {
-      display: grid;
-      gap: 28px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .panel {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,215,0,0.25);
-      border-radius: 16px;
-      padding: 26px;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.25);
-      text-align: left;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s ease;
-      backdrop-filter: blur(8px); /* Apple efekti */
-    }
-
-    .panel h3 {
-      margin: 0 0 12px;
-      font-size: 20px;
-      font-weight: 600;
-      color: #FFD700;
-    }
-
-    .panel p {
-      margin: 0;
-      line-height: 1.6;
-    }
-
-    /* Scroll efekti */
-    .visible {
-      opacity: 1 !important;
-      transform: translateY(0) !important;
-    }
+    /* ---- Reveal sınıfı ---- */
+    .visible{opacity:1 !important; transform:translateY(0) !important;}
   </style>
 
-  <div class="about-image">
-    <img src="medastare_poweredbyAI.jpg" alt="MedaStaré Powered by AI">
-  </div>
+  <div class="about-wrap">
+    <!-- ÜST GÖRSEL -->
+    <figure class="ai-hero">
+      <!-- Görsel yolu: depoya yüklediğin dosya adıyla birebir. -->
+      <img src="medastare_poweredbyAI.jpg" alt="MedaStaré – AI powered fashion & beauty visual">
+    </figure>
+    <div class="caption">Powered by AI • Designed for People</div>
 
-  <div class="headline">
-    <h2 id="about-title">About Us / Hakkımızda</h2>
-  </div>
-
-  <div class="panels">
-    <div class="panel">
-      <h3>EN</h3>
-      <p>“MedaStaré – Where AI Meets Fashion & Beauty”<br>
-      Created by women, for women.<br>
-      Redefining style with artificial intelligence, creativity, and personalization.<br>
-      Not just an app, but a movement shaping the future of digital fashion-tech.<br><br>
-      • Powered by AI, designed for people.<br>
-      • Built with vision, crafted with passion.<br>
-      • From Turkey to the world.</p>
+    <!-- BAŞLIK -->
+    <div class="headline">
+      <h2 id="about-title">About Us / Hakkımızda</h2>
     </div>
-    <div class="panel">
-      <h3>TR</h3>
-      <p>“MedaStaré – Yapay Zeka ile Moda & Güzelliğin Buluştuğu Yer”<br>
-      Kadınlar tarafından, kadınlara özel.<br>
-      Stili, yapay zekâ, yaratıcılık ve kişiselleştirme ile yeniden tanımlıyoruz.<br>
-      Sadece bir uygulama değil, dijital moda-teknoloji geleceğini şekillendiren bir hareket.<br><br>
-      • Yapay zekâ ile güçlendirildi, insanlar için tasarlandı.<br>
-      • Vizyonla inşa edildi, tutkuyla geliştirildi.<br>
-      • Türkiye’den dünyaya açılıyor.</p>
+
+    <!-- İÇERİK -->
+    <div class="panels">
+      <article class="panel">
+        <h3>EN</h3>
+        <p>“MedaStaré – Where AI Meets Fashion &amp; Beauty” Created by women, for women. Redefining style with artificial intelligence, creativity, and personalization. Not just an app, but a movement shaping the future of digital fashion-tech.</p>
+        <ul class="dots">
+          <li>Powered by AI, designed for people.</li>
+          <li>Built with vision, crafted with passion.</li>
+          <li>From Turkey to the world.</li>
+        </ul>
+      </article>
+
+      <article class="panel">
+        <h3>TR</h3>
+        <p>“MedaStaré – Yapay Zekâ ile Moda &amp; Güzelliğin Buluştuğu Yer” Kadınlar tarafından, kadınlara özel. Stili, yapay zekâ, yaratıcılık ve kişiselleştirme ile yeniden tanımlıyoruz. Sadece bir uygulama değil, dijital moda-teknoloji geleceğini şekillendiren bir hareket.</p>
+        <ul class="dots">
+          <li>Yapay zekâ ile güçlendirildi, insanlar için tasarlandı.</li>
+          <li>Vizyonla inşa edildi, tutkuyla geliştirildi.</li>
+          <li>Türkiye’den dünyaya açılıyor.</li>
+        </ul>
+      </article>
     </div>
   </div>
 
+  <!-- Apple-vari: parallax + fade-up reveal -->
   <script>
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.2 });
+    (function () {
+      const heroImg = document.querySelector('#about-ai .ai-hero img');
+      const revealEls = document.querySelectorAll('#about-ai .headline h2, #about-ai .panel');
 
-    document.querySelectorAll('.panel').forEach((el) => observer.observe(el));
+      // Parallax (çok hafif)
+      const onScroll = () => {
+        if (!heroImg) return;
+        const r = heroImg.getBoundingClientRect();
+        const center = window.innerHeight * 0.5;
+        const delta = (r.top + r.height * 0.5 - center) / window.innerHeight;
+        heroImg.style.setProperty('--parallax', (delta * -24).toFixed(1) + 'px');
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      // Reveal
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      revealEls.forEach((el) => io.observe(el));
+    })();
   </script>
 </section>
+<!-- =================== /About Us / Hakkımızda =================== -->
   
   <section id="momentum">
     <h2>Momentum</h2>
