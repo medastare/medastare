@@ -259,24 +259,11 @@
 <!-- About Us / Hakkımızda -->
 <section id="about-section" aria-labelledby="about-title">
   <style>
-    /* Genel alan */
     #about-section {
-      background: var(--bg, #0a0a0a);
-      color: var(--text, #fff);
+      background: #0a0a0a;
+      color: #fff;
       padding: clamp(56px, 8vw, 120px) 24px;
       font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
-      position: relative;
-      isolation: isolate;
-    }
-
-    /* Arka plan ışıltısı */
-    #about-section::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(60% 100% at 50% 100%, rgba(255,215,0,0.08), transparent);
-      filter: blur(40px);
-      z-index: -1;
     }
 
     .about-wrap {
@@ -284,7 +271,6 @@
       margin: 0 auto;
     }
 
-    /* Başlık */
     .headline {
       text-align: center;
       margin-bottom: 48px;
@@ -297,14 +283,8 @@
       background: linear-gradient(90deg, #FFD700, #FFB700);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
-      color: transparent;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 1s ease;
     }
 
-    /* İçerik kutuları */
     .panels {
       display: grid;
       gap: 32px;
@@ -319,9 +299,6 @@
       border-radius: 16px;
       padding: 28px;
       box-shadow: 0 10px 28px rgba(0,0,0,0.25);
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 1s ease;
     }
 
     .panel h3 {
@@ -333,12 +310,6 @@
     .panel p {
       line-height: 1.6;
       margin: 0 0 14px;
-    }
-
-    /* Scroll efekt aktifleştiğinde */
-    .visible {
-      opacity: 1 !important;
-      transform: translateY(0) !important;
     }
   </style>
 
@@ -355,27 +326,11 @@
       </div>
       <div class="panel">
         <h3>TR</h3>
-        <p>“MedaStaré – Yapay Zekâ ile Moda & Güzelliğin Buluştuğu Yer”  
+        <p>“MedaStaré – Yapay Zeka ile Moda & Güzelliğin Buluştuğu Yer”  
         Kadınlar tarafından, kadınlara özel. Stili yapay zekâ, yaratıcılık ve kişiselleştirme ile yeniden tanımlıyoruz.</p>
       </div>
     </div>
   </div>
-
-  <!-- Scroll animasyonu için JS -->
-  <script>
-    (function(){
-      const els = document.querySelectorAll('#about-section .headline h2, #about-section .panel');
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting){
-            e.target.classList.add('visible');
-            io.unobserve(e.target);
-          }
-        });
-      },{threshold:.2});
-      els.forEach(el=>io.observe(el));
-    })();
-  </script>
 </section>
   
   <section id="momentum">
