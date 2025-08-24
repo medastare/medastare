@@ -256,81 +256,26 @@
   /* Not */
   .waitlist-box .note { color:#aaa; font-size:0.9em; margin-top:20px; }
   </style>
-<!-- ============= About Us / Hakkımızda (no-JS, safe) ============= -->
-<section id="about" aria-labelledby="about-title">
-  <style>
-    :root{
-      --bg:#0b0b0b; --text:#eaeaea;
-      --gold:#ffd700; --gold2:#ffb700;
-      --panel:rgba(255,255,255,.04); --panelBorder:rgba(255,215,0,.22);
-      --maxW:1100px;
-    }
-    #about{background:var(--bg); color:var(--text);
-           padding:clamp(56px,8vw,120px) 24px; position:relative; isolation:isolate;}
-    #about::before{content:""; position:absolute; inset:0;
-      background:radial-gradient(60% 90% at 50% 10%, rgba(255,215,0,.07), transparent 60%);
-      filter:blur(24px); z-index:-1;}
-
-    .about__wrap{max-width:var(--maxW); margin:0 auto;}
-
-    /* Görsel */
-    .about__media{margin:0 auto 28px; max-width:920px; border-radius:20px; overflow:hidden;
-      border:1px solid var(--panelBorder); box-shadow:0 18px 40px rgba(0,0,0,.45);}
-    .about__media img{display:block; width:100%; height:auto;}
-
-    /* Başlık */
-    .headline{ text-align:center; margin:0 0 36px; }
-    .headline h2{
-      font-size:clamp(32px,5.2vw,56px); font-weight:800; margin:0;
-      background:linear-gradient(90deg,var(--gold),var(--gold2));
-      -webkit-background-clip:text; background-clip:text;
-      -webkit-text-fill-color:transparent; color:transparent;
-    }
-
-    /* Kartlar */
-    .panels{display:grid; gap:28px;}
-    @media (min-width:900px){ .panels{grid-template-columns:repeat(2,1fr);} }
-    .panel{
-      background:var(--panel); border:1px solid var(--panelBorder);
-      border-radius:16px; padding:24px 24px 18px;
-      box-shadow:0 12px 32px rgba(0,0,0,.28);
-    }
-    .panel h3{margin:0 0 12px; font-size:20px; color:var(--gold);}
-    .panel p{margin:0 0 12px; line-height:1.62;}
-    .dots{list-style:none; padding:0; margin:6px 0 0;}
-    .dots li{position:relative; padding-left:1rem; margin:6px 0;}
-    .dots li::before{content:"•"; position:absolute; left:0; color:var(--gold);}
-
-    /* Apple-vari yüklenince fade-up (JS’siz) */
-    @keyframes fadeUp{from{opacity:0; transform:translateY(24px)}
-                      to{opacity:1; transform:none}}
-    .about__media{animation:fadeUp .8s ease both;}
-    .headline h2{animation:fadeUp .9s ease both .12s;}
-    .panel{animation:fadeUp .9s ease both;}
-    .panel:nth-of-type(1){animation-delay:.18s;}
-    .panel:nth-of-type(2){animation-delay:.28s;}
-
-    @media (prefers-reduced-motion:reduce){
-      .about__media, .headline h2, .panel{animation:none;}
-    }
-  </style>
-
-  <div class="about__wrap">
-    <figure class="about__media">
-      <!-- Görsel yolu kökten: yüklediğin konuma göre değiştir -->
-      <img src="/medastare_poweredbyAI.jpg" alt="AI powered MedaStaré illustration" loading="lazy">
-    </figure>
-
+<!-- About Us / Hakkımızda -->
+<section id="about-section" aria-labelledby="about-title">
+  <div class="about-wrap">
     <div class="headline">
       <h2 id="about-title">About Us / Hakkımızda</h2>
     </div>
 
+    <!-- Görsel -->
+    <div class="about__media">
+      <img src="medastare_poweredbyAI.jpg" alt="MedaStaré AI" />
+      <p class="img-note">© MedaStaré – Özel görsel, tüm hakları saklıdır.</p>
+    </div>
+
+    <!-- İçerik -->
     <div class="panels">
       <article class="panel">
         <h3>EN</h3>
-        <p>MedaStaré – Where AI Meets Fashion &amp; Beauty” Created by women, for women.
-           Redefining style with artificial intelligence, creativity, and personalization.
-           Not just an app, but a movement shaping the future of digital fashion-tech.</p>
+        <p>“MedaStaré – Where AI Meets Fashion & Beauty”  
+        Created by women, for women. Redefining style with artificial intelligence, creativity, and personalization.  
+        Not just an app, but a movement shaping the future of digital fashion-tech.</p>
         <ul class="dots">
           <li>Powered by AI, designed for people.</li>
           <li>Built with vision, crafted with passion.</li>
@@ -340,10 +285,9 @@
 
       <article class="panel">
         <h3>TR</h3>
-        <p>MedaStaré – Yapay Zekâ ile Moda &amp; Güzelliğin Buluştuğu Yer”
-           Kadınlar tarafından, kadınlara özel. Stili yapay zekâ, yaratıcılık ve
-           kişiselleştirme ile yeniden tanımlıyoruz. Sadece bir uygulama değil,
-           dijital moda-teknoloji geleceğini şekillendiren bir hareket.</p>
+        <p>“MedaStaré – Yapay Zeka ile Moda & Güzelliğin Buluştuğu Yer”  
+        Kadınlar tarafından, kadınlara özel. Stili, yapay zekâ, yaratıcılık ve kişiselleştirme ile yeniden tanımlıyoruz.  
+        Sadece bir uygulama değil, dijital moda-teknoloji geleceğini şekillendiren bir hareket.</p>
         <ul class="dots">
           <li>Yapay zekâ ile güçlendirildi, insanlar için tasarlandı.</li>
           <li>Vizyonla inşa edildi, tutkuyla geliştirildi.</li>
@@ -353,6 +297,39 @@
     </div>
   </div>
 </section>
+
+<style>
+  .about__media {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .about__media img {
+    width: 100%;
+    max-width: 800px;
+    border-radius: 16px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1.2s ease forwards;
+    transition: transform .6s ease, box-shadow .6s ease;
+  }
+
+  .about__media img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.25);
+  }
+
+  .img-note {
+    font-size: 14px;
+    color: #aaa;
+    margin-top: 12px;
+    font-style: italic;
+  }
+
+  @keyframes fadeInUp {
+    to { opacity: 1; transform: none; }
+  }
+</style>
   
   <section id="momentum">
     <h2>Momentum</h2>
