@@ -721,5 +721,14 @@
 
   <!-- Harici JS dosyan varsa -->
   <script src="/main.js" defer></script>
+  <script>
+document.querySelectorAll('[data-coming-soon]').forEach(a=>{
+  a.addEventListener('click', (e)=>{
+    e.preventDefault();
+    alert(a.getAttribute('data-coming-soon'));
+  });
+});
+</script>
+  
 </body>
 </html>
