@@ -14,11 +14,9 @@
   }
   html,body{margin:0;background:var(--bg);color:var(--text);
     font-family:system-ui,-apple-system,"SF Pro Text","Segoe UI",sans-serif}
-  /* soft glow */
   body::before{content:"";position:fixed;inset:0;pointer-events:none;
     background:radial-gradient(60% 100% at 50% 100%, rgba(255,215,0,.08), transparent);
     filter:blur(40px)}
-  /* top nav */
   .topNav{position:sticky;top:0;z-index:10;display:flex;gap:16px;align-items:center;
     padding:10px 16px;background:rgba(0,0,0,.35);border-bottom:1px solid rgba(255,215,0,.12);
     backdrop-filter:saturate(140%) blur(8px)}
@@ -29,7 +27,7 @@
     -webkit-background-clip:text;background-clip:text;color:transparent}
   .lead{opacity:.9;margin:0 0 22px;line-height:1.6;font-size:clamp(14px,3.4vw,17px)}
   .card{background:var(--card);border:1px solid var(--cardBorder);border-radius:16px;
-    padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.28)}
+    padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.28);overflow:hidden}
   .card h2{margin:0 0 10px;font-size:20px}
   .card p{margin:0 0 12px;line-height:1.55;font-size:15px}
   .btnRow{display:flex;flex-wrap:wrap;gap:10px}
@@ -53,25 +51,20 @@
   <main class="wrap">
     <h1 class="title">Careers</h1>
     <p class="lead">
-      EN — We’re building the future of fashion-tech. If you’re passionate about AI,
-      personalization and premium digital experiences, you’ll feel at home. <br>
-      TR — Moda-teknolojinin geleceğini inşa ediyoruz. Yapay zekâ, kişiselleştirme ve
-      premium dijital deneyimler ilgi alanınsa doğru yerdesin.
+      We’re building the future of fashion-tech. If you’re passionate about AI,
+      personalization and premium digital experiences, you’ll feel at home.
     </p>
 
     <section class="card">
-      <h2>Open Roles / Açık Pozisyonlar</h2>
-      <p>EN — We’re preparing our first openings. TR — İlk pozisyonlarımızı hazırlıyoruz.</p>
+      <h2>Open Roles</h2>
+      <p>We’re preparing our first openings.</p>
 
       <div class="btnRow">
-        <a class="btn gold" href="#" onclick="alert('Careers – Coming Soon! / Çok yakında!');return false;">Get Notified / Bildirim Al</a>
-        <a class="btn" href="/#waitlist">Join Waitlist / Ön Kayıt</a>
+        <a class="btn gold" href="#" onclick="alert('Careers — Coming Soon!');return false;">Get Notified</a>
+        <a class="btn" href="/#waitlist">Join Waitlist</a>
       </div>
 
-      <p class="note">
-        EN — Tip: Add your LinkedIn when you join the waitlist for early consideration. <br>
-        TR — İpucu: Ön kayıta LinkedIn’inizi eklerseniz erken değerlendirmeye alınır.
-      </p>
+      <p class="note">Tip: Add your LinkedIn when you join the waitlist for early consideration.</p>
     </section>
   </main>
 
