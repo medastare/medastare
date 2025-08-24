@@ -7,89 +7,81 @@
 <link rel="icon" href="/favicon.ico" />
 <style>
   :root{
-    --bg:#0a0a0a; --text:#f2f2f2; --muted:#cfcfcf;
+    --bg:#0a0a0a; --text:#f2f2f2;
     --gold1:#ffd54a; --gold2:#e6b800;
     --card:rgba(255,255,255,.035); --cardBorder:rgba(255,215,0,.22);
     --maxW:1100px;
   }
-  *{box-sizing:border-box}
   html,body{height:100%;margin:0;background:var(--bg);color:var(--text);
-    font-family:system-ui,-apple-system,"Segoe UI",sans-serif}
-  .nav{position:sticky;top:0;z-index:10;padding:10px 16px;
-    backdrop-filter:saturate(140%) blur(8px);
-    background:rgba(0,0,0,.35);border-bottom:1px solid rgba(255,215,0,.12)}
-  .nav a{color:var(--text);text-decoration:none;margin-right:14px;opacity:.85}
-  main{max-width:var(--maxW);margin:0 auto;padding:64px 20px 40px}
-  h1{margin:0 0 10px;font-size:clamp(28px,5vw,44px);font-weight:800;
+    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-text-size-adjust:100%}
+  *,*:before,*:after{box-sizing:border-box}
+  .wrap{max-width:var(--maxW);margin:0 auto;padding:80px 24px}
+  .title{margin:0 0 24px;font-size:clamp(28px,4.6vw,48px);font-weight:800;
     background:linear-gradient(90deg,var(--gold1),var(--gold2));
     -webkit-background-clip:text;background-clip:text;color:transparent}
-  .lead{color:var(--muted);margin:0 0 22px}
-  .card{background:var(--card);border:1px solid var(--cardBorder);
-    border-radius:16px;padding:20px 20px 28px;box-shadow:0 10px 28px rgba(0,0,0,.28)}
-  .row{display:grid;gap:16px}
-  label{font-weight:700}
-  textarea{width:100%;min-height:160px;padding:12px 14px;border-radius:12px;
-    border:1px solid rgba(255,215,0,.18);background:rgba(255,255,255,.04);color:var(--text);
-    resize:vertical}
-  .actions{display:flex;justify-content:center}
-  .btn{
-    display:inline-block;min-width:260px;padding:14px 18px;border-radius:14px;border:0;
-    background:linear-gradient(90deg,var(--gold1),var(--gold2));
-    color:#111;font-weight:800;font-size:16px;cursor:pointer;
-    box-shadow:0 8px 26px rgba(255,215,0,.22)
-  }
-  footer{max-width:var(--maxW);margin:56px auto 28px;padding:0 20px;opacity:.85}
-  footer hr{border:0;height:1px;background:rgba(255,215,0,.15);margin:26px 0}
-  /* soft glow */
+  .lead{opacity:.9;margin:0 0 24px}
+  .card{background:var(--card);border:1px solid var(--cardBorder);border-radius:16px;
+    padding:24px;box-shadow:0 10px 28px rgba(0,0,0,.28)}
+  label{display:block;margin:14px 0 8px;font-weight:700}
+  textarea{width:100%;min-height:160px;border-radius:12px;padding:14px 16px;
+    border:1px solid rgba(255,215,0,.18);background:rgba(255,255,255,.04);
+    color:var(--text);font-size:16px;resize:vertical}
+  .btn{display:inline-flex;align-items:center;justify-content:center;
+    padding:14px 22px;border-radius:14px;border:0;font-weight:800;font-size:16px;
+    background:linear-gradient(90deg,var(--gold1),var(--gold2));color:#111;
+    cursor:pointer;box-shadow:0 8px 26px rgba(255,215,0,.25);transition:transform .12s ease, box-shadow .2s ease}
+  .btn:hover{transform:translateY(-1px);box-shadow:0 12px 32px rgba(255,215,0,.33)}
+  .btnRow{display:flex;justify-content:center;margin-top:18px}
+  .topNav{position:sticky;top:0;backdrop-filter:saturate(140%) blur(8px);
+    background:rgba(0,0,0,.35);border-bottom:1px solid rgba(255,215,0,.12);padding:10px 16px}
+  .topNav a{color:var(--text);text-decoration:none;margin-right:14px;opacity:.85}
   body::before{content:"";position:fixed;inset:0;pointer-events:none;
     background:radial-gradient(60% 100% at 50% 100%, rgba(255,215,0,.08), transparent);
     filter:blur(42px)}
+  footer{max-width:var(--maxW);margin:64px auto 32px;padding:0 24px;opacity:.85}
+  footer hr{border:0;height:1px;background:rgba(255,215,0,.15);margin:28px 0}
 </style>
 </head>
 <body>
-  <nav class="nav">
+  <nav class="topNav">
     <a href="/">← Home</a>
     <a href="/careers.html">Careers</a>
     <a href="/contact.html" aria-current="page">Contact / Media</a>
   </nav>
 
-  <main>
-    <h1>Contact / Media</h1>
+  <main class="wrap">
+    <h1 class="title">Contact / Media</h1>
     <p class="lead">For partnerships, press and general inquiries.</p>
 
     <section class="card">
-      <div class="row">
-        <p><strong>Email (partnerships & media):</strong>
-          <a href="mailto:info@medastare.com">info@medastare.com</a></p>
+      <p><strong>Email (partnerships &amp; media):</strong>
+        <a href="mailto:info@medastare.com">info@medastare.com</a></p>
 
-        <div>
-          <label for="msg">Message</label>
-          <textarea id="msg" placeholder="Write your message…"></textarea>
+      <form id="contactForm">
+        <label for="msg">Message</label>
+        <textarea id="msg" placeholder="Write your message…"></textarea>
+        <div class="btnRow">
+          <button type="submit" class="btn">Send via Email</button>
         </div>
-
-        <div class="actions">
-          <button id="sendBtn" type="button" class="btn">Send via Email</button>
-        </div>
-      </div>
+      </form>
     </section>
   </main>
 
   <footer>
     <hr />
-    <div>© <span id="y"></span> MedaStaré — All rights reserved.</div>
+    © <span id="y"></span> MedaStaré — All rights reserved.
   </footer>
 
-<script>
-  document.getElementById('y').textContent = new Date().getFullYear();
-
-  // reliable mailto on iOS/Safari
-  document.getElementById('sendBtn').addEventListener('click', function(){
-    var body = encodeURIComponent(document.getElementById('msg').value || "");
-    var mail = "mailto:info@medastare.com"
-            + "?subject=" + encodeURIComponent("MedaStaré Contact")
-            + "&body=" + body;
-    window.location.href = mail;
-  });
-</script>
+  <script>
+    // footer year
+    document.getElementById('y').textContent = new Date().getFullYear();
+    // mailto with body
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const body = encodeURIComponent(document.getElementById('msg').value.trim());
+      const link = `mailto:info@medastare.com?subject=MedaStar%C3%A9%20Contact&body=${body}`;
+      window.location.href = link;
+    });
+  </script>
 </body>
 </html>
