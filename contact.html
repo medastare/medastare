@@ -27,13 +27,14 @@
     -webkit-background-clip:text;background-clip:text;color:transparent}
   .lead{opacity:.9;margin:0 0 18px;line-height:1.55;font-size:clamp(14px,3.4vw,17px)}
   .card{background:var(--card);border:1px solid var(--cardBorder);border-radius:16px;
-    padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.28)}
+    padding:18px;box-shadow:0 8px 24px rgba(0,0,0,.28);overflow:hidden}
   .card h3{margin:0 0 8px;font-size:18px}
   .card p{margin:0 0 12px;line-height:1.55;font-size:15px}
   label{display:block;font-weight:600;margin:10px 0 6px;font-size:14px}
-  textarea{width:100%;min-height:150px;resize:vertical;font-size:15px;
+  textarea{display:block;width:100%;min-height:150px;resize:vertical;font-size:15px;
     padding:12px 14px;border-radius:12px;color:var(--text);
-    border:1px solid var(--cardBorder);background:rgba(255,255,255,.04)}
+    border:1px solid var(--cardBorder);background:rgba(255,255,255,.04);
+    box-sizing:border-box} /* ← kaymayı çözen satır */
   .btn{display:inline-block;margin-top:12px;padding:12px 16px;font-weight:700;
     border-radius:12px;border:0;color:#111;cursor:pointer;
     background:linear-gradient(90deg,var(--gold1),var(--gold2));
@@ -53,17 +54,14 @@
 
   <main class="wrap">
     <h1 class="title">Contact / Media</h1>
-    <p class="lead">For partnerships, press and general inquiries • İş birlikleri, basın ve genel iletişim</p>
+    <p class="lead">For partnerships, press and general inquiries.</p>
 
     <section class="card">
-      <h3>EN</h3>
+      <h3>Email</h3>
       <p>Partnerships & media: <a href="mailto:info@medastare.com">info@medastare.com</a></p>
 
-      <h3>TR</h3>
-      <p>İş birlikleri & basın: <a href="mailto:info@medastare.com">info@medastare.com</a></p>
-
-      <label for="msg">Message / Mesaj</label>
-      <textarea id="msg" placeholder="Write your message… / Mesajınızı yazın…"></textarea>
+      <label for="msg">Message</label>
+      <textarea id="msg" placeholder="Write your message…"></textarea>
 
       <button class="btn"
         onclick="window.location='mailto:info@medastare.com?subject=MedaStaré%20Contact&body='+encodeURIComponent(document.getElementById('msg').value)">
