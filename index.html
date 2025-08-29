@@ -370,112 +370,117 @@
       <h2>About Us / Hakkımızda</h2>
     </div>
 
-    <!-- Görsel + telif -->
-    <div class="aboutX__media">
-      <img src="medastare_poweredbyAI.jpg" alt="MedaStaré Powered by AI">
-      <p class="aboutX__caption">© MedaStaré – Özel görsel, tüm hakları saklıdır.</p>
-    </div>
+    <!-- Görsel + Telif -->
+    <figure class="aboutX__media">
+      <img src="medastare_poweredbyAI.jpg" alt="MedaStaré — Powered by AI">
+      <figcaption class="aboutX__caption">© MedaStaré – Özel görsel, tüm hakları saklıdır.</figcaption>
+    </figure>
 
-    <!-- EN Açıklama -->
-    <div class="aboutX__content">
-      <h3>EN</h3>
-      <p>
-        “MedaStaré – Where AI Meets Fashion & Beauty”  
-        Created by women, for women.  
-        Redefining style with artificial intelligence, creativity, and personalization.  
+    <!-- EN Kart -->
+    <article class="aboutX__card">
+      <h3 class="aboutX__tag">EN</h3>
+      <p class="aboutX__lead">
+        “MedaStaré – Where AI Meets Fashion &amp; Beauty” Created by women, for women.
+        Redefining style with artificial intelligence, creativity, and personalization.
         Not just an app, but a movement shaping the future of digital fashion-tech.
       </p>
-      <ul>
+      <ul class="aboutX__list">
         <li>Powered by AI, designed for people.</li>
         <li>Built with vision, crafted with passion.</li>
         <li>From Turkey to the world.</li>
       </ul>
-    </div>
+    </article>
 
-    <!-- TR Açıklama -->
-    <div class="aboutX__content">
-      <h3>TR</h3>
-      <p>
-        “MedaStaré – Yapay Zekâ ile Moda & Güzelliğin Buluştuğu Yer”  
-        Kadınlar tarafından, kadınlara özel.  
-        Stili yapay zekâ, yaratıcılık ve kişiselleştirme ile yeniden tanımlıyor.  
+    <!-- TR Kart -->
+    <article class="aboutX__card">
+      <h3 class="aboutX__tag">TR</h3>
+      <p class="aboutX__lead">
+        “MedaStaré – Yapay Zekâ ile Moda &amp; Güzelliğin Buluştuğu Yer” Kadınlar tarafından,
+        kadınlara özel. Stili yapay zekâ, yaratıcılık ve kişiselleştirme ile yeniden tanımlıyor.
         Sadece bir uygulama değil, dijital fashion-tech geleceğini şekillendiren bir hareket.
       </p>
-      <ul>
+      <ul class="aboutX__list">
         <li>Yapay zekâ ile güçlendirildi, insanlar için tasarlandı.</li>
         <li>Vizyonla inşa edildi, tutkuyla geliştirildi.</li>
         <li>Türkiye’den dünyaya.</li>
       </ul>
-    </div>
+    </article>
 
   </div>
 </section>
 
 <style>
-/* Genel kapsayıcı */
-.aboutX {
-  color: var(--text,#f2f2f2);
-  padding: 60px 20px;
-}
-.aboutX__wrap {
-  max-width: 1100px;
-  margin: 0 auto;
-}
+  /* ---------- Palette ---------- */
+  :root{
+    --ax-text:#f2f2f2;
+    --ax-muted:#cfcab8;
+    --ax-card:rgba(12,12,14,.82);
+    --ax-gold:#FFD56A;
+    --ax-gold-2:#F0B44E;
+    --ax-gold-3:#B8892B;
+    --ax-stroke:rgba(255,213,106,.28);
+    --ax-glow:rgba(255,213,106,.14);
+  }
 
-/* Başlık */
-.aboutX__headline {
-  text-align: center;
-  margin-bottom: 40px;
-}
-.aboutX__headline h2 {
-  margin: 0;
-  font-size: clamp(28px,5vw,36px);
-  background: linear-gradient(90deg,#FFD56A,#F0B44E,#B8892B);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+  /* ---------- Section ---------- */
+  .aboutX{padding:56px 20px; color:var(--ax-text);}
+  .aboutX__wrap{max-width:1100px; margin:0 auto;}
 
-/* Görsel */
-.aboutX__media {
-  text-align: center;
-  margin-bottom: 20px;
-}
-.aboutX__media img {
-  width: 100%;
-  max-width: 800px;
-  border-radius: 12px;
-  box-shadow: 0 10px 28px rgba(0,0,0,.5);
-}
-.aboutX__caption {
-  margin-top: 8px;
-  font-size: 0.9rem;
-  color: #cfcab8;
-  font-style: italic;
-  text-align: center;
-}
+  /* ---------- Headline ---------- */
+  .aboutX__headline{text-align:center; margin-bottom:26px;}
+  .aboutX__headline h2{
+    margin:0;
+    font-size:clamp(28px,5vw,36px);
+    background:linear-gradient(90deg,var(--ax-gold),var(--ax-gold-2),var(--ax-gold-3));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
 
-/* İçerik */
-.aboutX__content {
-  margin-bottom: 40px;
-}
-.aboutX__content h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  color: #FFD56A;
-}
-.aboutX__content p {
-  font-size: 1.05rem;
-  line-height: 1.6;
-  margin-bottom: 10px;
-}
-.aboutX__content ul {
-  padding-left: 20px;
-}
-.aboutX__content li {
-  margin-bottom: 6px;
-}
+  /* ---------- Hero image + caption ---------- */
+  .aboutX__media{margin:0 0 12px; text-align:center;}
+  .aboutX__media img{
+    width:100%; max-width:800px; display:block; margin-inline:auto;
+    border-radius:12px; box-shadow:0 10px 28px rgba(0,0,0,.5);
+  }
+  .aboutX__caption{
+    margin-top:8px; font-size:.95rem; color:var(--ax-muted); font-style:italic;
+  }
+
+  /* ---------- Language card ---------- */
+  .aboutX__card{
+    position:relative;
+    background:var(--ax-card);
+    border:1px solid var(--ax-stroke);
+    border-radius:16px;
+    padding:22px 20px;
+    margin:18px 0;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,.02) inset,
+      0 12px 28px var(--ax-glow);
+  }
+
+  /* small “EN / TR” tag */
+  .aboutX__tag{
+    margin:0 0 10px;
+    font-size:1.05rem; letter-spacing:.02em;
+    font-weight:700; color:var(--ax-text);
+  }
+
+  .aboutX__lead{margin:.25rem 0 10px; line-height:1.7; font-size:1.05rem;}
+
+  /* Bullet list with golden dots exactly like the screenshot */
+  .aboutX__list{margin:10px 0 0 0; padding-left:22px;}
+  .aboutX__list li{
+    margin:8px 0; line-height:1.6;
+    list-style:disc;
+  }
+  .aboutX__list li::marker{color:var(--ax-gold);} /* sarı • */
+
+  /* Responsive spacing */
+  @media (min-width:900px){
+    .aboutX__card{padding:26px 24px;}
+  }
 </style>
-<!-- =================== /About Us =================== -->
+  
   <section id="momentum">
     <h2>Momentum</h2>
     <div class="card">
