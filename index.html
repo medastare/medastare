@@ -257,131 +257,81 @@
   .waitlist-box .note { color:#aaa; font-size:0.9em; margin-top:20px; }
   </style>
 </script>
-
-<!-- ===== MedaStaré Teaser (Minimal) ===== -->
-<div id="teaser" style="display:none;
-  position:fixed; inset:0; z-index:9999; 
-  background:rgba(0,0,0,0.8); 
-  display:flex; align-items:center; justify-content:center;">
-  
-  <div style="background:#111; color:#eee; max-width:600px; width:90%; border-radius:14px; overflow:hidden; position:relative; font-family:-apple-system,Arial,sans-serif;">
-    <button onclick="document.getElementById('teaser').style.display='none'" 
-      style="position:absolute; top:10px; right:10px; background:#222; color:#fff; border:none; border-radius:6px; width:28px; height:28px; cursor:pointer;">✕</button>
+<!-- ========= MedaStaré Teaser Section ========= -->
+<section id="medastare-teaser" class="teaser">
+  <div class="teaser-box">
     
-    <img src="medastare_fashiontech.PNG" alt="MedaStaré" style="width:100%; display:block;">
-    
-    <div style="padding:20px; text-align:center;">
-      <h2 style="margin:0 0 10px; color:#f7e09a;">MedaStaré — 24 Saatlik Özel Teaser Deneyimi</h2>
-      <p style="margin:0 0 12px;">Moda ve teknolojinin geleceğini şekillendiren <strong>MedaStaré</strong>, ilk kez kapılarını aralıyor. 
-      Waitlist’e katılan seçilmiş kullanıcılar, yalnızca <strong>24 saat</strong> boyunca benzersiz içerikleri önceden deneyimleme ayrıcalığına sahip olacak.</p>
-      <p style="opacity:0.8; font-size:0.9em;">Bu gösterim bir lansman değil, bir <em>ön izleme</em>. Bir ekosistemin doğuşunu ilk göreceklerden olun.</p>
-    </div>
-  </div>
-</div>
+    <!-- Üst Görsel -->
+    <figure class="teaser-hero">
+      <img src="medastare_fashiontech.PNG" alt="MedaStaré — Fashion-Tech Ecosystem">
+    </figure>
 
-<script>
-  // Sayfa açılınca otomatik göster (700ms sonra)
-  window.addEventListener('load', ()=> {
-    setTimeout(()=> document.getElementById('teaser').style.display='flex', 700);
-  });
-</script>
-<!-- ============== About Us / Hakkımızda (CSS-only, safe) ============== -->
-<section id="about-medastare" class="aboutX" aria-labelledby="aboutX-title">
-  <style>
-    /* ----- SCOPE: .aboutX ----- */
-    .aboutX{color:var(--text,#f2f2f2); padding:clamp(56px,8vw,120px) 24px;}
-    .aboutX__wrap{max-width:1100px; margin:0 auto;}
+    <!-- Başlık -->
+    <header class="teaser-head">
+      <h2>MedaStaré — 24 Saatlik Özel Teaser Deneyimi</h2>
+    </header>
 
-    /* Başlık */
-    .aboutX__headline{ text-align:center; margin:0 0 32px;}
-    .aboutX__headline h2{
-      margin:0; font-size:clamp(32px,5.2vw,56px); font-weight:700;
-      background:linear-gradient(90deg,var(--gold,#FFD700),#FFB700);
-      -webkit-background-clip:text; background-clip:text;
-      -webkit-text-fill-color:transparent; color:transparent;
-      animation:aboutX-fadeUp .9s ease both;
-    }
+    <!-- Açıklama -->
+    <section class="teaser-copy">
+      <p>
+        Moda ve teknolojinin geleceğini şekillendiren <strong>MedaStaré</strong>, ilk kez kapılarını aralıyor.
+        Waitlist’e katılan seçilmiş kullanıcılar, yalnızca <strong>24 saat</strong> boyunca benzersiz içerikleri
+        önceden deneyimleme ayrıcalığına sahip olacak.
+      </p>
+      <p class="dim">
+        Bu gösterim bir lansman değil, bir <em>ön izleme</em>.  
+        Bir ekosistemin doğuşunu ilk göreceklerden olun.
+      </p>
+    </section>
 
-    /* Görsel + not */
-    .aboutX__media{ text-align:center; margin:0 0 28px;}
-    .aboutX__media img{
-      width:100%; max-width:800px; border-radius:16px;
-      box-shadow:0 10px 28px rgba(0,0,0,.25);
-      animation:aboutX-fadeUp .9s ease .05s both;
-      transition:box-shadow .6s ease, transform .6s ease;
-    }
-    .aboutX__media img:hover{
-      box-shadow:0 0 30px rgba(255,215,0,.22);
-      transform:translateY(-2px) scale(1.01);
-    }
-    .aboutX__note{ margin:12px 0 0; font-size:14px; color:#a9a9a9; font-style:italic; }
-
-    /* EN / TR kutuları */
-    .aboutX__grid{ display:grid; gap:32px;}
-    @media (min-width:900px){ .aboutX__grid{ grid-template-columns:repeat(2,1fr);} }
-
-    .aboutX__card{
-      background:rgba(255,255,255,.035);
-      border:1px solid rgba(255,215,0,.22);
-      border-radius:16px; padding:24px 24px 22px;
-      box-shadow:0 10px 28px rgba(0,0,0,.25);
-      animation:aboutX-fadeUp .9s ease .1s both;
-    }
-    .aboutX__card h3{ margin:0 0 10px; font-size:22px; color:var(--gold,#FFD700); }
-    .aboutX__card p{ margin:0 0 14px; line-height:1.6; }
-    .aboutX__dots{ list-style:none; padding:0; margin:0; }
-    .aboutX__dots li{ position:relative; padding-left:1.15rem; margin:.35rem 0; }
-    .aboutX__dots li::before{ content:"•"; position:absolute; left:0; top:0; color:var(--gold,#FFD700); }
-
-    /* Apple tarzı yumuşak fade-up */
-    @keyframes aboutX-fadeUp{
-      from{opacity:0; transform:translateY(16px);}
-      to{opacity:1; transform:translateY(0);}
-    }
-    @media (prefers-reduced-motion:reduce){
-      .aboutX *{ animation:none !important; }
-    }
-  </style>
-
-  <div class="aboutX__wrap">
-    <div class="aboutX__headline">
-      <h2 id="aboutX-title">About Us / Hakkımızda</h2>
-    </div>
-
-    <!-- GÖRSEL (dosya adını birebir böyle yükle) -->
-    <div class="aboutX__media">
-      <img src="medastare_poweredbyAI.jpg" alt="MedaStaré — Powered by AI">
-      <p class="aboutX__note">© MedaStaré – Özel görsel, tüm hakları saklıdır.</p>
-    </div>
-
-    <!-- EN / TR KUTULAR -->
-    <div class="aboutX__grid">
-      <article class="aboutX__card">
-        <h3>EN</h3>
-        <p>“MedaStaré – Where AI Meets Fashion &amp; Beauty”
-        Created by women, for women. Redefining style with artificial intelligence, creativity, and personalization.
-        Not just an app, but a movement shaping the future of digital fashion-tech.</p>
-        <ul class="aboutX__dots">
-          <li>Powered by AI, designed for people.</li>
-          <li>Built with vision, crafted with passion.</li>
-          <li>From Turkey to the world.</li>
-        </ul>
-      </article>
-
-      <article class="aboutX__card">
-        <h3>TR</h3>
-        <p>“MedaStaré – Yapay Zekâ ile Moda &amp; Güzelliğin Buluştuğu Yer”
-        Kadınlar tarafından, kadınlara özel. Stili, yapay zekâ, yaratıcılık ve kişiselleştirme ile yeniden tanımlıyoruz.
-        Sadece bir uygulama değil, dijital moda-teknoloji geleceğini şekillendiren bir hareket.</p>
-        <ul class="aboutX__dots">
-          <li>Yapay zekâ ile güçlendirildi, insanlar için tasarlandı.</li>
-          <li>Vizyonla inşa edildi, tutkuyla geliştirildi.</li>
-          <li>Türkiye’den dünyaya açılıyor.</li>
-        </ul>
-      </article>
-    </div>
   </div>
 </section>
+
+<style>
+/* Genel kutu */
+.teaser {
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+}
+.teaser-box {
+  background: rgba(0,0,0,0.7);
+  border-radius: 14px;
+  max-width: 700px;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 0 28px rgba(255,215,0,.15);
+  color: #eee;
+}
+
+/* Görsel */
+.teaser-hero img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 18px;
+}
+
+/* Başlık */
+.teaser-head h2 {
+  margin: 0 0 10px;
+  font-size: 1.4rem;
+  background: linear-gradient(90deg,#FFD56A,#F0B44E,#B8892B);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Açıklama */
+.teaser-copy {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.teaser-copy .dim {
+  opacity: .85;
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+</style>
+
 <!-- =================== /About Us =================== -->
   <section id="momentum">
     <h2>Momentum</h2>
