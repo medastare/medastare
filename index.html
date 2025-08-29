@@ -257,93 +257,87 @@
   .waitlist-box .note { color:#aaa; font-size:0.9em; margin-top:20px; }
   </style>
 </script>
-<!-- ========= MEDASTARÉ TEASER MODAL ========= -->
-<div id="ms-teaser" class="ms-modal" aria-hidden="true">
-  <div class="ms-backdrop" data-close></div>
 
-  <article class="ms-card">
-    <button class="ms-close" aria-label="Close" data-close>✕</button>
+  <!-- ===== MedaStaré Teaser (Drop-in Modal) ===== -->
+<div id="msz-teaser" class="msz-modal" aria-hidden="true">
+  <div class="msz-backdrop" data-close></div>
 
-    <!-- ÜST GÖRSEL -->
-    <figure class="ms-hero">
-      <img src="medastare_fashiontech.PNG" alt="MedaStaré — Fashion-Tech Ecosystem" />
+  <article class="msz-card" role="dialog" aria-modal="true" aria-labelledby="msz-title">
+    <button class="msz-close" aria-label="Close" data-close>✕</button>
+
+    <figure class="msz-hero">
+      <img src="medastare_fashiontech.PNG" alt="MedaStaré — Fashion-Tech Ecosystem">
     </figure>
 
-    <!-- BAŞLIK + AÇIKLAMA -->
-    <header class="ms-head">
-      <h2 class="ms-title">MedaStaré — 24 Saatlik Özel Teaser Deneyimi</h2>
-      <p class="ms-sub">MedaStaré — 24h Exclusive Teaser Experience</p>
+    <header class="msz-head">
+      <h2 id="msz-title" class="msz-title">MedaStaré — 24 Saatlik Özel Teaser Deneyimi</h2>
+      <p class="msz-sub">MedaStaré — 24h Exclusive Teaser Experience</p>
     </header>
 
-    <section class="ms-copy">
-      <p>
-        Moda ve teknolojinin geleceğini şekillendiren <strong>MedaStaré</strong>, ilk kez kapılarını aralıyor.
-        Waitlist’e katılan seçilmiş kullanıcılar, yalnızca <strong>24 saat</strong> boyunca benzersiz içerikleri
-        önceden deneyimleme ayrıcalığına sahip olacak.
-      </p>
+    <section class="msz-copy">
+      <p>Moda ve teknolojinin geleceğini şekillendiren <strong>MedaStaré</strong>, ilk kez kapılarını aralıyor.
+      Waitlist’e katılan seçilmiş kullanıcılar, yalnızca <strong>24 saat</strong> boyunca benzersiz içerikleri
+      önceden deneyimleme ayrıcalığına sahip olacak.</p>
       <p class="dim">Bu gösterim bir lansman değil, bir <em>ön izleme</em>. Bir ekosistemin doğuşunu ilk göreceklerden olun.</p>
 
-      <p>
-        <strong>MedaStaré</strong>, the ecosystem where fashion meets technology, opens its doors for the very first time.
-        Selected users on the waitlist will gain early access to unique content — available only for <strong>24 hours</strong>.
-      </p>
+      <p><strong>MedaStaré</strong>, the ecosystem where fashion meets technology, opens its doors for the very first time.
+      Selected users on the waitlist will gain early access to unique content — available only for <strong>24 hours</strong>.</p>
       <p class="dim">This is not a launch — it’s a <em>preview</em>. Be among the first to witness the beginning of a new era.</p>
     </section>
   </article>
 </div>
 
 <style>
-  .ms-modal[aria-hidden="true"] { display:none; }
-  .ms-modal {
-    position: fixed; inset: 0; z-index: 9999;
-    display: grid; place-items: center;
-    font-family: "SF Pro", -apple-system, sans-serif;
+  /* İzolasyon için prefix: msz- */
+  .msz-modal[aria-hidden="true"]{display:none}
+  .msz-modal{
+    position:fixed; inset:0; z-index:2147483647;  /* en üste */
+    display:grid; place-items:center; font-family:-apple-system,"SF Pro",Inter,Helvetica,Arial,sans-serif;
   }
-  .ms-backdrop {
-    position: absolute; inset: 0;
-    background: rgba(0,0,0,0.75);
-    backdrop-filter: blur(6px);
+  .msz-backdrop{position:absolute; inset:0; background:rgba(0,0,0,.78);
+    backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);}
+  .msz-card{
+    position:relative; width:min(760px,94vw); color:#eee7d5; background:#0b0b0f; border-radius:22px;
+    overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.55),0 0 60px rgba(255,204,0,.08) inset;
+    transform:translateY(10px) scale(.98); opacity:0; animation:msz-in .6s cubic-bezier(.2,.7,.2,1) .05s forwards;
   }
-  .ms-card {
-    position: relative;
-    width: min(720px, 95%);
-    background: #0b0b0f;
-    border-radius: 20px;
-    color: #eee7d5;
-    box-shadow: 0 20px 60px rgba(0,0,0,.55);
-    animation: fadeIn .6s ease forwards;
-  }
-  .ms-close {
-    position: absolute; top: 12px; right: 12px;
-    border: none; background: rgba(255,255,255,0.08);
-    color: #ffd56a; font-size: 18px;
-    border-radius: 8px; cursor: pointer;
-  }
-  .ms-hero img { width:100%; display:block; border-radius:20px 20px 0 0; }
-  .ms-head { text-align:center; padding:18px; }
-  .ms-title { font-size: 22px; margin:0; background: linear-gradient(180deg,#FFD56A,#B8892B); -webkit-background-clip:text; color:transparent; }
-  .ms-sub { font-size: 14px; color:#cfcab8; margin: 4px 0 0; }
-  .ms-copy { padding:20px; line-height:1.6; }
-  .ms-copy p { margin: 10px 0; }
-  .dim { opacity:0.8; }
-  @keyframes fadeIn { from {opacity:0; transform:scale(.96);} to {opacity:1; transform:scale(1);} }
+  .msz-card::before{content:""; position:absolute; inset:-2px; padding:2px; border-radius:24px;
+    background:conic-gradient(from 0deg,#B8892B,#F0B44E,#FFD56A,#F7E09A,#F0B44E,#B8892B);
+    mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor; mask-composite:exclude; filter:blur(.6px); animation:msz-spin 9s linear infinite; opacity:.9}
+  .msz-close{position:absolute; top:10px; right:10px; width:34px; height:34px; border:0; border-radius:10px;
+    background:rgba(255,255,255,.08); color:#ffd56a; font-size:18px; cursor:pointer}
+  .msz-hero img{display:block; width:100%; height:auto; aspect-ratio:16/9; object-fit:cover}
+  .msz-head{text-align:center; padding:18px 18px 6px}
+  .msz-title{margin:0 0 4px; font-size:clamp(20px,4.2vw,28px);
+    background:linear-gradient(180deg,#F7E09A,#F0B44E 60%,#B8892B); -webkit-background-clip:text; background-clip:text; color:transparent}
+  .msz-sub{margin:0; color:#cfcab8; font-size:clamp(13px,2.8vw,14px)}
+  .msz-copy{padding:10px 22px 22px; max-width:70ch; margin-inline:auto; line-height:1.6}
+  .msz-copy p{margin:.5rem 0}
+  .dim{opacity:.85}
+  @keyframes msz-in{to{opacity:1; transform:translateY(0) scale(1)}}
+  @keyframes msz-spin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){.msz-card{animation:none}}
 </style>
 
 <script>
-  const teaser = document.getElementById("ms-teaser");
-  const openTeaser = () => teaser.setAttribute("aria-hidden","false");
-  const closeTeaser = () => teaser.setAttribute("aria-hidden","true");
+  (function(){
+    const modal = document.getElementById('msz-teaser');
+    const open  = () => modal.setAttribute('aria-hidden','false');
+    const close = () => modal.setAttribute('aria-hidden','true');
 
-  // otomatik açılış (1 saniye sonra)
-  window.addEventListener("load", ()=> setTimeout(openTeaser, 1000));
+    // otomatik açılış (1s sonra)
+    window.addEventListener('load', () => setTimeout(open, 1000));
 
-  teaser.querySelectorAll("[data-close]").forEach(el =>
-    el.addEventListener("click", closeTeaser)
-  );
-  document.addEventListener("keydown", e=>{
-    if(e.key === "Escape") closeTeaser();
-  });
+    modal.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', close));
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') close(); });
+
+    // İstersen sayfadaki bir butona bağla:
+    // document.querySelector('#open-teaser')?.addEventListener('click', open);
+  })();
 </script>
+<!-- ===== /MedaStaré Teaser ===== -->
   
 <!-- ============== About Us / Hakkımızda (CSS-only, safe) ============== -->
 <section id="about-medastare" class="aboutX" aria-labelledby="aboutX-title">
