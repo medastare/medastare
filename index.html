@@ -257,13 +257,12 @@
   .waitlist-box .note { color:#aaa; font-size:0.9em; margin-top:20px; }
   </style>
 </script>
+<!-- ========= MEDASTARÉ TEASER MODAL ========= -->
+<div id="ms-teaser" class="ms-modal" aria-hidden="true">
+  <div class="ms-backdrop" data-close></div>
 
-  <!-- ========= MEDASTARÉ TEASER MODAL ========= -->
-<div id="ms-teaser" class="ms-modal">
-  <div class="ms-backdrop" onclick="closeMS()"></div>
-
-  <div class="ms-card">
-    <button class="ms-close" onclick="closeMS()">✕</button>
+  <article class="ms-card">
+    <button class="ms-close" aria-label="Close" data-close>✕</button>
 
     <!-- ÜST GÖRSEL -->
     <figure class="ms-hero">
@@ -272,8 +271,8 @@
 
     <!-- BAŞLIK + AÇIKLAMA -->
     <header class="ms-head">
-      <h2>MedaStaré — 24 Saatlik Özel Teaser Deneyimi</h2>
-      <p>MedaStaré — 24h Exclusive Teaser Experience</p>
+      <h2 class="ms-title">MedaStaré — 24 Saatlik Özel Teaser Deneyimi</h2>
+      <p class="ms-sub">MedaStaré — 24h Exclusive Teaser Experience</p>
     </header>
 
     <section class="ms-copy">
@@ -282,75 +281,68 @@
         Waitlist’e katılan seçilmiş kullanıcılar, yalnızca <strong>24 saat</strong> boyunca benzersiz içerikleri
         önceden deneyimleme ayrıcalığına sahip olacak.
       </p>
-      <p><em>Bu gösterim bir lansman değil, bir ön izleme. Bir ekosistemin doğuşunu ilk göreceklerden olun.</em></p>
+      <p class="dim">Bu gösterim bir lansman değil, bir <em>ön izleme</em>. Bir ekosistemin doğuşunu ilk göreceklerden olun.</p>
 
       <p>
         <strong>MedaStaré</strong>, the ecosystem where fashion meets technology, opens its doors for the very first time.
         Selected users on the waitlist will gain early access to unique content — available only for <strong>24 hours</strong>.
       </p>
-      <p><em>This is not a launch — it’s a preview. Be among the first to witness the beginning of a new era.</em></p>
+      <p class="dim">This is not a launch — it’s a <em>preview</em>. Be among the first to witness the beginning of a new era.</p>
     </section>
-  </div>
+  </article>
 </div>
 
 <style>
-  /* Modal genel */
+  .ms-modal[aria-hidden="true"] { display:none; }
   .ms-modal {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: fixed; inset: 0; z-index: 9999;
+    display: grid; place-items: center;
+    font-family: "SF Pro", -apple-system, sans-serif;
+  }
+  .ms-backdrop {
+    position: absolute; inset: 0;
     background: rgba(0,0,0,0.75);
-    z-index: 99999;
+    backdrop-filter: blur(6px);
   }
-
   .ms-card {
-    background: #111;
-    color: #fff;
-    max-width: 700px;
-    width: 90%;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 0 30px rgba(0,0,0,.6);
     position: relative;
+    width: min(720px, 95%);
+    background: #0b0b0f;
+    border-radius: 20px;
+    color: #eee7d5;
+    box-shadow: 0 20px 60px rgba(0,0,0,.55);
+    animation: fadeIn .6s ease forwards;
   }
-
   .ms-close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border: none;
-    background: rgba(255,255,255,.2);
-    color: #fff;
-    padding: 6px 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
+    position: absolute; top: 12px; right: 12px;
+    border: none; background: rgba(255,255,255,0.08);
+    color: #ffd56a; font-size: 18px;
+    border-radius: 8px; cursor: pointer;
   }
-
-  .ms-hero img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-
-  .ms-head {
-    text-align: center;
-    padding: 15px;
-  }
-
-  .ms-copy {
-    padding: 20px;
-    font-size: 15px;
-    line-height: 1.5;
-  }
+  .ms-hero img { width:100%; display:block; border-radius:20px 20px 0 0; }
+  .ms-head { text-align:center; padding:18px; }
+  .ms-title { font-size: 22px; margin:0; background: linear-gradient(180deg,#FFD56A,#B8892B); -webkit-background-clip:text; color:transparent; }
+  .ms-sub { font-size: 14px; color:#cfcab8; margin: 4px 0 0; }
+  .ms-copy { padding:20px; line-height:1.6; }
+  .ms-copy p { margin: 10px 0; }
+  .dim { opacity:0.8; }
+  @keyframes fadeIn { from {opacity:0; transform:scale(.96);} to {opacity:1; transform:scale(1);} }
 </style>
 
 <script>
-  function closeMS() {
-    document.getElementById('ms-teaser').style.display = "none";
-  }
+  const teaser = document.getElementById("ms-teaser");
+  const openTeaser = () => teaser.setAttribute("aria-hidden","false");
+  const closeTeaser = () => teaser.setAttribute("aria-hidden","true");
+
+  // otomatik açılış (1 saniye sonra)
+  window.addEventListener("load", ()=> setTimeout(openTeaser, 1000));
+
+  teaser.querySelectorAll("[data-close]").forEach(el =>
+    el.addEventListener("click", closeTeaser)
+  );
+  document.addEventListener("keydown", e=>{
+    if(e.key === "Escape") closeTeaser();
+  });
 </script>
   
 <!-- ============== About Us / Hakkımızda (CSS-only, safe) ============== -->
