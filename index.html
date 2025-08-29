@@ -216,9 +216,9 @@
     <button class="ms-close" aria-label="Close" data-close>✕</button>
 
     <!-- ÜST GÖRSEL -->
-  <figure class="ms-hero">
-  <img src="medastare_fashiontech.PNG" alt="MedaStaré — Fashion-Tech Ecosystem" />
-</figure>
+    <figure class="ms-hero">
+      <img src="medastare_fashiontech.PNG" alt="MedaStaré — Fashion-Tech Ecosystem" />
+    </figure>
 
     <!-- BAŞLIK + AÇIKLAMA -->
     <header class="ms-head">
@@ -315,14 +315,11 @@
   const openMS = ()=> ms.setAttribute('aria-hidden','false');
   const closeMS = ()=> ms.setAttribute('aria-hidden','true');
 
-  // otomatik açılış (istersen kaldır)
+  // otomatik açılış
   window.addEventListener('load', ()=> setTimeout(openMS, 700));
 
   ms.querySelectorAll('[data-close]').forEach(el=> el.addEventListener('click', closeMS));
   document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMS(); });
-
-  // İstersen sayfadaki bir butondan aç:
-  // document.querySelector('#open-teaser').addEventListener('click', openMS);
 </script>
   
   <style>
