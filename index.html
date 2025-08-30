@@ -219,64 +219,34 @@
 
 <script>
   function validateEmail(event) {
-    const nameInput  = document.getElementById("wl-name");
-    const emailInput = document.getElementById("wl-email");
-    const name  = (nameInput.value || "").trim();
-    const email = (emailInput.value || "").trim().toLowerCase();
+    const email = document.getElementById("wl-email").value.toLowerCase();
     const invalidMsg = document.getElementById("invalid-message");
 
-    // uyarıyı sıfırla
-    invalidMsg.style.display = "none";
+    // Regex kontrolü
+    const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
-    // zorunlu alan kontrolleri
-    if (!name) {
-      invalidMsg.textContent = "⚠️ Ad alanı zorunlu.";
-      invalidMsg.style.display = "block";
-      nameInput.focus();
-      event.preventDefault();
-      return false;
-    }
-    if (!email) {
-      invalidMsg.textContent = "⚠️ Lütfen e-posta adresi gir.";
-      invalidMsg.style.display = "block";
-      emailInput.focus();
-      event.preventDefault();
-      return false;
-    }
+    // Fake domain listesi
+    const fakeDomains = ["asdnakls.com", "tempmail.com", "10minutemail.com", "mailinator.com"];
 
-    // format kontrolü
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     if (!emailPattern.test(email)) {
       invalidMsg.textContent = "⚠️ Lütfen geçerli bir e-posta adresi gir.";
       invalidMsg.style.display = "block";
-      emailInput.focus();
-      event.preventDefault();
+      event.preventDefault(); // gönderimi engeller
       return false;
     }
 
-    // fake domain engeli
-    const fakeDomains = ["asdnakls.com","tempmail.com","10minutemail.com","mailinator.com"];
-    const domain = email.split("@")[1] || "";
-    if (fakeDomains.includes(domain)) {
-      invalidMsg.textContent = "⚠️ Bu domain kabul edilmiyor. Lütfen gerçek bir e-posta gir.";
-      invalidMsg.style.display = "block";
-      emailInput.focus();
-      event.preventDefault();
-      return false;
+    for (let domain of fakeDomains) {
+      if (email.endsWith("@" + domain)) {
+        invalidMsg.textContent = "⚠️ Bu domain kabul edilmiyor. Lütfen gerçek bir e-posta gir.";
+        invalidMsg.style.display = "block";
+        event.preventDefault();
+        return false;
+      }
     }
 
-    // hepsi OK -> gönder
-    return true;
+    invalidMsg.style.display = "none";
+    return true; // form gönderilebilir
   }
-
-  // kullanıcı yazarken uyarıyı gizle
-  ["wl-name","wl-email"].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el){ el.addEventListener("input", ()=> {
-      const m=document.getElementById("invalid-message");
-      if(m) m.style.display="none";
-    });}
-  });
 </script>
 
   <style>
