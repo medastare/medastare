@@ -196,8 +196,8 @@
     </p>
 
     <!-- FORM -->
-    <form id="waitlist-form" method="POST" action="https://formspree.io/f/xvgqjvvo"
-          autocomplete="on" onsubmit="return validateEmail(event)">
+    <form id="waitlist-form" method="POST" action="/api/waitlist"
+      autocomplete="on" onsubmit="return validateEmail(event)">
       <input id="wl-name" name="name" type="text" placeholder="Ad / Name" required autocomplete="name">
       <input id="wl-email" name="email" type="email" placeholder="E-posta / Email" required
              autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email">
