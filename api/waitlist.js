@@ -8,18 +8,18 @@ export default async function handler(req, res) {
   const { name, email } = req.body;
 
   if (!name || !email) {
-    return res.status(400).send(errorHTML(" İsim ve e-posta gerekli!"));
+    return res.status(400).send(errorHTML("⚠️ İsim ve e-posta gerekli!"));
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    return res.status(400).send(errorHTML(" Geçerli bir e-posta adresi giriniz"));
+    return res.status(400).send(errorHTML("⚠️ Geçerli bir e-posta adresi giriniz"));
   }
 
   const allowedDomains = ["gmail.com", "icloud.com", "outlook.com", "hotmail.com", "yahoo.com"];
   const domain = email.split("@")[1]?.toLowerCase();
   if (!allowedDomains.includes(domain)) {
-    return res.status(400).send(errorHTML(" Sadece gmail, icloud, outlook, hotmail, yahoo kabul ediliyor"));
+    return res.status(400).send(errorHTML("⚠️ Sadece gmail, icloud, outlook, hotmail, yahoo kabul ediliyor"));
   }
 
   try {
