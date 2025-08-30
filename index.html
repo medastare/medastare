@@ -196,38 +196,47 @@
       </p>
 
       <!-- FORM -->
-<form method="POST" action="https://formspree.io/f/xvgqjvvo" autocomplete="on" onsubmit="return validateEmail()">
+<form id="waitlist-form" method="POST" action="https://formspree.io/f/xvgqjvvo" autocomplete="on">
   <input id="wl-name" name="name" type="text" placeholder="Ad / Name" required autocomplete="name">
 
   <input id="wl-email" name="email" type="email" placeholder="E-posta / Email" required 
-         autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email"
-         pattern="^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$">
+         autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email">
 
   <button type="submit">Join the Circle 💎</button>
 </form>
 
 <p class="note">Unsubscribe anytime.</p>
 
+<!-- Başarı & hata mesajları -->
 <p id="success-message" style="color:lime; display:none;">✅ Teşekkürler! Kaydın alındı.</p>
 <p id="error-message" style="color:red; display:none;">❌ Bir hata oldu. Tekrar dene.</p>
+<p id="invalid-message" style="color:orange; display:none;">⚠️ Lütfen geçerli bir e-posta adresi gir.</p>
+
+</div>
+</section>
 
 <script>
-  function validateEmail() {
-    const email = document.getElementById("wl-email").value.toLowerCase();
-    const fakeDomains = ["asdnakls.com", "tempmail.com", "10minutemail.com", "mailinator.com"];
+  const form = document.getElementById("waitlist-form");
+  const emailInput = document.getElementById("wl-email");
+  const successMsg = document.getElementById("success-message");
+  const errorMsg = document.getElementById("error-message");
+  const invalidMsg = document.getElementById("invalid-message");
 
-    for (let domain of fakeDomains) {
-      if (email.endsWith("@" + domain)) {
-        document.getElementById("error-message").style.display = "block";
-        document.getElementById("error-message").innerText = "⚠️ Bu mail adresi kabul edilmiyor. Lütfen gerçek bir mail giriniz.";
-        return false;
-      }
+  form.addEventListener("submit", function(e) {
+    const email = emailInput.value.trim();
+
+    // basit e-posta kontrolü
+    const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    if (!emailPattern.test(email)) {
+      e.preventDefault();
+      invalidMsg.style.display = "block";
+      successMsg.style.display = "none";
+      errorMsg.style.display = "none";
+      return;
+    } else {
+      invalidMsg.style.display = "none";
     }
-
-    // Başarı mesajını aç (Formspree zaten maili gönderecek)
-    document.getElementById("success-message").style.display = "block";
-    return true;
-  }
+  });
 </script>
 
   <style>
