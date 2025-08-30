@@ -196,18 +196,39 @@
       </p>
 
       <!-- FORM -->
-      <form method="POST" action="https://formspree.io/f/xvgqjvvo" autocomplete="on">
-        <input id="wl-name" name="name" type="text" placeholder="Ad / Name" required autocomplete="name">
-        <input id="wl-email" name="email" type="email" placeholder="E-posta / Email" required autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email">
-        <button type="submit">Join the Circle 💎</button>
-      </form>
+<form method="POST" action="https://formspree.io/f/xvgqjvvo" autocomplete="on" onsubmit="return validateEmail()">
+  <input id="wl-name" name="name" type="text" placeholder="Ad / Name" required autocomplete="name">
 
-      <p class="note">Unsubscribe anytime.</p>
+  <input id="wl-email" name="email" type="email" placeholder="E-posta / Email" required 
+         autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email"
+         pattern="^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$">
 
-      <p id="success-message" style="color:lime; display:none;">✅ Teşekkürler! Kaydın alındı.</p>
-      <p id="error-message" style="color:red; display:none;">❌ Bir hata oldu. Tekrar dene.</p>
-    </div>
-  </section>
+  <button type="submit">Join the Circle 💎</button>
+</form>
+
+<p class="note">Unsubscribe anytime.</p>
+
+<p id="success-message" style="color:lime; display:none;">✅ Teşekkürler! Kaydın alındı.</p>
+<p id="error-message" style="color:red; display:none;">❌ Bir hata oldu. Tekrar dene.</p>
+
+<script>
+  function validateEmail() {
+    const email = document.getElementById("wl-email").value.toLowerCase();
+    const fakeDomains = ["asdnakls.com", "tempmail.com", "10minutemail.com", "mailinator.com"];
+
+    for (let domain of fakeDomains) {
+      if (email.endsWith("@" + domain)) {
+        document.getElementById("error-message").style.display = "block";
+        document.getElementById("error-message").innerText = "⚠️ Bu mail adresi kabul edilmiyor. Lütfen gerçek bir mail giriniz.";
+        return false;
+      }
+    }
+
+    // Başarı mesajını aç (Formspree zaten maili gönderecek)
+    document.getElementById("success-message").style.display = "block";
+    return true;
+  }
+</script>
 
   <style>
   /* Waitlist genel */
