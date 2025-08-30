@@ -2,9 +2,7 @@ import { google } from "googleapis";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
-    return res.status(405).send(`
-      <html><body><h1>❌ Only POST allowed</h1></body></html>
-    `);
+    return res.status(405).send(errorHTML("❌ Sadece POST isteği kabul ediliyor"));
   }
 
   const { name, email } = req.body;
@@ -19,15 +17,17 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Google Sheets Auth
+    // 🔑 Google Service Account bağlan
     const auth = new google.auth.GoogleAuth({
       credentials: JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT),
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
     const sheets = google.sheets({ version: "v4", auth });
 
+    // 📊 Senin Sheet ID
     const spreadsheetId = "1--Y4fUkqxuB_6E-NpNXwFnEVhY1X20YRBdpHCIp061E";
 
+    // Satır ekle
     await sheets.spreadsheets.values.append({
       spreadsheetId,
       range: "A:E",
@@ -46,12 +46,14 @@ export default async function handler(req, res) {
     return res.status(200).send(successHTML(name));
 
   } catch (err) {
-    console.error("Sheets API error:", err);
-    return res.status(500).send(errorHTML("❌ Sheets API error: " + err.message));
+    console.error("❌ Sheets API error:", err);
+    return res.status(500).send(errorHTML("❌ Google Sheets API hatası: " + err.message));
   }
 }
 
-// 🎉 Başarı ekranı
+//
+// 🎉 Başarı Ekranı
+//
 function successHTML(name) {
   return `
   <html>
@@ -66,7 +68,7 @@ function successHTML(name) {
       .stars {
         position:absolute; width:100%; height:100%;
         background:url('https://www.transparenttextures.com/patterns/stardust.png');
-        animation: twinkle 10s infinite linear; opacity:0.3;
+        animation: twinkle 15s infinite linear; opacity:0.25;
       }
       @keyframes twinkle {
         from {background-position:0 0;}
@@ -107,7 +109,9 @@ function successHTML(name) {
   </html>`;
 }
 
-// ⚠️ Hata ekranı
+//
+// ⚠️ Hata Ekranı
+//
 function errorHTML(message) {
   return `
   <html>
