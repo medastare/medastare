@@ -1,10 +1,7 @@
 {
-  "type": "service_account",
-  "project_id": "medastare-xxxx",
-  "private_key_id": "xxxx",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nABC...XYZ\n-----END PRIVATE KEY-----\n",
-  "client_email": "medastare-bot@medastare-xxxx.iam.gserviceaccount.com",
-  "client_id": "123456789",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  ...
+  "name": "medastare",
+  "version": "1.0.0",
+  "dependencies": {
+    "googleapis": "^118.0.0"
+  }
 }
