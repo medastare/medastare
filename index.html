@@ -259,7 +259,7 @@
 </script>
 
 <!-- ========= MedaStaré Teaser Section ========= -->
-<section id="medastare-teaser" class="teaser">
+<section id="medastare-teaser" class="teaser" aria-labelledby="teaser-title-tr">
   <div class="teaser-box">
 
     <!-- Üst Görsel -->
@@ -268,42 +268,47 @@
     </figure>
 
     <!-- TR -->
-    <div class="teaser-block">
-      <h2 class="teaser-head">MedaStaré — 24 Saatlik Özel Teaser Deneyimi</h2>
-      <div class="teaser-sep"></div>
-      <div class="teaser-copy" lang="tr">
-        <p>
-          Moda ve teknolojinin geleceğini şekillendiren <strong>MedaStaré</strong>, ilk kez kapılarını aralıyor.
-          Waitlist’e katılan seçilmiş kullanıcılar, yalnızca <strong>24 saat</strong> boyunca benzersiz içerikleri
-          önceden deneyimleme ayrıcalığına sahip olacak.
-        </p>
-        <p class="dim">
-          Bu gösterim bir lansman değil, bir <em>ön izleme</em>. Bir ekosistemin doğuşunu ilk göreceklerden olun.
-        </p>
-      </div>
-    </div>
+    <header class="teaser-head">
+      <h2 id="teaser-title-tr">MedaStaré — 24 Saatlik Özel Teaser Deneyimi</h2>
+    </header>
+    <section class="teaser-copy" lang="tr">
+      <p>
+        Moda ve teknolojinin geleceğini şekillendiren <strong>MedaStaré</strong>, ilk kez kapılarını aralıyor.
+        Waitlist’e katılan seçilmiş kullanıcılar, yalnızca <strong>24 saat</strong> boyunca benzersiz içerikleri
+        önceden deneyimleme ayrıcalığına sahip olacak.
+      </p>
+      <p class="dim">
+        Bu gösterim bir lansman değil, bir <em>ön izleme</em>. Bir ekosistemin doğuşunu ilk göreceklerden olun.
+      </p>
+    </section>
+
+    <div class="teaser-sep" role="presentation"></div>
 
     <!-- EN -->
-    <div class="teaser-block">
-      <h2 class="teaser-head">MedaStaré — 24h Exclusive Teaser Experience</h2>
-      <div class="teaser-sep"></div>
-      <div class="teaser-copy" lang="en">
-        <p>
-          <strong>MedaStaré</strong>, the ecosystem where fashion meets technology, opens its doors for the very first time.
-          Selected users on the waitlist will gain early access to unique content — available only for <strong>24 hours</strong>.
-        </p>
-        <p class="dim">
-          This is not a launch. This is a <em>preview</em>. Be among the first to witness the beginning of a new era.
-        </p>
-      </div>
-    </div>
+    <header class="teaser-head">
+      <h2 id="teaser-title-en">MedaStaré — 24h Exclusive Teaser Experience</h2>
+    </header>
+    <section class="teaser-copy" lang="en">
+      <p>
+        <strong>MedaStaré</strong>, the ecosystem where fashion meets technology, opens its doors for the very first time.
+        Selected users on the waitlist will gain early access to unique content — available only for <strong>24 hours</strong>.
+      </p>
+      <p class="dim">
+        This is not a launch. This is a <em>preview</em>. Be among the first to witness the beginning of a new era.
+      </p>
+    </section>
 
   </div>
 </section>
 
 <style>
-.teaser { padding:40px 20px; display:flex; justify-content:center; }
-.teaser-box {
+/* Kapsayıcı */
+.teaser{
+  padding:40px 20px;
+  display:flex;
+  justify-content:center;
+}
+.teaser-box{
   background:rgba(0,0,0,.70);
   border-radius:14px;
   max-width:700px; width:100%;
@@ -313,47 +318,52 @@
 }
 
 /* Görsel */
-.teaser-hero img {
+.teaser-hero{ margin:0 0 16px; }
+.teaser-hero img{
   width:100%; height:auto; display:block;
-  border-radius:10px; margin-bottom:24px;
+  border-radius:10px;
 }
 
 /* Başlık */
-.teaser-head {
+.teaser-head{ margin:0 0 8px; }
+.teaser-head h2{
+  margin:0;
   font-size:clamp(20px,4.5vw,26px);
-  font-weight:600;
-  text-align:center;
-  margin:0 0 8px;
   background:linear-gradient(90deg,#FFD56A,#F0B44E,#B8892B);
   -webkit-background-clip:text; background-clip:text;
   -webkit-text-fill-color:transparent; color:transparent;
+  text-align:center;
 }
-.teaser-block { margin-bottom:36px; }
+
+/* Metin */
+.teaser-copy{
+  max-width:620px;
+  margin:0 auto 10px;        /* blok aralıkları düzenlendi */
+  text-align:justify;
+  text-justify:inter-word;
+  line-height:1.65;
+  font-size:1rem;
+  hyphens:auto; -webkit-hyphens:auto;
+}
+.teaser-copy p{ margin:0 0 12px; }   /* paragraf boşluğu kısaldı */
+.teaser-copy .dim{
+  opacity:.85;
+  font-size:.95rem;
+  margin-top:6px;            /* üst boşluğu azalttım */
+}
 
 /* Ayırıcı çizgi */
-.teaser-sep {
+.teaser-sep{
   height:1px;
-  width:80%;
-  margin:0 auto 18px;
+  width:88%;
+  margin:14px auto;          /* daha dengeli spacing */
   background:linear-gradient(90deg,transparent,#FFD56A,transparent);
   opacity:.6;
 }
 
-/* Metin */
-.teaser-copy {
-  max-width:600px;
-  margin:0 auto;
-  text-align:justify;
-  text-justify:inter-word;
-  line-height:1.55;
-  font-size:1rem;
-}
-.teaser-copy p { margin:0 0 14px; }
-.teaser-copy .dim {
-  opacity:.85;
-  font-size:.95rem;
-  text-align:center;
-  font-style:italic;
+/* Küçük ekran */
+@media (max-width:380px){
+  .teaser-copy{ max-width: 92%; }
 }
 </style>
   
