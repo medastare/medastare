@@ -196,8 +196,7 @@
     </p>
 
     <!-- FORM -->
-    <form id="waitlist-form" method="POST" action="/api/waitlist"
-      autocomplete="on" onsubmit="return validateEmail(event)">
+    <form id="waitlist-form" method="POST" action="/api/waitlist" autocomplete="on">
       <input id="wl-name" name="name" type="text" placeholder="Ad / Name" required autocomplete="name">
       <input id="wl-email" name="email" type="email" placeholder="E-posta / Email" required
              autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email">
@@ -207,71 +206,61 @@
     <p class="note">Unsubscribe anytime.</p>
 
     <!-- Mesajlar -->
-    <p id="success-message" style="color:lime; display:none;">✅ Teşekkürler! Kaydın alındı.</p>
+    <p id="success-message" style="color:lime; display:none;">✅ Teşekkürler! Kaydın alındı, beklemede kal ✨</p>
     <p id="error-message" style="color:red; display:none;">❌ Bir hata oldu. Tekrar dene.</p>
     <p id="invalid-message" style="color:orange; display:none;">⚠️ Lütfen geçerli bir e-posta adresi gir.</p>
   </div>
 </section>
 
 <script>
-  function validateEmail(event) {
-    const nameInput  = document.getElementById("wl-name");
-    const emailInput = document.getElementById("wl-email");
+  document.getElementById("waitlist-form").addEventListener("submit", async function(event) {
+    event.preventDefault();
 
-    const name  = (nameInput.value || "").trim();
-    const email = (emailInput.value || "").trim().toLowerCase();
+    const name = document.getElementById("wl-name").value.trim();
+    const email = document.getElementById("wl-email").value.trim().toLowerCase();
 
+    const successMsg = document.getElementById("success-message");
+    const errorMsg   = document.getElementById("error-message");
     const invalidMsg = document.getElementById("invalid-message");
+
+    successMsg.style.display = "none";
+    errorMsg.style.display   = "none";
     invalidMsg.style.display = "none";
 
-    // Ad zorunlu
+    // Ad kontrolü
     if (!name) {
       invalidMsg.textContent = "⚠️ Ad alanı zorunlu.";
       invalidMsg.style.display = "block";
-      event.preventDefault();
-      return false;
+      return;
     }
 
-    // E-posta zorunlu
-    if (!email) {
-      invalidMsg.textContent = "⚠️ Lütfen e-posta adresi gir.";
-      invalidMsg.style.display = "block";
-      event.preventDefault();
-      return false;
-    }
-
-    // Daha sıkı format kontrolü
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|net|org|edu|gov|io|co|tr)$/;
+    // E-posta kontrolü (sadece büyük sağlayıcılar)
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@(gmail\.com|icloud\.com|outlook\.com|hotmail\.com|yahoo\.com)$/;
     if (!emailPattern.test(email)) {
-      invalidMsg.textContent = "⚠️ Lütfen geçerli bir e-posta adresi gir.";
+      invalidMsg.textContent = "⚠️ Sadece gmail, icloud, outlook, hotmail veya yahoo kabul ediliyor.";
       invalidMsg.style.display = "block";
-      event.preventDefault();
-      return false;
+      return;
     }
 
-    // Fake domain kontrolü
-    const fakeDomains = [
-      "asdnakls.com","tempmail.com","10minutemail.com",
-      "mailinator.com","hakakaja.com","hajajaj.com"
-    ];
-    const domain = email.split("@")[1] || "";
-    if (fakeDomains.includes(domain)) {
-      invalidMsg.textContent = "⚠️ Bu domain kabul edilmiyor. Lütfen gerçek bir e-posta gir.";
-      invalidMsg.style.display = "block";
-      event.preventDefault();
-      return false;
-    }
-
-    return true;
-  }
-
-  // input sırasında uyarıyı gizle
-  ["wl-name","wl-email"].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.addEventListener("input", () => {
-        document.getElementById("invalid-message").style.display = "none";
+    try {
+      const res = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email })
       });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        successMsg.textContent = data.message || "✅ Teşekkürler! Kaydın alındı, beklemede kal ✨";
+        successMsg.style.display = "block";
+      } else {
+        errorMsg.textContent = data.message || "❌ Bir hata oldu. Tekrar dene.";
+        errorMsg.style.display = "block";
+      }
+    } catch (err) {
+      errorMsg.textContent = "❌ Sunucuya bağlanırken bir hata oluştu.";
+      errorMsg.style.display = "block";
     }
   });
 </script>
