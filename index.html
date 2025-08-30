@@ -324,7 +324,7 @@
 }
 
 /* Başlık */
-.teaser-head{ margin:0 0 8px; }
+.teaser-head{ margin:4px 0 6px; }
 .teaser-head h2{
   margin:0;
   font-size:clamp(20px,4.5vw,26px);
@@ -332,37 +332,30 @@
   -webkit-background-clip:text; background-clip:text;
   -webkit-text-fill-color:transparent; color:transparent;
   text-align:center;
-}
-
-/* Metin */
-.teaser-copy{
-  max-width:620px;
-  margin:0 auto 4px;              /* üst–alt boşluklar sıkı */
-  text-align:justify;              /* iki yana yasla */
-  text-justify:inter-word;
-  text-align-last:center;          /* son satırı ortala */
-  line-height:1.55;
-  font-size:1rem;
-  hyphens:auto; -webkit-hyphens:auto;
-  word-break:normal;
-  letter-spacing:.2px;             /* harf aralığı micro */
-}
-.teaser-copy p{ margin:0 0 8px; }  /* paragraflar arası daha kısa */
-.teaser-copy .dim{
-  opacity:.88;
-  font-size:.96rem;
-  margin-top:2px;
-}
-
-/* Başlık (daha kompakt) */
-.teaser-head{ margin:4px 0 6px; }
-.teaser-head h2{
-  margin:0;
   line-height:1.25;
-  text-wrap:balance;               /* destekleyen tarayıcıda başlığı dengeler */
+  text-wrap:balance;                    /* destekleyenlerde başlık satırlarını dengeler */
 }
 
-/* Ayırıcı çizgi (daha kısa, daha hafif) */
+/* Metin (kompakt ve derli toplu) */
+.teaser-copy{
+  max-width:600px;                      /* gövde genişliği */
+  margin:0 auto 8px;                    /* ortala + alt boşluk */
+  text-align:left;                      /* profesyonel görünüm */
+  line-height:1.45;                     /* satır arası sıkı */
+  font-size:1rem;
+  letter-spacing:0.1px;                 /* çok hafif aralık */
+  word-break:keep-all;                  /* kelime bölme yok */
+}
+.teaser-copy p{ margin:0 0 10px; }      /* paragraf aralığı */
+.teaser-copy .dim{
+  opacity:.85;
+  font-size:.95rem;
+  margin-top:6px;
+  text-align:center;                    /* alt açıklama ortalı */
+  font-style:italic;
+}
+
+/* Ayırıcı çizgi */
 .teaser-sep{
   height:1px;
   width:78%;
@@ -371,16 +364,11 @@
   opacity:.45;
 }
 
-/* Destek var ise başlık dengeleme */
-@supports (text-wrap: balance){
-  .teaser-head h2{ text-wrap:balance; }
-}
-
 /* Küçük ekran mikro ayar */
 @media (max-width:380px){
   .teaser-copy{ max-width:92%; }
-  /* iOS’ta aşırı boşluk görürsen, aşağıdakini aç:
-  .teaser-copy{ text-align:left; }
+  /* Eğer iOS’ta sözcük araları fazla görünürse alttakini aç:
+  .teaser-copy{ text-align:justify; text-justify:inter-word; }
   */
 }
 </style>
