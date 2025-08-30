@@ -1,5 +1,5 @@
 //
-// ✨ Başarı Ekranı (Apple hologram efekti)
+// ✨ Başarı Ekranı (Apple + Hologram Efekti)
 //
 function successHTML(name) {
   return `
@@ -13,19 +13,19 @@ function successHTML(name) {
         display:flex;
         align-items:center;
         justify-content:center;
-        background:radial-gradient(circle at 30% 30%, #0f0f1f, #000);
+        background:radial-gradient(circle at 20% 20%, #0a0a1a, #000);
         font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-        overflow:hidden;
         color:#fff;
+        overflow:hidden;
       }
 
-      /* Hologram grid */
+      /* Hologram grid efekti */
       .grid {
         position:absolute;
-        width:100%;
-        height:100%;
-        background-image:linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-                         linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+        inset:0;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
         background-size:40px 40px;
         animation:moveGrid 20s linear infinite;
       }
@@ -36,59 +36,57 @@ function successHTML(name) {
 
       .container {
         text-align:center;
-        animation:fadeIn 1.2s ease-out;
         z-index:2;
+        animation:fadeIn 1s ease-out;
       }
 
       h1 {
-        font-size:2.5rem;
-        background:linear-gradient(90deg,#00f0ff,#ff00de,#00ff95);
+        font-size:2.6rem;
+        background:linear-gradient(90deg,#00eaff,#ff00ff,#00ff9d);
         -webkit-background-clip:text;
         -webkit-text-fill-color:transparent;
-        text-shadow:0 0 30px rgba(0,255,255,0.4);
         animation:glow 3s ease-in-out infinite;
+      }
+      @keyframes glow {
+        0%,100% { text-shadow:0 0 20px rgba(0,255,255,0.6); }
+        50% { text-shadow:0 0 40px rgba(255,0,200,0.7); }
       }
 
       p {
-        font-size:1.1rem;
         margin-top:14px;
+        font-size:1.1rem;
+        color:#d0d0d0;
         opacity:0;
-        animation:slideUp 1.5s ease forwards;
-        animation-delay:1s;
-        color:#cfcfcf;
+        animation:slideUp 1.2s ease forwards;
+        animation-delay:0.8s;
       }
 
-      /* Efektler */
-      @keyframes fadeIn { from{opacity:0;transform:scale(0.95);} to{opacity:1;transform:scale(1);} }
-      @keyframes slideUp { from{transform:translateY(20px);opacity:0;} to{transform:translateY(0);opacity:1;} }
-      @keyframes glow { 
-        0%,100% { text-shadow:0 0 20px rgba(0,255,255,0.6), 0 0 40px rgba(255,0,255,0.3); }
-        50% { text-shadow:0 0 40px rgba(0,255,180,0.8), 0 0 80px rgba(255,0,200,0.5); }
-      }
-
-      /* Floating particles */
+      /* Floating hologram parçacıkları */
       .particle {
         position:absolute;
         border-radius:50%;
-        background:rgba(0,255,255,0.7);
-        animation:float 10s infinite ease-in-out;
+        background:rgba(0,255,255,0.8);
+        animation:float 8s ease-in-out infinite;
       }
-      .particle:nth-child(1) { width:6px; height:6px; top:20%; left:30%; animation-delay:0s; }
-      .particle:nth-child(2) { width:8px; height:8px; top:50%; left:70%; animation-delay:2s; background:#ff00ff; }
-      .particle:nth-child(3) { width:5px; height:5px; top:70%; left:40%; animation-delay:4s; background:#00ff95; }
+      .particle:nth-child(1) { width:6px; height:6px; top:30%; left:20%; animation-delay:0s;}
+      .particle:nth-child(2) { width:10px; height:10px; top:60%; left:70%; animation-delay:2s; background:#ff00ff;}
+      .particle:nth-child(3) { width:7px; height:7px; top:75%; left:40%; animation-delay:4s; background:#00ff9d;}
 
       @keyframes float {
         0% { transform:translateY(0) scale(1);}
-        50% { transform:translateY(-30px) scale(1.3);}
+        50% { transform:translateY(-25px) scale(1.3);}
         100% { transform:translateY(0) scale(1);}
       }
+
+      @keyframes fadeIn { from{opacity:0; transform:scale(0.9);} to{opacity:1; transform:scale(1);} }
+      @keyframes slideUp { from{transform:translateY(20px); opacity:0;} to{transform:translateY(0); opacity:1;} }
     </style>
   </head>
   <body>
     <div class="grid"></div>
     <div class="container">
       <h1>🤖✨ Teşekkürler ${name}!</h1>
-      <p>Kaydın yapay zeka hologramına işlendi.<br><strong>Bizi beklemede kal 💫</strong></p>
+      <p>Kaydın başarıyla Google Sheets’e işlendi.<br><strong>Bizi beklemede kal 💫</strong></p>
     </div>
     <div class="particle"></div>
     <div class="particle"></div>
@@ -112,7 +110,7 @@ function errorHTML(message) {
         display:flex;
         align-items:center;
         justify-content:center;
-        background:radial-gradient(circle at center,#1a0000,#000);
+        background:radial-gradient(circle at center,#2d0000,#000);
         font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
         color:#fff;
         overflow:hidden;
@@ -120,10 +118,10 @@ function errorHTML(message) {
 
       .grid {
         position:absolute;
-        width:100%;
-        height:100%;
-        background-image:linear-gradient(rgba(255,0,0,0.1) 1px, transparent 1px),
-                         linear-gradient(90deg, rgba(255,0,0,0.1) 1px, transparent 1px);
+        inset:0;
+        background-image:
+          linear-gradient(rgba(255,0,0,0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,0,0,0.08) 1px, transparent 1px);
         background-size:40px 40px;
         animation:moveGrid 15s linear infinite;
       }
@@ -134,32 +132,32 @@ function errorHTML(message) {
 
       .container {
         text-align:center;
-        animation:fadeIn 1s ease-out;
         z-index:2;
+        animation:fadeIn 1s ease-out;
       }
 
       h1 {
-        font-size:2rem;
+        font-size:2.2rem;
         color:#ff4c4c;
-        text-shadow:0 0 30px rgba(255,0,0,0.6);
+        text-shadow:0 0 30px rgba(255,0,0,0.7);
         animation:alarm 1s infinite;
+      }
+      @keyframes alarm {
+        0%,100% { text-shadow:0 0 20px rgba(255,0,0,0.5); }
+        50% { text-shadow:0 0 50px rgba(255,50,50,1); }
       }
 
       p {
-        font-size:1rem;
         margin-top:12px;
+        font-size:1rem;
         color:#ffaaaa;
         opacity:0;
         animation:slideUp 1.2s ease forwards;
         animation-delay:0.8s;
       }
 
-      @keyframes fadeIn { from{opacity:0;transform:scale(0.9);} to{opacity:1;transform:scale(1);} }
-      @keyframes slideUp { from{transform:translateY(20px);opacity:0;} to{transform:translateY(0);opacity:1;} }
-      @keyframes alarm { 
-        0%,100% { text-shadow:0 0 20px rgba(255,0,0,0.6), 0 0 40px rgba(255,0,0,0.3); }
-        50% { text-shadow:0 0 40px rgba(255,50,50,1), 0 0 80px rgba(255,0,0,0.7); }
-      }
+      @keyframes fadeIn { from{opacity:0; transform:scale(0.9);} to{opacity:1; transform:scale(1);} }
+      @keyframes slideUp { from{transform:translateY(20px); opacity:0;} to{transform:translateY(0); opacity:1);} }
     </style>
   </head>
   <body>
