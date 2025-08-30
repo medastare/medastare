@@ -56,7 +56,7 @@ export default async function handler(req, res) {
   }
 }
 
-/* ====== Başarı Ekranı (Apple / Hologram + ışık efekti) ====== */
+/* ====== Başarı Ekranı (Apple / Hologram + Işık Efekti) ====== */
 function successHTML(name) {
   return `
   <html>
@@ -86,8 +86,23 @@ function successHTML(name) {
         background:linear-gradient(90deg,#00eaff,#7a5cff,#00ffb3);
         -webkit-background-clip:text;
         -webkit-text-fill-color:transparent;
-        text-shadow:0 0 30px rgba(0,234,255,.6);
-        animation:shine 4s ease-in-out infinite alternate;
+        position:relative;
+        display:inline-block;
+        overflow:hidden;
+      }
+      /* Parlayan çizgi (shimmer efekti) */
+      h1::after {
+        content:"";
+        position:absolute;
+        top:0; left:-120%;
+        width:120%; height:100%;
+        background:linear-gradient(120deg,transparent,rgba(255,255,255,0.6),transparent);
+        animation:shimmer 3s infinite;
+      }
+      @keyframes shimmer {
+        0% { left:-120%; }
+        50% { left:100%; }
+        100% { left:120%; }
       }
       p {
         margin-top:14px;
@@ -117,23 +132,19 @@ function successHTML(name) {
         from {transform:rotate(0);}
         to {transform:rotate(360deg);}
       }
-      @keyframes shine {
-        0% { text-shadow:0 0 25px rgba(0,234,255,.5); }
-        100% { text-shadow:0 0 45px rgba(122,92,255,.8); }
-      }
     </style>
   </head>
   <body>
     <div class="halo"></div>
     <div class="container">
       <h1>✨ Teşekkürler ${name}!</h1>
-      <p>Kaydın başarıyla Google Sheets’e eklendi.<br><b>Bizi beklemede kal... </b></p>
+      <p>Kaydın başarıyla Google Sheets’e eklendi.<br><b>Bizi beklemede kal 🚀</b></p>
     </div>
   </body>
   </html>`;
 }
 
-/* ====== Hata Ekranı (Apple tarzı cam + neon) ====== */
+/* ====== Hata Ekranı (Apple tarzı Cam + Neon) ====== */
 function errorHTML(message) {
   return `
   <html>
