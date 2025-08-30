@@ -184,127 +184,102 @@
     </div>
   </header>
 
-<!-- Waitlist Section -->
-<section class="waitlist" id="waitlist">
-  <div class="waitlist-box">
-    <h2>✨ MedaStaré Waitlist ✨</h2>
+  <!-- Waitlist Section -->
+  <section class="waitlist" id="waitlist">
+    <div class="waitlist-box">
+      <h2>✨ MedaStaré Waitlist ✨</h2>
 
-    <p>
-      <strong>Step Into MedaStaré / MedaStaré’ye Adım At</strong><br><br>
-      İlk erişim, özel avantajlar ve erken kullanıcı topluluğuna katılmak için
-      e-postanı bırak.
-    </p>
+      <p>
+        <strong>Step Into MedaStaré / MedaStaré’ye Adım At</strong><br><br>
+        İlk erişim, özel avantajlar ve erken kullanıcı topluluğuna katılmak için
+        e-postanı bırak.
+      </p>
 
-    <!-- FORM -->
-    <form id="waitlist-form" method="POST" action="https://formspree.io/f/xvgqjvvo"
-          autocomplete="on" onsubmit="return validateEmail(event)" novalidate>
-      
-      <input id="wl-name" name="name" type="text" placeholder="Ad / Name" required autocomplete="name">
+     <!-- FORM -->
+<form id="waitlist-form" method="POST" action="https://formspree.io/f/xvgqjvvo"
+      autocomplete="on" onsubmit="return validateEmail(event)" novalidate>
+  
+  <input id="wl-name" name="name" type="text" placeholder="Ad / Name" required autocomplete="name">
 
-      <!-- SADECE BU SATIRLAR DÜZELTİLDİ -->
-      <input id="wl-email" name="email" type="email" placeholder="E-posta / Email" required 
-             autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email">
+  <input id="wl-email" name="email" type="text" placeholder="E-posta / Email" required 
+         autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email">
 
-      <button id="wl-btn" type="submit" class="dim">Join the Circle 💎</button>
-    </form>
+  <button type="submit">Join the Circle 💎</button>
+</form>
 
-    <p class="note">Unsubscribe anytime.</p>
+<p class="note">Unsubscribe anytime.</p>
 
-    <!-- Mesajlar -->
-    <p id="success-message" style="color:lime; display:none;">✅ Teşekkürler! Kaydın alındı.</p>
-    <p id="error-message" style="color:red; display:none;">❌ Bir hata oldu. Tekrar dene.</p>
-    <p id="invalid-message" style="color:orange; display:none;">⚠️ Lütfen geçerli bir e-posta adresi gir.</p>
+<!-- Mesajlar -->
+<p id="success-message" style="color:lime; display:none;">✅ Teşekkürler! Kaydın alındı.</p>
+<p id="error-message" style="color:red; display:none;">❌ Bir hata oldu. Tekrar dene.</p>
+<p id="invalid-message" style="color:orange; display:none;">⚠️ Lütfen geçerli bir e-posta adresi gir.</p>
 
-  </div>
+</div>
 </section>
 
 <script>
-  // ------ Canlı doğrulama ve buton rengi ------
-  const form  = document.getElementById('waitlist-form');
-  const nameI = document.getElementById('wl-name');
-  const mailI = document.getElementById('wl-email');
-  const btn   = document.getElementById('wl-btn');
-  const invalidMsg = document.getElementById('invalid-message');
-  const successMsg = document.getElementById('success-message');
-  const errorMsg   = document.getElementById('error-message');
-
-  const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-  const fakeDomains  = ["asdnakls.com","tempmail.com","10minutemail.com","mailinator.com"];
-
-  function isValidEmail(v){
-    if(!emailPattern.test(v)) return false;
-    const d = v.split('@')[1] || '';
-    return !fakeDomains.includes(d);
-  }
-
-  function updateButtonState(){
-    const nameOk = nameI.value.trim().length > 0;
-    const mailOk = isValidEmail(mailI.value.toLowerCase());
-    if(nameOk && mailOk){
-      btn.classList.remove('dim');
-      btn.classList.add('active');
-    }else{
-      btn.classList.remove('active');
-      btn.classList.add('dim');
-    }
-  }
-
-  nameI.addEventListener('input', ()=> {
-    invalidMsg.style.display = 'none';
-    updateButtonState();
-  });
-  mailI.addEventListener('input', ()=> {
-    invalidMsg.style.display = 'none';
-    updateButtonState();
-  });
-
-  // ------ Submit doğrulama ------
   function validateEmail(event) {
-    successMsg.style.display = "none";
-    errorMsg.style.display   = "none";
+    const nameInput  = document.getElementById("wl-name");
+    const emailInput = document.getElementById("wl-email");
+    const name  = (nameInput.value || "").trim();
+    const email = (emailInput.value || "").trim().toLowerCase();
+    const invalidMsg = document.getElementById("invalid-message");
+
+    // uyarıyı sıfırla
     invalidMsg.style.display = "none";
 
-    const name  = nameI.value.trim();
-    const email = mailI.value.toLowerCase();
-
-    // Zorunlu alan kontrolleri
-    if(!name){
-      invalidMsg.textContent = "⚠️ Ad alanı zorunlu."; 
+    // zorunlu alan kontrolleri
+    if (!name) {
+      invalidMsg.textContent = "⚠️ Ad alanı zorunlu.";
       invalidMsg.style.display = "block";
+      nameInput.focus();
       event.preventDefault();
       return false;
     }
-    if(!email){
-      invalidMsg.textContent = "⚠️ Lütfen e-posta adresi gir."; 
+    if (!email) {
+      invalidMsg.textContent = "⚠️ Lütfen e-posta adresi gir.";
       invalidMsg.style.display = "block";
+      emailInput.focus();
       event.preventDefault();
       return false;
     }
 
-    // E-posta geçerlilik
-    if(!emailPattern.test(email)){
+    // format kontrolü
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    if (!emailPattern.test(email)) {
       invalidMsg.textContent = "⚠️ Lütfen geçerli bir e-posta adresi gir.";
       invalidMsg.style.display = "block";
-      event.preventDefault();
-      return false;
-    }
-    const domain = email.split('@')[1] || '';
-    if(fakeDomains.includes(domain)){
-      invalidMsg.textContent = "⚠️ Bu domain kabul edilmiyor. Lütfen gerçek bir e-posta gir.";
-      invalidMsg.style.display = "block";
+      emailInput.focus();
       event.preventDefault();
       return false;
     }
 
-    // Geçerliyse gönderilsin (Formspree action kullanılıyor)
+    // fake domain engeli
+    const fakeDomains = ["asdnakls.com","tempmail.com","10minutemail.com","mailinator.com"];
+    const domain = email.split("@")[1] || "";
+    if (fakeDomains.includes(domain)) {
+      invalidMsg.textContent = "⚠️ Bu domain kabul edilmiyor. Lütfen gerçek bir e-posta gir.";
+      invalidMsg.style.display = "block";
+      emailInput.focus();
+      event.preventDefault();
+      return false;
+    }
+
+    // hepsi OK -> gönder
     return true;
   }
 
-  // İlk yüklemede buton durumu
-  updateButtonState();
+  // kullanıcı yazarken uyarıyı gizle
+  ["wl-name","wl-email"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){ el.addEventListener("input", ()=> {
+      const m=document.getElementById("invalid-message");
+      if(m) m.style.display="none";
+    });}
+  });
 </script>
 
-<style>
+  <style>
   /* Waitlist genel */
   .waitlist { padding:60px 20px; text-align:center; }
 
@@ -341,20 +316,17 @@
   .waitlist-box input:focus,
   .waitlist-box input:not(:placeholder-shown) { border-color: #FFD700; background: #222; box-shadow: 0 0 12px rgba(255,215,0,0.6); outline: none; }
 
-  /* Buton (mevcut stilin ÜZERİNE durum sınıfları) */
+  /* Buton */
   .waitlist-box button {
     display: block; width: 100%; margin-top: 20px; padding: 14px 20px;
     background: linear-gradient(45deg, gold, #d4af37); color: #000; font-weight: bold; border: none; border-radius: 10px; font-size: 1.1em; cursor: pointer; transition: all 0.3s ease; position: relative; z-index: 2;
   }
   .waitlist-box button:hover { background: linear-gradient(45deg, #e6c200, #b8962e); transform: translateY(-2px); }
 
-  /* ✨ Durum renkleri (yalnızca sınıf ekliyoruz) */
-  .waitlist-box button.dim    { filter: grayscale(.4) brightness(.85); }
-  .waitlist-box button.active { filter: none; }
-
   /* Not */
   .waitlist-box .note { color:#aaa; font-size:0.9em; margin-top:20px; }
-</style>
+  </style>
+</script>
 
  <!-- ========= MedaStaré Teaser Section ========= -->
 <section id="medastare-teaser" class="teaser" aria-labelledby="teaser-title-tr">
