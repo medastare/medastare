@@ -1,9 +1,9 @@
-export default function Home() {
-  return (
+export default function handler(req, res) {
+  res.status(200).send(`
     <html>
       <head>
         <title>MedaStaré - Tadilatta</title>
-        <style>{`
+        <style>
           body {
             margin:0; height:100vh; display:flex; align-items:center; justify-content:center;
             background: linear-gradient(135deg,#1a1a40,#000);
@@ -30,10 +30,6 @@ export default function Home() {
             0%,100% { transform:translateY(0);}
             50% { transform:translateY(-10px);}
           }
-          @keyframes fadeIn {
-            from {opacity:0; transform:scale(0.9);}
-            to {opacity:1; transform:scale(1);}
-          }
           h1 {
             font-size:2.2em; margin:20px 0;
             background:linear-gradient(to right, gold, #fff);
@@ -41,7 +37,7 @@ export default function Home() {
             -webkit-text-fill-color:transparent;
           }
           p { font-size:1.2em; color:#ccc; }
-        `}</style>
+        </style>
       </head>
       <body>
         <div class="stars"></div>
@@ -52,5 +48,5 @@ export default function Home() {
         </div>
       </body>
     </html>
-  );
+  `);
 }
