@@ -6,11 +6,13 @@ export default async function handler(req, res) {
   }
 
   const { name, email } = req.body;
+
+  // ⚠️ Zorunlu alanlar
   if (!name || !email) {
     return res.status(400).send(errorHTML("⚠️ İsim ve e-posta gerekli!"));
   }
 
-  // ✨ Regex ile format kontrolü
+  // ✨ Regex ile e-posta format kontrolü
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     return res.status(400).send(errorHTML("⚠️ Geçerli bir e-posta adresi giriniz"));
@@ -34,7 +36,7 @@ export default async function handler(req, res) {
     // 📊 Senin Sheet ID
     const spreadsheetId = "1--Y4fUkqxuB_6E-NpNXwFnEVhY1X20YRBdpHCIp061E";
 
-    // Satır ekle
+    // 📝 Satır ekle
     await sheets.spreadsheets.values.append({
       spreadsheetId,
       range: "A:E",
@@ -54,7 +56,7 @@ export default async function handler(req, res) {
 
   } catch (err) {
     console.error("❌ Sheets API error:", err);
-    return res.status(500).send(errorHTML("❌ Google Sheets API hatası: " + err.message));
+    return res.status(500).send(errorHTML("❌ Sunucu hatası: " + err.message));
   }
 }
 
