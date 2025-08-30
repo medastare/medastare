@@ -23,23 +23,16 @@ export default async function handler(req, res) {
   }
 
   try {
-    if (!process.env.GOOGLE_SERVICE_KEY) {
-      throw new Error("GOOGLE_SERVICE_KEY env değişkeni bulunamadı!");
-    }
-
-    // 🔑 ENV’den gelen JSON’u al
-    const credentials = JSON.parse(process.env.GOOGLE_SERVICE_KEY);
-
-    // ✅ private_key satır sonlarını düzelt
-    credentials.private_key = credentials.private_key.replace(/\\n/g, '\n');
+    const key = process.env.GOOGLE_SERVICE_KEY;
+    if (!key) throw new Error("GOOGLE_SERVICE_KEY bulunamadı!");
 
     const auth = new google.auth.GoogleAuth({
-      credentials,
+      credentials: JSON.parse(key),
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
 
     const sheets = google.sheets({ version: "v4", auth });
-    const spreadsheetId = "1--Y4fUkqxuB_6E-NpNXwFnEVhY1X20YRBdpHCIp061E";
+    const spreadsheetId = "1--Y4fUkqxuB_6E-NpNXwFnEVhY1X20YRBdpHCIp061E"; // ✅ senin sheet ID
 
     await sheets.spreadsheets.values.append({
       spreadsheetId,
@@ -51,13 +44,12 @@ export default async function handler(req, res) {
           email,
           req.headers["x-forwarded-for"] || req.socket?.remoteAddress || "N/A",
           req.headers["user-agent"] || "unknown",
-          new Date().toISOString()
+          new Date().toISOString(),
         ]],
       },
     });
 
     return res.status(200).send(successHTML(name));
-
   } catch (err) {
     console.error("❌ Sheets API error:", err);
     return res.status(500).send(errorHTML("❌ Sunucu hatası: " + err.message));
