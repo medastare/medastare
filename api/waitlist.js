@@ -56,7 +56,7 @@ export default async function handler(req, res) {
   }
 }
 
-/* ====== Başarı Ekranı (Apple / Hologram Efektli) ====== */
+/* ====== Başarı Ekranı (Apple / Hologram) ====== */
 function successHTML(name) {
   return `
   <html>
@@ -86,7 +86,7 @@ function successHTML(name) {
         background:linear-gradient(90deg,#00eaff,#7a5cff,#00ffb3);
         -webkit-background-clip:text;
         -webkit-text-fill-color:transparent;
-        animation:glow 3s ease-in-out infinite;
+        text-shadow:0 0 25px rgba(0,234,255,.5);
       }
       p {
         margin-top:14px;
@@ -97,15 +97,12 @@ function successHTML(name) {
       /* glowing halo */
       .halo {
         position:absolute;
-        width:600px;
-        height:600px;
+        width:550px;
+        height:550px;
         border-radius:50%;
         background:radial-gradient(circle,rgba(0,234,255,.25),transparent 70%);
         filter:blur(80px);
-        animation:rotate 20s linear infinite;
-      }
-      @keyframes glow {
-        50% { text-shadow:0 0 35px rgba(0,234,255,.6); }
+        animation:rotate 25s linear infinite;
       }
       @keyframes fadeIn {
         from { opacity:0; transform:scale(0.95);}
@@ -119,22 +116,6 @@ function successHTML(name) {
         from {transform:rotate(0);}
         to {transform:rotate(360deg);}
       }
-      /* floating particles */
-      .particle {
-        position:absolute;
-        width:6px;
-        height:6px;
-        border-radius:50%;
-        background:white;
-        opacity:.7;
-        animation:float 6s ease-in-out infinite;
-      }
-      .particle:nth-child(1){top:20%;left:25%;animation-delay:0s}
-      .particle:nth-child(2){top:70%;left:40%;animation-delay:1.5s}
-      .particle:nth-child(3){top:40%;left:75%;animation-delay:3s}
-      @keyframes float {
-        50% { transform:translateY(-20px) scale(1.2); opacity:.9 }
-      }
     </style>
   </head>
   <body>
@@ -143,9 +124,6 @@ function successHTML(name) {
       <h1>✨ Teşekkürler ${name}!</h1>
       <p>Kaydın başarıyla Google Sheets’e eklendi.<br><b>Bizi beklemede kal 🚀</b></p>
     </div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
   </body>
   </html>`;
 }
@@ -163,25 +141,25 @@ function errorHTML(message) {
         display:flex;
         align-items:center;
         justify-content:center;
-        background:linear-gradient(135deg,#200,#400);
+        background:linear-gradient(135deg,#200,#000);
         font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
         overflow:hidden;
       }
       .card {
         padding:30px 40px;
         border-radius:20px;
-        background:rgba(255,0,0,.08);
-        backdrop-filter:blur(18px) saturate(160%);
-        -webkit-backdrop-filter:blur(18px) saturate(160%);
+        background:rgba(255,0,0,.06);
+        backdrop-filter:blur(16px) saturate(180%);
+        -webkit-backdrop-filter:blur(16px) saturate(180%);
         border:1px solid rgba(255,0,0,.25);
         text-align:center;
         animation:fadeIn .8s ease-out;
-        box-shadow:0 0 40px rgba(255,0,0,.25);
+        box-shadow:0 0 50px rgba(255,0,0,.3);
       }
       h1 {
         font-size:2rem;
         color:#ff4c4c;
-        text-shadow:0 0 15px rgba(255,0,0,0.6);
+        text-shadow:0 0 20px rgba(255,0,0,0.6);
         animation:pulse 1.5s infinite;
         margin:0 0 10px;
       }
