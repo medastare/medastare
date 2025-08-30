@@ -1,5 +1,5 @@
 //
-// ✨ Başarı Ekranı (Apple + Hologram vibe)
+// ✨ Başarı Ekranı (Apple / hologram efektli)
 //
 function successHTML(name) {
   return `
@@ -13,80 +13,61 @@ function successHTML(name) {
         display:flex;
         align-items:center;
         justify-content:center;
-        background:radial-gradient(circle at 20% 20%, #0a0a1a, #000);
+        background:radial-gradient(circle at top,#1a1a40,#0d0d1f);
         font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-        color:#fff;
         overflow:hidden;
+        color:#fff;
       }
-      .grid {
-        position:absolute;
-        inset:0;
-        background-image:
-          linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
-        background-size:40px 40px;
-        animation:move 20s linear infinite;
-      }
-      @keyframes move {
-        from {background-position:0 0, 0 0;}
-        to {background-position:40px 40px, 40px 40px;}
-      }
-      .container {
+      .card {
         text-align:center;
-        z-index:2;
-        animation:fadeIn 1.2s ease-out;
+        padding:40px;
+        border-radius:20px;
+        background:rgba(255,255,255,0.05);
+        backdrop-filter:blur(15px) saturate(120%);
+        -webkit-backdrop-filter:blur(15px) saturate(120%);
+        border:1px solid rgba(255,255,255,0.15);
+        box-shadow:0 0 40px rgba(0,255,200,0.2);
+        animation:fadeIn 1s ease-out;
       }
       h1 {
         font-size:2.4rem;
-        background:linear-gradient(90deg,#00eaff,#ff00ff,#00ff9d);
+        margin:0;
+        background:linear-gradient(90deg,#00eaff,#ff57ff,#00ffb3);
         -webkit-background-clip:text;
         -webkit-text-fill-color:transparent;
         animation:glow 3s ease-in-out infinite;
       }
-      @keyframes glow {
-        0%,100% { text-shadow:0 0 20px rgba(0,255,255,0.6); }
-        50% { text-shadow:0 0 40px rgba(255,0,200,0.7); }
-      }
       p {
-        margin-top:14px;
         font-size:1.1rem;
-        color:#d0d0d0;
-        opacity:0;
-        animation:slideUp 1.2s ease forwards;
-        animation-delay:0.8s;
+        margin-top:15px;
+        color:#cfe8ff;
       }
-      .particle {
-        position:absolute;
-        border-radius:50%;
-        animation:float 8s ease-in-out infinite;
+      @keyframes fadeIn { from{opacity:0;transform:scale(0.95);} to{opacity:1;transform:scale(1);} }
+      @keyframes glow {
+        0%,100%{text-shadow:0 0 20px rgba(0,234,255,0.3);}
+        50%{text-shadow:0 0 35px rgba(255,87,255,0.4);}
       }
-      .particle:nth-child(1){width:6px;height:6px;top:30%;left:20%;background:#0ff;}
-      .particle:nth-child(2){width:10px;height:10px;top:60%;left:70%;background:#f0f;}
-      .particle:nth-child(3){width:7px;height:7px;top:75%;left:40%;background:#0f9;}
-      @keyframes float {
-        0%{transform:translateY(0) scale(1);}
-        50%{transform:translateY(-25px) scale(1.3);}
-        100%{transform:translateY(0) scale(1);}
+      .dot {
+        width:10px; height:10px; border-radius:50%;
+        background:conic-gradient(from 0deg,#00eaff,#ff57ff,#00ffb3,#00eaff);
+        margin:20px auto 0;
+        animation:spin 2s linear infinite;
       }
-      @keyframes fadeIn {from{opacity:0;transform:scale(0.9);}to{opacity:1;transform:scale(1);} }
-      @keyframes slideUp {from{transform:translateY(20px);opacity:0;}to{transform:translateY(0);opacity:1;} }
+      @keyframes spin { to { transform:rotate(360deg); } }
     </style>
   </head>
   <body>
-    <div class="grid"></div>
-    <div class="container">
-      <h1>🤖✨ Teşekkürler ${name}!</h1>
-      <p>Kaydın başarıyla Google Sheets’e işlendi.<br><strong>Bizi beklemede kal 💫</strong></p>
+    <div class="card">
+      <h1>✨ Teşekkürler ${name}!</h1>
+      <p>Kaydın başarıyla Google Sheets’e eklendi.<br><strong>Bizi beklemede kal 💫</strong></p>
+      <div class="dot"></div>
     </div>
-    <div class="particle"></div>
-    <div class="particle"></div>
-    <div class="particle"></div>
   </body>
   </html>`;
 }
 
 //
-// ⚠️ Hata Ekranı (Apple kırmızı hologram alarmı)
+// ⚠️ Hata Ekranı (Apple kırmızı neon efekti)
 //
 function errorHTML(message) {
   return `
@@ -100,54 +81,40 @@ function errorHTML(message) {
         display:flex;
         align-items:center;
         justify-content:center;
-        background:radial-gradient(circle at center,#2d0000,#000);
+        background:radial-gradient(circle at top,#400000,#100000);
         font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-        color:#fff;
         overflow:hidden;
+        color:#fff;
       }
-      .grid {
-        position:absolute;
-        inset:0;
-        background-image:
-          linear-gradient(rgba(255,0,0,0.08) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(255,0,0,0.08) 1px, transparent 1px);
-        background-size:40px 40px;
-        animation:move 15s linear infinite;
-      }
-      @keyframes move {
-        from {background-position:0 0, 0 0;}
-        to {background-position:40px 40px, 40px 40px;}
-      }
-      .container {
+      .card {
         text-align:center;
-        z-index:2;
+        padding:35px;
+        border-radius:18px;
+        background:rgba(255,0,0,0.05);
+        backdrop-filter:blur(12px);
+        -webkit-backdrop-filter:blur(12px);
+        border:1px solid rgba(255,0,0,0.25);
+        box-shadow:0 0 40px rgba(255,0,0,0.25);
         animation:fadeIn 1s ease-out;
       }
       h1 {
         font-size:2rem;
+        margin:0;
         color:#ff4c4c;
-        text-shadow:0 0 30px rgba(255,0,0,0.7);
-        animation:alarm 1s infinite;
-      }
-      @keyframes alarm {
-        0%,100% { text-shadow:0 0 20px rgba(255,0,0,0.5);}
-        50% { text-shadow:0 0 50px rgba(255,50,50,1);}
+        text-shadow:0 0 20px rgba(255,0,0,0.6);
+        animation:pulse 1.4s infinite;
       }
       p {
-        margin-top:12px;
         font-size:1rem;
-        color:#ffaaaa;
-        opacity:0;
-        animation:slideUp 1.2s ease forwards;
-        animation-delay:0.8s;
+        margin-top:12px;
+        color:#ffb3b3;
       }
-      @keyframes fadeIn {from{opacity:0;transform:scale(0.9);}to{opacity:1;transform:scale(1);} }
-      @keyframes slideUp {from{transform:translateY(20px);opacity:0;}to{transform:translateY(0);opacity:1);} }
+      @keyframes fadeIn { from{opacity:0;transform:translateY(15px);} to{opacity:1;transform:translateY(0);} }
+      @keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.06);} }
     </style>
   </head>
   <body>
-    <div class="grid"></div>
-    <div class="container">
+    <div class="card">
       <h1>⚠️ Hata!</h1>
       <p>${message}</p>
     </div>
