@@ -8,18 +8,18 @@ export default async function handler(req, res) {
   const { name, email } = req.body;
 
   if (!name || !email) {
-    return res.status(400).send(errorHTML("⚠️ İsim ve e-posta gerekli!"));
+    return res.status(400).send(errorHTML(" İsim ve e-posta gerekli!"));
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
-    return res.status(400).send(errorHTML("⚠️ Geçerli bir e-posta adresi giriniz"));
+    return res.status(400).send(errorHTML(" Geçerli bir e-posta adresi giriniz"));
   }
 
   const allowedDomains = ["gmail.com", "icloud.com", "outlook.com", "hotmail.com", "yahoo.com"];
   const domain = email.split("@")[1]?.toLowerCase();
   if (!allowedDomains.includes(domain)) {
-    return res.status(400).send(errorHTML("⚠️ Sadece gmail, icloud, outlook, hotmail, yahoo kabul ediliyor"));
+    return res.status(400).send(errorHTML(" Sadece gmail, icloud, outlook, hotmail, yahoo kabul ediliyor"));
   }
 
   try {
@@ -56,7 +56,7 @@ export default async function handler(req, res) {
   }
 }
 
-/* ====== Başarı Ekranı (Apple / Hologram) ====== */
+/* ====== Başarı Ekranı (Apple / Hologram + ışık efekti) ====== */
 function successHTML(name) {
   return `
   <html>
@@ -86,7 +86,8 @@ function successHTML(name) {
         background:linear-gradient(90deg,#00eaff,#7a5cff,#00ffb3);
         -webkit-background-clip:text;
         -webkit-text-fill-color:transparent;
-        text-shadow:0 0 25px rgba(0,234,255,.5);
+        text-shadow:0 0 30px rgba(0,234,255,.6);
+        animation:shine 4s ease-in-out infinite alternate;
       }
       p {
         margin-top:14px;
@@ -116,13 +117,17 @@ function successHTML(name) {
         from {transform:rotate(0);}
         to {transform:rotate(360deg);}
       }
+      @keyframes shine {
+        0% { text-shadow:0 0 25px rgba(0,234,255,.5); }
+        100% { text-shadow:0 0 45px rgba(122,92,255,.8); }
+      }
     </style>
   </head>
   <body>
     <div class="halo"></div>
     <div class="container">
       <h1>✨ Teşekkürler ${name}!</h1>
-      <p>Kaydın başarıyla Google Sheets’e eklendi.<br><b>Bizi beklemede kal 🚀</b></p>
+      <p>Kaydın başarıyla Google Sheets’e eklendi.<br><b>Bizi beklemede kal... </b></p>
     </div>
   </body>
   </html>`;
