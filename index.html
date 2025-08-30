@@ -197,9 +197,9 @@
 
     <!-- FORM -->
     <form id="waitlist-form" method="POST" action="https://formspree.io/f/xvgqjvvo"
-          autocomplete="on" onsubmit="return validateEmail(event)" novalidate>
+          autocomplete="on" onsubmit="return validateEmail(event)">
       <input id="wl-name" name="name" type="text" placeholder="Ad / Name" required autocomplete="name">
-      <input id="wl-email" name="email" type="text" placeholder="E-posta / Email" required
+      <input id="wl-email" name="email" type="email" placeholder="E-posta / Email" required
              autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email">
       <button type="submit">Join the Circle 💎</button>
     </form>
@@ -222,13 +222,9 @@
     const email = (emailInput.value || "").trim().toLowerCase();
 
     const invalidMsg = document.getElementById("invalid-message");
-    const successMsg = document.getElementById("success-message");
-    const errorMsg   = document.getElementById("error-message");
 
     // Mesajları sıfırla
     invalidMsg.style.display = "none";
-    successMsg.style.display = "none";
-    errorMsg.style.display   = "none";
 
     // Ad zorunlu
     if (!name) {
