@@ -184,7 +184,7 @@
     </div>
   </header>
 
-  <!-- Waitlist Section -->
+<!-- Waitlist Section -->
   <section class="waitlist" id="waitlist">
     <div class="waitlist-box">
       <h2>✨ MedaStaré Waitlist ✨</h2>
@@ -218,35 +218,66 @@
 </section>
 
 <script>
+  // sadece doğrulama: boş, format, fake domain -> engelle
   function validateEmail(event) {
-    const email = document.getElementById("wl-email").value.toLowerCase();
+    const nameInput  = document.getElementById("wl-name");
+    const emailInput = document.getElementById("wl-email");
+    const name  = (nameInput.value || "").trim();
+    const email = (emailInput.value || "").trim().toLowerCase();
     const invalidMsg = document.getElementById("invalid-message");
 
-    // Regex kontrolü
-    const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+    // uyarıyı sıfırla
+    invalidMsg.style.display = "none";
 
-    // Fake domain listesi
-    const fakeDomains = ["asdnakls.com", "tempmail.com", "10minutemail.com", "mailinator.com"];
-
-    if (!emailPattern.test(email)) {
-      invalidMsg.textContent = "⚠️ Lütfen geçerli bir e-posta adresi gir.";
+    // alanlar zorunlu
+    if (!name) {
+      invalidMsg.textContent = "⚠️ Ad alanı zorunlu.";
       invalidMsg.style.display = "block";
-      event.preventDefault(); // gönderimi engeller
+      nameInput.focus();
+      event.preventDefault();
+      return false;
+    }
+    if (!email) {
+      invalidMsg.textContent = "⚠️ Lütfen e-posta adresi gir.";
+      invalidMsg.style.display = "block";
+      emailInput.focus();
+      event.preventDefault();
       return false;
     }
 
-    for (let domain of fakeDomains) {
-      if (email.endsWith("@" + domain)) {
-        invalidMsg.textContent = "⚠️ Bu domain kabul edilmiyor. Lütfen gerçek bir e-posta gir.";
-        invalidMsg.style.display = "block";
-        event.preventDefault();
-        return false;
-      }
+    // format kontrolü
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    if (!emailPattern.test(email)) {
+      invalidMsg.textContent = "⚠️ Lütfen geçerli bir e-posta adresi gir.";
+      invalidMsg.style.display = "block";
+      emailInput.focus();
+      event.preventDefault();
+      return false;
     }
 
-    invalidMsg.style.display = "none";
-    return true; // form gönderilebilir
+    // fake domain engeli
+    const fakeDomains = ["asdnakls.com","tempmail.com","10minutemail.com","mailinator.com"];
+    const domain = email.split("@")[1] || "";
+    if (fakeDomains.includes(domain)) {
+      invalidMsg.textContent = "⚠️ Bu domain kabul edilmiyor. Lütfen gerçek bir e-posta gir.";
+      invalidMsg.style.display = "block";
+      emailInput.focus();
+      event.preventDefault();
+      return false;
+    }
+
+    // her şey tamamsa gönderime izin ver
+    return true;
   }
+
+  // yazarken uyarıyı gizle (tasarımı bozmaz)
+  ["wl-name","wl-email"].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el){ el.addEventListener("input", ()=>{
+      const m=document.getElementById("invalid-message");
+      if(m) m.style.display="none";
+    });}
+  });
 </script>
 
   <style>
@@ -296,7 +327,6 @@
   /* Not */
   .waitlist-box .note { color:#aaa; font-size:0.9em; margin-top:20px; }
   </style>
-</script>
 
  <!-- ========= MedaStaré Teaser Section ========= -->
 <section id="medastare-teaser" class="teaser" aria-labelledby="teaser-title-tr">
