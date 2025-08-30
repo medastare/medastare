@@ -7,18 +7,15 @@ export default async function handler(req, res) {
 
   const { name, email } = req.body;
 
-  // ⚠️ Zorunlu alanlar
   if (!name || !email) {
     return res.status(400).send(errorHTML("⚠️ İsim ve e-posta gerekli!"));
   }
 
-  // ✨ Regex ile e-posta format kontrolü
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     return res.status(400).send(errorHTML("⚠️ Geçerli bir e-posta adresi giriniz"));
   }
 
-  // ✨ Domain kontrolü
   const allowedDomains = ["gmail.com", "icloud.com", "outlook.com", "hotmail.com", "yahoo.com"];
   const domain = email.split("@")[1]?.toLowerCase();
   if (!allowedDomains.includes(domain)) {
@@ -26,22 +23,24 @@ export default async function handler(req, res) {
   }
 
   try {
-    // 🔑 Google Service Account bağlan
     if (!process.env.GOOGLE_SERVICE_KEY) {
       throw new Error("GOOGLE_SERVICE_KEY env değişkeni bulunamadı!");
     }
 
+    // 🔑 ENV’den gelen JSON’u al
+    const credentials = JSON.parse(process.env.GOOGLE_SERVICE_KEY);
+
+    // ✅ private_key satır sonlarını düzelt
+    credentials.private_key = credentials.private_key.replace(/\\n/g, '\n');
+
     const auth = new google.auth.GoogleAuth({
-      credentials: JSON.parse(process.env.GOOGLE_SERVICE_KEY), // ✅ ENV KEY KULLANIMI
+      credentials,
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
 
     const sheets = google.sheets({ version: "v4", auth });
-
-    // 📊 Senin Sheet ID
     const spreadsheetId = "1--Y4fUkqxuB_6E-NpNXwFnEVhY1X20YRBdpHCIp061E";
 
-    // 📝 Satır ekle
     await sheets.spreadsheets.values.append({
       spreadsheetId,
       range: "A:E",
@@ -65,9 +64,6 @@ export default async function handler(req, res) {
   }
 }
 
-//
-// 🎉 Başarı Ekranı
-//
 function successHTML(name) {
   return `
   <html>
@@ -81,9 +77,6 @@ function successHTML(name) {
   </html>`;
 }
 
-//
-// ⚠️ Hata Ekranı
-//
 function errorHTML(message) {
   return `
   <html>
