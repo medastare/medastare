@@ -138,7 +138,7 @@ function successHTML(name) {
     <div class="halo"></div>
     <div class="container">
       <h1>✨ Teşekkürler ${name}!</h1>
-      <p>Kaydın başarıyla Google Sheets’e eklendi.<br><b>Bizi beklemede kal 🚀</b></p>
+      <p>Kaydın başarıyla Google Sheets’e eklendi.<br><b>Bizi beklemede kal... </b></p>
     </div>
   </body>
   </html>`;
