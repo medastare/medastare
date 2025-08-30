@@ -27,10 +27,15 @@ export default async function handler(req, res) {
 
   try {
     // 🔑 Google Service Account bağlan
+    if (!process.env.GOOGLE_SERVICE_KEY) {
+      throw new Error("GOOGLE_SERVICE_KEY env değişkeni bulunamadı!");
+    }
+
     const auth = new google.auth.GoogleAuth({
-      credentials: JSON.parse(process.env.GOOGLE_SERVICE_KEY), // ✅ BURASI DÜZELTİLDİ
+      credentials: JSON.parse(process.env.GOOGLE_SERVICE_KEY), // ✅ ENV KEY KULLANIMI
       scopes: ["https://www.googleapis.com/auth/spreadsheets"],
     });
+
     const sheets = google.sheets({ version: "v4", auth });
 
     // 📊 Senin Sheet ID
@@ -45,8 +50,8 @@ export default async function handler(req, res) {
         values: [[
           name,
           email,
-          req.headers["x-forwarded-for"] || req.socket.remoteAddress,
-          req.headers["user-agent"],
+          req.headers["x-forwarded-for"] || req.socket?.remoteAddress || "N/A",
+          req.headers["user-agent"] || "unknown",
           new Date().toISOString()
         ]],
       },
@@ -58,4 +63,36 @@ export default async function handler(req, res) {
     console.error("❌ Sheets API error:", err);
     return res.status(500).send(errorHTML("❌ Sunucu hatası: " + err.message));
   }
+}
+
+//
+// 🎉 Başarı Ekranı
+//
+function successHTML(name) {
+  return `
+  <html>
+  <head><title>MedaStaré Waitlist</title></head>
+  <body style="background:#1a1a40; color:#fff; display:flex; align-items:center; justify-content:center; height:100vh; font-family:sans-serif;">
+    <div style="text-align:center;">
+      <h1>✨ Teşekkürler ${name}!</h1>
+      <p>Kaydın başarıyla Google Sheets’e eklendi.<br><strong>Bizi beklemede kal 💫</strong></p>
+    </div>
+  </body>
+  </html>`;
+}
+
+//
+// ⚠️ Hata Ekranı
+//
+function errorHTML(message) {
+  return `
+  <html>
+  <head><title>MedaStaré Waitlist - Hata</title></head>
+  <body style="background:#400000; color:#fff; display:flex; align-items:center; justify-content:center; height:100vh; font-family:sans-serif;">
+    <div style="text-align:center;">
+      <h1>⚠️ Hata!</h1>
+      <p>${message}</p>
+    </div>
+  </body>
+  </html>`;
 }
