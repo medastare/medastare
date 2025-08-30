@@ -257,31 +257,7 @@
   .waitlist-box .note { color:#aaa; font-size:0.9em; margin-top:20px; }
   </style>
 </script>
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="return validateEmail()">
-  <label for="name">Adınız:</label>
-  <input type="text" name="name" id="name" required>
 
-  <label for="email">E-posta:</label>
-  <input type="email" name="email" id="email" required 
-         pattern="^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$">
-
-  <button type="submit">Kaydol</button>
-</form>
-
-<script>
-  function validateEmail() {
-    const email = document.getElementById("email").value.toLowerCase();
-    const fakeDomains = ["asdnakls.com", "tempmail.com", "10minutemail.com", "mailinator.com"];
-
-    for (let domain of fakeDomains) {
-      if (email.endsWith("@" + domain)) {
-        alert("⚠️ Bu mail adresi kabul edilmiyor. Lütfen gerçek bir mail giriniz.");
-        return false; // formu göndermeyi engeller
-      }
-    }
-    return true; // formu gönder
-  }
-</script>
  <!-- ========= MedaStaré Teaser Section ========= -->
 <section id="medastare-teaser" class="teaser" aria-labelledby="teaser-title-tr">
   <div class="teaser-box">
