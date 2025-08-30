@@ -262,15 +262,11 @@
 <section id="medastare-teaser" class="teaser" aria-labelledby="teaser-title-tr">
   <div class="teaser-box">
 
-    <!-- Üst Görsel -->
-    <figure class="teaser-hero">
-      <img src="medastare_fashiontech.PNG" alt="MedaStaré — Fashion-Tech Ecosystem">
-    </figure>
-
     <!-- TR -->
     <header class="teaser-head">
       <h2 id="teaser-title-tr">MedaStaré — 24 Saatlik Özel Teaser Deneyimi</h2>
     </header>
+    <div class="teaser-sep"></div>
     <section class="teaser-copy" lang="tr">
       <p>
         Moda ve teknolojinin geleceğini şekillendiren <strong>MedaStaré</strong>, ilk kez kapılarını aralıyor.
@@ -282,12 +278,11 @@
       </p>
     </section>
 
-    <div class="teaser-sep" role="presentation" aria-hidden="true"></div>
-
     <!-- EN -->
     <header class="teaser-head">
       <h2 id="teaser-title-en">MedaStaré — 24h Exclusive Teaser Experience</h2>
     </header>
+    <div class="teaser-sep"></div>
     <section class="teaser-copy" lang="en">
       <p>
         <strong>MedaStaré</strong>, the ecosystem where fashion meets technology, opens its doors for the very first time.
@@ -315,40 +310,41 @@
   padding:24px 22px;
   color:#eee;
   box-shadow:0 0 28px rgba(255,215,0,.15);
-  text-align:center;
-}
-
-/* Görsel */
-.teaser-hero{ margin:0 0 18px; }
-.teaser-hero img{
-  width:100%; height:auto; display:block;
-  border-radius:10px;
 }
 
 /* Başlık */
-.teaser-head{ margin:4px 0 6px; }
+.teaser-head{
+  margin:18px 0 8px;        /* üst-alt boşluklar eşit */
+  text-align:center;
+}
 .teaser-head h2{
   margin:0;
   font-size:clamp(20px,4.5vw,26px);
   background:linear-gradient(90deg,#FFD56A,#F0B44E,#B8892B);
   -webkit-background-clip:text; background-clip:text;
   -webkit-text-fill-color:transparent; color:transparent;
-  text-align:center;
-  line-height:1.25;
-  text-wrap:balance;
+  line-height:1.3;
 }
 
-/* Metin (kompakt ve derli toplu) */
+/* Ayırıcı çizgi */
+.teaser-sep{
+  height:1px;
+  width:78%;
+  margin:10px auto 18px;    /* çizgi ile başlık & metin arası eşit */
+  background:linear-gradient(90deg,transparent,#FFD56A,transparent);
+  opacity:.45;
+}
+
+/* Metin */
 .teaser-copy{
   max-width:600px;
-  margin:0 auto 8px;
+  margin:0 auto 16px;
   text-align:left;
-  line-height:1.45;
+  line-height:1.55;
   font-size:1rem;
   letter-spacing:0.1px;
-  word-break:keep-all;
 }
-.teaser-copy p{ margin:0 0 10px; }
+.teaser-copy p{ margin:0 0 12px; }
 .teaser-copy .dim{
   opacity:.85;
   font-size:.95rem;
@@ -357,21 +353,9 @@
   font-style:italic;
 }
 
-/* Ayırıcı çizgi */
-.teaser-sep{
-  height:1px;
-  width:78%;
-  margin:10px auto;
-  background:linear-gradient(90deg,transparent,#FFD56A,transparent);
-  opacity:.45;
-}
-
 /* Küçük ekran mikro ayar */
 @media (max-width:380px){
   .teaser-copy{ max-width:92%; }
-  /* iOS’ta sözcük araları fazla görünürse şunu aç:
-     .teaser-copy{ text-align:justify; text-justify:inter-word; }
-  */
 }
 </style>
   
