@@ -10,6 +10,13 @@ export default async function handler(req, res) {
     return res.status(400).send(errorHTML("⚠️ İsim ve e-posta gerekli!"));
   }
 
+  // ✨ Regex ile format kontrolü
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return res.status(400).send(errorHTML("⚠️ Geçerli bir e-posta adresi giriniz"));
+  }
+
+  // ✨ Domain kontrolü
   const allowedDomains = ["gmail.com", "icloud.com", "outlook.com", "hotmail.com", "yahoo.com"];
   const domain = email.split("@")[1]?.toLowerCase();
   if (!allowedDomains.includes(domain)) {
