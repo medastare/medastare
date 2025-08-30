@@ -69,13 +69,19 @@ function successHTML(name) {
         display:flex;
         align-items:center;
         justify-content:center;
-        background:radial-gradient(circle at top,#1a1a40,#0d0d1f);
+        background:radial-gradient(circle at top,#0b0d1a,#000);
         font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
         overflow:hidden;
         color:#fff;
       }
+      .container {
+        text-align:center;
+        position:relative;
+        z-index:2;
+        animation:fadeIn 1.2s ease-out;
+      }
       h1 {
-        font-size:2.5rem;
+        font-size:2.8rem;
         font-weight:700;
         background:linear-gradient(90deg,#00eaff,#7a5cff,#00ffb3);
         -webkit-background-clip:text;
@@ -83,46 +89,117 @@ function successHTML(name) {
         animation:glow 3s ease-in-out infinite;
       }
       p {
-        margin-top:12px;
+        margin-top:14px;
         font-size:1.1rem;
-        color:#d9e6ff;
-        animation:fadeIn 2s ease forwards;
+        color:#cfe8ff;
+        animation:slideUp 1.5s ease forwards;
+      }
+      /* glowing halo */
+      .halo {
+        position:absolute;
+        width:600px;
+        height:600px;
+        border-radius:50%;
+        background:radial-gradient(circle,rgba(0,234,255,.25),transparent 70%);
+        filter:blur(80px);
+        animation:rotate 20s linear infinite;
       }
       @keyframes glow {
-        50% { text-shadow:0 0 30px rgba(0,234,255,.6); }
+        50% { text-shadow:0 0 35px rgba(0,234,255,.6); }
       }
       @keyframes fadeIn {
-        from { opacity:0; transform:translateY(10px); }
-        to { opacity:1; transform:translateY(0); }
+        from { opacity:0; transform:scale(0.95);}
+        to { opacity:1; transform:scale(1);}
+      }
+      @keyframes slideUp {
+        from {opacity:0; transform:translateY(20px);}
+        to {opacity:1; transform:translateY(0);}
+      }
+      @keyframes rotate {
+        from {transform:rotate(0);}
+        to {transform:rotate(360deg);}
+      }
+      /* floating particles */
+      .particle {
+        position:absolute;
+        width:6px;
+        height:6px;
+        border-radius:50%;
+        background:white;
+        opacity:.7;
+        animation:float 6s ease-in-out infinite;
+      }
+      .particle:nth-child(1){top:20%;left:25%;animation-delay:0s}
+      .particle:nth-child(2){top:70%;left:40%;animation-delay:1.5s}
+      .particle:nth-child(3){top:40%;left:75%;animation-delay:3s}
+      @keyframes float {
+        50% { transform:translateY(-20px) scale(1.2); opacity:.9 }
       }
     </style>
   </head>
   <body>
-    <div style="text-align:center;">
+    <div class="halo"></div>
+    <div class="container">
       <h1>✨ Teşekkürler ${name}!</h1>
-      <p>Kaydın başarıyla Google Sheets’e eklendi.<br><strong>Bizi beklemede kal... </strong></p>
+      <p>Kaydın başarıyla Google Sheets’e eklendi.<br><b>Bizi beklemede kal 🚀</b></p>
     </div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
   </body>
   </html>`;
 }
 
-/* ====== Hata Ekranı ====== */
+/* ====== Hata Ekranı (Apple tarzı cam + neon) ====== */
 function errorHTML(message) {
   return `
   <html>
-  <head><title>MedaStaré Waitlist - Hata</title></head>
-  <body style="background:#400;color:#fff;display:flex;align-items:center;justify-content:center;height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
-    <div style="text-align:center;">
-      <h1 style="color:#ff4c4c;animation:pulse 1.5s infinite;">⚠️ Hata!</h1>
-      <p>${message}</p>
-    </div>
+  <head>
+    <title>MedaStaré Waitlist - Hata</title>
     <style>
-      @keyframes pulse { 
-        0% { transform:scale(1); } 
-        50% { transform:scale(1.05); } 
-        100% { transform:scale(1); } 
+      body {
+        margin:0;
+        height:100vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background:linear-gradient(135deg,#200,#400);
+        font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+        overflow:hidden;
+      }
+      .card {
+        padding:30px 40px;
+        border-radius:20px;
+        background:rgba(255,0,0,.08);
+        backdrop-filter:blur(18px) saturate(160%);
+        -webkit-backdrop-filter:blur(18px) saturate(160%);
+        border:1px solid rgba(255,0,0,.25);
+        text-align:center;
+        animation:fadeIn .8s ease-out;
+        box-shadow:0 0 40px rgba(255,0,0,.25);
+      }
+      h1 {
+        font-size:2rem;
+        color:#ff4c4c;
+        text-shadow:0 0 15px rgba(255,0,0,0.6);
+        animation:pulse 1.5s infinite;
+        margin:0 0 10px;
+      }
+      p { color:#ffdcdc; margin:0; font-size:1rem; }
+      @keyframes fadeIn {
+        from {opacity:0; transform:translateY(10px);}
+        to {opacity:1; transform:translateY(0);}
+      }
+      @keyframes pulse {
+        50% { transform:scale(1.05); }
       }
     </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>⚠️ Hata!</h1>
+      <p>${message}</p>
+    </div>
   </body>
   </html>`;
 }
