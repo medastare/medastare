@@ -100,7 +100,7 @@ function successHTML(name) {
   <body>
     <div style="text-align:center;">
       <h1>✨ Teşekkürler ${name}!</h1>
-      <p>Kaydın başarıyla Google Sheets’e eklendi.<br><strong>Bizi beklemede kal 🚀</strong></p>
+      <p>Kaydın başarıyla Google Sheets’e eklendi.<br><strong>Bizi beklemede kal...</strong></p>
     </div>
   </body>
   </html>`;
