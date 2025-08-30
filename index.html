@@ -196,7 +196,9 @@
       </p>
 
       <!-- FORM -->
-<form id="waitlist-form" method="POST" action="https://formspree.io/f/xvgqjvvo" autocomplete="on">
+<form id="waitlist-form" method="POST" action="https://formspree.io/f/xvgqjvvo" 
+      autocomplete="on" onsubmit="return validateEmail()">
+  
   <input id="wl-name" name="name" type="text" placeholder="Ad / Name" required autocomplete="name">
 
   <input id="wl-email" name="email" type="email" placeholder="E-posta / Email" required 
@@ -207,7 +209,7 @@
 
 <p class="note">Unsubscribe anytime.</p>
 
-<!-- Başarı & hata mesajları -->
+<!-- Mesajlar -->
 <p id="success-message" style="color:lime; display:none;">✅ Teşekkürler! Kaydın alındı.</p>
 <p id="error-message" style="color:red; display:none;">❌ Bir hata oldu. Tekrar dene.</p>
 <p id="invalid-message" style="color:orange; display:none;">⚠️ Lütfen geçerli bir e-posta adresi gir.</p>
@@ -216,27 +218,33 @@
 </section>
 
 <script>
-  const form = document.getElementById("waitlist-form");
-  const emailInput = document.getElementById("wl-email");
-  const successMsg = document.getElementById("success-message");
-  const errorMsg = document.getElementById("error-message");
-  const invalidMsg = document.getElementById("invalid-message");
+  function validateEmail() {
+    const email = document.getElementById("wl-email").value.toLowerCase();
+    const invalidMsg = document.getElementById("invalid-message");
 
-  form.addEventListener("submit", function(e) {
-    const email = emailInput.value.trim();
-
-    // basit e-posta kontrolü
+    // Normal e-posta regex kontrolü
     const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+
+    // Fake domain listesi
+    const fakeDomains = ["asdnakls.com", "tempmail.com", "10minutemail.com", "mailinator.com"];
+
     if (!emailPattern.test(email)) {
-      e.preventDefault();
+      invalidMsg.textContent = "⚠️ Lütfen geçerli bir e-posta adresi gir.";
       invalidMsg.style.display = "block";
-      successMsg.style.display = "none";
-      errorMsg.style.display = "none";
-      return;
-    } else {
-      invalidMsg.style.display = "none";
+      return false; // formu göndermeyi durdur
     }
-  });
+
+    for (let domain of fakeDomains) {
+      if (email.endsWith("@" + domain)) {
+        invalidMsg.textContent = "⚠️ Bu domain kabul edilmiyor. Lütfen gerçek bir e-posta gir.";
+        invalidMsg.style.display = "block";
+        return false;
+      }
+    }
+
+    invalidMsg.style.display = "none";
+    return true; // form gönderilebilir
+  }
 </script>
 
   <style>
