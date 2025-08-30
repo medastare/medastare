@@ -195,14 +195,14 @@
         e-postanı bırak.
       </p>
 
-      <!-- FORM -->
-<form id="waitlist-form" method="POST" action="https://formspree.io/f/xvgqjvvo" 
-      autocomplete="on" onsubmit="return validateEmail()">
+     <!-- FORM -->
+<form id="waitlist-form" method="POST" action="https://formspree.io/f/xvgqjvvo"
+      autocomplete="on" onsubmit="return validateEmail(event)" novalidate>
   
   <input id="wl-name" name="name" type="text" placeholder="Ad / Name" required autocomplete="name">
 
-  <input id="wl-email" name="email" type="email" placeholder="E-posta / Email" required 
-         autocomplete="email" autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email">
+  <input id="wl-email" name="email" type="text" placeholder="E-posta / Email" required 
+         autocapitalize="off" autocorrect="off" spellcheck="false" inputmode="email">
 
   <button type="submit">Join the Circle 💎</button>
 </form>
@@ -218,11 +218,11 @@
 </section>
 
 <script>
-  function validateEmail() {
+  function validateEmail(event) {
     const email = document.getElementById("wl-email").value.toLowerCase();
     const invalidMsg = document.getElementById("invalid-message");
 
-    // Normal e-posta regex kontrolü
+    // Regex kontrolü
     const emailPattern = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
 
     // Fake domain listesi
@@ -231,13 +231,15 @@
     if (!emailPattern.test(email)) {
       invalidMsg.textContent = "⚠️ Lütfen geçerli bir e-posta adresi gir.";
       invalidMsg.style.display = "block";
-      return false; // formu göndermeyi durdur
+      event.preventDefault(); // gönderimi engeller
+      return false;
     }
 
     for (let domain of fakeDomains) {
       if (email.endsWith("@" + domain)) {
         invalidMsg.textContent = "⚠️ Bu domain kabul edilmiyor. Lütfen gerçek bir e-posta gir.";
         invalidMsg.style.display = "block";
+        event.preventDefault();
         return false;
       }
     }
