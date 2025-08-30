@@ -321,15 +321,20 @@
   -webkit-text-fill-color:transparent; color:transparent;
 }
 
-/* Metin */
+/* Metin (Apple-style) */
 .teaser-copy{
   font-size:1rem;
   line-height:1.6;
-  text-align:justify;
-  text-justify:inter-word;
-  text-align-last:left;
+  text-align:left;           /* sadece soldan hizalı */
+  max-width:620px;           /* daha okunaklı genişlik */
+  margin:0 auto 12px;        /* ortalanmış blok */
 }
-.teaser-copy .dim{ opacity:.85; margin-top:10px; font-size:.97rem; }
+.teaser-copy p{ margin:0 0 14px; }
+.teaser-copy .dim{
+  opacity:.85;
+  font-size:.97rem;
+  font-style:italic;
+}
 
 /* Ayırıcı çizgi */
 .teaser-sep{
