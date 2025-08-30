@@ -257,7 +257,8 @@
   .waitlist-box .note { color:#aaa; font-size:0.9em; margin-top:20px; }
   </style>
 </script>
-<!-- ========= MedaStaré Teaser Section ========= -->
+
+  <!-- ========= MedaStaré Teaser Section ========= -->
 <section id="medastare-teaser" class="teaser" aria-labelledby="teaser-title-tr">
   <div class="teaser-box">
 
@@ -281,7 +282,7 @@
       </p>
     </section>
 
-    <div class="teaser-sep" role="presentation"></div>
+    <div class="teaser-sep" role="presentation" aria-hidden="true"></div>
 
     <!-- EN -->
     <header class="teaser-head">
@@ -314,10 +315,11 @@
   padding:24px 22px;
   color:#eee;
   box-shadow:0 0 28px rgba(255,215,0,.15);
+  text-align:center;
 }
 
 /* Görsel */
-.teaser-hero{ margin:0 0 16px; }
+.teaser-hero{ margin:0 0 18px; }
 .teaser-hero img{
   width:100%; height:auto; display:block;
   border-radius:10px;
@@ -333,25 +335,25 @@
   -webkit-text-fill-color:transparent; color:transparent;
   text-align:center;
   line-height:1.25;
-  text-wrap:balance;                    /* destekleyenlerde başlık satırlarını dengeler */
+  text-wrap:balance;
 }
 
 /* Metin (kompakt ve derli toplu) */
 .teaser-copy{
-  max-width:600px;                      /* gövde genişliği */
-  margin:0 auto 8px;                    /* ortala + alt boşluk */
-  text-align:left;                      /* profesyonel görünüm */
-  line-height:1.45;                     /* satır arası sıkı */
+  max-width:600px;
+  margin:0 auto 8px;
+  text-align:left;
+  line-height:1.45;
   font-size:1rem;
-  letter-spacing:0.1px;                 /* çok hafif aralık */
-  word-break:keep-all;                  /* kelime bölme yok */
+  letter-spacing:0.1px;
+  word-break:keep-all;
 }
-.teaser-copy p{ margin:0 0 10px; }      /* paragraf aralığı */
+.teaser-copy p{ margin:0 0 10px; }
 .teaser-copy .dim{
   opacity:.85;
   font-size:.95rem;
   margin-top:6px;
-  text-align:center;                    /* alt açıklama ortalı */
+  text-align:center;
   font-style:italic;
 }
 
@@ -367,8 +369,8 @@
 /* Küçük ekran mikro ayar */
 @media (max-width:380px){
   .teaser-copy{ max-width:92%; }
-  /* Eğer iOS’ta sözcük araları fazla görünürse alttakini aç:
-  .teaser-copy{ text-align:justify; text-justify:inter-word; }
+  /* iOS’ta sözcük araları fazla görünürse şunu aç:
+     .teaser-copy{ text-align:justify; text-justify:inter-word; }
   */
 }
 </style>
