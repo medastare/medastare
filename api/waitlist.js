@@ -49,8 +49,8 @@ export default async function handler(req, res) {
       },
     });
 
-    // ✅ Başarıyla kayıt olursa redirect
-    return res.redirect("/thank-you.html");
+    // ✅ Kayıt başarılı → direkt teşekkür sayfasına yönlendir
+    return res.redirect("https://www.medastare.com/thank-you.html");
 
   } catch (err) {
     console.error("❌ Sheets API error:", err);
