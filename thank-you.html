@@ -7,7 +7,6 @@
   <meta name="theme-color" content="#0b0b0f" />
   <title>MedaStaré — Teşekkürler</title>
 
-  <!-- Sosyal paylaşıma minik iyileştirme -->
   <meta property="og:title" content="MedaStaré — Teşekkürler">
   <meta property="og:description" content="24 saatlik özel teaser başladığında sana e-posta göndereceğiz. Seçilmişler arasındasın.">
   <meta property="og:type" content="website">
@@ -52,7 +51,7 @@
       padding:28px 22px;
       box-shadow:var(--shadow);
       overflow:hidden;
-      isolation:isolate; /* halka maskesi için */
+      isolation:isolate;
     }
     .card::before{
       content:"";
@@ -65,9 +64,6 @@
       opacity:.9;
       z-index:-1;
       animation:ringTurn 16s linear infinite;
-    }
-    @media (prefers-reduced-motion: reduce){
-      .card::before{animation:none}
     }
     @keyframes ringTurn{
       to{ transform:rotate(360deg); }
@@ -94,7 +90,7 @@
       text-align:center;
     }
     .muted{ color:var(--muted); opacity:.95 }
-    .lead .emph{ font-weight:700 } /* öne çıkarma */
+    .lead .emph{ font-weight:700 }
 
     .hr{
       height:1px; width:84%; margin:16px auto;
@@ -110,7 +106,6 @@
       padding:10px 16px; border-radius:12px; border:1px solid var(--btn-br);
       text-decoration:none; color:var(--text); background:var(--btn-bg);
       transition:background .25s ease, transform .15s ease, box-shadow .15s ease;
-      will-change:transform;
     }
     .btn:hover{ background:var(--btn-hover); transform:translateY(-1px) }
     .btn:active{ transform:translateY(0) }
@@ -123,10 +118,6 @@
       background:
         linear-gradient(180deg, rgba(255,228,140,.08), rgba(255,228,140,.02));
     }
-
-    .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:.82rem}
-
-    @media (max-width:380px){ .btn{width:100%} }
   </style>
 </head>
 <body>
