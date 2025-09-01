@@ -32,7 +32,7 @@ export default async function handler(req, res) {
     });
 
     const sheets = google.sheets({ version: "v4", auth });
-    const spreadsheetId = "1--Y4fUkqxuB_6E-NpNXwFnEVhY1X20YRBdpHCIp061E"; // ✅ senin Sheet ID
+    const spreadsheetId = "1--Y4fUkqxuB_6E-NpNXwFnEVhY1X20YRBdpHCIp061E";
 
     await sheets.spreadsheets.values.append({
       spreadsheetId,
@@ -49,8 +49,9 @@ export default async function handler(req, res) {
       },
     });
 
-    // ✅ Kayıt başarılı → direkt teşekkür sayfasına yönlendir
-    return res.redirect("https://www.medastare.com/thank-you.html");
+    // ✅ Başarı → yönlendirme header ile
+    res.writeHead(302, { Location: "https://www.medastare.com/thank-you.html" });
+    return res.end();
 
   } catch (err) {
     console.error("❌ Sheets API error:", err);
@@ -58,7 +59,7 @@ export default async function handler(req, res) {
   }
 }
 
-/* ====== Hata Ekranı (Apple tarzı Cam + Neon) ====== */
+/* ====== Hata Ekranı ====== */
 function errorHTML(message) {
   return `
   <html>
