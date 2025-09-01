@@ -7,6 +7,7 @@
   <meta name="theme-color" content="#0b0b0f" />
   <title>MedaStaré — Teşekkürler</title>
 
+  <!-- Sosyal paylaşıma minik iyileştirme -->
   <meta property="og:title" content="MedaStaré — Teşekkürler">
   <meta property="og:description" content="24 saatlik özel teaser başladığında sana e-posta göndereceğiz. Seçilmişler arasındasın.">
   <meta property="og:type" content="website">
@@ -51,7 +52,7 @@
       padding:28px 22px;
       box-shadow:var(--shadow);
       overflow:hidden;
-      isolation:isolate;
+      isolation:isolate; /* halka maskesi için */
     }
     .card::before{
       content:"";
@@ -64,6 +65,9 @@
       opacity:.9;
       z-index:-1;
       animation:ringTurn 16s linear infinite;
+    }
+    @media (prefers-reduced-motion: reduce){
+      .card::before{animation:none}
     }
     @keyframes ringTurn{
       to{ transform:rotate(360deg); }
@@ -90,7 +94,7 @@
       text-align:center;
     }
     .muted{ color:var(--muted); opacity:.95 }
-    .lead .emph{ font-weight:700 }
+    .lead .emph{ font-weight:700 } /* öne çıkarma */
 
     .hr{
       height:1px; width:84%; margin:16px auto;
@@ -106,6 +110,7 @@
       padding:10px 16px; border-radius:12px; border:1px solid var(--btn-br);
       text-decoration:none; color:var(--text); background:var(--btn-bg);
       transition:background .25s ease, transform .15s ease, box-shadow .15s ease;
+      will-change:transform;
     }
     .btn:hover{ background:var(--btn-hover); transform:translateY(-1px) }
     .btn:active{ transform:translateY(0) }
@@ -114,4 +119,42 @@
       box-shadow:0 0 0 3px color-mix(in oklab, var(--btn-focus) 70%, transparent);
     }
     .btn.gold{
-      border-color: color
+      border-color: color-mix(in oklab, var(--g2) 60%, white 0%);
+      background:
+        linear-gradient(180deg, rgba(255,228,140,.08), rgba(255,228,140,.02));
+    }
+
+    .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:.82rem}
+
+    @media (max-width:380px){ .btn{width:100%} }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <article class="card" role="status" aria-live="polite" aria-labelledby="t1">
+      <p class="eyebrow">MedaStaré Waitlist</p>
+      <h1 id="t1">Teşekkürler, kaydın alındı.</h1>
+
+      <p class="lead">
+        <span class="emph">24 saatlik özel teaser</span> açılır açılmaz sana e-posta göndereceğiz.
+        Şimdilik rahatça yerini al — seçilmişler arasındasın. ✨
+      </p>
+
+      <p class="lead muted">
+        Bu bir lansman değil; <strong>ön izleme</strong>. İçerikler yayına girdiğinde ilk sen göreceksin.
+      </p>
+
+      <div class="hr" aria-hidden="true"></div>
+
+      <p class="lead-en" lang="en">
+        <span class="mono">EN</span> · Thanks for joining the waitlist.
+        We’ll email you as soon as the <strong>24-hour teaser</strong> opens. This is a preview, not a launch.
+      </p>
+
+      <div class="actions">
+        <a class="btn gold" href="/" aria-label="Ana sayfaya dön">Ana sayfaya dön</a>
+      </div>
+    </article>
+  </main>
+</body>
+</html>
