@@ -49,99 +49,13 @@ export default async function handler(req, res) {
       },
     });
 
-    return res.status(200).send(successHTML(name));
+    // ✅ Başarıyla kayıt olursa redirect
+    return res.redirect("/thank-you.html");
+
   } catch (err) {
     console.error("❌ Sheets API error:", err);
     return res.status(500).send(errorHTML("❌ Sunucu hatası: " + err.message));
   }
-}
-
-/* ====== Başarı Ekranı (Apple / Hologram + Işık Efekti) ====== */
-function successHTML(name) {
-  return `
-  <html>
-  <head>
-    <title>MedaStaré Waitlist</title>
-    <style>
-      body {
-        margin:0;
-        height:100vh;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        background:radial-gradient(circle at top,#0b0d1a,#000);
-        font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-        overflow:hidden;
-        color:#fff;
-      }
-      .container {
-        text-align:center;
-        position:relative;
-        z-index:2;
-        animation:fadeIn 1.2s ease-out;
-      }
-      h1 {
-        font-size:2.8rem;
-        font-weight:700;
-        background:linear-gradient(90deg,#00eaff,#7a5cff,#00ffb3);
-        -webkit-background-clip:text;
-        -webkit-text-fill-color:transparent;
-        position:relative;
-        display:inline-block;
-        overflow:hidden;
-      }
-      /* Parlayan çizgi (shimmer efekti) */
-      h1::after {
-        content:"";
-        position:absolute;
-        top:0; left:-120%;
-        width:120%; height:100%;
-        background:linear-gradient(120deg,transparent,rgba(255,255,255,0.6),transparent);
-        animation:shimmer 3s infinite;
-      }
-      @keyframes shimmer {
-        0% { left:-120%; }
-        50% { left:100%; }
-        100% { left:120%; }
-      }
-      p {
-        margin-top:14px;
-        font-size:1.1rem;
-        color:#cfe8ff;
-        animation:slideUp 1.5s ease forwards;
-      }
-      /* glowing halo */
-      .halo {
-        position:absolute;
-        width:550px;
-        height:550px;
-        border-radius:50%;
-        background:radial-gradient(circle,rgba(0,234,255,.25),transparent 70%);
-        filter:blur(80px);
-        animation:rotate 25s linear infinite;
-      }
-      @keyframes fadeIn {
-        from { opacity:0; transform:scale(0.95);}
-        to { opacity:1; transform:scale(1);}
-      }
-      @keyframes slideUp {
-        from {opacity:0; transform:translateY(20px);}
-        to {opacity:1; transform:translateY(0);}
-      }
-      @keyframes rotate {
-        from {transform:rotate(0);}
-        to {transform:rotate(360deg);}
-      }
-    </style>
-  </head>
-  <body>
-    <div class="halo"></div>
-    <div class="container">
-      <h1>✨ Teşekkürler ${name}!</h1>
-      <p>Kaydın başarıyla Google Sheets’e eklendi.<br><b>Bizi beklemede kal... </b></p>
-    </div>
-  </body>
-  </html>`;
 }
 
 /* ====== Hata Ekranı (Apple tarzı Cam + Neon) ====== */
