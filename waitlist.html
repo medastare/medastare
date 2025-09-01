@@ -7,6 +7,7 @@
   <meta name="theme-color" content="#0b0b0f" />
   <title>MedaStaré — Teşekkürler</title>
 
+  <!-- Sosyal paylaşıma minik iyileştirme -->
   <meta property="og:title" content="MedaStaré — Teşekkürler">
   <meta property="og:description" content="24 saatlik özel teaser başladığında sana e-posta göndereceğiz. Seçilmişler arasındasın.">
   <meta property="og:type" content="website">
@@ -25,17 +26,25 @@
       --btn-hover: rgba(255,224,120,.12);
       --btn-focus: rgba(255,224,120,.45);
     }
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
       min-height:100svh;
       display:grid;
       place-items:center;
-      background: radial-gradient(60% 60% at 50% 30%, rgba(255,215,120,.08), transparent 70%), var(--bg);
+      background:
+        radial-gradient(60% 60% at 50% 30%, rgba(255,215,120,.08), transparent 70%),
+        var(--bg);
       color:var(--text);
       font-family:ui-sans-serif, -apple-system, "SF Pro", Inter, Arial, sans-serif;
-      padding:20px;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding: max(20px, env(safe-area-inset-top)) max(20px, env(safe-area-inset-right))
+               max(20px, env(safe-area-inset-bottom)) max(20px, env(safe-area-inset-left));
     }
     .wrap{width:min(720px,92vw); position:relative}
+
     .card{
       position:relative;
       background:var(--panel);
@@ -43,32 +52,107 @@
       padding:28px 22px;
       box-shadow:var(--shadow);
       overflow:hidden;
-      isolation:isolate;
+      isolation:isolate; /* halka maskesi için */
     }
-    .eyebrow{font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); text-align:center; margin:0 0 6px}
-    h1{margin:0 0 8px; font-size:clamp(22px,5vw,28px); text-align:center;
-       background:linear-gradient(180deg,var(--g1), var(--g3) 60%, var(--g4));
-       -webkit-background-clip:text; color:transparent;}
-    .lead{max-width:62ch; margin:8px auto; text-align:center; line-height:1.6;}
+    .card::before{
+      content:"";
+      position:absolute; inset:-2px; padding:2px; border-radius:24px;
+      background:var(--ring);
+      -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite:xor; mask-composite:exclude;
+      filter:blur(.4px);
+      opacity:.9;
+      z-index:-1;
+      animation:ringTurn 16s linear infinite;
+    }
+    @media (prefers-reduced-motion: reduce){
+      .card::before{animation:none}
+    }
+    @keyframes ringTurn{
+      to{ transform:rotate(360deg); }
+    }
+
+    .eyebrow{
+      font-size:.78rem; letter-spacing:.18em; text-transform:uppercase;
+      color:var(--muted); text-align:center; margin:0 0 6px
+    }
+    h1{
+      margin:0 0 8px;
+      font-size:clamp(22px,5vw,28px);
+      line-height:1.2; text-align:center;
+      background:linear-gradient(180deg,var(--g1), var(--g3) 60%, var(--g4));
+      -webkit-background-clip:text; background-clip:text; color:transparent;
+      text-shadow:0 0 16px rgba(255,210,90,.12);
+    }
+
+    .lead, .lead-en{
+      max-width:62ch;
+      margin:8px auto;
+      line-height:1.6;
+      font-size:clamp(14px,3.2vw,16px);
+      text-align:center;
+    }
     .muted{ color:var(--muted); opacity:.95 }
-    .hr{height:1px; width:84%; margin:16px auto;
-        background:linear-gradient(90deg,transparent,var(--g2),transparent); opacity:.5}
-    .actions{display:flex; justify-content:center; margin-top:8px}
-    .btn{padding:10px 16px; border-radius:12px; border:1px solid var(--btn-br);
-         text-decoration:none; color:var(--text); background:var(--btn-bg);}
+    .lead .emph{ font-weight:700 } /* öne çıkarma */
+
+    .hr{
+      height:1px; width:84%; margin:16px auto;
+      background:linear-gradient(90deg,transparent,var(--g2),transparent);
+      opacity:.5
+    }
+
+    .actions{
+      display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:8px
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      padding:10px 16px; border-radius:12px; border:1px solid var(--btn-br);
+      text-decoration:none; color:var(--text); background:var(--btn-bg);
+      transition:background .25s ease, transform .15s ease, box-shadow .15s ease;
+      will-change:transform;
+    }
+    .btn:hover{ background:var(--btn-hover); transform:translateY(-1px) }
+    .btn:active{ transform:translateY(0) }
+    .btn:focus-visible{
+      outline:none;
+      box-shadow:0 0 0 3px color-mix(in oklab, var(--btn-focus) 70%, transparent);
+    }
+    .btn.gold{
+      border-color: color-mix(in oklab, var(--g2) 60%, white 0%);
+      background:
+        linear-gradient(180deg, rgba(255,228,140,.08), rgba(255,228,140,.02));
+    }
+
+    .mono{font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:.82rem}
+
+    @media (max-width:380px){ .btn{width:100%} }
   </style>
 </head>
 <body>
   <main class="wrap">
-    <article class="card">
+    <article class="card" role="status" aria-live="polite" aria-labelledby="t1">
       <p class="eyebrow">MedaStaré Waitlist</p>
-      <h1>Teşekkürler, kaydın alındı.</h1>
-      <p class="lead"><span class="emph">24 saatlik özel teaser</span> açılır açılmaz sana e-posta göndereceğiz.<br>Seçilmişler arasındasın. ✨</p>
-      <p class="lead muted">Bu bir lansman değil; <strong>ön izleme</strong>. İçerikler yayına girdiğinde ilk sen göreceksin.</p>
-      <div class="hr"></div>
-      <p class="lead">EN · Thanks for joining the waitlist. We’ll email you as soon as the <strong>24-hour teaser</strong> opens. This is a preview, not a launch.</p>
+      <h1 id="t1">Teşekkürler, kaydın alındı.</h1>
+
+      <p class="lead">
+        <span class="emph">24 saatlik özel teaser</span> açılır açılmaz sana e-posta göndereceğiz.
+        Şimdilik rahatça yerini al — seçilmişler arasındasın. ✨
+      </p>
+
+      <p class="lead muted">
+        Bu bir lansman değil; <strong>ön izleme</strong>. İçerikler yayına girdiğinde ilk sen göreceksin.
+      </p>
+
+      <div class="hr" aria-hidden="true"></div>
+
+      <p class="lead-en" lang="en">
+        <span class="mono">EN</span> · Thanks for joining the waitlist.
+        We’ll email you as soon as the <strong>24-hour teaser</strong> opens. This is a preview, not a launch.
+      </p>
+
       <div class="actions">
-        <a class="btn" href="/" aria-label="Ana sayfaya dön">Ana sayfaya dön</a>
+        <a class="btn gold" href="/" aria-label="Ana sayfaya dön">Ana sayfaya dön</a>
       </div>
     </article>
   </main>
