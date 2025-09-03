@@ -36,25 +36,31 @@ header, main, section, footer {
   overflow: hidden !important;
 }
 
-/* ==== APPLE STYLE ORB EFEKTLERİ ==== */
-.bg-fx span {
+/* ==== MEDASTARE STARLIGHT ORB EFEKTLERİ ==== */
+.medastare-fx span {
   position: absolute;
   display: block;
   border-radius: 50%;
   background: radial-gradient(circle, rgba(212,175,55,.25), transparent 70%);
-  animation: floatOrb 40s ease-in-out infinite;
+  animation: starlightFloat 40s ease-in-out infinite;
   will-change: transform, opacity;
   opacity: .5;
   filter: blur(8px);
 }
 
 /* 6 orb – soft hareket */
-.bg-fx span:nth-child(1){ width:200px;height:200px;top:10%; left:15%; animation-delay:0s;}
-.bg-fx span:nth-child(2){ width:160px;height:160px;top:30%; left:70%; animation-delay:6s;}
-.bg-fx span:nth-child(3){ width:240px;height:240px;top:60%; left:20%; animation-delay:12s;}
-.bg-fx span:nth-child(4){ width:120px;height:120px;top:80%; left:50%; animation-delay:18s;}
-.bg-fx span:nth-child(5){ width:180px;height:180px;top:40%; left:40%; animation-delay:24s;}
-.bg-fx span:nth-child(6){ width:140px;height:140px;top:15%; left:80%; animation-delay:30s;}
+.medastare-fx span:nth-child(1){ width:200px;height:200px;top:10%; left:15%; animation-delay:0s;}
+.medastare-fx span:nth-child(2){ width:160px;height:160px;top:30%; left:70%; animation-delay:6s;}
+.medastare-fx span:nth-child(3){ width:240px;height:240px;top:60%; left:20%; animation-delay:12s;}
+.medastare-fx span:nth-child(4){ width:120px;height:120px;top:80%; left:50%; animation-delay:18s;}
+.medastare-fx span:nth-child(5){ width:180px;height:180px;top:40%; left:40%; animation-delay:24s;}
+.medastare-fx span:nth-child(6){ width:140px;height:140px;top:15%; left:80%; animation-delay:30s;}
+
+/* Animasyon */
+@keyframes starlightFloat {
+  0%,100% { transform: translate(0,0) scale(1); opacity:.4; }
+  50%     { transform: translate(25px,-30px) scale(1.1); opacity:.8; }
+}
 
 @keyframes floatOrb {
   0%,100% { transform: translate(0,0) scale(1); opacity:.4; }
