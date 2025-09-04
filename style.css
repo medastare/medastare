@@ -117,6 +117,7 @@ header, main, section, footer {
 [style*="skew"] {
   max-width: 100%;
 }
+
 .light-streaks {
   position: fixed;
   inset: 0;
@@ -153,4 +154,22 @@ header, main, section, footer {
 @keyframes goldSweep {
   0%   { transform: translateY(-20vh) rotate(-10deg); }
   100% { transform: translateY(120vh) rotate(-10deg); }
+}
+
+/* ==== BACKDROP BLUR SABİT ==== */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(
+    60% 80% at 50% 0%,     /* blur yukarıdan başlasın */
+    rgba(255,215,0,0.12),  /* soft altın tonu */
+    transparent 70%
+  );
+  filter: blur(55px);      /* daha geniş ve yumuşak blur */
+  z-index: 0;              /* hep en arkada kalsın */
 }
