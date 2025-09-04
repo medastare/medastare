@@ -40,6 +40,9 @@
   footer{max-width:var(--maxW);margin:64px auto 32px;padding:0 24px;opacity:.85}
   footer hr{border:0;height:1px;background:rgba(255,215,0,.15);margin:28px 0}
   .note{margin-top:12px;opacity:.8}
+  /* TR / EN renk ayrımı */
+  .lang-en{color:var(--text)}
+  .lang-tr{color:var(--gold1)}
 </style>
 </head>
 <body>
@@ -50,20 +53,32 @@
   </nav>
 
   <main class="wrap">
-    <h1 class="title">Careers</h1>
+    <h1 class="title">Careers / Kariyerler</h1>
     <p class="lead">
-      We’re building the future of fashion-tech. If you’re passionate about AI,
-      personalization and premium digital experiences, you’ll feel at home.
+      <span class="lang-en"><strong>EN:</strong> We’re building the future of fashion-tech. If you’re passionate about AI,
+      personalization and premium digital experiences, you’ll feel at home.</span><br>
+      <span class="lang-tr"><strong>TR:</strong> Moda-teknolojisinin geleceğini inşa ediyoruz. Yapay zekâ, kişiselleştirme
+      ve premium dijital deneyimlere tutkuluysan, burada kendini evinde hissedeceksin.</span>
     </p>
 
     <section class="card">
-      <h2>Open Roles</h2>
-      <p>We’re preparing our first openings.</p>
+      <h2>Open Roles / Açık Pozisyonlar</h2>
+      <p>
+        <span class="lang-en"><strong>EN:</strong> We’re preparing our first openings.</span><br>
+        <span class="lang-tr"><strong>TR:</strong> İlk iş ilanlarımızı hazırlıyoruz.</span>
+      </p>
       <div class="btnRow">
-        <button class="btn gold" id="notifyBtn">Get Notified</button>
-        <a class="btn ghost" href="/#waitlist">Join Waitlist</a>
+        <button class="btn gold" id="notifyBtn">
+          <span class="lang-en">EN: Get Notified</span> / <span class="lang-tr">TR: Bildirim Al</span>
+        </button>
+        <a class="btn ghost" href="/#waitlist">
+          <span class="lang-en">EN: Join Waitlist</span> / <span class="lang-tr">TR: Ön Kayıt Ol</span>
+        </a>
       </div>
-      <p class="note">Tip: Add your LinkedIn when you join the waitlist for early consideration.</p>
+      <p class="note">
+        <span class="lang-en"><strong>EN:</strong> Tip: Add your LinkedIn when you join the waitlist for early consideration.</span><br>
+        <span class="lang-tr"><strong>TR:</strong> İpucu: Ön kayıta katılırken LinkedIn profilini eklersen öncelikli değerlendirileceksin.</span>
+      </p>
     </section>
   </main>
 
