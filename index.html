@@ -53,9 +53,7 @@
     header .lang-toggle { cursor:pointer; font-size:.9rem; color:var(--wine); }
 
     /* Hero */
-    .hero {
-      text-align:center; padding:80px 20px; background:#fff;
-    }
+    .hero { text-align:center; padding:80px 20px; background:#fff; }
     .hero img { max-width:900px; width:100%; border-radius:12px; }
     .hero h1 { font-family:"Playfair Display", serif; font-size:2.2rem; margin:20px 0 10px; color:var(--wine);}
     .hero p { font-size:1.1rem; color:var(--gray); max-width:600px; margin:auto; }
@@ -85,7 +83,7 @@
 
     /* Footer */
     footer { background:#111; color:#fff; padding:40px 20px; }
-    footer .grid { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:40px; max-width:1200px; margin:auto; }
+    footer .grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:40px; max-width:1200px; margin:auto; }
     footer h4 { margin-bottom:15px; color:#f5f5f5;}
     footer a { display:block; color:#ccc; text-decoration:none; margin-bottom:8px; font-size:.95rem; }
     footer a:hover { color:#fff;}
@@ -97,20 +95,20 @@
 <header>
   <div class="logo">MedaStaré</div>
   <nav>
-    <a href="#about">About</a>
-    <a href="#vision">Vision</a>
-    <a href="#future">Future</a>
-    <a href="#waitlist">Waitlist</a>
-    <a href="#contact">Contact</a>
+    <a href="#about" data-en="About" data-tr="Hakkımızda">About</a>
+    <a href="#vision" data-en="Vision" data-tr="Vizyon">Vision</a>
+    <a href="#future" data-en="Future" data-tr="Gelecek">Future</a>
+    <a href="#waitlist" data-en="Waitlist" data-tr="Kayıt Ol">Waitlist</a>
+    <a href="#contact" data-en="Contact" data-tr="İletişim">Contact</a>
   </nav>
-  <div class="lang-toggle">EN / TR +</div>
+  <div class="lang-toggle" onclick="toggleLang()">EN</div>
 </header>
 
 <!-- Hero -->
 <section class="hero">
   <img src="medastare-eiffel-elegance.jpeg" alt="Eiffel Elegance" loading="lazy">
-  <h1>Global sahne artık senin gardırobunda</h1>
-  <p>Her stile ve her bütçeye hitap eden global koleksiyonlar, MedaStaré’de buluşuyor.</p>
+  <h1 data-en="Global stage now in your wardrobe" data-tr="Global sahne artık senin gardırobunda">Global stage now in your wardrobe</h1>
+  <p data-en="Collections for every style and budget, all in one place." data-tr="Her stile ve her bütçeye hitap eden global koleksiyonlar, MedaStaré’de buluşuyor.">Collections for every style and budget, all in one place.</p>
 </section>
 
 <!-- Grid Collections -->
@@ -161,31 +159,40 @@
 
 <!-- Waitlist -->
 <section class="waitlist" id="waitlist">
-  <h2>Join the Waitlist</h2>
-  <p>Be the first to access exclusive collections and global previews.</p>
+  <h2 data-en="Join the Waitlist" data-tr="Bekleme Listesine Katıl">Join the Waitlist</h2>
+  <p data-en="Be the first to access exclusive collections and global previews." data-tr="Özel koleksiyonlara ve global önizlemelere ilk sen eriş.">Be the first to access exclusive collections and global previews.</p>
   <form id="waitlist-form" method="POST" action="/api/waitlist" autocomplete="on">
     <input id="wl-name" name="name" type="text" placeholder="Full Name" required autocomplete="name">
     <input id="wl-email" name="email" type="email" placeholder="Email Address" required autocomplete="email">
-    <button type="submit">Sign Up</button>
+    <button type="submit" data-en="Sign Up" data-tr="Kayıt Ol">Sign Up</button>
   </form>
 </section>
 
 <!-- About -->
 <section id="about">
-  <h2>About MedaStaré</h2>
-  <p>MedaStaré is where AI meets fashion & beauty. From Turkey to the world, we bring together global collections and personalized styling technology.</p>
+  <h2 data-en="About MedaStaré" data-tr="MedaStaré Hakkında">About MedaStaré</h2>
+  <p data-en="MedaStaré is where AI meets fashion & beauty. From Turkey to the world, we bring together global collections and personalized styling technology."
+     data-tr="MedaStaré, yapay zekâ ile moda ve güzelliğin buluştuğu yerdir. Türkiye’den dünyaya, global koleksiyonları ve kişiselleştirilmiş stil teknolojisini bir araya getiriyoruz.">
+    MedaStaré is where AI meets fashion & beauty. From Turkey to the world, we bring together global collections and personalized styling technology.
+  </p>
 </section>
 
 <!-- Vision -->
 <section id="vision">
-  <h2>Our Vision</h2>
-  <p>We are building Turkey’s first AI-powered fashion-tech ecosystem, uniting style, beauty and technology with a global touch.</p>
+  <h2 data-en="Our Vision" data-tr="Vizyonumuz">Our Vision</h2>
+  <p data-en="We are building Turkey’s first AI-powered fashion-tech ecosystem, uniting style, beauty and technology with a global touch."
+     data-tr="Türkiye’nin ilk yapay zekâ destekli fashion-tech ekosistemini inşa ediyoruz; stil, güzellik ve teknolojiyi global bir dokunuşla birleştiriyoruz.">
+    We are building Turkey’s first AI-powered fashion-tech ecosystem, uniting style, beauty and technology with a global touch.
+  </p>
 </section>
 
 <!-- Future -->
 <section id="future">
-  <h2>Future Potential</h2>
-  <p>The global fashion & beauty market surpasses $3 Trillion. MedaStaré is uniquely positioned with its technopark project status and rapid traction: in only 3 weeks, our Crunchbase rank soared from 2.9 million to 44 thousand. This growth proves our potential to scale globally.</p>
+  <h2 data-en="Future Potential" data-tr="Gelecek Potansiyeli">Future Potential</h2>
+  <p data-en="The global fashion & beauty market surpasses $3 Trillion. MedaStaré is uniquely positioned with its technopark project status and rapid traction: in only 3 weeks, our Crunchbase rank soared from 2.9 million to 44 thousand. This growth proves our potential to scale globally."
+     data-tr="Global moda ve güzellik pazarı 3 trilyon doları aşıyor. MedaStaré, teknopark projesi statüsü ve hızlı ivmesiyle benzersiz bir konumdadır: sadece 3 haftada Crunchbase sıralamamız 2.9 milyondan 44 bine yükseldi. Bu büyüme, küresel ölçekte büyüme potansiyelimizi kanıtlıyor.">
+    The global fashion & beauty market surpasses $3 Trillion. MedaStaré is uniquely positioned with its technopark project status and rapid traction: in only 3 weeks, our Crunchbase rank soared from 2.9 million to 44 thousand. This growth proves our potential to scale globally.
+  </p>
 </section>
 
 <!-- Contact & Footer -->
@@ -201,19 +208,28 @@
       <a href="https://instagram.com/medastareapp">Instagram</a>
       <a href="https://x.com/medastareapp">X (Twitter)</a>
       <a href="https://linkedin.com/company/medastareapp">LinkedIn</a>
+      <a href="https://www.crunchbase.com/organization/medastar%C3%A9" target="_blank">Crunchbase</a>
     </div>
     <div>
       <h4>Vision</h4>
       <a href="#vision">Our Vision</a>
       <a href="#future">Future Potential</a>
     </div>
-    <div>
-      <h4>Crunchbase</h4>
-      <a href="https://www.crunchbase.com/organization/medastar%C3%A9" target="_blank">View Profile</a>
-    </div>
   </div>
   <small>© 2025 MedaStaré. All rights reserved.</small>
 </footer>
+
+<script>
+  let currentLang = "EN";
+  function toggleLang() {
+    currentLang = (currentLang === "EN") ? "TR" : "EN";
+    document.querySelector(".lang-toggle").innerText = currentLang;
+
+    document.querySelectorAll("[data-en]").forEach(el => {
+      el.innerText = (currentLang === "EN") ? el.dataset.en : el.dataset.tr;
+    });
+  }
+</script>
 
 </body>
 </html>
