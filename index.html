@@ -38,7 +38,7 @@
       margin:0;
       padding:0;
       max-width:100%;
-      overflow-x:hidden; /* sağa kaymayı engelle */
+      overflow-x:hidden;
       font-family: Inter, sans-serif;
       background:var(--pink);
       color:var(--black);
@@ -101,7 +101,7 @@
     <a href="#waitlist" data-en="Waitlist" data-tr="Kayıt Ol">Waitlist</a>
     <a href="#contact" data-en="Contact" data-tr="İletişim">Contact</a>
   </nav>
-  <div class="lang-toggle" onclick="toggleLang()">EN</div>
+  <div class="lang-toggle" onclick="toggleLang()">TR | EN</div>
 </header>
 
 <!-- Hero -->
@@ -110,52 +110,6 @@
   <h1 data-en="Global stage now in your wardrobe" data-tr="Global sahne artık senin gardırobunda">Global stage now in your wardrobe</h1>
   <p data-en="Collections for every style and budget, all in one place." data-tr="Her stile ve her bütçeye hitap eden global koleksiyonlar, MedaStaré’de buluşuyor.">Collections for every style and budget, all in one place.</p>
 </section>
-
-<!-- Grid Collections -->
-<div class="grid">
-  <div class="grid-item">
-    <img src="medabeaute-perfume-01.jpeg" alt="MedaBeauté">
-    <div class="caption">
-      <h3>MedaBeauté</h3>
-      <p>Benzersiz ve global kozmetik ürünleri: parfüm, makyaj, bakım. Global markalarla birlikte özel üretimlerimiz.</p>
-    </div>
-  </div>
-  <div class="grid-item">
-    <img src="medastare-business-01.jpeg" alt="Business">
-    <div class="caption">
-      <h3>Business Collection</h3>
-      <p>Sofistike ve modern çizgiler. Global markaların seçkin parçaları tek platformda.</p>
-    </div>
-  </div>
-  <div class="grid-item">
-    <img src="medastare-femmesport-01.jpeg" alt="FemmeSport">
-    <div class="caption">
-      <h3>FemmeSport Collection</h3>
-      <p>Sportif şıklığı zarafetle birleştiren global koleksiyonlar.</p>
-    </div>
-  </div>
-  <div class="grid-item">
-    <img src="medastare-glamcouture-01.jpeg" alt="GlamCouture">
-    <div class="caption">
-      <h3>GlamCouture Collection</h3>
-      <p>Kırmızı halıya layık couture parçalarla yıldız gibi parlaman için.</p>
-    </div>
-  </div>
-  <div class="grid-item">
-    <img src="medastare-minimal-01.jpg" alt="Minimal">
-    <div class="caption">
-      <h3>Minimal Elegance</h3>
-      <p>Sade zarafet ve minimal çizgilerle global ikonlar bir arada.</p>
-    </div>
-  </div>
-  <div class="grid-item">
-    <img src="medastare-urbanflare-01.jpeg" alt="UrbanFlare">
-    <div class="caption">
-      <h3>UrbanFlare</h3>
-      <p>Şehrin enerjisini yansıtan global parçalar tek platformda.</p>
-    </div>
-  </div>
-</div>
 
 <!-- Waitlist -->
 <section class="waitlist" id="waitlist">
@@ -212,18 +166,27 @@
     </div>
     <div>
       <h4>Vision</h4>
-      <a href="#vision">Our Vision</a>
-      <a href="#future">Future Potential</a>
+      <a href="#vision" data-en="Our Vision" data-tr="Vizyonumuz">Our Vision</a>
+      <a href="#future" data-en="Future Potential" data-tr="Gelecek Potansiyeli">Future Potential</a>
     </div>
   </div>
   <small>© 2025 MedaStaré. All rights reserved.</small>
 </footer>
 
 <script>
-  let currentLang = "EN";
+  // Dil kaydı için localStorage
+  let currentLang = localStorage.getItem("lang") || "EN";
+  updateLang();
+
   function toggleLang() {
     currentLang = (currentLang === "EN") ? "TR" : "EN";
-    document.querySelector(".lang-toggle").innerText = currentLang;
+    localStorage.setItem("lang", currentLang);
+    updateLang();
+  }
+
+  function updateLang() {
+    document.querySelector(".lang-toggle").innerText = 
+      (currentLang === "EN") ? "TR | EN" : "EN | TR";
 
     document.querySelectorAll("[data-en]").forEach(el => {
       el.innerText = (currentLang === "EN") ? el.dataset.en : el.dataset.tr;
