@@ -1,101 +1,141 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>İletişim | MedaStaré</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Contact | MedaStaré</title>
+  <link rel="icon" type="image/png" href="/favicon.ico">
+
   <style>
-    body {
-      background-color: #0a0a0a;
-      color: white;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
+    :root {
+      --pink:#fbeef5;
+      --wine:#6d1f34;
+      --black:#111;
+      --gray:#666;
     }
-    h1 {
-      color: #FFD700;
+    html, body {
+      margin:0;
+      padding:0;
+      max-width:100%;
+      overflow-x:hidden;
+      font-family: Inter, sans-serif;
+      background:var(--pink);
+      color:var(--black);
     }
-    .contact-info {
-      margin-bottom: 20px;
+    header {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:20px 40px; background:#fff; position:sticky; top:0; z-index:1000;
+      border-bottom:1px solid #eee;
     }
-    .contact-info a {
-      color: #FFD700;
-      text-decoration: none;
-    }
-    .contact-info a:hover {
-      text-decoration: underline;
-    }
-    form {
-      background: #111;
-      padding: 20px;
-      border-radius: 8px;
-    }
-    label {
-      display: block;
-      margin: 10px 0 5px;
-    }
+    header .logo { font-family:"Playfair Display", serif; font-size:1.5rem; color:var(--wine); font-weight:600; }
+    header nav a { margin:0 15px; text-decoration:none; color:var(--black); font-weight:500; }
+    header .lang-toggle { cursor:pointer; font-size:.9rem; color:var(--wine); }
+
+    main { padding:60px 20px; max-width:900px; margin:auto; }
+    h1 { font-family:"Playfair Display", serif; font-size:2rem; margin-bottom:20px; color:var(--wine);}
+    h2 { font-family:"Playfair Display", serif; font-size:1.4rem; margin-top:40px; margin-bottom:15px; color:var(--wine); }
+    p, li { color:var(--gray); line-height:1.6; }
+
+    .contact-info a { color:var(--wine); text-decoration:none; font-weight:500; }
+    .contact-info a:hover { text-decoration:underline; }
+
+    form { background:#fff; padding:25px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08); margin-top:20px;}
+    label { display:block; margin:12px 0 6px; font-weight:500; color:var(--black);}
     input, textarea {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 4px;
-      margin-bottom: 15px;
+      width:100%; padding:12px; border:1px solid #ccc; border-radius:6px; margin-bottom:15px; font-size:1rem;
     }
+    input:focus, textarea:focus { border-color:var(--wine); outline:none;}
     button {
-      background-color: #FFD700;
-      color: #000;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
+      background:var(--wine); color:#fff; border:none; padding:14px 20px;
+      border-radius:6px; font-weight:600; cursor:pointer; font-size:1rem;
     }
-    button:hover {
-      background-color: #e6c200;
-    }
+    button:hover { background:#8a2945; }
+
+    footer { background:#111; color:#fff; padding:40px 20px; margin-top:40px; }
+    footer small { display:block; margin-top:30px; text-align:center; color:#aaa; }
   </style>
 </head>
 <body>
 
-  <h1>İletişim / Contact</h1>
-<div class="contact-info">
-  <p>Bize e-posta ile ulaşabilirsiniz / You can reach us via email:</p>
-  
-  <div style="margin-bottom:15px;">
-    <strong>Genel İletişim & İşbirlikleri / General Inquiries & Partnerships:</strong><br>
-    <a href="mailto:info@medastare.com">info@medastare.com</a>
+<header>
+  <div class="logo">MedaStaré</div>
+  <nav>
+    <a href="/" data-en="Home" data-tr="Ana Sayfa">Home</a>
+    <a href="/careers.html" data-en="Careers" data-tr="Kariyerler">Careers</a>
+    <a href="/contact.html" data-en="Contact" data-tr="İletişim">Contact</a>
+  </nav>
+  <div class="lang-toggle" onclick="toggleLang()">TR | EN</div>
+</header>
+
+<main>
+  <h1 data-en="Contact" data-tr="İletişim">Contact</h1>
+
+  <div class="contact-info">
+    <p data-en="You can reach us via email:" data-tr="Bize e-posta ile ulaşabilirsiniz:">
+      You can reach us via email:
+    </p>
+
+    <div style="margin-bottom:15px;">
+      <strong data-en="General Inquiries & Partnerships:" data-tr="Genel İletişim & İşbirlikleri:">General Inquiries & Partnerships:</strong><br>
+      <a href="mailto:info@medastare.com">info@medastare.com</a>
+    </div>
+
+    <div style="margin-bottom:15px;">
+      <strong data-en="User Support & Questions:" data-tr="Kullanıcı Soruları & Destek:">User Support & Questions:</strong><br>
+      <a href="mailto:hello@medastare.com">hello@medastare.com</a>
+    </div>
+
+    <p>
+      <span data-en="Phone:" data-tr="Telefon:">Phone:</span>
+      <a href="tel:+905415661310">+90 541 566 13 10</a>
+    </p>
+
+    <p data-en="Our social media accounts:" data-tr="Sosyal medya hesaplarımız:">Our social media accounts:</p>
+    <ul>
+      <li><a href="https://www.linkedin.com/">LinkedIn</a></li>
+      <li><a href="https://x.com/">X (Twitter)</a></li>
+      <li><a href="https://www.instagram.com/">Instagram</a></li>
+      <li><a href="https://www.crunchbase.com/">Crunchbase</a></li>
+    </ul>
   </div>
 
-  <div style="margin-bottom:15px;">
-    <strong>Kullanıcı Soruları & Destek / User Support & Questions:</strong><br>
-    <a href="mailto:hello@medastare.com">hello@medastare.com</a>
-  </div>
-
-  <p>Telefon / Phone:
-    <a href="tel:+905415661310">+90 541 566 13 10</a>
-  </p>
-
-  <p>Sosyal medya hesaplarımız / Our social media accounts:</p>
-  <ul>
-    <li><a href="https://www.linkedin.com/">LinkedIn</a></li>
-    <li><a href="https://x.com/">X (Twitter)</a></li>
-    <li><a href="https://www.instagram.com/">Instagram</a></li>
-    <li><a href="https://www.crunchbase.com/">Crunchbase</a></li>
-  </ul>
-</div>
-
-  <h2>Bize Mesaj Gönderin</h2>
+  <h2 data-en="Send Us a Message" data-tr="Bize Mesaj Gönderin">Send Us a Message</h2>
   <form>
-    <label for="name">Ad Soyad</label>
-    <input type="text" id="name" name="name" placeholder="Adınızı girin">
+    <label for="name" data-en="Full Name" data-tr="Ad Soyad">Full Name</label>
+    <input type="text" id="name" name="name" placeholder="Full Name">
 
-    <label for="email">E-posta</label>
-    <input type="email" id="email" name="email" placeholder="E-postanızı girin">
+    <label for="email" data-en="Email" data-tr="E-posta">Email</label>
+    <input type="email" id="email" name="email" placeholder="Email">
 
-    <label for="message">Mesajınız</label>
-    <textarea id="message" name="message" rows="5" placeholder="Mesajınızı buraya yazın"></textarea>
+    <label for="message" data-en="Message" data-tr="Mesajınız">Message</label>
+    <textarea id="message" name="message" rows="5" placeholder="Message"></textarea>
 
-    <button type="submit">Gönder</button>
+    <button type="submit" data-en="Send" data-tr="Gönder">Send</button>
   </form>
+</main>
+
+<footer>
+  <small>© 2025 MedaStaré. All rights reserved.</small>
+</footer>
+
+<script>
+  let currentLang = localStorage.getItem("lang") || "EN";
+  updateLang();
+
+  function toggleLang() {
+    currentLang = (currentLang === "EN") ? "TR" : "EN";
+    localStorage.setItem("lang", currentLang);
+    updateLang();
+  }
+
+  function updateLang() {
+    document.querySelector(".lang-toggle").innerText = 
+      (currentLang === "EN") ? "TR | EN" : "EN | TR";
+    document.querySelectorAll("[data-en]").forEach(el => {
+      el.innerText = (currentLang === "EN") ? el.dataset.en : el.dataset.tr;
+    });
+  }
+</script>
+
 </body>
 </html>
