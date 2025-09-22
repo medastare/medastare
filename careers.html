@@ -1,93 +1,116 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Careers — MedaStaré</title>
-<link rel="icon" href="/favicon.ico" />
-<style>
-  :root{
-    --bg:#0a0a0a; --text:#f2f2f2;
-    --gold1:#ffd54a; --gold2:#e6b800;
-    --card:rgba(255,255,255,.035); --cardBorder:rgba(255,215,0,.22);
-    --maxW:1100px;
-  }
-  html,body{height:100%;margin:0;background:var(--bg);color:var(--text);
-    font-family:system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-text-size-adjust:100%;display:flex;flex-direction:column;min-height:100vh}
-  *,*:before,*:after{box-sizing:border-box}
-  .wrap{max-width:var(--maxW);margin:0 auto;padding:80px 24px;flex:1}
-  .title{margin:0 0 16px;font-size:clamp(28px,4.6vw,48px);font-weight:800;
-    background:linear-gradient(90deg,var(--gold1),var(--gold2));
-    -webkit-background-clip:text;background-clip:text;color:transparent}
-  .lead{opacity:.9;margin:0 0 28px;line-height:1.6}
-  .card{background:var(--card);border:1px solid var(--cardBorder);border-radius:16px;
-    padding:24px;box-shadow:0 10px 28px rgba(0,0,0,.28);margin-top:32px}
-  h2{margin:0 0 16px;font-size:clamp(20px,3.6vw,28px)}
-  .btn{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;
-    padding:14px 22px;border-radius:14px;font-weight:800;font-size:16px;cursor:pointer;text-align:center;text-decoration:none}
-  .btn.gold{background:linear-gradient(90deg,var(--gold1),var(--gold2));color:#111;border:0;
-    box-shadow:0 8px 26px rgba(255,215,0,.25);transition:transform .12s ease, box-shadow .2s ease}
-  .btn.gold:hover{transform:translateY(-1px);box-shadow:0 12px 32px rgba(255,215,0,.33)}
-  .btn.ghost{border:1px solid var(--cardBorder);color:var(--text);background:transparent}
-  .btnRow{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:20px}
-  .topNav{position:sticky;top:0;backdrop-filter:saturate(140%) blur(8px);
-    background:rgba(0,0,0,.35);border-bottom:1px solid rgba(255,215,0,.12);padding:10px 16px}
-  .topNav a{color:var(--text);text-decoration:none;margin-right:14px;opacity:.85}
-  body::before{content:"";position:fixed;inset:0;pointer-events:none;
-    background:radial-gradient(60% 100% at 50% 100%, rgba(255,215,0,.08), transparent);
-    filter:blur(42px)}
-  footer{max-width:var(--maxW);margin:32px auto 24px;padding:0 24px;opacity:.85;text-align:center}
-  footer hr{border:0;height:1px;background:rgba(255,215,0,.15);margin:20px 0}
-  .note{margin-top:18px;opacity:.85;line-height:1.5}
-  .lang-en{color:var(--text);display:block;margin-bottom:8px}
-  .lang-tr{color:var(--gold1);display:block;margin-bottom:18px}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Careers — MedaStaré</title>
+  <link rel="icon" type="image/png" href="/favicon.ico">
+
+  <style>
+    :root {
+      --pink:#fbeef5;
+      --wine:#6d1f34;
+      --black:#111;
+      --gray:#666;
+    }
+    html, body {
+      margin:0;
+      padding:0;
+      max-width:100%;
+      overflow-x:hidden;
+      font-family: Inter, sans-serif;
+      background:var(--pink);
+      color:var(--black);
+    }
+    header {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:20px 40px; background:#fff; position:sticky; top:0; z-index:1000;
+      border-bottom:1px solid #eee;
+    }
+    header .logo { font-family:"Playfair Display", serif; font-size:1.5rem; color:var(--wine); font-weight:600; }
+    header nav a { margin:0 15px; text-decoration:none; color:var(--black); font-weight:500; }
+    header .lang-toggle { cursor:pointer; font-size:.9rem; color:var(--wine); }
+
+    main { padding:60px 20px; max-width:900px; margin:auto; }
+    h1 { font-family:"Playfair Display", serif; font-size:2rem; margin-bottom:20px; color:var(--wine);}
+    p { color:var(--gray); line-height:1.6; margin-bottom:20px; }
+
+    .card { background:#fff; border-radius:12px; padding:25px; box-shadow:0 4px 15px rgba(0,0,0,0.08); margin-top:30px; }
+    .card h2 { font-family:"Playfair Display", serif; font-size:1.5rem; margin-bottom:15px; color:var(--wine);}
+    .btnRow { display:flex; gap:12px; flex-wrap:wrap; margin-top:20px; }
+    .btn { flex:1; text-align:center; padding:14px; border-radius:6px; font-weight:600; cursor:pointer; text-decoration:none; }
+    .btn.gold { background:var(--wine); color:#fff; }
+    .btn.gold:hover { background:#8a2945; }
+    .btn.ghost { border:1px solid var(--wine); color:var(--wine); background:transparent; }
+    .btn.ghost:hover { background:var(--wine); color:#fff; }
+
+    footer { background:#111; color:#fff; padding:40px 20px; margin-top:40px; }
+    footer small { display:block; margin-top:30px; text-align:center; color:#aaa; }
+  </style>
 </head>
 <body>
-  <nav class="topNav">
-    <a href="/">← Home</a>
-    <a href="/careers.html" aria-current="page">Careers</a>
-    <a href="/contact.html">Contact / Media</a>
+
+<header>
+  <div class="logo">MedaStaré</div>
+  <nav>
+    <a href="/" data-en="Home" data-tr="Ana Sayfa">Home</a>
+    <a href="/careers.html" data-en="Careers" data-tr="Kariyerler">Careers</a>
+    <a href="/#contact" data-en="Contact" data-tr="İletişim">Contact</a>
   </nav>
+  <div class="lang-toggle" onclick="toggleLang()">TR | EN</div>
+</header>
 
-  <main class="wrap">
-    <h1 class="title">Careers / Kariyerler</h1>
+<main>
+  <h1 data-en="Careers" data-tr="Kariyerler">Careers</h1>
 
-    <p class="lead">
-      <span class="lang-en"><strong>EN:</strong> We’re building the future of fashion-tech. If you’re passionate about AI, personalization and premium digital experiences, you’ll feel at home.</span>
-      <span class="lang-tr"><strong>TR:</strong> Moda-teknolojisinin geleceğini inşa ediyoruz. Yapay zekâ, kişiselleştirme ve premium dijital deneyimlere tutkuluysan, burada kendini evinde hissedeceksin.</span>
+  <p data-en="We’re building the future of fashion-tech. If you’re passionate about AI, personalization and premium digital experiences, you’ll feel at home."
+     data-tr="Moda-teknolojisinin geleceğini inşa ediyoruz. Yapay zekâ, kişiselleştirme ve premium dijital deneyimlere tutkuluysan, burada kendini evinde hissedeceksin.">
+     We’re building the future of fashion-tech. If you’re passionate about AI, personalization and premium digital experiences, you’ll feel at home.
+  </p>
+
+  <section class="card">
+    <h2 data-en="Open Roles" data-tr="Açık Pozisyonlar">Open Roles</h2>
+    <p data-en="We’re preparing our first openings."
+       data-tr="İlk iş ilanlarımızı hazırlıyoruz.">We’re preparing our first openings.</p>
+
+    <div class="btnRow">
+      <a class="btn gold" href="mailto:hello@medastare.com?subject=Careers — Notify me">
+        <span data-en="Get Notified" data-tr="Bildirim Al">Get Notified</span>
+      </a>
+      <a class="btn ghost" href="/#waitlist">
+        <span data-en="Join Waitlist" data-tr="Ön Kayıt Ol">Join Waitlist</span>
+      </a>
+    </div>
+
+    <p class="note" data-en="Tip: Add your LinkedIn profile when you apply for early consideration."
+       data-tr="İpucu: Erken değerlendirme için başvururken LinkedIn profilini eklersen öncelikli değerlendirileceksin.">
+       Tip: Add your LinkedIn profile when you apply for early consideration.
     </p>
+  </section>
+</main>
 
-    <section class="card">
-      <h2>Open Roles / Açık Pozisyonlar</h2>
-      <p>
-        <span class="lang-en"><strong>EN:</strong> We’re preparing our first openings.</span>
-        <span class="lang-tr"><strong>TR:</strong> İlk iş ilanlarımızı hazırlıyoruz.</span>
-      </p>
-      <div class="btnRow">
-        <a class="btn gold" href="mailto:hello@medastare.com?subject=Careers — Notify me&body=Hi MedaStaré team,%0D%0A%0D%0APlease notify me about upcoming roles.%0D%0A%0D%0AName:%0D%0ALinkedIn:">
-          <span class="lang-en">Get Notified</span>
-          <span class="lang-tr">Bildirim Al</span>
-        </a>
-        <a class="btn ghost" href="/#waitlist">
-          <span class="lang-en">Join Waitlist</span>
-          <span class="lang-tr">Ön Kayıt Ol</span>
-        </a>
-      </div>
-      <p class="note">
-        <span class="lang-en"><strong>EN:</strong> Tip: Add your LinkedIn profile when you apply for early consideration.</span>
-        <span class="lang-tr"><strong>TR:</strong> İpucu: Erken değerlendirme için başvuru yaparken LinkedIn profilini eklersen öncelikli değerlendirileceksin.</span>
-      </p>
-    </section>
-  </main>
+<footer>
+  <small>© 2025 MedaStaré. All rights reserved.</small>
+</footer>
 
-  <footer>
-    <hr />
-    © <span id="y"></span> MedaStaré — All rights reserved.
-  </footer>
+<script>
+  let currentLang = localStorage.getItem("lang") || "EN";
+  updateLang();
 
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
+  function toggleLang() {
+    currentLang = (currentLang === "EN") ? "TR" : "EN";
+    localStorage.setItem("lang", currentLang);
+    updateLang();
+  }
+
+  function updateLang() {
+    document.querySelector(".lang-toggle").innerText = 
+      (currentLang === "EN") ? "TR | EN" : "EN | TR";
+    document.querySelectorAll("[data-en]").forEach(el => {
+      el.innerText = (currentLang === "EN") ? el.dataset.en : el.dataset.tr;
+    });
+  }
+</script>
+
 </body>
 </html>
