@@ -29,12 +29,10 @@
 
   <style>
     :root {
+      --pink:#fbeef5;
       --wine:#6d1f34;
       --black:#111;
       --gray:#666;
-      --aurora1:#1a1a40;
-      --aurora2:#6d1f34;
-      --aurora3:#ffd700;
     }
     html, body {
       margin:0;
@@ -42,17 +40,9 @@
       max-width:100%;
       overflow-x:hidden;
       font-family: Inter, sans-serif;
+      background:var(--pink);
       color:var(--black);
-      background:linear-gradient(-45deg,var(--aurora1),var(--aurora2),var(--aurora3));
-      background-size:600% 600%;
-      animation: aurora 20s ease infinite;
     }
-    @keyframes aurora {
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
-    }
-
     header {
       display:flex; justify-content:space-between; align-items:center;
       padding:20px 40px; background:#fff; position:sticky; top:0; z-index:1000;
@@ -63,19 +53,14 @@
     header .lang-toggle { cursor:pointer; font-size:.9rem; color:var(--wine); }
 
     /* Hero */
-    .hero { text-align:center; padding:80px 20px; background:#fff; overflow:hidden;}
-    .hero img { max-width:900px; width:100%; border-radius:12px; opacity:0; transform:translateX(-100px); animation:slideIn 1.5s ease forwards; }
-    .hero h1 { font-family:"Playfair Display", serif; font-size:2.2rem; margin:20px 0 10px; color:var(--wine); opacity:0; transform:translateX(100px); animation:slideInRight 1.5s ease forwards .5s; }
-    .hero p { font-size:1.1rem; color:var(--gray); max-width:600px; margin:auto; opacity:0; transform:translateY(40px); animation:fadeUp 1.5s ease forwards 1s; }
-
-    @keyframes slideIn { to { opacity:1; transform:translateX(0);} }
-    @keyframes slideInRight { to { opacity:1; transform:translateX(0);} }
-    @keyframes fadeUp { to { opacity:1; transform:translateY(0);} }
+    .hero { text-align:center; padding:80px 20px; background:#fff; }
+    .hero img { max-width:900px; width:100%; border-radius:12px; }
+    .hero h1 { font-family:"Playfair Display", serif; font-size:2.2rem; margin:20px 0 10px; color:var(--wine);}
+    .hero p { font-size:1.1rem; color:var(--gray); max-width:600px; margin:auto; }
 
     /* Grid */
     .grid { display:grid; grid-template-columns:1fr 1fr; gap:30px; padding:60px 20px; max-width:1200px; margin:auto;}
-    .grid-item { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.08); opacity:0; transform:scale(0.9); transition:all 1s ease; }
-    .grid-item.visible { opacity:1; transform:scale(1); }
+    .grid-item { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.08);}
     .grid-item img { width:100%; display:block; }
     .grid-item .caption { padding:20px; }
     .grid-item .caption h3 { margin:0 0 10px; font-family:"Playfair Display", serif; color:var(--wine);}
@@ -83,22 +68,17 @@
 
     /* Waitlist */
     .waitlist { background:#fff; padding:70px 20px; text-align:center; }
-    .waitlist h2 { font-family:"Playfair Display", serif; font-size:1.8rem; margin-bottom:15px; color:var(--wine); position:relative; display:inline-block; }
-    .waitlist h2::after { content:""; position:absolute; left:0; bottom:-5px; width:0; height:2px; background:linear-gradient(90deg,gold,#ff4da6); transition:width .8s ease; }
-    .waitlist h2.visible::after { width:100%; }
+    .waitlist h2 { font-family:"Playfair Display", serif; font-size:1.8rem; margin-bottom:15px; color:var(--wine);}
     .waitlist p { color:var(--gray); margin-bottom:25px; }
     .waitlist form { max-width:500px; margin:auto; display:flex; flex-direction:column; gap:15px;}
     .waitlist input { border:none; border-bottom:1px solid #ccc; padding:12px; font-size:1rem; outline:none; background:transparent;}
     .waitlist input:focus { border-color:var(--wine);}
-    .waitlist button { background:var(--wine); color:#fff; border:none; padding:14px; font-size:1rem; border-radius:6px; cursor:pointer; position:relative; overflow:hidden;}
-    .waitlist button::after { content:""; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%) scale(0); width:300%; height:300%; background:radial-gradient(circle,rgba(255,215,0,0.4) 10%, transparent 10.01%); transition:transform .6s, opacity .8s; opacity:0; }
-    .waitlist button:active::after { transform:translate(-50%,-50%) scale(1); opacity:1; }
+    .waitlist button { background:var(--wine); color:#fff; border:none; padding:14px; font-size:1rem; border-radius:6px; cursor:pointer; }
+    .waitlist button:hover { background:#8a2945; }
 
     /* Sections */
     section { padding:60px 20px; max-width:900px; margin:auto; }
-    section h2 { font-family:"Playfair Display", serif; font-size:1.6rem; margin-bottom:20px; color:var(--wine); position:relative; display:inline-block; }
-    section h2::after { content:""; position:absolute; left:0; bottom:-5px; width:0; height:2px; background:linear-gradient(90deg,gold,#ff4da6); transition:width .8s ease; }
-    section h2.visible::after { width:100%; }
+    section h2 { font-family:"Playfair Display", serif; font-size:1.6rem; margin-bottom:20px; color:var(--wine);}
     section p { color:var(--gray); line-height:1.7; }
 
     /* Footer */
@@ -108,6 +88,88 @@
     footer a { display:block; color:#ccc; text-decoration:none; margin-bottom:8px; font-size:.95rem; }
     footer a:hover { color:#fff;}
     footer small { display:block; margin-top:30px; text-align:center; color:#aaa; }
+
+    /* =========================
+       PREMIUM ANIMATIONS (ADD)
+       Tasarımı bozmadan eklendi
+       ========================= */
+
+    /* 1) Background Aurora – mevcut pembe arka planı bozmaz */
+    body::after{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(60% 80% at 10% 20%, rgba(255,215,0,0.18), transparent 60%),
+        radial-gradient(70% 60% at 85% 25%, rgba(109,31,52,0.18), transparent 65%),
+        radial-gradient(50% 70% at 60% 100%, rgba(255,105,180,0.12), transparent 60%);
+      mix-blend-mode:multiply;   /* beyaz alanlarda görünmez, pembeyi bozmaz */
+      opacity:.08;
+      animation: auroraFloat 18s ease-in-out infinite alternate;
+      z-index:0;
+    }
+    @keyframes auroraFloat{
+      0%{ transform:translate3d(0,0,0); }
+      100%{ transform:translate3d(2%, -2%, 0); }
+    }
+
+    /* 2) Hero perde açılışı (girişte soldan/sağdan) */
+    .hero img{
+      opacity:0; transform:translateX(-60px);
+      animation: heroLeft 900ms cubic-bezier(.2,.8,.2,1) forwards;
+    }
+    .hero h1{
+      opacity:0; transform:translateX(60px);
+      animation: heroRight 900ms cubic-bezier(.2,.8,.2,1) .15s forwards;
+    }
+    .hero p{
+      opacity:0; transform:translateY(18px);
+      animation: heroUp 800ms ease .30s forwards;
+    }
+    @keyframes heroLeft{to{opacity:1; transform:none}}
+    @keyframes heroRight{to{opacity:1; transform:none}}
+    @keyframes heroUp{to{opacity:1; transform:none}}
+
+    /* 3) Grid scroll reveal (zoom + fade) */
+    .grid-item{
+      will-change:opacity, transform;
+      opacity:0; transform:translateY(24px) scale(.98);
+      transition:opacity .8s ease, transform .8s ease;
+    }
+    .grid-item.reveal{
+      opacity:1; transform:none;
+    }
+
+    /* 4) Başlıklar (h2) – altın çizgi sweep görünce */
+    section h2, .waitlist h2{
+      position:relative; display:inline-block;
+    }
+    section h2::after, .waitlist h2::after{
+      content:""; position:absolute; left:0; bottom:-6px; height:2px; width:0;
+      background:linear-gradient(90deg, gold, #ff4da6);
+      transition:width .8s cubic-bezier(.19,1,.22,1);
+    }
+    section h2.sweep::after, .waitlist h2.sweep::after{
+      width:100%;
+    }
+
+    /* 5) Button ripple */
+    .waitlist button{ position:relative; overflow:hidden; }
+    .waitlist button .ripple{
+      position:absolute; border-radius:50%;
+      transform:translate(-50%,-50%) scale(0);
+      background:radial-gradient(circle, rgba(255,215,0,.45) 0%, rgba(255,215,0,.25) 40%, rgba(255,215,0,0) 60%);
+      animation:rippleExpand .7s ease-out forwards;
+      pointer-events:none;
+    }
+    @keyframes rippleExpand{
+      to{ transform:translate(-50%,-50%) scale(1); opacity:0; }
+    }
+
+    /* Reduce motion desteği */
+    @media (prefers-reduced-motion: reduce){
+      *{ animation:none !important; transition:none !important }
+    }
   </style>
 </head>
 <body>
@@ -191,35 +253,44 @@
 <!-- About -->
 <section id="about">
   <h2 data-en="About MedaStaré" data-tr="MedaStaré Hakkında">About MedaStaré</h2>
-  <p>MedaStaré is where AI meets fashion & beauty. From Turkey to the world, we bring together global collections and personalized styling technology.</p>
+  <p data-en="MedaStaré is where AI meets fashion & beauty. From Turkey to the world, we bring together global collections and personalized styling technology."
+     data-tr="MedaStaré, yapay zekâ ile moda ve güzelliğin buluştuğu yerdir. Türkiye’den dünyaya, global koleksiyonları ve kişiselleştirilmiş stil teknolojisini bir araya getiriyoruz.">
+    MedaStaré is where AI meets fashion & beauty. From Turkey to the world, we bring together global collections and personalized styling technology.
+  </p>
 </section>
 
 <!-- Vision -->
 <section id="vision">
   <h2 data-en="Our Vision" data-tr="Vizyonumuz">Our Vision</h2>
-  <p>We are building Turkey’s first AI-powered fashion-tech ecosystem, uniting style, beauty, and technology with a global touch.</p>
+  <p data-en="We are building Turkey’s first AI-powered fashion-tech ecosystem, uniting style, beauty, and technology with a global touch. With 9 patent applications filed and 50+ proprietary contents, MedaStaré is shaping the future of fashion and beauty innovation."
+     data-tr="Türkiye’nin ilk yapay zekâ destekli moda-teknoloji ekosistemini inşa ediyoruz; stil, güzellik ve teknolojiyi küresel bir dokunuşla birleştiriyoruz. 9 patent başvurusu yapılmış ve 50’den fazla tescilli içeriğiyle MedaStaré, moda ve güzellik inovasyonunun geleceğini şekillendiriyor.">
+    We are building Turkey’s first AI-powered fashion-tech ecosystem, uniting style, beauty, and technology with a global touch. With 9 patent applications filed and 50+ proprietary contents, MedaStaré is shaping the future of fashion and beauty innovation. 
+  </p>
 </section>
 
 <!-- Future -->
 <section id="future">
   <h2 data-en="Future Potential" data-tr="Gelecek Potansiyeli">Future Potential</h2>
-  <p>The global fashion & beauty market surpasses $3 Trillion. MedaStaré is uniquely positioned with its technopark project status and rapid traction.</p>
+  <p data-en="The global fashion & beauty market surpasses $3 Trillion. MedaStaré is uniquely positioned with its technopark project status and rapid traction: in only 3 weeks, our Crunchbase rank soared from 2.9 million to 44 thousand. This growth proves our potential to scale globally."
+     data-tr="Global moda ve güzellik pazarı 3 trilyon doları aşıyor. MedaStaré, teknopark projesi statüsü ve hızlı ivmesiyle benzersiz bir konumdadır: sadece 3 haftada Crunchbase sıralamamız 2.9 milyondan 44 bine yükseldi. Bu büyüme, küresel ölçekte büyüme potansiyelimizi kanıtlıyor.">
+    The global fashion & beauty market surpasses $3 Trillion. MedaStaré is uniquely positioned with its technopark project status and rapid traction: in only 3 weeks, our Crunchbase rank soared from 2.9 million to 44 thousand. This growth proves our potential to scale globally.
+  </p>
 </section>
 
 <!-- Contact & Footer -->
 <footer id="contact">
   <div class="grid">
-    <div>
-      <h4>Company</h4>
-      <a href="/careers.html">Careers</a>
-      <a href="/contact.html">Contact</a>
-    </div>
+ <div>
+  <h4>Company</h4>
+  <a href="/careers.html">Careers</a>
+  <a href="/contact.html">Contact</a>
+</div>
     <div>
       <h4>Social</h4>
-      <a href="https://www.instagram.com/medastareapp" target="_blank">Instagram</a>
-      <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
-      <a href="https://www.linkedin.com/company/medastare/" target="_blank">LinkedIn</a>
-      <a href="https://www.crunchbase.com/organization/medastar%C3%A9" target="_blank">Crunchbase</a>
+<a href="https://www.instagram.com/medastareapp?igsh=MTJmNnZveDk3OHU4eA%3D%3D&utm_source=qr" target="_blank">Instagram</a>
+<a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
+<a href="https://www.linkedin.com/company/medastare/" target="_blank">LinkedIn</a>
+<a href="https://www.crunchbase.com/organization/medastar%C3%A9" target="_blank">Crunchbase</a>
     </div>
     <div>
       <h4>Vision</h4>
@@ -231,7 +302,6 @@
 </footer>
 
 <script>
-  // Dil toggle
   let currentLang = localStorage.getItem("lang") || "EN";
   updateLang();
 
@@ -244,20 +314,47 @@
   function updateLang() {
     document.querySelector(".lang-toggle").innerText = 
       (currentLang === "EN") ? "TR | EN" : "EN | TR";
+
     document.querySelectorAll("[data-en]").forEach(el => {
       el.innerText = (currentLang === "EN") ? el.dataset.en : el.dataset.tr;
     });
   }
 
-  // Grid scroll reveal
-  const observer = new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add("visible");
+  /* === Animasyon JS (tasarımı BOZMADAN) === */
+
+  // 3) Grid reveal + 4) h2 sweep on view
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      if (entry.target.classList.contains('grid-item')) {
+        entry.target.classList.add('reveal');
       }
+      if (entry.target.tagName === 'H2') {
+        entry.target.classList.add('sweep');
+      }
+      io.unobserve(entry.target);
     });
-  },{threshold:.2});
-  document.querySelectorAll(".grid-item, section h2").forEach(el=>observer.observe(el));
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.grid-item, section h2, .waitlist h2').forEach(el => io.observe(el));
+
+  // 5) Button ripple
+  const wlBtn = document.querySelector('.waitlist button');
+  if (wlBtn) {
+    wlBtn.addEventListener('click', function(e){
+      const rect = this.getBoundingClientRect();
+      const span = document.createElement('span');
+      span.className = 'ripple';
+      const size = Math.max(rect.width, rect.height) * 2;
+      span.style.width = span.style.height = size + 'px';
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      span.style.left = x + 'px';
+      span.style.top = y + 'px';
+      this.appendChild(span);
+      span.addEventListener('animationend', () => span.remove());
+    });
+  }
 </script>
 
 </body>
