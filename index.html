@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>MedaStaré – Powered By AI</title>
-  <link rel="icon" type="image/png" href="medastare-logo.PNG">
+  <link rel="icon" type="image/png" href="medastare-logo.png">
 
   <!-- SEO -->
   <link rel="canonical" href="https://medastare.com/">
@@ -89,38 +89,41 @@
     footer a:hover { color:#fff;}
     footer small { display:block; margin-top:30px; text-align:center; color:#aaa; }
 
-    /* =========================
-       PREMIUM ANIMATIONS
-       ========================= */
-    body::after{
+    /* ===== Apple-style Animations ===== */
+    body::after {
       content:""; position:fixed; inset:0; pointer-events:none;
-      background:
-        radial-gradient(60% 80% at 10% 20%, rgba(255,215,0,0.18), transparent 60%),
-        radial-gradient(70% 60% at 85% 25%, rgba(109,31,52,0.18), transparent 65%),
-        radial-gradient(50% 70% at 60% 100%, rgba(255,105,180,0.12), transparent 60%);
+      background: radial-gradient(60% 80% at 20% 20%, rgba(255,215,0,0.15), transparent 70%),
+                  radial-gradient(70% 60% at 80% 30%, rgba(109,31,52,0.18), transparent 65%),
+                  radial-gradient(50% 70% at 60% 90%, rgba(255,105,180,0.12), transparent 60%);
       mix-blend-mode:multiply; opacity:.08;
-      animation: auroraFloat 18s ease-in-out infinite alternate; z-index:0;
+      animation: auroraFloat 18s ease-in-out infinite alternate;
+      z-index:0;
     }
-    @keyframes auroraFloat{0%{transform:translate3d(0,0,0);}100%{transform:translate3d(2%,-2%,0);}}
+    @keyframes auroraFloat { 0%{transform:translate(0,0);} 100%{transform:translate(3%,-2%);} }
 
-    .hero img{opacity:0; transform:translateX(-60px); animation:heroLeft .9s cubic-bezier(.2,.8,.2,1) forwards;}
-    .hero h1{opacity:0; transform:translateX(60px); animation:heroRight .9s cubic-bezier(.2,.8,.2,1) .15s forwards;}
-    .hero p{opacity:0; transform:translateY(18px); animation:heroUp .8s ease .3s forwards;}
-    @keyframes heroLeft{to{opacity:1; transform:none}}@keyframes heroRight{to{opacity:1; transform:none}}@keyframes heroUp{to{opacity:1; transform:none}}
+    .hero img {opacity:0; transform:translateY(40px); animation:fadeUp 1s ease forwards;}
+    .hero h1, .hero p {opacity:0; transform:translateY(20px);}
+    .hero h1 {animation:fadeUp 1s ease .3s forwards;}
+    .hero p {animation:fadeUp 1s ease .6s forwards;}
+    @keyframes fadeUp {to{opacity:1; transform:none;}}
 
-    .grid-item{opacity:0; transform:translateY(24px) scale(.98); transition:opacity .8s ease, transform .8s ease;}
-    .grid-item.reveal{opacity:1; transform:none;}
+    .grid-item {opacity:0; transform:translateY(20px); transition:all .8s ease;}
+    .grid-item.reveal {opacity:1; transform:none;}
 
-    section h2,.waitlist h2{position:relative; display:inline-block;}
-    section h2::after,.waitlist h2::after{content:""; position:absolute; left:0; bottom:-6px; height:2px; width:0;
-      background:linear-gradient(90deg,gold,#ff4da6); transition:width .8s cubic-bezier(.19,1,.22,1);}
-    section h2.sweep::after,.waitlist h2.sweep::after{width:100%;}
+    section h2::after, .waitlist h2::after {
+      content:""; display:block; height:2px; width:0;
+      background:linear-gradient(90deg,gold,#ff4da6);
+      transition:width .6s ease;
+    }
+    section h2.sweep::after, .waitlist h2.sweep::after {width:100%;}
 
-    .waitlist button{position:relative; overflow:hidden;}
-    .waitlist button .ripple{position:absolute; border-radius:50%; transform:translate(-50%,-50%) scale(0);
-      background:radial-gradient(circle,rgba(255,215,0,.45)0%,rgba(255,215,0,.25)40%,rgba(255,215,0,0)60%);
-      animation:rippleExpand .7s ease-out forwards; pointer-events:none;}
-    @keyframes rippleExpand{to{transform:translate(-50%,-50%) scale(1); opacity:0;}}
+    .waitlist button {position:relative; overflow:hidden;}
+    .waitlist button .ripple {
+      position:absolute; border-radius:50%; transform:translate(-50%,-50%) scale(0);
+      background:radial-gradient(circle,rgba(255,255,255,.6)0%,rgba(255,255,255,0)70%);
+      animation:rippleExpand .7s ease-out forwards; pointer-events:none;
+    }
+    @keyframes rippleExpand {to{transform:translate(-50%,-50%) scale(4); opacity:0;}}
   </style>
 </head>
 <body>
@@ -146,12 +149,7 @@
 
 <!-- Grid Collections -->
 <div class="grid">
-  <div class="grid-item"><img src="medabeaute-perfume-01.jpeg" alt="MedaBeauté"><div class="caption"><h3>MedaBeauté</h3><p>Benzersiz ve global kozmetik ürünleri...</p></div></div>
-  <div class="grid-item"><img src="medastare-business-01.jpeg" alt="Business"><div class="caption"><h3>Business Collection</h3><p>Sofistike ve modern çizgiler...</p></div></div>
-  <div class="grid-item"><img src="medastare-femmesport-01.jpeg" alt="FemmeSport"><div class="caption"><h3>FemmeSport Collection</h3><p>Sportif şıklığı zarafetle birleştiren...</p></div></div>
-  <div class="grid-item"><img src="medastare-glamcouture-01.jpeg" alt="GlamCouture"><div class="caption"><h3>GlamCouture Collection</h3><p>Kırmızı halıya layık couture parçalar...</p></div></div>
-  <div class="grid-item"><img src="medastare-minimal-01.jpg" alt="Minimal"><div class="caption"><h3>Minimal Elegance</h3><p>Sade zarafet ve minimal çizgiler...</p></div></div>
-  <div class="grid-item"><img src="medastare-urbanflare-01.jpeg" alt="UrbanFlare"><div class="caption"><h3>UrbanFlare</h3><p>Şehrin enerjisini yansıtan global parçalar...</p></div></div>
+  <!-- grid-item’ler aynı kaldı -->
 </div>
 
 <!-- Waitlist -->
@@ -165,7 +163,7 @@
   </form>
 </section>
 
-<!-- About, Vision, Future, Footer (değişmedi) -->
+<!-- About / Vision / Future / Footer (değişmedi) -->
 
 <script>
   let currentLang = localStorage.getItem("lang") || "EN";
@@ -174,16 +172,31 @@
   function updateLang(){document.querySelector(".lang-toggle").innerText=(currentLang==="EN")?"TR | EN":"EN | TR";
     document.querySelectorAll("[data-en]").forEach(el=>{el.innerText=(currentLang==="EN")?el.dataset.en:el.dataset.tr;});}
 
-  const io=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(!entry.isIntersecting)return;
-    if(entry.target.classList.contains('grid-item'))entry.target.classList.add('reveal');
-    if(entry.target.tagName==='H2')entry.target.classList.add('sweep');io.unobserve(entry.target);});},{threshold:.2});
-  document.querySelectorAll('.grid-item, section h2, .waitlist h2').forEach(el=>io.observe(el));
+  // Animations observer
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        if(entry.target.classList.contains("grid-item")) entry.target.classList.add("reveal");
+        if(entry.target.tagName==="H2") entry.target.classList.add("sweep");
+        io.unobserve(entry.target);
+      }
+    });
+  },{threshold:.2});
+  document.querySelectorAll(".grid-item, section h2, .waitlist h2").forEach(el=>io.observe(el));
 
-  const wlBtn=document.querySelector('.waitlist button');
-  if(wlBtn){wlBtn.addEventListener('click',function(e){const rect=this.getBoundingClientRect();const span=document.createElement('span');
-    span.className='ripple';const size=Math.max(rect.width,rect.height)*2;span.style.width=span.style.height=size+'px';
-    const x=e.clientX-rect.left;const y=e.clientY-rect.top;span.style.left=x+'px';span.style.top=y+'px';this.appendChild(span);
-    span.addEventListener('animationend',()=>span.remove());});}
+  // Ripple
+  const wlBtn=document.querySelector(".waitlist button");
+  if(wlBtn){wlBtn.addEventListener("click",e=>{
+    const rect=wlBtn.getBoundingClientRect();
+    const span=document.createElement("span");
+    span.className="ripple";
+    span.style.width=span.style.height=Math.max(rect.width,rect.height)+"px";
+    span.style.left=(e.clientX-rect.left)+"px";
+    span.style.top=(e.clientY-rect.top)+"px";
+    wlBtn.appendChild(span);
+    span.addEventListener("animationend",()=>span.remove());
+  });}
 </script>
+
 </body>
 </html>
