@@ -4,7 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>MedaStaré – Powered By AI</title>
-  <link rel="icon" type="image/png" href="/medastare-logo.png">
+  <!-- FAVICON (güncellendi) -->
+  <link rel="icon" type="image/png" href="/medastare-logo.PNG">
+  <link rel="apple-touch-icon" href="/medastare-logo.PNG">
 
   <!-- SEO -->
   <link rel="canonical" href="https://medastare.com/">
@@ -35,79 +37,119 @@
       --gray:#666;
     }
     html, body {
-      margin:0; padding:0; max-width:100%; overflow-x:hidden;
+      margin:0;
+      padding:0;
+      max-width:100%;
+      overflow-x:hidden;
       font-family: Inter, sans-serif;
-      background:var(--pink); color:var(--black);
+      background:var(--pink);
+      color:var(--black);
     }
-
-    /* Aurora bg */
-    body::before {
-      content:""; position:fixed; top:0; left:0; width:100%; height:100%;
-      background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.6), transparent 70%),
-                  radial-gradient(circle at 80% 70%, rgba(255,192,203,0.3), transparent 70%),
-                  radial-gradient(circle at 50% 100%, rgba(109,31,52,0.2), transparent 70%);
-      filter: blur(80px); z-index:-1; animation: aurora 15s infinite alternate;
-    }
-    @keyframes aurora { 
-      0%{transform:translateX(0);} 
-      100%{transform:translateX(-100px);} 
-    }
-
-    header {display:flex; justify-content:space-between; align-items:center;
+    header {
+      display:flex; justify-content:space-between; align-items:center;
       padding:20px 40px; background:#fff; position:sticky; top:0; z-index:1000;
       border-bottom:1px solid #eee;
     }
-    header .logo {font-family:"Playfair Display", serif; font-size:1.5rem; color:var(--wine); font-weight:600;}
-    header nav a {margin:0 15px; text-decoration:none; color:var(--black); font-weight:500;}
-    header .lang-toggle {cursor:pointer; font-size:.9rem; color:var(--wine);}
+    header .logo { font-family:"Playfair Display", serif; font-size:1.5rem; color:var(--wine); font-weight:600; }
+    header nav a { margin:0 15px; text-decoration:none; color:var(--black); font-weight:500; }
+    header .lang-toggle { cursor:pointer; font-size:.9rem; color:var(--wine); }
 
     /* Hero */
-    .hero {text-align:center; padding:80px 20px; background:#fff; position:relative; overflow:hidden;}
-    .hero::before {
-      content:""; position:absolute; inset:0; background:var(--pink);
-      transform:translateX(-100%); animation: reveal 1.5s ease forwards;
-    }
-    @keyframes reveal {to{transform:translateX(100%);}}
-    .hero img {max-width:900px; width:100%; border-radius:12px; opacity:0; transform:scale(1.05); transition:1.2s;}
-    .hero h1, .hero p {opacity:0; transform:translateY(20px); transition:1s;}
-    .hero.in img, .hero.in h1, .hero.in p {opacity:1; transform:none;}
+    .hero { text-align:center; padding:80px 20px; background:#fff; }
+    .hero img { max-width:900px; width:100%; border-radius:12px; }
+    .hero h1 { font-family:"Playfair Display", serif; font-size:2.2rem; margin:20px 0 10px; color:var(--wine);}
+    .hero p { font-size:1.1rem; color:var(--gray); max-width:600px; margin:auto; }
 
     /* Grid */
-    .grid {display:grid; grid-template-columns:1fr 1fr; gap:30px; padding:60px 20px; max-width:1200px; margin:auto;}
-    .grid-item {background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.08);
-      opacity:0; transform:translateY(40px); transition:.8s;}
-    .grid-item.in {opacity:1; transform:none;}
-    .grid-item img {width:100%; display:block;}
-    .grid-item .caption {padding:20px;}
-    .grid-item .caption h3 {margin:0 0 10px; font-family:"Playfair Display", serif; color:var(--wine);}
-    .grid-item .caption p {margin:0; font-size:.95rem; color:var(--gray); line-height:1.5;}
+    .grid { display:grid; grid-template-columns:1fr 1fr; gap:30px; padding:60px 20px; max-width:1200px; margin:auto;}
+    .grid-item { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.08);}
+    .grid-item img { width:100%; display:block; }
+    .grid-item .caption { padding:20px; }
+    .grid-item .caption h3 { margin:0 0 10px; font-family:"Playfair Display", serif; color:var(--wine);}
+    .grid-item .caption p { margin:0; font-size:.95rem; color:var(--gray); line-height:1.5;}
 
     /* Waitlist */
-    .waitlist {background:#fff; padding:70px 20px; text-align:center;}
-    .waitlist h2 {font-family:"Playfair Display", serif; font-size:1.8rem; margin-bottom:15px; color:var(--wine);}
-    .waitlist p {color:var(--gray); margin-bottom:25px;}
-    .waitlist form {max-width:500px; margin:auto; display:flex; flex-direction:column; gap:15px;}
-    .waitlist input {border:none; border-bottom:1px solid #ccc; padding:12px; font-size:1rem; outline:none; background:transparent;}
-    .waitlist input:focus {border-color:var(--wine);}
-    .waitlist button {position:relative; overflow:hidden; background:var(--wine); color:#fff; border:none; padding:14px; font-size:1rem; border-radius:6px; cursor:pointer;}
-    .waitlist button:hover {background:#8a2945;}
-    .waitlist button .ripple {position:absolute; border-radius:50%; transform:scale(0); background:rgba(255,255,255,0.7); animation:ripple 0.6s linear;}
-    @keyframes ripple {to{transform:scale(4); opacity:0;}}
+    .waitlist { background:#fff; padding:70px 20px; text-align:center; }
+    .waitlist h2 { font-family:"Playfair Display", serif; font-size:1.8rem; margin-bottom:15px; color:var(--wine);}
+    .waitlist p { color:var(--gray); margin-bottom:25px; }
+    .waitlist form { max-width:500px; margin:auto; display:flex; flex-direction:column; gap:15px;}
+    .waitlist input { border:none; border-bottom:1px solid #ccc; padding:12px; font-size:1rem; outline:none; background:transparent;}
+    .waitlist input:focus { border-color:var(--wine);}
+    .waitlist button { background:var(--wine); color:#fff; border:none; padding:14px; font-size:1rem; border-radius:6px; cursor:pointer; }
+    .waitlist button:hover { background:#8a2945; }
 
     /* Sections */
-    section {padding:60px 20px; max-width:900px; margin:auto;}
-    section h2 {font-family:"Playfair Display", serif; font-size:1.6rem; margin-bottom:20px; color:var(--wine); position:relative;}
-    section h2::after {content:""; position:absolute; bottom:-5px; left:0; width:0; height:2px; background:var(--wine); transition:.5s;}
-    section h2.in::after {width:60px;}
-    section p {color:var(--gray); line-height:1.7;}
+    section { padding:60px 20px; max-width:900px; margin:auto; }
+    section h2 { font-family:"Playfair Display", serif; font-size:1.6rem; margin-bottom:20px; color:var(--wine);}
+    section p { color:var(--gray); line-height:1.7; }
 
     /* Footer */
-    footer {background:#111; color:#fff; padding:40px 20px;}
-    footer .grid {display:grid; grid-template-columns:1fr 1fr 1fr; gap:40px; max-width:1200px; margin:auto;}
-    footer h4 {margin-bottom:15px; color:#f5f5f5;}
-    footer a {display:block; color:#ccc; text-decoration:none; margin-bottom:8px; font-size:.95rem;}
-    footer a:hover {color:#fff;}
-    footer small {display:block; margin-top:30px; text-align:center; color:#aaa;}
+    footer { background:#111; color:#fff; padding:40px 20px; }
+    footer .grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:40px; max-width:1200px; margin:auto; }
+    footer h4 { margin-bottom:15px; color:#f5f5f5;}
+    footer a { display:block; color:#ccc; text-decoration:none; margin-bottom:8px; font-size:.95rem; }
+    footer a:hover { color:#fff;}
+    footer small { display:block; margin-top:30px; text-align:center; color:#aaa; }
+
+    /* =====================================================
+       SADE ANİMASYONLAR – tasarımı bozmaz (EKLENDİ)
+       ===================================================== */
+
+    /* 5) Çok hafif Aurora: body arka planında, görselleri kapatmaz */
+    body{
+      background:
+        var(--pink),
+        radial-gradient(1200px 800px at 12% 20%, rgba(255,215,0,.08), transparent 60%),
+        radial-gradient(1000px 700px at 82% 28%, rgba(109,31,52,.08), transparent 65%),
+        radial-gradient(900px 900px at 50% 100%, rgba(255,192,203,.08), transparent 60%);
+      background-attachment: fixed, fixed, fixed, fixed;
+      background-size: auto, 200% 200%, 220% 220%, 200% 200%;
+      animation: auroraShift 28s ease-in-out infinite alternate;
+    }
+    @keyframes auroraShift{
+      from { background-position: 0 0, 0% 50%, 100% 50%, 50% 100%; }
+      to   { background-position: 0 0, 100% 50%, 0% 50%, 50% 90%; }
+    }
+
+    /* 1) Hero perde açılışı */
+    .hero img{ opacity:0; transform:translateX(-50px); animation:heroInLeft .9s cubic-bezier(.2,.8,.2,1) forwards; }
+    .hero h1{ opacity:0; transform:translateX(50px);  animation:heroInRight .9s cubic-bezier(.2,.8,.2,1) .15s forwards; }
+    .hero p { opacity:0; transform:translateY(14px);  animation:heroUp .8s ease .30s forwards; }
+    @keyframes heroInLeft{ to{ opacity:1; transform:none } }
+    @keyframes heroInRight{ to{ opacity:1; transform:none } }
+    @keyframes heroUp{ to{ opacity:1; transform:none } }
+
+    /* 2) Grid scroll reveal (JS varsa) */
+    .js .grid-item{ opacity:0; transform:translateY(24px) scale(.98); transition:opacity .8s ease, transform .8s ease; }
+    .js .grid-item.reveal{ opacity:1; transform:none; }
+
+    /* 3) Başlık altın çizgi sweep */
+    section h2, .waitlist h2{ position:relative; display:inline-block; }
+    section h2::after, .waitlist h2::after{
+      content:""; position:absolute; left:0; bottom:-6px; height:2px; width:0;
+      background:linear-gradient(90deg, gold, #ff4da6);
+      transition:width .8s cubic-bezier(.19,1,.22,1);
+    }
+    section h2.sweep::after, .waitlist h2.sweep::after{ width:100%; }
+
+    /* 4) Button ripple */
+    .waitlist button{ position:relative; overflow:hidden; }
+    .waitlist button .r{
+      position:absolute; border-radius:50%;
+      transform:translate(-50%,-50%) scale(0);
+      background:radial-gradient(circle, rgba(255,215,0,.45) 0%, rgba(255,215,0,.2) 40%, rgba(255,215,0,0) 60%);
+      width:var(--s,0); height:var(--s,0); left:var(--x,0); top:var(--y,0);
+      animation:ripple .7s ease-out forwards;
+      pointer-events:none;
+    }
+    @keyframes ripple{ to{ transform:translate(-50%,-50%) scale(1); opacity:0 } }
+
+    /* Erişilebilirlik */
+    @media (prefers-reduced-motion: reduce){
+      body{ animation:none !important }
+      .hero img,.hero h1,.hero p{ animation:none !important; opacity:1; transform:none }
+      .js .grid-item{ opacity:1 !important; transform:none !important }
+    }
   </style>
 </head>
 <body>
@@ -125,7 +167,7 @@
 </header>
 
 <!-- Hero -->
-<section class="hero" id="hero">
+<section class="hero">
   <img src="medastare-eiffel-elegance.jpeg" alt="Eiffel Elegance" loading="lazy">
   <h1 data-en="Global stage now in your wardrobe" data-tr="Global sahne artık senin gardırobunda">Global stage now in your wardrobe</h1>
   <p data-en="Collections for every style and budget, all in one place." data-tr="Her stile ve her bütçeye hitap eden global koleksiyonlar, MedaStaré’de buluşuyor.">Collections for every style and budget, all in one place.</p>
@@ -133,21 +175,57 @@
 
 <!-- Grid Collections -->
 <div class="grid">
-  <div class="grid-item"><img src="medabeaute-perfume-01.jpeg" alt="MedaBeauté"><div class="caption"><h3>MedaBeauté</h3><p>Benzersiz ve global kozmetik ürünleri.</p></div></div>
-  <div class="grid-item"><img src="medastare-business-01.jpeg" alt="Business"><div class="caption"><h3>Business Collection</h3><p>Sofistike ve modern çizgiler.</p></div></div>
-  <div class="grid-item"><img src="medastare-femmesport-01.jpeg" alt="FemmeSport"><div class="caption"><h3>FemmeSport</h3><p>Sportif şıklık ve zarafet.</p></div></div>
-  <div class="grid-item"><img src="medastare-glamcouture-01.jpeg" alt="GlamCouture"><div class="caption"><h3>GlamCouture</h3><p>Kırmızı halıya layık couture.</p></div></div>
-  <div class="grid-item"><img src="medastare-minimal-01.jpg" alt="Minimal"><div class="caption"><h3>Minimal Elegance</h3><p>Sade zarafet.</p></div></div>
-  <div class="grid-item"><img src="medastare-urbanflare-01.jpeg" alt="UrbanFlare"><div class="caption"><h3>UrbanFlare</h3><p>Şehrin enerjisi.</p></div></div>
+  <div class="grid-item">
+    <img src="medabeaute-perfume-01.jpeg" alt="MedaBeauté">
+    <div class="caption">
+      <h3>MedaBeauté</h3>
+      <p>Benzersiz ve global kozmetik ürünleri: parfüm, makyaj, bakım. Global markaların yanı sıra MedaBeauté özel üretimlerimiz.</p>
+    </div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-business-01.jpeg" alt="Business">
+    <div class="caption">
+      <h3>Business Collection</h3>
+      <p>Sofistike ve modern çizgiler. Global markaların seçkin parçaları tek platformda.</p>
+    </div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-femmesport-01.jpeg" alt="FemmeSport">
+    <div class="caption">
+      <h3>FemmeSport Collection</h3>
+      <p>Sportif şıklığı zarafetle birleştiren global koleksiyonlar.</p>
+    </div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-glamcouture-01.jpeg" alt="GlamCouture">
+    <div class="caption">
+      <h3>GlamCouture Collection</h3>
+      <p>Kırmızı halıya layık couture parçalarla yıldız gibi parlaman için.</p>
+    </div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-minimal-01.jpg" alt="Minimal">
+    <div class="caption">
+      <h3>Minimal Elegance</h3>
+      <p>Sade zarafet ve minimal çizgilerle global ikonlar bir arada.</p>
+    </div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-urbanflare-01.jpeg" alt="UrbanFlare">
+    <div class="caption">
+      <h3>UrbanFlare</h3>
+      <p>Şehrin enerjisini yansıtan global parçalar tek platformda.</p>
+    </div>
+  </div>
 </div>
 
 <!-- Waitlist -->
 <section class="waitlist" id="waitlist">
   <h2 data-en="Join the Waitlist" data-tr="Bekleme Listesine Katıl">Join the Waitlist</h2>
   <p data-en="Be the first to access exclusive collections and global previews." data-tr="Özel koleksiyonlara ve global önizlemelere ilk sen eriş.">Be the first to access exclusive collections and global previews.</p>
-  <form id="waitlist-form" method="POST" action="/api/waitlist">
-    <input id="wl-name" name="name" type="text" placeholder="Full Name" required>
-    <input id="wl-email" name="email" type="email" placeholder="Email Address" required>
+  <form id="waitlist-form" method="POST" action="/api/waitlist" autocomplete="on">
+    <input id="wl-name" name="name" type="text" placeholder="Full Name" required autocomplete="name">
+    <input id="wl-email" name="email" type="email" placeholder="Email Address" required autocomplete="email">
     <button type="submit" data-en="Sign Up" data-tr="Kayıt Ol">Sign Up</button>
   </form>
 </section>
@@ -155,55 +233,108 @@
 <!-- About -->
 <section id="about">
   <h2 data-en="About MedaStaré" data-tr="MedaStaré Hakkında">About MedaStaré</h2>
-  <p data-en="MedaStaré is where AI meets fashion & beauty." data-tr="MedaStaré, yapay zekâ ile moda ve güzelliğin buluştuğu yerdir.">MedaStaré is where AI meets fashion & beauty.</p>
+  <p data-en="MedaStaré is where AI meets fashion & beauty. From Turkey to the world, we bring together global collections and personalized styling technology."
+     data-tr="MedaStaré, yapay zekâ ile moda ve güzelliğin buluştuğu yerdir. Türkiye’den dünyaya, global koleksiyonları ve kişiselleştirilmiş stil teknolojisini bir araya getiriyoruz.">
+    MedaStaré is where AI meets fashion & beauty. From Turkey to the world, we bring together global collections and personalized styling technology.
+  </p>
 </section>
 
 <!-- Vision -->
 <section id="vision">
   <h2 data-en="Our Vision" data-tr="Vizyonumuz">Our Vision</h2>
-  <p data-en="We are building Turkey’s first AI-powered fashion-tech ecosystem." data-tr="Türkiye’nin ilk yapay zekâ destekli moda-teknoloji ekosistemini inşa ediyoruz.">We are building Turkey’s first AI-powered fashion-tech ecosystem.</p>
+  <p data-en="We are building Turkey’s first AI-powered fashion-tech ecosystem, uniting style, beauty, and technology with a global touch. With 9 patent applications filed and 50+ proprietary contents, MedaStaré is shaping the future of fashion and beauty innovation."
+     data-tr="Türkiye’nin ilk yapay zekâ destekli moda-teknoloji ekosistemini inşa ediyoruz; stil, güzellik ve teknolojiyi küresel bir dokunuşla birleştiriyoruz. 9 patent başvurusu yapılmış ve 50’den fazla tescilli içeriğiyle MedaStaré, moda ve güzellik inovasyonunun geleceğini şekillendiriyor.">
+    We are building Turkey’s first AI-powered fashion-tech ecosystem, uniting style, beauty, and technology with a global touch. With 9 patent applications filed and 50+ proprietary contents, MedaStaré is shaping the future of fashion and beauty innovation. 
+  </p>
 </section>
 
 <!-- Future -->
 <section id="future">
   <h2 data-en="Future Potential" data-tr="Gelecek Potansiyeli">Future Potential</h2>
-  <p data-en="The global fashion & beauty market surpasses $3 Trillion." data-tr="Global moda ve güzellik pazarı 3 trilyon doları aşıyor.">The global fashion & beauty market surpasses $3 Trillion.</p>
+  <p data-en="The global fashion & beauty market surpasses $3 Trillion. MedaStaré is uniquely positioned with its technopark project status and rapid traction: in only 3 weeks, our Crunchbase rank soared from 2.9 million to 44 thousand. This growth proves our potential to scale globally."
+     data-tr="Global moda ve güzellik pazarı 3 trilyon doları aşıyor. MedaStaré, teknopark projesi statüsü ve hızlı ivmesiyle benzersiz bir konumdadır: sadece 3 haftada Crunchbase sıralamamız 2.9 milyondan 44 bine yükseldi. Bu büyüme, küresel ölçekte büyüme potansiyelimizi kanıtlıyor.">
+    The global fashion & beauty market surpasses $3 Trillion. MedaStaré is uniquely positioned with its technopark project status and rapid traction: in only 3 weeks, our Crunchbase rank soared from 2.9 million to 44 thousand. This growth proves our potential to scale globally.
+  </p>
 </section>
 
 <!-- Contact & Footer -->
 <footer id="contact">
   <div class="grid">
-    <div><h4>Company</h4><a href="/careers.html">Careers</a><a href="/contact.html">Contact</a></div>
-    <div><h4>Social</h4><a href="https://www.instagram.com/medastareapp" target="_blank">Instagram</a><a href="https://x.com/medastareapp" target="_blank">X</a><a href="https://www.linkedin.com/company/medastare/" target="_blank">LinkedIn</a><a href="https://www.crunchbase.com/organization/medastar%C3%A9" target="_blank">Crunchbase</a></div>
-    <div><h4>Vision</h4><a href="#vision">Our Vision</a><a href="#future">Future Potential</a></div>
+    <div>
+      <h4>Company</h4>
+      <a href="/careers.html">Careers</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <div>
+      <h4>Social</h4>
+      <a href="https://www.instagram.com/medastareapp?igsh=MTJmNnZveDk3OHU4eA%3D%3D&utm_source=qr" target="_blank">Instagram</a>
+      <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
+      <a href="https://www.linkedin.com/company/medastare/" target="_blank">LinkedIn</a>
+      <a href="https://www.crunchbase.com/organization/medastar%C3%A9" target="_blank">Crunchbase</a>
+    </div>
+    <div>
+      <h4>Vision</h4>
+      <a href="#vision">Our Vision</a>
+      <a href="#future">Future Potential</a>
+    </div>
   </div>
   <small>© 2025 MedaStaré. All rights reserved.</small>
 </footer>
 
 <script>
+  // JS aktifse .js sınıfı ekle (grid reveal güvenliği)
+  document.documentElement.classList.add('js');
+
   let currentLang = localStorage.getItem("lang") || "EN";
   updateLang();
-  function toggleLang(){currentLang=(currentLang==="EN")?"TR":"EN";localStorage.setItem("lang",currentLang);updateLang();}
-  function updateLang(){
-    document.querySelector(".lang-toggle").innerText=(currentLang==="EN")?"TR | EN":"EN | TR";
-    document.querySelectorAll("[data-en]").forEach(el=>{el.innerText=(currentLang==="EN")?el.dataset.en:el.dataset.tr;});
+
+  function toggleLang() {
+    currentLang = (currentLang === "EN") ? "TR" : "EN";
+    localStorage.setItem("lang", currentLang);
+    updateLang();
   }
 
-  // Hero + Grid reveal
-  const observer=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");}})
-  },{threshold:0.2});
-  document.querySelectorAll(".hero, .grid-item, section h2").forEach(el=>observer.observe(el));
+  function updateLang() {
+    document.querySelector(".lang-toggle").innerText =
+      (currentLang === "EN") ? "TR | EN" : "EN | TR";
 
-  // Ripple
-  document.querySelectorAll("button").forEach(btn=>{
-    btn.addEventListener("click",function(e){
-      const circle=document.createElement("span");
-      circle.classList.add("ripple");
-      circle.style.left=e.offsetX+"px"; circle.style.top=e.offsetY+"px";
-      this.appendChild(circle); setTimeout(()=>circle.remove(),600);
+    document.querySelectorAll("[data-en]").forEach(el => {
+      el.innerText = (currentLang === "EN") ? el.dataset.en : el.dataset.tr;
     });
-  });
+  }
+
+  /* === Animasyon JS (tasarımı BOZMADAN) === */
+
+  // Grid reveal + h2 sweep
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const t = entry.target;
+      if (t.classList.contains('grid-item')) t.classList.add('reveal');
+      if (t.tagName === 'H2') t.classList.add('sweep');
+      io.unobserve(t);
+    });
+  }, { threshold: 0.18 });
+
+  document.querySelectorAll('.grid-item, section h2, .waitlist h2').forEach(el => io.observe(el));
+
+  // Button ripple
+  const wlBtn = document.querySelector('.waitlist button');
+  if (wlBtn) {
+    wlBtn.addEventListener('click', function(e){
+      const rect = this.getBoundingClientRect();
+      const s = Math.max(rect.width, rect.height) * 2;
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const r = document.createElement('span');
+      r.className = 'r';
+      r.style.setProperty('--s', s + 'px');
+      r.style.setProperty('--x', x + 'px');
+      r.style.setProperty('--y', y + 'px');
+      this.appendChild(r);
+      r.addEventListener('animationend', () => r.remove());
+    });
+  }
 </script>
 
 </body>
