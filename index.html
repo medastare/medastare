@@ -43,6 +43,22 @@
       background:var(--pink);
       color:var(--black);
     }
+
+    /* Background stars */
+    body::before {
+      content:"";
+      position:fixed;
+      top:0; left:0; right:0; bottom:0;
+      background:url('https://www.transparenttextures.com/patterns/stardust.png');
+      opacity:0.15;
+      animation: moveStars 60s linear infinite;
+      z-index:-1;
+    }
+    @keyframes moveStars {
+      from {background-position:0 0;}
+      to {background-position:1000px 1000px;}
+    }
+
     header {
       display:flex; justify-content:space-between; align-items:center;
       padding:20px 40px; background:#fff; position:sticky; top:0; z-index:1000;
@@ -54,13 +70,33 @@
 
     /* Hero */
     .hero { text-align:center; padding:80px 20px; background:#fff; }
-    .hero img { max-width:900px; width:100%; border-radius:12px; }
-    .hero h1 { font-family:"Playfair Display", serif; font-size:2.2rem; margin:20px 0 10px; color:var(--wine);}
-    .hero p { font-size:1.1rem; color:var(--gray); max-width:600px; margin:auto; }
+    .hero img { max-width:900px; width:100%; border-radius:12px; opacity:0; transform:translateY(20px); animation:fadeSlide 1.5s ease forwards; }
+    .hero h1 { font-family:"Playfair Display", serif; font-size:2.2rem; margin:20px 0 10px; color:var(--wine); opacity:0; transform:translateY(20px); animation:fadeSlide 1.5s ease forwards .3s, sparkle 2s ease-out 1.5s; }
+    .hero p { font-size:1.1rem; color:var(--gray); max-width:600px; margin:auto; opacity:0; transform:translateY(20px); animation:fadeSlide 1.5s ease forwards .6s; }
+
+    @keyframes fadeSlide {
+      to { opacity:1; transform:translateY(0); }
+    }
+    @keyframes sparkle {
+      0% { text-shadow:0 0 2px gold; }
+      50% { text-shadow:0 0 12px #FFD700,0 0 24px #ff4da6; }
+      100% { text-shadow:none; }
+    }
 
     /* Grid */
     .grid { display:grid; grid-template-columns:1fr 1fr; gap:30px; padding:60px 20px; max-width:1200px; margin:auto;}
-    .grid-item { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.08);}
+    .grid-item { background:#fff; border-radius:12px; overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.08); opacity:0; filter:blur(10px); transform:translateY(40px); animation:showCard 1s ease forwards; }
+    .grid-item:nth-child(1){ animation-delay:.2s }
+    .grid-item:nth-child(2){ animation-delay:.4s }
+    .grid-item:nth-child(3){ animation-delay:.6s }
+    .grid-item:nth-child(4){ animation-delay:.8s }
+    .grid-item:nth-child(5){ animation-delay:1s }
+    .grid-item:nth-child(6){ animation-delay:1.2s }
+
+    @keyframes showCard {
+      to { opacity:1; filter:blur(0); transform:translateY(0); }
+    }
+
     .grid-item img { width:100%; display:block; }
     .grid-item .caption { padding:20px; }
     .grid-item .caption h3 { margin:0 0 10px; font-family:"Playfair Display", serif; color:var(--wine);}
@@ -78,7 +114,8 @@
 
     /* Sections */
     section { padding:60px 20px; max-width:900px; margin:auto; }
-    section h2 { font-family:"Playfair Display", serif; font-size:1.6rem; margin-bottom:20px; color:var(--wine);}
+    section h2 { font-family:"Playfair Display", serif; font-size:1.6rem; margin-bottom:20px; color:var(--wine); transition:all .6s ease; }
+    section h2:hover { text-shadow:0 0 10px #FFD700,0 0 20px #ff4da6; }
     section p { color:var(--gray); line-height:1.7; }
 
     /* Footer */
