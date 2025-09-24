@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>MedaStaré – Powered By AI</title>
-  <!-- Favicon: isteğine göre dosya adı bire bir -->
+  <!-- Favicon -->
   <link rel="icon" type="image/png" href="medastare-logo.PNG">
 
   <!-- SEO -->
@@ -43,6 +43,7 @@
       font-family: Inter, sans-serif;
       background:var(--pink);
       color:var(--black);
+      scroll-behavior:smooth;
     }
     header {
       display:flex; justify-content:space-between; align-items:center;
@@ -54,19 +55,34 @@
     header .lang-toggle { cursor:pointer; font-size:.9rem; color:var(--wine); }
 
     /* Hero */
-    .hero { text-align:center; padding:80px 20px; background:#fff; }
+    .hero { text-align:center; padding:80px 20px 40px; background:#fff; position:relative; overflow:hidden;}
     .hero img { 
       max-width:900px; 
       width:100%; 
       border-radius:12px;
-      /* Çatışmasız giriş animasyonu */
       opacity:0;
-      transform:scale(0.95);
+      transform:scale(0.95) translateY(20px);
       animation: fadeInScale 1.5s ease forwards;
     }
-    @keyframes fadeInScale { to { opacity:1; transform:scale(1); } }
+    @keyframes fadeInScale { to { opacity:1; transform:scale(1) translateY(0);} }
     .hero h1 { font-family:"Playfair Display", serif; font-size:2.2rem; margin:20px 0 10px; color:var(--wine);}
     .hero p { font-size:1.1rem; color:var(--gray); max-width:600px; margin:auto; }
+
+    /* Scroll down arrow */
+    .scroll-down { margin-top:40px; }
+    .scroll-down a { display:inline-block; }
+    .scroll-down svg {
+      width:28px; height:28px;
+      stroke:var(--wine);
+      animation:bounce 2s infinite;
+      transition:stroke .3s ease;
+    }
+    .scroll-down a:hover svg { stroke:#000; }
+    @keyframes bounce {
+      0%,20%,50%,80%,100% { transform:translateY(0); }
+      40% { transform:translateY(6px); }
+      60% { transform:translateY(3px); }
+    }
 
     /* Grid */
     .grid { display:grid; grid-template-columns:1fr 1fr; gap:30px; padding:60px 20px; max-width:1200px; margin:auto;}
@@ -121,13 +137,10 @@
     footer a:hover { color:#fff;}
     footer small { display:block; margin-top:30px; text-align:center; color:#aaa; }
 
-    /* ===== EK ANİMASYONLAR (bozmadan) ===== */
-
-    /* 1) Grid scroll reveal – sadece JS açıksa başlangıçta gizle */
-    .js .grid-item { opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+    /* ===== Apple tarzı ek animasyonlar ===== */
+    .js .grid-item { opacity:0; transform:translateY(18px) scale(0.98); transition:opacity .6s ease, transform .6s ease; }
     .grid-item.reveal { opacity:1; transform:none; }
 
-    /* 2) Başlık altı çizgi sweep (görünür olunca) */
     section h2, .waitlist h2 { position:relative; display:inline-block; }
     section h2::after, .waitlist h2::after{
       content:""; position:absolute; left:0; bottom:-6px; height:2px; width:0;
@@ -136,7 +149,22 @@
     }
     section h2.sweep::after, .waitlist h2.sweep::after{ width:100%; }
 
-    /* Hareketi azalt tercihine saygı */
+    /* Parallax hero */
+    .hero::before {
+      content:"";
+      position:absolute;
+      top:-50%; left:-50%;
+      width:200%; height:200%;
+      background:radial-gradient(circle at center, rgba(255,255,255,0.2), transparent 70%);
+      transform:translateY(-20px);
+      animation: heroGlow 6s ease-in-out infinite alternate;
+      pointer-events:none;
+    }
+    @keyframes heroGlow {
+      from { transform:translateY(-30px) scale(1); }
+      to { transform:translateY(30px) scale(1.05); }
+    }
+
     @media (prefers-reduced-motion: reduce){
       *{ animation:none !important; transition:none !important }
     }
@@ -161,10 +189,15 @@
   <img src="medastare-eiffel-elegance.jpeg" alt="Eiffel Elegance" loading="lazy">
   <h1 data-en="Global stage now in your wardrobe" data-tr="Global sahne artık senin gardırobunda">Global stage now in your wardrobe</h1>
   <p data-en="Collections for every style and budget, all in one place." data-tr="Her stile ve her bütçeye hitap eden global koleksiyonlar, MedaStaré’de buluşuyor.">Collections for every style and budget, all in one place.</p>
+  <div class="scroll-down">
+    <a href="#collections">
+      <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </div>
 </section>
 
 <!-- Grid Collections -->
-<div class="grid">
+<div class="grid" id="collections">
   <div class="grid-item">
     <img src="medabeaute-perfume-01.jpeg" alt="MedaBeauté">
     <div class="caption">
@@ -250,17 +283,17 @@
 <!-- Contact & Footer -->
 <footer id="contact">
   <div class="grid">
- <div>
-  <h4>Company</h4>
-  <a href="/careers.html">Careers</a>
-  <a href="/contact.html">Contact</a>
-</div>
+    <div>
+      <h4>Company</h4>
+      <a href="/careers.html">Careers</a>
+      <a href="/contact.html">Contact</a>
+    </div>
     <div>
       <h4>Social</h4>
-<a href="https://www.instagram.com/medastareapp?igsh=MTJmNnZveDk3OHU4eA%3D%3D&utm_source=qr" target="_blank">Instagram</a>
-<a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
-<a href="https://www.linkedin.com/company/medastare/" target="_blank">LinkedIn</a>
-<a href="https://www.crunchbase.com/organization/medastar%C3%A9" target="_blank">Crunchbase</a>
+      <a href="https://www.instagram.com/medastareapp" target="_blank">Instagram</a>
+      <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
+      <a href="https://www.linkedin.com/company/medastare/" target="_blank">LinkedIn</a>
+      <a href="https://www.crunchbase.com/organization/medastar%C3%A9" target="_blank">Crunchbase</a>
     </div>
     <div>
       <h4>Vision</h4>
@@ -272,50 +305,3 @@
 </footer>
 
 <script>
-  // JS açık olduğunu belirt (no-JS'te görünürlük değişmesin)
-  document.documentElement.classList.add('js');
-
-  let currentLang = localStorage.getItem("lang") || "EN";
-  updateLang();
-
-  function toggleLang() {
-    currentLang = (currentLang === "EN") ? "TR" : "EN";
-    localStorage.setItem("lang", currentLang);
-    updateLang();
-  }
-
-  function updateLang() {
-    document.querySelector(".lang-toggle").innerText = 
-      (currentLang === "EN") ? "TR | EN" : "EN | TR";
-
-    document.querySelectorAll("[data-en]").forEach(el => {
-      el.innerText = (currentLang === "EN") ? el.dataset.en : el.dataset.tr;
-    });
-  }
-
-  /* Animasyon JS – sade ve çatışmasız */
-  (function(){
-    const targets = [
-      ...document.querySelectorAll('.grid-item'),
-      ...document.querySelectorAll('section h2, .waitlist h2')
-    ];
-    if (!('IntersectionObserver' in window)) {
-      // Eski tarayıcı için: direkt göster
-      document.querySelectorAll('.grid-item').forEach(el => el.classList.add('reveal'));
-      document.querySelectorAll('section h2, .waitlist h2').forEach(el => el.classList.add('sweep'));
-      return;
-    }
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        if (entry.target.classList.contains('grid-item')) entry.target.classList.add('reveal');
-        if (entry.target.tagName === 'H2') entry.target.classList.add('sweep');
-        io.unobserve(entry.target);
-      });
-    }, { threshold: 0.2 });
-    targets.forEach(el => io.observe(el));
-  })();
-</script>
-
-</body>
-</html>
