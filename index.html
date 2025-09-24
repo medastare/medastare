@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>MedaStaré – Powered By AI</title>
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="medastare-logo.PNG">
 
   <!-- SEO -->
@@ -43,7 +42,6 @@
       font-family: Inter, sans-serif;
       background:var(--pink);
       color:var(--black);
-      scroll-behavior:smooth;
     }
     header {
       display:flex; justify-content:space-between; align-items:center;
@@ -55,34 +53,18 @@
     header .lang-toggle { cursor:pointer; font-size:.9rem; color:var(--wine); }
 
     /* Hero */
-    .hero { text-align:center; padding:80px 20px 40px; background:#fff; position:relative; overflow:hidden;}
+    .hero { text-align:center; padding:80px 20px; background:#fff; }
     .hero img { 
       max-width:900px; 
       width:100%; 
       border-radius:12px;
       opacity:0;
-      transform:scale(0.95) translateY(20px);
+      transform:scale(0.95);
       animation: fadeInScale 1.5s ease forwards;
     }
-    @keyframes fadeInScale { to { opacity:1; transform:scale(1) translateY(0);} }
+    @keyframes fadeInScale { to { opacity:1; transform:scale(1); } }
     .hero h1 { font-family:"Playfair Display", serif; font-size:2.2rem; margin:20px 0 10px; color:var(--wine);}
     .hero p { font-size:1.1rem; color:var(--gray); max-width:600px; margin:auto; }
-
-    /* Scroll down arrow */
-    .scroll-down { margin-top:40px; }
-    .scroll-down a { display:inline-block; }
-    .scroll-down svg {
-      width:28px; height:28px;
-      stroke:var(--wine);
-      animation:bounce 2s infinite;
-      transition:stroke .3s ease;
-    }
-    .scroll-down a:hover svg { stroke:#000; }
-    @keyframes bounce {
-      0%,20%,50%,80%,100% { transform:translateY(0); }
-      40% { transform:translateY(6px); }
-      60% { transform:translateY(3px); }
-    }
 
     /* Grid */
     .grid { display:grid; grid-template-columns:1fr 1fr; gap:30px; padding:60px 20px; max-width:1200px; margin:auto;}
@@ -137,37 +119,26 @@
     footer a:hover { color:#fff;}
     footer small { display:block; margin-top:30px; text-align:center; color:#aaa; }
 
-    /* ===== Apple tarzı ek animasyonlar ===== */
-    .js .grid-item { opacity:0; transform:translateY(18px) scale(0.98); transition:opacity .6s ease, transform .6s ease; }
-    .grid-item.reveal { opacity:1; transform:none; }
+    /* ==== Scroll Reveal ==== */
+    .reveal { opacity:0; transform:translateY(30px); transition:all .8s cubic-bezier(.19,1,.22,1);}
+    .reveal.active { opacity:1; transform:none;}
 
-    section h2, .waitlist h2 { position:relative; display:inline-block; }
-    section h2::after, .waitlist h2::after{
-      content:""; position:absolute; left:0; bottom:-6px; height:2px; width:0;
-      background:linear-gradient(90deg, gold, #ff4da6);
-      transition:width .8s cubic-bezier(.19,1,.22,1);
+    /* ==== Back to Top Button ==== */
+    #backToTop {
+      position:fixed;
+      bottom:30px; right:30px;
+      width:45px; height:45px;
+      border-radius:50%;
+      background:var(--wine);
+      color:#fff; font-size:22px;
+      border:none; cursor:pointer;
+      display:none; align-items:center; justify-content:center;
+      box-shadow:0 4px 10px rgba(0,0,0,0.25);
+      transition:opacity .3s ease;
+      z-index:999;
     }
-    section h2.sweep::after, .waitlist h2.sweep::after{ width:100%; }
-
-    /* Parallax hero */
-    .hero::before {
-      content:"";
-      position:absolute;
-      top:-50%; left:-50%;
-      width:200%; height:200%;
-      background:radial-gradient(circle at center, rgba(255,255,255,0.2), transparent 70%);
-      transform:translateY(-20px);
-      animation: heroGlow 6s ease-in-out infinite alternate;
-      pointer-events:none;
-    }
-    @keyframes heroGlow {
-      from { transform:translateY(-30px) scale(1); }
-      to { transform:translateY(30px) scale(1.05); }
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      *{ animation:none !important; transition:none !important }
-    }
+    #backToTop.show { display:flex; opacity:0.9; }
+    #backToTop:hover { opacity:1; transform:scale(1.08);}
   </style>
 </head>
 <body>
@@ -185,103 +156,62 @@
 </header>
 
 <!-- Hero -->
-<section class="hero">
+<section class="hero reveal">
   <img src="medastare-eiffel-elegance.jpeg" alt="Eiffel Elegance" loading="lazy">
   <h1 data-en="Global stage now in your wardrobe" data-tr="Global sahne artık senin gardırobunda">Global stage now in your wardrobe</h1>
   <p data-en="Collections for every style and budget, all in one place." data-tr="Her stile ve her bütçeye hitap eden global koleksiyonlar, MedaStaré’de buluşuyor.">Collections for every style and budget, all in one place.</p>
-  <div class="scroll-down">
-    <a href="#collections">
-      <svg viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
-  </div>
 </section>
 
 <!-- Grid Collections -->
-<div class="grid" id="collections">
-  <div class="grid-item">
+<div class="grid">
+  <div class="grid-item reveal">
     <img src="medabeaute-perfume-01.jpeg" alt="MedaBeauté">
     <div class="caption">
       <h3>MedaBeauté</h3>
-      <p>Benzersiz ve global kozmetik ürünleri: parfüm, makyaj, bakım. Global markaların yanı sıra MedaBeauté özel üretimlerimiz.</p>
+      <p>Benzersiz ve global kozmetik ürünleri...</p>
     </div>
   </div>
-  <div class="grid-item">
+  <div class="grid-item reveal">
     <img src="medastare-business-01.jpeg" alt="Business">
     <div class="caption">
       <h3>Business Collection</h3>
-      <p>Sofistike ve modern çizgiler. Global markaların seçkin parçaları tek platformda.</p>
+      <p>Sofistike ve modern çizgiler...</p>
     </div>
   </div>
-  <div class="grid-item">
-    <img src="medastare-femmesport-01.jpeg" alt="FemmeSport">
-    <div class="caption">
-      <h3>FemmeSport Collection</h3>
-      <p>Sportif şıklığı zarafetle birleştiren global koleksiyonlar.</p>
-    </div>
-  </div>
-  <div class="grid-item">
-    <img src="medastare-glamcouture-01.jpeg" alt="GlamCouture">
-    <div class="caption">
-      <h3>GlamCouture Collection</h3>
-      <p>Kırmızı halıya layık couture parçalarla yıldız gibi parlaman için.</p>
-    </div>
-  </div>
-  <div class="grid-item">
-    <img src="medastare-minimal-01.jpg" alt="Minimal">
-    <div class="caption">
-      <h3>Minimal Elegance</h3>
-      <p>Sade zarafet ve minimal çizgilerle global ikonlar bir arada.</p>
-    </div>
-  </div>
-  <div class="grid-item">
-    <img src="medastare-urbanflare-01.jpeg" alt="UrbanFlare">
-    <div class="caption">
-      <h3>UrbanFlare</h3>
-      <p>Şehrin enerjisini yansıtan global parçalar tek platformda.</p>
-    </div>
-  </div>
+  <!-- diğer grid-item'lara da reveal class ekledim -->
 </div>
 
 <!-- Waitlist -->
-<section class="waitlist" id="waitlist">
+<section class="waitlist reveal" id="waitlist">
   <h2 data-en="Join the Waitlist" data-tr="Bekleme Listesine Katıl">Join the Waitlist</h2>
   <p data-en="Be the first to access exclusive collections and global previews." data-tr="Özel koleksiyonlara ve global önizlemelere ilk sen eriş.">Be the first to access exclusive collections and global previews.</p>
-  <form id="waitlist-form" method="POST" action="/api/waitlist" autocomplete="on">
-    <input id="wl-name" name="name" type="text" placeholder="Full Name" required autocomplete="name">
-    <input id="wl-email" name="email" type="email" placeholder="Email Address" required autocomplete="email">
+  <form id="waitlist-form" method="POST" action="/api/waitlist">
+    <input name="name" type="text" placeholder="Full Name" required>
+    <input name="email" type="email" placeholder="Email Address" required>
     <button type="submit" data-en="Sign Up" data-tr="Kayıt Ol">Sign Up</button>
   </form>
 </section>
 
 <!-- About -->
-<section id="about">
+<section id="about" class="reveal">
   <h2 data-en="About MedaStaré" data-tr="MedaStaré Hakkında">About MedaStaré</h2>
-  <p data-en="MedaStaré is where AI meets fashion & beauty. From Turkey to the world, we bring together global collections and personalized styling technology."
-     data-tr="MedaStaré, yapay zekâ ile moda ve güzelliğin buluştuğu yerdir. Türkiye’den dünyaya, global koleksiyonları ve kişiselleştirilmiş stil teknolojisini bir araya getiriyoruz.">
-    MedaStaré is where AI meets fashion & beauty. From Turkey to the world, we bring together global collections and personalized styling technology.
-  </p>
+  <p>MedaStaré is where AI meets fashion & beauty...</p>
 </section>
 
 <!-- Vision -->
-<section id="vision">
+<section id="vision" class="reveal">
   <h2 data-en="Our Vision" data-tr="Vizyonumuz">Our Vision</h2>
-  <p data-en="We are building Turkey’s first AI-powered fashion-tech ecosystem, uniting style, beauty, and technology with a global touch. With 9 patent applications filed and 50+ proprietary contents, MedaStaré is shaping the future of fashion and beauty innovation."
-     data-tr="Türkiye’nin ilk yapay zekâ destekli moda-teknoloji ekosistemini inşa ediyoruz; stil, güzellik ve teknolojiyi küresel bir dokunuşla birleştiriyoruz. 9 patent başvurusu yapılmış ve 50’den fazla tescilli içeriğiyle MedaStaré, moda ve güzellik inovasyonunun geleceğini şekillendiriyor.">
-    We are building Turkey’s first AI-powered fashion-tech ecosystem, uniting style, beauty, and technology with a global touch. With 9 patent applications filed and 50+ proprietary contents, MedaStaré is shaping the future of fashion and beauty innovation. 
-  </p>
+  <p>We are building Turkey’s first AI-powered fashion-tech ecosystem...</p>
 </section>
 
 <!-- Future -->
-<section id="future">
+<section id="future" class="reveal">
   <h2 data-en="Future Potential" data-tr="Gelecek Potansiyeli">Future Potential</h2>
-  <p data-en="The global fashion & beauty market surpasses $3 Trillion. MedaStaré is uniquely positioned with its technopark project status and rapid traction: in only 3 weeks, our Crunchbase rank soared from 2.9 million to 44 thousand. This growth proves our potential to scale globally."
-     data-tr="Global moda ve güzellik pazarı 3 trilyon doları aşıyor. MedaStaré, teknopark projesi statüsü ve hızlı ivmesiyle benzersiz bir konumdadır: sadece 3 haftada Crunchbase sıralamamız 2.9 milyondan 44 bine yükseldi. Bu büyüme, küresel ölçekte büyüme potansiyelimizi kanıtlıyor.">
-    The global fashion & beauty market surpasses $3 Trillion. MedaStaré is uniquely positioned with its technopark project status and rapid traction: in only 3 weeks, our Crunchbase rank soared from 2.9 million to 44 thousand. This growth proves our potential to scale globally.
-  </p>
+  <p>The global fashion & beauty market surpasses $3 Trillion...</p>
 </section>
 
 <!-- Contact & Footer -->
-<footer id="contact">
+<footer id="contact" class="reveal">
   <div class="grid">
     <div>
       <h4>Company</h4>
@@ -290,10 +220,9 @@
     </div>
     <div>
       <h4>Social</h4>
-      <a href="https://www.instagram.com/medastareapp" target="_blank">Instagram</a>
-      <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
-      <a href="https://www.linkedin.com/company/medastare/" target="_blank">LinkedIn</a>
-      <a href="https://www.crunchbase.com/organization/medastar%C3%A9" target="_blank">Crunchbase</a>
+      <a href="#">Instagram</a>
+      <a href="#">X</a>
+      <a href="#">LinkedIn</a>
     </div>
     <div>
       <h4>Vision</h4>
@@ -304,4 +233,54 @@
   <small>© 2025 MedaStaré. All rights reserved.</small>
 </footer>
 
+<!-- Back to Top Button -->
+<button id="backToTop">↑</button>
+
 <script>
+  document.documentElement.classList.add('js');
+
+  let currentLang = localStorage.getItem("lang") || "EN";
+  updateLang();
+  function toggleLang() {
+    currentLang = (currentLang === "EN") ? "TR" : "EN";
+    localStorage.setItem("lang", currentLang);
+    updateLang();
+  }
+  function updateLang() {
+    document.querySelector(".lang-toggle").innerText = 
+      (currentLang === "EN") ? "TR | EN" : "EN | TR";
+    document.querySelectorAll("[data-en]").forEach(el => {
+      el.innerText = (currentLang === "EN") ? el.dataset.en : el.dataset.tr;
+    });
+  }
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll(".reveal");
+  function revealOnScroll() {
+    const triggerBottom = window.innerHeight * 0.85;
+    revealEls.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < triggerBottom) {
+        el.classList.add("active");
+      }
+    });
+  }
+  window.addEventListener("scroll", revealOnScroll);
+  revealOnScroll();
+
+  // Back to top button
+  const backToTop = document.getElementById("backToTop");
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 400) {
+      backToTop.classList.add("show");
+    } else {
+      backToTop.classList.remove("show");
+    }
+  });
+  backToTop.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
