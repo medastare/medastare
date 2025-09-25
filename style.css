@@ -1,9 +1,9 @@
-/* HERO animasyonu */
+/* === HERO animasyonu === */
 .hero img {
   opacity: 0;
   transform: scale(0.95);
   animation: fadeInScale 1.5s ease forwards;
-  animation-delay: 0.3s; /* gecikme ile daha belirgin */
+  animation-delay: 0.3s; /* daha belirgin başlasın */
 }
 @keyframes fadeInScale {
   to {
@@ -12,13 +12,13 @@
   }
 }
 
-/* Başlık (h2, h1) animasyonu */
-section h2, .hero h1 {
+/* === Başlık & Paragraf Animasyonu === */
+.hero h1, section h2 {
   opacity: 0;
   transform: translateY(30px);
   animation: slideUp 1s ease forwards;
 }
-section p, .hero p {
+.hero p, section p {
   opacity: 0;
   transform: translateY(20px);
   animation: slideUp 1s ease forwards;
@@ -31,7 +31,7 @@ section p, .hero p {
   }
 }
 
-/* Grid item animasyonu */
+/* === Grid Item Animasyonu === */
 .grid-item {
   opacity: 0;
   transform: translateY(40px);
@@ -42,7 +42,7 @@ section p, .hero p {
   transform: translateY(0);
 }
 
-/* Waitlist buton hover + click efektleri */
+/* === Waitlist Buton Hover + Click === */
 .waitlist button {
   background: var(--wine);
   color: #fff;
@@ -51,7 +51,7 @@ section p, .hero p {
   font-size: 1rem;
   border-radius: 6px;
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.3s ease;
+  transition: transform 0.25s ease, background 0.3s ease;
 }
 .waitlist button:hover {
   background: #8a2945;
@@ -61,7 +61,7 @@ section p, .hero p {
   transform: scale(0.95);
 }
 
-/* Footer link hover animasyonu */
+/* === Footer Link Hover Underline === */
 footer a {
   position: relative;
   transition: color 0.3s ease;
