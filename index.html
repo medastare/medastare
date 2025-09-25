@@ -274,17 +274,25 @@
 <script>
 /* ===== Animations Full Paket ===== */
 
-// Reveal on Scroll
-const reveals = document.querySelectorAll('.reveal-on-scroll');
+// Scroll reveal (FIXED)
+const revealEls = document.querySelectorAll(
+  '.grid-item, section h2, section p, .hero h1, .hero p'
+);
+
 function revealOnScroll() {
   const triggerBottom = window.innerHeight * 0.85;
-  reveals.forEach(el => {
+  revealEls.forEach(el => {
+    if (el.classList.contains('show')) return; // tekrar tetiklenmesin
     const rect = el.getBoundingClientRect();
-    if(rect.top < triggerBottom){ el.classList.add('show'); }
+    if (rect.top < triggerBottom) {
+      el.classList.add('show');
+      if (el.tagName === 'H2') el.classList.add('sweep'); // alt çizgi efekti
+    }
   });
 }
-window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('load', revealOnScroll);
+
+window.addEventListener('load', revealOnScroll, { passive: true });
+window.addEventListener('scroll', revealOnScroll, { passive: true });
 
 // Typewriter Effect
 function typeWriter(el, text, speed=80) {
