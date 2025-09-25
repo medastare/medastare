@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>MedaStaré – Powered By AI</title>
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="medastare-logo.PNG">
+  <link rel="icon" type="image/png" href="images/medastare-logo.png">
 
   <!-- SEO -->
   <link rel="canonical" href="https://medastare.com/">
@@ -16,14 +16,14 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="MedaStaré – Global Fashion-Tech">
   <meta property="og:description" content="AI + fashion & beauty: global collections and exclusive previews.">
-  <meta property="og:image" content="/images/og-cover.jpg">
+  <meta property="og:image" content="images/og-cover.jpg">
   <meta property="og:url" content="https://medastare.com/">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="MedaStaré – Global Fashion-Tech">
   <meta name="twitter:description" content="Global collections, luxury beauty, AI-powered styling.">
-  <meta name="twitter:image" content="/images/og-cover.jpg">
+  <meta name="twitter:image" content="images/og-cover.jpg">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
@@ -67,8 +67,7 @@
     .hero h1 { font-family:"Playfair Display", serif; font-size:2.2rem; margin:20px 0 10px; color:var(--wine);}
     .hero p { font-size:1.1rem; color:var(--gray); max-width:600px; margin:auto; }
 
-    /* ===== Scrollable Collections (ORTA GRID) ===== */
-    /* Sadece BODY altındaki ilk .grid yatay kaydırmalı olur; footer içindeki .grid etkilenmez. */
+    /* ===== Scrollable Collections ===== */
     body > .grid {
       display:flex;
       gap:20px;
@@ -80,23 +79,19 @@
       -webkit-overflow-scrolling:touch;
       scroll-padding:0 20px;
     }
-    /* scrollbar gizle (webkit) */
     body > .grid::-webkit-scrollbar { height:0; }
-    /* scrollbar gizle (Firefox) */
     body > .grid { scrollbar-width:none; }
-    body > .grid::-webkit-scrollbar-thumb { background:transparent; }
 
     .grid-item { 
-      flex:0 0 300px;            /* kart genişliği */
+      flex:0 0 300px;
       background:#fff; 
       border-radius:12px; 
       overflow:hidden; 
       box-shadow:0 4px 15px rgba(0,0,0,0.08);
       transition: transform .35s ease, box-shadow .35s ease;
       scroll-snap-align:start;
-      opacity:0; transform:translateY(16px); /* yumuşak giriş */
+      opacity:0; transform:translateY(16px);
     }
-    /* Görünür olunca yumuşak açılma */
     .grid-item.show { opacity:1; transform:none; }
     .grid-item:hover {
       transform:translateY(-8px);
@@ -168,12 +163,12 @@
 
 <!-- Hero -->
 <section class="hero reveal">
-  <img src="medastare-eiffel-elegance.jpeg" alt="Eiffel Elegance" loading="lazy">
+  <img src="images/medastare-eiffel-elegance.jpeg" alt="Eiffel Elegance" loading="lazy">
   <h1 data-en="Global stage now in your wardrobe" data-tr="Global sahne artık senin gardırobunda">Global stage now in your wardrobe</h1>
   <p data-en="Collections for every style and budget, all in one place." data-tr="Her stile ve her bütçeye hitap eden global koleksiyonlar, MedaStaré’de buluşuyor.">Collections for every style and budget, all in one place.</p>
 </section>
 
-<!-- Grid Collections (YATAY KAYDIRMALI) -->
+<!-- Grid Collections -->
 <div class="grid" id="collections">
   <div class="grid-item reveal">
     <img src="images/medabeaute-perfume-01.jpeg" alt="MedaBeauté">
@@ -293,16 +288,14 @@
     });
   }
 
-  // Scroll reveal (mevcut yapını bozmadan, h2 çizgisi + grid kart giriş)
+  // Scroll reveal
   const revealEls = document.querySelectorAll(".reveal, section h2, .grid-item");
   function revealOnScroll() {
     const triggerBottom = window.innerHeight * 0.85;
     revealEls.forEach(el => {
       const rect = el.getBoundingClientRect();
       if (rect.top < triggerBottom) {
-        // başlıklarda alt çizgi animasyonu
         if(el.tagName==="H2"){ el.classList.add("sweep"); }
-        // grid kartları görünür yap
         if(el.classList.contains("grid-item")){ el.classList.add("show"); }
       }
     });
@@ -323,7 +316,7 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  // Desktop için: koleksiyonları mouse ile sürükleyerek kaydırma (istediğin şov burada :))
+  // Desktop drag-scroll
   const scroller = document.getElementById('collections');
   let isDown = false, startX = 0, scrollLeft = 0;
   scroller.addEventListener('mousedown', (e)=>{
