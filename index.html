@@ -85,12 +85,6 @@
       box-shadow:0 4px 15px rgba(0,0,0,0.08);
       scroll-snap-align: start;
       transition: all 0.4s ease;
-      opacity:0;
-      transform:translateY(30px);
-    }
-    .grid-item.show {
-      opacity:1;
-      transform:translateY(0);
     }
     .grid-item img { width:100%; display:block; }
     .grid-item .caption { padding:20px; }
@@ -99,7 +93,7 @@
 
     /* Waitlist */
     .waitlist { background:#fff; padding:70px 20px; text-align:center; }
-    .waitlist h2 { font-family:"Playfair Display", serif; font-size:1.8rem; margin-bottom:15px; color:var(--wine); position:relative; display:inline-block; }
+    .waitlist h2 { font-family:"Playfair Display", serif; font-size:1.8rem; margin-bottom:15px; color:var(--wine); position:relative; display:inline-block;}
     .waitlist h2::after{content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:linear-gradient(90deg, gold, #ff4da6); transition:width .8s ease;}
     .waitlist h2.sweep::after{width:100%;}
     .waitlist p { color:var(--gray); margin-bottom:25px; }
@@ -111,11 +105,10 @@
 
     /* Sections */
     section { padding:60px 20px; max-width:900px; margin:auto; }
-    section h2 { font-family:"Playfair Display", serif; font-size:1.6rem; margin-bottom:20px; color:var(--wine); position:relative; display:inline-block; opacity:0; transform:translateY(30px); transition:all .6s ease; }
-    section h2.sweep::after{width:100%;}
+    section h2 { font-family:"Playfair Display", serif; font-size:1.6rem; margin-bottom:20px; color:var(--wine); position:relative; display:inline-block; }
     section h2::after{content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px; background:linear-gradient(90deg, gold, #ff4da6); transition:width .8s ease;}
-    section p { color:var(--gray); line-height:1.7; opacity:0; transform:translateY(30px); transition:all .6s ease; }
-    section.show h2, section.show p { opacity:1; transform:translateY(0); }
+    section h2.sweep::after{width:100%;}
+    section p { color:var(--gray); line-height:1.7; }
 
     /* Footer */
     footer { background:#111; color:#fff; padding:40px 20px; }
@@ -161,12 +154,48 @@
 
 <!-- Scrollable Collections -->
 <div class="grid">
-  <div class="grid-item"><img src="medabeaute-perfume-01.jpeg" alt="MedaBeauté"><div class="caption"><h3>MedaBeauté</h3><p>Benzersiz ve global kozmetik ürünleri: parfüm, makyaj, bakım. Global markaların yanı sıra MedaBeauté özel üretimlerimiz.</p></div></div>
-  <div class="grid-item"><img src="medastare-business-01.jpeg" alt="Business"><div class="caption"><h3>Business Collection</h3><p>Sofistike ve modern çizgiler. Global markaların seçkin parçaları tek platformda.</p></div></div>
-  <div class="grid-item"><img src="medastare-femmesport-01.jpeg" alt="FemmeSport"><div class="caption"><h3>FemmeSport Collection</h3><p>Sportif şıklığı zarafetle birleştiren global koleksiyonlar.</p></div></div>
-  <div class="grid-item"><img src="medastare-glamcouture-01.jpeg" alt="GlamCouture"><div class="caption"><h3>GlamCouture Collection</h3><p>Kırmızı halıya layık couture parçalarla yıldız gibi parlaman için.</p></div></div>
-  <div class="grid-item"><img src="medastare-minimal-01.jpg" alt="Minimal"><div class="caption"><h3>Minimal Elegance</h3><p>Sade zarafet ve minimal çizgilerle global ikonlar bir arada.</p></div></div>
-  <div class="grid-item"><img src="medastare-urbanflare-01.jpeg" alt="UrbanFlare"><div class="caption"><h3>UrbanFlare</h3><p>Şehrin enerjisini yansıtan global parçalar tek platformda.</p></div></div>
+  <div class="grid-item">
+    <img src="medabeaute-perfume-01.jpeg" alt="MedaBeauté">
+    <div class="caption">
+      <h3>MedaBeauté</h3>
+      <p>Benzersiz ve global kozmetik ürünleri: parfüm, makyaj, bakım. Global markaların yanı sıra MedaBeauté özel üretimlerimiz.</p>
+    </div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-business-01.jpeg" alt="Business">
+    <div class="caption">
+      <h3>Business Collection</h3>
+      <p>Sofistike ve modern çizgiler. Global markaların seçkin parçaları tek platformda.</p>
+    </div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-femmesport-01.jpeg" alt="FemmeSport">
+    <div class="caption">
+      <h3>FemmeSport Collection</h3>
+      <p>Sportif şıklığı zarafetle birleştiren global koleksiyonlar.</p>
+    </div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-glamcouture-01.jpeg" alt="GlamCouture">
+    <div class="caption">
+      <h3>GlamCouture Collection</h3>
+      <p>Kırmızı halıya layık couture parçalarla yıldız gibi parlaman için.</p>
+    </div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-minimal-01.jpg" alt="Minimal">
+    <div class="caption">
+      <h3>Minimal Elegance</h3>
+      <p>Sade zarafet ve minimal çizgilerle global ikonlar bir arada.</p>
+    </div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-urbanflare-01.jpeg" alt="UrbanFlare">
+    <div class="caption">
+      <h3>UrbanFlare</h3>
+      <p>Şehrin enerjisini yansıtan global parçalar tek platformda.</p>
+    </div>
+  </div>
 </div>
 
 <!-- Waitlist -->
@@ -201,9 +230,23 @@
 <!-- Contact & Footer -->
 <footer id="contact">
   <div class="grid">
-    <div><h4>Company</h4><a href="/careers.html">Careers</a><a href="/contact.html">Contact</a></div>
-    <div><h4>Social</h4><a href="https://www.instagram.com/medastareapp" target="_blank">Instagram</a><a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a><a href="https://www.linkedin.com/company/medastare/" target="_blank">LinkedIn</a><a href="https://www.crunchbase.com/organization/medastar%C3%A9" target="_blank">Crunchbase</a></div>
-    <div><h4>Vision</h4><a href="#vision">Our Vision</a><a href="#future">Future Potential</a></div>
+    <div>
+      <h4>Company</h4>
+      <a href="/careers.html">Careers</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <div>
+      <h4>Social</h4>
+      <a href="https://www.instagram.com/medastareapp" target="_blank">Instagram</a>
+      <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
+      <a href="https://www.linkedin.com/company/medastare/" target="_blank">LinkedIn</a>
+      <a href="https://www.crunchbase.com/organization/medastar%C3%A9" target="_blank">Crunchbase</a>
+    </div>
+    <div>
+      <h4>Vision</h4>
+      <a href="#vision">Our Vision</a>
+      <a href="#future">Future Potential</a>
+    </div>
   </div>
   <small>© 2025 MedaStaré. All rights reserved.</small>
 </footer>
@@ -214,7 +257,6 @@
 <script>
   document.documentElement.classList.add('js');
 
-  // Dil toggle
   let currentLang = localStorage.getItem("lang") || "EN";
   updateLang();
   function toggleLang() {
@@ -229,64 +271,69 @@
       el.innerText = (currentLang === "EN") ? el.dataset.en : el.dataset.tr;
     });
   }
+<script>
+<script>
+/* ===== Animations Full Paket ===== */
 
-  // Scroll reveal
-  const revealEls = document.querySelectorAll('.grid-item, section h2, section p, .hero h1, .hero p');
-  function revealOnScroll() {
-    const triggerBottom = window.innerHeight * 0.85;
-    revealEls.forEach(el => {
-      if (el.classList.contains('show')) return;
-      const rect = el.getBoundingClientRect();
-      if (rect.top < triggerBottom) {
-        el.classList.add('show');
-        if (el.tagName === 'H2') el.classList.add('sweep');
-      }
-    });
+// Scroll reveal (FIXED)
+const revealEls = document.querySelectorAll(
+  '.grid-item, section h2, section p, .hero h1, .hero p'
+);
+function revealOnScroll() {
+  const triggerBottom = window.innerHeight * 0.85;
+  revealEls.forEach(el => {
+    if (el.classList.contains('show')) return;
+    const rect = el.getBoundingClientRect();
+    if (rect.top < triggerBottom) {
+      el.classList.add('show');
+      if (el.tagName === 'H2') el.classList.add('sweep');
+    }
+  });
+}
+window.addEventListener('load', revealOnScroll, { passive: true });
+window.addEventListener('scroll', revealOnScroll, { passive: true });
+
+// Typewriter Effect
+function typeWriter(el, text, speed=80) {
+  let i=0;
+  function typing(){
+    if(i < text.length){
+      el.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    }
   }
-  window.addEventListener('load', revealOnScroll, { passive: true });
-  window.addEventListener('scroll', revealOnScroll, { passive: true });
-
-  // Typewriter
-  function typeWriter(el, text, speed=80) {
-    let i=0;
-    function typing(){
-      if(i < text.length){
-        el.innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typing, speed);
-      }
-    }
-    typing();
+  typing();
+}
+window.addEventListener('load', ()=>{
+  const el = document.querySelector('.hero h1');
+  if(el){
+    const text = el.dataset.en || el.innerText;
+    el.innerText = "";
+    typeWriter(el, text);
   }
-  window.addEventListener('load', ()=>{
-    const el = document.querySelector('.hero h1');
-    if(el){
-      const text = el.dataset.en || el.innerText;
-      el.innerText = "";
-      typeWriter(el, text);
-    }
-  });
+});
 
-  // Parallax Hero
-  window.addEventListener('scroll', ()=>{
-    const heroImg = document.querySelector('.hero img');
-    if(heroImg){
-      heroImg.style.transform = `translateY(${window.scrollY * 0.2}px) scale(1.05)`;
-    }
-  });
+// Parallax Hero
+window.addEventListener('scroll', ()=>{
+  const heroImg = document.querySelector('.hero img');
+  if(heroImg){
+    heroImg.style.transform = `translateY(${window.scrollY * 0.2}px) scale(1.05)`;
+  }
+});
 
-  // Back to top
-  const backToTop = document.getElementById("backToTop");
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 400) {
-      backToTop.classList.add("show");
-    } else {
-      backToTop.classList.remove("show");
-    }
-  });
-  backToTop.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
+// Back to top smooth show
+const backToTop = document.getElementById("backToTop");
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 400) {
+    backToTop.classList.add("show");
+  } else {
+    backToTop.classList.remove("show");
+  }
+});
+backToTop.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 </script>
 </body>
 </html>
