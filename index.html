@@ -272,25 +272,24 @@
     });
   }
 <script>
+<script>
 /* ===== Animations Full Paket ===== */
 
 // Scroll reveal (FIXED)
 const revealEls = document.querySelectorAll(
   '.grid-item, section h2, section p, .hero h1, .hero p'
 );
-
 function revealOnScroll() {
   const triggerBottom = window.innerHeight * 0.85;
   revealEls.forEach(el => {
-    if (el.classList.contains('show')) return; // tekrar tetiklenmesin
+    if (el.classList.contains('show')) return;
     const rect = el.getBoundingClientRect();
     if (rect.top < triggerBottom) {
       el.classList.add('show');
-      if (el.tagName === 'H2') el.classList.add('sweep'); // alt çizgi efekti
+      if (el.tagName === 'H2') el.classList.add('sweep');
     }
   });
 }
-
 window.addEventListener('load', revealOnScroll, { passive: true });
 window.addEventListener('scroll', revealOnScroll, { passive: true });
 
