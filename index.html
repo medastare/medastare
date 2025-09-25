@@ -271,35 +271,62 @@
       el.innerText = (currentLang === "EN") ? el.dataset.en : el.dataset.tr;
     });
   }
+<script>
+/* ===== Animations Full Paket ===== */
 
-  // Scroll reveal
-  const revealEls = document.querySelectorAll(".reveal, section h2");
-  function revealOnScroll() {
-    const triggerBottom = window.innerHeight * 0.85;
-    revealEls.forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < triggerBottom) {
-        el.classList.add("reveal","active");
-        if(el.tagName==="H2"){ el.classList.add("sweep"); }
-      }
-    });
-  }
-  window.addEventListener("scroll", revealOnScroll);
-  window.addEventListener("load", revealOnScroll);
+// Reveal on Scroll
+const reveals = document.querySelectorAll('.reveal-on-scroll');
+function revealOnScroll() {
+  const triggerBottom = window.innerHeight * 0.85;
+  reveals.forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if(rect.top < triggerBottom){ el.classList.add('show'); }
+  });
+}
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
 
-  // Back to top
-  const backToTop = document.getElementById("backToTop");
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 400) {
-      backToTop.classList.add("show");
-    } else {
-      backToTop.classList.remove("show");
+// Typewriter Effect
+function typeWriter(el, text, speed=80) {
+  let i=0;
+  function typing(){
+    if(i < text.length){
+      el.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
     }
-  });
-  backToTop.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-</script>
+  }
+  typing();
+}
+window.addEventListener('load', ()=>{
+  const el = document.querySelector('.hero h1');
+  if(el){
+    const text = el.dataset.en || el.innerText;
+    el.innerText = "";
+    typeWriter(el, text);
+  }
+});
 
+// Parallax Hero
+window.addEventListener('scroll', ()=>{
+  const heroImg = document.querySelector('.hero img');
+  if(heroImg){
+    heroImg.style.transform = `translateY(${window.scrollY * 0.2}px) scale(1.05)`;
+  }
+});
+
+// Back to top smooth show
+const backToTop = document.getElementById("backToTop");
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 400) {
+    backToTop.classList.add("show");
+  } else {
+    backToTop.classList.remove("show");
+  }
+});
+backToTop.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
 </body>
 </html>
