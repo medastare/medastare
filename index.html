@@ -130,25 +130,25 @@
     }
     .waitlist button:hover { transform:scale(1.05); }
 
-    /* CEO Accordion */
-    .ceo { max-width:900px; margin:60px auto; text-align:left; }
+    /* CEO Section */
+    .ceo { max-width:900px; margin:60px auto; text-align:center; }
     .ceo button {
-      width:100%; background:rgba(255,255,255,0.05);
-      border:1px solid rgba(212,175,55,0.3);
-      color:var(--gold); font-size:1.2rem;
-      font-weight:600; padding:16px;
-      cursor:pointer; border-radius:8px;
-      display:flex; justify-content:space-between; align-items:center;
+      background:linear-gradient(90deg,var(--pink),var(--gold));
+      color:#000; font-size:1.2rem;
+      font-weight:600; padding:16px 32px;
+      border:none; border-radius:8px;
+      cursor:pointer; transition:all .3s ease;
     }
+    .ceo button:hover { transform:scale(1.08); }
     .ceo-content {
       max-height:0; overflow:hidden;
-      transition:max-height .5s ease;
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(212,175,55,0.3);
-      border-radius:0 0 8px 8px; padding:0 16px;
+      opacity:0; transform:translateY(-20px);
+      transition:max-height .6s ease, opacity .6s ease, transform .6s ease;
     }
-    .ceo-content.open { max-height:500px; } /* açıldığında animasyon için */
-    .ceo-content p { padding:16px 0; color:#ddd; }
+    .ceo-content.open {
+      max-height:500px; opacity:1; transform:translateY(0);
+    }
+    .ceo-content p { padding:20px; color:#ddd; }
 
     /* Footer */
     footer { background:#000; padding:50px 20px; }
@@ -195,41 +195,13 @@
   <p data-en="Collections for every style and budget, all in one place." data-tr="Her stile ve her bütçeye hitap eden global koleksiyonlar, MedaStaré’de buluşuyor.">Collections for every style and budget, all in one place.</p>
 </section>
 
-<!-- Collections -->
-<div class="grid">
-  <div class="grid-item">
-    <img src="medabeaute-perfume-01.jpeg" alt="MedaBeauté">
-    <div class="caption"><h3>MedaBeauté</h3><p>Benzersiz ve global kozmetik ürünleri: parfüm, makyaj, bakım. Global markaların yanı sıra MedaBeauté özel üretimlerimiz.</p></div>
-  </div>
-  <div class="grid-item">
-    <img src="medastare-business-01.jpeg" alt="Business">
-    <div class="caption"><h3>Business Collection</h3><p>Sofistike ve modern çizgiler. Global markaların seçkin parçaları tek platformda.</p></div>
-  </div>
-  <div class="grid-item">
-    <img src="medastare-femmesport-01.jpeg" alt="FemmeSport">
-    <div class="caption"><h3>FemmeSport Collection</h3><p>Sportif şıklığı zarafetle birleştiren global koleksiyonlar.</p></div>
-  </div>
-  <div class="grid-item">
-    <img src="medastare-glamcouture-01.jpeg" alt="GlamCouture">
-    <div class="caption"><h3>GlamCouture Collection</h3><p>Kırmızı halıya layık couture parçalarla yıldız gibi parlaman için.</p></div>
-  </div>
-  <div class="grid-item">
-    <img src="medastare-minimal-01.jpg" alt="Minimal">
-    <div class="caption"><h3>Minimal Elegance</h3><p>Sade zarafet ve minimal çizgilerle global ikonlar bir arada.</p></div>
-  </div>
-  <div class="grid-item">
-    <img src="medastare-urbanflare-01.jpeg" alt="UrbanFlare">
-    <div class="caption"><h3>UrbanFlare</h3><p>Şehrin enerjisini yansıtan global parçalar tek platformda.</p></div>
-  </div>
-</div>
-
 <!-- Waitlist -->
 <section class="waitlist" id="waitlist">
   <h2 data-en="Join the Waitlist" data-tr="Bekleme Listesine Katıl">Join the Waitlist</h2>
   <p data-en="Be the first to access exclusive collections and global previews." data-tr="Özel koleksiyonlara ve global önizlemelere ilk sen eriş.">Be the first to access exclusive collections and global previews.</p>
-  <form>
-    <input type="text" placeholder="Full Name">
-    <input type="email" placeholder="Email Address">
+  <form id="waitlist-form" method="POST" action="thank-you.html" autocomplete="on">
+    <input id="wl-name" name="name" type="text" placeholder="Full Name" required autocomplete="name">
+    <input id="wl-email" name="email" type="email" placeholder="Email Address" required autocomplete="email">
     <button type="submit">Sign Up</button>
   </form>
 </section>
@@ -252,12 +224,13 @@
   <p>The global fashion & beauty market surpasses $3 Trillion. MedaStaré is uniquely positioned with its technopark project status and rapid traction: in only 3 weeks, our Crunchbase rank soared from 2.9 million to 44 thousand. This growth proves our potential to scale globally.</p>
 </section>
 
-<!-- CEO Accordion -->
+<!-- CEO Section -->
 <section class="ceo">
-  <button type="button" onclick="toggleCEO()">Founder & CEO <span id="ceo-plus">+</span></button>
+  <button type="button" onclick="toggleCEO()">Founder & CEO</button>
   <div class="ceo-content" id="ceo-content">
     <p><strong>Medine Ak</strong> – Visionary Entrepreneur shaping the future of fashion-tech.  
     Founder & CEO of MedaStaré, building Turkey’s first AI-powered fashion-tech ecosystem and leading its global expansion.</p>
+    <a href="founder.html" style="color:var(--pink); font-weight:600;">Learn More →</a>
   </div>
 </section>
 
@@ -315,19 +288,25 @@ function updateLang(){
   });
 }
 
-/* CEO accordion */
+/* CEO Section animation */
 function toggleCEO(){
   const content=document.getElementById("ceo-content");
-  const plus=document.getElementById("ceo-plus");
-
-  if(content.classList.contains("open")){
-    content.classList.remove("open");
-    plus.textContent="+";
-  } else {
-    content.classList.add("open");
-    plus.textContent="−";
-  }
+  content.classList.toggle("open");
 }
+
+/* Waitlist localStorage */
+const nameInput=document.getElementById("wl-name");
+const emailInput=document.getElementById("wl-email");
+
+window.addEventListener("load",()=>{
+  if(localStorage.getItem("wl-name")) nameInput.value=localStorage.getItem("wl-name");
+  if(localStorage.getItem("wl-email")) emailInput.value=localStorage.getItem("wl-email");
+});
+
+document.getElementById("waitlist-form").addEventListener("submit",function(){
+  localStorage.setItem("wl-name",nameInput.value);
+  localStorage.setItem("wl-email",emailInput.value);
+});
 </script>
 </body>
 </html>
