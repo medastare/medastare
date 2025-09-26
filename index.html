@@ -6,26 +6,21 @@
   <title>MedaStaré – Powered By AI</title>
   <link rel="icon" type="image/png" href="medastare-logo.PNG">
 
-  <!-- SEO -->
-  <link rel="canonical" href="https://medastare.com/">
-  <meta name="description" content="MedaStaré — AI-powered fashion & beauty ecosystem. From Turkey to the world.">
-  <meta name="keywords" content="MedaStaré, fashion tech, AI fashion, MedaBeauté, style app">
-
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
       --black:#0a0a0a;
-      --gold:linear-gradient(90deg,#ffd700,#ffb347);
-      --wine:#6d1f34;
+      --wine:#5a0f1d;
       --pink:#ff4da6;
-      --gray:#bbb;
+      --gold:#d4af37;
+      --gray:#999;
     }
-    html, body {
-      margin:0; padding:0;
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
       font-family: Inter, sans-serif;
-      background:var(--black);
+      background: linear-gradient(135deg, var(--black), var(--wine), var(--pink));
       color:#fff;
       overflow-x:hidden;
     }
@@ -33,106 +28,133 @@
     /* Header */
     header {
       display:flex; justify-content:space-between; align-items:center;
-      padding:20px 40px; background:#000; position:sticky; top:0; z-index:1000;
-      border-bottom:1px solid rgba(255,215,0,0.2);
+      padding:20px 40px;
+      position:sticky; top:0; z-index:1000;
+      background:rgba(10,10,10,0.7);
+      backdrop-filter:blur(8px);
+      transition:background .3s ease;
     }
+    header.scrolled { background:rgba(10,10,10,0.95); }
     header .logo {
       font-family:"Playfair Display", serif;
-      font-size:1.8rem;
-      background:var(--gold);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      font-weight:600;
+      font-size:1.8rem; font-weight:600;
+      color:var(--gold);
       letter-spacing:1px;
     }
     header nav a {
-      margin:0 15px; text-decoration:none; color:#fff; font-weight:500;
-      position:relative;
+      margin:0 15px; text-decoration:none;
+      color:#fff; font-weight:500;
+      transition:color .3s;
     }
-    header nav a::after {
-      content:""; position:absolute; bottom:-4px; left:0; width:0; height:2px;
-      background:var(--pink); transition:width .3s ease;
-    }
-    header nav a:hover::after { width:100%; }
-    header .lang-toggle { cursor:pointer; font-size:.9rem; color:#ffd700; }
+    header nav a:hover { color:var(--gold); }
+    header .lang-toggle { cursor:pointer; font-size:.9rem; color:var(--pink); }
 
     /* Hero */
-    .hero { text-align:center; padding:100px 20px; background:#111; }
+    .hero {
+      text-align:center; padding:100px 20px;
+      background:linear-gradient(180deg, rgba(0,0,0,0.6), transparent);
+    }
     .hero img {
       max-width:900px; width:100%; border-radius:14px;
-      opacity:0; transform:scale(0.9);
-      animation: fadeInScale 1.8s ease forwards;
+      box-shadow:0 8px 30px rgba(0,0,0,0.6);
+      transform:translateY(20px); opacity:0;
+      animation:fadeUp 1.5s ease forwards;
     }
-    @keyframes fadeInScale { to { opacity:1; transform:scale(1);} }
     .hero h1 {
       font-family:"Playfair Display", serif;
       font-size:2.5rem; margin:30px 0 15px;
-      background:var(--gold);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      opacity:0; animation: fadeUp 1s ease 0.5s forwards;
+      color:var(--gold); text-shadow:0 0 10px rgba(212,175,55,0.5);
     }
-    .hero p {
-      font-size:1.2rem; color:#ccc; max-width:600px; margin:auto;
-      opacity:0; animation: fadeUp 1s ease 0.9s forwards;
+    .hero p { font-size:1.2rem; color:#ddd; max-width:650px; margin:auto; }
+
+    @keyframes fadeUp {
+      to { opacity:1; transform:translateY(0); }
     }
-    @keyframes fadeUp { to { opacity:1; transform:translateY(0);} }
 
     /* Grid */
     .grid {
-      display:flex; gap:20px; padding:60px 20px;
+      display:flex; gap:25px; padding:50px 20px;
       overflow-x:auto; scroll-snap-type:x mandatory;
     }
+    .grid::-webkit-scrollbar { display:none; }
     .grid-item {
-      flex:0 0 280px; background:#1a1a1a; border-radius:12px;
-      overflow:hidden; box-shadow:0 4px 15px rgba(0,0,0,0.4);
-      transform:translateY(40px); opacity:0;
-      transition:all .6s ease;
+      flex:0 0 300px; background:rgba(255,255,255,0.05);
+      border:1px solid rgba(212,175,55,0.3);
+      border-radius:14px; scroll-snap-align:start;
+      overflow:hidden; backdrop-filter:blur(6px);
+      transition:transform .4s, box-shadow .4s;
     }
-    .grid-item.show { transform:translateY(0); opacity:1; }
-    .grid-item img { width:100%; }
-    .grid-item .caption { padding:20px; }
-    .grid-item h3 {
-      font-family:"Playfair Display", serif; color:#ffd700;
-      margin:0 0 10px;
+    .grid-item img { width:100%; display:block; }
+    .grid-item:hover {
+      transform:translateY(-10px);
+      box-shadow:0 10px 30px rgba(212,175,55,0.4);
     }
-    .grid-item p { color:#ccc; font-size:.95rem; }
+    .caption { padding:20px; }
+    .caption h3 {
+      font-family:"Playfair Display", serif;
+      color:var(--gold); margin-bottom:10px;
+    }
+    .caption p { color:#ccc; font-size:.95rem; }
 
-    /* Section Titles */
+    /* Section */
+    section { padding:70px 20px; max-width:900px; margin:auto; text-align:center; }
     section h2 {
-      font-family:"Playfair Display", serif; font-size:1.8rem; color:#ffd700;
-      position:relative; display:inline-block;
+      font-family:"Playfair Display", serif;
+      font-size:2rem; color:var(--gold);
+      margin-bottom:20px; position:relative;
+      display:inline-block;
     }
     section h2::after {
-      content:""; position:absolute; left:0; bottom:-6px; width:0; height:2px;
-      background:var(--pink); transition:width .8s ease;
+      content:""; position:absolute; left:0; bottom:-8px;
+      width:100%; height:3px;
+      background:linear-gradient(90deg,var(--gold),var(--pink));
+      transform:scaleX(0); transform-origin:left;
+      transition:transform .6s ease;
     }
-    section h2.sweep::after { width:100%; }
-    section p { color:#ccc; line-height:1.7; }
+    section.show h2::after { transform:scaleX(1); }
+    section p { color:#ddd; line-height:1.7; }
 
-    /* CEO Section */
-    .founder {
-      background:#111; text-align:center; padding:80px 20px;
+    /* Waitlist form */
+    .waitlist form { max-width:500px; margin:auto; display:flex; flex-direction:column; gap:15px; }
+    .waitlist input {
+      border:none; border-bottom:1px solid #666;
+      padding:14px; background:transparent;
+      color:#fff; font-size:1rem;
     }
-    .founder h2 { color:#ffd700; margin-bottom:20px; }
-    .founder p {
-      max-width:700px; margin:auto; color:#ccc; font-size:1.1rem;
-      line-height:1.8;
+    .waitlist input:focus { border-color:var(--gold); outline:none; }
+    .waitlist button {
+      background:linear-gradient(90deg,var(--wine),var(--pink));
+      border:none; padding:14px; color:#fff;
+      font-weight:600; border-radius:8px; cursor:pointer;
+      transition:transform .3s;
     }
+    .waitlist button:hover { transform:scale(1.05); }
+
+    /* CEO */
+    .ceo { padding:60px 20px; text-align:center; background:rgba(255,255,255,0.05); margin-top:50px; border-top:1px solid rgba(212,175,55,0.3); }
+    .ceo h2 { color:var(--gold); margin-bottom:15px; }
+    .ceo p { color:#ddd; font-size:1.1rem; }
 
     /* Footer */
-    footer { background:#000; color:#ccc; padding:50px 20px; }
-    footer h4 { color:#ffd700; margin-bottom:15px; }
-    footer a { color:#ccc; text-decoration:none; display:block; margin-bottom:8px; }
-    footer a:hover { color:#fff; }
-    footer small { display:block; margin-top:30px; text-align:center; color:#777; }
+    footer { background:#000; padding:50px 20px; }
+    footer .grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:30px; max-width:1200px; margin:auto;
+    }
+    footer h4 { margin-bottom:15px; color:var(--gold); }
+    footer a { display:block; color:#aaa; text-decoration:none; margin-bottom:8px; }
+    footer a:hover { color:var(--pink); }
+    footer small { display:block; margin-top:30px; text-align:center; color:#666; }
 
-    /* Back to Top */
+    /* Back to top */
     #backToTop {
-      position:fixed; right:20px; bottom:20px; background:#ffd700; color:#000;
-      border:none; padding:12px 16px; border-radius:50%;
-      font-size:18px; cursor:pointer; opacity:0; pointer-events:none;
-      transition:opacity .3s ease; z-index:1000;
+      position:fixed; right:20px; bottom:20px;
+      background:linear-gradient(135deg,var(--pink),var(--gold));
+      color:#000; border:none; padding:14px;
+      border-radius:50%; font-size:18px;
+      cursor:pointer; opacity:0; pointer-events:none;
+      transition:opacity .3s;
+      z-index:1000;
     }
     #backToTop.show { opacity:1; pointer-events:auto; }
   </style>
@@ -146,49 +168,56 @@
     <a href="#vision" data-en="Vision" data-tr="Vizyon">Vision</a>
     <a href="#future" data-en="Future" data-tr="Gelecek">Future</a>
     <a href="#waitlist" data-en="Waitlist" data-tr="Kayıt Ol">Waitlist</a>
-    <a href="#founder" data-en="Founder" data-tr="Kurucu">Founder</a>
     <a href="#contact" data-en="Contact" data-tr="İletişim">Contact</a>
   </nav>
   <div class="lang-toggle" onclick="toggleLang()">TR | EN</div>
 </header>
 
 <!-- Hero -->
-<section class="hero reveal">
-  <img src="medastare-eiffel-elegance.jpeg" alt="Eiffel Elegance" loading="lazy">
+<section class="hero">
+  <img src="medastare-eiffel-elegance.jpeg" alt="Eiffel Elegance">
   <h1 data-en="Global stage now in your wardrobe" data-tr="Global sahne artık senin gardırobunda">Global stage now in your wardrobe</h1>
   <p data-en="Collections for every style and budget, all in one place." data-tr="Her stile ve her bütçeye hitap eden global koleksiyonlar, MedaStaré’de buluşuyor.">Collections for every style and budget, all in one place.</p>
 </section>
 
-<!-- Grid Collections -->
+<!-- Scrollable Collections -->
 <div class="grid">
-  <!-- aynı grid-item’ler kalıyor -->
+  <!-- aynı görseller ve açıklamalar burada kalıyor -->
+  <!-- ... -->
 </div>
 
 <!-- Waitlist -->
-<section class="waitlist reveal" id="waitlist">
+<section class="waitlist" id="waitlist">
   <h2 data-en="Join the Waitlist" data-tr="Bekleme Listesine Katıl">Join the Waitlist</h2>
-  <p data-en="Be the first to access exclusive collections and global previews." data-tr="Özel koleksiyonlara ve global önizlemelere ilk sen eriş.">Be the first...</p>
+  <p data-en="Be the first to access exclusive collections and global previews." data-tr="Özel koleksiyonlara ve global önizlemelere ilk sen eriş.">Be the first to access exclusive collections and global previews.</p>
   <form>
-    <input type="text" placeholder="Full Name" required>
-    <input type="email" placeholder="Email Address" required>
+    <input type="text" placeholder="Full Name">
+    <input type="email" placeholder="Email Address">
     <button type="submit">Sign Up</button>
   </form>
 </section>
 
-<!-- CEO Section -->
-<section class="founder" id="founder">
-  <h2 data-en="Founder & CEO" data-tr="Kurucu & CEO">Founder & CEO</h2>
-  <p data-en="Medine Ak, the visionary entrepreneur behind MedaStaré, is redefining the intersection of fashion, beauty, and technology. At only 22, she is leading Türkiye’s first AI-powered fashion-tech ecosystem, aiming to set new global standards of luxury and innovation."
-     data-tr="MedaStaré’nin vizyoner girişimcisi Medine Ak, moda, güzellik ve teknolojinin kesişimini yeniden tanımlıyor. Henüz 22 yaşında, Türkiye’nin ilk yapay zekâ destekli fashion-tech ekosistemini kurarak lüks ve inovasyonda yeni küresel standartlar belirlemeyi hedefliyor.">
-  </p>
+<!-- CEO -->
+<section class="ceo">
+  <h2>Founder & CEO</h2>
+  <p>Medine Ak – Visionary Entrepreneur shaping the future of fashion-tech.</p>
 </section>
 
 <!-- Footer -->
 <footer id="contact">
   <div class="grid">
-    <div><h4>Company</h4><a href="#">Careers</a><a href="#">Contact</a></div>
-    <div><h4>Social</h4><a href="#">Instagram</a><a href="#">LinkedIn</a></div>
-    <div><h4>Vision</h4><a href="#vision">Vision</a><a href="#future">Future</a></div>
+    <div>
+      <h4>Company</h4>
+      <a href="/careers.html">Careers</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <div>
+      <h4>Social</h4>
+      <a href="#">Instagram</a>
+      <a href="#">X (Twitter)</a>
+      <a href="#">LinkedIn</a>
+      <a href="#">Crunchbase</a>
+    </div>
   </div>
   <small>© 2025 MedaStaré. All rights reserved.</small>
 </footer>
@@ -196,37 +225,37 @@
 <button id="backToTop">↑</button>
 
 <script>
-  /* Language toggle */
-  let currentLang = localStorage.getItem("lang") || "EN";
-  updateLang();
-  function toggleLang(){
-    currentLang = (currentLang==="EN")?"TR":"EN";
-    localStorage.setItem("lang", currentLang); updateLang();
-  }
-  function updateLang(){
-    document.querySelector(".lang-toggle").innerText = (currentLang==="EN")?"TR | EN":"EN | TR";
-    document.querySelectorAll("[data-en]").forEach(el=>{
-      el.innerText = (currentLang==="EN")?el.dataset.en:el.dataset.tr;
-    });
-  }
+/* Header scroll bg */
+window.addEventListener("scroll",()=>{
+  document.querySelector("header").classList.toggle("scrolled",window.scrollY>50);
+});
 
-  /* Scroll reveal */
-  const revealEls = document.querySelectorAll('.grid-item, section h2, section p, .hero h1, .hero p');
-  function revealOnScroll(){
-    const trigger = window.innerHeight * 0.85;
-    revealEls.forEach(el=>{
-      if(el.classList.contains('show')) return;
-      const rect = el.getBoundingClientRect();
-      if(rect.top < trigger){ el.classList.add('show'); if(el.tagName==='H2') el.classList.add('sweep'); }
-    });
-  }
-  window.addEventListener('scroll', revealOnScroll);
-  window.addEventListener('load', revealOnScroll);
+/* Scroll reveal */
+const sections=document.querySelectorAll("section");
+function reveal(){
+  sections.forEach(sec=>{
+    const rect=sec.getBoundingClientRect();
+    if(rect.top<window.innerHeight*0.8) sec.classList.add("show");
+  });
+}
+window.addEventListener("scroll",reveal); window.addEventListener("load",reveal);
 
-  /* Back to top */
-  const backToTop=document.getElementById("backToTop");
-  window.addEventListener("scroll",()=>{ backToTop.classList.toggle("show",window.scrollY>400); });
-  backToTop.addEventListener("click",()=>{ window.scrollTo({top:0,behavior:'smooth'}); });
+/* Back to top */
+const btn=document.getElementById("backToTop");
+window.addEventListener("scroll",()=>{btn.classList.toggle("show",window.scrollY>400);});
+btn.addEventListener("click",()=>{window.scrollTo({top:0,behavior:'smooth'});});
+
+/* Lang toggle */
+let currentLang=localStorage.getItem("lang")||"EN"; updateLang();
+function toggleLang(){
+  currentLang=(currentLang==="EN")?"TR":"EN"; localStorage.setItem("lang",currentLang); updateLang();
+}
+function updateLang(){
+  document.querySelector(".lang-toggle").innerText=(currentLang==="EN")?"TR | EN":"EN | TR";
+  document.querySelectorAll("[data-en]").forEach(el=>{
+    el.innerText=(currentLang==="EN")?el.dataset.en:el.dataset.tr;
+  });
+}
 </script>
 </body>
 </html>
