@@ -196,7 +196,30 @@
 
 <!-- Collections -->
 <div class="grid">
-  <!-- Grid items aynı kalıyor -->
+  <div class="grid-item">
+    <img src="medabeaute-perfume-01.jpeg" alt="MedaBeauté">
+    <div class="caption"><h3>MedaBeauté</h3><p>Benzersiz ve global kozmetik ürünleri: parfüm, makyaj, bakım. Global markaların yanı sıra MedaBeauté özel üretimlerimiz.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-business-01.jpeg" alt="Business">
+    <div class="caption"><h3>Business Collection</h3><p>Sofistike ve modern çizgiler. Global markaların seçkin parçaları tek platformda.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-femmesport-01.jpeg" alt="FemmeSport">
+    <div class="caption"><h3>FemmeSport Collection</h3><p>Sportif şıklığı zarafetle birleştiren global koleksiyonlar.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-glamcouture-01.jpeg" alt="GlamCouture">
+    <div class="caption"><h3>GlamCouture Collection</h3><p>Kırmızı halıya layık couture parçalarla yıldız gibi parlaman için.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-minimal-01.jpg" alt="Minimal">
+    <div class="caption"><h3>Minimal Elegance</h3><p>Sade zarafet ve minimal çizgilerle global ikonlar bir arada.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-urbanflare-01.jpeg" alt="UrbanFlare">
+    <div class="caption"><h3>UrbanFlare</h3><p>Şehrin enerjisini yansıtan global parçalar tek platformda.</p></div>
+  </div>
 </div>
 
 <!-- Waitlist -->
@@ -230,11 +253,10 @@
 
 <!-- CEO Accordion -->
 <section class="ceo">
-  <button onclick="toggleCeo()">Founder & CEO <span id="ceo-toggle">＋</span></button>
+  <button type="button" onclick="toggleCEO()">Founder & CEO <span id="ceo-plus">+</span></button>
   <div class="ceo-content" id="ceo-content">
-    <p><strong>Medine Ak</strong> – Founder & CEO of MedaStaré.  
-    A visionary entrepreneur building Turkey’s first AI-powered fashion-tech ecosystem.  
-    With bold innovation, global perspective, and relentless dedication, she is shaping the future of fashion and beauty on a worldwide stage.</p>
+    <p><strong>Medine Ak</strong> – Visionary Entrepreneur shaping the future of fashion-tech.  
+    Founder & CEO of MedaStaré, building Turkey’s first AI-powered fashion-tech ecosystem and leading its global expansion.</p>
   </div>
 </section>
 
@@ -293,15 +315,18 @@ function updateLang(){
 }
 
 /* CEO accordion */
-function toggleCeo(){
+function toggleCEO(){
   const content=document.getElementById("ceo-content");
-  const toggle=document.getElementById("ceo-toggle");
-  if(content.style.maxHeight && content.style.maxHeight!=="0px"){
-    content.style.maxHeight="0";
-    toggle.innerText="＋";
+  const plus=document.getElementById("ceo-plus");
+
+  if(content.classList.contains("open")){
+    content.style.maxHeight=null;
+    content.classList.remove("open");
+    plus.textContent="+";
   } else {
     content.style.maxHeight=content.scrollHeight+"px";
-    toggle.innerText="－";
+    content.classList.add("open");
+    plus.textContent="−";
   }
 }
 </script>
