@@ -25,6 +25,7 @@
       overflow-x:hidden;
     }
 
+    /* Header */
     header {
       display:flex; justify-content:space-between; align-items:center;
       padding:20px 40px;
@@ -48,12 +49,72 @@
     header nav a:hover { color:var(--gold); }
     header .lang-toggle { cursor:pointer; font-size:.9rem; color:var(--pink); }
 
-    .hero { text-align:center; padding:100px 20px; }
-    .hero img { max-width:900px; width:100%; border-radius:14px; box-shadow:0 8px 30px rgba(0,0,0,0.6); }
+    /* Hero */
+    .hero {
+      text-align:center; padding:100px 20px;
+      background:linear-gradient(180deg, rgba(0,0,0,0.6), transparent);
+    }
+    .hero img {
+      max-width:900px; width:100%; border-radius:14px;
+      box-shadow:0 8px 30px rgba(0,0,0,0.6);
+      transform:translateY(20px); opacity:0;
+      animation:fadeUp 1.5s ease forwards;
+    }
+    .hero h1 {
+      font-family:"Playfair Display", serif;
+      font-size:2.5rem; margin:30px 0 15px;
+      color:var(--gold); text-shadow:0 0 10px rgba(212,175,55,0.5);
+    }
+    .hero p { font-size:1.2rem; color:#ddd; max-width:650px; margin:auto; }
 
+    @keyframes fadeUp {
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    /* Grid */
+    .grid {
+      display:flex; gap:25px; padding:50px 20px;
+      overflow-x:auto; scroll-snap-type:x mandatory;
+    }
+    .grid::-webkit-scrollbar { display:none; }
+    .grid-item {
+      flex:0 0 300px; background:rgba(255,255,255,0.05);
+      border:1px solid rgba(212,175,55,0.3);
+      border-radius:14px; scroll-snap-align:start;
+      overflow:hidden; backdrop-filter:blur(6px);
+      transition:transform .4s, box-shadow .4s;
+    }
+    .grid-item img { width:100%; display:block; }
+    .grid-item:hover {
+      transform:translateY(-10px);
+      box-shadow:0 10px 30px rgba(212,175,55,0.4);
+    }
+    .caption { padding:20px; }
+    .caption h3 {
+      font-family:"Playfair Display", serif;
+      color:var(--gold); margin-bottom:10px;
+    }
+    .caption p { color:#ccc; font-size:.95rem; }
+
+    /* Section */
     section { padding:70px 20px; max-width:900px; margin:auto; text-align:center; }
-    section h2 { font-family:"Playfair Display", serif; font-size:2rem; color:var(--gold); margin-bottom:20px; }
+    section h2 {
+      font-family:"Playfair Display", serif;
+      font-size:2rem; color:var(--gold);
+      margin-bottom:20px; position:relative;
+      display:inline-block;
+    }
+    section h2::after {
+      content:""; position:absolute; left:0; bottom:-8px;
+      width:100%; height:3px;
+      background:linear-gradient(90deg,var(--gold),var(--pink));
+      transform:scaleX(0); transform-origin:left;
+      transition:transform .6s ease;
+    }
+    section.show h2::after { transform:scaleX(1); }
+    section p { color:#ddd; line-height:1.7; }
 
+    /* Waitlist form */
     .waitlist form { max-width:500px; margin:auto; display:flex; flex-direction:column; gap:15px; }
     .waitlist input {
       border:none; border-bottom:1px solid #666;
@@ -69,12 +130,36 @@
     }
     .waitlist button:hover { transform:scale(1.05); }
 
-    footer { background:#000; padding:50px 20px; text-align:center; }
-    footer h4 { margin-bottom:15px; color:var(--gold); }
-    footer a { display:block; color:#aaa; margin-bottom:8px; text-decoration:none; }
-    footer a:hover { color:var(--pink); }
-    footer small { display:block; margin-top:30px; color:#666; }
+    /* CEO Section */
+    .ceo { max-width:900px; margin:60px auto; text-align:center; }
+    .ceo h2 { color:var(--gold); margin-bottom:10px; }
+    .ceo p { color:#ddd; margin-bottom:15px; }
+    .ceo a {
+      display:inline-block;
+      background:linear-gradient(90deg,var(--wine),var(--pink));
+      padding:14px 24px;
+      border-radius:8px;
+      color:#fff; text-decoration:none;
+      font-weight:600;
+      transition:transform .3s, box-shadow .3s;
+    }
+    .ceo a:hover {
+      transform:scale(1.07);
+      box-shadow:0 8px 25px rgba(212,175,55,0.5);
+    }
 
+    /* Footer */
+    footer { background:#000; padding:50px 20px; }
+    footer .grid {
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:30px; max-width:1200px; margin:auto;
+    }
+    footer h4 { margin-bottom:15px; color:var(--gold); }
+    footer a { display:block; color:#aaa; text-decoration:none; margin-bottom:8px; }
+    footer a:hover { color:var(--pink); }
+    footer small { display:block; margin-top:30px; text-align:center; color:#666; }
+
+    /* Back to top */
     #backToTop {
       position:fixed; right:20px; bottom:20px;
       background:linear-gradient(135deg,var(--pink),var(--gold));
@@ -85,20 +170,6 @@
       z-index:1000;
     }
     #backToTop.show { opacity:1; pointer-events:auto; }
-
-    /* Founder link */
-    .ceo-link {
-      display:block; text-align:center;
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(212,175,55,0.3);
-      color:var(--gold);
-      font-size:1.2rem; font-weight:600;
-      padding:16px; border-radius:8px;
-      text-decoration:none; margin:60px auto;
-      max-width:500px;
-      transition:background .3s ease, transform .3s ease;
-    }
-    .ceo-link:hover { background:rgba(212,175,55,0.1); transform:scale(1.02); }
   </style>
 </head>
 <body>
@@ -106,11 +177,11 @@
 <header>
   <div class="logo">MedaStaré</div>
   <nav>
-    <a href="#about">About</a>
-    <a href="#vision">Vision</a>
-    <a href="#future">Future</a>
-    <a href="#waitlist">Waitlist</a>
-    <a href="#contact">Contact</a>
+    <a href="#about" data-en="About" data-tr="Hakkımızda">About</a>
+    <a href="#vision" data-en="Vision" data-tr="Vizyon">Vision</a>
+    <a href="#future" data-en="Future" data-tr="Gelecek">Future</a>
+    <a href="#waitlist" data-en="Waitlist" data-tr="Kayıt Ol">Waitlist</a>
+    <a href="#contact" data-en="Contact" data-tr="İletişim">Contact</a>
   </nav>
   <div class="lang-toggle" onclick="toggleLang()">TR | EN</div>
 </header>
@@ -118,50 +189,90 @@
 <!-- Hero -->
 <section class="hero">
   <img src="medastare-eiffel-elegance.jpeg" alt="Eiffel Elegance">
-  <h1>Global stage now in your wardrobe</h1>
-  <p>Collections for every style and budget, all in one place.</p>
+  <h1 data-en="Global stage now in your wardrobe" data-tr="Global sahne artık senin gardırobunda">Global stage now in your wardrobe</h1>
+  <p data-en="Collections for every style and budget, all in one place." data-tr="Her stile ve her bütçeye hitap eden global koleksiyonlar, MedaStaré’de buluşuyor.">Collections for every style and budget, all in one place.</p>
 </section>
+
+<!-- Collections -->
+<div class="grid">
+  <div class="grid-item">
+    <img src="medabeaute-perfume-01.jpeg" alt="MedaBeauté">
+    <div class="caption"><h3>MedaBeauté</h3><p>Benzersiz ve global kozmetik ürünleri: parfüm, makyaj, bakım. Global markaların yanı sıra MedaBeauté özel üretimlerimiz.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-business-01.jpeg" alt="Business">
+    <div class="caption"><h3>Business Collection</h3><p>Sofistike ve modern çizgiler. Global markaların seçkin parçaları tek platformda.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-femmesport-01.jpeg" alt="FemmeSport">
+    <div class="caption"><h3>FemmeSport Collection</h3><p>Sportif şıklığı zarafetle birleştiren global koleksiyonlar.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-glamcouture-01.jpeg" alt="GlamCouture">
+    <div class="caption"><h3>GlamCouture Collection</h3><p>Kırmızı halıya layık couture parçalarla yıldız gibi parlaman için.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-minimal-01.jpg" alt="Minimal">
+    <div class="caption"><h3>Minimal Elegance</h3><p>Sade zarafet ve minimal çizgilerle global ikonlar bir arada.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-urbanflare-01.jpeg" alt="UrbanFlare">
+    <div class="caption"><h3>UrbanFlare</h3><p>Şehrin enerjisini yansıtan global parçalar tek platformda.</p></div>
+  </div>
+</div>
 
 <!-- Waitlist -->
 <section class="waitlist" id="waitlist">
-  <h2>Join the Waitlist</h2>
-  <p>Be the first to access exclusive collections and global previews.</p>
-  <form id="waitlist-form" action="/api/waitlist" method="POST">
-    <input id="wl-name" name="name" type="text" placeholder="Full Name" required>
-    <input id="wl-email" name="email" type="email" placeholder="Email Address" required>
+  <h2 data-en="Join the Waitlist" data-tr="Bekleme Listesine Katıl">Join the Waitlist</h2>
+  <p data-en="Be the first to access exclusive collections and global previews." data-tr="Özel koleksiyonlara ve global önizlemelere ilk sen eriş.">Be the first to access exclusive collections and global previews.</p>
+  <form id="waitlist-form" method="POST" action="/api/waitlist">
+    <input id="wl-name" name="name" type="text" placeholder="Full Name" required autocomplete="name">
+    <input id="wl-email" name="email" type="email" placeholder="Email Address" required autocomplete="email">
     <button type="submit">Sign Up</button>
   </form>
 </section>
 
 <!-- About -->
 <section id="about">
-  <h2>About MedaStaré</h2>
-  <p>MedaStaré is where AI meets fashion & beauty. From Turkey to the world.</p>
+  <h2 data-en="About MedaStaré" data-tr="MedaStaré Hakkında">About MedaStaré</h2>
+  <p>MedaStaré is where AI meets fashion & beauty. From Turkey to the world, we bring together global collections and personalized styling technology.</p>
 </section>
 
 <!-- Vision -->
 <section id="vision">
-  <h2>Our Vision</h2>
-  <p>We are building Turkey’s first AI-powered fashion-tech ecosystem.</p>
+  <h2 data-en="Our Vision" data-tr="Vizyonumuz">Our Vision</h2>
+  <p>We are building Turkey’s first AI-powered fashion-tech ecosystem, uniting style, beauty, and technology with a global touch. With 9 patent applications filed and 50+ proprietary contents, MedaStaré is shaping the future of fashion and beauty innovation.</p>
 </section>
 
 <!-- Future -->
 <section id="future">
-  <h2>Future Potential</h2>
-  <p>The global fashion & beauty market surpasses $3 Trillion.</p>
+  <h2 data-en="Future Potential" data-tr="Gelecek Potansiyeli">Future Potential</h2>
+  <p>The global fashion & beauty market surpasses $3 Trillion. MedaStaré is uniquely positioned with its technopark project status and rapid traction: in only 3 weeks, our Crunchbase rank soared from 2.9 million to 44 thousand. This growth proves our potential to scale globally.</p>
 </section>
 
-<!-- Founder Link -->
-<a href="founder.html" class="ceo-link">Founder & CEO – Medine Ak →</a>
+<!-- CEO Section -->
+<section class="ceo">
+  <h2>Founder & CEO</h2>
+  <p><strong>Medine Ak</strong> – Visionary Entrepreneur shaping the future of fashion-tech.  
+  Founder & CEO of MedaStaré, building Turkey’s first AI-powered fashion-tech ecosystem and leading its global expansion.</p>
+  <a href="founder.html">Learn More →</a>
+</section>
 
 <!-- Footer -->
 <footer id="contact">
-  <div>
-    <h4>Social</h4>
-    <a href="https://instagram.com/medastareapp" target="_blank">Instagram</a>
-    <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
-    <a href="https://linkedin.com/company/medastare" target="_blank">LinkedIn</a>
-    <a href="https://crunchbase.com/organization/medastar%C3%A9" target="_blank">Crunchbase</a>
+  <div class="grid">
+    <div>
+      <h4>Company</h4>
+      <a href="/careers.html">Careers</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <div>
+      <h4>Social</h4>
+      <a href="https://www.instagram.com/medastareapp" target="_blank">Instagram</a>
+      <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
+      <a href="https://www.linkedin.com/company/medastare/" target="_blank">LinkedIn</a>
+      <a href="https://www.crunchbase.com/organization/medastar%C3%A9" target="_blank">Crunchbase</a>
+    </div>
   </div>
   <small>© 2025 MedaStaré. All rights reserved.</small>
 </footer>
@@ -169,38 +280,58 @@
 <button id="backToTop">↑</button>
 
 <script>
-/* Header scroll */
+/* Header scroll bg */
 window.addEventListener("scroll",()=>{
   document.querySelector("header").classList.toggle("scrolled",window.scrollY>50);
 });
+
+/* Scroll reveal */
+const sections=document.querySelectorAll("section");
+function reveal(){
+  sections.forEach(sec=>{
+    const rect=sec.getBoundingClientRect();
+    if(rect.top<window.innerHeight*0.8) sec.classList.add("show");
+  });
+}
+window.addEventListener("scroll",reveal); window.addEventListener("load",reveal);
 
 /* Back to top */
 const btn=document.getElementById("backToTop");
 window.addEventListener("scroll",()=>{btn.classList.toggle("show",window.scrollY>400);});
 btn.addEventListener("click",()=>{window.scrollTo({top:0,behavior:'smooth'});});
 
-/* Waitlist form handling */
-document.getElementById("waitlist-form").addEventListener("submit",function(e){
+/* Lang toggle */
+let currentLang=localStorage.getItem("lang")||"EN"; updateLang();
+function toggleLang(){
+  currentLang=(currentLang==="EN")?"TR":"EN"; localStorage.setItem("lang",currentLang); updateLang();
+}
+function updateLang(){
+  document.querySelector(".lang-toggle").innerText=(currentLang==="EN")?"TR | EN":"EN | TR";
+  document.querySelectorAll("[data-en]").forEach(el=>{
+    el.innerText=(currentLang==="EN")?el.dataset.en:el.dataset.tr;
+  });
+}
+
+/* Waitlist submit */
+document.getElementById("waitlist-form").addEventListener("submit", function(e){
   e.preventDefault();
   const name=document.getElementById("wl-name").value.trim();
   const email=document.getElementById("wl-email").value.trim();
-  if(!email.includes("@")){
-    window.location.href="error.html"; // error page
-    return;
+
+  localStorage.setItem("wl-name", name);
+  localStorage.setItem("wl-email", email);
+
+  if(email.includes("@")){
+    window.location.href="thank-you.html";
+  } else {
+    window.location.href="error.html";
   }
-  // save to localStorage
-  localStorage.setItem("wl-name",name);
-  localStorage.setItem("wl-email",email);
-  this.submit();
-  window.location.href="thankyou.html"; // success page
 });
 
-/* Auto-fill */
+/* Waitlist auto fill */
 window.addEventListener("load",()=>{
-  const name=localStorage.getItem("wl-name");
-  const email=localStorage.getItem("wl-email");
-  if(name) document.getElementById("wl-name").value=name;
-  if(email) document.getElementById("wl-email").value=email;
+  if(localStorage.getItem("wl-name")) document.getElementById("wl-name").value=localStorage.getItem("wl-name");
+  if(localStorage.getItem("wl-email")) document.getElementById("wl-email").value=localStorage.getItem("wl-email");
 });
 </script>
 </body>
