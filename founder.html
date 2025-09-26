@@ -95,7 +95,7 @@
 </section>
 
 <!-- Future Goals -->
-<section>
+<section class="future-goals">
   <h2>Future Goals</h2>
   <div class="timeline">
     <div class="timeline-item">
@@ -112,6 +112,56 @@
     </div>
   </div>
 </section>
+
+<style>
+.future-goals {
+  max-width: 800px;
+  margin: 80px auto;
+  text-align: center;
+}
+
+.future-goals h2 {
+  font-family: "Playfair Display", serif;
+  font-size: 2rem;
+  color: var(--gold);
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.timeline {
+  position: relative;
+  margin-left: 40px;
+  border-left: 2px solid rgba(212,175,55,0.6); /* gold çizgi */
+  padding-left: 40px;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 40px;
+  text-align: left;
+}
+
+.timeline-item::before {
+  content: "★";
+  position: absolute;
+  left: -32px;  /* yıldızın çizgi üzerinde konumu */
+  top: 0;
+  color: var(--gold);
+  font-size: 18px;
+}
+
+.timeline-item h4 {
+  color: var(--pink);
+  margin: 0 0 10px;
+  font-size: 1.2rem;
+}
+
+.timeline-item p {
+  color: #ddd;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+</style>
 
 </body>
 </html>
