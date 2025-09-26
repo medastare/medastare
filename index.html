@@ -21,8 +21,16 @@
     body {
       font-family: Inter, sans-serif;
       background: linear-gradient(135deg, var(--black), var(--wine), var(--pink));
+      background-size: 400% 400%;
+      animation: gradientFlow 20s ease infinite;
       color:#fff;
       overflow-x:hidden;
+    }
+
+    @keyframes gradientFlow {
+      0% { background-position:0% 50%; }
+      50% { background-position:100% 50%; }
+      100% { background-position:0% 50%; }
     }
 
     /* Header */
@@ -84,10 +92,10 @@
       overflow:hidden; backdrop-filter:blur(6px);
       transition:transform .4s, box-shadow .4s;
     }
-    .grid-item img { width:100%; display:block; }
-    .grid-item:hover {
-      transform:translateY(-10px);
-      box-shadow:0 10px 30px rgba(212,175,55,0.4);
+    .grid-item img { width:100%; display:block; transition: transform .5s, filter .5s; }
+    .grid-item:hover img {
+      transform:scale(1.05);
+      filter:brightness(1.2);
     }
     .caption { padding:20px; }
     .caption h3 {
@@ -97,7 +105,8 @@
     .caption p { color:#ccc; font-size:.95rem; }
 
     /* Section */
-    section { padding:70px 20px; max-width:900px; margin:auto; text-align:center; }
+    section { padding:70px 20px; max-width:900px; margin:auto; text-align:center; opacity:0; transform:translateY(30px); transition:opacity 1s ease, transform 1s ease; }
+    section.show { opacity:1; transform:translateY(0); }
     section h2 {
       font-family:"Playfair Display", serif;
       font-size:2rem; color:var(--gold);
@@ -132,8 +141,8 @@
 
     /* CEO Accordion */
     .ceo { max-width:900px; margin:60px auto; text-align:left; }
-    .ceo button {
-      width:100%; background:rgba(255,255,255,0.05);
+    .ceo h2 {
+      background:rgba(255,255,255,0.05);
       border:1px solid rgba(212,175,55,0.3);
       color:var(--gold); font-size:1.2rem;
       font-weight:600; padding:16px;
@@ -142,10 +151,12 @@
     }
     .ceo-content {
       max-height:0; overflow:hidden;
-      transition:max-height .5s ease;
+      transition:max-height .6s ease;
       background:rgba(255,255,255,0.05);
       border:1px solid rgba(212,175,55,0.3);
-      border-radius:0 0 8px 8px; padding:0 16px;
+      border-top:none;
+      border-radius:0 0 8px 8px;
+      padding:0 16px;
     }
     .ceo-content p { padding:16px 0; color:#ddd; }
 
@@ -251,29 +262,13 @@
   <p>The global fashion & beauty market surpasses $3 Trillion. MedaStaré is uniquely positioned with its technopark project status and rapid traction: in only 3 weeks, our Crunchbase rank soared from 2.9 million to 44 thousand. This growth proves our potential to scale globally.</p>
 </section>
 
-<!-- CEO Section -->
+<!-- CEO Accordion -->
 <section class="ceo">
-  <h2 onclick="toggleCeo()" style="cursor:pointer;">
-    Founder & CEO <span id="ceo-toggle">＋</span>
-  </h2>
-  <div id="ceo-content" style="max-height:0; overflow:hidden; transition:max-height 0.6s ease;">
+  <h2 onclick="toggleCeo()">Founder & CEO <span id="ceo-toggle">＋</span></h2>
+  <div class="ceo-content" id="ceo-content">
     <p>Medine Ak – Visionary Entrepreneur shaping the future of fashion-tech.</p>
   </div>
 </section>
-
-<script>
-function toggleCeo(){
-  const content=document.getElementById("ceo-content");
-  const toggle=document.getElementById("ceo-toggle");
-  if(content.style.maxHeight && content.style.maxHeight!=="0px"){
-    content.style.maxHeight="0";
-    toggle.innerText="＋";
-  } else {
-    content.style.maxHeight="200px"; // içerik uzunluğuna göre artırılabilir
-    toggle.innerText="－";
-  }
-}
-</script>
 
 <!-- Footer -->
 <footer id="contact">
@@ -329,16 +324,16 @@ function updateLang(){
   });
 }
 
-/* CEO accordion */
-function toggleCEO(){
+/* CEO Accordion */
+function toggleCeo(){
   const content=document.getElementById("ceo-content");
-  const plus=document.getElementById("ceo-plus");
-  if(content.style.maxHeight){
-    content.style.maxHeight=null;
-    plus.textContent="+";
+  const toggle=document.getElementById("ceo-toggle");
+  if(content.style.maxHeight && content.style.maxHeight!=="0px"){
+    content.style.maxHeight="0";
+    toggle.innerText="＋";
   } else {
     content.style.maxHeight=content.scrollHeight+"px";
-    plus.textContent="−";
+    toggle.innerText="－";
   }
 }
 </script>
