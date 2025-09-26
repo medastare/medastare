@@ -43,11 +43,25 @@
     .card h3{color:var(--gold);margin-bottom:10px;}
 
     /* Timeline */
-    .timeline{position:relative;padding-left:30px;text-align:left;}
-    .timeline::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--gold);}
+    .timeline{position:relative;padding-left:50px;text-align:left;}
+    .timeline::before{content:"";position:absolute;left:20px;top:0;bottom:0;width:2px;background:var(--gold);}
     .timeline-item{margin-bottom:30px;position:relative;}
-    .timeline-item::before{content:"★";position:absolute;left:-2px;color:var(--gold);top:0;}
+    .timeline-item::before{content:"★";position:absolute;left:-30px;color:var(--gold);top:0;font-size:18px;}
     .timeline-item h4{color:var(--pink);margin-bottom:5px;}
+
+    /* Back button */
+    .back-home{text-align:center;margin:50px 0;}
+    .back-home a{
+      display:inline-block;
+      padding:12px 20px;
+      background:linear-gradient(90deg,var(--wine),var(--pink));
+      color:#fff;
+      font-weight:600;
+      border-radius:6px;
+      text-decoration:none;
+      transition:transform .3s;
+    }
+    .back-home a:hover{transform:scale(1.05);}
   </style>
 </head>
 <body>
@@ -95,7 +109,7 @@
 </section>
 
 <!-- Future Goals -->
-<section class="future-goals">
+<section>
   <h2>Future Goals</h2>
   <div class="timeline">
     <div class="timeline-item">
@@ -113,55 +127,10 @@
   </div>
 </section>
 
-<style>
-.future-goals {
-  max-width: 800px;
-  margin: 80px auto;
-  text-align: center;
-}
-
-.future-goals h2 {
-  font-family: "Playfair Display", serif;
-  font-size: 2rem;
-  color: var(--gold);
-  margin-bottom: 40px;
-  position: relative;
-}
-
-.timeline {
-  position: relative;
-  margin-left: 40px;
-  border-left: 2px solid rgba(212,175,55,0.6); /* gold çizgi */
-  padding-left: 40px;
-}
-
-.timeline-item {
-  position: relative;
-  margin-bottom: 40px;
-  text-align: left;
-}
-
-.timeline-item::before {
-  content: "★";
-  position: absolute;
-  left: -32px;  /* yıldızın çizgi üzerinde konumu */
-  top: 0;
-  color: var(--gold);
-  font-size: 18px;
-}
-
-.timeline-item h4 {
-  color: var(--pink);
-  margin: 0 0 10px;
-  font-size: 1.2rem;
-}
-
-.timeline-item p {
-  color: #ddd;
-  font-size: 1rem;
-  line-height: 1.6;
-}
-</style>
+<!-- Back to Home -->
+<div class="back-home">
+  <a href="index.html">← Back to Home</a>
+</div>
 
 </body>
 </html>
