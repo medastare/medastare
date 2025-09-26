@@ -57,8 +57,6 @@
     .hero img {
       max-width:900px; width:100%; border-radius:14px;
       box-shadow:0 8px 30px rgba(0,0,0,0.6);
-      transform:translateY(20px); opacity:0;
-      animation:fadeUp 1.5s ease forwards;
     }
     .hero h1 {
       font-family:"Playfair Display", serif;
@@ -66,10 +64,6 @@
       color:var(--gold); text-shadow:0 0 10px rgba(212,175,55,0.5);
     }
     .hero p { font-size:1.2rem; color:#ddd; max-width:650px; margin:auto; }
-
-    @keyframes fadeUp {
-      to { opacity:1; transform:translateY(0); }
-    }
 
     /* Grid */
     .grid {
@@ -104,14 +98,6 @@
       margin-bottom:20px; position:relative;
       display:inline-block;
     }
-    section h2::after {
-      content:""; position:absolute; left:0; bottom:-8px;
-      width:100%; height:3px;
-      background:linear-gradient(90deg,var(--gold),var(--pink));
-      transform:scaleX(0); transform-origin:left;
-      transition:transform .6s ease;
-    }
-    section.show h2::after { transform:scaleX(1); }
     section p { color:#ddd; line-height:1.7; }
 
     /* Waitlist form */
@@ -130,25 +116,21 @@
     }
     .waitlist button:hover { transform:scale(1.05); }
 
-    /* CEO Section */
+    /* CEO Link */
     .ceo { max-width:900px; margin:60px auto; text-align:center; }
-    .ceo button {
-      background:linear-gradient(90deg,var(--pink),var(--gold));
-      color:#000; font-size:1.2rem;
-      font-weight:600; padding:16px 32px;
-      border:none; border-radius:8px;
-      cursor:pointer; transition:all .3s ease;
+    .ceo a {
+      display:inline-block;
+      padding:16px 24px;
+      background:linear-gradient(90deg,var(--wine),var(--pink));
+      color:#fff; font-weight:600;
+      border-radius:8px;
+      text-decoration:none;
+      transition:transform .3s, box-shadow .3s;
     }
-    .ceo button:hover { transform:scale(1.08); }
-    .ceo-content {
-      max-height:0; overflow:hidden;
-      opacity:0; transform:translateY(-20px);
-      transition:max-height .6s ease, opacity .6s ease, transform .6s ease;
+    .ceo a:hover {
+      transform:scale(1.05);
+      box-shadow:0 8px 20px rgba(212,175,55,0.4);
     }
-    .ceo-content.open {
-      max-height:500px; opacity:1; transform:translateY(0);
-    }
-    .ceo-content p { padding:20px; color:#ddd; }
 
     /* Footer */
     footer { background:#000; padding:50px 20px; }
@@ -179,11 +161,11 @@
 <header>
   <div class="logo">MedaStaré</div>
   <nav>
-    <a href="#about" data-en="About" data-tr="Hakkımızda">About</a>
-    <a href="#vision" data-en="Vision" data-tr="Vizyon">Vision</a>
-    <a href="#future" data-en="Future" data-tr="Gelecek">Future</a>
-    <a href="#waitlist" data-en="Waitlist" data-tr="Kayıt Ol">Waitlist</a>
-    <a href="#contact" data-en="Contact" data-tr="İletişim">Contact</a>
+    <a href="#about">About</a>
+    <a href="#vision">Vision</a>
+    <a href="#future">Future</a>
+    <a href="#waitlist">Waitlist</a>
+    <a href="#contact">Contact</a>
   </nav>
   <div class="lang-toggle" onclick="toggleLang()">TR | EN</div>
 </header>
@@ -191,47 +173,70 @@
 <!-- Hero -->
 <section class="hero">
   <img src="medastare-eiffel-elegance.jpeg" alt="Eiffel Elegance">
-  <h1 data-en="Global stage now in your wardrobe" data-tr="Global sahne artık senin gardırobunda">Global stage now in your wardrobe</h1>
-  <p data-en="Collections for every style and budget, all in one place." data-tr="Her stile ve her bütçeye hitap eden global koleksiyonlar, MedaStaré’de buluşuyor.">Collections for every style and budget, all in one place.</p>
+  <h1>Global stage now in your wardrobe</h1>
+  <p>Collections for every style and budget, all in one place.</p>
 </section>
+
+<!-- Collections -->
+<div class="grid">
+  <div class="grid-item">
+    <img src="medabeaute-perfume-01.jpeg" alt="MedaBeauté – Benzersiz ve global kozmetik ürünleri: parfüm, makyaj, bakım. Global markaların yanı sıra MedaBeauté özel üretimlerimiz.">
+    <div class="caption"><h3>MedaBeauté</h3><p>Benzersiz ve global kozmetik ürünleri: parfüm, makyaj, bakım. Global markaların yanı sıra MedaBeauté özel üretimlerimiz.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-business-01.jpeg" alt="Business – Sofistike ve modern çizgiler. Global markaların seçkin parçaları tek platformda.">
+    <div class="caption"><h3>Business Collection</h3><p>Sofistike ve modern çizgiler. Global markaların seçkin parçaları tek platformda.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-femmesport-01.jpeg" alt="FemmeSport – Sportif şıklığı zarafetle birleştiren global koleksiyonlar.">
+    <div class="caption"><h3>FemmeSport Collection</h3><p>Sportif şıklığı zarafetle birleştiren global koleksiyonlar.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-glamcouture-01.jpeg" alt="GlamCouture – Kırmızı halıya layık couture parçalarla yıldız gibi parlaman için.">
+    <div class="caption"><h3>GlamCouture Collection</h3><p>Kırmızı halıya layık couture parçalarla yıldız gibi parlaman için.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-minimal-01.jpg" alt="Minimal – Sade zarafet ve minimal çizgilerle global ikonlar bir arada.">
+    <div class="caption"><h3>Minimal Elegance</h3><p>Sade zarafet ve minimal çizgilerle global ikonlar bir arada.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-urbanflare-01.jpeg" alt="UrbanFlare – Şehrin enerjisini yansıtan global parçalar tek platformda.">
+    <div class="caption"><h3>UrbanFlare</h3><p>Şehrin enerjisini yansıtan global parçalar tek platformda.</p></div>
+  </div>
+</div>
 
 <!-- Waitlist -->
 <section class="waitlist" id="waitlist">
-  <h2 data-en="Join the Waitlist" data-tr="Bekleme Listesine Katıl">Join the Waitlist</h2>
-  <p data-en="Be the first to access exclusive collections and global previews." data-tr="Özel koleksiyonlara ve global önizlemelere ilk sen eriş.">Be the first to access exclusive collections and global previews.</p>
-  <form id="waitlist-form" method="POST" action="thank-you.html" autocomplete="on">
-    <input id="wl-name" name="name" type="text" placeholder="Full Name" required autocomplete="name">
-    <input id="wl-email" name="email" type="email" placeholder="Email Address" required autocomplete="email">
+  <h2>Join the Waitlist</h2>
+  <p>Be the first to access exclusive collections and global previews.</p>
+  <form id="waitlist-form" method="POST" action="/api/waitlist">
+    <input name="name" type="text" placeholder="Full Name" required autocomplete="name">
+    <input name="email" type="email" placeholder="Email Address" required autocomplete="email">
     <button type="submit">Sign Up</button>
   </form>
 </section>
 
 <!-- About -->
 <section id="about">
-  <h2 data-en="About MedaStaré" data-tr="MedaStaré Hakkında">About MedaStaré</h2>
+  <h2>About MedaStaré</h2>
   <p>MedaStaré is where AI meets fashion & beauty. From Turkey to the world, we bring together global collections and personalized styling technology.</p>
 </section>
 
 <!-- Vision -->
 <section id="vision">
-  <h2 data-en="Our Vision" data-tr="Vizyonumuz">Our Vision</h2>
+  <h2>Our Vision</h2>
   <p>We are building Turkey’s first AI-powered fashion-tech ecosystem, uniting style, beauty, and technology with a global touch. With 9 patent applications filed and 50+ proprietary contents, MedaStaré is shaping the future of fashion and beauty innovation.</p>
 </section>
 
 <!-- Future -->
 <section id="future">
-  <h2 data-en="Future Potential" data-tr="Gelecek Potansiyeli">Future Potential</h2>
-  <p>The global fashion & beauty market surpasses $3 Trillion. MedaStaré is uniquely positioned with its technopark project status and rapid traction: in only 3 weeks, our Crunchbase rank soared from 2.9 million to 44 thousand. This growth proves our potential to scale globally.</p>
+  <h2>Future Potential</h2>
+  <p>The global fashion & beauty market surpasses $3 Trillion. MedaStaré is uniquely positioned with its technopark project status and rapid traction: in only 3 weeks, our Crunchbase rank soared from 2.9 million to 44 thousand.</p>
 </section>
 
-<!-- CEO Section -->
+<!-- CEO -->
 <section class="ceo">
-  <button type="button" onclick="toggleCEO()">Founder & CEO</button>
-  <div class="ceo-content" id="ceo-content">
-    <p><strong>Medine Ak</strong> – Visionary Entrepreneur shaping the future of fashion-tech.  
-    Founder & CEO of MedaStaré, building Turkey’s first AI-powered fashion-tech ecosystem and leading its global expansion.</p>
-    <a href="founder.html" style="color:var(--pink); font-weight:600;">Learn More →</a>
-  </div>
+  <a href="/founder.html">Founder & CEO – Medine Ak</a>
 </section>
 
 <!-- Footer -->
@@ -261,52 +266,10 @@ window.addEventListener("scroll",()=>{
   document.querySelector("header").classList.toggle("scrolled",window.scrollY>50);
 });
 
-/* Scroll reveal */
-const sections=document.querySelectorAll("section");
-function reveal(){
-  sections.forEach(sec=>{
-    const rect=sec.getBoundingClientRect();
-    if(rect.top<window.innerHeight*0.8) sec.classList.add("show");
-  });
-}
-window.addEventListener("scroll",reveal); window.addEventListener("load",reveal);
-
 /* Back to top */
 const btn=document.getElementById("backToTop");
 window.addEventListener("scroll",()=>{btn.classList.toggle("show",window.scrollY>400);});
 btn.addEventListener("click",()=>{window.scrollTo({top:0,behavior:'smooth'});});
-
-/* Lang toggle */
-let currentLang=localStorage.getItem("lang")||"EN"; updateLang();
-function toggleLang(){
-  currentLang=(currentLang==="EN")?"TR":"EN"; localStorage.setItem("lang",currentLang); updateLang();
-}
-function updateLang(){
-  document.querySelector(".lang-toggle").innerText=(currentLang==="EN")?"TR | EN":"EN | TR";
-  document.querySelectorAll("[data-en]").forEach(el=>{
-    el.innerText=(currentLang==="EN")?el.dataset.en:el.dataset.tr;
-  });
-}
-
-/* CEO Section animation */
-function toggleCEO(){
-  const content=document.getElementById("ceo-content");
-  content.classList.toggle("open");
-}
-
-/* Waitlist localStorage */
-const nameInput=document.getElementById("wl-name");
-const emailInput=document.getElementById("wl-email");
-
-window.addEventListener("load",()=>{
-  if(localStorage.getItem("wl-name")) nameInput.value=localStorage.getItem("wl-name");
-  if(localStorage.getItem("wl-email")) emailInput.value=localStorage.getItem("wl-email");
-});
-
-document.getElementById("waitlist-form").addEventListener("submit",function(){
-  localStorage.setItem("wl-name",nameInput.value);
-  localStorage.setItem("wl-email",emailInput.value);
-});
 </script>
 </body>
 </html>
