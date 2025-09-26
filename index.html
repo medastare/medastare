@@ -147,6 +147,7 @@
       border:1px solid rgba(212,175,55,0.3);
       border-radius:0 0 8px 8px; padding:0 16px;
     }
+    .ceo-content.open { max-height:500px; } /* açıldığında animasyon için */
     .ceo-content p { padding:16px 0; color:#ddd; }
 
     /* Footer */
@@ -320,11 +321,9 @@ function toggleCEO(){
   const plus=document.getElementById("ceo-plus");
 
   if(content.classList.contains("open")){
-    content.style.maxHeight=null;
     content.classList.remove("open");
     plus.textContent="+";
   } else {
-    content.style.maxHeight=content.scrollHeight+"px";
     content.classList.add("open");
     plus.textContent="−";
   }
