@@ -130,10 +130,24 @@
     }
     .waitlist button:hover { transform:scale(1.05); }
 
-    /* CEO */
-    .ceo { padding:60px 20px; text-align:center; background:rgba(255,255,255,0.05); margin-top:50px; border-top:1px solid rgba(212,175,55,0.3); }
-    .ceo h2 { color:var(--gold); margin-bottom:15px; }
-    .ceo p { color:#ddd; font-size:1.1rem; }
+    /* CEO Accordion */
+    .ceo { max-width:900px; margin:60px auto; text-align:left; }
+    .ceo button {
+      width:100%; background:rgba(255,255,255,0.05);
+      border:1px solid rgba(212,175,55,0.3);
+      color:var(--gold); font-size:1.2rem;
+      font-weight:600; padding:16px;
+      cursor:pointer; border-radius:8px;
+      display:flex; justify-content:space-between; align-items:center;
+    }
+    .ceo-content {
+      max-height:0; overflow:hidden;
+      transition:max-height .5s ease;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(212,175,55,0.3);
+      border-radius:0 0 8px 8px; padding:0 16px;
+    }
+    .ceo-content p { padding:16px 0; color:#ddd; }
 
     /* Footer */
     footer { background:#000; padding:50px 20px; }
@@ -180,10 +194,32 @@
   <p data-en="Collections for every style and budget, all in one place." data-tr="Her stile ve her bütçeye hitap eden global koleksiyonlar, MedaStaré’de buluşuyor.">Collections for every style and budget, all in one place.</p>
 </section>
 
-<!-- Scrollable Collections -->
+<!-- Collections -->
 <div class="grid">
-  <!-- aynı görseller ve açıklamalar burada kalıyor -->
-  <!-- ... -->
+  <div class="grid-item">
+    <img src="medabeaute-perfume-01.jpeg" alt="MedaBeauté">
+    <div class="caption"><h3>MedaBeauté</h3><p>Benzersiz ve global kozmetik ürünleri: parfüm, makyaj, bakım. Global markaların yanı sıra MedaBeauté özel üretimlerimiz.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-business-01.jpeg" alt="Business">
+    <div class="caption"><h3>Business Collection</h3><p>Sofistike ve modern çizgiler. Global markaların seçkin parçaları tek platformda.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-femmesport-01.jpeg" alt="FemmeSport">
+    <div class="caption"><h3>FemmeSport Collection</h3><p>Sportif şıklığı zarafetle birleştiren global koleksiyonlar.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-glamcouture-01.jpeg" alt="GlamCouture">
+    <div class="caption"><h3>GlamCouture Collection</h3><p>Kırmızı halıya layık couture parçalarla yıldız gibi parlaman için.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-minimal-01.jpg" alt="Minimal">
+    <div class="caption"><h3>Minimal Elegance</h3><p>Sade zarafet ve minimal çizgilerle global ikonlar bir arada.</p></div>
+  </div>
+  <div class="grid-item">
+    <img src="medastare-urbanflare-01.jpeg" alt="UrbanFlare">
+    <div class="caption"><h3>UrbanFlare</h3><p>Şehrin enerjisini yansıtan global parçalar tek platformda.</p></div>
+  </div>
 </div>
 
 <!-- Waitlist -->
@@ -197,10 +233,30 @@
   </form>
 </section>
 
-<!-- CEO -->
+<!-- About -->
+<section id="about">
+  <h2 data-en="About MedaStaré" data-tr="MedaStaré Hakkında">About MedaStaré</h2>
+  <p>MedaStaré is where AI meets fashion & beauty. From Turkey to the world, we bring together global collections and personalized styling technology.</p>
+</section>
+
+<!-- Vision -->
+<section id="vision">
+  <h2 data-en="Our Vision" data-tr="Vizyonumuz">Our Vision</h2>
+  <p>We are building Turkey’s first AI-powered fashion-tech ecosystem, uniting style, beauty, and technology with a global touch. With 9 patent applications filed and 50+ proprietary contents, MedaStaré is shaping the future of fashion and beauty innovation.</p>
+</section>
+
+<!-- Future -->
+<section id="future">
+  <h2 data-en="Future Potential" data-tr="Gelecek Potansiyeli">Future Potential</h2>
+  <p>The global fashion & beauty market surpasses $3 Trillion. MedaStaré is uniquely positioned with its technopark project status and rapid traction: in only 3 weeks, our Crunchbase rank soared from 2.9 million to 44 thousand. This growth proves our potential to scale globally.</p>
+</section>
+
+<!-- CEO Accordion -->
 <section class="ceo">
-  <h2>Founder & CEO</h2>
-  <p>Medine Ak – Visionary Entrepreneur shaping the future of fashion-tech.</p>
+  <button onclick="toggleCEO()">Founder & CEO <span id="ceo-plus">+</span></button>
+  <div class="ceo-content" id="ceo-content">
+    <p>Medine Ak – Visionary Entrepreneur shaping the future of fashion-tech.</p>
+  </div>
 </section>
 
 <!-- Footer -->
@@ -213,10 +269,10 @@
     </div>
     <div>
       <h4>Social</h4>
-      <a href="#">Instagram</a>
-      <a href="#">X (Twitter)</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">Crunchbase</a>
+      <a href="https://www.instagram.com/medastareapp" target="_blank">Instagram</a>
+      <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
+      <a href="https://www.linkedin.com/company/medastare/" target="_blank">LinkedIn</a>
+      <a href="https://www.crunchbase.com/organization/medastar%C3%A9" target="_blank">Crunchbase</a>
     </div>
   </div>
   <small>© 2025 MedaStaré. All rights reserved.</small>
@@ -255,6 +311,19 @@ function updateLang(){
   document.querySelectorAll("[data-en]").forEach(el=>{
     el.innerText=(currentLang==="EN")?el.dataset.en:el.dataset.tr;
   });
+}
+
+/* CEO accordion */
+function toggleCEO(){
+  const content=document.getElementById("ceo-content");
+  const plus=document.getElementById("ceo-plus");
+  if(content.style.maxHeight){
+    content.style.maxHeight=null;
+    plus.textContent="+";
+  } else {
+    content.style.maxHeight=content.scrollHeight+"px";
+    plus.textContent="−";
+  }
 }
 </script>
 </body>
