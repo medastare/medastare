@@ -1,151 +1,207 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Medine Ak | Founder & CEO of MedaStaré</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MedaStaré – Powered By AI</title>
+  <link rel="icon" type="image/png" href="medastare-logo.PNG">
 
-  <!-- Meta Description -->
-  <meta name="description" content="Medine Ak – MedaStaré’nin kurucusu ve CEO’su. Moda, güzellik ve yapay zekâ kesişiminde vizyoner girişimci.">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Medine Ak – Founder & CEO, MedaStaré">
-  <meta property="og:description" content="Moda, güzellik ve yapay zekâ kesişiminde vizyoner girişimci.">
-  <meta property="og:image" content="https://medastare.com/images/medine-ak.jpg">
-  <meta property="og:url" content="https://medastare.com/founder/medine-ak">
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-
-  <!-- Schema.org Person -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Medine Ak",
-    "birthDate": "2002-10-13",
-    "jobTitle": "Founder & CEO",
-    "image": "https://medastare.com/images/medine-ak.jpg",
-    "worksFor": { "@type": "Organization", "name": "MedaStaré", "url": "https://medastare.com" },
-    "url": "https://medastare.com/founder/medine-ak",
-    "sameAs": [
-      "https://linkedin.com/company/medastare",
-      "https://instagram.com/medastareapp",
-      "https://x.com/medastareapp",
-      "https://crunchbase.com/organization/medastar%C3%A9"
-    ]
-  }
-  </script>
-
-  <!-- Styling -->
   <style>
+    :root {
+      --black:#0a0a0a;
+      --wine:#5a0f1d;
+      --pink:#ff4da6;
+      --gold:#d4af37;
+      --gray:#999;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
     body {
-      background-color: #0a0a0a;
-      color: #f2f2f2;
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 20px;
-      line-height: 1.7;
-      animation: fadeInBody 1.2s ease forwards;
-    }
-
-    @keyframes fadeInBody {
-      from {opacity: 0;}
-      to {opacity: 1;}
-    }
-
-    h1, h2 {
-      color: #FFD700;
-      text-align: center;
-      position: relative;
-      margin-bottom: 20px;
-    }
-
-    h2::after {
-      content:"";
-      position:absolute;
-      bottom:-6px; left:50%;
-      transform:translateX(-50%);
-      width:60px; height:3px;
-      background: linear-gradient(90deg, #FFD700, #ff4da6);
-      border-radius:2px;
-    }
-
-    section {
-      margin: 40px auto;
-      padding: 20px;
-      max-width: 900px;
-      background: #111;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
-      animation: fadeUp 1s ease forwards;
-      opacity: 0;
-    }
-
-    section:nth-of-type(1) { animation-delay: 0.3s; }
-    section:nth-of-type(2) { animation-delay: 0.6s; }
-
-    @keyframes fadeUp {
-      from { opacity:0; transform:translateY(30px); }
-      to { opacity:1; transform:translateY(0); }
-    }
-
-    p { margin: 12px 0; }
-
-    /* Görsel */
-    .founder-photo {
-      display: block;
-      margin: 40px auto 20px;
-      max-width: 300px;
-      border-radius: 12px;
-      box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
-      animation: fadeUp 1s ease forwards;
-    }
-
-    /* CTA geri buton */
-    .back-btn {
-      display:block;
-      margin: 50px auto 20px;
-      text-align:center;
-      background: linear-gradient(90deg, #5a0f1d, #ff4da6);
+      font-family: Inter, sans-serif;
+      background: linear-gradient(135deg, var(--black), var(--wine), var(--pink));
       color:#fff;
-      text-decoration:none;
-      padding:14px 28px;
-      border-radius:8px;
-      font-weight:600;
-      transition: transform 0.3s ease;
-      max-width: 220px;
+      overflow-x:hidden;
     }
-    .back-btn:hover { transform: scale(1.05); }
+
+    header {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:20px 40px;
+      position:sticky; top:0; z-index:1000;
+      background:rgba(10,10,10,0.7);
+      backdrop-filter:blur(8px);
+      transition:background .3s ease;
+    }
+    header.scrolled { background:rgba(10,10,10,0.95); }
+    header .logo {
+      font-family:"Playfair Display", serif;
+      font-size:1.8rem; font-weight:600;
+      color:var(--gold);
+      letter-spacing:1px;
+    }
+    header nav a {
+      margin:0 15px; text-decoration:none;
+      color:#fff; font-weight:500;
+      transition:color .3s;
+    }
+    header nav a:hover { color:var(--gold); }
+    header .lang-toggle { cursor:pointer; font-size:.9rem; color:var(--pink); }
+
+    .hero { text-align:center; padding:100px 20px; }
+    .hero img { max-width:900px; width:100%; border-radius:14px; box-shadow:0 8px 30px rgba(0,0,0,0.6); }
+
+    section { padding:70px 20px; max-width:900px; margin:auto; text-align:center; }
+    section h2 { font-family:"Playfair Display", serif; font-size:2rem; color:var(--gold); margin-bottom:20px; }
+
+    .waitlist form { max-width:500px; margin:auto; display:flex; flex-direction:column; gap:15px; }
+    .waitlist input {
+      border:none; border-bottom:1px solid #666;
+      padding:14px; background:transparent;
+      color:#fff; font-size:1rem;
+    }
+    .waitlist input:focus { border-color:var(--gold); outline:none; }
+    .waitlist button {
+      background:linear-gradient(90deg,var(--wine),var(--pink));
+      border:none; padding:14px; color:#fff;
+      font-weight:600; border-radius:8px; cursor:pointer;
+      transition:transform .3s;
+    }
+    .waitlist button:hover { transform:scale(1.05); }
+
+    footer { background:#000; padding:50px 20px; text-align:center; }
+    footer h4 { margin-bottom:15px; color:var(--gold); }
+    footer a { display:block; color:#aaa; margin-bottom:8px; text-decoration:none; }
+    footer a:hover { color:var(--pink); }
+    footer small { display:block; margin-top:30px; color:#666; }
+
+    #backToTop {
+      position:fixed; right:20px; bottom:20px;
+      background:linear-gradient(135deg,var(--pink),var(--gold));
+      color:#000; border:none; padding:14px;
+      border-radius:50%; font-size:18px;
+      cursor:pointer; opacity:0; pointer-events:none;
+      transition:opacity .3s;
+      z-index:1000;
+    }
+    #backToTop.show { opacity:1; pointer-events:auto; }
+
+    /* Founder link */
+    .ceo-link {
+      display:block; text-align:center;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(212,175,55,0.3);
+      color:var(--gold);
+      font-size:1.2rem; font-weight:600;
+      padding:16px; border-radius:8px;
+      text-decoration:none; margin:60px auto;
+      max-width:500px;
+      transition:background .3s ease, transform .3s ease;
+    }
+    .ceo-link:hover { background:rgba(212,175,55,0.1); transform:scale(1.02); }
   </style>
 </head>
 <body>
 
-  <h1>Medine Ak – Founder & Visionary Entrepreneur</h1>
+<header>
+  <div class="logo">MedaStaré</div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#vision">Vision</a>
+    <a href="#future">Future</a>
+    <a href="#waitlist">Waitlist</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="lang-toggle" onclick="toggleLang()">TR | EN</div>
+</header>
 
-  <!-- Görsel -->
-  <img src="founder-ceo.1.PNG" alt="Medine Ak" class="founder-photo">
+<!-- Hero -->
+<section class="hero">
+  <img src="medastare-eiffel-elegance.jpeg" alt="Eiffel Elegance">
+  <h1>Global stage now in your wardrobe</h1>
+  <p>Collections for every style and budget, all in one place.</p>
+</section>
 
-  <section id="tr">
-    <h2>🇹🇷 Türkçe</h2>
-    <p><b>Medine Ak – Kurucu & Vizyoner Girişimci</b></p>
-    <p>13 Ekim 2002 doğumlu Medine Ak, 22 yaşında genç bir Türk kadın girişimci, estetisyen ve güzellik uzmanıdır. Henüz erken yaşta kendi markasını kurarak, moda ve teknolojiyi bir araya getiren <b>MedaStaré</b> ile kısa sürede global görünürlük kazanmıştır.</p>
-    <p>Kadınlar tarafından, kadınlara özel bir ekosistem oluşturmayı hedefleyen Medine Ak; yapay zekâ, moda ve güzelliğin kesişiminde yenilikçi projeler geliştiriyor. Kurucusu olduğu MedaStaré, yalnızca 2 hafta gibi kısa bir sürede <b>2.9 milyon sıralamadan 45 bininci sıraya yükselerek</b> Crunchbase ve yapay zekâ platformlarında lansman öncesinde trend olmuştur.</p>
-    <p>Disiplinli ve mükemmeliyetçi kişiliğiyle tanınan Ak, günde saatler alan calışma temposunu eğitim hayatı ile birlikte yürütmektedir. Güzellik, Estetik ve İleri Girişimcilik alanında toplam <b>5 sertifikaya</b> sahip olan Medine Ak, girişimcilik yolculuğunda hem profesyonel uzmanlığını hem de yenilikçi bakış açısını harmanlıyor.</p>
-    <p>Yalnızca girişimci değil, aynı zamanda vizyoner bir lider olan Ak; kadınların iş hayatında daha görünür olması için ilham verici bir rol üstleniyor. Estetik anlayışı, detaylara verdiği önem ve bakımlı duruşuyla güçlü bir örnek oluşturarak, Türkiye’den başlayıp dünyaya açılan bir marka hikâyesi yazıyor.</p>
-  </section>
+<!-- Waitlist -->
+<section class="waitlist" id="waitlist">
+  <h2>Join the Waitlist</h2>
+  <p>Be the first to access exclusive collections and global previews.</p>
+  <form id="waitlist-form" action="/api/waitlist" method="POST">
+    <input id="wl-name" name="name" type="text" placeholder="Full Name" required>
+    <input id="wl-email" name="email" type="email" placeholder="Email Address" required>
+    <button type="submit">Sign Up</button>
+  </form>
+</section>
 
-  <section id="en">
-    <h2>🌍 English</h2>
-    <p><b>Medine Ak – Founder & Visionary Entrepreneur</b></p>
-    <p>Born on October 13, 2002, Medine Ak is a 22-year-old Turkish female entrepreneur, esthetician, and beauty specialist. At an early age, she founded her own brand, <b>MedaStaré</b>, which quickly gained global visibility by merging fashion and technology.</p>
-    <p>Dedicated to creating an ecosystem by women, for women, Ak is developing innovative projects at the intersection of AI, fashion, and beauty. Within just 2 weeks, MedaStaré rose <b>from 2.9M to 45K in Crunchbase rankings</b>, trending across AI and startup platforms even before its official launch.</p>
-    <p>Known for her discipline and perfectionist personality, Ak balances up to 10 hours of daily work with her studies. She holds <b>5 certifications</b> in beauty and aesthetics, combining professional expertise with an innovative entrepreneurial vision.</p>
-    <p>More than just an entrepreneur, Ak is a visionary leader inspiring women to become more visible in the business world. With her strong sense of aesthetics, attention to detail, and polished presence, she is building a brand story that begins in Turkey and expands worldwide.</p>
-  </section>
+<!-- About -->
+<section id="about">
+  <h2>About MedaStaré</h2>
+  <p>MedaStaré is where AI meets fashion & beauty. From Turkey to the world.</p>
+</section>
 
-  <!-- Geri buton -->
-  <a href="https://medastare.com" class="back-btn">← Back to MedaStaré</a>
+<!-- Vision -->
+<section id="vision">
+  <h2>Our Vision</h2>
+  <p>We are building Turkey’s first AI-powered fashion-tech ecosystem.</p>
+</section>
 
+<!-- Future -->
+<section id="future">
+  <h2>Future Potential</h2>
+  <p>The global fashion & beauty market surpasses $3 Trillion.</p>
+</section>
+
+<!-- Founder Link -->
+<a href="founder.html" class="ceo-link">Founder & CEO – Medine Ak →</a>
+
+<!-- Footer -->
+<footer id="contact">
+  <div>
+    <h4>Social</h4>
+    <a href="https://instagram.com/medastareapp" target="_blank">Instagram</a>
+    <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
+    <a href="https://linkedin.com/company/medastare" target="_blank">LinkedIn</a>
+    <a href="https://crunchbase.com/organization/medastar%C3%A9" target="_blank">Crunchbase</a>
+  </div>
+  <small>© 2025 MedaStaré. All rights reserved.</small>
+</footer>
+
+<button id="backToTop">↑</button>
+
+<script>
+/* Header scroll */
+window.addEventListener("scroll",()=>{
+  document.querySelector("header").classList.toggle("scrolled",window.scrollY>50);
+});
+
+/* Back to top */
+const btn=document.getElementById("backToTop");
+window.addEventListener("scroll",()=>{btn.classList.toggle("show",window.scrollY>400);});
+btn.addEventListener("click",()=>{window.scrollTo({top:0,behavior:'smooth'});});
+
+/* Waitlist form handling */
+document.getElementById("waitlist-form").addEventListener("submit",function(e){
+  e.preventDefault();
+  const name=document.getElementById("wl-name").value.trim();
+  const email=document.getElementById("wl-email").value.trim();
+  if(!email.includes("@")){
+    window.location.href="error.html"; // error page
+    return;
+  }
+  // save to localStorage
+  localStorage.setItem("wl-name",name);
+  localStorage.setItem("wl-email",email);
+  this.submit();
+  window.location.href="thankyou.html"; // success page
+});
+
+/* Auto-fill */
+window.addEventListener("load",()=>{
+  const name=localStorage.getItem("wl-name");
+  const email=localStorage.getItem("wl-email");
+  if(name) document.getElementById("wl-name").value=name;
+  if(email) document.getElementById("wl-email").value=email;
+});
+</script>
 </body>
 </html>
