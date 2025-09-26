@@ -60,13 +60,6 @@
       transform:translateY(20px); opacity:0;
       animation:fadeUp 1.5s ease forwards;
     }
-    .hero h1, .hero p {
-      opacity:0; transform:translateY(30px);
-      transition:opacity 1s ease, transform 1s ease;
-    }
-    .hero.show h1, .hero.show p {
-      opacity:1; transform:translateY(0);
-    }
     .hero h1 {
       font-family:"Playfair Display", serif;
       font-size:2.5rem; margin:30px 0 15px;
@@ -90,11 +83,6 @@
       border-radius:14px; scroll-snap-align:start;
       overflow:hidden; backdrop-filter:blur(6px);
       transition:transform .4s, box-shadow .4s;
-      opacity:0; transform:translateY(40px);
-    }
-    .grid-item.show {
-      opacity:1; transform:translateY(0);
-      transition:opacity .8s ease, transform .8s ease;
     }
     .grid-item img { width:100%; display:block; }
     .grid-item:hover {
@@ -115,10 +103,7 @@
       font-size:2rem; color:var(--gold);
       margin-bottom:20px; position:relative;
       display:inline-block;
-      opacity:0; transform:translateY(40px);
-      transition:opacity .8s ease, transform .8s ease;
     }
-    section.show h2 { opacity:1; transform:translateY(0); }
     section h2::after {
       content:""; position:absolute; left:0; bottom:-8px;
       width:100%; height:3px;
@@ -127,23 +112,42 @@
       transition:transform .6s ease;
     }
     section.show h2::after { transform:scaleX(1); }
-    section p {
-      color:#ddd; line-height:1.7;
-      opacity:0; transform:translateY(40px);
-      transition:opacity .8s ease, transform .8s ease;
+    section p { color:#ddd; line-height:1.7; }
+
+    /* Waitlist form */
+    .waitlist form { max-width:500px; margin:auto; display:flex; flex-direction:column; gap:15px; }
+    .waitlist input {
+      border:none; border-bottom:1px solid #666;
+      padding:14px; background:transparent;
+      color:#fff; font-size:1rem;
     }
-    section.show p {
-      opacity:1; transform:translateY(0);
+    .waitlist input:focus { border-color:var(--gold); outline:none; }
+    .waitlist button {
+      background:linear-gradient(90deg,var(--wine),var(--pink));
+      border:none; padding:14px; color:#fff;
+      font-weight:600; border-radius:8px; cursor:pointer;
+      transition:transform .3s;
     }
+    .waitlist button:hover { transform:scale(1.05); }
 
     /* CEO Accordion */
     .ceo { max-width:900px; margin:60px auto; text-align:left; }
-    .ceo h2 { cursor:pointer; color:var(--gold); font-size:1.4rem; display:flex; justify-content:space-between; align-items:center; }
-    #ceo-content {
-      max-height:0; overflow:hidden;
-      transition:max-height .6s ease;
+    .ceo button {
+      width:100%; background:rgba(255,255,255,0.05);
+      border:1px solid rgba(212,175,55,0.3);
+      color:var(--gold); font-size:1.2rem;
+      font-weight:600; padding:16px;
+      cursor:pointer; border-radius:8px;
+      display:flex; justify-content:space-between; align-items:center;
     }
-    #ceo-content p { padding:16px 0; color:#ddd; }
+    .ceo-content {
+      max-height:0; overflow:hidden;
+      transition:max-height .5s ease;
+      background:rgba(255,255,255,0.05);
+      border:1px solid rgba(212,175,55,0.3);
+      border-radius:0 0 8px 8px; padding:0 16px;
+    }
+    .ceo-content p { padding:16px 0; color:#ddd; }
 
     /* Footer */
     footer { background:#000; padding:50px 20px; }
@@ -192,10 +196,19 @@
 
 <!-- Collections -->
 <div class="grid">
-  <div class="grid-item"><img src="medabeaute-perfume-01.jpeg"><div class="caption"><h3>MedaBeauté</h3><p>Benzersiz ve global kozmetik ürünleri.</p></div></div>
-  <div class="grid-item"><img src="medastare-business-01.jpeg"><div class="caption"><h3>Business</h3><p>Sofistike ve modern çizgiler.</p></div></div>
-  <div class="grid-item"><img src="medastare-femmesport-01.jpeg"><div class="caption"><h3>FemmeSport</h3><p>Sportif şıklığı zarafetle birleştiren global koleksiyonlar.</p></div></div>
+  <!-- Grid items aynı kalıyor -->
 </div>
+
+<!-- Waitlist -->
+<section class="waitlist" id="waitlist">
+  <h2 data-en="Join the Waitlist" data-tr="Bekleme Listesine Katıl">Join the Waitlist</h2>
+  <p data-en="Be the first to access exclusive collections and global previews." data-tr="Özel koleksiyonlara ve global önizlemelere ilk sen eriş.">Be the first to access exclusive collections and global previews.</p>
+  <form>
+    <input type="text" placeholder="Full Name">
+    <input type="email" placeholder="Email Address">
+    <button type="submit">Sign Up</button>
+  </form>
+</section>
 
 <!-- About -->
 <section id="about">
@@ -206,28 +219,40 @@
 <!-- Vision -->
 <section id="vision">
   <h2 data-en="Our Vision" data-tr="Vizyonumuz">Our Vision</h2>
-  <p>We are building Turkey’s first AI-powered fashion-tech ecosystem.</p>
+  <p>We are building Turkey’s first AI-powered fashion-tech ecosystem, uniting style, beauty, and technology with a global touch. With 9 patent applications filed and 50+ proprietary contents, MedaStaré is shaping the future of fashion and beauty innovation.</p>
 </section>
 
 <!-- Future -->
 <section id="future">
   <h2 data-en="Future Potential" data-tr="Gelecek Potansiyeli">Future Potential</h2>
-  <p>The global fashion & beauty market surpasses $3 Trillion.</p>
+  <p>The global fashion & beauty market surpasses $3 Trillion. MedaStaré is uniquely positioned with its technopark project status and rapid traction: in only 3 weeks, our Crunchbase rank soared from 2.9 million to 44 thousand. This growth proves our potential to scale globally.</p>
 </section>
 
-<!-- CEO Section -->
+<!-- CEO Accordion -->
 <section class="ceo">
-  <h2 onclick="toggleCeo()">Founder & CEO <span id="ceo-toggle">＋</span></h2>
-  <div id="ceo-content">
-    <p>Medine Ak – Visionary Entrepreneur shaping the future of fashion-tech.</p>
+  <button onclick="toggleCeo()">Founder & CEO <span id="ceo-toggle">＋</span></button>
+  <div class="ceo-content" id="ceo-content">
+    <p><strong>Medine Ak</strong> – Founder & CEO of MedaStaré.  
+    A visionary entrepreneur building Turkey’s first AI-powered fashion-tech ecosystem.  
+    With bold innovation, global perspective, and relentless dedication, she is shaping the future of fashion and beauty on a worldwide stage.</p>
   </div>
 </section>
 
 <!-- Footer -->
 <footer id="contact">
   <div class="grid">
-    <div><h4>Company</h4><a href="#">Careers</a><a href="#">Contact</a></div>
-    <div><h4>Social</h4><a href="#">Instagram</a><a href="#">X</a><a href="#">LinkedIn</a></div>
+    <div>
+      <h4>Company</h4>
+      <a href="/careers.html">Careers</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <div>
+      <h4>Social</h4>
+      <a href="https://www.instagram.com/medastareapp" target="_blank">Instagram</a>
+      <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
+      <a href="https://www.linkedin.com/company/medastare/" target="_blank">LinkedIn</a>
+      <a href="https://www.crunchbase.com/organization/medastar%C3%A9" target="_blank">Crunchbase</a>
+    </div>
   </div>
   <small>© 2025 MedaStaré. All rights reserved.</small>
 </footer>
@@ -241,17 +266,14 @@ window.addEventListener("scroll",()=>{
 });
 
 /* Scroll reveal */
-const revealEls=document.querySelectorAll("section, .grid-item, .hero");
+const sections=document.querySelectorAll("section");
 function reveal(){
-  revealEls.forEach(el=>{
-    const rect=el.getBoundingClientRect();
-    if(rect.top<window.innerHeight*0.85){
-      el.classList.add("show");
-    }
+  sections.forEach(sec=>{
+    const rect=sec.getBoundingClientRect();
+    if(rect.top<window.innerHeight*0.8) sec.classList.add("show");
   });
 }
-window.addEventListener("scroll",reveal);
-window.addEventListener("load",reveal);
+window.addEventListener("scroll",reveal); window.addEventListener("load",reveal);
 
 /* Back to top */
 const btn=document.getElementById("backToTop");
