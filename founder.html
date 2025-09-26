@@ -8,35 +8,31 @@
   <!-- Meta Description -->
   <meta name="description" content="Medine Ak – MedaStaré’nin kurucusu ve CEO’su. Moda, güzellik ve yapay zekâ kesişiminde vizyoner girişimci.">
 
-  <!-- Open Graph / Social Media -->
+  <!-- Open Graph -->
   <meta property="og:title" content="Medine Ak – Founder & CEO, MedaStaré">
   <meta property="og:description" content="Moda, güzellik ve yapay zekâ kesişiminde vizyoner girişimci.">
   <meta property="og:image" content="https://medastare.com/images/medine-ak.jpg">
   <meta property="og:url" content="https://medastare.com/founder/medine-ak">
+
+  <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- Schema.org Person Markup -->
+  <!-- Schema.org Person -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Medine Ak",
-    "alternateName": ["MedaStaré Founder", "Medastaré"],
     "birthDate": "2002-10-13",
-    "nationality": "TR",
     "jobTitle": "Founder & CEO",
-    "url": "https://medastare.com/founder/medine-ak",
     "image": "https://medastare.com/images/medine-ak.jpg",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "MedaStaré",
-      "url": "https://medastare.com"
-    },
+    "worksFor": { "@type": "Organization", "name": "MedaStaré", "url": "https://medastare.com" },
+    "url": "https://medastare.com/founder/medine-ak",
     "sameAs": [
-      "https://www.linkedin.com/company/medastareapp",
+      "https://linkedin.com/company/medastare",
       "https://instagram.com/medastareapp",
       "https://x.com/medastareapp",
-      "https://www.crunchbase.com/organization/medastar%C3%A9"
+      "https://crunchbase.com/organization/medastar%C3%A9"
     ]
   }
   </script>
@@ -46,28 +42,89 @@
     body {
       background-color: #0a0a0a;
       color: #f2f2f2;
-      font-family: Arial, sans-serif;
+      font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 20px;
-      line-height: 1.6;
+      line-height: 1.7;
+      animation: fadeInBody 1.2s ease forwards;
     }
+
+    @keyframes fadeInBody {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+
     h1, h2 {
       color: #FFD700;
+      text-align: center;
+      position: relative;
+      margin-bottom: 20px;
     }
+
+    h2::after {
+      content:"";
+      position:absolute;
+      bottom:-6px; left:50%;
+      transform:translateX(-50%);
+      width:60px; height:3px;
+      background: linear-gradient(90deg, #FFD700, #ff4da6);
+      border-radius:2px;
+    }
+
     section {
-      margin-bottom: 40px;
+      margin: 40px auto;
       padding: 20px;
+      max-width: 900px;
       background: #111;
       border-radius: 10px;
       box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+      animation: fadeUp 1s ease forwards;
+      opacity: 0;
     }
-    p {
-      margin: 10px 0;
+
+    section:nth-of-type(1) { animation-delay: 0.3s; }
+    section:nth-of-type(2) { animation-delay: 0.6s; }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(30px); }
+      to { opacity:1; transform:translateY(0); }
     }
+
+    p { margin: 12px 0; }
+
+    /* Görsel */
+    .founder-photo {
+      display: block;
+      margin: 40px auto 20px;
+      max-width: 300px;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+      animation: fadeUp 1s ease forwards;
+    }
+
+    /* CTA geri buton */
+    .back-btn {
+      display:block;
+      margin: 50px auto 20px;
+      text-align:center;
+      background: linear-gradient(90deg, #5a0f1d, #ff4da6);
+      color:#fff;
+      text-decoration:none;
+      padding:14px 28px;
+      border-radius:8px;
+      font-weight:600;
+      transition: transform 0.3s ease;
+      max-width: 220px;
+    }
+    .back-btn:hover { transform: scale(1.05); }
   </style>
 </head>
 <body>
+
   <h1>Medine Ak – Founder & Visionary Entrepreneur</h1>
+
+  <!-- Görsel -->
+  <img src="founder-ceo.1.PNG" alt="Medine Ak" class="founder-photo">
 
   <section id="tr">
     <h2>🇹🇷 Türkçe</h2>
@@ -86,5 +143,9 @@
     <p>Known for her discipline and perfectionist personality, Ak balances up to 10 hours of daily work with her studies. She holds <b>5 certifications</b> in beauty and aesthetics, combining professional expertise with an innovative entrepreneurial vision.</p>
     <p>More than just an entrepreneur, Ak is a visionary leader inspiring women to become more visible in the business world. With her strong sense of aesthetics, attention to detail, and polished presence, she is building a brand story that begins in Turkey and expands worldwide.</p>
   </section>
+
+  <!-- Geri buton -->
+  <a href="https://medastare.com" class="back-btn">← Back to MedaStaré</a>
+
 </body>
 </html>
