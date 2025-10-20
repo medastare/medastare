@@ -21,14 +21,14 @@ body{
   background:linear-gradient(135deg,var(--light),var(--gray),var(--black));
   color:white;overflow-x:hidden;position:relative;
 }
-/* 🔧 Canvas görünürlük & katman (sadece burayı güçlendirdim) */
+/* 🔧 Parçacık kanvası görünür ve doğru katmanda */
 canvas#particles{
-  position:fixed;inset:0;
-  width:100vw;height:100vh;
+  position:fixed; inset:0;
+  display:block; width:100vw; height:100vh;
   pointer-events:none;
-  z-index:0;           /* içerik (z-index:1) altında, arka planın üstünde */
+  z-index:0;              /* içerik (z-index:1) altında */
   opacity:.85;
-  mix-blend-mode:screen;
+  mix-blend-mode:screen;  /* altın parıltı efekti */
 }
 header{
   display:flex;justify-content:space-between;align-items:center;
@@ -91,18 +91,17 @@ footer .grid{
 }
 footer h4{color:var(--gold);margin-bottom:10px;}
 footer a{color:#aaa;text-decoration:none;display:block;margin:5px 0;}
-footer a:hover{color:var(--pink);}
+footer a:hover{color:#ff4da6;}
 footer small{color:#666;}
 
 #backToTop{
   position:fixed;right:20px;bottom:20px;
   background:linear-gradient(135deg,var(--pink),var(--gold));
   border:none;border-radius:50%;padding:14px;font-size:18px;
-  color:black;cursor:pointer;opacity:0;transition:opacity .3s;z-index:999;
+  color:black;cursor:pointer;opacity:0;transition:opacity .3s;z-index:9999;
 }
 #backToTop.show{opacity:1;}
 
-/* Hareket kısıt tercihi olanlara saygı */
 @media (prefers-reduced-motion: reduce){
   .hero img{animation:none}
 }
@@ -195,125 +194,101 @@ footer small{color:#666;}
 <button id="backToTop">↑</button>
 
 <script>
-/* ================= Back to top (dokunmadım, sadece z-index’i yukarı aldım) ================= */
-const btn=document.getElementById("backToTop");
-window.addEventListener("scroll",()=>{btn.classList.toggle("show",window.scrollY>400);});
-btn.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
-
-/* ================= Dil Toggle (seninki aynen) ================= */
-let lang="en";
-function toggleLang(){
-  lang=lang==="en"?"tr":"en";
-  document.querySelectorAll("[data-tr]").forEach(el=>{
-    const tr=el.getAttribute("data-tr");
-    const en=el.getAttribute("data-en")||el.textContent;
-    if(!el.getAttribute("data-en")) el.setAttribute("data-en",el.textContent);
-    el.textContent=lang==="tr"?tr:el.getAttribute("data-en");
-  });
-  document.querySelector(".lang-toggle").textContent=lang==="tr"?"EN | TR":"TR | EN";
-}
-
-/* ================= Parçacık Animasyonu — SAĞLAM SÜRÜM =================
-   - Altın noktalar + yakın olanları bağlayan çizgiler
-   - Resize + tab gizlenince pause
-   - prefers-reduced-motion’a saygı
-======================================================================= */
+/* ============ Back to top (daha erken gözüksün) ============ */
 (function(){
-  const canvas=document.getElementById('particles');
-  const ctx=canvas.getContext('2d');
+  const btn = document.getElementById("backToTop");
+  if(!btn) return;
+  const toggle = () => btn.classList.toggle("show", window.scrollY > 200);
+  toggle();
+  window.addEventListener("scroll", toggle, {passive:true});
+  btn.addEventListener("click", ()=>window.scrollTo({top:0,behavior:"smooth"}));
+})();
 
-  const cfg={
-    count: 110,
-    maxDist: 140,
-    linkAlpha: 0.22,
-    radiusMin: 1.1,
-    radiusMax: 3.2,
-    speed: 0.4
-  };
+/* ============ Dil Toggle (global yapıldı) ============ */
+let lang="en";
+window.toggleLang = function(){
+  lang = (lang==="en") ? "tr" : "en";
+  document.querySelectorAll("[data-tr]").forEach(el=>{
+    const tr = el.getAttribute("data-tr");
+    const en = el.getAttribute("data-en") || el.textContent;
+    if(!el.getAttribute("data-en")) el.setAttribute("data-en", el.textContent);
+    el.textContent = (lang==="tr") ? tr : el.getAttribute("data-en");
+  });
+  const t = document.querySelector(".lang-toggle");
+  if (t) t.textContent = (lang==="tr") ? "EN | TR" : "TR | EN";
+};
 
-  let particles=[];
-  let running=true;
+/* ============ Parçacık Animasyonu (retina + link çizgili) ============ */
+(function(){
+  const canvas = document.getElementById('particles');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const DPR = Math.min(window.devicePixelRatio || 1, 2);
 
   function resize(){
-    canvas.width=window.innerWidth;
-    canvas.height=window.innerHeight;
+    const w = Math.floor(window.innerWidth  * DPR);
+    const h = Math.floor(window.innerHeight * DPR);
+    canvas.width = w; canvas.height = h;
+    canvas.style.width  = window.innerWidth + "px";
+    canvas.style.height = window.innerHeight + "px";
   }
-  resize();
-  window.addEventListener('resize',resize);
+  resize(); window.addEventListener('resize', resize);
 
-  function rand(a,b){return a+Math.random()*(b-a);}
+  const N = 110, maxDist = 140 * DPR, speed = 0.35 * DPR;
+  const particles = Array.from({length:N}, () => ({
+    x: Math.random()*canvas.width,
+    y: Math.random()*canvas.height,
+    dx: (Math.random()-0.5)*speed,
+    dy: (Math.random()-0.5)*speed,
+    r: (1.1 + Math.random()*2.1) * DPR
+  }));
 
-  function create(){
-    particles.length=0;
-    for(let i=0;i<cfg.count;i++){
-      particles.push({
-        x: Math.random()*canvas.width,
-        y: Math.random()*canvas.height,
-        dx: (Math.random()-0.5)*cfg.speed,
-        dy: (Math.random()-0.5)*cfg.speed,
-        r: rand(cfg.radiusMin,cfg.radiusMax)
-      });
-    }
-  }
-  create();
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function draw(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
-    // noktalar
-    particles.forEach(p=>{
-      const g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*2.2);
-      g.addColorStop(0,'rgba(255,255,255,0.9)');
-      g.addColorStop(1,'rgba(212,175,55,0.6)');
-      ctx.fillStyle=g;
+    // dots
+    for(const p of particles){
       ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle = 'rgba(212,175,55,0.8)';
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
       ctx.fill();
-    });
-
-    // çizgiler
-    for(let i=0;i<particles.length;i++){
-      for(let j=i+1;j<particles.length;j++){
+    }
+    // links
+    for(let i=0;i<N;i++){
+      for(let j=i+1;j<N;j++){
         const a=particles[i], b=particles[j];
         const dx=a.x-b.x, dy=a.y-b.y;
-        const d=Math.hypot(dx,dy);
-        if(d<cfg.maxDist){
-          ctx.strokeStyle=`rgba(212,175,55,${cfg.linkAlpha*(1-d/cfg.maxDist)})`;
-          ctx.lineWidth=0.7;
-          ctx.beginPath();
-          ctx.moveTo(a.x,a.y);
-          ctx.lineTo(b.x,b.y);
-          ctx.stroke();
+        const d2=dx*dx+dy*dy;
+        if(d2 < maxDist*maxDist){
+          const alpha = 0.25 * (1 - Math.sqrt(d2)/maxDist);
+          ctx.strokeStyle = `rgba(212,175,55,${alpha})`;
+          ctx.lineWidth = DPR*0.6;
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
         }
       }
     }
   }
 
   function step(){
-    particles.forEach(p=>{
-      p.x+=p.dx; p.y+=p.dy;
-      if(p.x<0||p.x>canvas.width) p.dx*=-1;
-      if(p.y<0||p.y>canvas.height) p.dy*=-1;
-    });
+    for(const p of particles){
+      p.x += p.dx; p.y += p.dy;
+      if(p.x < 0 || p.x > canvas.width)  p.dx *= -1;
+      if(p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    }
   }
 
   function loop(){
-    if(!running) return;
-    step(); draw();
-    requestAnimationFrame(loop);
+    draw();
+    if(!reduced){ step(); requestAnimationFrame(loop); }
   }
 
-  // Tab gizlenince durdur / görünce çalıştır
-  document.addEventListener('visibilitychange',()=>{
-    running=!document.hidden;
-    if(running) requestAnimationFrame(loop);
+  document.addEventListener('visibilitychange', ()=>{
+    if(!document.hidden && !reduced) requestAnimationFrame(loop);
   });
 
-  // Hareket kısıt tercihi
-  const prefersReduced=window.matchMedia('(prefers-reduced-motion: reduce)');
-  if(prefersReduced.matches){ running=false; ctx.clearRect(0,0,canvas.width,canvas.height); return; }
-
-  requestAnimationFrame(loop);
+  loop();
 })();
 </script>
 </body>
