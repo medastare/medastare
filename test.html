@@ -207,27 +207,65 @@ el.textContent=lang==="tr"?tr:el.getAttribute("data-en");
 document.querySelector(".lang-toggle").textContent=lang==="tr"?"EN | TR":"TR | EN";
 }
 
-// Particles
-const c=document.getElementById("particles");
-const ctx=c.getContext("2d");
-let ps=[];
-function resize(){c.width=innerWidth;c.height=innerHeight;}
-window.addEventListener("resize",resize);resize();
-for(let i=0;i<120;i++){
-ps.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2+1,dx:(Math.random()-0.5)*0.6,dy:(Math.random()-0.5)*0.6});
+<!-- Particle Background -->
+<canvas id="particles"></canvas>
+
+<script>
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let particles = [];
+const numParticles = 70;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 }
-function draw(){
-ctx.clearRect(0,0,c.width,c.height);
-ctx.fillStyle="rgba(212,175,55,0.8)";
-ps.forEach(p=>{
-ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
-p.x+=p.dx;p.y+=p.dy;
-if(p.x<0||p.x>c.width)p.dx*=-1;
-if(p.y<0||p.y>c.height)p.dy*=-1;
-});
-requestAnimationFrame(draw);
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+for (let i = 0; i < numParticles; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2 + 1,
+    dx: (Math.random() - 0.5) * 0.5,
+    dy: (Math.random() - 0.5) * 0.5
+  });
 }
-draw();
+
+function drawParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = 'rgba(212, 175, 55, 0.6)'; // altın
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fill();
+  });
+}
+
+function moveParticles() {
+  particles.forEach(p => {
+    p.x += p.dx;
+    p.y += p.dy;
+    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+  });
+}
+
+function animate() {
+  drawParticles();
+  moveParticles();
+  requestAnimationFrame(animate);
+}
+animate();
+
+// canvas'ı arka plan gibi yapalım
+canvas.style.position = 'fixed';
+canvas.style.top = 0;
+canvas.style.left = 0;
+canvas.style.zIndex = '-1';
+canvas.style.pointerEvents = 'none';
+canvas.style.opacity = '0.6';
 </script>
 
 </body>
