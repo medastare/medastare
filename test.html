@@ -133,7 +133,6 @@ footer small{color:#666;}
   </div>
 </section>
 
-<!-- Waitlist -->
 <section class="waitlist" id="waitlist">
   <h2 data-tr="Bekleme Listesine Katıl">Join the Waitlist</h2>
   <p data-tr="Özel koleksiyonlara ilk erişen sen ol.">Be the first to access exclusive collections and previews.</p>
@@ -186,87 +185,48 @@ footer small{color:#666;}
 <button id="backToTop">↑</button>
 
 <script>
-// make all sections visible directly
-document.querySelectorAll("section").forEach(s=>s.style.opacity="1");
-
-// Back to top
+// BACK TO TOP
 const btn=document.getElementById("backToTop");
 window.addEventListener("scroll",()=>{btn.classList.toggle("show",window.scrollY>400);});
 btn.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
 
-// Lang toggle
+// LANGUAGE TOGGLE FIXED
 let lang="en";
 function toggleLang(){
-lang=lang==="en"?"tr":"en";
-document.querySelectorAll("[data-tr]").forEach(el=>{
-const tr=el.getAttribute("data-tr");
-const en=el.textContent;
-el.setAttribute("data-en",en);
-el.textContent=lang==="tr"?tr:el.getAttribute("data-en");
-});
-document.querySelector(".lang-toggle").textContent=lang==="tr"?"EN | TR":"TR | EN";
+  lang=lang==="en"?"tr":"en";
+  document.querySelectorAll("[data-tr]").forEach(el=>{
+    const tr=el.getAttribute("data-tr");
+    const en=el.getAttribute("data-en")||el.textContent;
+    if(!el.getAttribute("data-en")) el.setAttribute("data-en",el.textContent);
+    el.textContent=lang==="tr"?tr:el.getAttribute("data-en");
+  });
+  document.querySelector(".lang-toggle").textContent=lang==="tr"?"EN | TR":"TR | EN";
 }
 
-<!-- Particle Background -->
-<canvas id="particles"></canvas>
-
-<script>
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-let particles = [];
-const numParticles = 70;
-
-function resizeCanvas() {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+// PARTICLE ANIMATION FIXED
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+let particles=[];
+const numParticles=90;
+function resizeCanvas(){canvas.width=innerWidth;canvas.height=innerHeight;}
+window.addEventListener('resize',resizeCanvas);resizeCanvas();
+for(let i=0;i<numParticles;i++){
+  particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,dx:(Math.random()-.5)*.6,dy:(Math.random()-.5)*.6});
 }
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
-
-for (let i = 0; i < numParticles; i++) {
-  particles.push({
-    x: Math.random() * canvas.width,
-    y: Math.random() * canvas.height,
-    r: Math.random() * 2 + 1,
-    dx: (Math.random() - 0.5) * 0.5,
-    dy: (Math.random() - 0.5) * 0.5
+function drawParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle='rgba(212,175,55,0.6)';
+  particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();});
+}
+function moveParticles(){
+  particles.forEach(p=>{
+    p.x+=p.dx;p.y+=p.dy;
+    if(p.x<0||p.x>canvas.width)p.dx*=-1;
+    if(p.y<0||p.y>canvas.height)p.dy*=-1;
   });
 }
-
-function drawParticles() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = 'rgba(212, 175, 55, 0.6)'; // altın
-  particles.forEach(p => {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fill();
-  });
-}
-
-function moveParticles() {
-  particles.forEach(p => {
-    p.x += p.dx;
-    p.y += p.dy;
-    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-  });
-}
-
-function animate() {
-  drawParticles();
-  moveParticles();
-  requestAnimationFrame(animate);
-}
+function animate(){drawParticles();moveParticles();requestAnimationFrame(animate);}
 animate();
-
-// canvas'ı arka plan gibi yapalım
-canvas.style.position = 'fixed';
-canvas.style.top = 0;
-canvas.style.left = 0;
-canvas.style.zIndex = '-1';
-canvas.style.pointerEvents = 'none';
-canvas.style.opacity = '0.6';
 </script>
-
 </body>
 </html>
