@@ -1,102 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Contact | MedaStaré</title>
-  <link rel="icon" type="image/png" href="/favicon.ico">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Contact | MedaStaré</title>
+<link rel="icon" type="image/png" href="/favicon.ico" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
 
-  <style>
-    :root {
-      --pink:#fbeef5;
-      --wine:#6d1f34;
-      --black:#111;
-      --gray:#666;
-    }
-    html, body {
-      margin:0;
-      padding:0;
-      max-width:100%;
-      overflow-x:hidden;
-      font-family: Inter, sans-serif;
-      background:var(--pink);
-      color:var(--black);
-    }
-    header {
-      display:flex; justify-content:space-between; align-items:center;
-      padding:20px 40px; background:#fff; position:sticky; top:0; z-index:1000;
-      border-bottom:1px solid #eee;
-    }
-    header .logo { font-family:"Playfair Display", serif; font-size:1.5rem; color:var(--wine); font-weight:600; }
-    header nav a { margin:0 15px; text-decoration:none; color:var(--black); font-weight:500; }
-    header .lang-toggle { cursor:pointer; font-size:.9rem; color:var(--wine); }
+<style>
+:root {
+  --gold:#d4af37;
+  --pink:#ff4da6;
+  --black:#000;
+  --gray:#aaa;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:Inter,sans-serif;
+  background:linear-gradient(135deg,#0d0d0f,#1a1a1f,#000);
+  color:#fff;
+  overflow-x:hidden;
+  position:relative;
+  min-height:100vh;
+}
 
-    main { padding:60px 20px; max-width:900px; margin:auto; }
-    h1 { font-family:"Playfair Display", serif; font-size:2rem; margin-bottom:20px; color:var(--wine);}
-    h2 { font-family:"Playfair Display", serif; font-size:1.4rem; margin-top:40px; margin-bottom:15px; color:var(--wine); }
-    p, li { color:var(--gray); line-height:1.6; }
+/* ===== Particles background ===== */
+#particles{
+  position:fixed; inset:0; display:block;
+  width:100vw; height:100vh; pointer-events:none;
+  z-index:0; opacity:.85; mix-blend-mode:screen;
+}
 
-    .contact-info a { color:var(--wine); text-decoration:none; font-weight:500; }
-    .contact-info a:hover { text-decoration:underline; }
+/* ===== Header ===== */
+header{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:20px 40px;
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(8px);
+  position:sticky; top:0; z-index:10;
+  border-bottom:1px solid rgba(212,175,55,.2);
+}
+header .logo{
+  font-family:"Playfair Display",serif;
+  font-size:1.8rem;
+  color:var(--gold);
+  font-weight:600;
+}
+nav a{
+  color:#fff;
+  text-decoration:none;
+  margin:0 15px;
+  font-weight:500;
+  transition:color .3s;
+}
+nav a:hover{ color:var(--gold); }
+.lang-toggle{
+  color:var(--pink);
+  cursor:pointer;
+  font-size:.9rem;
+  border:1px solid var(--pink);
+  border-radius:10px;
+  padding:4px 8px;
+}
 
-    form { background:#fff; padding:25px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.08); margin-top:20px;}
-    label { display:block; margin:12px 0 6px; font-weight:500; color:var(--black);}
-    input, textarea {
-      width:100%; padding:12px; border:1px solid #ccc; border-radius:6px; margin-bottom:15px; font-size:1rem;
-    }
-    input:focus, textarea:focus { border-color:var(--wine); outline:none;}
-    button {
-      background:var(--wine); color:#fff; border:none; padding:14px 20px;
-      border-radius:6px; font-weight:600; cursor:pointer; font-size:1rem;
-    }
-    button:hover { background:#8a2945; }
+/* ===== Main content ===== */
+main{
+  position:relative;
+  z-index:1;
+  max-width:900px;
+  margin:auto;
+  padding:80px 20px;
+  text-align:left;
+}
+h1,h2{
+  font-family:"Playfair Display",serif;
+  color:var(--gold);
+}
+h1{font-size:2rem;margin-bottom:20px;}
+h2{font-size:1.3rem;margin-top:40px;margin-bottom:15px;}
+p,li{color:var(--gray);line-height:1.7;}
 
-    footer { background:#111; color:#fff; padding:40px 20px; margin-top:40px; }
-    footer small { display:block; margin-top:30px; text-align:center; color:#aaa; }
-  </style>
+.contact-info a{
+  color:var(--pink);
+  text-decoration:none;
+  font-weight:500;
+}
+.contact-info a:hover{ text-decoration:underline; }
+
+/* ===== Form ===== */
+form{
+  background:rgba(255,255,255,.05);
+  padding:30px;
+  border-radius:12px;
+  border:1px solid rgba(212,175,55,.2);
+  box-shadow:0 0 25px rgba(0,0,0,.3);
+  margin-top:25px;
+  backdrop-filter:blur(6px);
+}
+label{display:block;margin:12px 0 6px;font-weight:500;color:var(--gold);}
+input,textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(0,0,0,.3);
+  border-radius:8px;
+  color:#fff;
+  font-size:1rem;
+}
+input:focus,textarea:focus{
+  border-color:var(--gold);
+  outline:none;
+  background:rgba(0,0,0,.5);
+}
+button{
+  background:linear-gradient(90deg,var(--pink),var(--gold));
+  border:none;
+  padding:14px 20px;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  font-size:1rem;
+  color:#000;
+  transition:transform .3s;
+}
+button:hover{transform:scale(1.05);}
+
+/* ===== Footer ===== */
+footer{
+  background:rgba(0,0,0,.9);
+  text-align:center;
+  padding:50px 20px;
+  margin-top:50px;
+  position:relative;
+  z-index:1;
+  border-top:1px solid rgba(212,175,55,.2);
+}
+footer small{color:#777;}
+
+/* ===== Responsive ===== */
+@media(max-width:600px){
+  header{flex-direction:column;gap:10px;}
+  nav a{margin:0 8px;}
+}
+</style>
 </head>
 <body>
+
+<canvas id="particles"></canvas>
 
 <header>
   <div class="logo">MedaStaré</div>
   <nav>
-    <a href="/" data-en="Home" data-tr="Ana Sayfa">Home</a>
-    <a href="/careers.html" data-en="Careers" data-tr="Kariyerler">Careers</a>
-    <a href="/contact.html" data-en="Contact" data-tr="İletişim">Contact</a>
+    <a href="/">Home</a>
+    <a href="/careers.html">Careers</a>
+    <a href="/contact.html">Contact</a>
   </nav>
   <div class="lang-toggle" onclick="toggleLang()">TR | EN</div>
 </header>
 
 <main>
   <h1 data-en="Contact" data-tr="İletişim">Contact</h1>
-
   <div class="contact-info">
-    <p data-en="You can reach us via email:" data-tr="Bize e-posta ile ulaşabilirsiniz:">
-      You can reach us via email:
-    </p>
-
+    <p>You can reach us via email:</p>
     <div style="margin-bottom:15px;">
-      <strong data-en="General Inquiries & Partnerships:" data-tr="Genel İletişim & İşbirlikleri:">General Inquiries & Partnerships:</strong><br>
+      <strong>General Inquiries & Partnerships:</strong><br>
       <a href="mailto:info@medastare.com">info@medastare.com</a>
     </div>
-
     <div style="margin-bottom:15px;">
-      <strong data-en="User Support & Questions:" data-tr="Kullanıcı Soruları & Destek:">User Support & Questions:</strong><br>
+      <strong>User Support & Questions:</strong><br>
       <a href="mailto:hello@medastare.com">hello@medastare.com</a>
     </div>
-
-    <p>
-      <span data-en="Phone:" data-tr="Telefon:">Phone:</span>
-      <a href="tel:+905415661310">+90 541 566 13 10</a>
-    </p>
-
-    <!-- Address added below -->
-    <p>
-      <span data-en="Address:" data-tr="Adres:">Address:</span>
-      Mustafa Kemal Mh. 2118 Cd. Maidan İş Merkezi 4 C Blok No: 140 Çankaya/Ankara Turkey.
-    </p>
-
-    <p data-en="Our social media accounts:" data-tr="Sosyal medya hesaplarımız:">Our social media accounts:</p>
+    <p>Phone: <a href="tel:+905415661310">+90 541 566 13 10</a></p>
+    <p>Address: Mustafa Kemal Mh. 2118 Cd. Maidan İş Merkezi 4 C Blok No:140 Çankaya / Ankara Turkey</p>
+    <p>Our social media accounts:</p>
     <ul>
       <li><a href="https://www.linkedin.com/">LinkedIn</a></li>
       <li><a href="https://x.com/">X (Twitter)</a></li>
@@ -105,18 +181,15 @@
     </ul>
   </div>
 
-  <h2 data-en="Send Us a Message" data-tr="Bize Mesaj Gönderin">Send Us a Message</h2>
+  <h2>Send Us a Message</h2>
   <form>
-    <label for="name" data-en="Full Name" data-tr="Ad Soyad">Full Name</label>
-    <input type="text" id="name" name="name" placeholder="Full Name">
-
-    <label for="email" data-en="Email" data-tr="E-posta">Email</label>
-    <input type="email" id="email" name="email" placeholder="Email">
-
-    <label for="message" data-en="Message" data-tr="Mesajınız">Message</label>
+    <label for="name">Full Name</label>
+    <input type="text" id="name" name="name" placeholder="Full Name" />
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" placeholder="Email" />
+    <label for="message">Message</label>
     <textarea id="message" name="message" rows="5" placeholder="Message"></textarea>
-
-    <button type="submit" data-en="Send" data-tr="Gönder">Send</button>
+    <button type="submit">Send</button>
   </form>
 </main>
 
@@ -125,23 +198,77 @@
 </footer>
 
 <script>
-  let currentLang = localStorage.getItem("lang") || "EN";
+/* ===== Language toggle ===== */
+let currentLang=localStorage.getItem("lang")||"EN";
+updateLang();
+function toggleLang(){
+  currentLang=(currentLang==="EN")?"TR":"EN";
+  localStorage.setItem("lang",currentLang);
   updateLang();
+}
+function updateLang(){
+  document.querySelector(".lang-toggle").innerText=(currentLang==="EN")?"TR | EN":"EN | TR";
+  document.querySelectorAll("[data-en]").forEach(el=>{
+    el.innerText=(currentLang==="EN")?el.dataset.en:el.dataset.tr;
+  });
+}
 
-  function toggleLang() {
-    currentLang = (currentLang === "EN") ? "TR" : "EN";
-    localStorage.setItem("lang", currentLang);
-    updateLang();
+/* ===== Particles ===== */
+(function(){
+  const canvas=document.getElementById("particles");
+  if(!canvas)return;
+  const ctx=canvas.getContext("2d");
+  const DPR=Math.min(window.devicePixelRatio||1,2);
+  const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function resize(){
+    const w=Math.floor(window.innerWidth*DPR);
+    const h=Math.floor(window.innerHeight*DPR);
+    canvas.width=w;canvas.height=h;
+    canvas.style.width=window.innerWidth+"px";
+    canvas.style.height=window.innerHeight+"px";
   }
-
-  function updateLang() {
-    document.querySelector(".lang-toggle").innerText = 
-      (currentLang === "EN") ? "TR | EN" : "EN | TR";
-    document.querySelectorAll("[data-en]").forEach(el => {
-      el.innerText = (currentLang === "EN") ? el.dataset.en : el.dataset.tr;
-    });
+  resize();window.addEventListener("resize",resize,{passive:true});
+  const N=110,maxDist=140*DPR,speed=0.35*DPR;
+  const P=Array.from({length:N},()=>({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    dx:(Math.random()-.5)*speed,
+    dy:(Math.random()-.5)*speed,
+    r:(1.1+Math.random()*2.1)*DPR
+  }));
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(const p of P){
+      ctx.beginPath();
+      ctx.fillStyle="rgba(212,175,55,0.85)";
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fill();
+    }
+    for(let i=0;i<N;i++){
+      for(let j=i+1;j<N;j++){
+        const a=P[i],b=P[j];
+        const dx=a.x-b.x,dy=a.y-b.y;
+        const d2=dx*dx+dy*dy;
+        if(d2<maxDist*maxDist){
+          const alpha=0.25*(1-Math.sqrt(d2)/maxDist);
+          ctx.strokeStyle=`rgba(212,175,55,${alpha})`;
+          ctx.lineWidth=DPR*0.6;
+          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+        }
+      }
+    }
   }
+  function step(){
+    for(const p of P){
+      p.x+=p.dx;p.y+=p.dy;
+      if(p.x<0||p.x>canvas.width)p.dx*=-1;
+      if(p.y<0||p.y>canvas.height)p.dy*=-1;
+    }
+  }
+  function loop(){draw();if(!reduced){step();requestAnimationFrame(loop);}}
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden&&!reduced)requestAnimationFrame(loop);});
+  loop();
+})();
 </script>
-
 </body>
 </html>
