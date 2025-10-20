@@ -133,12 +133,13 @@ footer small{color:#666;}
   </div>
 </section>
 
-<section id="waitlist">
+<!-- Waitlist -->
+<section class="waitlist" id="waitlist">
   <h2 data-tr="Bekleme Listesine Katıl">Join the Waitlist</h2>
   <p data-tr="Özel koleksiyonlara ilk erişen sen ol.">Be the first to access exclusive collections and previews.</p>
-  <form>
-    <input type="text" placeholder="Full Name" required>
-    <input type="email" placeholder="Email Address" required>
+  <form id="waitlist-form" method="POST" action="/api/waitlist">
+    <input name="name" type="text" placeholder="Full Name" required autocomplete="name">
+    <input name="email" type="email" placeholder="Email Address" required autocomplete="email">
     <button type="submit">Sign Up</button>
   </form>
 </section>
