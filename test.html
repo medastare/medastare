@@ -5,8 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>MedaStaré</title>
   <link rel="icon" type="image/png" href="medastare-logo.PNG">
-
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
   <style>
@@ -15,161 +13,73 @@
       --wine:#5a0f1d;
       --pink:#ff4da6;
       --gold:#d4af37;
+      --gray:#999;
     }
-    * { box-sizing:border-box; margin:0; padding:0; }
-    body {
-      font-family: Inter, sans-serif;
-      background: linear-gradient(135deg, var(--black), var(--wine), var(--pink));
-      color:#fff;
-      overflow-x:hidden;
-      position: relative;
-      min-height: 100vh;
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      font-family:Inter,sans-serif;
+      background:linear-gradient(135deg,var(--black),var(--wine),var(--pink));
+      color:#fff;overflow-x:hidden;position:relative;min-height:100vh;
     }
-
-    /* Particle Background */
-    canvas#particles {
-      position: fixed;
-      top:0; left:0;
-      width:100%; height:100%;
-      z-index:-1;
-      pointer-events:none;
+    canvas#particles{
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      z-index:-1;pointer-events:none;
     }
 
-    /* Header */
-    header {
-      display:flex; justify-content:space-between; align-items:center;
-      padding:20px 40px;
-      position:sticky; top:0; z-index:1000;
-      background:rgba(10,10,10,0.6);
-      backdrop-filter:blur(10px);
+    header{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:20px 40px;position:sticky;top:0;z-index:1000;
+      background:rgba(10,10,10,0.7);backdrop-filter:blur(8px);
       transition:background .3s ease;
     }
-    header.scrolled { background:rgba(10,10,10,0.9); }
-    header .logo {
-      font-family:"Playfair Display", serif;
-      font-size:1.8rem; font-weight:600;
-      color:var(--gold);
-      letter-spacing:1px;
-    }
-    header nav a {
-      margin:0 15px; text-decoration:none;
-      color:#fff; font-weight:500;
-      transition:color .3s;
-    }
-    header nav a:hover { color:var(--gold); }
-    header .lang-toggle {
-      cursor:pointer; font-size:.9rem;
-      color:var(--pink);
-      border:1px solid var(--pink);
-      padding:6px 10px;
-      border-radius:8px;
+    header.scrolled{background:rgba(10,10,10,0.95);}
+    header .logo{font-family:"Playfair Display",serif;font-size:1.8rem;font-weight:600;color:var(--gold);}
+    header nav a{margin:0 15px;text-decoration:none;color:#fff;font-weight:500;transition:color .3s;}
+    header nav a:hover{color:var(--gold);}
+    header .lang-toggle{
+      cursor:pointer;font-size:.9rem;color:var(--pink);
+      border:1px solid var(--pink);padding:6px 10px;border-radius:8px;
       transition:.3s;
     }
-    header .lang-toggle:hover {
-      background:var(--pink);
-      color:#000;
-    }
+    header .lang-toggle:hover{background:var(--pink);color:#000;}
 
-    /* Hero */
-    .hero {
-      text-align:center; padding:100px 20px;
-      background:linear-gradient(180deg, rgba(0,0,0,0.6), transparent);
-      animation: fadeIn 2s ease;
-    }
-    .hero img {
-      max-width:900px; width:100%; border-radius:14px;
-      box-shadow:0 8px 30px rgba(0,0,0,0.6);
-      animation: float 6s ease-in-out infinite;
-    }
-    .hero h1 {
-      font-family:"Playfair Display", serif;
-      font-size:2.6rem; margin:30px 0 15px;
-      color:var(--gold); text-shadow:0 0 10px rgba(212,175,55,0.5);
-    }
-    .hero p { font-size:1.2rem; color:#ddd; max-width:650px; margin:auto; }
+    .hero{text-align:center;padding:100px 20px;}
+    .hero img{max-width:900px;width:100%;border-radius:14px;box-shadow:0 8px 30px rgba(0,0,0,0.6);}
+    .hero h1{font-family:"Playfair Display",serif;font-size:2.5rem;margin:30px 0 15px;color:var(--gold);}
+    .hero p{font-size:1.2rem;color:#ddd;max-width:650px;margin:auto;}
 
-    /* Grid */
-    .grid {
-      display:flex; flex-direction:column; gap:25px;
-      padding:50px 20px;
-      align-items:center;
+    .grid{display:flex;flex-direction:column;gap:25px;padding:50px 20px;align-items:center;}
+    .grid-item{width:80%;max-width:900px;background:rgba(255,255,255,0.05);border:1px solid rgba(212,175,55,0.3);border-radius:14px;overflow:hidden;backdrop-filter:blur(6px);transition:transform .4s,box-shadow .4s;}
+    .grid-item:hover{transform:translateY(-10px);box-shadow:0 10px 30px rgba(212,175,55,0.4);}
+    .caption{padding:20px;}
+    .caption h3{font-family:"Playfair Display",serif;color:var(--gold);margin-bottom:10px;}
+    .caption p{color:#ccc;font-size:.95rem;margin-bottom:10px;}
+    .caption button{
+      background:transparent;border:1px solid var(--gold);color:var(--gold);
+      padding:6px 10px;border-radius:6px;cursor:pointer;transition:.3s;
     }
-    .grid-item {
-      width:80%; max-width:900px;
-      background:rgba(255,255,255,0.05);
-      border:1px solid rgba(212,175,55,0.3);
-      border-radius:14px; overflow:hidden;
-      backdrop-filter:blur(8px);
-      transition:transform .4s, box-shadow .4s;
-      animation: fadeUp 1.5s ease;
-    }
-    .grid-item:hover {
-      transform:translateY(-10px);
-      box-shadow:0 10px 30px rgba(212,175,55,0.4);
-    }
-    .grid-item img { width:100%; display:block; }
-    .caption { padding:20px; }
-    .caption h3 {
-      font-family:"Playfair Display", serif;
-      color:var(--gold); margin-bottom:10px;
-    }
-    .caption p { color:#ccc; font-size:.95rem; }
+    .caption button:hover{background:var(--gold);color:#000;}
 
-    /* Section */
-    section { padding:70px 20px; max-width:900px; margin:auto; text-align:center; }
-    section h2 {
-      font-family:"Playfair Display", serif;
-      font-size:2rem; color:var(--gold);
-      margin-bottom:20px; position:relative;
-      display:inline-block;
-    }
-    section p { color:#ddd; line-height:1.7; }
+    section{padding:70px 20px;max-width:900px;margin:auto;text-align:center;}
+    section h2{font-family:"Playfair Display",serif;font-size:2rem;color:var(--gold);margin-bottom:20px;}
+    section p{color:#ddd;line-height:1.7;}
 
-    /* Waitlist */
-    .waitlist form { max-width:500px; margin:auto; display:flex; flex-direction:column; gap:15px; }
-    .waitlist input {
-      border:none; border-bottom:1px solid #666;
-      padding:14px; background:transparent;
-      color:#fff; font-size:1rem;
-    }
-    .waitlist input:focus { border-color:var(--gold); outline:none; }
-    .waitlist button {
-      background:linear-gradient(90deg,var(--wine),var(--pink));
-      border:none; padding:14px; color:#fff;
-      font-weight:600; border-radius:8px; cursor:pointer;
-      transition:transform .3s;
-    }
-    .waitlist button:hover { transform:scale(1.05); }
+    footer{background:#000;padding:50px 20px;}
+    footer .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px;max-width:1200px;margin:auto;}
+    footer h4{margin-bottom:15px;color:var(--gold);}
+    footer a{display:block;color:#aaa;text-decoration:none;margin-bottom:8px;}
+    footer a:hover{color:var(--pink);}
+    footer small{display:block;margin-top:30px;text-align:center;color:#666;}
 
-    /* Footer */
-    footer { background:#000; padding:50px 20px; }
-    footer .grid {
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-      gap:30px; max-width:1200px; margin:auto;
-    }
-    footer h4 { margin-bottom:15px; color:var(--gold); }
-    footer a { display:block; color:#aaa; text-decoration:none; margin-bottom:8px; }
-    footer a:hover { color:var(--pink); }
-    footer small { display:block; margin-top:30px; text-align:center; color:#666; }
-
-    /* Back to top */
-    #backToTop {
-      position:fixed; right:20px; bottom:20px;
+    #backToTop{
+      position:fixed;right:20px;bottom:20px;
       background:linear-gradient(135deg,var(--pink),var(--gold));
-      color:#000; border:none; padding:14px;
-      border-radius:50%; font-size:18px;
-      cursor:pointer; opacity:0; pointer-events:none;
-      transition:opacity .3s, transform .3s;
-      z-index:1000;
+      color:#000;border:none;padding:14px;border-radius:50%;font-size:18px;
+      cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;
+      box-shadow:0 0 15px rgba(212,175,55,0.6);z-index:1000;
     }
-    #backToTop.show { opacity:1; pointer-events:auto; }
-    #backToTop:hover { transform:scale(1.1); }
-
-    /* Animations */
-    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
-    @keyframes fadeUp { from {opacity:0; transform:translateY(20px);} to {opacity:1; transform:translateY(0);} }
-    @keyframes float {0%{transform:translateY(0);}50%{transform:translateY(-10px);}100%{transform:translateY(0);} }
-
+    #backToTop.show{opacity:1;pointer-events:auto;}
+    #backToTop:hover{transform:scale(1.1);}
   </style>
 </head>
 <body>
@@ -179,90 +89,59 @@
 <header>
   <div class="logo">MedaStaré</div>
   <nav>
-    <a href="#about" data-tr="about">Hakkımızda</a>
-    <a href="#vision" data-tr="vision">Vizyon</a>
-    <a href="#future" data-tr="future">Gelecek</a>
-    <a href="#waitlist" data-tr="waitlist">Kayıt</a>
-    <a href="#contact" data-tr="contact">İletişim</a>
+    <a href="#about">About</a>
+    <a href="#vision">Vision</a>
+    <a href="#future">Future</a>
+    <a href="#waitlist">Waitlist</a>
+    <a href="#contact">Contact</a>
   </nav>
   <div class="lang-toggle" onclick="toggleLang()">TR | EN</div>
 </header>
 
 <section class="hero">
   <img src="medastare-eiffel-elegance.jpeg" alt="Eiffel Elegance">
-  <h1 data-tr="heroTitle">Global sahne artık gardırobunda</h1>
-  <p data-tr="heroText">Her tarz ve bütçe için koleksiyonlar — hepsi tek platformda.</p>
+  <h1 data-tr="heroTitle">Global stage now in your wardrobe</h1>
+  <p data-tr="heroText">Collections for every style and budget, all in one place.</p>
 </section>
 
-<!-- Koleksiyonlar -->
 <div class="grid">
-  <div class="grid-item">
-    <img src="medabeaute-perfume-01.jpeg">
-    <div class="caption"><h3>MedaBeauté</h3><p data-tr="medabeaute">Benzersiz ve global kozmetik ürünleri: parfüm, makyaj, bakım. Global markaların yanı sıra MedaBeauté özel üretimlerimiz.</p></div>
-  </div>
-
-  <div class="grid-item">
-    <img src="medastare-business-01.jpeg">
-    <div class="caption"><h3>Business Collection</h3><p data-tr="business">Sofistike ve modern çizgiler. Global markaların seçkin parçaları tek platformda.</p></div>
-  </div>
-
-  <div class="grid-item">
-    <img src="medastare-femmesport-01.jpeg">
-    <div class="caption"><h3>FemmeSport</h3><p data-tr="femmesport">Sportif şıklığı zarafetle birleştiren global koleksiyonlar.</p></div>
-  </div>
-
-  <div class="grid-item">
-    <img src="medastare-glamcouture-01.jpeg">
-    <div class="caption"><h3>GlamCouture</h3><p data-tr="glamcouture">Kırmızı halıya layık couture parçalarla yıldız gibi parlaman için.</p></div>
-  </div>
-
-  <div class="grid-item">
-    <img src="medastare-minimal-01.jpg">
-    <div class="caption"><h3>Minimal Elegance</h3><p data-tr="minimal">Sade zarafet ve minimal çizgilerle global ikonlar bir arada.</p></div>
-  </div>
-
-  <div class="grid-item">
-    <img src="medastare-urbanflare-01.jpeg">
-    <div class="caption"><h3>UrbanFlare</h3><p data-tr="urban">Şehrin enerjisini yansıtan global parçalar tek platformda.</p></div>
-  </div>
-
-  <div class="grid-item">
-    <img src="petstare.PNG">
-    <div class="caption"><h3>PetStaré</h3><p data-tr="petstare">Teknoloji, sadece insanlar için değil; en sadık dostlarımız için de çalışıyor. Akıllı bakım, sezgisel öneriler ve sevgiyle dokunan bir sistem — çünkü onlar da en az bizler kadar özel.</p></div>
-  </div>
+  <div class="grid-item"><img src="medabeaute-perfume-01.jpeg"><div class="caption"><h3>MedaBeauté</h3><p data-tr="medabeaute">Unique global beauty products — perfumes, makeup, skincare, and exclusive MedaBeauté creations.</p><button onclick="translateSection(this)">Translate</button></div></div>
+  <div class="grid-item"><img src="medastare-business-01.jpeg"><div class="caption"><h3>Business Collection</h3><p data-tr="business">Sophisticated and modern lines. Global brands united in one platform.</p><button onclick="translateSection(this)">Translate</button></div></div>
+  <div class="grid-item"><img src="medastare-femmesport-01.jpeg"><div class="caption"><h3>FemmeSport</h3><p data-tr="femmesport">Global collections combining sporty elegance and style.</p><button onclick="translateSection(this)">Translate</button></div></div>
+  <div class="grid-item"><img src="medastare-glamcouture-01.jpeg"><div class="caption"><h3>GlamCouture</h3><p data-tr="glamcouture">Red-carpet-worthy couture pieces to make you shine like a star.</p><button onclick="translateSection(this)">Translate</button></div></div>
+  <div class="grid-item"><img src="medastare-minimal-01.jpg"><div class="caption"><h3>Minimal Elegance</h3><p data-tr="minimal">Minimal elegance and global icons together.</p><button onclick="translateSection(this)">Translate</button></div></div>
+  <div class="grid-item"><img src="medastare-urbanflare-01.jpeg"><div class="caption"><h3>UrbanFlare</h3><p data-tr="urban">Reflecting city energy through global designs.</p><button onclick="translateSection(this)">Translate</button></div></div>
+  <div class="grid-item"><img src="petstare.jpeg"><div class="caption"><h3>PetStaré</h3><p data-tr="petstare">Technology works not only for humans but also for our loyal friends. Smart care, intuitive suggestions, and love-driven systems — because they are just as special.</p><button onclick="translateSection(this)">Translate</button></div></div>
 </div>
 
-<!-- Hakkımızda -->
 <section id="about">
-  <h2 data-tr="aboutTitle">Hakkımızda</h2>
-  <p data-tr="aboutText">MedaStaré, yapay zekayı moda ve güzellikle buluşturan Türkiye’nin ilk lüks moda-teknoloji ekosistemidir.</p>
+  <h2 data-tr="aboutTitle">About MedaStaré</h2>
+  <p data-tr="aboutText">MedaStaré is where AI meets fashion & beauty. From Turkey to the world, we bring together global collections and personalized styling technology.</p>
 </section>
 
-<!-- Vizyon -->
 <section id="vision">
-  <h2 data-tr="visionTitle">Vizyonumuz</h2>
-  <p data-tr="visionText">Stil, güzellik ve teknolojiyi global dokunuşla bir araya getiriyoruz. MedaStaré, geleceğin moda ve güzellik inovasyonunu şekillendiriyor.</p>
+  <h2 data-tr="visionTitle">Our Vision</h2>
+  <p data-tr="visionText">We are building Turkey’s first AI-powered fashion-tech ecosystem, uniting style, beauty, and technology with a global touch.</p>
 </section>
 
-<!-- Gelecek -->
 <section id="future">
-  <h2 data-tr="futureTitle">Gelecek Potansiyeli</h2>
-  <p data-tr="futureText">Global moda & güzellik pazarı 3 trilyon doları aşıyor. MedaStaré, technopark projesi statüsü ve hızlı yükselişiyle bu geleceği şekillendiriyor.</p>
+  <h2 data-tr="futureTitle">Future Potential</h2>
+  <p data-tr="futureText">The global fashion & beauty market surpasses $3 Trillion. MedaStaré is uniquely positioned with its technopark project status and rapid traction.</p>
 </section>
 
 <footer id="contact">
   <div class="grid">
     <div>
-      <h4 data-tr="company">Şirket</h4>
-      <a href="#">Kariyer</a>
-      <a href="#">İletişim</a>
+      <h4 data-tr="company">Company</h4>
+      <a href="/careers.html">Careers</a>
+      <a href="/contact.html">Contact</a>
     </div>
     <div>
-      <h4 data-tr="social">Sosyal</h4>
-      <a href="#">Instagram</a>
-      <a href="#">X (Twitter)</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">Crunchbase</a>
+      <h4 data-tr="social">Social</h4>
+      <a href="https://www.instagram.com/medastareapp" target="_blank">Instagram</a>
+      <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
+      <a href="https://www.linkedin.com/company/medastare/" target="_blank">LinkedIn</a>
+      <a href="https://www.crunchbase.com/organization/medastar%C3%A9" target="_blank">Crunchbase</a>
     </div>
   </div>
   <small>© 2025 MedaStaré. All rights reserved.</small>
@@ -271,75 +150,51 @@
 <button id="backToTop">↑</button>
 
 <script>
-/* Scroll header */
-window.addEventListener("scroll",()=>{
-  document.querySelector("header").classList.toggle("scrolled",window.scrollY>50);
-});
-
-/* Back to top */
+window.addEventListener("scroll",()=>{document.querySelector("header").classList.toggle("scrolled",window.scrollY>50);});
 const btn=document.getElementById("backToTop");
 window.addEventListener("scroll",()=>{btn.classList.toggle("show",window.scrollY>400);});
 btn.addEventListener("click",()=>{window.scrollTo({top:0,behavior:'smooth'});});
 
-/* Language toggle */
-let currentLang="tr";
-const translations={
-  en:{
-    heroTitle:"The global stage is now in your wardrobe",
-    heroText:"Collections for every style and budget — all in one place.",
-    about:"About", vision:"Vision", future:"Future", waitlist:"Waitlist", contact:"Contact",
-    medabeaute:"Unique global beauty products — perfumes, makeup, skincare, and exclusive MedaBeauté creations.",
-    business:"Sophisticated and modern lines. Global brands united in one platform.",
-    femmesport:"Global collections combining sporty elegance and style.",
-    glamcouture:"Red-carpet-worthy couture pieces to make you shine like a star.",
-    minimal:"Minimal elegance and global icons together.",
-    urban:"Reflecting city energy through global designs.",
-    petstare:"Technology works not only for humans but also for our loyal friends. Smart care, intuitive suggestions, and love-driven systems — because they are just as special.",
-    aboutTitle:"About MedaStaré",
-    aboutText:"MedaStaré unites AI with fashion and beauty — the first luxury fashion-tech ecosystem from Turkey.",
-    visionTitle:"Our Vision",
-    visionText:"We merge style, beauty, and technology with a global touch. MedaStaré is shaping the future of fashion and beauty innovation.",
-    futureTitle:"Future Potential",
-    futureText:"The global fashion & beauty market exceeds $3 Trillion. With its technopark status and rapid rise, MedaStaré leads this future.",
-    company:"Company", social:"Social"
-  },
-  tr:{}
-};
-
-function toggleLang(){
-  const elements=document.querySelectorAll("[data-tr]");
-  if(currentLang==="tr"){
-    elements.forEach(el=>{
-      const key=el.getAttribute("data-tr");
-      if(translations.en[key]) el.textContent=translations.en[key];
-    });
-    currentLang="en";
-  } else {
-    location.reload();
-  }
-}
-
 /* Particles */
-const c=document.getElementById("particles");
-const ctx=c.getContext("2d");
-let particles=[];
+const c=document.getElementById("particles"),ctx=c.getContext("2d");let particles=[];
 function resize(){c.width=innerWidth;c.height=innerHeight;}
 window.addEventListener("resize",resize);resize();
-for(let i=0;i<100;i++){
-  particles.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2+1,dx:(Math.random()-0.5)*0.5,dy:(Math.random()-0.5)*0.5});
-}
-function animate(){
-  ctx.clearRect(0,0,c.width,c.height);
-  ctx.fillStyle="rgba(255,215,0,0.6)";
-  particles.forEach(p=>{
-    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
-    p.x+=p.dx;p.y+=p.dy;
-    if(p.x<0||p.x>c.width)p.dx*=-1;
-    if(p.y<0||p.y>c.height)p.dy*=-1;
-  });
-  requestAnimationFrame(animate);
-}
+for(let i=0;i<80;i++){particles.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*2+1,dx:(Math.random()-0.5)*0.5,dy:(Math.random()-0.5)*0.5});}
+function animate(){ctx.clearRect(0,0,c.width,c.height);ctx.fillStyle="rgba(212,175,55,0.7)";
+particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();p.x+=p.dx;p.y+=p.dy;if(p.x<0||p.x>c.width)p.dx*=-1;if(p.y<0||p.y>c.height)p.dy*=-1;});requestAnimationFrame(animate);}
 animate();
+
+/* Translation */
+let lang="en";
+const trText={
+  medabeaute:"Benzersiz ve global kozmetik ürünleri: parfüm, makyaj, bakım. Global markaların yanı sıra özel üretimlerimiz.",
+  business:"Sofistike ve modern çizgiler. Global markaların seçkin parçaları tek platformda.",
+  femmesport:"Sportif şıklığı zarafetle birleştiren global koleksiyonlar.",
+  glamcouture:"Kırmızı halıya layık couture parçalarla yıldız gibi parlaman için.",
+  minimal:"Sade zarafet ve minimal çizgilerle global ikonlar bir arada.",
+  urban:"Şehrin enerjisini yansıtan global parçalar tek platformda.",
+  petstare:"Teknoloji, sadece insanlar için değil; en sadık dostlarımız için de çalışıyor.",
+  aboutTitle:"Hakkımızda",aboutText:"MedaStaré, yapay zekayı moda ve güzellikle buluşturan bir ekosistemdir.",
+  visionTitle:"Vizyonumuz",visionText:"Stil, güzellik ve teknolojiyi global dokunuşla bir araya getiriyoruz.",
+  futureTitle:"Gelecek Potansiyeli",futureText:"Global moda ve güzellik pazarı 3 trilyon doları aşıyor.",
+  company:"Şirket",social:"Sosyal"
+};
+function toggleLang(){
+  const elements=document.querySelectorAll("[data-tr]");
+  elements.forEach(el=>{
+    const key=el.getAttribute("data-tr");
+    if(lang==="en"&&trText[key])el.textContent=trText[key];
+    else el.textContent=translations[key]||el.textContent;
+  });
+  lang=lang==="en"?"tr":"en";
+}
+function translateSection(btn){
+  const p=btn.previousElementSibling;
+  const key=p.getAttribute("data-tr");
+  if(lang==="en"&&trText[key])p.textContent=trText[key];
+  else p.textContent=translations[key]||p.textContent;
+  lang=lang==="en"?"tr":"en";
+}
 </script>
 </body>
 </html>
