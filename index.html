@@ -1,226 +1,112 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MedaStaré</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-<style>
-:root {
-  --black:#0a0a0a;
-  --wine:#5a0f1d;
-  --pink:#ff4da6;
-  --gold:#d4af37;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body {
-  font-family:'Inter',sans-serif;
-  color:#fff;
-  overflow-x:hidden;
-  background:radial-gradient(circle at 20% 20%, var(--pink) 0%, var(--wine) 30%, var(--black) 100%);
-  background-attachment:fixed;
-  animation:bgflow 30s infinite alternate ease-in-out;
-}
-@keyframes bgflow {
-  0%{background-position:0 0}
-  100%{background-position:100% 100%}
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>MedaStaré | Tadilatta</title>
+  <link rel="icon" type="image/png" href="medastare-logo.PNG">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
 
-/* Parlayan partiküller */
-@keyframes sparkle {
-  0%,100%{opacity:0.3;transform:translateY(0)}
-  50%{opacity:1;transform:translateY(-10px)}
-}
-.sparkle{
-  position:fixed;
-  width:4px;height:4px;
-  background:var(--gold);
-  border-radius:50%;
-  animation:sparkle 4s infinite ease-in-out;
-  z-index:0;
-}
-.sparkle:nth-child(odd){animation-delay:1s;background:var(--pink)}
-.sparkle:nth-child(even){animation-delay:2s}
+  <style>
+    :root {
+      --black:#0a0a0a;
+      --gold:#d4af37;
+      --pink:#ff4da6;
+      --wine:#5a0f1d;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:Inter,sans-serif;
+      background:radial-gradient(circle at center,var(--black),#1a0011,var(--wine));
+      color:#fff;
+      height:100vh; overflow:hidden;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      text-align:center; position:relative;
+    }
 
-/* Header */
-header {
-  position:sticky;top:0;
-  background:rgba(0,0,0,0.6);
-  backdrop-filter:blur(6px);
-  padding:15px 40px;
-  display:flex;justify-content:space-between;align-items:center;
-  z-index:1000;
-}
-.logo{font-family:'Playfair Display',serif;color:var(--gold);font-size:1.7rem;}
-nav a{color:#fff;text-decoration:none;margin:0 15px;font-weight:500;}
-nav a:hover{color:var(--gold);}
-.lang-toggle{cursor:pointer;color:var(--pink);font-weight:600;}
+    /* Yıldız efekti */
+    .star{
+      position:absolute; background:var(--gold);
+      border-radius:50%; opacity:0.7;
+      animation:twinkle 4s infinite ease-in-out;
+    }
+    @keyframes twinkle{
+      0%,100%{opacity:0.2; transform:scale(0.8);}
+      50%{opacity:1; transform:scale(1.2);}
+    }
 
-/* Sections */
-section{padding:80px 20px;max-width:900px;margin:auto;text-align:center;position:relative;z-index:10;}
-section h2{
-  font-family:'Playfair Display',serif;
-  color:var(--gold);
-  font-size:2rem;
-  margin-bottom:20px;
-  opacity:0;transform:translateY(20px);
-  animation:fadeInUp 1s forwards;
-}
-section p{
-  color:#ddd;
-  line-height:1.6;
-  font-size:1.1rem;
-  opacity:0;transform:translateY(20px);
-  animation:fadeInUp 1.5s forwards;
-}
+    /* Başlık */
+    h1{
+      font-family:"Playfair Display",serif;
+      font-size:2.8rem; color:var(--gold);
+      letter-spacing:1px; margin-bottom:15px;
+      animation:fadeInDown 2s ease forwards;
+    }
+    @keyframes fadeInDown{
+      from{opacity:0;transform:translateY(-30px);}
+      to{opacity:1;transform:translateY(0);}
+    }
 
-/* Koleksiyon Kartları */
-.collection {
-  display:flex;
-  flex-direction:column;
-  gap:40px;
-  margin-top:40px;
-}
-.card{
-  background:rgba(255,255,255,0.05);
-  border:1px solid rgba(212,175,55,0.3);
-  border-radius:12px;
-  overflow:hidden;
-  box-shadow:0 0 15px rgba(0,0,0,0.3);
-  transition:transform .3s ease,box-shadow .3s ease;
-  opacity:0;
-  transform:translateY(30px);
-  animation:fadeInUp 1.2s forwards;
-}
-.card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(212,175,55,0.4);}
-.card img{width:100%;display:block;}
-.card .caption{padding:20px;}
-.card h3{font-family:'Playfair Display',serif;color:var(--gold);margin-bottom:10px;}
-.card p{color:#ccc;}
+    p{
+      font-size:1.2rem; color:#ddd;
+      max-width:600px; margin:auto;
+      line-height:1.6;
+      animation:fadeIn 2.5s ease forwards;
+    }
+    @keyframes fadeIn{
+      from{opacity:0;}
+      to{opacity:1;}
+    }
 
-/* Fade in */
-@keyframes fadeInUp {
-  to {opacity:1;transform:translateY(0);}
-}
+    .signature{
+      margin-top:30px; font-weight:600; color:var(--pink);
+      animation:fadeIn 3s ease forwards;
+    }
 
-/* Button */
-button {
-  background:linear-gradient(90deg,var(--wine),var(--pink));
-  border:none;
-  padding:12px 24px;
-  border-radius:8px;
-  color:#fff;
-  font-weight:600;
-  margin-top:20px;
-  cursor:pointer;
-  transition:transform .3s;
-}
-button:hover{transform:scale(1.05);}
-
-/* Footer */
-footer{
-  background:#000;
-  text-align:center;
-  padding:40px 20px;
-  color:#777;
-}
-footer a{color:var(--pink);text-decoration:none;font-weight:600;}
-</style>
+    .lang-toggle{
+      position:absolute; top:25px; right:25px;
+      background:linear-gradient(90deg,var(--pink),var(--gold));
+      color:#000; font-weight:600;
+      border:none; border-radius:20px;
+      padding:8px 14px; cursor:pointer;
+      transition:.3s;
+    }
+    .lang-toggle:hover{transform:scale(1.05);}
+  </style>
 </head>
 <body>
 
-<!-- Parlayan partiküller -->
+<button class="lang-toggle" onclick="toggleLang()">TR | EN</button>
+
+<h1 id="title">Sitemiz kısa süreliğine tadilatta</h1>
+<p id="desc">Sizlere daha iyi bir deneyim sunmak için sistemimizi güncelliyoruz.<br> Lütfen kısa bir süre sonra tekrar ziyaret edin.</p>
+<div class="signature" id="sign">💫 MedaStaré Ekibi 💫</div>
+
 <script>
-for(let i=0;i<25;i++){
-  let s=document.createElement('div');
-  s.className='sparkle';
+/* Yıldız oluşturma */
+for(let i=0;i<60;i++){
+  const s=document.createElement('div');
+  s.className='star';
+  s.style.width=s.style.height=Math.random()*3+2+'px';
   s.style.top=Math.random()*100+'%';
   s.style.left=Math.random()*100+'%';
-  s.style.animationDuration=(3+Math.random()*3)+'s';
+  s.style.animationDuration=(2+Math.random()*4)+'s';
   document.body.appendChild(s);
 }
-</script>
 
-<header>
-  <div class="logo">MedaStaré</div>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#collections">Collections</a>
-    <a href="#vision">Vision</a>
-    <a href="#contact">Contact</a>
-  </nav>
-  <div class="lang-toggle" onclick="toggleLang()">TR | EN</div>
-</header>
-
-<section id="about">
-  <h2>Hakkımızda</h2>
-  <p>MedaStaré; moda, güzellik ve teknolojiyi birleştirerek dijital zarafetin geleceğini şekillendiriyor.</p>
-</section>
-
-<section id="collections">
-  <h2>Koleksiyonlar</h2>
-  <div class="collection">
-    <div class="card">
-      <img src="medabeaute-perfume-01.jpeg" alt="MedaBeauté">
-      <div class="caption">
-        <h3>MedaBeauté</h3>
-        <p>Benzersiz kozmetik ürünleri: parfüm, makyaj, bakım — global markalarla birlikte özel üretimlerimiz.</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="medastare-business-01.jpeg" alt="Business">
-      <div class="caption">
-        <h3>Business Collection</h3>
-        <p>Sofistike çizgiler, güçlü siluetler. Global markaların seçkin parçaları tek platformda.</p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="petstare.PNG" alt="PetStaré">
-      <div class="caption">
-        <h3>Pet Companion</h3>
-        <p>Teknoloji, sadece insanlar için değil; en sadık dostlarımız için de çalışıyor.<br>
-        Akıllı bakım, sezgisel öneriler ve sevgiyle dokunan bir sistem — çünkü onlar da en az bizler kadar özel.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="vision">
-  <h2>Vizyon</h2>
-  <p>Türkiye’nin ilk yapay zekâ destekli moda teknolojisi ekosistemi: global zarafeti yerel dokuyla buluşturuyoruz.</p>
-</section>
-
-<section id="contact">
-  <h2>İletişim</h2>
-  <p>Bizimle iletişime geçin: <a href="mailto:info@medastare.com">info@medastare.com</a></p>
-</section>
-
-<footer>
-  <p>© 2025 MedaStaré. All rights reserved.</p>
-</footer>
-
-<script>
+/* Çeviri butonu */
+const translations={
+  title:{tr:"Sitemiz kısa süreliğine tadilatta", en:"Our website is temporarily under maintenance"},
+  desc:{tr:"Sizlere daha iyi bir deneyim sunmak için sistemimizi güncelliyoruz.<br> Lütfen kısa bir süre sonra tekrar ziyaret edin.",
+        en:"We’re updating our system to offer you a better experience.<br> Please check back again soon."},
+  sign:{tr:"💫 MedaStaré Ekibi 💫", en:"💫 The MedaStaré Team 💫"}
+};
 let currentLang="tr";
 function toggleLang(){
-  const tr={
-    about:"Hakkımızda",collections:"Koleksiyonlar",vision:"Vizyon",contact:"İletişim",
-    aboutText:"MedaStaré; moda, güzellik ve teknolojiyi birleştirerek dijital zarafetin geleceğini şekillendiriyor.",
-    visionText:"Türkiye’nin ilk yapay zekâ destekli moda teknolojisi ekosistemi: global zarafeti yerel dokuyla buluşturuyoruz."
-  };
-  const en={
-    about:"About",collections:"Collections",vision:"Vision",contact:"Contact",
-    aboutText:"MedaStaré combines fashion, beauty, and technology to define the future of digital elegance.",
-    visionText:"Turkey’s first AI-powered fashion-tech ecosystem — uniting global sophistication with local touch."
-  };
-  const set=currentLang==="tr"?en:tr;
-  document.querySelector('nav a[href="#about"]').textContent=set.about;
-  document.querySelector('nav a[href="#collections"]').textContent=set.collections;
-  document.querySelector('nav a[href="#vision"]').textContent=set.vision;
-  document.querySelector('nav a[href="#contact"]').textContent=set.contact;
-  document.querySelector('#about p').textContent=set.aboutText;
-  document.querySelector('#vision p').textContent=set.visionText;
-  document.querySelector('.lang-toggle').textContent=currentLang==="tr"?"EN | TR":"TR | EN";
   currentLang=currentLang==="tr"?"en":"tr";
+  document.getElementById("title").innerHTML=translations.title[currentLang];
+  document.getElementById("desc").innerHTML=translations.desc[currentLang];
+  document.getElementById("sign").innerHTML=translations.sign[currentLang];
 }
 </script>
 
