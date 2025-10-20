@@ -1,68 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Careers — MedaStaré</title>
-  <link rel="icon" type="image/png" href="/favicon.ico">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Careers — MedaStaré</title>
+<link rel="icon" type="image/png" href="/favicon.ico" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
 
-  <style>
-    :root {
-      --pink:#fbeef5;
-      --wine:#6d1f34;
-      --black:#111;
-      --gray:#666;
-    }
-    html, body {
-      margin:0;
-      padding:0;
-      max-width:100%;
-      overflow-x:hidden;
-      font-family: Inter, sans-serif;
-      background:var(--pink);
-      color:var(--black);
-    }
-    header {
-      display:flex; justify-content:space-between; align-items:center;
-      padding:20px 40px; background:#fff; position:sticky; top:0; z-index:1000;
-      border-bottom:1px solid #eee;
-    }
-    header .logo { font-family:"Playfair Display", serif; font-size:1.5rem; color:var(--wine); font-weight:600; }
-    header nav a { margin:0 15px; text-decoration:none; color:var(--black); font-weight:500; }
-    header .lang-toggle { cursor:pointer; font-size:.9rem; color:var(--wine); }
+<style>
+:root {
+  --gold:#d4af37;
+  --pink:#ff4da6;
+  --black:#000;
+  --gray:#aaa;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:Inter,sans-serif;
+  background:linear-gradient(135deg,#0d0d0f,#1a1a1f,#000);
+  color:#fff;
+  overflow-x:hidden;
+  position:relative;
+  min-height:100vh;
+}
 
-    main { padding:60px 20px; max-width:900px; margin:auto; }
-    h1 { font-family:"Playfair Display", serif; font-size:2rem; margin-bottom:20px; color:var(--wine);}
-    p { color:var(--gray); line-height:1.6; margin-bottom:20px; }
+/* ===== Particles background ===== */
+#particles{
+  position:fixed; inset:0;
+  width:100vw; height:100vh;
+  pointer-events:none;
+  z-index:0; opacity:.85;
+  mix-blend-mode:screen;
+}
 
-    .card { background:#fff; border-radius:12px; padding:25px; box-shadow:0 4px 15px rgba(0,0,0,0.08); margin-top:30px; }
-    .card h2 { font-family:"Playfair Display", serif; font-size:1.5rem; margin-bottom:15px; color:var(--wine);}
-    .btnRow { display:flex; gap:12px; flex-wrap:wrap; margin-top:20px; }
-    .btn { flex:1; text-align:center; padding:14px; border-radius:6px; font-weight:600; cursor:pointer; text-decoration:none; }
-    .btn.gold { background:var(--wine); color:#fff; }
-    .btn.gold:hover { background:#8a2945; }
-    .btn.ghost { border:1px solid var(--wine); color:var(--wine); background:transparent; }
-    .btn.ghost:hover { background:var(--wine); color:#fff; }
+/* ===== Header ===== */
+header{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:20px 40px;
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(8px);
+  position:sticky; top:0; z-index:10;
+  border-bottom:1px solid rgba(212,175,55,.2);
+}
+header .logo{
+  font-family:"Playfair Display",serif;
+  font-size:1.8rem;
+  color:var(--gold);
+  font-weight:600;
+}
+nav a{
+  color:#fff;
+  text-decoration:none;
+  margin:0 15px;
+  font-weight:500;
+  transition:color .3s;
+}
+nav a:hover{ color:var(--gold); }
+.lang-toggle{
+  color:var(--pink);
+  cursor:pointer;
+  font-size:.9rem;
+  border:1px solid var(--pink);
+  border-radius:10px;
+  padding:4px 8px;
+}
 
-    footer { background:#111; color:#fff; padding:40px 20px; margin-top:40px; }
-    footer small { display:block; margin-top:30px; text-align:center; color:#aaa; }
-  </style>
+/* ===== Main ===== */
+main{
+  position:relative;
+  z-index:1;
+  max-width:900px;
+  margin:auto;
+  padding:80px 20px;
+}
+h1,h2{
+  font-family:"Playfair Display",serif;
+  color:var(--gold);
+}
+h1{font-size:2rem;margin-bottom:20px;}
+p{color:var(--gray);line-height:1.7;margin-bottom:20px;}
+
+/* ===== Card Section ===== */
+.card{
+  background:rgba(255,255,255,.05);
+  border-radius:12px;
+  padding:30px;
+  box-shadow:0 0 25px rgba(0,0,0,.3);
+  border:1px solid rgba(212,175,55,.2);
+  margin-top:30px;
+  backdrop-filter:blur(6px);
+}
+.card h2{
+  color:var(--gold);
+  font-family:"Playfair Display",serif;
+  font-size:1.5rem;
+  margin-bottom:15px;
+}
+.btnRow{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px;}
+.btn{
+  flex:1;
+  text-align:center;
+  padding:14px;
+  border-radius:8px;
+  font-weight:600;
+  cursor:pointer;
+  text-decoration:none;
+  font-size:1rem;
+  transition:transform .3s;
+}
+.btn.gold{
+  background:linear-gradient(90deg,var(--pink),var(--gold));
+  color:#000;
+}
+.btn.gold:hover{transform:scale(1.05);}
+.btn.ghost{
+  border:1px solid var(--gold);
+  color:var(--gold);
+  background:transparent;
+}
+.btn.ghost:hover{
+  background:var(--gold);
+  color:#000;
+  transform:scale(1.05);
+}
+.note{font-size:.9rem;color:#bbb;}
+
+/* ===== Footer ===== */
+footer{
+  background:rgba(0,0,0,.9);
+  text-align:center;
+  padding:50px 20px;
+  margin-top:60px;
+  position:relative;
+  z-index:1;
+  border-top:1px solid rgba(212,175,55,.2);
+}
+footer small{color:#777;}
+
+/* ===== Responsive ===== */
+@media(max-width:600px){
+  header{flex-direction:column;gap:10px;}
+  nav a{margin:0 8px;}
+}
+</style>
 </head>
 <body>
+
+<canvas id="particles"></canvas>
 
 <header>
   <div class="logo">MedaStaré</div>
   <nav>
-    <a href="/" data-en="Home" data-tr="Ana Sayfa">Home</a>
-    <a href="/careers.html" data-en="Careers" data-tr="Kariyerler">Careers</a>
-    <a href="/#contact" data-en="Contact" data-tr="İletişim">Contact</a>
+    <a href="/">Home</a>
+    <a href="/careers.html">Careers</a>
+    <a href="/contact.html">Contact</a>
   </nav>
   <div class="lang-toggle" onclick="toggleLang()">TR | EN</div>
 </header>
 
 <main>
   <h1 data-en="Careers" data-tr="Kariyerler">Careers</h1>
-
   <p data-en="We’re building the future of fashion-tech. If you’re passionate about AI, personalization and premium digital experiences, you’ll feel at home."
      data-tr="Moda-teknolojisinin geleceğini inşa ediyoruz. Yapay zekâ, kişiselleştirme ve premium dijital deneyimlere tutkuluysan, burada kendini evinde hissedeceksin.">
      We’re building the future of fashion-tech. If you’re passionate about AI, personalization and premium digital experiences, you’ll feel at home.
@@ -94,23 +191,82 @@
 </footer>
 
 <script>
-  let currentLang = localStorage.getItem("lang") || "EN";
+/* ===== Lang toggle ===== */
+let currentLang=localStorage.getItem("lang")||"EN";
+updateLang();
+function toggleLang(){
+  currentLang=(currentLang==="EN")?"TR":"EN";
+  localStorage.setItem("lang",currentLang);
   updateLang();
+}
+function updateLang(){
+  document.querySelector(".lang-toggle").innerText=(currentLang==="EN")?"TR | EN":"EN | TR";
+  document.querySelectorAll("[data-en]").forEach(el=>{
+    el.innerText=(currentLang==="EN")?el.dataset.en:el.dataset.tr;
+  });
+}
 
-  function toggleLang() {
-    currentLang = (currentLang === "EN") ? "TR" : "EN";
-    localStorage.setItem("lang", currentLang);
-    updateLang();
+/* ===== Gold particle animation ===== */
+(function(){
+  const canvas=document.getElementById("particles");
+  if(!canvas)return;
+  const ctx=canvas.getContext("2d");
+  const DPR=Math.min(window.devicePixelRatio||1,2);
+  const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function resize(){
+    const w=Math.floor(window.innerWidth*DPR);
+    const h=Math.floor(window.innerHeight*DPR);
+    canvas.width=w;canvas.height=h;
+    canvas.style.width=window.innerWidth+"px";
+    canvas.style.height=window.innerHeight+"px";
+  }
+  resize();window.addEventListener("resize",resize,{passive:true});
+
+  const N=110,maxDist=140*DPR,speed=0.35*DPR;
+  const P=Array.from({length:N},()=>({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    dx:(Math.random()-.5)*speed,
+    dy:(Math.random()-.5)*speed,
+    r:(1.1+Math.random()*2.1)*DPR
+  }));
+
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(const p of P){
+      ctx.beginPath();
+      ctx.fillStyle="rgba(212,175,55,0.85)";
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fill();
+    }
+    for(let i=0;i<N;i++){
+      for(let j=i+1;j<N;j++){
+        const a=P[i],b=P[j];
+        const dx=a.x-b.x,dy=a.y-b.y;
+        const d2=dx*dx+dy*dy;
+        if(d2<maxDist*maxDist){
+          const alpha=0.25*(1-Math.sqrt(d2)/maxDist);
+          ctx.strokeStyle=`rgba(212,175,55,${alpha})`;
+          ctx.lineWidth=DPR*0.6;
+          ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();
+        }
+      }
+    }
   }
 
-  function updateLang() {
-    document.querySelector(".lang-toggle").innerText = 
-      (currentLang === "EN") ? "TR | EN" : "EN | TR";
-    document.querySelectorAll("[data-en]").forEach(el => {
-      el.innerText = (currentLang === "EN") ? el.dataset.en : el.dataset.tr;
-    });
+  function step(){
+    for(const p of P){
+      p.x+=p.dx;p.y+=p.dy;
+      if(p.x<0||p.x>canvas.width)p.dx*=-1;
+      if(p.y<0||p.y>canvas.height)p.dy*=-1;
+    }
   }
+
+  function loop(){draw();if(!reduced){step();requestAnimationFrame(loop);}}
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden&&!reduced)requestAnimationFrame(loop);});
+  loop();
+})();
 </script>
-
 </body>
 </html>
