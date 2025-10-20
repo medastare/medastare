@@ -1,1 +1,346 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MedaStaré</title>
+<link rel="icon" type="image/png" href="medastare-logo.PNG" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
 
+<style>
+:root{
+  --black:#000; --gray:#1a1a1a; --light:#d9d9d9;
+  --gold:#d4af37; --pink:#ff4da6;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:Inter,sans-serif;
+  background:linear-gradient(135deg,var(--light),var(--gray),var(--black));
+  color:#fff; overflow-x:hidden; position:relative;
+}
+
+/* ===== Particles canvas (arka plan) ===== */
+#particles{
+  position:fixed; inset:0; display:block;
+  width:100vw; height:100vh; pointer-events:none;
+  z-index:0; opacity:.85; mix-blend-mode:screen;
+}
+
+/* ===== Header ===== */
+header{
+  display:flex; justify-content:space-between; align-items:center;
+  padding:20px 40px; position:sticky; top:0; z-index:10;
+  background:rgba(0,0,0,.65); backdrop-filter:blur(8px);
+  transition:background .3s ease;
+}
+header.scrolled{ background:rgba(0,0,0,.9); }
+.logo{ font-family:"Playfair Display",serif; color:var(--gold); font-size:1.8rem; }
+nav a{
+  color:#fff; text-decoration:none; margin:0 15px; font-weight:500; transition:color .3s;
+}
+nav a:hover{ color:var(--gold); }
+.lang-toggle{
+  color:var(--pink); cursor:pointer; font-size:.9rem;
+  border:1px solid var(--pink); border-radius:10px; padding:4px 8px;
+}
+
+/* ===== Sections ===== */
+section{
+  max-width:1000px; margin:auto; text-align:center; padding:80px 20px;
+  position:relative; z-index:1;
+}
+h1,h2{ font-family:"Playfair Display",serif; color:var(--gold); margin-bottom:20px; }
+p{ color:#ddd; line-height:1.7; font-size:1rem; }
+
+/* Hero */
+.hero img{
+  width:100%; max-width:850px; border-radius:16px;
+  box-shadow:0 0 40px rgba(0,0,0,.5);
+  animation:float 6s ease-in-out infinite;
+}
+@keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+
+/* Collections grid (alt alta responsive) */
+.grid{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px; margin-top:60px;
+}
+.grid-item{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(212,175,55,.2);
+  border-radius:14px; overflow:hidden; backdrop-filter:blur(6px);
+  transition:transform .4s, box-shadow .4s;
+}
+.grid-item:hover{ transform:translateY(-10px); box-shadow:0 10px 25px rgba(212,175,55,.4); }
+.grid-item img{ width:100%; display:block; }
+.caption{ padding:20px; }
+.caption h3{ color:var(--gold); margin-bottom:10px; }
+.caption p{ font-size:.95rem; }
+
+/* Form */
+form{ max-width:500px; margin:auto; display:flex; flex-direction:column; gap:15px; margin-top:20px; }
+input{
+  border:none; border-bottom:1px solid #666; background:transparent;
+  padding:12px; color:#fff; font-size:1rem;
+}
+input:focus{ border-color:var(--gold); outline:none; }
+button{
+  background:linear-gradient(90deg,var(--pink),var(--gold));
+  border:none; padding:14px; border-radius:8px; font-weight:600; cursor:pointer; color:#000;
+}
+button:hover{ transform:scale(1.05); }
+
+/* Footer */
+footer{ background:#000; padding:50px 20px; text-align:center; }
+footer .grid{
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:30px; margin-bottom:30px;
+}
+footer h4{ color:var(--gold); margin-bottom:10px; }
+footer a{ color:#aaa; text-decoration:none; display:block; margin:5px 0; }
+footer a:hover{ color:var(--pink); }
+footer small{ color:#666; }
+
+/* Back to top */
+#backToTop{
+  position:fixed; right:20px; bottom:20px;
+  background:linear-gradient(135deg,var(--pink),var(--gold));
+  border:none; border-radius:50%; padding:14px; font-size:18px;
+  color:#000; cursor:pointer; opacity:0; transition:opacity .3s; z-index:9999;
+}
+#backToTop.show{ opacity:1; }
+
+@media (prefers-reduced-motion:reduce){
+  .hero img{ animation:none; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<header id="top">
+  <div class="logo">MedaStaré</div>
+  <nav>
+    <a href="#about"  data-tr="Hakkımızda" data-en="About">About</a>
+    <a href="#vision" data-tr="Vizyon"     data-en="Vision">Vision</a>
+    <a href="#future" data-tr="Gelecek"    data-en="Future">Future</a>
+    <a href="#waitlist" data-tr="Bekleme Listesi" data-en="Waitlist">Waitlist</a>
+    <a href="#contact" data-tr="İletişim"  data-en="Contact">Contact</a>
+  </nav>
+  <div class="lang-toggle" onclick="toggleLang()">TR | EN</div>
+</header>
+
+<section class="hero">
+  <img src="medastare-eiffel-elegance.jpeg" alt="Eiffel Elegance" />
+  <h1 data-tr="Küresel sahne artık senin gardırobunda" data-en="Global stage now in your wardrobe">Global stage now in your wardrobe</h1>
+  <p  data-tr="Her tarz ve bütçeye uygun koleksiyonlar, tek bir yerde." data-en="Collections for every style and budget, all in one place.">Collections for every style and budget, all in one place.</p>
+</section>
+
+<section id="collections">
+  <h2 data-tr="Koleksiyonlar" data-en="Collections">Collections</h2>
+  <div class="grid">
+    <div class="grid-item">
+      <img src="medabeaute-perfume-01.jpeg" alt="MedaBeauté" />
+      <div class="caption">
+        <h3>MedaBeauté</h3>
+        <p data-tr="Kozmetik, parfüm, makyaj ve bakımda global dokunuş." data-en="Global cosmetics, perfume, makeup & skincare by MedaBeauté.">Global cosmetics, perfume, makeup & skincare by MedaBeauté.</p>
+      </div>
+    </div>
+    <div class="grid-item">
+      <img src="medastare-business-01.jpeg" alt="Business Collection" />
+      <div class="caption">
+        <h3>Business Collection</h3>
+        <p data-tr="Modern ve sofistike çizgilerle iş dünyasına stil." data-en="Modern and sophisticated business silhouettes.">Modern and sophisticated business silhouettes.</p>
+      </div>
+    </div>
+    <div class="grid-item">
+      <img src="medastare-femmesport-01.jpeg" alt="FemmeSport" />
+      <div class="caption">
+        <h3>FemmeSport</h3>
+        <p data-tr="Sportif şıklıkla birleşen zarif detaylar." data-en="Elegant activewear with refined energy.">Elegant activewear with refined energy.</p>
+      </div>
+    </div>
+    <div class="grid-item">
+      <img src="medastare-glamcouture-01.jpeg" alt="GlamCouture" />
+      <div class="caption">
+        <h3>GlamCouture</h3>
+        <p data-tr="Kırmızı halıya layık couture parçalarla yıldız gibi parlaman için." data-en="Red carpet couture pieces to make you shine.">Red carpet couture pieces to make you shine.</p>
+      </div>
+    </div>
+    <div class="grid-item">
+      <img src="medastare-minimal-01.jpg" alt="Minimal Elegance" />
+      <div class="caption">
+        <h3>Minimal Elegance</h3>
+        <p data-tr="Sade zarafet ve minimal çizgilerle global ikonlar bir arada." data-en="Global icons of minimalist elegance.">Global icons of minimalist elegance.</p>
+      </div>
+    </div>
+    <div class="grid-item">
+      <img src="medastare-urbanflare-01.jpeg" alt="UrbanFlare" />
+      <div class="caption">
+        <h3>UrbanFlare</h3>
+        <p data-tr="Şehrin enerjisini yansıtan global parçalar tek platformda." data-en="City-inspired global pieces in one universe.">City-inspired global pieces in one universe.</p>
+      </div>
+    </div>
+    <div class="grid-item">
+      <img src="petstare.PNG" alt="PetStaré" />
+      <div class="caption">
+        <h3>PetStaré</h3>
+        <p data-tr="Teknoloji, sadece insanlar için değil; en sadık dostlarımız için de." data-en="Technology designed for our most loyal friends.">Technology designed for our most loyal friends.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="waitlist" id="waitlist">
+  <h2 data-tr="Bekleme Listesine Katıl" data-en="Join the Waitlist">Join the Waitlist</h2>
+  <p  data-tr="Özel koleksiyonlara ilk erişen sen ol." data-en="Be the first to access exclusive collections and previews.">Be the first to access exclusive collections and previews.</p>
+  <!-- waitlist endpointİNİ BOZMADIM -->
+  <form id="waitlist-form" method="POST" action="/api/waitlist">
+    <input name="name" type="text" placeholder="Full Name" required autocomplete="name" />
+    <input name="email" type="email" placeholder="Email Address" required autocomplete="email" />
+    <button type="submit">Sign Up</button>
+  </form>
+</section>
+
+<section id="about">
+  <h2 data-tr="Hakkımızda" data-en="About MedaStaré">About MedaStaré</h2>
+  <p data-tr="MedaStaré, yapay zekayı moda ve güzellikle buluşturan, Türkiye'den dünyaya uzanan ilk moda teknolojisi ekosistemidir. Kadın girişimciliğini, global markalarla yerel inovasyonu aynı platformda birleştirir."
+     data-en="MedaStaré brings AI together with fashion and beauty — a tech ecosystem born in Turkey, expanding globally. It unites female entrepreneurship, global brands, and local innovation on one elegant platform.">
+    MedaStaré brings AI together with fashion and beauty — a tech ecosystem born in Turkey, expanding globally. It unites female entrepreneurship, global brands, and local innovation on one elegant platform.
+  </p>
+</section>
+
+<section id="vision">
+  <h2 data-tr="Vizyonumuz" data-en="Our Vision">Our Vision</h2>
+  <p data-tr="Türkiye’nin ilk yapay zekâ destekli moda ve güzellik ekosistemini kuruyoruz. 9 patent başvurusu, 50'den fazla özel içerik ve uluslararası işbirliğiyle geleceğin dijital moda deneyimini inşa ediyoruz."
+     data-en="We are building Turkey’s first AI-powered fashion and beauty ecosystem with 9 patent applications, 50+ proprietary contents, and international collaborations shaping the digital future.">
+    We are building Turkey’s first AI-powered fashion and beauty ecosystem with 9 patent applications, 50+ proprietary contents, and international collaborations shaping the digital future.
+  </p>
+</section>
+
+<section id="future">
+  <h2 data-tr="Gelecek Potansiyeli" data-en="Future Potential">Future Potential</h2>
+  <p data-tr="Küresel moda ve güzellik pazarı 3 trilyon doları aşıyor. MedaStaré, technopark projesi statüsüyle ve hızla artan küresel görünürlüğüyle bu pazarda yeni bir dönemi temsil ediyor."
+     data-en="The global fashion & beauty market exceeds $3 trillion. With technopark project status and rapidly growing international visibility, MedaStaré represents a new era in this market.">
+    The global fashion & beauty market exceeds $3 trillion. With technopark project status and rapidly growing international visibility, MedaStaré represents a new era in this market.
+  </p>
+</section>
+
+<footer id="contact">
+  <div class="grid">
+    <div>
+      <h4 data-tr="Şirket" data-en="Company">Company</h4>
+      <a href="/careers.html">Careers</a>
+      <a href="/contact.html">Contact</a>
+    </div>
+    <div>
+      <h4 data-tr="Sosyal" data-en="Social">Social</h4>
+      <a href="https://www.instagram.com/medastareapp" target="_blank">Instagram</a>
+      <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
+      <a href="https://www.linkedin.com/company/medastare/" target="_blank">LinkedIn</a>
+      <a href="https://www.crunchbase.com/organization/medastar%C3%A9" target="_blank">Crunchbase</a>
+    </div>
+  </div>
+  <!-- Reserved metni BİLEREK İngilizce bırakıldı -->
+  <small>© 2025 MedaStaré. All rights reserved.</small>
+</footer>
+
+<button id="backToTop" aria-label="Back to top">↑</button>
+
+<script>
+/* ===== Header scroll bg ===== */
+document.addEventListener("scroll", ()=>{
+  const h=document.querySelector("header");
+  if(!h) return;
+  h.classList.toggle("scrolled", window.scrollY>50);
+}, {passive:true});
+
+/* ===== Back to top ===== */
+(function(){
+  const btn=document.getElementById("backToTop");
+  if(!btn) return;
+  const toggle=()=>btn.classList.toggle("show", window.scrollY>200);
+  toggle();
+  window.addEventListener("scroll", toggle, {passive:true});
+  btn.addEventListener("click", ()=>window.scrollTo({top:0,behavior:"smooth"}));
+})();
+
+/* ===== Language toggle (nav + başlıklar + açıklamalar + footer başlıkları) ===== */
+let LANG="en";
+function toggleLang(){
+  LANG=(LANG==="en")?"tr":"en";
+  document.querySelectorAll("[data-tr]").forEach(el=>{
+    const tr=el.getAttribute("data-tr");
+    const en=el.getAttribute("data-en") || el.textContent;
+    if(!el.getAttribute("data-en")) el.setAttribute("data-en", el.textContent);
+    el.textContent=(LANG==="tr")?tr:el.getAttribute("data-en");
+  });
+  const t=document.querySelector(".lang-toggle");
+  if(t) t.textContent=(LANG==="tr")?"EN | TR":"TR | EN";
+}
+
+/* ===== Particles (retina + bağ çizgili) ===== */
+(function(){
+  const canvas=document.getElementById("particles");
+  if(!canvas) return;
+  const ctx=canvas.getContext("2d");
+  const DPR=Math.min(window.devicePixelRatio||1,2);
+  const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  function resize(){
+    const w=Math.floor(window.innerWidth*DPR);
+    const h=Math.floor(window.innerHeight*DPR);
+    canvas.width=w; canvas.height=h;
+    canvas.style.width=window.innerWidth+"px";
+    canvas.style.height=window.innerHeight+"px";
+  }
+  resize(); window.addEventListener("resize", resize, {passive:true});
+
+  const N=110, maxDist=140*DPR, speed=0.35*DPR;
+  const P=Array.from({length:N}, ()=>({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    dx:(Math.random()-.5)*speed,
+    dy:(Math.random()-.5)*speed,
+    r:(1.1+Math.random()*2.1)*DPR
+  }));
+
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    // dots
+    for(const p of P){
+      ctx.beginPath();
+      ctx.fillStyle="rgba(212,175,55,0.85)";
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fill();
+    }
+    // links
+    for(let i=0;i<N;i++){
+      for(let j=i+1;j<N;j++){
+        const a=P[i], b=P[j];
+        const dx=a.x-b.x, dy=a.y-b.y;
+        const d2=dx*dx+dy*dy;
+        if(d2<maxDist*maxDist){
+          const alpha=0.25*(1-Math.sqrt(d2)/maxDist);
+          ctx.strokeStyle=`rgba(212,175,55,${alpha})`;
+          ctx.lineWidth=DPR*0.6;
+          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
+        }
+      }
+    }
+  }
+  function step(){
+    for(const p of P){
+      p.x+=p.dx; p.y+=p.dy;
+      if(p.x<0||p.x>canvas.width)  p.dx*=-1;
+      if(p.y<0||p.y>canvas.height) p.dy*=-1;
+    }
+  }
+  function loop(){ draw(); if(!reduced){ step(); requestAnimationFrame(loop); } }
+  document.addEventListener("visibilitychange", ()=>{ if(!document.hidden && !reduced) requestAnimationFrame(loop); });
+  loop();
+})();
+</script>
+</body>
+</html>
