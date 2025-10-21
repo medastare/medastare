@@ -317,57 +317,6 @@ document.addEventListener("scroll", ()=>{
   h.classList.toggle("scrolled", window.scrollY>50);
 }, {passive:true});
 
-
-<!-- 🌟 BACK TO TOP BUTTON -->
-<button id="backToTop" title="Back to Top">↑</button>
-
-<style>
-#backToTop {
-  position: fixed;
-  right: 22px;
-  bottom: 25px;
-  width: 55px;
-  height: 55px;
-  border: none;
-  border-radius: 50%;
-  font-size: 22px;
-  color: #000;
-  cursor: pointer;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: opacity 0.5s ease, transform 0.4s ease;
-  z-index: 9999;
-  background: linear-gradient(90deg, #ff4da6, #d4af37, #ff4da6);
-  background-size: 300% 300%;
-  animation: backToTopGlow 4s ease infinite, backToTopPulse 3s ease-in-out infinite;
-  box-shadow: 0 0 25px rgba(212,175,55,0.45);
-}
-
-#backToTop.show {
-  opacity: 1;
-  transform: scale(1);
-}
-
-#backToTop:hover {
-  transform: scale(1.12);
-  box-shadow: 0 0 40px rgba(212,175,55,0.65);
-}
-
-/* Renk geçişi */
-@keyframes backToTopGlow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Aura efekti */
-@keyframes backToTopPulse {
-  0%,100% { box-shadow: 0 0 25px rgba(212,175,55,0.45), 0 0 50px rgba(255,77,166,0.2); }
-  50% { box-shadow: 0 0 45px rgba(212,175,55,0.75), 0 0 90px rgba(255,77,166,0.3); }
-}
-</style>
-
-<script>
 /* ===== Back to top ===== */
 (function(){
   const btn=document.getElementById("backToTop");
@@ -377,7 +326,7 @@ document.addEventListener("scroll", ()=>{
   window.addEventListener("scroll", toggle, {passive:true});
   btn.addEventListener("click", ()=>window.scrollTo({top:0,behavior:"smooth"}));
 })();
-  
+
 /* ===== Language toggle (nav + başlıklar + açıklamalar + footer başlıkları) ===== */
 let LANG="en";
 function toggleLang(){
