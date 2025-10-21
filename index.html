@@ -194,14 +194,41 @@ footer small{ color:#666; }
 
 <section class="waitlist" id="waitlist">
   <h2 data-tr="Bekleme Listesine Katıl" data-en="Join the Waitlist">Join the Waitlist</h2>
-  <p  data-tr="Özel koleksiyonlara ilk erişen sen ol." data-en="Be the first to access exclusive collections and previews.">Be the first to access exclusive collections and previews.</p>
+  <p data-tr="Özel koleksiyonlara ilk erişen sen ol." data-en="Be the first to access exclusive collections and previews.">
+    Be the first to access exclusive collections and previews.
+  </p>
+
   <!-- waitlist endpointİNİ BOZMADIM -->
   <form id="waitlist-form" method="POST" action="/api/waitlist">
     <input name="name" type="text" placeholder="Full Name" required autocomplete="name" />
     <input name="email" type="email" placeholder="Email Address" required autocomplete="email" />
-    <button type="submit">Sign Up</button>
+
+    <button type="submit" style="
+      background: linear-gradient(90deg, #ff4da6, #d4af37, #ff4da6);
+      background-size: 300% 300%;
+      animation: gradientShift 4s ease infinite;
+      border: none;
+      border-radius: 10px;
+      color: #000;
+      font-weight: 600;
+      font-size: 1.05rem;
+      padding: 14px 30px;
+      cursor: pointer;
+      transition: transform .3s;
+      box-shadow: 0 0 15px rgba(212,175,55,0.3);
+    ">
+      Sign Up ✦
+    </button>
   </form>
 </section>
+
+<style>
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+</style>
 
 <section id="about">
   <h2 data-tr="Hakkımızda" data-en="About MedaStaré">About MedaStaré</h2>
@@ -290,6 +317,46 @@ document.addEventListener("scroll", ()=>{
   h.classList.toggle("scrolled", window.scrollY>50);
 }, {passive:true});
 
+<!-- Yukarı Butonu -->
+<button id="backToTop" style="
+  position: fixed;
+  bottom: 40px;
+  right: 30px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(90deg, #ff4da6, #d4af37, #ff4da6);
+  background-size: 300% 300%;
+  animation: gradientShift 4s ease infinite;
+  color: #000;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(212,175,55,0.35);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity .5s, transform .4s;
+  z-index: 999;
+">
+↑
+</button>
+
+<style>
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Buton görünür hale geldiğinde */
+#backToTop.show {
+  opacity: 1;
+  transform: scale(1);
+}
+</style>
+
+<script>
 /* ===== Back to top ===== */
 (function(){
   const btn=document.getElementById("backToTop");
@@ -299,7 +366,8 @@ document.addEventListener("scroll", ()=>{
   window.addEventListener("scroll", toggle, {passive:true});
   btn.addEventListener("click", ()=>window.scrollTo({top:0,behavior:"smooth"}));
 })();
-
+</script>
+  
 /* ===== Language toggle (nav + başlıklar + açıklamalar + footer başlıkları) ===== */
 let LANG="en";
 function toggleLang(){
