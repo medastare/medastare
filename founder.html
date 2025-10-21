@@ -1,86 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Founder & CEO  Medine Ak | MedaStaré</title>
-  <link rel="icon" type="image/png" href="medastare-logo.PNG">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Founder & CEO Medine Ak | MedaStaré</title>
+<link rel="icon" type="image/png" href="medastare-logo.PNG">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0a0a0a; --wine:#5a0f1d; --pink:#ff4da6; --gold:#d4af37;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:Inter,sans-serif;
+  background:radial-gradient(circle at top,#1a0a0a,#000);
+  color:#fff;overflow-x:hidden;
+}
 
-  <style>
-    :root {
-      --black:#0a0a0a;
-      --wine:#5a0f1d;
-      --pink:#ff4da6;
-      --gold:#d4af37;
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      font-family:Inter,sans-serif;
-      background:linear-gradient(135deg,var(--black),var(--wine));
-      color:#fff;overflow-x:hidden;line-height:1.7;
-    }
-    header{padding:20px;text-align:center;background:#000;}
-    header h1{font-family:"Playfair Display",serif;color:var(--gold);font-size:2.5rem;}
+/* ==== Floating stars ==== */
+.stars{position:fixed;inset:0;z-index:-1;overflow:hidden;}
+.star{position:absolute;width:2px;height:2px;background:var(--gold);border-radius:50%;
+  animation:floatStar 12s linear infinite;opacity:0.6;}
+@keyframes floatStar{
+  from{transform:translateY(100vh) scale(0.8);opacity:0.1;}
+  to{transform:translateY(-10vh) scale(1.2);opacity:0.7;}
+}
+.star:nth-child(2){left:20%;animation-delay:2s;width:3px;height:3px;}
+.star:nth-child(3){left:70%;animation-delay:4s;}
+.star:nth-child(4){left:40%;animation-delay:6s;width:1px;height:1px;opacity:.4;}
+.star:nth-child(5){left:85%;animation-delay:8s;}
 
-    /* Hero */
-    .hero{max-width:900px;margin:40px auto;text-align:center;}
-    .hero img{width:100%;border-radius:14px;opacity:0;transform:translateY(40px);animation:fadeUp 1.5s ease forwards;}
-    .hero h2{margin-top:20px;color:var(--gold);font-size:2rem;}
-    .hero p{color:#ddd;font-size:1.1rem;}
+/* ==== Header ==== */
+header{text-align:center;padding:40px 20px;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);}
+header h1{font-family:"Playfair Display",serif;font-size:2.7rem;color:var(--gold);letter-spacing:.5px;}
+header p{color:#aaa;font-size:1.1rem;margin-top:8px;}
 
-    @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+/* ==== Hero ==== */
+.hero{
+  max-width:950px;margin:50px auto;text-align:center;position:relative;
+  animation:fadeIn 1.8s ease forwards;
+}
+.hero img{
+  width:100%;border-radius:16px;box-shadow:0 0 40px rgba(212,175,55,0.3);
+  transition:transform .8s ease, box-shadow .8s ease;
+}
+.hero img:hover{transform:scale(1.02);box-shadow:0 0 60px rgba(212,175,55,0.5);}
+.hero h2{margin-top:25px;color:var(--gold);font-size:2rem;}
+.hero p{color:#ddd;font-size:1.1rem;margin-top:8px;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(40px);}to{opacity:1;transform:translateY(0);}}
 
-    /* Sections */
-    section{max-width:1000px;margin:60px auto;padding:20px;text-align:center;}
-    h2{color:var(--gold);margin-bottom:20px;font-family:"Playfair Display",serif;}
+/* ==== Sections ==== */
+section{max-width:1000px;margin:70px auto;padding:20px;text-align:center;}
+h2{font-family:"Playfair Display",serif;color:var(--gold);margin-bottom:20px;font-size:1.8rem;}
+p{color:#ddd;line-height:1.7;}
 
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
-    .card{background:rgba(255,255,255,0.05);border:1px solid rgba(212,175,55,0.3);padding:20px;border-radius:10px;transition:transform .3s,box-shadow .3s;}
-    .card:hover{transform:translateY(-10px);box-shadow:0 10px 30px rgba(212,175,55,0.4);}
-    .card h3{color:var(--gold);margin-bottom:10px;}
+/* ==== Cards ==== */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:20px;}
+.card{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(212,175,55,0.25);
+  padding:25px;border-radius:12px;
+  backdrop-filter:blur(6px);
+  transition:transform .5s, box-shadow .5s;
+  opacity:0;transform:translateY(30px);
+  animation:fadeUp .9s forwards;
+}
+.card:nth-child(2){animation-delay:.3s;}
+.card:hover{transform:translateY(-8px);box-shadow:0 10px 25px rgba(212,175,55,0.4);}
+.card h3{color:var(--pink);margin-bottom:12px;}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0);}}
 
-    /* Timeline */
-    .timeline{position:relative;padding-left:50px;text-align:left;}
-    .timeline::before{content:"";position:absolute;left:20px;top:0;bottom:0;width:2px;background:var(--gold);}
-    .timeline-item{margin-bottom:30px;position:relative;}
-    .timeline-item::before{content:"★";position:absolute;left:-30px;color:var(--gold);top:0;font-size:18px;}
-    .timeline-item h4{color:var(--pink);margin-bottom:5px;}
+/* ==== Timeline ==== */
+.timeline{position:relative;padding-left:50px;text-align:left;margin-top:30px;}
+.timeline::before{
+  content:"";position:absolute;left:25px;top:0;bottom:0;width:2px;background:linear-gradient(var(--pink),var(--gold));
+  box-shadow:0 0 10px rgba(255,77,166,0.5);
+}
+.timeline-item{margin-bottom:40px;position:relative;animation:fadeUp .9s forwards;}
+.timeline-item::before{
+  content:"★";position:absolute;left:-28px;color:var(--gold);top:0;font-size:18px;
+}
+.timeline-item h4{color:var(--pink);margin-bottom:5px;}
+.timeline-item p{color:#ccc;font-size:1rem;}
 
-    /* Back button */
-    .back-home{text-align:center;margin:50px 0;}
-    .back-home a{
-      display:inline-block;
-      padding:12px 20px;
-      background:linear-gradient(90deg,var(--wine),var(--pink));
-      color:#fff;
-      font-weight:600;
-      border-radius:6px;
-      text-decoration:none;
-      transition:transform .3s;
-    }
-    .back-home a:hover{transform:scale(1.05);}
-  </style>
+/* ==== Back Button ==== */
+.back-home{text-align:center;margin:80px 0 50px;}
+.back-home a{
+  display:inline-block;padding:14px 28px;
+  background:linear-gradient(90deg,var(--pink),var(--gold));
+  color:#000;font-weight:600;text-decoration:none;border-radius:8px;
+  transition:transform .3s;
+}
+.back-home a:hover{transform:scale(1.08);}
+</style>
 </head>
 <body>
 
+<div class="stars">
+  <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
+</div>
+
 <header>
-  <h1>Founder & CEO  Medine Ak</h1>
+  <h1>Founder & CEO — Medine Ak</h1>
+  <p>Visionary Leader Shaping the Future of Fashion-Tech</p>
 </header>
 
 <!-- Hero -->
 <div class="hero">
-  <img src="founder-ceo.1.PNG" alt="Medine Ak">
-  <p>Visionary Leader shaping the future of fashion-tech</p>
+  <img src="founder-ceo.1.PNG" alt="Medine Ak Portrait">
+  <h2>MedaStaré Founder & CEO</h2>
+  <p>Empowering global style through AI, innovation and elegance.</p>
 </div>
 
 <!-- Biography -->
 <section>
   <h2>Biography</h2>
   <p><b>Born:</b> 13 October 2002, Ankara</p>
-  <p>Medine Ak is a young Turkish entrepreneur and beauty specialist who combines <b>AI, fashion and aesthetics</b>. Alongside her education, she has earned <b>5 certifications in advanced entrepreneurship and beauty</b>, establishing herself as a determined and disciplined leader.</p>
+  <p>Medine Ak is a Turkish entrepreneur and beauty specialist merging <b>AI, fashion and aesthetics</b>. Alongside her education, she has earned <b>five certifications in advanced entrepreneurship and beauty</b>, establishing herself as a disciplined, visionary young leader shaping the global fashion-tech scene.</p>
 </section>
 
 <!-- Vision & Mission -->
@@ -93,17 +130,17 @@
     </div>
     <div class="card">
       <h3>Mission</h3>
-      <p>Empowering individuals through technology and aesthetics, creating a platform where <b>style meets innovation</b>, and every woman finds her unique brilliance.</p>
+      <p>To empower individuals through technology and aesthetics, creating a space where <b>style meets innovation</b> and every woman finds her unique brilliance.</p>
     </div>
   </div>
 </section>
 
-<!-- Values & Inspiration -->
+<!-- Values -->
 <section>
   <h2>Values & Inspiration</h2>
   <div class="cards">
-    <div class="card"><h3>Inspiration</h3><p>Medine takes inspiration from her own journey, proving that true power comes from self-growth and celebrating personal achievements.</p></div>
-    <div class="card"><h3>Core Values</h3><p>Originality, boldness, elegance, and continuous innovation define her work and leadership style.</p></div>
+    <div class="card"><h3>Inspiration</h3><p>Medine’s journey reflects her belief that true power comes from growth, independence, and authenticity — transforming challenges into elegance.</p></div>
+    <div class="card"><h3>Core Values</h3><p>Originality, boldness, elegance, and continuous innovation define her leadership and creative philosophy.</p></div>
   </div>
 </section>
 
@@ -111,22 +148,13 @@
 <section>
   <h2>Future Goals</h2>
   <div class="timeline">
-    <div class="timeline-item">
-      <h4>2025–2026</h4>
-      <p>Launch MedaStaré to global audiences and secure a strong international user base.</p>
-    </div>
-    <div class="timeline-item">
-      <h4>2027</h4>
-      <p>Expand into global fashion-tech markets with AI-powered styling tools and product lines.</p>
-    </div>
-    <div class="timeline-item">
-      <h4>2030</h4>
-      <p>Establish MedaStaré as a worldwide brand and open flagship showrooms in fashion capitals.</p>
-    </div>
+    <div class="timeline-item"><h4>2025–2026</h4><p>Launch MedaStaré globally and build a strong international user base.</p></div>
+    <div class="timeline-item"><h4>2027</h4><p>Expand into fashion-tech markets with AI-powered styling and personalized ecosystems.</p></div>
+    <div class="timeline-item"><h4>2030</h4><p>Establish MedaStaré as a world-class brand with flagship showrooms in Paris, Milan, and Dubai.</p></div>
   </div>
 </section>
 
-<!-- Back to Home -->
+<!-- Back -->
 <div class="back-home">
   <a href="index.html">← Back to Home</a>
 </div>
