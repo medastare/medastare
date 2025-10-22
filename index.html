@@ -198,8 +198,8 @@ footer small{ color:#666; }
     Be the first to access exclusive collections and previews.
   </p>
 
-  <!-- Waitlist form -->
-  <form id="waitlist-form" method="POST" action="/api/waitlist" onsubmit="handleWaitlistSubmit(event)">
+  <!-- ✅ Form doğrudan API'ye bağlı -->
+  <form id="waitlist-form" method="POST" action="/api/waitlist">
     <input name="name" type="text" placeholder="Full Name" required autocomplete="name" />
     <input name="email" type="email" placeholder="Email Address" required autocomplete="email" />
 
@@ -216,7 +216,7 @@ footer small{ color:#666; }
 
   @keyframes buttonGlow {
     0% { box-shadow: 0 0 10px rgba(212,175,55,0.3), 0 0 20px rgba(255,77,166,0.1); }
-    50% { box-shadow: 0 0 25px rgba(212,175,55,0.6), 0 0 45px rgba(255,77,166,0.3); }
+    50% { box-shadow: 0 0 30px rgba(212,175,55,0.6), 0 0 60px rgba(255,77,166,0.4); }
     100% { box-shadow: 0 0 10px rgba(212,175,55,0.3), 0 0 20px rgba(255,77,166,0.1); }
   }
 
@@ -235,28 +235,28 @@ footer small{ color:#666; }
   }
 
   .waitlist-btn:hover {
-    transform: scale(1.05);
+    transform: scale(1.07);
   }
 </style>
 
 <script>
-  async function handleWaitlistSubmit(event) {
-    event.preventDefault();
-    const form = event.target;
-    const data = new FormData(form);
+  // 🔗 Sadece backend'e bağlı, yönlendirmeyi waitlist.js yapacak
+  document.getElementById("waitlist-form").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const formData = new FormData(form);
 
-    const response = await fetch(form.action, {
+    await fetch(form.action, {
       method: "POST",
-      body: data
+      body: formData
+    })
+    .then(() => {
+      // API yönlendirmeyi kendi yapacak — burada hiçbir müdahale yok
+    })
+    .catch((err) => {
+      console.error("API bağlantı hatası:", err);
     });
-
-    if (response.ok) {
-      window.location.href = "/thankyou.html"; // ✅ başarıyla gönderildiyse yönlendirme
-    } else {
-      const html = await response.text();
-      document.body.innerHTML = html; // ❌ hata ekranı backend'den gelen errorHTML
-    }
-  }
+  });
 </script>
   
 <style>
