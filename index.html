@@ -199,12 +199,8 @@ footer small{ color:#666; }
     Be the first to access exclusive collections and previews.
   </p>
 
-  <!-- Doğrudan backend'e POST -->
-  <form id="waitlist-form"
-        action="/api/waitlist"
-        method="post"
-        accept-charset="utf-8"
-        enctype="application/x-www-form-urlencoded">
+  <!-- Doğrudan backend'e -->
+  <form id="waitlist-form" action="/api/waitlist" method="post" accept-charset="utf-8">
     <input name="name"  type="text"  placeholder="Full Name"     required autocomplete="name" />
     <input name="email" type="email" placeholder="Email Address" required autocomplete="email" />
     <button type="submit" class="waitlist-btn">Sign Up ✦</button>
@@ -233,6 +229,50 @@ footer small{ color:#666; }
   .waitlist-btn:hover { transform: scale(1.07); }
   .waitlist-btn:active { transform: scale(0.99); }
 </style>
+
+<script>
+  // Yalın POST: urlencoded gönder, 302 yönlendirmeyi yakala
+  (function () {
+    const form = document.getElementById('waitlist-form');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // urlencoded body (backend’in req.body ile uyumlu)
+      const body = new URLSearchParams(new FormData(form)).toString();
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+          body,
+          redirect: 'follow'
+        });
+
+        // Backend 302 ile thank-you.html'e yönlendirirse:
+        if (res.redirected) {
+          window.location.href = res.url;       // örn: /thank-you.html
+          return;
+        }
+
+        if (res.ok) {
+          // 200 dönerse de güvenli tarafta kalıp teşekkür sayfasına al.
+          window.location.href = '/thank-you.html';
+          return;
+        }
+
+        // Hata: backend'in gönderdiği errorHTML'i göster
+        const html = await res.text();
+        document.open(); document.write(html); document.close();
+      } catch (err) {
+        document.body.innerHTML =
+          '<div style="padding:40px;font-family:sans-serif;color:#fff;background:#000">' +
+          '<h2>Bağlantı hatası</h2><p>' + (err && err.message ? err.message : 'Unknown error') + '</p></div>';
+      }
+    });
+  })();
+</script>
   
 <section id="about">
   <h2 data-tr="Hakkımızda" data-en="About MedaStaré">About MedaStaré</h2>
