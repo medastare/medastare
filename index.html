@@ -198,8 +198,8 @@ footer small{ color:#666; }
     Be the first to access exclusive collections and previews.
   </p>
 
-  <!-- DOĞRUDAN BACKEND'e POST atar: /api/waitlist -->
-  <form id="waitlist-form" method="POST" action="/api/waitlist" accept-charset="utf-8">
+  <!-- ✅ Backend ile direkt bağlantı -->
+  <form id="waitlist-form" method="POST" action="/api/waitlist" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
     <input name="name" type="text" placeholder="Full Name" required autocomplete="name" />
     <input name="email" type="email" placeholder="Email Address" required autocomplete="email" />
 
@@ -234,7 +234,9 @@ footer small{ color:#666; }
     transition: transform 0.3s ease;
   }
 
-  .waitlist-btn:hover { transform: scale(1.07); }
+  .waitlist-btn:hover {
+    transform: scale(1.07);
+  }
 </style>
 
 <section id="about">
