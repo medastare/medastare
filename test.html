@@ -1,0 +1,43 @@
+<section class="waitlist" id="waitlist">
+  <h2 data-tr="Bekleme Listesine Katıl" data-en="Join the Waitlist">Join the Waitlist</h2>
+  <p data-tr="Özel, benzersiz içerik ve modüllere ilk erişen sen ol."
+     data-en="Be the first to access exclusive, unique content and modules.">
+    Be the first to access exclusive collections and previews.
+  </p>
+
+  <!-- DOĞRUDAN VERCEL API'YE POST -->
+  <form id="waitlist-form"
+        action="https://medastare.vercel.app/api/waitlist"
+        method="post"
+        accept-charset="utf-8"
+        enctype="application/x-www-form-urlencoded">
+    <input name="name"  type="text"  placeholder="Full Name"     required autocomplete="name" />
+    <input name="email" type="email" placeholder="Email Address" required autocomplete="email" />
+    <button type="submit" class="waitlist-btn">Sign Up ✦</button>
+  </form>
+</section>
+
+<style>
+  @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  @keyframes buttonGlow{0%{box-shadow:0 0 10px rgba(212,175,55,.3),0 0 20px rgba(255,77,166,.1)}
+                        50%{box-shadow:0 0 30px rgba(212,175,55,.6),0 0 60px rgba(255,77,166,.4)}
+                        100%{box-shadow:0 0 10px rgba(212,175,55,.3),0 0 20px rgba(255,77,166,.1)}}
+  .waitlist-btn{
+    background:linear-gradient(90deg,#ff4da6,#d4af37,#ff4da6);
+    background-size:300% 300%;
+    animation:gradientShift 4s ease infinite,buttonGlow 3s ease-in-out infinite;
+    border:none;border-radius:10px;color:#000;font-weight:600;font-size:1.05rem;
+    padding:14px 30px;cursor:pointer;transition:transform .3s ease
+  }
+  .waitlist-btn:hover{transform:scale(1.07)}
+  .waitlist-btn:active{transform:scale(.99)}
+</style>
+
+<!-- (opsiyonel) Bu sayfa Vercel'de açılırsa relative'a çevirir -->
+<script>
+  (function(){
+    const f=document.getElementById('waitlist-form');
+    if(!f) return;
+    if(/vercel\.app$/i.test(location.hostname)) f.action='/api/waitlist';
+  })();
+</script>
