@@ -194,13 +194,18 @@ footer small{ color:#666; }
 
 <section class="waitlist" id="waitlist">
   <h2 data-tr="Bekleme Listesine Katıl" data-en="Join the Waitlist">Join the Waitlist</h2>
-  <p data-tr="Özel, benzersiz içerik ve modüllere ilk erişen sen ol." data-en="Be the first to access exclusive, unique content and modules.">
+  <p data-tr="Özel, benzersiz içerik ve modüllere ilk erişen sen ol."
+     data-en="Be the first to access exclusive, unique content and modules.">
     Be the first to access exclusive collections and previews.
   </p>
 
-  <!-- ✅ Doğrudan /api/waitlist.js'e bağlı -->
-  <form id="waitlist-form" method="POST" action="/api/waitlist" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
-    <input name="name" type="text" placeholder="Full Name" required autocomplete="name" />
+  <!-- Doğrudan backend'e POST -->
+  <form id="waitlist-form"
+        action="/api/waitlist"
+        method="post"
+        accept-charset="utf-8"
+        enctype="application/x-www-form-urlencoded">
+    <input name="name"  type="text"  placeholder="Full Name"     required autocomplete="name" />
     <input name="email" type="email" placeholder="Email Address" required autocomplete="email" />
 
     <button type="submit" class="waitlist-btn">Sign Up ✦</button>
@@ -208,35 +213,31 @@ footer small{ color:#666; }
 </section>
 
 <style>
+  /* Animasyonlar (mevcut tasarımla aynı) */
   @keyframes gradientShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
   }
-
   @keyframes buttonGlow {
-    0% { box-shadow: 0 0 10px rgba(212,175,55,0.3), 0 0 20px rgba(255,77,166,0.1); }
-    50% { box-shadow: 0 0 30px rgba(212,175,55,0.6), 0 0 60px rgba(255,77,166,0.4); }
-    100% { box-shadow: 0 0 10px rgba(212,175,55,0.3), 0 0 20px rgba(255,77,166,0.1); }
+    0%   { box-shadow: 0 0 10px rgba(212,175,55,.3), 0 0 20px rgba(255,77,166,.1); }
+    50%  { box-shadow: 0 0 30px rgba(212,175,55,.6), 0 0 60px rgba(255,77,166,.4); }
+    100% { box-shadow: 0 0 10px rgba(212,175,55,.3), 0 0 20px rgba(255,77,166,.1); }
   }
 
-  .waitlist-btn {
-    background: linear-gradient(90deg, #ff4da6, #d4af37, #ff4da6);
+  /* Buton – görsel aynen, sadece parıltı + hover */
+  .waitlist-btn{
+    background: linear-gradient(90deg,#ff4da6,#d4af37,#ff4da6);
     background-size: 300% 300%;
     animation: gradientShift 4s ease infinite, buttonGlow 3s ease-in-out infinite;
-    border: none;
-    border-radius: 10px;
-    color: #000;
-    font-weight: 600;
-    font-size: 1.05rem;
-    padding: 14px 30px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+    border: none; border-radius: 10px;
+    color:#000; font-weight:600; font-size:1.05rem;
+    padding:14px 30px; cursor:pointer; transition: transform .3s ease;
   }
-
   .waitlist-btn:hover { transform: scale(1.07); }
+  .waitlist-btn:active { transform: scale(0.99); }
 </style>
-
+  
 <section id="about">
   <h2 data-tr="Hakkımızda" data-en="About MedaStaré">About MedaStaré</h2>
   <p data-tr="MedaStaré, yapay zekayı moda ve güzellikle buluşturan, Türkiye'den dünyaya uzanan ilk moda teknolojisi ekosistemidir. Kadın girişimciliğini, global markalarla yerel inovasyonu aynı platformda birleştirir."
