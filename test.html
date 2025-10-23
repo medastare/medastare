@@ -1,211 +1,142 @@
-<!-- ⚜️ MedAİ Chat Başlangıç (Black & Gold Edition) -->
-<div id="medai-widget"></div>
+<!-- ⚜️ MedAİ Floating Chat (Black & Gold Signature Edition) -->
+<div id="medai-launcher"></div>
+<div id="medai-panel" style="display:none;"></div>
 
 <script>
-const medaiWidget = document.getElementById("medai-widget");
+// 🌟 GOLD PULSE ANIMATED BUTTON
+const medaiLauncher = document.getElementById("medai-launcher");
+const medaiPanel = document.getElementById("medai-panel");
 
-// ✨ Lüks siyah-altın kutu tasarımı
-medaiWidget.innerHTML = `
+medaiLauncher.innerHTML = `
+  <div id="medaiButton" style="
+    position: fixed;
+    bottom: 40px;
+    right: 50px;
+    background: linear-gradient(90deg, #d4af37, #f5e29e, #d4af37);
+    background-size: 300% 300%;
+    border-radius: 50px;
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    padding: 14px 32px;
+    font-size: 15px;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(212,175,55,0.6);
+    animation: goldFlow 5s infinite linear;
+    transition: all 0.3s ease;
+    z-index: 9999;
+  ">
+    💫 MedAİ’yi Aç
+  </div>
+`;
+
+medaiPanel.innerHTML = `
   <div style="
-    background: linear-gradient(160deg, rgba(0,0,0,0.92), rgba(32,32,32,0.85));
-    border: 1px solid rgba(212,175,55,0.4);
-    border-radius: 28px;
-    padding: 0;
+    position: fixed;
+    bottom: 110px;
+    right: 50px;
+    background: linear-gradient(160deg, rgba(0,0,0,0.9), rgba(26,26,26,0.85));
+    border: 1px solid rgba(212,175,55,0.5);
+    border-radius: 26px;
+    width: 380px;
+    max-height: 500px;
     color: #fff;
     font-family: 'Inter', sans-serif;
-    width: 390px;
-    max-width: 90%;
-    margin: 70px auto;
-    box-shadow: 0 0 45px rgba(212,175,55,0.2);
-    backdrop-filter: blur(14px);
+    display: flex;
+    flex-direction: column;
     overflow: hidden;
-    animation: fadeIn 1s ease forwards;
+    box-shadow: 0 0 40px rgba(212,175,55,0.3);
+    backdrop-filter: blur(14px);
+    animation: fadeIn 0.6s ease forwards;
+    z-index: 9999;
   ">
     <div style="
       background: linear-gradient(90deg,#1a1a40,#d4af37);
-      padding:18px;
-      text-align:center;
-      border-bottom: 1px solid rgba(212,175,55,0.3);
+      padding: 16px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 16px;
     ">
-      <h3 style="font-size:21px;margin:0;font-weight:600;color:#fff;">
-        💫 MedAİ Luxe Chat
-      </h3>
-      <p style="font-size:13px;margin:4px 0 0;color:#ffd;">
-        Ruhunu ve stilini yıldız zarafetinde dengeleyelim ✨
-      </p>
+      ✨ MedAİ Asistan
     </div>
-
     <div id="chatBody" style="
-      padding: 20px;
-      height: 380px;
+      flex: 1;
+      padding: 18px;
       overflow-y: auto;
-      background: rgba(255,255,255,0.02);
+      background: rgba(0,0,0,0.25);
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      scroll-behavior: smooth;
+      gap: 10px;
     ">
-      <div class="ai-msg" style="
-        align-self: flex-start;
-        background: linear-gradient(90deg, rgba(212,175,55,0.9), rgba(255,230,150,0.8));
-        color: #111;
-        padding: 12px 15px;
-        border-radius: 16px 16px 16px 4px;
-        max-width: 85%;
-        font-size: 14px;
-        font-weight: 500;
-        box-shadow: 0 0 10px rgba(212,175,55,0.4);
-      ">
-        Selam 💫 ben <b>MedAİ</b> — bugün ruh halin nasıl?
-      </div>
     </div>
-
     <div style="
       display:flex;
       align-items:center;
       padding:14px;
       background: rgba(255,255,255,0.05);
-      border-top: 1px solid rgba(212,175,55,0.2);
+      border-top: 1px solid rgba(212,175,55,0.25);
     ">
-      <textarea id="userMessage" placeholder="Mesajını yaz..." 
-        style="flex:1;background:rgba(255,255,255,0.07);border:none;
+      <textarea id="userMessage" placeholder="Bana yaz..." 
+        style="flex:1;background:rgba(255,255,255,0.08);border:none;
         border-radius:12px;padding:10px 14px;color:#fff;font-size:14px;
-        resize:none;outline:none;height:44px;font-family:'Inter',sans-serif;"></textarea>
-
+        resize:none;outline:none;height:44px;"></textarea>
       <button id="sendMessage" style="
-        background: linear-gradient(135deg,#d4af37,#ffdd66);
-        border:none;border-radius:50%;width:48px;height:48px;
-        margin-left:10px;color:black;font-size:18px;font-weight:700;
-        cursor:pointer;box-shadow:0 0 15px rgba(212,175,55,0.4);
-        transition:all 0.25s ease;
-      ">
-        ➤
-      </button>
+        background:linear-gradient(135deg,#d4af37,#f8e7a2);
+        border:none;border-radius:50%;width:44px;height:44px;
+        margin-left:10px;color:black;font-size:18px;cursor:pointer;
+        transition:transform 0.2s;box-shadow:0 0 12px rgba(212,175,55,0.3);
+      ">➤</button>
     </div>
-
-    <p id="limitInfo" style="font-size:11px;text-align:center;color:#d4af37;margin:5px 0 14px;"></p>
   </div>
 `;
 
-// 💬 Mesaj sınırı
-let messageCount = localStorage.getItem("medaiCount") || 0;
-const limit = 10;
-const limitInfo = document.getElementById("limitInfo");
-const updateLimitText = () => {
-  limitInfo.innerText = `Kalan mesaj hakkın: ${limit - messageCount}`;
-};
-updateLimitText();
-
-// 🖤 Altın efektli gönderme animasyonu
-const sendMessage = document.getElementById("sendMessage");
-const textarea = document.getElementById("userMessage");
-const chatBody = document.getElementById("chatBody");
-
-sendMessage.addEventListener("click", async () => {
-  if (messageCount >= limit) {
-    alert("✨ Günlük mesaj limitine ulaştın aşkım. Yarın görüşürüz 💫");
-    return;
-  }
-
-  const text = textarea.value.trim();
-  if (!text) return;
-
-  sendMessage.style.transform = "scale(0.9)";
-  setTimeout(() => (sendMessage.style.transform = "scale(1)"), 120);
-
-  // Kullanıcı balonu
-  const userBubble = document.createElement("div");
-  userBubble.className = "user-msg";
-  userBubble.style.cssText = `
-    align-self: flex-end;
-    background: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
-    padding: 10px 15px;
-    border-radius: 16px 16px 4px 16px;
-    max-width: 80%;
-    font-size: 14px;
-    color: #fff;
-    box-shadow: 0 0 8px rgba(255,255,255,0.08);
-    animation: slideUp 0.4s ease;
-  `;
-  userBubble.textContent = text;
-  chatBody.appendChild(userBubble);
-  chatBody.scrollTop = chatBody.scrollHeight;
-  textarea.value = "";
-
-  // “MedAİ yazıyor” efekti
-  const typing = document.createElement("div");
-  typing.style.cssText = `
-    align-self: flex-start;
-    color: #d4af37;
-    font-size: 13px;
-    opacity: 0.8;
-    animation: pulse 1.5s infinite ease-in-out;
-  `;
-  typing.textContent = "MedAİ yazıyor...";
-  chatBody.appendChild(typing);
-  chatBody.scrollTop = chatBody.scrollHeight;
-
-  try {
-    const response = await fetch("/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message: text })
-    });
-
-    const data = await response.json();
-    const reply = data.reply || "Bir şeyler ters gitti 💫";
-    chatBody.removeChild(typing);
-
-    // MedAİ cevabı
-    const aiBubble = document.createElement("div");
-    aiBubble.className = "ai-msg";
-    aiBubble.style.cssText = `
-      align-self: flex-start;
-      background: linear-gradient(90deg, rgba(212,175,55,0.9), rgba(255,230,150,0.8));
-      color: #111;
-      padding: 12px 15px;
-      border-radius: 16px 16px 16px 4px;
-      max-width: 85%;
-      font-size: 14px;
-      font-weight: 500;
-      box-shadow: 0 0 10px rgba(212,175,55,0.4);
-      animation: fadeIn 0.3s ease forwards;
-    `;
-
-    let i = 0;
-    const interval = setInterval(() => {
-      aiBubble.innerHTML = reply.substring(0, i++) + "<span style='opacity:0.6;'>💫</span>";
-      chatBody.scrollTop = chatBody.scrollHeight;
-      if (i > reply.length) {
-        aiBubble.innerHTML = reply;
-        clearInterval(interval);
-      }
-    }, 25);
-
-    chatBody.appendChild(aiBubble);
-    messageCount++;
-    localStorage.setItem("medaiCount", messageCount);
-    updateLimitText();
-  } catch (err) {
-    chatBody.removeChild(typing);
-    const errBubble = document.createElement("div");
-    errBubble.style.cssText = `
-      align-self: flex-start;
-      color: #d4af37;
-      font-size: 13px;
-    `;
-    errBubble.textContent = "Bağlantı hatası 💫";
-    chatBody.appendChild(errBubble);
-  }
-});
-
-// 🎞️ Animasyonlar
+// 🌙 Animasyon stilleri
 const style = document.createElement("style");
 style.innerHTML = `
-@keyframes fadeIn { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
-@keyframes slideUp { from {opacity:0; transform:translateY(15px);} to {opacity:1; transform:translateY(0);} }
-@keyframes pulse { 0%,100% {opacity:0.5;} 50% {opacity:1;} }
+@keyframes goldFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%,100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
 `;
 document.head.appendChild(style);
+
+// 🌸 Butona tıklayınca açılıp kapanma
+let isOpen = false;
+const button = document.getElementById("medaiButton");
+button.addEventListener("click", () => {
+  isOpen = !isOpen;
+  medaiPanel.style.display = isOpen ? "flex" : "none";
+  button.innerHTML = isOpen ? "🌙 Kapat" : "💫 MedAİ’yi Aç";
+
+  if (isOpen) {
+    const chatBody = document.getElementById("chatBody");
+    chatBody.innerHTML = `
+      <div style="
+        align-self:flex-start;
+        background: linear-gradient(90deg, rgba(212,175,55,0.9), rgba(255,230,160,0.8));
+        color: #111;
+        padding: 12px 15px;
+        border-radius: 15px 15px 15px 5px;
+        font-size: 14px;
+        box-shadow: 0 0 10px rgba(212,175,55,0.4);
+        animation: fadeIn 0.6s ease;
+      ">
+        Hoş geldin 💫<br>
+        Bugün enerjin güçlü hissediliyor...<br>
+        Stiline biraz sihir katmaya ne dersin? ✨
+      </div>
+    `;
+  }
+});
 </script>
-<!-- ⚜️ MedAİ Chat Bitiş -->
+<!-- ⚜️ MedAİ Floating Chat Bitiş -->
