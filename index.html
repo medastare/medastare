@@ -235,6 +235,91 @@ footer small{ color:#666; }
     if(/vercel\.app$/i.test(location.hostname)) f.action='/api/waitlist';
   })();
 </script>
+
+<!-- 💫 MedAİ Chat Başlangıç -->
+<div id="medai-widget"></div>
+
+<script>
+  // 💬 Günlük mesaj limiti
+  let messageCount = localStorage.getItem("medaiCount") || 0;
+  const limit = 10;
+
+  const medaiWidget = document.getElementById("medai-widget");
+  medaiWidget.innerHTML = `
+    <div style="
+      background: linear-gradient(135deg, rgba(26,26,64,0.95), rgba(255,77,166,0.1));
+      border: 1px solid rgba(255,77,166,0.4);
+      border-radius: 22px;
+      padding: 26px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      width: 380px;
+      max-width: 90%;
+      margin: 70px auto;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(255,77,166,0.25);
+      backdrop-filter: blur(14px);
+      transition: all 0.3s ease;">
+      
+      <h3 style="font-size: 22px; color: #ff4da6; margin-bottom: 10px;">
+        ✨ MedAİ
+      </h3>
+      <p style="font-size: 15px; opacity: 0.95;">
+        Selam, ben <b>MedAİ</b> 💫<br>Ruhunu ve stilini birlikte dengeleyelim mi?
+      </p>
+      <textarea id="userMessage" placeholder="Bana yaz..." 
+        style="margin-top: 16px; width: 100%; height: 60px; 
+        border-radius: 10px; padding: 10px; border: none; 
+        resize: none; font-family: 'Inter', sans-serif;"></textarea>
+      <button id="sendMessage" 
+        style="margin-top: 12px; background: linear-gradient(90deg,#ff4da6,#ff9966);
+        border: none; padding: 12px 24px; color: white; font-weight: 600;
+        border-radius: 10px; cursor: pointer; transition: transform 0.3s;">
+        Gönder 💬
+      </button>
+      <p id="limitInfo" style="font-size:12px; color:#ffd6eb; margin-top:10px;"></p>
+      <div id="responseArea" 
+        style="margin-top: 18px; text-align: left; 
+        font-size: 14px; color: #ffd6eb; line-height: 1.6; max-height:240px; overflow-y:auto;"></div>
+    </div>
+  `;
+
+  const limitInfo = document.getElementById("limitInfo");
+  const updateLimitText = () => {
+    limitInfo.innerText = \`Kalan mesaj hakkın: \${limit - messageCount}\`;
+  };
+  updateLimitText();
+
+  document.getElementById("sendMessage").addEventListener("click", async () => {
+    if (messageCount >= limit) {
+      alert("✨ Günlük mesaj limitine ulaştın aşkım. Yarın görüşürüz 💫");
+      return;
+    }
+
+    const userMessage = document.getElementById("userMessage").value;
+    const responseDiv = document.getElementById("responseArea");
+    if (!userMessage.trim()) return;
+
+    responseDiv.innerHTML += `<p><b>Sen:</b> ${userMessage}</p>`;
+
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message: userMessage })
+    });
+
+    const data = await response.json();
+    const reply = data.reply;
+    responseDiv.innerHTML += `<p><b>MedAİ:</b> ${reply}</p>`;
+    document.getElementById("userMessage").value = "";
+    responseDiv.scrollTop = responseDiv.scrollHeight;
+
+    messageCount++;
+    localStorage.setItem("medaiCount", messageCount);
+    updateLimitText();
+  });
+</script>
+<!-- 💫 MedAİ Chat Bitiş -->
   
 <section id="about">
   <h2 data-tr="Hakkımızda" data-en="About MedaStaré">About MedaStaré</h2>
