@@ -1,55 +1,62 @@
-<!-- 💫 MedAİ Chat Başlangıç (Luxury WP Style) -->
+<!-- ⚜️ MedAİ Chat Başlangıç (Black & Gold Edition) -->
 <div id="medai-widget"></div>
 
 <script>
 const medaiWidget = document.getElementById("medai-widget");
 
-// 🌸 Zarif lüks kutu tasarımı
+// ✨ Lüks siyah-altın kutu tasarımı
 medaiWidget.innerHTML = `
   <div style="
-    background: linear-gradient(160deg, rgba(26,26,64,0.95), rgba(255,77,166,0.1));
-    border: 1px solid rgba(255,77,166,0.3);
-    border-radius: 25px;
+    background: linear-gradient(160deg, rgba(0,0,0,0.92), rgba(32,32,32,0.85));
+    border: 1px solid rgba(212,175,55,0.4);
+    border-radius: 28px;
     padding: 0;
     color: #fff;
     font-family: 'Inter', sans-serif;
     width: 390px;
     max-width: 90%;
     margin: 70px auto;
-    box-shadow: 0 0 40px rgba(255,77,166,0.25);
-    backdrop-filter: blur(12px);
+    box-shadow: 0 0 45px rgba(212,175,55,0.2);
+    backdrop-filter: blur(14px);
     overflow: hidden;
     animation: fadeIn 1s ease forwards;
   ">
-    <div style="background: linear-gradient(90deg,#ff4da6,#ff9966);
-      padding:16px;text-align:center;">
-      <h3 style="font-size:20px;margin:0;font-weight:600;">
-        ✨ MedAİ Asistanı
+    <div style="
+      background: linear-gradient(90deg,#1a1a40,#d4af37);
+      padding:18px;
+      text-align:center;
+      border-bottom: 1px solid rgba(212,175,55,0.3);
+    ">
+      <h3 style="font-size:21px;margin:0;font-weight:600;color:#fff;">
+        💫 MedAİ Luxe Chat
       </h3>
-      <p style="font-size:13px;margin:4px 0 0;opacity:0.9;">
-        Ruhunu & stilini birlikte dengeleyelim 💫
+      <p style="font-size:13px;margin:4px 0 0;color:#ffd;">
+        Ruhunu ve stilini yıldız zarafetinde dengeleyelim ✨
       </p>
     </div>
 
     <div id="chatBody" style="
-      padding: 18px;
+      padding: 20px;
       height: 380px;
       overflow-y: auto;
-      background: rgba(0,0,0,0.2);
+      background: rgba(255,255,255,0.02);
       display: flex;
       flex-direction: column;
       gap: 12px;
+      scroll-behavior: smooth;
     ">
       <div class="ai-msg" style="
         align-self: flex-start;
-        background: linear-gradient(90deg, rgba(255,77,166,0.8), rgba(255,153,102,0.7));
-        padding: 10px 14px;
-        border-radius: 15px 15px 15px 0;
+        background: linear-gradient(90deg, rgba(212,175,55,0.9), rgba(255,230,150,0.8));
+        color: #111;
+        padding: 12px 15px;
+        border-radius: 16px 16px 16px 4px;
         max-width: 85%;
         font-size: 14px;
-        box-shadow: 0 0 10px rgba(255,77,166,0.2);
+        font-weight: 500;
+        box-shadow: 0 0 10px rgba(212,175,55,0.4);
       ">
-        Selam ben <b>MedAİ</b> 💫<br>Ruhunu ve stilini birlikte dengeleyelim mi?
+        Selam 💫 ben <b>MedAİ</b> — bugün ruh halin nasıl?
       </div>
     </div>
 
@@ -58,26 +65,27 @@ medaiWidget.innerHTML = `
       align-items:center;
       padding:14px;
       background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(8px);
+      border-top: 1px solid rgba(212,175,55,0.2);
     ">
-      <textarea id="userMessage" placeholder="Bana yaz..." 
-        style="flex:1;background:rgba(255,255,255,0.1);border:none;
+      <textarea id="userMessage" placeholder="Mesajını yaz..." 
+        style="flex:1;background:rgba(255,255,255,0.07);border:none;
         border-radius:12px;padding:10px 14px;color:#fff;font-size:14px;
-        resize:none;outline:none;height:44px;"></textarea>
+        resize:none;outline:none;height:44px;font-family:'Inter',sans-serif;"></textarea>
 
       <button id="sendMessage" style="
-        background:linear-gradient(90deg,#ff4da6,#ff9966);
-        border:none;border-radius:50%;width:44px;height:44px;
-        margin-left:10px;color:white;font-size:18px;cursor:pointer;
-        transition:transform 0.2s;">
+        background: linear-gradient(135deg,#d4af37,#ffdd66);
+        border:none;border-radius:50%;width:48px;height:48px;
+        margin-left:10px;color:black;font-size:18px;font-weight:700;
+        cursor:pointer;box-shadow:0 0 15px rgba(212,175,55,0.4);
+        transition:all 0.25s ease;
+      ">
         ➤
       </button>
     </div>
 
-    <p id="limitInfo" style="font-size:11px;text-align:center;color:#ffd6eb;margin:5px 0 14px;"></p>
+    <p id="limitInfo" style="font-size:11px;text-align:center;color:#d4af37;margin:5px 0 14px;"></p>
   </div>
 `;
-
 
 // 💬 Mesaj sınırı
 let messageCount = localStorage.getItem("medaiCount") || 0;
@@ -88,8 +96,7 @@ const updateLimitText = () => {
 };
 updateLimitText();
 
-
-// 🩷 Gönderme
+// 🖤 Altın efektli gönderme animasyonu
 const sendMessage = document.getElementById("sendMessage");
 const textarea = document.getElementById("userMessage");
 const chatBody = document.getElementById("chatBody");
@@ -103,35 +110,35 @@ sendMessage.addEventListener("click", async () => {
   const text = textarea.value.trim();
   if (!text) return;
 
-  // Kullanıcı mesajı
+  sendMessage.style.transform = "scale(0.9)";
+  setTimeout(() => (sendMessage.style.transform = "scale(1)"), 120);
+
+  // Kullanıcı balonu
   const userBubble = document.createElement("div");
   userBubble.className = "user-msg";
   userBubble.style.cssText = `
     align-self: flex-end;
-    background: linear-gradient(90deg, rgba(255,255,255,0.15), rgba(255,255,255,0.1));
-    padding: 10px 14px;
-    border-radius: 15px 15px 0 15px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.1));
+    padding: 10px 15px;
+    border-radius: 16px 16px 4px 16px;
     max-width: 80%;
     font-size: 14px;
     color: #fff;
-    box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    box-shadow: 0 0 8px rgba(255,255,255,0.08);
+    animation: slideUp 0.4s ease;
   `;
   userBubble.textContent = text;
   chatBody.appendChild(userBubble);
   chatBody.scrollTop = chatBody.scrollHeight;
   textarea.value = "";
 
-  // MedAİ yazıyor efekti
+  // “MedAİ yazıyor” efekti
   const typing = document.createElement("div");
-  typing.className = "typing";
   typing.style.cssText = `
     align-self: flex-start;
-    background: rgba(255,77,166,0.2);
-    border-radius: 12px;
-    padding: 8px 14px;
-    max-width: 50%;
+    color: #d4af37;
     font-size: 13px;
-    color: #ffb6d5;
+    opacity: 0.8;
     animation: pulse 1.5s infinite ease-in-out;
   `;
   typing.textContent = "MedAİ yazıyor...";
@@ -149,22 +156,25 @@ sendMessage.addEventListener("click", async () => {
     const reply = data.reply || "Bir şeyler ters gitti 💫";
     chatBody.removeChild(typing);
 
+    // MedAİ cevabı
     const aiBubble = document.createElement("div");
     aiBubble.className = "ai-msg";
     aiBubble.style.cssText = `
       align-self: flex-start;
-      background: linear-gradient(90deg, rgba(255,77,166,0.8), rgba(255,153,102,0.7));
-      padding: 10px 14px;
-      border-radius: 15px 15px 15px 0;
+      background: linear-gradient(90deg, rgba(212,175,55,0.9), rgba(255,230,150,0.8));
+      color: #111;
+      padding: 12px 15px;
+      border-radius: 16px 16px 16px 4px;
       max-width: 85%;
       font-size: 14px;
-      box-shadow: 0 0 10px rgba(255,77,166,0.2);
+      font-weight: 500;
+      box-shadow: 0 0 10px rgba(212,175,55,0.4);
       animation: fadeIn 0.3s ease forwards;
     `;
 
     let i = 0;
     const interval = setInterval(() => {
-      aiBubble.innerHTML = reply.substring(0, i++) + "💫";
+      aiBubble.innerHTML = reply.substring(0, i++) + "<span style='opacity:0.6;'>💫</span>";
       chatBody.scrollTop = chatBody.scrollHeight;
       if (i > reply.length) {
         aiBubble.innerHTML = reply;
@@ -179,18 +189,23 @@ sendMessage.addEventListener("click", async () => {
   } catch (err) {
     chatBody.removeChild(typing);
     const errBubble = document.createElement("div");
-    errBubble.className = "ai-msg";
-    errBubble.textContent = "Bağlantıda sorun var 💫";
+    errBubble.style.cssText = `
+      align-self: flex-start;
+      color: #d4af37;
+      font-size: 13px;
+    `;
+    errBubble.textContent = "Bağlantı hatası 💫";
     chatBody.appendChild(errBubble);
   }
 });
 
-// 🌟 animasyonlar
+// 🎞️ Animasyonlar
 const style = document.createElement("style");
 style.innerHTML = `
 @keyframes fadeIn { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
+@keyframes slideUp { from {opacity:0; transform:translateY(15px);} to {opacity:1; transform:translateY(0);} }
 @keyframes pulse { 0%,100% {opacity:0.5;} 50% {opacity:1;} }
 `;
 document.head.appendChild(style);
 </script>
-<!-- 💫 MedAİ Chat Bitiş -->
+<!-- ⚜️ MedAİ Chat Bitiş -->
