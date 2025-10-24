@@ -370,6 +370,7 @@ style.innerHTML = `
   transition: transform 0.2s;
   box-shadow: 0 0 8px rgba(255,192,203,0.4);
 }
+.stop-btn { display: none; } /* 💫 sustur başta görünmesin */
 .voice-btn:hover, .stop-btn:hover {
   transform: scale(1.05);
   box-shadow: 0 0 12px rgba(255,215,0,0.6);
@@ -428,15 +429,22 @@ button.addEventListener("click", () => {
 // 🔊 Sesli okuma & susturma
 let currentUtterance = null;
 function speak(text, id) {
-  if (speechSynthesis.speaking) speechSynthesis.cancel();
+  stopSpeak(); // diğerleri kapanır
+  const stopBtn = document.querySelector(`#${id} .stop-btn`);
+  if (stopBtn) stopBtn.style.display = "inline-block"; // sadece bu aktif
+
   currentUtterance = new SpeechSynthesisUtterance(text);
   currentUtterance.lang = "tr-TR";
   currentUtterance.rate = 1.05;
   currentUtterance.pitch = 1;
+  currentUtterance.onend = () => {
+    if (stopBtn) stopBtn.style.display = "none"; // bitince kaybol
+  };
   speechSynthesis.speak(currentUtterance);
 }
 function stopSpeak() {
   speechSynthesis.cancel();
+  document.querySelectorAll(".stop-btn").forEach(btn => (btn.style.display = "none"));
 }
 
 // 🚀 Mesaj Gönderme + ⭐ Yazıyor animasyonu + IP + API bağlantısı
@@ -487,8 +495,8 @@ document.addEventListener("click", async (e) => {
         animation:fadeIn 0.5s ease;">
         ${reply}
         <br>
-        <button class="voice-btn" onclick="speak(\`${reply.replace(/[`']/g, '')}\`, '${messageId}')">Dinle</button>
-        <button class="stop-btn" onclick="stopSpeak()">Sustur</button>
+        <button class="voice-btn" onclick="speak(\`${reply.replace(/[`']/g, '')}\`, '${messageId}')">🔊 Dinle</button>
+        <button class="stop-btn" onclick="stopSpeak()">🔇 Sustur</button>
         <div style="text-align:center;margin-top:5px;">
           <button class="feedback" data-type="like">💖 Beğendim</button>
           <button class="feedback" data-type="dislike">😐 Beğenmedim</button>
