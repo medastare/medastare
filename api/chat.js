@@ -1,22 +1,29 @@
-// ✅ api/chat.js — MedAİ v11 (Voice & Emotion Edition 💫)
+// ✅ api/chat.js — MedAİ v11.2 (Voice + Emotion + Feedback Fix Edition)
 // Kurucu: Medine Ak 💋
-// Artık MedAİ konuşabiliyor 🎙️
 
 import fetch from "node-fetch";
 
 export const config = { api: { bodyParser: true } };
 
 export default async function handler(req, res) {
+  // ✅ CORS ayarları
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
   res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
 
+  // ✅ OPTIONS (preflight) isteklerini kabul et
   if (req.method === "OPTIONS") return res.status(200).end();
-  if (req.method !== "POST") return res.status(405).json({ message: "Method not allowed" });
 
-  const { message, feedback, userIP } = req.body;
-  if (!message && !feedback) return res.status(400).json({ message: "No message provided" });
+  // ✅ Sadece POST kabul et
+  if (req.method !== "POST") {
+    return res.status(405).json({ message: "Method not allowed" });
+  }
+
+  const { message, feedback, userIP } = req.body || {};
+  if (!message && !feedback) {
+    return res.status(400).json({ message: "No message provided" });
+  }
 
   try {
     // 🌟 Günlük mod & yıldız
@@ -27,36 +34,39 @@ export default async function handler(req, res) {
 
     // 💌 E-posta gönderimi
     async function sendMail(subject, html) {
-      await fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: "MedAİ <noreply@medastare.com>",
-          to: ["hello@medastare.com"],
-          subject,
-          html,
-        }),
-      });
+      try {
+        await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: "MedAİ <noreply@medastare.com>",
+            to: ["hello@medastare.com"],
+            subject,
+            html,
+          }),
+        });
+      } catch (e) {
+        console.warn("📧 E-posta gönderilemedi:", e.message);
+      }
     }
 
     // 🚫 Küfür filtresi
-    const badWords = ["amk", "siktir", "piç", "orospu", "yarrak", "aptal", "salak", "göt", "ibne", "aq", "pezevenk", "kaltak", "fuck", "shit", "bitch"];
+    const badWords = ["amk","siktir","piç","orospu","yarrak","aptal","salak","göt","ibne","aq","pezevenk","kaltak","fuck","shit","bitch"];
     const lower = (message || "").toLowerCase();
     const ip = req.headers["x-forwarded-for"] || userIP || "unknown";
 
-    if (badWords.some((w) => lower.includes(w))) {
-      console.warn(`🚫 Toxic tespit: ${ip}`);
+    if (badWords.some(w => lower.includes(w))) {
       await sendMail(
         "🚫 Toxic Kullanıcı Tespit Edildi | MedAİ Güvenlik",
         `
-        <h2>🚫 Toxic Kullanıcı Raporu</h2>
-        <p><b>IP:</b> ${ip}</p>
-        <p><b>Mesaj:</b> ${message}</p>
-        <p><b>Zaman:</b> ${new Date().toLocaleString("tr-TR")}</p>
-        <p style="color:#d4af37;">⚜️ MedaStaré Güvenlik Log Sistemi</p>
+          <h2>🚫 Toxic Kullanıcı Raporu</h2>
+          <p><b>IP:</b> ${ip}</p>
+          <p><b>Mesaj:</b> ${message}</p>
+          <p><b>Zaman:</b> ${new Date().toLocaleString("tr-TR")}</p>
+          <p style="color:#d4af37;">⚜️ MedaStaré Güvenlik Log Sistemi</p>
         `
       );
       return res.status(200).json({ reply: "⚠️ Lütfen uygun bir dil kullanalım 💫" });
@@ -68,17 +78,17 @@ export default async function handler(req, res) {
       await sendMail(
         `📊 Yeni Geri Bildirim: ${feedbackText}`,
         `
-        <h2>📊 MedAİ Feedback Raporu</h2>
-        <p><b>Geri Bildirim:</b> ${feedbackText}</p>
-        <p><b>Kullanıcı IP:</b> ${ip}</p>
-        <p><b>Zaman:</b> ${new Date().toLocaleString("tr-TR")}</p>
-        <p style="color:#d4af37;">⚜️ MedaStaré Feedback Sistemi</p>
+          <h2>📊 MedAİ Feedback Raporu</h2>
+          <p><b>Geri Bildirim:</b> ${feedbackText}</p>
+          <p><b>Kullanıcı IP:</b> ${ip}</p>
+          <p><b>Zaman:</b> ${new Date().toLocaleString("tr-TR")}</p>
+          <p style="color:#d4af37;">⚜️ MedaStaré Feedback Sistemi</p>
         `
       );
       return res.status(200).json({ reply: "💌 Geri bildirimin için teşekkür ederim yıldızım 💫" });
     }
 
-    // 🌟 MedAİ'nin konuşma zekâsı
+    // 💬 MedAİ ana yanıt
     const completion = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -126,24 +136,29 @@ Yanında operasyon desteği olarak **Aidana Kydyrova** bulunur.
     const reply = data.choices?.[0]?.message?.content?.trim() || "Bir şeyler ters gitti 💫";
 
     // 🎙️ Sesli okuma (Text-to-Speech)
-    const tts = await fetch("https://api.openai.com/v1/audio/speech", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini-tts",
-        voice: "alloy", // seçenekler: alloy, verse, aria, nova
-        input: reply,
-      }),
-    });
+    let audioUrl = null;
+    try {
+      const tts = await fetch("https://api.openai.com/v1/audio/speech", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: "gpt-4o-mini-tts",
+          voice: "alloy",
+          input: reply,
+        }),
+      });
 
-    const audioBuffer = await tts.arrayBuffer();
-    const base64 = Buffer.from(audioBuffer).toString("base64");
-    const audioUrl = `data:audio/mp3;base64,${base64}`;
+      const audioBuffer = await tts.arrayBuffer();
+      const base64 = Buffer.from(audioBuffer).toString("base64");
+      audioUrl = `data:audio/mp3;base64,${base64}`;
+    } catch (err) {
+      console.warn("🔇 Ses üretimi başarısız:", err.message);
+    }
 
-    // ✨ Cevap
+    // ✨ Cevap döndür
     return res.status(200).json({
       reply: `${reply}\n\n──────────────\n💖 **Beğendim** | 😐 **Beğenmedim**`,
       audio: audioUrl,
