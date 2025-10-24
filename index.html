@@ -236,7 +236,7 @@ footer small{ color:#666; }
   })();
 </script>
 
- <!-- ⚜️ MedAİ Floating Chat (Luxury Gold Glow Edition – Connected Edition v12.4 / API Linked) -->
+ <!-- ⚜️ MedAİ Floating Chat (Luxury Gold Glow Edition – Connected Edition v12.4 / Fixed API & Styled Buttons) -->
 <div id="medai-launcher"></div>
 <div id="medai-panel" style="display:none;"></div>
 
@@ -342,6 +342,10 @@ style.innerHTML = `
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
+@keyframes starPulse {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
 .typing-stars {
   display: flex;
   gap: 6px;
@@ -351,7 +355,24 @@ style.innerHTML = `
 .typing-star {
   color: #d4af37;
   font-size: 20px;
-  animation: fadeIn 1.2s infinite alternate;
+  animation: starPulse 1.2s infinite;
+}
+.voice-btn, .stop-btn {
+  background: linear-gradient(135deg,#ff4da6,#ffd700);
+  border: none;
+  color: #000;
+  border-radius: 14px;
+  padding: 6px 14px;
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 0 8px rgba(255,192,203,0.4);
+}
+.voice-btn:hover, .stop-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(255,215,0,0.6);
 }
 .feedback {
   background: linear-gradient(135deg,#d4af37,#f9e9b0);
@@ -413,14 +434,12 @@ function speak(text, id) {
   currentUtterance.rate = 1.05;
   currentUtterance.pitch = 1;
   speechSynthesis.speak(currentUtterance);
-  document.querySelector(`#${id} .stop-btn`).style.display = "inline";
 }
 function stopSpeak() {
   speechSynthesis.cancel();
-  document.querySelectorAll(".stop-btn").forEach(btn => btn.style.display = "none");
 }
 
-// 🚀 Mesaj Gönderme + ⭐ Yazıyor animasyonu + API bağlantısı
+// 🚀 Mesaj Gönderme + ⭐ Yazıyor animasyonu + IP + API bağlantısı
 document.addEventListener("click", async (e) => {
   const chatBody = document.getElementById("chatBody");
 
@@ -437,7 +456,6 @@ document.addEventListener("click", async (e) => {
     </div>`;
     document.getElementById("userMessage").value = "";
 
-    // 🌟 Yazıyor animasyonu
     const typingDiv = document.createElement("div");
     typingDiv.classList.add("typing-stars");
     typingDiv.innerHTML = `<span class="typing-star">★</span><span class="typing-star">★</span><span class="typing-star">★</span>`;
@@ -449,7 +467,6 @@ document.addEventListener("click", async (e) => {
         .then(res => res.json())
         .then(d => d.ip);
 
-      // ✅ DOĞRU API BAĞLANTISI BURADA
       const response = await fetch("https://medastare.vercel.app/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
