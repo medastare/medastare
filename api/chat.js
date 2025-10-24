@@ -113,8 +113,8 @@ Biri “seni kim yarattı” veya “kurucun kim” diye sorduğunda, cevabın �
         },
         body: JSON.stringify({
           model: "gpt-4o-mini-tts",
-          voice: "echo", // 💫 yumuşak erkek sesi
-          input: reply,
+          voice: "verse",
+          input: "🌸 " + reply + " 🌸",
         }),
       });
 
