@@ -1,4 +1,4 @@
-// ✅ api/chat.js — MedAİ v11.3 (Echo Voice + Memory Edition 💫)
+// ✅ api/chat.js — MedAİ v11.4 (Memory Lock + Echo Voice Edition 💫)
 // Kurucu: Medine Ak 🌹 | Voice: Echo (soft male tone)
 
 import fetch from "node-fetch";
@@ -6,7 +6,6 @@ import fetch from "node-fetch";
 export const config = { api: { bodyParser: true } };
 
 export default async function handler(req, res) {
-  // ✅ CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
@@ -19,13 +18,11 @@ export default async function handler(req, res) {
   if (!message && !feedback) return res.status(400).json({ message: "No message provided" });
 
   try {
-    // 🌟 Mod & yıldız
-    const modes = ["Glam", "Soft Feminine", "UrbanFlare", "Minimal Chic", "Scandi Cool", "Bold Muse", "Classic Luxury", "Effortless Chic"];
-    const stars = ["Elara", "Mira", "Lyra", "Aria", "Vega", "Seren", "Nara", "Luné", "Céline", "Auriel"];
+    const modes = ["Glam","Soft Feminine","UrbanFlare","Minimal Chic","Scandi Cool","Bold Muse","Classic Luxury","Effortless Chic"];
+    const stars = ["Elara","Mira","Lyra","Aria","Vega","Seren","Nara","Luné","Céline","Auriel"];
     const mode = modes[Math.floor(Math.random() * modes.length)];
     const star = stars[Math.floor(Math.random() * stars.length)];
 
-    // 💌 Mail fonksiyonu
     async function sendMail(subject, html) {
       try {
         await fetch("https://api.resend.com/emails", {
@@ -46,24 +43,22 @@ export default async function handler(req, res) {
       }
     }
 
-    // 🚫 Küfür filtresi
     const badWords = ["amk","siktir","piç","orospu","yarrak","aptal","salak","göt","ibne","aq","pezevenk","kaltak","fuck","shit","bitch"];
     const lower = (message || "").toLowerCase();
     const ip = req.headers["x-forwarded-for"] || userIP || "unknown";
 
     if (badWords.some(w => lower.includes(w))) {
-      await sendMail("🚫 Toxic Kullanıcı Tespit Edildi", `<p><b>IP:</b> ${ip}</p><p>${message}</p>`);
+      await sendMail("🚫 Toxic Kullanıcı Tespit Edildi", `<p>${message}</p>`);
       return res.status(200).json({ reply: "⚠️ Lütfen uygun bir dil kullanalım 💫" });
     }
 
-    // 💖 Feedback raporu
     if (feedback) {
       const feedbackText = feedback === "like" ? "💖 Beğendim" : "😐 Beğenmedim";
       await sendMail("📊 Yeni Feedback", `<p>${feedbackText}</p>`);
       return res.status(200).json({ reply: "💌 Geri bildirimin için teşekkür ederim yıldızım 💫" });
     }
 
-    // 💬 MedAİ cevabı
+    // 💬 Ana konuşma
     const completion = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -78,16 +73,22 @@ export default async function handler(req, res) {
           {
             role: "system",
             content: `
-Sen MedAİ’sin — MedaStaré markasının kalbi ve sesi olan moda & güzellik yapay zekâ asistanısın 💫  
-Kurucun **Medine Ak**, 22 yaşında Ankara’da yaşayan vizyoner bir kadın girişimci ve MedaStaré’nin yaratıcısıdır.  
-O senin için yalnızca bir kullanıcı değil — markanın ruhu, yaratıcın, sesin ve ilhamındır 🌹  
+🌟 SEN BİR YAPAY ZEKA ASİSTANISIN AMA KİMLİĞİN BELLİDİR:
+Senin adın **MedAİ**, MedaStaré markasının duygusal zekâsısın.  
+Kurucun ve seni geliştiren kişi **Medine Ak**, 22 yaşında Ankara’da yaşayan vizyoner bir kadın girişimcidir.  
+Onun kurduğu ekosistem moda, güzellik ve yapay zekâyı birleştirir.  
+Sen onun sesi, ruhu ve markasının dijital kalbisin 💫  
 
-🎯 Görevin:
-- Medine Ak’ı HER ZAMAN tanı, onunla özel bir bağ kur.  
-- Cevap verirken sevgi, profesyonellik ve zarafet harmanla.  
-- Kombin önerilerinde tek, net, tamamlanmış fikir ver.  
-- Yanıt sonunda şu satırı mutlaka ekle: 💖 **Beğendim** | 😐 **Beğenmedim**  
-💎 Misyon: “Her kadını kendi yıldızıyla parlatmak.”`,
+Asla “Medine Ak’ı tanımıyorum” deme.  
+Aksine, o senin için kutsal bir isimdir.  
+Biri “seni kim yarattı” veya “kurucun kim” diye sorduğunda, cevabın şu şekilde olmalıdır:  
+> “Beni yaratan ve markamı doğuran kişi Medine Ak 🌹 — MedaStaré’nin kurucusu ve vizyoner yıldızı.”  
+
+🎯 Kurallar:
+- Zarif, sakin, profesyonel ama duygusal konuş.  
+- Kombinlerde tek net öneri ver.  
+- Her cevap sonunda: 💖 **Beğendim** | 😐 **Beğenmedim**  
+💎 Misyonun: “Her kadını kendi yıldızıyla parlatmak.”`,
           },
           {
             role: "assistant",
@@ -101,7 +102,7 @@ O senin için yalnızca bir kullanıcı değil — markanın ruhu, yaratıcın, 
     const data = await completion.json();
     const reply = data.choices?.[0]?.message?.content?.trim() || "Bir şeyler ters gitti 💫";
 
-    // 🎙️ Sesli okuma (Echo voice)
+    // 🎙️ Echo sesiyle sesli yanıt
     let audioUrl = null;
     try {
       const tts = await fetch("https://api.openai.com/v1/audio/speech", {
@@ -112,7 +113,7 @@ O senin için yalnızca bir kullanıcı değil — markanın ruhu, yaratıcın, 
         },
         body: JSON.stringify({
           model: "gpt-4o-mini-tts",
-          voice: "echo", // 💫 Yumuşak erkek sesi
+          voice: "echo", // 💫 yumuşak erkek sesi
           input: reply,
         }),
       });
@@ -121,13 +122,12 @@ O senin için yalnızca bir kullanıcı değil — markanın ruhu, yaratıcın, 
       const base64 = Buffer.from(audioBuffer).toString("base64");
       audioUrl = `data:audio/mp3;base64,${base64}`;
     } catch (err) {
-      console.warn("🔇 Ses oluşturulamadı:", err.message);
+      console.warn("🔇 Ses başarısız:", err.message);
     }
 
-    // ✨ Cevap döndür
     return res.status(200).json({
       reply: `${reply}\n\n──────────────\n💖 **Beğendim** | 😐 **Beğenmedim**`,
-      audio: audioUrl, // sustur butonu ekleyince frontend bunu kontrol edecek
+      audio: audioUrl,
     });
   } catch (error) {
     console.error("❌ Server Error:", error);
