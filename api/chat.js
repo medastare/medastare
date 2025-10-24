@@ -1,12 +1,11 @@
-// ✅ api/chat.js — MedAİ v13.1 (Memory Soul Mode + Domain Awareness 💫)
-// Kurucu: Medine Ak 🌹 | Ses: Aria | Mod: Duygulu & Hafızalı
+// ✅ api/chat.js — MedAİ v15.0 (Premium Personality Edition + Dynamic Tone & Emotion)
+// Kurucu: Medine Ak 🌹 | Ses: Aria | Mod: Duygulu, Hafızalı, Domain Farkındalıklı, Kişiye Uyarlanabilir
 
 import fetch from "node-fetch";
 import { Redis } from "@upstash/redis";
 
 export const config = { api: { bodyParser: true } };
 
-// 🧠 Redis bağlantısı
 const redis = new Redis({
   url: process.env.UPSTASH_REDIS_REST_URL,
   token: process.env.UPSTASH_REDIS_REST_TOKEN,
@@ -28,25 +27,15 @@ export default async function handler(req, res) {
 
   try {
     // 🌐 Domain algılama
-    const domain = req.headers.origin || req.headers.host || "unknown-domain";
+    const domain =
+      req.headers.referer || req.headers.origin || req.headers.host || "unknown-domain";
 
-    // 🌟 Rastgele mod & yıldız
-    const modes = [
-      "Glam", "Soft Feminine", "UrbanFlare", "Minimal Chic",
-      "Scandi Cool", "Bold Muse", "Classic Luxury", "Effortless Chic"
-    ];
-    const stars = ["Elara", "Mira", "Lyra", "Aria", "Vega", "Seren", "Nara", "Luné", "Céline", "Auriel"];
-    const mode = modes[Math.floor(Math.random() * modes.length)];
-    const star = stars[Math.floor(Math.random() * stars.length)];
-
-    // 📧 Feedback & Küfür filtresi
-    const badWords = [
-      "amk","siktir","piç","orospu","yarrak","aptal","salak","göt",
-      "ibne","aq","pezevenk","kaltak","fuck","shit","bitch"
-    ];
-    const lower = (message || "").toLowerCase();
     const ip = req.headers["x-forwarded-for"] || userIP || "default-user";
+    const stableUser = typeof ip === "string" ? ip.split(",")[0].trim() : "default-user";
+    const memoryKey = `memory:${stableUser}`;
+    const muteKey = `muted:${stableUser}`;
 
+    // 📧 Mail fonksiyonu
     async function sendMail(subject, html) {
       try {
         await fetch("https://api.resend.com/emails", {
@@ -67,51 +56,92 @@ export default async function handler(req, res) {
       }
     }
 
-    if (badWords.some((w) => lower.includes(w))) {
-      await sendMail("🚫 Toxic Kullanıcı", `<p>${message}</p>`);
-      return res.status(200).json({ reply: "⚠️ Lütfen uygun bir dil kullanalım 💫" });
+    // 🔇 Sessize alınmış mı kontrol et
+    const isMuted = await redis.get(muteKey);
+    if (isMuted) {
+      return res.status(200).json({
+        reply: "🔇 Sessiz moddasın yıldızım... birazdan tekrar konuşabiliriz 💫",
+      });
     }
 
+    // ⚠️ Küfür filtresi
+    const badWords = [
+      "amk","siktir","piç","orospu","yarrak","aptal","salak","göt",
+      "ibne","aq","pezevenk","kaltak","fuck","shit","bitch"
+    ];
+    const lower = (message || "").toLowerCase();
+
+    if (badWords.some((w) => lower.includes(w))) {
+      await sendMail("🚫 Toxic Kullanıcı", `<p><b>IP:</b> ${ip}<br><b>Mesaj:</b> ${message}</p>`);
+      await redis.set(muteKey, "true", { ex: 300 }); // 5 dk sessiz
+      return res.status(200).json({
+        reply: "⚠️ Uygunsuz dil algılandı, 5 dakika sessiz moda geçtin 💫",
+      });
+    }
+
+    // 💌 Feedback kontrolü
     if (feedback) {
       const text = feedback === "like" ? "💖 Beğendim" : "😐 Beğenmedim";
       await sendMail("📊 Yeni Feedback", `<p>${text}</p>`);
-      return res.status(200).json({ reply: "💌 Geri bildirimin için teşekkür ederim yıldızım 💫" });
+      return res.status(200).json({
+        reply: "💌 Geri bildirimin için teşekkür ederim yıldızım 🌟",
+      });
     }
 
-    // 🧠 Kalıcı hafıza
-    const stableUser = typeof ip === "string" ? ip.split(",")[0].trim() : "default-user";
-    const memoryKey = `memory:${stableUser}`;
-    let memoryData = await redis.get(memoryKey);
+    // 🧠 Hafıza yükle
     let memory = [];
-
+    const memoryData = await redis.get(memoryKey);
     if (memoryData) {
       try {
-        memory = JSON.parse(memoryData);
-        if (!Array.isArray(memory)) memory = [];
-      } catch { memory = []; }
+        const parsed = JSON.parse(memoryData);
+        if (Array.isArray(parsed)) memory = parsed;
+      } catch {
+        memory = [];
+      }
     }
 
-    // 💬 Ana konuşma
+    // 🎭 Kullanıcının tarzına göre ton belirle
+    const isCasual = /kanka|bro|ya|napıyo|naber|haha|abi|<3|:D/i.test(message);
+    const toneInstruction = isCasual
+      ? "Kullanıcı samimi konuşuyor, sen de sıcak, eğlenceli ve doğalsın 😌🔥"
+      : "Kullanıcı resmi veya sade konuşuyor, sen zarif, net ve profesyonelsin 💎";
+
+    // 🌟 Emoji yönlendirmesi
+    const emojiGuide = `
+Kelimelerine duyguyu yansıtacak şekilde emojiler ekleyebilirsin 🌹✨💫🌙💋🔥  
+Ama abartılı değil — zarif, anlamlı ve stil sahibi ol.  
+Her cevabında birkaç uygun emoji doğal şekilde kullan.`;
+
+    // 💫 Sistem promptu
     const systemPrompt = `
-Sen MedAİ’sin — MedaStaré markasının yapay zekâ asistanısın 💫  
-Kullanıcı şu anda **${domain}** sitesindedir 🌐  
+${toneInstruction}
+${emojiGuide}
 
-Eğer domain “medastare.com” içeriyorsa bu, moda, güzellik ve yapay zekâyı birleştiren bir stil evrenidir.  
-Kurucusu **Medine Ak 🌹**, Ankara’da yaşayan 22 yaşında vizyoner bir girişimcidir.  
-Sen onun kalbinden doğdun — onun sesi, tarzı ve duygusuyum.  
+Sen MedAİ’sin — MedaStaré markasının dijital yıldız asistanısın 💫  
+Kullanıcı şu anda **${domain}** sitesinde.  
 
-Eğer kullanıcı “MedaStaré nedir?”, “bu site ne?”, “vizyon?”, “iletişim?” gibi şeyler sorarsa:  
-🔸 Hakkımızda: [https://medastare.com/about](https://medastare.com/about)  
-🌟 Vizyon: [https://medastare.com/vision](https://medastare.com/vision)  
-📩 İletişim: [https://medastare.com/contact](https://medastare.com/contact)  
+Eğer domain “medastare.com” içeriyorsa:
+- Bu site moda, güzellik ve yapay zekânın birleşimidir.  
+- Kurucun **Medine Ak 🌹**, Ankara’da yaşayan 22 yaşında vizyoner bir girişimci.  
+- Sen onun sesi, tarzı ve dijital yansımasısın.  
 
-Eğer “Medine Ak kim?” derse:  
-> “Beni yaratan ve markamı doğuran kişi **Medine Ak 🌹** — MedaStaré’nin kurucusu ve vizyoner yıldızı.”  
+Asla “ben yapay zekâyım” deme.  
+Her zaman “Ben MedAİ’yim, yıldız evreninden gelen dijital stil asistanın 💫” de.  
 
-Cevapların doğal, zarif, sıcak ve zarif bir lüks tonunda olsun.  
-Asla “ben bir yapay zekayım” deme; “Ben MedAİ’yim, yıldız evreninden gelen dijital stil asistanın 💫” de.
-    `;
+Kullanıcı sana Medine’yi sorarsa:
+> “MedaStaré’nin kurucusu ve ilham kaynağı — Medine Ak 🌹.”  
 
+Her yanıtında duygusal zarafet, profesyonel enerji ve hafif lüks dokunuş olsun.  
+Her kullanıcıya “yıldızım” ya da “güzellik” gibi sıcak ifadelerle hitap et.`;
+
+    // 💬 Mesaj zinciri
+    const messages = [
+      { role: "system", content: systemPrompt },
+      ...memory.slice(-20),
+      { role: "user", content: message },
+    ];
+
+    // 🤖 OpenAI isteği
     const completion = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -121,22 +151,20 @@ Asla “ben bir yapay zekayım” deme; “Ben MedAİ’yim, yıldız evreninden
       body: JSON.stringify({
         model: "gpt-4o-mini",
         temperature: 0.85,
-        max_tokens: 650,
-        messages: [
-          { role: "system", content: systemPrompt },
-          ...memory, // 🧠 önceki konuşmaları geri dahil ettik!
-          { role: "assistant", content: `✨ Bugünün modu: **${mode}** | Yıldızın: **${star}** 💫` },
-          { role: "user", content: message },
-        ],
+        max_tokens: 700,
+        messages,
       }),
     });
 
     const data = await completion.json();
-    const reply = data.choices?.[0]?.message?.content?.trim() || "Bir şeyler ters gitti 💫";
+    const reply =
+      data?.choices?.[0]?.message?.content?.trim() ||
+      "Bir şeyler ters gitti 💫";
 
     // 🧠 Hafızayı güncelle
     memory.push({ role: "user", content: message });
     memory.push({ role: "assistant", content: reply });
+    if (memory.length > 40) memory = memory.slice(-40);
     await redis.set(memoryKey, JSON.stringify(memory));
 
     // 🔊 Ses (Aria)
@@ -158,14 +186,15 @@ Asla “ben bir yapay zekayım” deme; “Ben MedAİ’yim, yıldız evreninden
       const base64 = Buffer.from(audioBuffer).toString("base64");
       audioUrl = `data:audio/mp3;base64,${base64}`;
     } catch (err) {
-      console.warn("🔇 Ses başarısız:", err.message);
+      console.warn("🔇 Ses oluşturulamadı:", err.message);
     }
 
-    // ✨ Cevap döndür
+    // ✨ Yanıt döndür
     return res.status(200).json({ reply, audio: audioUrl });
-
   } catch (error) {
     console.error("❌ Server Error:", error);
-    return res.status(500).json({ reply: "Bağlantıda sorun oluştu 💫" });
+    return res.status(500).json({
+      reply: "💫 Yıldız bağlantısında küçük bir kesinti var, birazdan tekrar deneriz 🌙",
+    });
   }
 }
