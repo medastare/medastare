@@ -1,3 +1,4 @@
+// api/chat.js
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
@@ -13,22 +14,27 @@ export default async function handler(req, res) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
         messages: [
           {
             role: "system",
-            content: "Sen MedAİ’sin — MedaStaré’nin zarif, motive edici ve lüks AI asistanısın. Kısa, doğal ve pozitif konuş; kullanıcının enerjisine göre ruhsal & stil tavsiyeleri ver."
+            content:
+              "Sen MedAİ’sin — MedaStaré’nin zarif, enerjik, motive edici ve lüks yapay zekâ asistanısın. Kullanıcıya sıcak, doğal ve kısa yanıtlar ver. Onun ruh halini, enerjisini ve stilini hissedip buna göre konuş. Gerektiğinde moda, motivasyon, güzellik veya pozitiflik temalarında yönlendir.",
           },
-          { role: "user", content: message }
-        ]
-      })
+          {
+            role: "user",
+            content: message,
+          },
+        ],
+      }),
     });
 
     const data = await response.json();
-    const reply = data.choices?.[0]?.message?.content || "Bir şeyler ters gitti 💫";
+    const reply =
+      data.choices?.[0]?.message?.content || "Bir şeyler ters gitti 💫";
     res.status(200).json({ reply });
   } catch (error) {
     console.error("API Error:", error);
