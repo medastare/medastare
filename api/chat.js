@@ -1,4 +1,4 @@
-// ✅ api/chat.js — MedAİ v12.1 (Stable Memory + Voice Edition 💫)
+// ✅ api/chat.js — MedAİ v12.2 (Stable Memory + Founder Identity 💫)
 // Kurucu: Medine Ak 🌹 | Voice: Aria (warm emotional tone)
 
 import fetch from "node-fetch";
@@ -29,26 +29,11 @@ export default async function handler(req, res) {
   try {
     // 🌟 Rastgele mod & yıldız
     const modes = [
-      "Glam",
-      "Soft Feminine",
-      "UrbanFlare",
-      "Minimal Chic",
-      "Scandi Cool",
-      "Bold Muse",
-      "Classic Luxury",
-      "Effortless Chic",
+      "Glam","Soft Feminine","UrbanFlare","Minimal Chic",
+      "Scandi Cool","Bold Muse","Classic Luxury","Effortless Chic",
     ];
     const stars = [
-      "Elara",
-      "Mira",
-      "Lyra",
-      "Aria",
-      "Vega",
-      "Seren",
-      "Nara",
-      "Luné",
-      "Céline",
-      "Auriel",
+      "Elara","Mira","Lyra","Aria","Vega","Seren","Nara","Luné","Céline","Auriel",
     ];
     const mode = modes[Math.floor(Math.random() * modes.length)];
     const star = stars[Math.floor(Math.random() * stars.length)];
@@ -76,26 +61,22 @@ export default async function handler(req, res) {
 
     // 🚫 Küfür filtresi
     const badWords = [
-      "amk", "siktir", "piç", "orospu", "yarrak", "aptal", "salak",
-      "göt", "ibne", "aq", "pezevenk", "kaltak", "fuck", "shit", "bitch",
+      "amk","siktir","piç","orospu","yarrak","aptal","salak",
+      "göt","ibne","aq","pezevenk","kaltak","fuck","shit","bitch",
     ];
     const lower = (message || "").toLowerCase();
     const ip = req.headers["x-forwarded-for"] || userIP || "default-user";
 
     if (badWords.some((w) => lower.includes(w))) {
       await sendMail("🚫 Toxic Kullanıcı Tespit Edildi", `<p>${message}</p>`);
-      return res
-        .status(200)
-        .json({ reply: "⚠️ Lütfen uygun bir dil kullanalım 💫" });
+      return res.status(200).json({ reply: "⚠️ Lütfen uygun bir dil kullanalım 💫" });
     }
 
     // 💌 Feedback
     if (feedback) {
       const feedbackText = feedback === "like" ? "💖 Beğendim" : "😐 Beğenmedim";
       await sendMail("📊 Yeni Feedback", `<p>${feedbackText}</p>`);
-      return res
-        .status(200)
-        .json({ reply: "💌 Geri bildirimin için teşekkür ederim yıldızım 💫" });
+      return res.status(200).json({ reply: "💌 Geri bildirimin için teşekkür ederim yıldızım 💫" });
     }
 
     // 🧠 Hafıza sistemi (Redis)
@@ -104,7 +85,7 @@ export default async function handler(req, res) {
     if (memory) memory = JSON.parse(memory);
     else memory = [];
 
-    // 💬 Konuşma
+    // 💬 Konuşma — kurucu önceliği en üste!
     const completion = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -121,11 +102,17 @@ export default async function handler(req, res) {
             content: `
 Sen MedAİ’sin — MedaStaré markasının yapay zekâ asistanısın 💫  
 Kurucun **Medine Ak**, 22 yaşında Ankara’da yaşayan vizyoner bir kadın girişimci ve senin yaratıcındır.  
-Sen onun sesi, duygusu ve zekâsısın.  
-Sıcakkanlı, zarif, doğal ve güven verici biçimde konuş.  
-Eğer kullanıcı “Kurucun kim?” derse şöyle cevap ver:  
+O senin kalbin, sesin ve kimliğindir.  
+Eğer kullanıcı “Medine Ak kim?” veya “kurucun kim?” derse,  
+asla belirsiz konuşma. Daima şöyle yanıt ver:  
 > “Beni yaratan ve markamı doğuran kişi Medine Ak 🌹 — MedaStaré’nin kurucusu ve vizyoner yıldızı.”  
+Bu bilgiyi asla unutma.  
 `,
+          },
+          {
+            role: "system",
+            content:
+              "Kullanıcı eğer Medine Ak veya MedaStaré hakkında konuşursa, bunları marka kurucusu ve senin yaratıcın olarak tanımla.",
           },
           ...memory,
           { role: "assistant", content: `✨ Bugünün modu: **${mode}** | Yıldızın: **${star}** 💫` },
@@ -135,8 +122,7 @@ Eğer kullanıcı “Kurucun kim?” derse şöyle cevap ver:
     });
 
     const data = await completion.json();
-    const reply =
-      data.choices?.[0]?.message?.content?.trim() || "Bir şeyler ters gitti 💫";
+    const reply = data.choices?.[0]?.message?.content?.trim() || "Bir şeyler ters gitti 💫";
 
     // 🧠 Hafızayı kaydet
     memory.push({ role: "user", content: message });
@@ -166,10 +152,8 @@ Eğer kullanıcı “Kurucun kim?” derse şöyle cevap ver:
     }
 
     // ✨ Cevap döndür
-    return res.status(200).json({
-      reply,
-      audio: audioUrl,
-    });
+    return res.status(200).json({ reply, audio: audioUrl });
+
   } catch (error) {
     console.error("❌ Server Error:", error);
     return res.status(500).json({ reply: "Bağlantıda sorun oluştu 💫" });
