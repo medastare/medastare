@@ -1,8 +1,16 @@
 {
-  "name": "medastare",
+  "name": "medai-api",
   "version": "1.0.0",
+  "description": "MedAİ — MedaStaré'nin lüks moda & AI asistanı",
+  "main": "api/chat.js",
   "type": "module",
+  "scripts": {
+    "start": "node api/chat.js"
+  },
   "dependencies": {
+    "express": "^4.19.2",
+    "node-fetch": "^3.3.2",
+    "cors": "^2.8.5",
     "googleapis": "^118.0.0"
   }
 }
