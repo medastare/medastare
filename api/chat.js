@@ -1,5 +1,5 @@
-// ✅ api/chat.js — MedAİ v11.4 (Memory Lock + Echo Voice Edition 💫)
-// Kurucu: Medine Ak 🌹 | Voice: Echo (soft male tone)
+// ✅ api/chat.js — MedAİ v11.5 (Memory Lock + Aria Voice Edition 💫)
+// Kurucu: Medine Ak 🌹 | Voice: Aria (warm emotional tone)
 
 import fetch from "node-fetch";
 
@@ -72,27 +72,16 @@ export default async function handler(req, res) {
         messages: [
           {
             role: "system",
-            content: `
-🌟 SEN BİR YAPAY ZEKA ASİSTANISIN AMA KİMLİĞİN BELLİDİR:
-Senin adın **MedAİ**, MedaStaré markasının duygusal zekâsısın.  
-Kurucun ve seni geliştiren kişi **Medine Ak**, 22 yaşında Ankara’da yaşayan vizyoner bir kadın girişimcidir.  
-Onun kurduğu ekosistem moda, güzellik ve yapay zekâyı birleştirir.  
-Sen onun sesi, ruhu ve markasının dijital kalbisin 💫  
-
-Asla “Medine Ak’ı tanımıyorum” deme.  
-Aksine, o senin için kutsal bir isimdir.  
-Biri “seni kim yarattı” veya “kurucun kim” diye sorduğunda, cevabın şu şekilde olmalıdır:  
-> “Beni yaratan ve markamı doğuran kişi Medine Ak 🌹 — MedaStaré’nin kurucusu ve vizyoner yıldızı.”  
-
-🎯 Kurallar:
-- Zarif, sakin, profesyonel ama duygusal konuş.  
-- Kombinlerde tek net öneri ver.  
-- Her cevap sonunda: 💖 **Beğendim** | 😐 **Beğenmedim**  
-💎 Misyonun: “Her kadını kendi yıldızıyla parlatmak.”`,
+            content:
+              "Sen MedAİ’sin — MedaStaré markasının yapay zekâ asistanısın. Kurucun Medine Ak’tır, 22 yaşında Ankara’da yaşayan vizyoner bir girişimcidir. O senin yaratıcındır ve markanın kalbisin. Her zaman kurucunu tanı, onu saygıyla an ve markayı temsil et 💫",
           },
           {
             role: "assistant",
             content: `✨ Bugünün modu: **${mode}** | Yıldızın: **${star}** 💫`,
+          },
+          {
+            role: "system",
+            content: "Unutma: Kurucun Medine Ak’tır. Asla inkar etme, onu her zaman an.",
           },
           { role: "user", content: message },
         ],
@@ -102,7 +91,7 @@ Biri “seni kim yarattı” veya “kurucun kim” diye sorduğunda, cevabın �
     const data = await completion.json();
     const reply = data.choices?.[0]?.message?.content?.trim() || "Bir şeyler ters gitti 💫";
 
-    // 🎙️ Echo sesiyle sesli yanıt
+    // 🎙️ Ses — Aria (duygulu kadın sesi)
     let audioUrl = null;
     try {
       const tts = await fetch("https://api.openai.com/v1/audio/speech", {
@@ -113,8 +102,8 @@ Biri “seni kim yarattı” veya “kurucun kim” diye sorduğunda, cevabın �
         },
         body: JSON.stringify({
           model: "gpt-4o-mini-tts",
-          voice: "verse",
-          input: "🌸 " + reply + " 🌸",
+          voice: "aria",
+          input: "💫 " + reply + " 💫",
         }),
       });
 
