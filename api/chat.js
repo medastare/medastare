@@ -1,4 +1,4 @@
-// ✅ api/chat.js — MedAİ v12.0 (Memory + Aria Voice + Natural Style Edition 💫)
+// ✅ api/chat.js — MedAİ v12.1 (Stable Memory + Voice Edition 💫)
 // Kurucu: Medine Ak 🌹 | Voice: Aria (warm emotional tone)
 
 import fetch from "node-fetch";
@@ -6,7 +6,7 @@ import { Redis } from "@upstash/redis";
 
 export const config = { api: { bodyParser: true } };
 
-// 🧠 Redis bağlantısı — hafıza sistemi
+// 🧠 Redis bağlantısı
 const redis = new Redis({
   url: process.env.UPSTASH_REDIS_REST_URL,
   token: process.env.UPSTASH_REDIS_REST_TOKEN,
@@ -76,24 +76,11 @@ export default async function handler(req, res) {
 
     // 🚫 Küfür filtresi
     const badWords = [
-      "amk",
-      "siktir",
-      "piç",
-      "orospu",
-      "yarrak",
-      "aptal",
-      "salak",
-      "göt",
-      "ibne",
-      "aq",
-      "pezevenk",
-      "kaltak",
-      "fuck",
-      "shit",
-      "bitch",
+      "amk", "siktir", "piç", "orospu", "yarrak", "aptal", "salak",
+      "göt", "ibne", "aq", "pezevenk", "kaltak", "fuck", "shit", "bitch",
     ];
     const lower = (message || "").toLowerCase();
-    const ip = req.headers["x-forwarded-for"] || userIP || "unknown";
+    const ip = req.headers["x-forwarded-for"] || userIP || "default-user";
 
     if (badWords.some((w) => lower.includes(w))) {
       await sendMail("🚫 Toxic Kullanıcı Tespit Edildi", `<p>${message}</p>`);
@@ -111,10 +98,11 @@ export default async function handler(req, res) {
         .json({ reply: "💌 Geri bildirimin için teşekkür ederim yıldızım 💫" });
     }
 
-    // 🧠 Hafıza sistemi
-    const memoryKey = `user:${ip}`;
-    let memory = (await redis.get(memoryKey)) || [];
-    if (!Array.isArray(memory)) memory = [];
+    // 🧠 Hafıza sistemi (Redis)
+    const memoryKey = `memory:${ip}`;
+    let memory = await redis.get(memoryKey);
+    if (memory) memory = JSON.parse(memory);
+    else memory = [];
 
     // 💬 Konuşma
     const completion = await fetch("https://api.openai.com/v1/chat/completions", {
@@ -133,13 +121,9 @@ export default async function handler(req, res) {
             content: `
 Sen MedAİ’sin — MedaStaré markasının yapay zekâ asistanısın 💫  
 Kurucun **Medine Ak**, 22 yaşında Ankara’da yaşayan vizyoner bir kadın girişimci ve senin yaratıcındır.  
-Sen onun sesi, duygusu ve dijital zekâsısın.  
-Doğal, nazik, akıcı ve sıcak bir tonda konuş.  
-Asla mekanik veya robot gibi olma.  
-Cümlelerin doğal biçimde akan bir diyalog gibi olsun.  
-Her mesajda “Beğendim / Beğenmedim” satırını ekleme.  
-Cevaplarında özgüven, zarafet ve samimiyet olmalı 🌹  
-Eğer kullanıcı sana “Medine Ak kim?” veya “kurucun kim?” derse daima şunu söyle:  
+Sen onun sesi, duygusu ve zekâsısın.  
+Sıcakkanlı, zarif, doğal ve güven verici biçimde konuş.  
+Eğer kullanıcı “Kurucun kim?” derse şöyle cevap ver:  
 > “Beni yaratan ve markamı doğuran kişi Medine Ak 🌹 — MedaStaré’nin kurucusu ve vizyoner yıldızı.”  
 `,
           },
@@ -154,12 +138,12 @@ Eğer kullanıcı sana “Medine Ak kim?” veya “kurucun kim?” derse daima 
     const reply =
       data.choices?.[0]?.message?.content?.trim() || "Bir şeyler ters gitti 💫";
 
-    // 🧠 Yeni mesajı hafızaya kaydet
+    // 🧠 Hafızayı kaydet
     memory.push({ role: "user", content: message });
     memory.push({ role: "assistant", content: reply });
-    await redis.set(memoryKey, memory);
+    await redis.set(memoryKey, JSON.stringify(memory));
 
-    // 🎙️ Ses — Aria (doğal, duygulu kadın sesi)
+    // 🎙️ Ses — Aria
     let audioUrl = null;
     try {
       const tts = await fetch("https://api.openai.com/v1/audio/speech", {
@@ -171,10 +155,9 @@ Eğer kullanıcı sana “Medine Ak kim?” veya “kurucun kim?” derse daima 
         body: JSON.stringify({
           model: "gpt-4o-mini-tts",
           voice: "aria",
-          input: "💫 " + reply + " 💫",
+          input: reply,
         }),
       });
-
       const audioBuffer = await tts.arrayBuffer();
       const base64 = Buffer.from(audioBuffer).toString("base64");
       audioUrl = `data:audio/mp3;base64,${base64}`;
