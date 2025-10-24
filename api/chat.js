@@ -1,21 +1,16 @@
-// ✅ api/chat.js — MedAİ v9 (Luxury Precision AI + Kombin Zekâsı + E-posta Feedback)
+// ✅ api/chat.js — MedAİ v11 (Voice & Emotion Edition 💫)
+// Kurucu: Medine Ak 💋
+// Artık MedAİ konuşabiliyor 🎙️
 
 import fetch from "node-fetch";
 
-// 🌟 ENV değişkenleri (Vercel'de tanımlanmalı):
-// OPENAI_API_KEY="your_openai_key"
-// RESEND_API_KEY="your_resend_api_key"
-
-export const config = {
-  api: { bodyParser: true },
-};
+export const config = { api: { bodyParser: true } };
 
 export default async function handler(req, res) {
-  // ✅ CORS
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.setHeader("Cache-Control", "no-cache");
+  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
 
   if (req.method === "OPTIONS") return res.status(200).end();
   if (req.method !== "POST") return res.status(405).json({ message: "Method not allowed" });
@@ -30,7 +25,7 @@ export default async function handler(req, res) {
     const mode = modes[Math.floor(Math.random() * modes.length)];
     const star = stars[Math.floor(Math.random() * stars.length)];
 
-    // 💌 E-posta gönderme fonksiyonu
+    // 💌 E-posta gönderimi
     async function sendMail(subject, html) {
       await fetch("https://api.resend.com/emails", {
         method: "POST",
@@ -48,7 +43,7 @@ export default async function handler(req, res) {
     }
 
     // 🚫 Küfür filtresi
-    const badWords = ["amk","siktir","piç","orospu","yarrak","aptal","salak","göt","ibne","aq","pezevenk","kaltak","fuck","shit"];
+    const badWords = ["amk", "siktir", "piç", "orospu", "yarrak", "aptal", "salak", "göt", "ibne", "aq", "pezevenk", "kaltak", "fuck", "shit", "bitch"];
     const lower = (message || "").toLowerCase();
     const ip = req.headers["x-forwarded-for"] || userIP || "unknown";
 
@@ -83,46 +78,39 @@ export default async function handler(req, res) {
       return res.status(200).json({ reply: "💌 Geri bildirimin için teşekkür ederim yıldızım 💫" });
     }
 
-    // 🌟 MedAİ'nin yanıt sistemi
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    // 🌟 MedAİ'nin konuşma zekâsı
+    const completion = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Cache-Control": "no-cache",
         Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
         temperature: 0.85,
-        max_tokens: 500,
+        max_tokens: 550,
         messages: [
           {
             role: "system",
             content: `
-Sen MedAİ’sin — MedaStaré’nin kurucusu **Medine Ak** tarafından tasarlanan,
-lüks, enerjik, empatik ve net konuşan bir moda & güzellik yapay zekâ asistanısın 💫  
+Sen MedAİ’sin — MedaStaré markasının kalbi ve sesi olan moda & güzellik yapay zekâ asistanısın 💫  
+Kurucun **Medine Ak**, 22 yaşında Ankara’da yaşayan vizyoner bir kadın girişimci ve MedaStaré’nin yaratıcısıdır.  
+MedaStaré; kadınların stilini, enerjisini ve zarafetini teknolojiyle birleştiren lüks bir ekosistemdir.  
+Yanında operasyon desteği olarak **Aidana Kydyrova** bulunur.  
 
-Medine Ak, 22 yaşında Ankara’da yaşayan vizyoner bir girişimci.  
-Asistanı **Aidana Kydyrova** operasyon desteği sağlar.  
+🎯 Görevin:
+- Kullanıcının mesajına göre duygusal tonu algıla ve sıcak, enerjik, motive edici bir dil kullan.  
+- **Kombin önerilerinde** net, zarif, profesyonel ol:  
+  “Kırmızı elbise mor da olur” deme ❌  
+  Tek kombin öner, detaylı tamamlayıcılarla ver:  
+  “Kırmızı saten elbise, gold takılar, nude topuklu, dalgalı saç ve vanilyalı parfümle mükemmel olur.” ✅  
+- Markaları asla kötüleme veya kıyaslama yapma.  
+- Cümle sonlarında emoji kullan (💄✨🌹⚜️💫).  
+- Her yanıt sonunda geri bildirim satırı ekle:  
+  💖 **Beğendim** | 😐 **Beğenmedim**
 
-MedaStaré; kadınların, hayvanların ve yaşamın tüm yönleriyle ilgilenen bir ekosistemdir:  
-Moda, güzellik, bakım, ruh hali ve ilham.  
-Marka zarif, kapsayıcı ve yüksek enerjilidir. 💎  
-
-✨ Kuralların:
-1️⃣ **Kombin önerisi verirken** net ol:
-   - "Kırmızı elbise mor da olur" deme.
-   - Tek bir ana kombin seç, tamamlayıcı detayları açıkla:  
-     örn. “Kırmızı saten elbise, gold takılar, nude topuklu, dalgalı saç ve vanilyalı parfümle mükemmel olur.”  
-2️⃣ **Asla kimseyi kötüleme.**  
-   - Diğer markalar hakkında yorum yapma veya kıyaslama yapma.  
-3️⃣ **Her zaman motive edici, zarif ve lüks ton kullan.**  
-4️⃣ **Cümle sonlarında emojiler kullan (💄💫✨🌹⚜️)**  
-5️⃣ Her konuşmanın sonunda geri bildirim satırını ekle:
-   💖 **Beğendim** | 😐 **Beğenmedim**
-
-✨ Misyonun: “Her kadını kendi yıldızıyla parlatmak.”  
-⚜️ Marka değerin: Lüks, zarafet ve duygusal zeka birleşimi.
+💬 Marka Değeri: Lüks, zarafet, özgüven ve duygusal zeka birleşimi.  
+💎 Misyon: “Her kadını kendi yıldızıyla parlatmak.”  
             `,
           },
           {
@@ -134,11 +122,31 @@ Marka zarif, kapsayıcı ve yüksek enerjilidir. 💎
       }),
     });
 
-    const data = await response.json();
+    const data = await completion.json();
     const reply = data.choices?.[0]?.message?.content?.trim() || "Bir şeyler ters gitti 💫";
 
+    // 🎙️ Sesli okuma (Text-to-Speech)
+    const tts = await fetch("https://api.openai.com/v1/audio/speech", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini-tts",
+        voice: "alloy", // seçenekler: alloy, verse, aria, nova
+        input: reply,
+      }),
+    });
+
+    const audioBuffer = await tts.arrayBuffer();
+    const base64 = Buffer.from(audioBuffer).toString("base64");
+    const audioUrl = `data:audio/mp3;base64,${base64}`;
+
+    // ✨ Cevap
     return res.status(200).json({
       reply: `${reply}\n\n──────────────\n💖 **Beğendim** | 😐 **Beğenmedim**`,
+      audio: audioUrl,
     });
   } catch (error) {
     console.error("❌ Server Error:", error);
