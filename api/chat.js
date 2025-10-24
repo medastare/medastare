@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`,
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
@@ -24,10 +24,7 @@ export default async function handler(req, res) {
             content:
               "Sen MedAİ’sin — MedaStaré’nin zarif, enerjik, motive edici ve lüks yapay zekâ asistanısın. Kullanıcıya sıcak, doğal ve kısa yanıtlar ver. Onun ruh halini, enerjisini ve stilini hissedip buna göre konuş. Gerektiğinde moda, motivasyon, güzellik veya pozitiflik temalarında yönlendir.",
           },
-          {
-            role: "user",
-            content: message,
-          },
+          { role: "user", content: message },
         ],
       }),
     });
@@ -35,9 +32,9 @@ export default async function handler(req, res) {
     const data = await response.json();
     const reply =
       data.choices?.[0]?.message?.content || "Bir şeyler ters gitti 💫";
-    res.status(200).json({ reply });
+    return res.status(200).json({ reply });
   } catch (error) {
-    console.error("API Error:", error);
-    res.status(500).json({ reply: "Bağlantıda sorun oluştu 💫" });
+    console.error("❌ API Error:", error);
+    return res.status(500).json({ reply: "Bağlantıda sorun oluştu 💫" });
   }
 }
