@@ -236,12 +236,12 @@ footer small{ color:#666; }
   })();
 </script>
 
-<!-- ⚜️ MedAİ Floating Chat (Luxury Gold Glow Edition – Fixed Left | Voice + Feedback Edition) -->
+<!-- ⚜️ MedAİ Floating Chat (Luxury Gold Glow Edition – Voice + Feedback + Stop Edition) -->
 <div id="medai-launcher"></div>
 <div id="medai-panel" style="display:none;"></div>
 
 <script>
-// ✨ GOLDEN FLOATING BUTTON (Sol sabit)
+// ✨ GOLDEN FLOATING BUTTON
 const medaiLauncher = document.getElementById("medai-launcher");
 const medaiPanel = document.getElementById("medai-panel");
 
@@ -354,18 +354,26 @@ style.innerHTML = `
   transition:transform 0.2s;
 }
 .feedback:hover { transform: scale(1.08); }
-.voice-btn {
+.voice-btn, .stop-btn {
   background: transparent;
-  color:#d4af37;
   border:none;
   cursor:pointer;
-  font-size:18px;
-  margin-left:6px;
+  font-size:15px;
+  margin-top:8px;
+  font-weight:600;
+}
+.voice-btn { color:#ff66cc; }
+.stop-btn { color:#ff3366; display:none; }
+.thanks {
+  color:#000;
+  font-size:13px;
+  margin-top:5px;
+  text-align:center;
 }
 `;
 document.head.appendChild(style);
 
-// 🪞 Hafıza (son 3 mesaj)
+// 🪞 Hafıza
 let chatMemory = JSON.parse(localStorage.getItem("medaiMemory") || "[]");
 function updateMemory(message) {
   chatMemory.push(message);
@@ -401,13 +409,20 @@ button.addEventListener("click", () => {
   }
 });
 
-// 🔊 Sesli okuma
-function speak(text) {
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "tr-TR";
-  utterance.rate = 1.05;
-  utterance.pitch = 1;
-  speechSynthesis.speak(utterance);
+// 🔊 Sesli okuma & susturma
+let currentUtterance = null;
+function speak(text, id) {
+  if (speechSynthesis.speaking) speechSynthesis.cancel();
+  currentUtterance = new SpeechSynthesisUtterance(text);
+  currentUtterance.lang = "tr-TR";
+  currentUtterance.rate = 1.05;
+  currentUtterance.pitch = 1;
+  speechSynthesis.speak(currentUtterance);
+  document.querySelector(`#${id} .stop-btn`).style.display = "inline";
+}
+function stopSpeak() {
+  speechSynthesis.cancel();
+  document.querySelectorAll(".stop-btn").forEach(btn => btn.style.display = "none");
 }
 
 // 🚀 Mesaj Gönderme
@@ -436,22 +451,24 @@ document.addEventListener("click", async (e) => {
       const data = await response.json();
       const reply = data.reply || "Bağlantı kurulamadı 💫";
       updateMemory({ role: "assistant", content: reply });
+      const messageId = "msg_" + Date.now();
 
-      chatBody.innerHTML += `<div style="
+      chatBody.innerHTML += `<div id="${messageId}" style="
         align-self:flex-start;
         background: linear-gradient(90deg, rgba(212,175,55,0.9), rgba(255,230,160,0.8));
         color:#111;padding:12px 15px;border-radius:15px 15px 15px 5px;
         font-size:14px;box-shadow:0 0 10px rgba(212,175,55,0.3);
         animation:fadeIn 0.5s ease;">
         ${reply}
-        <br><button class="voice-btn" onclick="speak(\`${reply.replace(/[`']/g, '')}\`)">🔊 Dinle</button>
+        <br>
+        <button class="voice-btn" onclick="speak(\`${reply.replace(/[`']/g, '')}\`, '${messageId}')">🔊 Dinle</button>
+        <button class="stop-btn" onclick="stopSpeak()">🔇 Sustur</button>
         <div style="text-align:center;margin-top:5px;">
           <button class="feedback" data-type="like">💖 Beğendim</button>
           <button class="feedback" data-type="dislike">😐 Beğenmedim</button>
         </div>
       </div>`;
       chatBody.scrollTop = chatBody.scrollHeight;
-      speak(reply);
     } catch (err) {
       console.error("❌ Bağlantı hatası:", err);
       chatBody.innerHTML += `<div style="
@@ -470,7 +487,7 @@ document.addEventListener("click", async (e) => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ feedback }),
     });
-    e.target.parentNode.innerHTML = `<div style="color:#d4af37;font-size:13px;margin-top:5px;">💌 Geri bildirimin için teşekkürler!</div>`;
+    e.target.parentNode.innerHTML = `<div class="thanks">💌 Geri bildirimin için teşekkürler!</div>`;
   }
 });
 </script>
