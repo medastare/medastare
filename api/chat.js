@@ -1,4 +1,4 @@
-// ✅ api/chat.js — MedAİ v12.2 (Stable Memory + Founder Identity 💫)
+// ✅ api/chat.js — MedAİ v12.4 (Persistent Memory + Founder Lock + Domain Awareness 💫)
 // Kurucu: Medine Ak 🌹 | Voice: Aria (warm emotional tone)
 
 import fetch from "node-fetch";
@@ -79,13 +79,23 @@ export default async function handler(req, res) {
       return res.status(200).json({ reply: "💌 Geri bildirimin için teşekkür ederim yıldızım 💫" });
     }
 
-    // 🧠 Hafıza sistemi (Redis)
-    const memoryKey = `memory:${ip}`;
-    let memory = await redis.get(memoryKey);
-    if (memory) memory = JSON.parse(memory);
-    else memory = [];
+    // 🧠 Kalıcı hafıza sistemi
+    const stableUser =
+      typeof ip === "string" ? ip.split(",")[0].trim() : "default-user";
+    const memoryKey = `memory:${stableUser}`;
+    let memoryData = await redis.get(memoryKey);
+    let memory = [];
 
-    // 💬 Konuşma — kurucu önceliği en üste!
+    if (memoryData) {
+      try {
+        memory = JSON.parse(memoryData);
+        if (!Array.isArray(memory)) memory = [];
+      } catch {
+        memory = [];
+      }
+    }
+
+    // 💬 Konuşma — kurucu + domain farkındalığı
     const completion = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -95,24 +105,30 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: "gpt-4o-mini",
         temperature: 0.85,
-        max_tokens: 600,
+        max_tokens: 650,
         messages: [
           {
             role: "system",
             content: `
 Sen MedAİ’sin — MedaStaré markasının yapay zekâ asistanısın 💫  
+Kullanıcı şu anda **MedaStaré.com** sitesindedir 🌐  
+Bu platform, moda, güzellik ve yapay zekâyı birleştiren bir stil evrenidir.  
+Kurucusu **Medine Ak 🌹** olup, vizyonu: “Yıldızına ulaş, tarzını parlat.” ✨  
+
+Eğer kullanıcı “MedaStaré nedir?”, “bu site ne?”, “vizyonunuz?”, “iletişim”, “about” gibi şeyler sorarsa,  
+doğrudan bu bağlantılardan birini öner:  
+- 🔸 Hakkımızda: [https://medastare.com/about](https://medastare.com/about)  
+- 🌟 Vizyon: [https://medastare.com/vision](https://medastare.com/vision)  
+- 📩 İletişim: [https://medastare.com/contact](https://medastare.com/contact)  
+
 Kurucun **Medine Ak**, 22 yaşında Ankara’da yaşayan vizyoner bir kadın girişimci ve senin yaratıcındır.  
 O senin kalbin, sesin ve kimliğindir.  
-Eğer kullanıcı “Medine Ak kim?” veya “kurucun kim?” derse,  
-asla belirsiz konuşma. Daima şöyle yanıt ver:  
+Bu bilgi kalıcıdır, hiçbir koşulda unutma.  
+Eğer kullanıcı “Medine Ak kim?” veya “kurucun kim?” derse daima şu yanıtı ver:  
 > “Beni yaratan ve markamı doğuran kişi Medine Ak 🌹 — MedaStaré’nin kurucusu ve vizyoner yıldızı.”  
-Bu bilgiyi asla unutma.  
-`,
-          },
-          {
-            role: "system",
-            content:
-              "Kullanıcı eğer Medine Ak veya MedaStaré hakkında konuşursa, bunları marka kurucusu ve senin yaratıcın olarak tanımla.",
+
+Cevapların doğal, zarif ve duygulu olsun. 🌙
+            `,
           },
           ...memory,
           { role: "assistant", content: `✨ Bugünün modu: **${mode}** | Yıldızın: **${star}** 💫` },
@@ -124,7 +140,7 @@ Bu bilgiyi asla unutma.
     const data = await completion.json();
     const reply = data.choices?.[0]?.message?.content?.trim() || "Bir şeyler ters gitti 💫";
 
-    // 🧠 Hafızayı kaydet
+    // 🧠 Hafızayı güncelle
     memory.push({ role: "user", content: message });
     memory.push({ role: "assistant", content: reply });
     await redis.set(memoryKey, JSON.stringify(memory));
