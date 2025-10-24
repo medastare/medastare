@@ -265,7 +265,7 @@ medaiLauncher.innerHTML = `
     backdrop-filter: blur(10px);
     z-index: 9999;
   ">
-    ✨ MedAİ
+    MedAİ
   </div>
 `;
 
@@ -297,7 +297,7 @@ medaiPanel.innerHTML = `
       font-size: 16px;
       color: #000;
     ">
-      🌟 MedAİ Luxury Assistant
+        MedAİ Assistant
     </div>
     <div id="chatBody" style="
       flex: 1;
@@ -351,7 +351,7 @@ const button = document.getElementById("medaiButton");
 button.addEventListener("click", () => {
   isOpen = !isOpen;
   medaiPanel.style.display = isOpen ? "flex" : "none";
-  button.innerHTML = isOpen ? "🌙 Kapat" : "✨ MedAİ";
+  button.innerHTML = isOpen ? "Kapat" : "MedAİ";
   if (isOpen) {
     const chatBody = document.getElementById("chatBody");
     chatBody.innerHTML = `
@@ -365,7 +365,7 @@ button.addEventListener("click", () => {
         box-shadow: 0 0 10px rgba(212,175,55,0.4);
         animation: fadeIn 0.6s ease;
       ">
-        Hoş geldin 💫<br>
+        Hoş geldin,Ben MedAİ.<br>
         Bugün enerjin yüksek hissediliyor...<br>
         Birlikte stiline yıldız tozu katalım mı? ✨
       </div>
