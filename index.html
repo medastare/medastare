@@ -236,7 +236,7 @@ footer small{ color:#666; }
   })();
 </script>
 
-  <!-- ⚜️ MedAİ Floating Chat (Luxury Gold Glow Edition – Typing + Voice Animation Edition) -->
+  <!-- ⚜️ MedAİ Floating Chat (Luxury Gold Glow Edition – Connected Edition v12.4) -->
 <div id="medai-launcher"></div>
 <div id="medai-panel" style="display:none;"></div>
 
@@ -452,7 +452,7 @@ function stopSpeak() {
   document.querySelectorAll(".stop-btn").forEach(btn => btn.style.display = "none");
 }
 
-// 🚀 Mesaj Gönderme + ⭐ Yazıyor animasyonu
+// 🚀 Mesaj Gönderme + ⭐ Yazıyor animasyonu + IP bağlama
 document.addEventListener("click", async (e) => {
   const chatBody = document.getElementById("chatBody");
 
@@ -477,11 +477,16 @@ document.addEventListener("click", async (e) => {
     chatBody.scrollTop = chatBody.scrollHeight;
 
     try {
+      const userIP = await fetch("https://api.ipify.org?format=json")
+        .then(res => res.json())
+        .then(d => d.ip);
+
       const response = await fetch("https://medastare.vercel.app/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMessage, memory: chatMemory }),
+        body: JSON.stringify({ message: userMessage, memory: chatMemory, userIP }),
       });
+
       const data = await response.json();
       const reply = data.reply || "Bağlantı kurulamadı 💫";
       updateMemory({ role: "assistant", content: reply });
