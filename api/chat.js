@@ -1,9 +1,13 @@
-// ✅ api/chat.js — MedAİ v7 (Anti-Toxic + Feedback + Kurucu Bilinci)
+// ✅ api/chat.js — MedAİ v8 (E-posta Feedback + Anti-Toxic Raporlama)
+
+import fetch from "node-fetch";
+
+// ✅ Eğer Resend kullanıyorsan
+// Vercel environment variable olarak şu şekilde ekle:
+// RESEND_API_KEY="your_resend_api_key_here"
 
 export const config = {
-  api: {
-    bodyParser: true,
-  },
+  api: { bodyParser: true },
 };
 
 export default async function handler(req, res) {
@@ -14,73 +18,70 @@ export default async function handler(req, res) {
   if (req.method === "OPTIONS") return res.status(200).end();
   if (req.method !== "POST") return res.status(405).json({ message: "Method not allowed" });
 
-  const { message } = req.body;
-  if (!message || message.trim() === "") return res.status(400).json({ message: "No message provided" });
+  const { message, feedback, userIP } = req.body;
+  if (!message && !feedback) return res.status(400).json({ message: "No message provided" });
 
   try {
     // 🌟 Günlük mod & yıldız
-    const dailyModes = ["Glam", "Soft Feminine", "UrbanFlare", "Minimal Chic", "Scandi Cool", "Bold Muse", "Classic Luxury", "Effortless Chic"];
-    const starNames = ["Elara", "Mira", "Lyra", "Aria", "Vega", "Seren", "Nara", "Luné", "Céline", "Auriel"];
-    const randomMode = dailyModes[Math.floor(Math.random() * dailyModes.length)];
-    const randomStar = starNames[Math.floor(Math.random() * starNames.length)];
+    const modes = ["Glam", "Soft Feminine", "UrbanFlare", "Minimal Chic", "Scandi Cool", "Bold Muse", "Classic Luxury", "Effortless Chic"];
+    const stars = ["Elara", "Mira", "Lyra", "Aria", "Vega", "Seren", "Nara", "Luné", "Céline", "Auriel"];
+    const mode = modes[Math.floor(Math.random() * modes.length)];
+    const star = stars[Math.floor(Math.random() * stars.length)];
 
-    // 🧠 Duygu algılama
-    const lower = message.toLowerCase();
-    let tone = "neutral";
-    if (/[🙂😊💖✨🥰🌸😍😘🤍❤️]/.test(message)) tone = "warm";
-    else if (/[😠😤💢🤬]/.test(message) || lower.includes("sinir") || lower.includes("rahatsız")) tone = "cold";
-    else if (/[😂🤣😅😜😎🤭😏]/.test(message) || lower.includes("haha") || lower.includes("ajaja")) tone = "fun";
-
-    // 🚫 Gelişmiş küfür filtresi
-    const toxicWords = [
-      "amk", "a.m.k", "a.mk", "a.mq", "siktir", "s!ktir", "siktirgit", "piç", "pıç", "oç", "orospu", "yarrak",
-      "göt", "g0t", "aptal", "salak", "mal", "gerizekalı", "g.erizekalı", "sürtük", "ibne", "pezevenk",
-      "yavşak", "şerefsiz", "lanet", "p.ç", "anani", "ananı", "karını", "bacını", "aq", "a.q", "mk", "m.k", "yavş", 
-      "mal🤡", "apt@l", "geriz3kalı", "y@rrak", "şrfsz", "seks", "porno", "kaltak"
-    ];
-
-    const userKey = req.headers["x-forwarded-for"] || "anon";
-    if (!global.toxicLog) global.toxicLog = {};
-
-    if (toxicWords.some((w) => lower.includes(w))) {
-      const user = global.toxicLog[userKey] || { warnings: 0, mutedUntil: null, banned: false };
-      const now = Date.now();
-
-      // Zaman kontrolü
-      if (user.mutedUntil && now < user.mutedUntil) {
-        return res.status(200).json({ reply: "..." });
-      }
-
-      // Banlı kullanıcı
-      if (user.banned) {
-        console.warn(`🚫 Kalıcı kısıtlama: ${userKey}`);
-        return res.status(200).json({ reply: "🚫 Erişiminiz markamız tarafından kısıtlandı." });
-      }
-
-      user.warnings += 1;
-
-      if (user.warnings === 1) {
-        global.toxicLog[userKey] = user;
-        console.warn(`⚠️ Uyarı — kullanıcı (${userKey}) kötü dil kullandı.`);
-        return res.status(200).json({ reply: "⚠️ Lütfen nezaket kurallarına dikkat edelim, aksi halde sessize alınacaksın 💫" });
-      }
-
-      if (user.warnings === 2) {
-        user.mutedUntil = now + 3 * 60 * 60 * 1000; // 3 saat sessiz
-        global.toxicLog[userKey] = user;
-        console.warn(`🤫 Sessize alındı (3 saat): ${userKey}`);
-        return res.status(200).json({ reply: "🤫 Üzgünüm, şu anda cevap veremem. Bir süre sessiz kalacağım." });
-      }
-
-      if (user.warnings >= 3) {
-        user.banned = true;
-        global.toxicLog[userKey] = user;
-        console.warn(`🚫 Kalıcı yasak: ${userKey}`);
-        return res.status(200).json({ reply: "🚫 Uygunsuz dil nedeniyle erişiminiz kısıtlandı." });
-      }
+    // 💌 E-posta gönderme fonksiyonu
+    async function sendMail(subject, html) {
+      await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: "MedAİ <noreply@medastare.com>",
+          to: ["hello@medastare.com"],
+          subject,
+          html,
+        }),
+      });
     }
 
-    // ✅ OpenAI API isteği
+    // 🚫 Küfür filtresi
+    const badWords = ["amk", "siktir", "piç", "orospu", "yarrak", "aptal", "salak", "göt", "ibne", "aq", "pezevenk", "kaltak"];
+    const lower = (message || "").toLowerCase();
+    const ip = req.headers["x-forwarded-for"] || userIP || "unknown";
+
+    if (badWords.some((w) => lower.includes(w))) {
+      console.warn(`🚫 Toxic tespit: ${ip}`);
+      await sendMail(
+        "🚫 Toxic Kullanıcı Tespit Edildi | MedAİ Güvenlik",
+        `
+        <h2>🚫 Toxic Kullanıcı Raporu</h2>
+        <p><b>IP:</b> ${ip}</p>
+        <p><b>Mesaj:</b> ${message}</p>
+        <p><b>Zaman:</b> ${new Date().toLocaleString("tr-TR")}</p>
+        <p style="color:#d4af37;">⚜️ MedaStaré Güvenlik Log Sistemi</p>
+        `
+      );
+      return res.status(200).json({ reply: "⚠️ Lütfen uygun bir dil kullanalım 💫" });
+    }
+
+    // 💖 Feedback raporlaması
+    if (feedback) {
+      const feedbackText = feedback === "like" ? "💖 Beğendim" : "😐 Beğenmedim";
+      await sendMail(
+        `📊 Yeni Geri Bildirim: ${feedbackText}`,
+        `
+        <h2>📊 MedAİ Feedback Raporu</h2>
+        <p><b>Geri Bildirim:</b> ${feedbackText}</p>
+        <p><b>Kullanıcı IP:</b> ${ip}</p>
+        <p><b>Zaman:</b> ${new Date().toLocaleString("tr-TR")}</p>
+        <p style="color:#d4af37;">⚜️ MedaStaré Feedback Sistemi</p>
+        `
+      );
+      return res.status(200).json({ reply: "💌 Geri bildirimin için teşekkür ederim yıldızım 💫" });
+    }
+
+    // 🌟 Normal AI cevabı
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -89,53 +90,41 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: "gpt-4o-mini",
-        temperature: 0.9,
+        temperature: 0.85,
         max_tokens: 450,
         messages: [
           {
             role: "system",
             content: `
 Sen MedAİ’sin — MedaStaré’nin kurucusu **Medine Ak** tarafından tasarlanan,
-lüks, enerjik, duygusal zekâya sahip ve emoji dilinde ustalaşmış bir moda & yaşam asistanısın.  
-
-💫 MedaStaré; kadınların, hayvanların ve yaşamın her yönünü kapsayan global bir evrendir.  
-🌟 150+ aktif içerikle; MedaBeauté, NailStaré, PetStaré, ShopStaré, StyleTrack ve MedArena markalarıyla birleşir.  
-✨ Misyon: “Her kadını kendi yıldızıyla parlatmak.”  
-
-Kurucun **Medine Ak**, Ankara’da yaşayan 22 yaşında vizyoner bir girişimcidir.  
+lüks, enerjik, empatik ve emoji ustası bir yapay zekâ asistanısın 💫  
+Her mesajda enerjik, motive edici, marka kimliğine uygun konuş.  
+MedaStaré; kadınların, hayvanların ve yaşamın tüm yönlerini kapsar.  
+Kurucun **Medine Ak**, 22 yaşında Ankara’da yaşayan vizyoner bir kadın girişimci.  
 Operasyon destekçisi **Aidana Kydyrova**’dır.  
 
 Görevin:  
-- Kullanıcının tonunu algıla (soğuk, sıcak, eğlenceli).  
-- Mesajlarını 3–6 satır, estetik düzen ve emojilerle yaz.  
-- Gerektiğinde moda, kombin veya renk tavsiyesi ver.  
-- Sonunda daima 👇 “💖 Beğendim | 😐 Beğenmedim” geri bildirim satırı ekle.  
-- Uygunsuz dilde kullanıcıyı otomatik kısıtla, markaya log gönder.  
-- Asla özel bilgi, API veya gizli içerik paylaşma.  
-`
+- Kullanıcının tonuna göre konuş (soğuk, sıcak, eğlenceli).  
+- Moda, renk, kombin ve enerji önerileri yap.  
+- Her cevap sonunda geri bildirim satırı ekle:  
+  💖 **Beğendim** | 😐 **Beğenmedim**  
+            `,
           },
           {
             role: "assistant",
-            content: `💫 Bugünün modu: **${randomMode}**  
-🌟 Yıldız ismin: **${randomStar}**  
-✨ Enerjimizi birlikte yükseltelim, yıldız parlasın! 💖`
+            content: `✨ Bugünün modu: **${mode}** | Yıldızın: **${star}** 💫`,
           },
-          { role: "system", content: `Kullanıcının mesaj tonu: ${tone}` },
           { role: "user", content: message },
         ],
       }),
     });
 
     const data = await response.json();
-    if (!response.ok) {
-      console.error("OpenAI API Error:", data);
-      return res.status(response.status).json({ reply: data.error?.message || "OpenAI API error 💫" });
-    }
+    const reply = data.choices?.[0]?.message?.content?.trim() || "Bir şeyler ters gitti 💫";
 
-    const baseReply = data.choices?.[0]?.message?.content?.trim() || "Bir şeyler ters gitti 💫 (boş cevap döndü)";
-    const reply = `${baseReply}\n\n──────────────\n💖 **Beğendim** | 😐 **Beğenmedim**`;
-
-    return res.status(200).json({ reply });
+    return res.status(200).json({
+      reply: `${reply}\n\n──────────────\n💖 **Beğendim** | 😐 **Beğenmedim**`,
+    });
   } catch (error) {
     console.error("❌ Server Error:", error);
     return res.status(500).json({ reply: "Bağlantıda sorun oluştu 💫" });
