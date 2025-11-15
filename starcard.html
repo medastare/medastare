@@ -3,95 +3,117 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MedAI StarCard — MedaStaré</title>
+<title>MedaAI StarCard — MedaStaré</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
 <style>
 
+/* ---------- GLOBAL ---------- */
 body {
     margin: 0;
     background: #000;
     font-family: 'Inter', sans-serif;
     color: white;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* -------- BACKGROUND -------- */
+/* ---------- COSMIC BACKGROUND ---------- */
 .bg {
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle at center, #121226 0%, #000 80%);
-    overflow: hidden;
+    background: radial-gradient(circle at center, #0e0e25 0%, #000 80%);
+    z-index: -2;
+}
+
+.stardust {
+    position: fixed;
+    inset: 0;
+    background: url("https://assets.codepen.io/1468070/Stars.svg");
+    opacity: 0.22;
+    animation: drift 22s linear infinite;
     z-index: -1;
 }
 
-.bg::before {
+@keyframes drift {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-350px); }
+}
+
+/* ---------- LUXURY HOLOGRAM CARD ---------- */
+.card {
+    width: 92%;
+    max-width: 610px;
+    margin: 95px auto;
+    padding: 45px 32px;
+    background: rgba(15,15,28,0.55);
+    border-radius: 28px;
+    backdrop-filter: blur(18px) saturate(180%);
+    border: 1px solid rgba(255,215,0,0.35);
+    box-shadow: 0 0 85px rgba(255,215,0,0.18);
+    position: relative;
+    animation: fadeIn .9s ease-out;
+
+    /* SABİT yükseklik – kart zıplamasın */
+    min-height: 560px;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- 3D HOLOGRAM STAR ---------- */
+.holo-star {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 25px;
+    position: relative;
+}
+
+.holo-star::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url("https://i.ibb.co/f1RhVfg/star-gold.png") no-repeat center/contain;
+    filter: drop-shadow(0 0 22px rgba(255,215,0,0.9));
+    opacity: 1;
+    animation: starPulse 4s ease-in-out infinite;
+}
+
+/* AURA HALOSU */
+.holo-star::after {
     content: "";
     position: absolute;
     inset: -40px;
-    background-image: url("https://i.ibb.co/M2nNkmS/gold-dust.png");
-    opacity: 0.20;
-    animation: float 22s linear infinite;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,215,0,0.22) 0%, transparent 70%);
+    filter: blur(35px);
+    animation: auraGlow 6s ease-in-out infinite;
 }
 
-@keyframes float {
-    0%   { transform: translateY(0); }
-    100% { transform: translateY(-280px); }
+@keyframes starPulse {
+    0% { transform: scale(1) rotate(0deg); opacity: 0.9; }
+    50% { transform: scale(1.09) rotate(4deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 0.9; }
 }
 
-/* -------- CARD -------- */
-.card {
-    width: 92%;
-    max-width: 600px;
-    margin: 85px auto;
-    background: rgba(20,20,35,0.50);
-    border-radius: 28px;
-    padding: 40px 32px;
-
-    border: 1px solid rgba(255,215,0,0.28);
-    backdrop-filter: blur(14px);
-    box-shadow: 0 0 55px rgba(255,215,0,0.20);
-
-    animation: fade 0.8s ease;
-    min-height: 600px; /* Kart artık kaymıyor */
+@keyframes auraGlow {
+    0%,100% { transform: scale(1); opacity: .65; }
+    50% { transform: scale(1.25); opacity: 1; }
 }
 
-@keyframes fade {
-    from { opacity: 0; transform: translateY(25px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-/* -------- STAR HOLOGRAM -------- */
-.star {
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 28px;
-
-    background-image: url("https://i.ibb.co/B3TjZ0s/star-gold-holo.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-
-    filter: drop-shadow(0 0 20px rgba(255,215,0,0.85));
-    animation: pulse 3.2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-    0%   { transform: scale(1); opacity: .8; }
-    50%  { transform: scale(1.10); opacity: 1; }
-    100% { transform: scale(1); opacity: .8; }
-}
-
-/* -------- TEXT -------- */
+/* ---------- TEXTS ---------- */
 .loading {
     text-align: center;
-    opacity: 0.75;
     font-size: 15px;
-    margin-bottom: 15px;
-    animation: blink 2s infinite;
+    opacity: .75;
+    margin-top: 10px;
+    animation: blink 1.8s infinite;
 }
 @keyframes blink {
-    0%,100% { opacity: .6; }
+    0%,100% { opacity: .5; }
     50% { opacity: 1; }
 }
 
@@ -99,52 +121,57 @@ body {
     text-align: center;
     font-family: 'Playfair Display';
     font-size: 46px;
+    letter-spacing: 1px;
     color: #ffd700;
-    margin-bottom: 20px;
+    margin-top: 18px;
+
+    /* sabit yükseklik */
+    min-height: 52px;
 }
 
 .output {
-    font-size: 18px;
-    line-height: 1.7;
+    margin-top: 25px;
+    font-size: 19px;
+    line-height: 1.8;
     white-space: pre-line;
-    min-height: 260px;
+    min-height: 260px; /* sabit */
 }
 
-/* -------- BUTTONS -------- */
+/* ---------- BUTTONS ---------- */
 .btn-box {
     display: flex;
     justify-content: center;
     gap: 14px;
-    margin-top: 28px;
+    margin-top: 25px;
 }
 
 button {
-    padding: 12px 30px;
+    padding: 14px 30px;
     border-radius: 30px;
     border: none;
     cursor: pointer;
     font-weight: 600;
-    font-size: 15px;
-
-    background: linear-gradient(90deg, #ffd700, #ff6bd6);
+    font-size: 14px;
     color: #000;
-    transition: 0.22s;
+    background: linear-gradient(90deg, #ffd700, #ff6bd6);
+    transition: 0.25s ease;
 }
 
 button:hover {
-    transform: scale(1.06);
+    transform: scale(1.08);
+    filter: brightness(1.15);
 }
-
 </style>
 </head>
 
 <body>
 
 <div class="bg"></div>
+<div class="stardust"></div>
 
 <div class="card">
 
-    <div class="star"></div>
+    <div class="holo-star"></div>
 
     <div class="loading" id="loadingText">MedaAI is generating your Star…</div>
 
@@ -156,103 +183,98 @@ button:hover {
         <button onclick="generate()">Yeni Üret</button>
         <button onclick="toggleLang()">EN / TR</button>
     </div>
+
 </div>
+
 
 <script>
 let lang = "tr";
 
-/* -------- STAR NAME MOTORU -------- */
+/* -------- RANDOM HELPER -------- */
+Array.prototype.random = function () {
+    return this[Math.floor(Math.random() * this.length)];
+};
+
+/* -------- AI-LIKE STAR NAME -------- */
 function generateStarName() {
-    const prefix = ["Astra", "Ela", "Noï", "Ophira", "Luné", "Auré", "Seré", "Vea", "Mirae", "Ély", "Nai", "Véra", "Oxa"];
-    const core   = ["thea", "stra", "lya", "raé", "naï", "vara", "lune", "rea", "lyra", "via", "nera"];
-    const suffix = ["a", "ia", "éa", "xa", "ara", "elle", "aya", "ira", "ora"];
+    const prefix = ["A", "E", "O", "L", "Ar", "El", "No", "Au", "Ser", "Vé", "Lu", "My", "Astra", "Ély", "Oph"];
+    const core   = ["stra", "thea", "lune", "leï", "vara", "lyra", "naé", "ria", "raya", "vona"];
+    const suffix = ["a", "éa", "aya", "ora", "elle", "ia", "xa"];
 
     return prefix.random() + core.random() + suffix.random();
 }
 
-/* -------- MOTTO MOTORU -------- */
+/* -------- AI MOTTOS -------- */
 function generateMotto() {
-    const p1 = ["Işığın", "Zarafetin", "Auran", "Sessiz gücün", "Adımların", "Kalbin"];
-    const p2 = ["herkesi susturur", "karanlığı deler", "odayı değiştirir", "yükselir", "parıldar"];
-    const p3 = ["ve kaybolmaz.", "ve iz bırakır.", "ve dönüşüm yaratır.", "ve konuşur.", "ve seni görünür kılar."];
+    const p1 = ["Zarafetin", "Işığın", "Auran", "Sessiz gücün", "Kalbin"];
+    const p2 = ["odayı değiştirir", "herkesi susturur", "karanlığı deler", "parıldar", "yükselir"];
+    const p3 = ["ve her şeyi dönüştürür.", "ve iz bırakır.", "ve yeni yollar açar.", "ve seni görünür kılar."];
 
     return `${p1.random()} ${p2.random()} ${p3.random()}`;
 }
 
-/* -------- KOMBIN MOTORU -------- */
+/* -------- AI COMBO -------- */
 function generateKombin() {
-    const main = ["Krem blazer takım", "White jumpsuit", "Siyah satin elbise", "Taupe trench coat", "Red drape dress", "Silver slip elbise"];
-    const acc  = ["Mini gold bag", "Pearl clutch", "Crystal drop earrings", "Gold spiral küpe", "Silver hoops"];
-    const hair = ["Sleek low bun", "Soft glam waves", "Wet hair look", "High elegant ponytail"];
-    const shoe = ["Pointed boots", "Nude stiletto", "Clear heels", "Metallic heels"];
+    const main = [
+        "Krem blazer takım",
+        "Siyah satin elbise",
+        "White jumpsuit",
+        "Taupe trench coat",
+        "Red drape dress",
+        "Silver slip elbise"
+    ];
+    const acc = [
+        "Gold spiral küpe",
+        "Pearl clutch",
+        "Mini gold bag",
+        "Silver hoops",
+        "Crystal drop earrings"
+    ];
+    const hair = [
+        "Sleek low bun",
+        "Soft glam waves",
+        "High elegant ponytail",
+        "Natural wavy",
+        "Wet hair look"
+    ];
+    const shoe = [
+        "Nude stiletto",
+        "Clear heels",
+        "Pointed boots",
+        "Metallic heels",
+        "Minimal topuklu"
+    ];
 
     return `• ${main.random()}\n• ${acc.random()}\n• ${hair.random()}\n• ${shoe.random()}`;
 }
 
-/* RANDOM PICK HELPER */
-Array.prototype.random = function() {
-    return this[Math.floor(Math.random() * this.length)];
-};
-
-/* ----- EN ÇEVİRİ ----- */
-function translateMotto(t) {
-    return t
-      .replace("Işığın","Your light")
-      .replace("Zarafetin","Your elegance")
-      .replace("Auran","Your aura")
-      .replace("Sessiz gücün","Your silent power")
-      .replace("Adımların","Your steps")
-      .replace("Kalbin","Your heart")
-      .replace("herkesi susturur","silences everyone")
-      .replace("karanlığı deler","cuts through darkness")
-      .replace("odayı değiştirir","changes the room")
-      .replace("yükselir","rises")
-      .replace("parıldar","glows")
-      .replace("ve kaybolmaz.","and never gets lost.")
-      .replace("ve iz bırakır.","and leaves a mark.")
-      .replace("ve dönüşüm yaratır.","and transforms everything.")
-      .replace("ve konuşur.","and speaks without words.")
-      .replace("ve seni görünür kılar.","and makes you seen.");
-}
-
-function translateKombin(k) {
-    return k
-      .replace("Krem blazer takım","Cream blazer set")
-      .replace("Siyah satin elbise","Black satin dress")
-      .replace("Taupe trench coat","Taupe trench coat")
-      .replace("Red drape dress","Red drape dress")
-      .replace("Silver slip elbise","Silver slip dress");
-}
-
-/* -------- GENERATOR -------- */
+/* -------- GENERATE -------- */
 function generate() {
     document.getElementById("loadingText").style.opacity = 1;
 
     setTimeout(() => {
-        let name = generateStarName();
+        let star = generateStarName();
         let motto = generateMotto();
         let kombin = generateKombin();
 
-        if (lang === "en") {
-            motto = translateMotto(motto);
-            kombin = translateKombin(kombin);
-        }
-
-        document.getElementById("starName").textContent = name + " ✦";
-
-        document.getElementById("outputBox").textContent =
-            (lang==="tr" ? "✦ Motto:\n" : "✦ Motto:\n") +
-            motto +
-            "\n\n" +
-            (lang==="tr" ? "✦ MedAI Kombin Önerisi:\n" : "✦ MedAI Outfit Suggestion:\n") +
-            kombin;
-
         document.getElementById("loadingText").style.opacity = 0;
-    }, 700);
+        document.getElementById("starName").textContent = star + " ✦";
+        document.getElementById("outputBox").textContent =
+            `✦ Motto:\n${motto}\n\n✦ MedAI Kombin Önerisi:\n${kombin}`;
+
+        if (lang === "en") toggleLang();
+    }, 600);
 }
 
 function toggleLang() {
-    lang = (lang === "tr") ? "en" : "tr";
+    lang = lang === "tr" ? "en" : "tr";
+
+    const text = document.getElementById("outputBox").textContent;
+    if (lang === "en") {
+        document.getElementById("outputBox").textContent = text
+            .replace("Motto","Motto")
+            .replace("MedAI Kombin Önerisi","MedAI Outfit Suggestion");
+    }
     generate();
 }
 
