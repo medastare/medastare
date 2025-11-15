@@ -3,233 +3,266 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MedaStaré — MedAI StarCard</title>
+<title>MedAI StarCard — MedaStaré</title>
 
-<!-- Font -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
 <style>
-/* --- GLOBAL --- */
+
 body {
     margin: 0;
     background: #000;
-    color: #fff;
     font-family: 'Inter', sans-serif;
+    color: white;
     overflow-x: hidden;
 }
 
-/* --- Cosmic Background --- */
-.stars {
+/* -------- BACKGROUND -------- */
+.bg {
     position: fixed;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, #1a1a40 0%, #000 80%);
+    inset: 0;
+    background: radial-gradient(circle at center, #151530 0%, #000 80%);
     overflow: hidden;
     z-index: -1;
 }
 
-.stars::before,
-.stars::after {
+.bg::before {
     content: "";
     position: absolute;
-    width: 200%;
-    height: 200%;
-    background-image: url("https://i.imgur.com/OWP5Q0I.png");
-    opacity: 0.25;
-    animation: moveStars 18s linear infinite;
+    inset: 0;
+    background-image: url("https://assets.codepen.io/1468070/Stars.svg");
+    opacity: 0.23;
+    animation: float 18s linear infinite;
 }
 
-.stars::after {
-    animation-duration: 28s;
-    opacity: 0.18;
+@keyframes float {
+    0% {transform: translateY(0);}
+    100% {transform: translateY(-300px);}
 }
 
-@keyframes moveStars {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-400px); }
-}
-
-/* --- Card Box --- */
-.star-box {
-    position: relative;
+/* -------- CARD -------- */
+.card {
     width: 92%;
     max-width: 600px;
-    margin: 100px auto;
-    padding: 40px;
-    border-radius: 24px;
-    background: rgba(10,10,15,0.7);
+    margin: 80px auto;
+    background: rgba(20,20,35,0.55);
+    border-radius: 28px;
+    padding: 35px 28px;
+    backdrop-filter: blur(14px);
     border: 1px solid rgba(255,215,0,0.25);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 0 50px rgba(255, 215, 0, 0.15);
-    animation: fadeIn 1.2s ease;
+    box-shadow: 0 0 45px rgba(255,215,0,0.15);
+    animation: fade 0.8s ease;
 }
 
-@keyframes fadeIn {
-    from {opacity: 0; transform: translateY(30px);}
+@keyframes fade {
+    from {opacity: 0; transform: translateY(20px);}
     to {opacity: 1; transform: translateY(0);}
 }
 
-/* --- Star Silhouette --- */
-.star-shape {
-    width: 140px;
-    height: 140px;
+/* -------- STAR HOLOGRAM -------- */
+.star {
+    width: 130px;
+    height: 130px;
     margin: 0 auto 25px;
-    background: url("https://i.imgur.com/2xTjNNO.png");
+    background-image: url("https://i.ibb.co/f1RhVfg/star-gold.png");
     background-size: contain;
     background-repeat: no-repeat;
-    filter: drop-shadow(0 0 18px rgba(255,215,0,0.7));
-    animation: pulse 4s infinite ease-in-out;
+    filter: drop-shadow(0 0 14px rgba(255,215,0,0.7));
+    animation: pulse 3.5s ease-in-out infinite;
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); opacity: 0.9; }
-    50% { transform: scale(1.08); opacity: 1; }
-    100% { transform: scale(1); opacity: 0.9; }
+    0% {transform: scale(1); opacity: .9;}
+    50% {transform: scale(1.08); opacity: 1;}
+    100% {transform: scale(1); opacity: .9;}
 }
 
-/* --- MedAI Loading Text --- */
-.generating {
+/* -------- TEXT -------- */
+.loading {
     text-align: center;
-    font-size: 16px;
     opacity: 0.7;
-    margin-bottom: 20px;
+    font-size: 14px;
+    margin-bottom: 12px;
     animation: blink 1.8s infinite;
 }
-
 @keyframes blink {
-    0%,100% { opacity: 0.6; }
-    50% { opacity: 1; }
+    0%,100% {opacity: .6;}
+    50% {opacity: 1;}
 }
 
-/* --- Title --- */
-.star-title {
+.name {
     text-align: center;
     font-family: 'Playfair Display';
-    font-size: 42px;
-    margin-bottom: 15px;
+    font-size: 44px;
     color: #ffd700;
+    margin-bottom: 20px;
 }
 
-/* --- Generated Text --- */
 .output {
     font-size: 18px;
     line-height: 1.7;
     white-space: pre-line;
     min-height: 200px;
-    margin-bottom: 25px;
 }
 
-/* --- Buttons --- */
-.btns {
+/* -------- BUTTONS -------- */
+.btn-box {
     display: flex;
-    gap: 12px;
     justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
 }
 
 button {
-    padding: 12px 24px;
+    padding: 12px 28px;
     border-radius: 30px;
-    font-size: 14px;
-    font-weight: 600;
     border: none;
     cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
     background: linear-gradient(90deg, #ffd700, #ff6bd6);
     color: #000;
-    transition: 0.3s;
+    transition: 0.2s;
 }
 
-button:hover {
-    transform: scale(1.05);
-}
+button:hover { transform: scale(1.06); }
+
 </style>
 </head>
 
 <body>
 
-<div class="stars"></div>
+<div class="bg"></div>
 
-<div class="star-box">
+<div class="card">
 
-    <div class="star-shape"></div>
+    <div class="star"></div>
 
-    <div class="generating" id="loading">MedaAI is generating your Star…</div>
+    <div class="loading" id="loadingText">MedaAI is generating your Star…</div>
 
-    <div class="star-title" id="starName"></div>
+    <div class="name" id="starName"></div>
 
-    <div class="output" id="outputText"></div>
+    <div class="output" id="outputBox"></div>
 
-    <div class="btns">
+    <div class="btn-box">
         <button onclick="generate()">Yeni Üret</button>
         <button onclick="toggleLang()">EN / TR</button>
     </div>
-
 </div>
 
 <script>
 let lang = "tr";
 
-/* --- STAR NAME POOL --- */
-const starNames = [
-    "Nóir", "Ayla", "Aleïa", "Myrà", "Luné", "Arden", "Élysia", "Séra",
-    "Astraé", "Nara", "Soleil", "Véda", "Auralie", "Noxie", "Ophira"
-];
+/* -------- AI-LIKE STAR NAME GENERATOR -------- */
+function generateStarName() {
+    const prefix = ["A", "E", "O", "L", "Ar", "El", "No", "Au", "Ser", "Vé", "Lu", "My", "Astra", "Nai", "Oph", "Ély"];
+    const core   = ["leï", "stra", "ria", "lune", "via", "thea", "lyra", "vara", "naé", "raya", "vona"];
+    const suffix = ["a", "éa", "ia", "ra", "xa", "aya", "ira", "elle", "aé", "ora"];
 
-/* --- TEXT DATA --- */
-const data = {
-    tr: {
-        mottos: [
-            "Işığın karanlıktan bile geçer.",
-            "Zarafet bir seçimdir.",
-            "Sessizlik en güçlü mesajındır.",
-            "Girdiğin her oda seni fark eder.",
-            "Işığı taşıyan kadın hiç kaybolmaz."
-        ],
-        kombins: [
-            "• Siyah saten elbise\n• Gold spiral küpeler\n• Nude stiletto\n• Soft glam makyaj",
-            "• Krem blazer takım\n• İnci detaylı çanta\n• Sleek low bun saç\n• Minimal topuklu",
-            "• Buz mavisi uzun elbise\n• Silver hoop küpeler\n• Glow skin makyaj\n• Metalik topuk",
-            "• Beyaz modern jumpsuit\n• Gold aksesuarlar\n• Dalgali saç\n• Şeffaf topuklu",
-            "• Kırmızı drape mini elbise\n• Uzun gold küpeler\n• Soft dalga saç\n• İnce topuk"
-        ]
-    },
+    return prefix[Math.random()*prefix.length|0] +
+           core[Math.random()*core.length|0] + 
+           suffix[Math.random()*suffix.length|0];
+}
 
-    en: {
-        mottos: [
-            "Your light cuts through the dark.",
-            "Elegance is a choice.",
-            "Silence is your loudest message.",
-            "Every room notices your presence.",
-            "A woman who carries light never gets lost."
-        ],
-        kombins: [
-            "• Black satin dress\n• Gold spiral earrings\n• Nude stilettos\n• Soft glam makeup",
-            "• Cream blazer set\n• Pearl-detailed bag\n• Sleek low bun\n• Minimal heels",
-            "• Ice-blue long dress\n• Silver hoops\n• Glow skin look\n• Metallic heels",
-            "• White modern jumpsuit\n• Gold accessories\n• Wavy hair\n• Clear heels",
-            "• Red draped mini dress\n• Long gold earrings\n• Soft waves\n• Thin heels"
-        ]
-    }
+/* -------- AI-LIKE MOTTO GENERATOR -------- */
+function generateMotto() {
+    const part1 = ["Işığın", "Zarafetin", "Auran", "Sessiz gücün", "Gölgen", "Kalbin"];
+    const part2 = ["karanlığı deler", "herkesi susturur", "odayı değiştirir", "konuşur", "yükselir", "parıldar"];
+    const part3 = ["asla kaybolmaz.", "her şeyi dönüştürür.", "iz bırakır.", "sen konuşmadan anlatır.", "yeni yollar açar."];
+
+    return `${part1.random()} ${part2.random()} ve ${part3.random()}`;
+}
+
+/* -------- AI-LIKE COMBINATION GENERATOR -------- */
+function generateKombin() {
+    const main = ["Siyah satin elbise", "Krem blazer takım", "White jumpsuit", "Taupe trench coat", "Red drape dress", "Silver slip elbise"];
+    const acc  = ["Gold spiral küpe", "Pearl clutch", "Silver hoops", "Mini gold bag", "Crystal drop earrings"];
+    const hair = ["Sleek low bun", "Soft glam waves", "Wet hair look", "Natural wavy", "High elegant ponytail"];
+    const shoe = ["Nude stiletto", "Clear heels", "Metallic heels", "Minimal topuklu", "Pointed boots"];
+
+    return `• ${main.random()}\n• ${acc.random()}\n• ${hair.random()}\n• ${shoe.random()}`;
+}
+
+/* RANDOM PICK HELPER */
+Array.prototype.random = function() {
+    return this[Math.floor(Math.random() * this.length)];
 };
 
-/* --- FUNCTIONS --- */
+/* -------- GENERATE ALL -------- */
 function generate() {
-    document.getElementById("loading").style.opacity = 1;
+    document.getElementById("loadingText").style.opacity = 1;
 
     setTimeout(() => {
-        const name = starNames[Math.floor(Math.random() * starNames.length)];
-        const motto = data[lang].mottos[Math.floor(Math.random() * data[lang].mottos.length)];
-        const kombin = data[lang].kombins[Math.floor(Math.random() * data[lang].kombins.length)];
+        let name = generateStarName();
+        let motto = generateMotto();
+        let kombin = generateKombin();
+
+        if (lang === "en") {
+            motto = translateMotto(motto);
+            kombin = translateKombin(kombin);
+        }
 
         document.getElementById("starName").textContent = name + " ✦";
-        document.getElementById("outputText").textContent =
-            `✦ Motto:\n${motto}\n\n✦ MedAI Kombin Önerisi:\n${kombin}`;
+        document.getElementById("outputBox").textContent =
+            (lang==="tr" ? "✦ Motto:\n" : "✦ Motto:\n") +
+            motto +
+            "\n\n" +
+            (lang==="tr" ? "✦ MedAI Kombin Önerisi:\n" : "✦ MedAI Outfit Suggestion:\n") +
+            kombin;
 
-        document.getElementById("loading").style.opacity = 0;
+        document.getElementById("loadingText").style.opacity = 0;
     }, 700);
 }
 
+/* ----- BASIC EN TRANSLATION (yeterli) ----- */
+function translateMotto(t) {
+    return t
+        .replace("Işığın","Your light")
+        .replace("Zarafetin","Your elegance")
+        .replace("Auran","Your aura")
+        .replace("Sessiz gücün","Your silent power")
+        .replace("Gölgen","Your shadow")
+        .replace("Kalbin","Your heart")
+        .replace("karanlığı deler","cuts through darkness")
+        .replace("herkesi susturur","silences everyone")
+        .replace("odayı değiştirir","changes the room")
+        .replace("konuşur","speaks")
+        .replace("yükselir","rises")
+        .replace("parıldar","glows")
+        .replace("asla kaybolmaz.","never gets lost.")
+        .replace("her şeyi dönüştürür.","transforms everything.")
+        .replace("iz bırakır.","leaves a mark.")
+        .replace("sen konuşmadan anlatır.","tells your story without words.")
+        .replace("yeni yollar açar.","opens new paths.");
+}
+
+function translateKombin(k) {
+    return k
+        .replace("Siyah satin elbise","Black satin dress")
+        .replace("Krem blazer takım","Cream blazer set")
+        .replace("White jumpsuit","White jumpsuit")
+        .replace("Taupe trench coat","Taupe trench coat")
+        .replace("Red drape dress","Red drape dress")
+        .replace("Silver slip elbise","Silver slip dress")
+        .replace("Gold spiral küpe","Gold spiral earrings")
+        .replace("Pearl clutch","Pearl clutch")
+        .replace("Silver hoops","Silver hoops")
+        .replace("Mini gold bag","Mini gold bag")
+        .replace("Crystal drop earrings","Crystal drop earrings")
+        .replace("Sleek low bun","Sleek low bun")
+        .replace("Soft glam waves","Soft glam waves")
+        .replace("Wet hair look","Wet hair look")
+        .replace("Natural wavy","Natural wavy")
+        .replace("High elegant ponytail","High elegant ponytail")
+        .replace("Nude stiletto","Nude stiletto")
+        .replace("Clear heels","Clear heels")
+        .replace("Metallic heels","Metallic heels")
+        .replace("Minimal topuklu","Minimal heels")
+        .replace("Pointed boots","Pointed boots");
+}
+
 function toggleLang() {
-    lang = lang === "tr" ? "en" : "tr";
+    lang = (lang === "tr") ? "en" : "tr";
     generate();
 }
 
