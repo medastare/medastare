@@ -137,6 +137,187 @@ footer small{ color:#666; }
   <p  data-tr="Her tarz ve bütçeye uygun koleksiyonlar, tek bir yerde." data-en="Collections for every style and budget, all in one place.">Collections for every style and budget, all in one place.</p>
 </section>
 
+  <style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', sans-serif;
+        background: #000;
+        color: #fff;
+        overflow-x: hidden;
+    }
+
+    .star-wrapper {
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 60px 20px;
+        position: relative;
+    }
+
+    /* Cosmic Altın Toz Animasyonu */
+    .particles {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: url("https://i.imgur.com/OWP5Q0I.png");
+        opacity: 0.25;
+        animation: float 12s linear infinite;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0); }
+        100% { transform: translateY(-200px); }
+    }
+
+    .star-card {
+        background: rgba(10, 10, 10, 0.85);
+        border: 1px solid rgba(255, 215, 0, 0.25);
+        padding: 40px;
+        border-radius: 18px;
+        width: 100%;
+        max-width: 600px;
+        position: relative;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 0 40px rgba(255, 215, 0, 0.15);
+    }
+
+    .star-title {
+        font-size: 42px;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+        color: #ffd700;
+    }
+
+    .typing {
+        font-size: 18px;
+        line-height: 1.6;
+        white-space: pre-line;
+        min-height: 180px;
+    }
+
+    .button-area {
+        margin-top: 30px;
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+    }
+
+    button {
+        padding: 12px 28px;
+        border-radius: 30px;
+        border: none;
+        cursor: pointer;
+        font-size: 15px;
+        background: linear-gradient(90deg, #ffcc55, #ff6bd6);
+        color: #000;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        transform: scale(1.05);
+        opacity: 0.9;
+    }
+</style>
+
+
+<div class="star-wrapper">
+    <div class="particles"></div>
+
+    <div class="star-card">
+        <div id="starName" class="star-title">MedaStaré StarCard ✦</div>
+
+        <div id="generatedText" class="typing"></div>
+
+        <div class="button-area">
+            <button onclick="generateStar()">Yeni Yıldız</button>
+            <button onclick="toggleLang()">EN / TR</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    let lang = "tr";
+
+    const starNames = [
+        "Nóir – Nur", "Ayla – Aleïa", "Lunaé – Mira", "Nova – Astré",
+        "Élysia – Seren", "Vera – Noiré", "Nara – Lux", "Soleil – Aria"
+    ];
+
+    const data = {
+        tr: {
+            motto: [
+                "“Sessizliğin bile lüks duruyor.”",
+                "“Elegans, sen yürürken başlar.”",
+                "“Girdiğin yerde enerjin kıyafeti geçer.”",
+                "“Sen yıldızsın, ışığın gecikmez.”"
+            ],
+            kombin: [
+                "• Krem oversize kazak\n• Kırmızı deri mini etek\n• Altın halka küpeler\n• Nude topuklu ayakkabı",
+                "• Siyah saten elbise\n• Uzun gold küpeler\n• Kırmızı dudak makyajı\n• İnce topuk stiletto",
+                "• Beyaz off-shoulder takım\n• Soft gold çanta\n• Minimal makyaj\n• Sneaker detaylı modern stile",
+                "• Camel kaban\n• Siyah boğazlı kazak\n• Deri kalem etek\n• Diz üstü çizmeler"
+            ]
+        },
+        en: {
+            motto: [
+                "“Even your silence looks luxurious.”",
+                "“Elegance begins when you walk in.”",
+                "“Your presence outshines your outfit.”",
+                "“You are the star—your light never delays.”"
+            ],
+            kombin: [
+                "• Cream oversized sweater\n• Red leather mini skirt\n• Gold hoop earrings\n• Nude heels",
+                "• Black satin dress\n• Long gold earrings\n• Red lips\n• Stiletto heels",
+                "• White off-shoulder set\n• Soft gold bag\n• Minimal makeup\n• Modern sneakers",
+                "• Camel coat\n• Black turtleneck\n• Leather pencil skirt\n• Over-knee boots"
+            ]
+        }
+    };
+
+
+    function typeText(element, text, i = 0) {
+        if (i === 0) element.innerHTML = "";
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            setTimeout(() => typeText(element, text, i + 1), 18);
+        }
+    }
+
+    function generateStar() {
+        const star = starNames[Math.floor(Math.random() * starNames.length)];
+        document.getElementById("starName").textContent = star;
+
+        const mottoList = data[lang].motto;
+        const kombinList = data[lang].kombin;
+
+        const motto = mottoList[Math.floor(Math.random() * mottoList.length)];
+        const kombin = kombinList[Math.floor(Math.random() * kombinList.length)];
+
+        const finalText =
+            `✦ Motto:\n${motto}\n\n` +
+            `✦ MedAI Kombin Önerisi:\n${kombin}`;
+
+        typeText(document.getElementById("generatedText"), finalText);
+    }
+
+    function toggleLang() {
+        lang = lang === "tr" ? "en" : "tr";
+        generateStar();
+    }
+
+    generateStar();
+</script>
+
 <section id="collections">
   <h2 data-tr="Koleksiyonlar" data-en="Collections">Collections</h2>
   <div class="grid">
