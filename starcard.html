@@ -21,7 +21,7 @@ body {
 .bg {
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle at center, #151530 0%, #000 80%);
+    background: radial-gradient(circle at center, #121226 0%, #000 80%);
     overflow: hidden;
     z-index: -1;
 }
@@ -29,71 +29,76 @@ body {
 .bg::before {
     content: "";
     position: absolute;
-    inset: 0;
-    background-image: url("https://assets.codepen.io/1468070/Stars.svg");
-    opacity: 0.23;
-    animation: float 18s linear infinite;
+    inset: -40px;
+    background-image: url("https://i.ibb.co/M2nNkmS/gold-dust.png");
+    opacity: 0.20;
+    animation: float 22s linear infinite;
 }
 
 @keyframes float {
-    0% {transform: translateY(0);}
-    100% {transform: translateY(-300px);}
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-280px); }
 }
 
 /* -------- CARD -------- */
 .card {
     width: 92%;
     max-width: 600px;
-    margin: 80px auto;
-    background: rgba(20,20,35,0.55);
+    margin: 85px auto;
+    background: rgba(20,20,35,0.50);
     border-radius: 28px;
-    padding: 35px 28px;
+    padding: 40px 32px;
+
+    border: 1px solid rgba(255,215,0,0.28);
     backdrop-filter: blur(14px);
-    border: 1px solid rgba(255,215,0,0.25);
-    box-shadow: 0 0 45px rgba(255,215,0,0.15);
+    box-shadow: 0 0 55px rgba(255,215,0,0.20);
+
     animation: fade 0.8s ease;
+    min-height: 600px; /* Kart artık kaymıyor */
 }
 
 @keyframes fade {
-    from {opacity: 0; transform: translateY(20px);}
-    to {opacity: 1; transform: translateY(0);}
+    from { opacity: 0; transform: translateY(25px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 /* -------- STAR HOLOGRAM -------- */
 .star {
-    width: 130px;
-    height: 130px;
-    margin: 0 auto 25px;
-    background-image: url("https://i.ibb.co/f1RhVfg/star-gold.png");
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 28px;
+
+    background-image: url("https://i.ibb.co/B3TjZ0s/star-gold-holo.png");
     background-size: contain;
     background-repeat: no-repeat;
-    filter: drop-shadow(0 0 14px rgba(255,215,0,0.7));
-    animation: pulse 3.5s ease-in-out infinite;
+
+    filter: drop-shadow(0 0 20px rgba(255,215,0,0.85));
+    animation: pulse 3.2s ease-in-out infinite;
 }
 
 @keyframes pulse {
-    0% {transform: scale(1); opacity: .9;}
-    50% {transform: scale(1.08); opacity: 1;}
-    100% {transform: scale(1); opacity: .9;}
+    0%   { transform: scale(1); opacity: .8; }
+    50%  { transform: scale(1.10); opacity: 1; }
+    100% { transform: scale(1); opacity: .8; }
 }
 
 /* -------- TEXT -------- */
 .loading {
     text-align: center;
-    opacity: 0.7;
-    font-size: 14px;
-    margin-bottom: 12px;
-    animation: blink 1.8s infinite;
+    opacity: 0.75;
+    font-size: 15px;
+    margin-bottom: 15px;
+    animation: blink 2s infinite;
 }
 @keyframes blink {
-    0%,100% {opacity: .6;}
-    50% {opacity: 1;}
+    0%,100% { opacity: .6; }
+    50% { opacity: 1; }
 }
 
 .name {
     text-align: center;
     font-family: 'Playfair Display';
-    font-size: 44px;
+    font-size: 46px;
     color: #ffd700;
     margin-bottom: 20px;
 }
@@ -102,30 +107,33 @@ body {
     font-size: 18px;
     line-height: 1.7;
     white-space: pre-line;
-    min-height: 200px;
+    min-height: 260px;
 }
 
 /* -------- BUTTONS -------- */
 .btn-box {
     display: flex;
     justify-content: center;
-    gap: 12px;
-    margin-top: 24px;
+    gap: 14px;
+    margin-top: 28px;
 }
 
 button {
-    padding: 12px 28px;
+    padding: 12px 30px;
     border-radius: 30px;
     border: none;
     cursor: pointer;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 15px;
+
     background: linear-gradient(90deg, #ffd700, #ff6bd6);
     color: #000;
-    transition: 0.2s;
+    transition: 0.22s;
 }
 
-button:hover { transform: scale(1.06); }
+button:hover {
+    transform: scale(1.06);
+}
 
 </style>
 </head>
@@ -153,32 +161,30 @@ button:hover { transform: scale(1.06); }
 <script>
 let lang = "tr";
 
-/* -------- AI-LIKE STAR NAME GENERATOR -------- */
+/* -------- STAR NAME MOTORU -------- */
 function generateStarName() {
-    const prefix = ["A", "E", "O", "L", "Ar", "El", "No", "Au", "Ser", "Vé", "Lu", "My", "Astra", "Nai", "Oph", "Ély"];
-    const core   = ["leï", "stra", "ria", "lune", "via", "thea", "lyra", "vara", "naé", "raya", "vona"];
-    const suffix = ["a", "éa", "ia", "ra", "xa", "aya", "ira", "elle", "aé", "ora"];
+    const prefix = ["Astra", "Ela", "Noï", "Ophira", "Luné", "Auré", "Seré", "Vea", "Mirae", "Ély", "Nai", "Véra", "Oxa"];
+    const core   = ["thea", "stra", "lya", "raé", "naï", "vara", "lune", "rea", "lyra", "via", "nera"];
+    const suffix = ["a", "ia", "éa", "xa", "ara", "elle", "aya", "ira", "ora"];
 
-    return prefix[Math.random()*prefix.length|0] +
-           core[Math.random()*core.length|0] + 
-           suffix[Math.random()*suffix.length|0];
+    return prefix.random() + core.random() + suffix.random();
 }
 
-/* -------- AI-LIKE MOTTO GENERATOR -------- */
+/* -------- MOTTO MOTORU -------- */
 function generateMotto() {
-    const part1 = ["Işığın", "Zarafetin", "Auran", "Sessiz gücün", "Gölgen", "Kalbin"];
-    const part2 = ["karanlığı deler", "herkesi susturur", "odayı değiştirir", "konuşur", "yükselir", "parıldar"];
-    const part3 = ["asla kaybolmaz.", "her şeyi dönüştürür.", "iz bırakır.", "sen konuşmadan anlatır.", "yeni yollar açar."];
+    const p1 = ["Işığın", "Zarafetin", "Auran", "Sessiz gücün", "Adımların", "Kalbin"];
+    const p2 = ["herkesi susturur", "karanlığı deler", "odayı değiştirir", "yükselir", "parıldar"];
+    const p3 = ["ve kaybolmaz.", "ve iz bırakır.", "ve dönüşüm yaratır.", "ve konuşur.", "ve seni görünür kılar."];
 
-    return `${part1.random()} ${part2.random()} ve ${part3.random()}`;
+    return `${p1.random()} ${p2.random()} ${p3.random()}`;
 }
 
-/* -------- AI-LIKE COMBINATION GENERATOR -------- */
+/* -------- KOMBIN MOTORU -------- */
 function generateKombin() {
-    const main = ["Siyah satin elbise", "Krem blazer takım", "White jumpsuit", "Taupe trench coat", "Red drape dress", "Silver slip elbise"];
-    const acc  = ["Gold spiral küpe", "Pearl clutch", "Silver hoops", "Mini gold bag", "Crystal drop earrings"];
-    const hair = ["Sleek low bun", "Soft glam waves", "Wet hair look", "Natural wavy", "High elegant ponytail"];
-    const shoe = ["Nude stiletto", "Clear heels", "Metallic heels", "Minimal topuklu", "Pointed boots"];
+    const main = ["Krem blazer takım", "White jumpsuit", "Siyah satin elbise", "Taupe trench coat", "Red drape dress", "Silver slip elbise"];
+    const acc  = ["Mini gold bag", "Pearl clutch", "Crystal drop earrings", "Gold spiral küpe", "Silver hoops"];
+    const hair = ["Sleek low bun", "Soft glam waves", "Wet hair look", "High elegant ponytail"];
+    const shoe = ["Pointed boots", "Nude stiletto", "Clear heels", "Metallic heels"];
 
     return `• ${main.random()}\n• ${acc.random()}\n• ${hair.random()}\n• ${shoe.random()}`;
 }
@@ -188,7 +194,37 @@ Array.prototype.random = function() {
     return this[Math.floor(Math.random() * this.length)];
 };
 
-/* -------- GENERATE ALL -------- */
+/* ----- EN ÇEVİRİ ----- */
+function translateMotto(t) {
+    return t
+      .replace("Işığın","Your light")
+      .replace("Zarafetin","Your elegance")
+      .replace("Auran","Your aura")
+      .replace("Sessiz gücün","Your silent power")
+      .replace("Adımların","Your steps")
+      .replace("Kalbin","Your heart")
+      .replace("herkesi susturur","silences everyone")
+      .replace("karanlığı deler","cuts through darkness")
+      .replace("odayı değiştirir","changes the room")
+      .replace("yükselir","rises")
+      .replace("parıldar","glows")
+      .replace("ve kaybolmaz.","and never gets lost.")
+      .replace("ve iz bırakır.","and leaves a mark.")
+      .replace("ve dönüşüm yaratır.","and transforms everything.")
+      .replace("ve konuşur.","and speaks without words.")
+      .replace("ve seni görünür kılar.","and makes you seen.");
+}
+
+function translateKombin(k) {
+    return k
+      .replace("Krem blazer takım","Cream blazer set")
+      .replace("Siyah satin elbise","Black satin dress")
+      .replace("Taupe trench coat","Taupe trench coat")
+      .replace("Red drape dress","Red drape dress")
+      .replace("Silver slip elbise","Silver slip dress");
+}
+
+/* -------- GENERATOR -------- */
 function generate() {
     document.getElementById("loadingText").style.opacity = 1;
 
@@ -203,6 +239,7 @@ function generate() {
         }
 
         document.getElementById("starName").textContent = name + " ✦";
+
         document.getElementById("outputBox").textContent =
             (lang==="tr" ? "✦ Motto:\n" : "✦ Motto:\n") +
             motto +
@@ -212,53 +249,6 @@ function generate() {
 
         document.getElementById("loadingText").style.opacity = 0;
     }, 700);
-}
-
-/* ----- BASIC EN TRANSLATION (yeterli) ----- */
-function translateMotto(t) {
-    return t
-        .replace("Işığın","Your light")
-        .replace("Zarafetin","Your elegance")
-        .replace("Auran","Your aura")
-        .replace("Sessiz gücün","Your silent power")
-        .replace("Gölgen","Your shadow")
-        .replace("Kalbin","Your heart")
-        .replace("karanlığı deler","cuts through darkness")
-        .replace("herkesi susturur","silences everyone")
-        .replace("odayı değiştirir","changes the room")
-        .replace("konuşur","speaks")
-        .replace("yükselir","rises")
-        .replace("parıldar","glows")
-        .replace("asla kaybolmaz.","never gets lost.")
-        .replace("her şeyi dönüştürür.","transforms everything.")
-        .replace("iz bırakır.","leaves a mark.")
-        .replace("sen konuşmadan anlatır.","tells your story without words.")
-        .replace("yeni yollar açar.","opens new paths.");
-}
-
-function translateKombin(k) {
-    return k
-        .replace("Siyah satin elbise","Black satin dress")
-        .replace("Krem blazer takım","Cream blazer set")
-        .replace("White jumpsuit","White jumpsuit")
-        .replace("Taupe trench coat","Taupe trench coat")
-        .replace("Red drape dress","Red drape dress")
-        .replace("Silver slip elbise","Silver slip dress")
-        .replace("Gold spiral küpe","Gold spiral earrings")
-        .replace("Pearl clutch","Pearl clutch")
-        .replace("Silver hoops","Silver hoops")
-        .replace("Mini gold bag","Mini gold bag")
-        .replace("Crystal drop earrings","Crystal drop earrings")
-        .replace("Sleek low bun","Sleek low bun")
-        .replace("Soft glam waves","Soft glam waves")
-        .replace("Wet hair look","Wet hair look")
-        .replace("Natural wavy","Natural wavy")
-        .replace("High elegant ponytail","High elegant ponytail")
-        .replace("Nude stiletto","Nude stiletto")
-        .replace("Clear heels","Clear heels")
-        .replace("Metallic heels","Metallic heels")
-        .replace("Minimal topuklu","Minimal heels")
-        .replace("Pointed boots","Pointed boots");
 }
 
 function toggleLang() {
