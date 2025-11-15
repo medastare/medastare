@@ -137,197 +137,279 @@ footer small{ color:#666; }
   <p  data-tr="Her tarz ve bütçeye uygun koleksiyonlar, tek bir yerde." data-en="Collections for every style and budget, all in one place.">Collections for every style and budget, all in one place.</p>
 </section>
 
-<!-- ⭐⭐ MEDAI STARCARD — PREMIUM ONBOARDING ⭐⭐ -->
+<!-- ⭐⭐ MedAI StarCard™ Onboarding Section ⭐⭐ -->
 
 <section id="star-onboarding">
 
 <style>
-/* ---------------- GLOBAL ---------------- */
-#star-onboarding {
-  padding: 80px 0;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+/* --------- SECTION WRAPPER --------- */
+#star-onboarding{
+  padding:80px 0;
+  display:flex;
+  justify-content:center;
 }
 
-/* ---------------- MAIN BUTTON (SHOW FORM) ---------------- */
-.show-btn {
-  padding: 16px 42px;
-  border-radius: 60px;
-  font-size: 20px;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  background: linear-gradient(90deg, #ffd700, #ff33cc);
-  color: #000;
-  transition: .35s;
-  box-shadow: 0 0 20px rgba(255,215,0,0.5);
+/* --------- TOP TRIGGER BUTTON --------- */
+.medai-trigger{
+  width:94%;
+  max-width:650px;
+  margin:0 auto;
+  padding:14px 26px;
+  border-radius:999px;
+  border:none;
+  cursor:pointer;
+  font-weight:600;
+  font-size:16px;
+  color:#000;
+  background:linear-gradient(90deg,#ffd700,#ff44dd);
+  box-shadow:0 0 22px rgba(255,215,0,0.6);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:relative;
+  overflow:hidden;
 }
 
-.show-btn:hover {
-  transform: scale(1.08);
-  box-shadow: 0 0 30px rgba(255,215,0,0.7);
+/* küçük ışık animasyonu */
+.medai-trigger::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-40%;
+  width:40%;
+  height:100%;
+  background:linear-gradient(120deg,rgba(255,255,255,.45),rgba(255,255,255,0));
+  transform:skewX(-20deg);
+  animation:triggerShine 5s infinite;
+}
+@keyframes triggerShine{
+  0%{transform:translateX(-120%) skewX(-20deg);}
+  40%{transform:translateX(220%) skewX(-20deg);}
+  100%{transform:translateX(220%) skewX(-20deg);}
 }
 
-/* ---------------- CARD (HIDDEN AT FIRST) ---------------- */
-.onboard-card {
-  width: 94%;
-  max-width: 650px;
-  padding: 40px;
-  border-radius: 30px;
-  background: rgba(20,18,30,0.55);
-  border: 1px solid rgba(255,215,0,0.35);
-  backdrop-filter: blur(18px);
-  box-shadow: 0 0 60px rgba(255,215,0,0.25);
-  color: #fff;
-  margin-top:40px;
-
-  transform: translateY(60px);
-  opacity: 0;
-  pointer-events: none;
-  transition: .6s ease;
+.medai-trigger span{
+  position:relative;
+  z-index:1;
+}
+.medai-trigger .arrow{
+  font-size:18px;
 }
 
-.onboard-card.active {
-  transform: translateY(0px);
-  opacity: 1;
-  pointer-events: auto;
+/* --------- CARD WRAPPER (ACCORDION) --------- */
+.onboard-wrapper{
+  width:94%;
+  max-width:650px;
+  margin:18px auto 0;
 }
 
-/* ---------------- TITLES ---------------- */
-.onboard-title {
-  text-align:center;
-  font-size:32px;
+.onboard-card{
+  border-radius:30px;
+  background:rgba(20,18,30,0.55);
+  border:1px solid rgba(255,215,0,0.35);
+  backdrop-filter:blur(18px);
+  box-shadow:0 0 60px rgba(255,215,0,0.25);
+  overflow:hidden;
+  max-height:0;
+  opacity:0;
+  transform:translateY(10px);
+  transition:max-height .6s ease, opacity .5s ease, transform .5s ease;
+}
+
+/* kart açıkken */
+.onboard-card.open{
+  max-height:900px;      /* yeterli yüksekliği veriyoruz */
+  opacity:1;
+  transform:translateY(0);
+}
+
+.onboard-inner{
+  padding:40px 34px;
+}
+
+/* --------- HEADER & LANG --------- */
+.onboard-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:18px;
+}
+
+.onboard-title{
+  font-size:26px;
   font-weight:600;
   color:#ffd700;
-  text-shadow:0 0 20px rgba(255,215,0,0.7);
-  margin-bottom:20px;
+  text-shadow:0 0 18px rgba(255,215,0,0.7);
 }
 
-/* ---------------- MEDAI TEXT ---------------- */
-.medai-text {
+/* local EN/TR switch */
+.onboard-lang{
+  border-radius:999px;
+  padding:6px 14px;
+  border:1px solid rgba(255,215,0,0.6);
+  background:rgba(0,0,0,0.4);
+  color:#ffd700;
+  font-size:13px;
+  cursor:pointer;
+}
+
+/* --------- MEDAI MESSAGE --------- */
+.medai-text{
   text-align:center;
-  font-size:18px;
-  opacity:.85;
-  margin-bottom:35px;
+  font-size:17px;
+  opacity:.9;
+  margin-bottom:28px;
 }
 
-/* ---------------- LABEL ---------------- */
-.label {
-  font-size:17px;
+/* --------- LABELS & INPUT --------- */
+.label{
+  font-size:16px;
   margin-bottom:8px;
   color:#ffd700;
 }
 
-/* ---------------- INPUT ---------------- */
-.input-box {
+.input-box{
   width:100%;
-  background:rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.07);
   border:1px solid rgba(255,215,0,0.3);
   padding:14px 16px;
   border-radius:14px;
   color:#fff;
-  margin-bottom:28px;
+  margin-bottom:26px;
   font-size:16px;
   outline:none;
   backdrop-filter:blur(10px);
 }
 
-/* ---------------- CHIPS ---------------- */
-.chips {
+/* --------- CHIPS --------- */
+.chips{
   display:flex;
   flex-wrap:wrap;
   gap:12px;
-  margin-bottom:35px;
+  margin-bottom:30px;
 }
 
-.chip {
-  padding:10px 20px;
-  border-radius:22px;
+.chip{
+  padding:9px 18px;
+  border-radius:20px;
   border:1px solid rgba(255,215,0,0.35);
-  background:rgba(255,255,255,0.08);
+  background:rgba(255,255,255,0.07);
   color:#fff;
-  font-size:15px;
+  font-size:14px;
   cursor:pointer;
-  transition:.25s;
+  transition:.22s;
 }
 
-.chip.active {
+.chip.active{
   background:linear-gradient(90deg,#ffd700,#ff44cc);
   color:#000;
-  font-weight:600;
   border:none;
-  box-shadow:0 0 15px rgba(255,215,0,0.5);
+  font-weight:600;
+  box-shadow:0 0 14px rgba(255,215,0,0.7);
 }
 
-/* ---------------- CREATE BUTTON ---------------- */
-.create-btn {
+/* --------- CREATE BUTTON --------- */
+.create-btn{
   width:100%;
-  padding:18px 30px;
+  padding:15px 26px;
   border-radius:32px;
   border:none;
   cursor:pointer;
   font-weight:600;
-  font-size:17px;
-  background:linear-gradient(90deg, #ffd700, #ff44dd);
-  color:#000;
-  transition:.3s;
-}
-
-.create-btn:hover {
-  transform:scale(1.05);
-  box-shadow:0 0 25px rgba(255,215,0,0.7);
-}
-
-/* ---------------- BOTTOM TEXT ---------------- */
-.bottom-box {
-  text-align:center;
-  margin-top:35px;
   font-size:16px;
-  opacity:.9;
+  background:linear-gradient(90deg,#ffd700,#ff44dd);
+  color:#000;
+  position:relative;
+  overflow:hidden;
+  transition:.25s;
 }
 
-.bottom-ai {
-  margin-top:8px;
-  opacity:.7;
+.create-btn::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-40%;
+  width:40%;
+  height:100%;
+  background:linear-gradient(120deg,rgba(255,255,255,.45),rgba(255,255,255,0));
+  transform:skewX(-20deg);
+  animation:btnShine 4s infinite;
+}
+@keyframes btnShine{
+  0%{transform:translateX(-130%) skewX(-20deg);}
+  50%{transform:translateX(230%) skewX(-20deg);}
+  100%{transform:translateX(230%) skewX(-20deg);}
+}
+
+.create-btn:hover{
+  transform:scale(1.04);
+  box-shadow:0 0 24px rgba(255,215,0,0.7);
+}
+
+/* --------- BOTTOM TEXT --------- */
+.bottom-box{
+  text-align:center;
+  margin-top:26px;
+  font-size:15px;
+  opacity:.95;
+}
+
+.bottom-ai{
+  margin-top:6px;
+  opacity:.75;
   font-style:italic;
+}
+
+/* mobile tweak */
+@media (max-width:480px){
+  .onboard-inner{
+    padding:30px 20px;
+  }
+  .onboard-title{
+    font-size:22px;
+  }
 }
 </style>
 
 
-<!-- ⭐ ANA BUTON (KARTI AÇ) -->
-<button class="show-btn" onclick="showCard()">
-    MedAI StarCard™
+<!-- ⭐ Trigger Button -->
+<button class="medai-trigger" type="button" onclick="toggleStarOnboard()">
+  <span>MedAI StarCard™</span>
+  <span class="arrow" id="starOnbArrow">▼</span>
 </button>
 
+<div class="onboard-wrapper">
+  <div id="onboardCard" class="onboard-card">
+    <div class="onboard-inner">
 
-<!-- ⭐ AÇILAN KART -->
-<div class="onboard-card" id="onboardCard">
+      <!-- Header + local EN/TR -->
+      <div class="onboard-header">
+        <div class="onboard-title">MedAI StarCard™</div>
+        <button class="onboard-lang" type="button" id="onbLangBtn" onclick="toggleOnboardLang()">
+          EN / TR
+        </button>
+      </div>
 
-    <div class="onboard-title">MedAI StarCard™</div>
-
-    <div id="medaiLine" class="medai-text">
+      <!-- MedAI intro -->
+      <div id="medaiLine" class="medai-text">
         Merhaba yıldızım, bugün senin enerjine uygun kombinini oluşturmaya hazırım.
-    </div>
+      </div>
 
-    <!-- İSİM -->
-    <div class="label" id="labelName">Adın nedir?</div>
-    <input id="userName" class="input-box" placeholder="Adın"/>
+      <!-- Name -->
+      <div class="label" id="labelName">Adın nedir?</div>
+      <input id="userName" class="input-box" placeholder="Adın"/>
 
-    <!-- TARZ -->
-    <div class="label" id="labelStyle">Stilini seç:</div>
-
-    <div class="chips" id="styleChips">
+      <!-- Style -->
+      <div class="label" id="labelStyle">Stilini seç:</div>
+      <div class="chips" id="styleChips">
         <div class="chip">Modern</div>
         <div class="chip">Modest</div>
         <div class="chip">Mix</div>
-    </div>
+      </div>
 
-    <!-- MOD -->
-    <div class="label" id="labelMood">Bugünkü enerjin?</div>
-
-    <div class="chips" id="moodChips">
+      <!-- Mood -->
+      <div class="label" id="labelMood">Bugünkü enerjin hangisi?</div>
+      <div class="chips" id="moodChips">
         <div class="chip">Urban</div>
         <div class="chip">Chill</div>
         <div class="chip">Business</div>
@@ -348,72 +430,116 @@ footer small{ color:#666; }
         <div class="chip">Academic</div>
         <div class="chip">Dark</div>
         <div class="chip">Artistic</div>
-    </div>
+      </div>
 
-    <!-- OLUŞTUR -->
-    <button class="create-btn" onclick="goStarCard()">
+      <!-- Create button -->
+      <button class="create-btn" type="button" onclick="goStarCard()"
+        id="createBtn">
         StarCard’ımı Oluştur ✦
-    </button>
+      </button>
 
-    <!-- ALT METİN -->
-    <div class="bottom-box">
+      <!-- Bottom text -->
+      <div class="bottom-box">
         <span id="bottom1">Bugünkü yıldızını görmek ister misin? ✦</span>
         <div id="bottom2" class="bottom-ai">
-            “Merhaba, benimle bugünkü kombinini üretmek ister misin?” — MedAI
+          “Merhaba, benimle bugünkü kombinini üretmek ister misin?” — MedAI
         </div>
-    </div>
+      </div>
 
+    </div>
+  </div>
 </div>
 
-
 <script>
-/* ⭐ CARD AÇMA FONKSİYONU */
-function showCard(){
-    document.getElementById("onboardCard").classList.add("active");
+/* local dil durumu */
+let onboardLang = "tr";
+
+/* trigger accordion */
+function toggleStarOnboard(){
+  const card  = document.getElementById("onboardCard");
+  const arrow = document.getElementById("starOnbArrow");
+  const isOpen = card.classList.contains("open");
+  if(isOpen){
+    card.classList.remove("open");
+    arrow.textContent = "▼";
+  }else{
+    card.classList.add("open");
+    arrow.textContent = "▲";
+  }
 }
 
-/* ⭐ CHIP SELECT */
-document.querySelectorAll(".chip").forEach(chip=>{
-    chip.addEventListener("click",()=>{
-        let group = chip.parentNode;
-        group.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
-        chip.classList.add("active");
-    });
+/* chip selection (tek seçim) */
+document.querySelectorAll("#styleChips .chip, #moodChips .chip").forEach(chip=>{
+  chip.addEventListener("click",()=>{
+    const group = chip.parentNode;
+    group.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
+    chip.classList.add("active");
+  });
 });
 
-/* ⭐ SAYFAYA GİTME (BUTONA BASMADAN GİTMİYOR ARTIK) */
+/* karttan starcard.html'e geç */
 function goStarCard(){
-    window.location.href = "starcard.html";
+  window.location.href = "starcard.html";
 }
 
-/* ⭐ DİL DEĞİŞİMİ (sitenizdeki toggleLang ile senkron çalışır) */
-function updateOnboardLang(){
-    if(currentLang === "tr"){
-        document.getElementById("medaiLine").textContent =
-        "Merhaba yıldızım, bugün senin enerjine uygun kombinini oluşturmaya hazırım.";
-        document.getElementById("labelName").textContent = "Adın nedir?";
-        document.getElementById("labelStyle").textContent = "Stilini seç:";
-        document.getElementById("labelMood").textContent = "Bugünkü enerjin?";
-        document.getElementsByClassName("create-btn")[0].textContent =
-        "StarCard’ımı Oluştur ✦";
-        document.getElementById("bottom1").textContent =
-        "Bugünkü yıldızını görmek ister misin? ✦";
-        document.getElementById("bottom2").textContent =
-        "“Merhaba, benimle bugünkü kombinini üretmek ister misin?” — MedAI";
-    } else {
-        document.getElementById("medaiLine").textContent =
-        "Hello star, I’m ready to design your outfit for today’s energy.";
-        document.getElementById("labelName").textContent = "What’s your name?";
-        document.getElementById("labelStyle").textContent = "Choose your style:";
-        document.getElementById("labelMood").textContent = "What's your energy?";
-        document.getElementsByClassName("create-btn")[0].textContent =
-        "Create my StarCard ✦";
-        document.getElementById("bottom1").textContent =
-        "Would you like to see today’s star? ✦";
-        document.getElementById("bottom2").textContent =
-        "“Hello, would you like me to generate your outfit for today?” — MedAI";
-    }
+/* TR / EN text data */
+const styleLabels = {
+  tr:["Modern","Modest","Mix"],
+  en:["Modern","Modest","Mixed"]
+};
+
+const moodLabels = {
+  tr:["Urban","Chill","Business","Hot Girl","Soft Girl","Elegant","Street","Cozy",
+      "Premium","Minimal","Party","Classy","Royal","Sporty","Glam","Basic",
+      "Diva","Academic","Dark","Artistic"],
+  en:["Urban","Chill","Business","Hot Girl","Soft Girl","Elegant","Street","Cozy",
+      "Premium","Minimal","Party","Classy","Royal","Sporty","Glam","Basic",
+      "Diva","Academic","Dark","Artistic"]
+};
+
+/* tüm metinleri güncelle */
+function applyOnboardTexts(){
+  if(onboardLang==="tr"){
+    document.getElementById("medaiLine").textContent =
+      "Merhaba yıldızım, bugün senin enerjine uygun kombinini oluşturmaya hazırım.";
+    document.getElementById("labelName").textContent = "Adın nedir?";
+    document.getElementById("userName").placeholder  = "Adın";
+    document.getElementById("labelStyle").textContent = "Stilini seç:";
+    document.getElementById("labelMood").textContent  = "Bugünkü enerjin hangisi?";
+    document.getElementById("createBtn").textContent  = "StarCard’ımı Oluştur ✦";
+    document.getElementById("bottom1").textContent    = "Bugünkü yıldızını görmek ister misin? ✦";
+    document.getElementById("bottom2").textContent    =
+      "“Merhaba, benimle bugünkü kombinini üretmek ister misin?” — MedAI";
+  }else{
+    document.getElementById("medaiLine").textContent =
+      "Hello star, I’m ready to design your outfit for today’s energy.";
+    document.getElementById("labelName").textContent = "What’s your name?";
+    document.getElementById("userName").placeholder  = "Your name";
+    document.getElementById("labelStyle").textContent = "Choose your style:";
+    document.getElementById("labelMood").textContent  = "What's your energy today?";
+    document.getElementById("createBtn").textContent  = "Create my StarCard ✦";
+    document.getElementById("bottom1").textContent    = "Would you like to see today’s star? ✦";
+    document.getElementById("bottom2").textContent    =
+      "“Hello, would you like me to generate your outfit for today?” — MedAI";
+  }
+
+  /* chips */
+  document.querySelectorAll("#styleChips .chip").forEach((chip,i)=>{
+    chip.textContent = styleLabels[onboardLang][i];
+  });
+  document.querySelectorAll("#moodChips .chip").forEach((chip,i)=>{
+    chip.textContent = moodLabels[onboardLang][i];
+  });
 }
+
+/* local EN / TR toggle */
+function toggleOnboardLang(){
+  onboardLang = (onboardLang==="tr") ? "en" : "tr";
+  applyOnboardTexts();
+}
+
+/* ilk yüklemede TR metinleri uygula */
+applyOnboardTexts();
 </script>
 
 </section>
