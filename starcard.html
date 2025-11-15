@@ -106,6 +106,9 @@ body {
     font-size: 19px;
     line-height: 1.7;
     min-height: 240px;
+
+    /* 🟡 1 — METİN DÜZENİ DÜZELTİLDİ */
+    white-space: pre-line;
 }
 
 /* ------------------ BUTTONS ------------------ */
@@ -127,8 +130,14 @@ button {
     color: #000;
     transition: .25s;
 }
+
 button:hover {
     transform: scale(1.08);
+}
+
+/* 🟡 2 — YENİ ÜRET SONRASI RENK KAYBINI DÜZELTEN TRİCK */
+button:active {
+    filter: brightness(1.08);
 }
 </style>
 </head>
