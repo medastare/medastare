@@ -137,6 +137,214 @@ footer small{ color:#666; }
   <p  data-tr="Her tarz ve bütçeye uygun koleksiyonlar, tek bir yerde." data-en="Collections for every style and budget, all in one place.">Collections for every style and budget, all in one place.</p>
 </section>
 
+<!-- ============================= -->
+<!-- ⭐ MedaStaré StarCard Onboarding -->
+<!-- ============================= -->
+
+<section id="starcard" class="starcard-section">
+
+    <h2 class="starcard-title" 
+        data-tr="MedaAI StarCard™"
+        data-en="MedaAI StarCard™"></h2>
+
+    <p class="starcard-sub"
+        data-tr="Merhaba yıldızım, bugün enerjine uygun kombinini oluşturmaya hazırım."
+        data-en="Hello star, I’m ready to create today’s outfit for your energy."></p>
+
+    <!-- NAME -->
+    <div class="starcard-field">
+        <label data-tr="Adın nedir?" data-en="What’s your name?"></label>
+        <input id="userName" type="text" placeholder="Adın…"/>
+    </div>
+
+    <!-- STYLE -->
+    <div class="starcard-field">
+        <label data-tr="Stilini seç" data-en="Choose your style"></label>
+
+        <div class="starcard-options">
+            <div class="style-option" data-value="modern" data-tr="Modern" data-en="Modern">Modern</div>
+            <div class="style-option" data-value="modest" data-tr="Modest" data-en="Modest">Modest</div>
+            <div class="style-option" data-value="mix" data-tr="Mix" data-en="Mix">Mix</div>
+        </div>
+    </div>
+
+    <!-- MOOD -->
+    <div class="starcard-field">
+        <label data-tr="Bugünkü moda en yakın olanı seç"
+               data-en="Choose today's mood"></label>
+
+        <div class="starcard-options mood-box">
+            <div class="mood-option" data-value="urban">Urban</div>
+            <div class="mood-option" data-value="business">Business</div>
+            <div class="mood-option" data-value="chill">Chill</div>
+            <div class="mood-option" data-value="glam">Glam</div>
+            <div class="mood-option" data-value="royal">Royal</div>
+            <div class="mood-option" data-value="soft">Soft Girl</div>
+            <div class="mood-option" data-value="hot">Hot Girl</div>
+            <div class="mood-option" data-value="street">Street</div>
+            <div class="mood-option" data-value="classy">Classy</div>
+            <div class="mood-option" data-value="minimal">Minimal</div>
+        </div>
+    </div>
+
+    <!-- BUTTON -->
+    <button class="starcard-btn" onclick="goToStarCard()"
+        data-tr="StarCard’ımı Oluştur ✦"
+        data-en="Generate my StarCard ✦">
+        StarCard’ımı Oluştur ✦
+    </button>
+
+    <!-- BOTTOM TEXT -->
+    <p class="starcard-end"
+       data-tr="Bugünkü yıldızını görmek ister misin?"
+       data-en="Would you like to see your star of the day?"></p>
+
+    <p class="starcard-ai"
+       data-tr="Merhaba, benimle bugünkü kombinini üretmek ister misin? — MedAI"
+       data-en="Hello, would you like me to create your outfit for today? — MedAI"></p>
+
+</section>
+
+<script>
+/* Selected values */
+let selectedStyle = "";
+let selectedMood = "";
+
+/* STYLE SELECT */
+document.querySelectorAll(".style-option").forEach(opt=>{
+    opt.onclick = function(){
+        document.querySelectorAll(".style-option").forEach(o=>o.classList.remove("active"));
+        this.classList.add("active");
+        selectedStyle = this.dataset.value;
+    };
+});
+
+/* MOOD SELECT */
+document.querySelectorAll(".mood-option").forEach(opt=>{
+    opt.onclick = function(){
+        document.querySelectorAll(".mood-option").forEach(o=>o.classList.remove("active"));
+        this.classList.add("active");
+        selectedMood = this.dataset.value;
+    };
+});
+
+/* Redirect to StarCard */
+function goToStarCard(){
+    const name = document.getElementById("userName").value.trim();
+    if(!name || !selectedStyle || !selectedMood){
+        alert("Lütfen tüm bilgileri doldur 🙏");
+        return;
+    }
+
+    const url = `starcard.html?name=${encodeURIComponent(name)}&style=${encodeURIComponent(selectedStyle)}&mood=${encodeURIComponent(selectedMood)}`;
+    window.location.href = url;
+}
+</script>
+
+<style>
+/* SECTION */
+.starcard-section {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+/* TITLES */
+.starcard-title {
+    font-size: 36px;
+    font-weight: 600;
+    color: #ffd700;
+    margin-bottom: 10px;
+}
+
+.starcard-sub {
+    font-size: 18px;
+    opacity: .8;
+    margin-bottom: 40px;
+}
+
+/* FIELDS */
+.starcard-field {
+    margin-bottom: 35px;
+    text-align: left;
+    max-width: 450px;
+    margin-inline: auto;
+}
+
+.starcard-field label {
+    font-size: 17px;
+    color: #ffd700;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.starcard-field input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,215,0,0.4);
+    background: rgba(0,0,0,0.3);
+    color: #fff;
+    font-size: 16px;
+}
+
+/* OPTIONS */
+.starcard-options {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.style-option,
+.mood-option {
+    padding: 10px 18px;
+    border: 1px solid rgba(255,215,0,0.4);
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 15px;
+    background: rgba(0,0,0,0.25);
+    transition: .25s;
+}
+
+.style-option.active,
+.mood-option.active {
+    background: linear-gradient(90deg, #ffd700, #ff69d9);
+    color: #000;
+    border-color: transparent;
+}
+
+/* BUTTON */
+.starcard-btn {
+    margin-top: 20px;
+    padding: 14px 40px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    background: linear-gradient(90deg,#ffd700,#ff69d9);
+    color: #000;
+    transition: .3s;
+}
+
+.starcard-btn:hover {
+    transform: scale(1.05);
+}
+
+/* END TEXT */
+.starcard-end {
+    margin-top: 30px;
+    font-size: 17px;
+    opacity: .85;
+}
+
+.starcard-ai {
+    margin-top: 8px;
+    font-size: 15px;
+    opacity: .65;
+    font-style: italic;
+}
+</style>
+  
 <section id="collections">
   <h2 data-tr="Koleksiyonlar" data-en="Collections">Collections</h2>
   <div class="grid">
