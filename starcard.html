@@ -8,15 +8,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-body {
+
+/* ------------------ GLOBAL FIX: SAĞ-SOLA OYNAMAYI ENGELLE ------------------ */
+html, body {
     margin: 0;
+    padding: 0;
+    position: fixed;
+    width: 100%;
+    overflow-x: hidden;
+    left: 0;
+    right: 0;
+}
+
+/* BODY STILL REQUIRED FOR COLOR + FONT */
+body {
     background: #000;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    overflow-x: hidden;
     color: #fff;
 }
 
-/* ------------------ ANIMATED BACKGROUND (NO IMAGES) ------------------ */
+/* ------------------ ANIMATED BACKGROUND ------------------ */
 .bg-stars {
     position: fixed;
     inset: 0;
@@ -67,7 +78,7 @@ body {
     text-shadow: 0 0 20px rgba(255,255,255,0.3);
 }
 
-/* ------------------ HOLOGRAM (PURE CSS) ------------------ */
+/* ------------------ HOLOGRAM ------------------ */
 .holo-star {
     width: 150px;
     height: 150px;
@@ -106,8 +117,6 @@ body {
     font-size: 19px;
     line-height: 1.7;
     min-height: 240px;
-
-    /* 🟡 1 — METİN DÜZENİ DÜZELTİLDİ */
     white-space: pre-line;
 }
 
@@ -130,21 +139,14 @@ button {
     color: #000;
     transition: .25s;
 }
+button:hover { transform: scale(1.08); }
+button:active { filter: brightness(1.08); }
 
-button:hover {
-    transform: scale(1.08);
-}
-
-/* 🟡 2 — YENİ ÜRET SONRASI RENK KAYBINI DÜZELTEN TRİCK */
-button:active {
-    filter: brightness(1.08);
-}
 </style>
 </head>
 
 <body>
 
-<!-- ---- Animated Background ---- -->
 <div class="bg-stars" id="bgStars"></div>
 
 <div id="cardBox" class="card">
@@ -185,6 +187,14 @@ function initStars(){
     }
 }
 initStars();
+
+/* ------------------ KARTIN RENGİNİ HER GEN'DE DEĞİŞTİR ------------------ */
+const cardColors = [
+    "rgba(20,18,30,0.55)",
+    "rgba(26,20,38,0.55)",
+    "rgba(30,17,40,0.55)",
+    "rgba(18,12,30,0.55)"
+];
 
 /* --- Star Name --- */
 const prefix = ["A","E","O","L","Ar","El","No","Au","Ser","Vé","Lu","My","Astra","Nai","Oph","Ély"];
@@ -273,6 +283,10 @@ function generateOutfitEN(){
 
 /* --- Generate --- */
 function generate(){
+
+    /* KARTIN RENGİNİ DEĞİŞTİR */
+    document.getElementById("cardBox").style.background = cardColors.random();
+
     document.getElementById("loadingText").style.opacity = 1;
 
     setTimeout(()=>{
@@ -282,7 +296,7 @@ function generate(){
 
         document.getElementById("starName").textContent = star + " ✦";
         document.getElementById("outputBox").textContent =
-            (lang==="tr" ? "✦ Motto:\n" : "✦ Motto:\n") +
+            "✦ Motto:\n" +
             motto + "\n\n" +
             (lang==="tr" ? "✦ MedAI Kombin Önerisi:\n" : "✦ MedAI Outfit Suggestion:\n") +
             outfit;
