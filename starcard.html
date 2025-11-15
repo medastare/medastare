@@ -5,176 +5,151 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>MedaAI StarCard — MedaStaré</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
 <style>
-
-/* -------- GLOBAL -------- */
+/* GLOBAL */
 body {
     margin: 0;
-    background: #000;
     font-family: 'Inter', sans-serif;
+    background: #000;
+    color: #fff;
     overflow-x: hidden;
-    color: white;
 }
 
-/* -------- LUXURY COSMIC BACKGROUND -------- */
+/* BACKGROUND PARALLAX */
 .bg {
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle at center, #0d0d1a 0%, #000 80%);
+    background: radial-gradient(circle at center, #0b0b1d 0%, #000 80%);
     overflow: hidden;
-    z-index: -3;
+    z-index: -1;
 }
 
-/* Layer 1 — slow gold dust */
 .bg::before {
     content: "";
     position: absolute;
     inset: 0;
-    background-image: url("https://www.transparenttextures.com/patterns/golden-dust.png");
-    opacity: 0.18;
-    animation: drift1 22s linear infinite;
+    background-image: url("https://assets.codepen.io/1468070/Stars.svg");
+    opacity: 0.23;
+    animation: float1 22s linear infinite;
 }
-
-@keyframes drift1 {
-    0% {transform: translateY(0);}
-    100% {transform: translateY(-450px);}
-}
-
-/* Layer 2 — faint nebula */
 .bg::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: url("https://i.ibb.co/ky88VYR/nebula-blue.png") center/cover no-repeat;
-    opacity: 0.14;
-    animation: drift2 40s linear infinite;
+    background-image: url("https://assets.codepen.io/1468070/Stars.svg");
+    opacity: 0.15;
+    animation: float2 35s linear infinite;
 }
 
-@keyframes drift2 {
-    0% {transform: scale(1) translateY(0);}
-    100% {transform: scale(1.3) translateY(-500px);}
+@keyframes float1 { 
+    0%{transform:translateY(0);} 
+    100%{transform:translateY(-300px);} 
+}
+@keyframes float2 { 
+    0%{transform:translateY(0);} 
+    100%{transform:translateY(-450px);} 
 }
 
-/* -------- CARD -------- */
+/* CARD */
 .card {
-    width: 90%;
+    width: 92%;
     max-width: 620px;
-    margin: 100px auto;
-    padding: 32px 28px;
+    margin: 110px auto;
+    padding: 40px 32px;
     border-radius: 26px;
-    background: rgba(15,15,25,0.55);
-    border: 1px solid rgba(255,215,0,0.25);
-    backdrop-filter: blur(20px);
+
+    background: rgba(28,25,45,0.55);
+    border: 1px solid rgba(255,215,0,0.28);
+    backdrop-filter: blur(14px);
     box-shadow: 0 0 50px rgba(255,215,0,0.18);
-    animation: fadeIn 1s ease forwards;
-    position: relative;
-    overflow: hidden;
+
+    animation: cardEnter 0.9s ease forwards;
+}
+@keyframes cardEnter {
+    0% { transform: scale(0.94) translateY(25px); opacity:0; }
+    100% { transform: scale(1) translateY(0); opacity:1; }
 }
 
-/* inner glow border */
-.card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 26px;
-    padding: 2px;
-    background: linear-gradient(90deg, #ffd70066, #ff6bd655, #ffd70066);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    animation: borderGlow 5s linear infinite;
+/* COLOR TRANSITION */
+.color-transition {
+    transition: 
+        background 0.8s ease,
+        border-color 0.8s ease,
+        box-shadow 0.8s ease;
 }
 
-@keyframes borderGlow {
-    0% {opacity: 0.6;}
-    50% {opacity: 1;}
-    100% {opacity: 0.6;}
-}
-
-@keyframes fadeIn {
-    from {opacity:0; transform: translateY(25px);}
-    to {opacity:1; transform: translateY(0);}
-}
-
-/* -------- HOLOGRAM STAR (SUPER PREMIUM) -------- */
-.holo-star {
+/* HOLOGRAM STAR */
+.star {
     width: 150px;
     height: 150px;
-    margin: 0 auto 20px;
-    background-image: url("https://i.ibb.co/f1RhVfg/star-gold.png");
+    margin: 0 auto 25px;
+    background-image: url("https://i.imgur.com/7X5Qw5b.png");
     background-size: contain;
     background-repeat: no-repeat;
-    filter: drop-shadow(0 0 22px rgba(255,215,0,0.9));
-    animation: starPulse 3.5s ease-in-out infinite, starTilt 7s ease-in-out infinite;
+    filter: drop-shadow(0 0 22px rgba(255,215,0,0.7));
+
+    animation: holoStar 3s ease-in-out infinite;
+}
+@keyframes holoStar {
+    0% { transform: scale(1) rotate(0deg); opacity:0.85; }
+    50% { transform: scale(1.08) rotate(4deg); opacity:1; }
+    100% { transform: scale(1) rotate(0deg); opacity:0.85; }
 }
 
-@keyframes starPulse {
-    0% {transform: scale(1); opacity: 0.9;}
-    50% {transform: scale(1.12); opacity: 1;}
-    100% {transform: scale(1); opacity: 0.9;}
-}
-
-@keyframes starTilt {
-    0% {transform: rotate(0deg);}
-    50% {transform: rotate(4deg);}
-    100% {transform: rotate(0deg);}
-}
-
-/* -------- TEXT -------- */
+/* LOADING TEXT */
 .loading {
     text-align: center;
     opacity: 0.7;
-    font-size: 14px;
+    font-size: 15px;
     margin-bottom: 15px;
-    animation: blink 1.7s infinite;
+    animation: blink 1.6s infinite;
 }
-
 @keyframes blink {
-    0%,100% {opacity:0.5;}
-    50% {opacity:1;}
+    0%,100%{opacity:.6;} 
+    50%{opacity:1;}
 }
 
+/* STAR NAME */
 .name {
     text-align: center;
     font-family: 'Playfair Display';
     font-size: 46px;
+    margin-bottom: 20px;
     color: #ffd700;
-    margin-bottom: 22px;
-    letter-spacing: 1px;
-    text-shadow: 0 0 18px rgba(255,215,0,0.45);
+    text-shadow: 0 0 12px rgba(255,215,0,0.7);
 }
 
+/* OUTPUT BOX */
 .output {
     font-size: 18px;
-    line-height: 1.6;
+    line-height: 1.7;
     white-space: pre-line;
-    min-height: 200px;
+    min-height: 210px;
 }
 
-/* -------- BUTTONS -------- */
+/* BUTTONS */
 .btn-box {
     display: flex;
     justify-content: center;
-    gap: 16px;
+    gap: 14px;
     margin-top: 26px;
 }
-
 button {
-    padding: 12px 32px;
-    border-radius: 30px;
+    padding: 13px 32px;
+    background: linear-gradient(90deg, #ffd700, #ff6bd6);
+    border-radius: 32px;
     border: none;
     cursor: pointer;
     font-weight: 600;
     font-size: 14px;
-    background: linear-gradient(90deg, #ffd700, #ff6bd6);
     color: #000;
-    transition: 0.25s;
+    transition: .25s;
 }
-
-button:hover { transform: scale(1.08); }
-
+button:hover {
+    transform: scale(1.06);
+}
 </style>
 </head>
 
@@ -182,9 +157,9 @@ button:hover { transform: scale(1.08); }
 
 <div class="bg"></div>
 
-<div class="card">
+<div id="cardBox" class="card color-transition">
 
-    <div class="holo-star"></div>
+    <div class="star"></div>
 
     <div class="loading" id="loadingText">MedaAI is generating your Star…</div>
 
@@ -196,150 +171,132 @@ button:hover { transform: scale(1.08); }
         <button onclick="generate()">Yeni Üret</button>
         <button onclick="toggleLang()">EN / TR</button>
     </div>
-
 </div>
 
 <script>
-
-/* --------------------------
-   GLOBAL VARIABLES
--------------------------- */
 let lang = "tr";
-let currentName = "";
-let currentMottoTR = "";
-let currentKombinTR = "";
 
-/* --------------------------
-   STAR NAME GENERATOR
--------------------------- */
-function generateStarName() {
-    const prefix = ["A", "O", "E", "Astra", "Ély", "Lun", "Ser", "Va", "Oph", "Nai", "Vé", "Aure"];
-    const core   = ["lea", "stra", "thea", "vara", "lyra", "ria", "naé", "vona", "reia", "luna"];
-    const suffix = ["a", "éa", "ira", "elle", "xa", "ora", "aya", "ia"];
+/* RANDOM COLOR THEMES */
+const cardColors = [
+    { bg:"rgba(30,25,60,0.55)", border:"rgba(255,215,0,0.35)", glow:"rgba(255,215,0,0.22)" },
+    { bg:"rgba(40,15,45,0.55)", border:"rgba(255,105,180,0.38)", glow:"rgba(255,105,180,0.25)" },
+    { bg:"rgba(10,30,50,0.55)", border:"rgba(0,200,255,0.38)", glow:"rgba(0,200,255,0.25)" },
+    { bg:"rgba(45,22,12,0.55)", border:"rgba(255,140,0,0.38)", glow:"rgba(255,140,0,0.25)" },
+    { bg:"rgba(25,15,40,0.55)", border:"rgba(180,70,255,0.38)", glow:"rgba(180,70,255,0.25)" }
+];
 
-    return prefix.random() + core.random() + suffix.random();
+/* STAR NAME GENERATOR */
+const prefix = ["A","E","O","L","Ar","El","No","Au","Ser","Vé","Lu","My","Astra","Nai","Oph","Ély"];
+const core   = ["leï","stra","ria","lune","via","thea","lyra","vara","naé","raya","vona"];
+const suffix = ["a","éa","ia","ra","xa","aya","ira","elle","aé","ora"];
+function generateStarName(){
+    return prefix.random()+core.random()+suffix.random();
 }
 
-/* RANDOM CHOICE HELPER */
-Array.prototype.random = function() {
-    return this[Math.floor(Math.random() * this.length)];
+/* MOTTO GEN */
+function generateMottoTR(){
+    const p1=["Işığın","Zarafetin","Auran","Sessiz gücün","Gölgen","Kalbin"];
+    const p2=["karanlığı deler","herkesi susturur","odayı değiştirir","yükselir","parıldar","iz bırakır"];
+    const p3=["asla kaybolmaz.","her şeyi dönüştürür.","yeni yollar açar.","konuşmadan anlatır.","seni öne çıkarır."];
+    return `${p1.random()} ${p2.random()} ve ${p3.random()}`;
+}
+function generateMottoEN(){
+    return generateMottoTR()
+    .replace("Işığın","Your light")
+    .replace("Zarafetin","Your elegance")
+    .replace("Auran","Your aura")
+    .replace("Sessiz gücün","Your silent power")
+    .replace("Gölgen","Your shadow")
+    .replace("Kalbin","Your heart")
+    .replace("karanlığı deler","cuts through darkness")
+    .replace("herkesi susturur","silences everyone")
+    .replace("odayı değiştirir","changes the room")
+    .replace("yükselir","rises")
+    .replace("parıldar","glows")
+    .replace("iz bırakır","leaves a mark")
+    .replace("asla kaybolmaz.","never gets lost.")
+    .replace("her şeyi dönüştürür.","transforms everything.")
+    .replace("yeni yollar açar.","opens new paths.")
+    .replace("konuşmadan anlatır.","tells without words.")
+    .replace("seni öne çıkarır.","makes you stand out.");
+}
+
+/* OUTFIT GEN */
+const mainTR=["Siyah saten elbise","Krem blazer takım","Silver slip elbise","Taupe trench coat","Beyaz jumpsuit"];
+const accTR=["Gold spiral küpe","İnci çanta","Silver hoops","Mini gold bag","Crystal küpe"];
+const hairTR=["Sleek low bun","Soft dalga","High ponytail","Wet hair","Natural wave"];
+const shoeTR=["Nude stiletto","Clear heels","Metallic heels","Minimal topuk","Pointed boots"];
+
+function generateOutfitTR(){
+    return `• ${mainTR.random()}\n• ${accTR.random()}\n• ${hairTR.random()}\n• ${shoeTR.random()}`;
+}
+function generateOutfitEN(){
+    return generateOutfitTR()
+    .replace("Siyah saten elbise","Black satin dress")
+    .replace("Krem blazer takım","Cream blazer set")
+    .replace("Silver slip elbise","Silver slip dress")
+    .replace("Taupe trench coat","Taupe trench coat")
+    .replace("Beyaz jumpsuit","White jumpsuit")
+    .replace("Gold spiral küpe","Gold spiral earrings")
+    .replace("İnci çanta","Pearl bag")
+    .replace("Silver hoops","Silver hoops")
+    .replace("Mini gold bag","Mini gold bag")
+    .replace("Crystal küpe","Crystal earrings")
+    .replace("Sleek low bun","Sleek low bun")
+    .replace("Soft dalga","Soft waves")
+    .replace("High ponytail","High ponytail")
+    .replace("Wet hair","Wet hair look")
+    .replace("Natural wave","Natural waves")
+    .replace("Nude stiletto","Nude stiletto")
+    .replace("Clear heels","Clear heels")
+    .replace("Metallic heels","Metallic heels")
+    .replace("Minimal topuk","Minimal heels")
+    .replace("Pointed boots","Pointed boots");
+}
+
+/* SMALL HELPER */
+Array.prototype.random = function(){
+    return this[Math.floor(Math.random()*this.length)];
 };
 
-/* --------------------------
-   MOTTO GENERATOR (TR)
--------------------------- */
-function generateMottoTR() {
-    const part1 = ["Auran", "Zarafetin", "Işığın", "Sessiz gücün", "Kalbin"];
-    const part2 = ["odayı değiştirir", "herkesi susturur", "parıldar", "yol açar", "iz bırakır"];
-    const part3 = ["ve asla kaybolmaz.", "ve her şeyi dönüştürür.", "sen konuşmadan anlatır."];
-
-    return `${part1.random()} ${part2.random()} ${part3.random()}`;
+/* COLOR APPLY */
+function changeCardColor(){
+    const c = cardColors.random();
+    const card = document.getElementById("cardBox");
+    card.style.background = c.bg;
+    card.style.borderColor = c.border;
+    card.style.boxShadow = `0 0 60px ${c.glow}`;
 }
 
-/* --------------------------
-   MOTTO TRANSLATION (EN)
--------------------------- */
-function translateMottoToEN(t) {
-    return t
-        .replace("Auran","Your aura")
-        .replace("Zarafetin","Your elegance")
-        .replace("Işığın","Your light")
-        .replace("Sessiz gücün","Your silent power")
-        .replace("Kalbin","Your heart")
-        .replace("odayı değiştirir","changes the room")
-        .replace("herkesi susturur","silences everyone")
-        .replace("parıldar","shines")
-        .replace("yol açar","opens paths")
-        .replace("iz bırakır","leaves a mark")
-        .replace("ve asla kaybolmaz.","and never gets lost.")
-        .replace("ve her şeyi dönüştürür.","and transforms everything.")
-        .replace("sen konuşmadan anlatır.","and tells your story without words.");
-}
-
-/* --------------------------
-   KOMBİN (TR)
--------------------------- */
-function generateKombinTR() {
-    const main = ["Siyah saten elbise", "Krem blazer takım", "Silver slip elbise", "Taupe trench coat", "Kırmızı drape elbise"];
-    const acc  = ["Gold spiral küpe", "Mini gold bag", "Pearl clutch", "Silver hoops"];
-    const hair = ["Sleek low bun", "Soft glam waves", "High elegant ponytail"];
-    const shoe = ["Nude stiletto", "Metallic heels", "Pointed boots"];
-
-    return `• ${main.random()}\n• ${acc.random()}\n• ${hair.random()}\n• ${shoe.random()}`;
-}
-
-/* --------------------------
-   KOMBİN TRANSLATION (EN)
--------------------------- */
-function translateKombinToEN(t) {
-    return t
-        .replace("Siyah saten elbise","Black satin dress")
-        .replace("Krem blazer takım","Cream blazer set")
-        .replace("Silver slip elbise","Silver slip dress")
-        .replace("Taupe trench coat","Taupe trench coat")
-        .replace("Kırmızı drape elbise","Red drape dress")
-        .replace("Gold spiral küpe","Gold spiral earrings")
-        .replace("Mini gold bag","Mini gold bag")
-        .replace("Pearl clutch","Pearl clutch")
-        .replace("Silver hoops","Silver hoops")
-        .replace("Sleek low bun","Sleek low bun")
-        .replace("Soft glam waves","Soft glam waves")
-        .replace("High elegant ponytail","High elegant ponytail")
-        .replace("Nude stiletto","Nude stiletto")
-        .replace("Metallic heels","Metallic heels")
-        .replace("Pointed boots","Pointed boots");
-}
-
-/* --------------------------
-   MAIN GENERATE
--------------------------- */
-function generate() {
-
+/* MAIN GENERATE */
+function generate(){
     document.getElementById("loadingText").style.opacity = 1;
 
-    setTimeout(() => {
+    changeCardColor();
 
-        currentName = generateStarName();
-        currentMottoTR = generateMottoTR();
-        currentKombinTR = generateKombinTR();
+    setTimeout(()=>{
+        const star = generateStarName();
+        const motto = (lang==="tr") ? generateMottoTR() : generateMottoEN();
+        const outfit = (lang==="tr") ? generateOutfitTR() : generateOutfitEN();
 
-        writeCard();
+        document.getElementById("starName").textContent = star+" ✦";
+        document.getElementById("outputBox").textContent =
+            (lang==="tr" ? "✦ Motto:\n" : "✦ Motto:\n") +
+            motto +
+            "\n\n" +
+            (lang==="tr" ? "✦ MedAI Kombin Önerisi:\n" : "✦ MedAI Outfit Suggestion:\n") +
+            outfit;
 
         document.getElementById("loadingText").style.opacity = 0;
-
-    }, 600);
+    }, 700);
 }
 
-/* --------------------------
-   WRITE TO SCREEN
--------------------------- */
-function writeCard() {
-
-    const nameBox = document.getElementById("starName");
-    const outBox = document.getElementById("outputBox");
-
-    nameBox.textContent = currentName + " ✦";
-
-    if (lang === "tr") {
-        outBox.textContent =
-            `✦ Motto:\n${currentMottoTR}\n\n✦ MedAI Kombin Önerisi:\n${currentKombinTR}`;
-    } else {
-        outBox.textContent =
-            `✦ Motto:\n${translateMottoToEN(currentMottoTR)}\n\n✦ MedAI Outfit Suggestion:\n${translateKombinToEN(currentKombinTR)}`;
-    }
+function toggleLang(){
+    lang = (lang==="tr") ? "en" : "tr";
+    generate();
 }
 
-/* --------------------------
-   LANGUAGE TOGGLE
--------------------------- */
-function toggleLang() {
-    lang = (lang === "tr") ? "en" : "tr";
-    writeCard();
-}
-
-/* INITIAL START */
 generate();
-
 </script>
 
 </body>
