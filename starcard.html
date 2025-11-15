@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>MedaAI StarCard™ — MedaStaré</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Plus+Jakarta+Sans:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
-/* ------------------------------------------------ GLOBAL */
 body {
     margin: 0;
     background: #000;
@@ -17,120 +16,99 @@ body {
     color: #fff;
 }
 
-/* ------------------------------------------------ BACKGROUND ANIM */
-.bg {
+/* ------------------ ANIMATED BACKGROUND (NO IMAGES) ------------------ */
+.bg-stars {
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle at center, #080812 0%, #000 80%);
     overflow: hidden;
     z-index: -1;
 }
 
-.star-layer {
+.star {
     position: absolute;
-    width: 200%;
-    height: 200%;
-    background-image: url("https://i.imgur.com/9aRKjGk.png");
-    background-size: cover;
-    opacity: 0.22;
-    animation: floatStars 35s linear infinite;
+    width: 2px;
+    height: 2px;
+    background: radial-gradient(circle, #ffd700, rgba(255,215,0,0));
+    border-radius: 50%;
+    animation: floatStar linear infinite;
 }
 
-.star-layer:nth-child(2) {
-    opacity: 0.16;
-    animation-duration: 55s;
-    animation-direction: reverse;
+@keyframes floatStar {
+    0% { transform: translateY(0); opacity: 0.2; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-800px); opacity: 0; }
 }
 
-@keyframes floatStars {
-    0% { transform: translate(-10%, -10%) rotate(0deg); }
-    100% { transform: translate(-20%, -25%) rotate(1deg); }
-}
-
-/* ------------------------------------------------ CARD */
+/* ------------------ CARD ------------------ */
 .card {
     width: 92%;
     max-width: 620px;
     margin: 140px auto;
     padding: 40px 34px;
-    border-radius: 28px;
-
-    background: rgba(15,13,25,0.55);
-    border: 1px solid rgba(255,215,0,0.38);
+    border-radius: 30px;
+    background: rgba(20,18,30,0.55);
+    border: 1px solid rgba(255,215,0,0.4);
     backdrop-filter: blur(18px);
-    box-shadow: 0 0 60px rgba(255,215,0,0.22);
-
-    animation: fadeIn 1s ease forwards;
+    box-shadow: 0 0 60px rgba(255,215,0,0.25);
+    animation: fadeIn .9s ease;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px) scale(0.95); }
+    from { opacity: 0; transform: translateY(30px) scale(.95); }
     to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-/* ------------------------------------------------ TITLE */
+/* ------------------ TITLE ------------------ */
 .top-title {
     text-align: center;
     font-size: 28px;
     font-weight: 600;
-    margin-bottom: 18px;
-    letter-spacing: 0.5px;
-    color: #ffffff;
-    text-shadow: 0 0 15px rgba(255,255,255,0.35);
+    margin-bottom: 20px;
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
 }
 
-/* ------------------------------------------------ HOLOGRAM STAR (NO IMGUR) */
+/* ------------------ HOLOGRAM (PURE CSS) ------------------ */
 .holo-star {
-    width: 140px;
-    height: 140px;
+    width: 150px;
+    height: 150px;
     margin: 0 auto 25px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(255,215,0,0.6), rgba(255,215,0,0.1));
+    background: radial-gradient(circle,
+        rgba(255,215,0,0.55),
+        rgba(255,215,0,0.15),
+        rgba(255,215,0,0.05)
+    );
     box-shadow:
-        0 0 35px rgba(255,215,0,0.65),
-        0 0 65px rgba(255,215,0,0.4),
-        inset 0 0 25px rgba(255,215,0,0.4);
-    animation: pulseStar 3s infinite ease-in-out;
+        0 0 30px rgba(255,215,0,0.5),
+        0 0 60px rgba(255,215,0,0.4),
+        inset 0 0 20px rgba(255,215,0,0.4);
+    animation: pulse 3s infinite ease-in-out;
 }
 
-@keyframes pulseStar {
-    0% { transform: scale(1); opacity: 0.9; }
-    50% { transform: scale(1.07); opacity: 1; }
-    100% { transform: scale(1); opacity: 0.88; }
+@keyframes pulse {
+    0% { transform: scale(1); opacity: .9; }
+    50% { transform: scale(1.08); opacity: 1; }
+    100% { transform: scale(1); opacity: .9; }
 }
 
-/* ------------------------------------------------ LOADING */
-.loading {
-    text-align: center;
-    opacity: 0.7;
-    font-size: 16px;
-    margin-bottom: 20px;
-    animation: blink 1.7s infinite;
-}
-
-@keyframes blink {
-    0%,100% { opacity: .55; }
-    50% { opacity: 1; }
-}
-
-/* ------------------------------------------------ STAR NAME */
+/* ------------------ STAR NAME ------------------ */
 .name {
     text-align: center;
     font-family: 'Playfair Display', serif;
-    font-size: 54px;
+    font-size: 52px;
     margin-bottom: 25px;
     color: #ffd700;
-    text-shadow: 0 0 18px rgba(255,215,0,0.9);
+    text-shadow: 0 0 16px rgba(255,215,0,0.85);
 }
 
-/* ------------------------------------------------ OUTPUT */
+/* ------------------ TEXT ------------------ */
 .output {
     font-size: 19px;
     line-height: 1.7;
     min-height: 240px;
 }
 
-/* ------------------------------------------------ BUTTONS */
+/* ------------------ BUTTONS ------------------ */
 .btn-box {
     display: flex;
     justify-content: center;
@@ -149,29 +127,26 @@ button {
     color: #000;
     transition: .25s;
 }
-
 button:hover {
-    transform: scale(1.07);
+    transform: scale(1.08);
 }
 </style>
 </head>
 
 <body>
 
-<!-- BG -->
-<div class="bg">
-    <div class="star-layer"></div>
-    <div class="star-layer"></div>
-</div>
+<!-- ---- Animated Background ---- -->
+<div class="bg-stars" id="bgStars"></div>
 
 <div id="cardBox" class="card">
     <div class="top-title">MedaAI StarCard™</div>
     <div class="holo-star"></div>
 
-    <div class="loading" id="loadingText">MedaAI is generating your Star…</div>
+    <div id="loadingText" style="text-align:center;opacity:.7;margin-bottom:20px;">
+        MedaAI is generating your Star…
+    </div>
 
     <div class="name" id="starName"></div>
-
     <div class="output" id="outputBox"></div>
 
     <div class="btn-box">
@@ -187,15 +162,22 @@ Array.prototype.random = function(){
     return this[Math.floor(Math.random()*this.length)];
 };
 
-/* ---- Renkli Luxe Kart Temaları ---- */
-const cardColors = [
-    { bg:"rgba(25,22,45,0.55)", border:"rgba(255,215,0,0.38)" },
-    { bg:"rgba(35,15,45,0.55)", border:"rgba(255,105,180,0.38)" },
-    { bg:"rgba(10,28,45,0.55)", border:"rgba(0,200,255,0.40)" },
-    { bg:"rgba(45,22,12,0.55)", border:"rgba(255,140,0,0.40)" },
-];
+/* --- Create animated stars --- */
+function initStars(){
+    const container = document.getElementById("bgStars");
+    container.innerHTML = "";
+    for(let i=0;i<80;i++){
+        const s = document.createElement("div");
+        s.classList.add("star");
+        s.style.left = Math.random()*100+"%";
+        s.style.top = (Math.random()*100+50)+"%";
+        s.style.animationDuration = (10+Math.random()*20)+"s";
+        container.appendChild(s);
+    }
+}
+initStars();
 
-/* ---- Star Name ---- */
+/* --- Star Name --- */
 const prefix = ["A","E","O","L","Ar","El","No","Au","Ser","Vé","Lu","My","Astra","Nai","Oph","Ély"];
 const core   = ["leï","stra","ria","lune","via","thea","lyra","vara","naé","raya","vona","phira","zea"];
 const suffix = ["a","éa","ia","ra","xa","aya","ira","elle","aé","ora","éssa"];
@@ -204,7 +186,7 @@ function generateStarName(){
     return prefix.random()+core.random()+suffix.random();
 }
 
-/* ---- TR & EN Motto ---- */
+/* --- Mottos --- */
 function generateMottoTR(){
     const p1=["Işığın","Zarafetin","Auran","Gölgen","Kalbin","Stilin"];
     const p2=["karanlığı deler","odayı değiştirir","her şeyi dönüştürür","iz bırakır","parıldar"];
@@ -231,27 +213,23 @@ function generateMottoEN(){
         .replace("tüm gözleri toplar.","turns all eyes to you.");
 }
 
-/* ---- Kombinler ---- */
+/* --- Outfit --- */
 const mainTR = [
     "Siyah kaşmir kaban",
     "Krem yün blazer takım",
     "Gri fitilli balıkçı kazak",
     "Taupe uzun trench coat",
-    "Siyah deri midi etek",
-    "Beyaz kaşmir kazak elbise",
 ];
 const accTR = [
     "Altın spiral küpe",
-    "İnci taşlı mini çanta",
+    "İnci mini çanta",
     "Gri yün bere",
-    "Gold detaylı deri eldiven",
-    "Zincir detaylı çanta"
+    "Gold deri eldiven"
 ];
 const hairTR = [
     "Sleek low bun",
     "Natural wave",
     "High ponytail",
-    "Wet look"
 ];
 const shoeTR = [
     "Siyah diz üstü çizmeler",
@@ -272,36 +250,23 @@ function generateOutfitEN(){
         .replace("Krem yün blazer takım","Cream wool blazer set")
         .replace("Gri fitilli balıkçı kazak","Gray ribbed turtleneck")
         .replace("Taupe uzun trench coat","Taupe long trench coat")
-        .replace("Siyah deri midi etek","Black leather midi skirt")
-        .replace("Beyaz kaşmir kazak elbise","White cashmere knit dress")
         .replace("Altın spiral küpe","Gold spiral earrings")
-        .replace("İnci taşlı mini çanta","Pearl mini bag")
+        .replace("İnci mini çanta","Pearl mini bag")
         .replace("Gri yün bere","Gray wool beanie")
-        .replace("Gold detaylı deri eldiven","Gold-detailed leather gloves")
-        .replace("Zincir detaylı çanta","Chain-detailed bag")
+        .replace("Gold deri eldiven","Gold leather gloves")
         .replace("Sleek low bun","Sleek low bun")
         .replace("Natural wave","Natural wave")
         .replace("High ponytail","High ponytail")
-        .replace("Wet look","Wet look")
         .replace("Siyah diz üstü çizmeler","Black over-knee boots")
         .replace("Kısa topuklu deri bot","Low-heel leather boots")
         .replace("Metallic heels","Metallic heels");
 }
 
-/* ---- Generate ---- */
-function changeCardColor(){
-    const c = cardColors.random();
-    const card = document.getElementById("cardBox");
-    card.style.background = c.bg;
-    card.style.borderColor = c.border;
-}
-
-function generate() {
+/* --- Generate --- */
+function generate(){
     document.getElementById("loadingText").style.opacity = 1;
 
-    changeCardColor();
-
-    setTimeout(() => {
+    setTimeout(()=>{
         const star = generateStarName();
         const motto = (lang==="tr") ? generateMottoTR() : generateMottoEN();
         const outfit = (lang==="tr") ? generateOutfitTR() : generateOutfitEN();
@@ -314,15 +279,15 @@ function generate() {
             outfit;
 
         document.getElementById("loadingText").style.opacity = 0;
-    }, 750);
+    }, 600);
 }
 
 function toggleLang(){
-    lang = (lang === "tr") ? "en" : "tr";
+    lang = (lang==="tr") ? "en" : "tr";
     generate();
 }
 
-generate(); // auto load
+generate();
 </script>
 
 </body>
