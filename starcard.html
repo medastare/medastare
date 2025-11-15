@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MedaStaré — MedAI StarCard</title>
+
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
+<style>
+/* --- GLOBAL --- */
+body {
+    margin: 0;
+    background: #000;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+/* --- Cosmic Background --- */
+.stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, #1a1a40 0%, #000 80%);
+    overflow: hidden;
+    z-index: -1;
+}
+
+.stars::before,
+.stars::after {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background-image: url("https://i.imgur.com/OWP5Q0I.png");
+    opacity: 0.25;
+    animation: moveStars 18s linear infinite;
+}
+
+.stars::after {
+    animation-duration: 28s;
+    opacity: 0.18;
+}
+
+@keyframes moveStars {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-400px); }
+}
+
+/* --- Card Box --- */
+.star-box {
+    position: relative;
+    width: 92%;
+    max-width: 600px;
+    margin: 100px auto;
+    padding: 40px;
+    border-radius: 24px;
+    background: rgba(10,10,15,0.7);
+    border: 1px solid rgba(255,215,0,0.25);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 0 50px rgba(255, 215, 0, 0.15);
+    animation: fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0; transform: translateY(30px);}
+    to {opacity: 1; transform: translateY(0);}
+}
+
+/* --- Star Silhouette --- */
+.star-shape {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 25px;
+    background: url("https://i.imgur.com/2xTjNNO.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: drop-shadow(0 0 18px rgba(255,215,0,0.7));
+    animation: pulse 4s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.08); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.9; }
+}
+
+/* --- MedAI Loading Text --- */
+.generating {
+    text-align: center;
+    font-size: 16px;
+    opacity: 0.7;
+    margin-bottom: 20px;
+    animation: blink 1.8s infinite;
+}
+
+@keyframes blink {
+    0%,100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+/* --- Title --- */
+.star-title {
+    text-align: center;
+    font-family: 'Playfair Display';
+    font-size: 42px;
+    margin-bottom: 15px;
+    color: #ffd700;
+}
+
+/* --- Generated Text --- */
+.output {
+    font-size: 18px;
+    line-height: 1.7;
+    white-space: pre-line;
+    min-height: 200px;
+    margin-bottom: 25px;
+}
+
+/* --- Buttons --- */
+.btns {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+button {
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(90deg, #ffd700, #ff6bd6);
+    color: #000;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<div class="star-box">
+
+    <div class="star-shape"></div>
+
+    <div class="generating" id="loading">MedaAI is generating your Star…</div>
+
+    <div class="star-title" id="starName"></div>
+
+    <div class="output" id="outputText"></div>
+
+    <div class="btns">
+        <button onclick="generate()">Yeni Üret</button>
+        <button onclick="toggleLang()">EN / TR</button>
+    </div>
+
+</div>
+
+<script>
+let lang = "tr";
+
+/* --- STAR NAME POOL --- */
+const starNames = [
+    "Nóir", "Ayla", "Aleïa", "Myrà", "Luné", "Arden", "Élysia", "Séra",
+    "Astraé", "Nara", "Soleil", "Véda", "Auralie", "Noxie", "Ophira"
+];
+
+/* --- TEXT DATA --- */
+const data = {
+    tr: {
+        mottos: [
+            "Işığın karanlıktan bile geçer.",
+            "Zarafet bir seçimdir.",
+            "Sessizlik en güçlü mesajındır.",
+            "Girdiğin her oda seni fark eder.",
+            "Işığı taşıyan kadın hiç kaybolmaz."
+        ],
+        kombins: [
+            "• Siyah saten elbise\n• Gold spiral küpeler\n• Nude stiletto\n• Soft glam makyaj",
+            "• Krem blazer takım\n• İnci detaylı çanta\n• Sleek low bun saç\n• Minimal topuklu",
+            "• Buz mavisi uzun elbise\n• Silver hoop küpeler\n• Glow skin makyaj\n• Metalik topuk",
+            "• Beyaz modern jumpsuit\n• Gold aksesuarlar\n• Dalgali saç\n• Şeffaf topuklu",
+            "• Kırmızı drape mini elbise\n• Uzun gold küpeler\n• Soft dalga saç\n• İnce topuk"
+        ]
+    },
+
+    en: {
+        mottos: [
+            "Your light cuts through the dark.",
+            "Elegance is a choice.",
+            "Silence is your loudest message.",
+            "Every room notices your presence.",
+            "A woman who carries light never gets lost."
+        ],
+        kombins: [
+            "• Black satin dress\n• Gold spiral earrings\n• Nude stilettos\n• Soft glam makeup",
+            "• Cream blazer set\n• Pearl-detailed bag\n• Sleek low bun\n• Minimal heels",
+            "• Ice-blue long dress\n• Silver hoops\n• Glow skin look\n• Metallic heels",
+            "• White modern jumpsuit\n• Gold accessories\n• Wavy hair\n• Clear heels",
+            "• Red draped mini dress\n• Long gold earrings\n• Soft waves\n• Thin heels"
+        ]
+    }
+};
+
+/* --- FUNCTIONS --- */
+function generate() {
+    document.getElementById("loading").style.opacity = 1;
+
+    setTimeout(() => {
+        const name = starNames[Math.floor(Math.random() * starNames.length)];
+        const motto = data[lang].mottos[Math.floor(Math.random() * data[lang].mottos.length)];
+        const kombin = data[lang].kombins[Math.floor(Math.random() * data[lang].kombins.length)];
+
+        document.getElementById("starName").textContent = name + " ✦";
+        document.getElementById("outputText").textContent =
+            `✦ Motto:\n${motto}\n\n✦ MedAI Kombin Önerisi:\n${kombin}`;
+
+        document.getElementById("loading").style.opacity = 0;
+    }, 700);
+}
+
+function toggleLang() {
+    lang = lang === "tr" ? "en" : "tr";
+    generate();
+}
+
+generate();
+</script>
+
+</body>
+</html>
