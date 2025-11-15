@@ -144,7 +144,8 @@ footer small{ color:#666; }
 <style>
 /* --------- SECTION WRAPPER --------- */
 #star-onboarding{
-  padding:80px 0;
+  width:100%;                /* ⭐ eklendi: sola kayma çözüldü */
+  padding:50px 0;           /* ⭐ eskiden 80px → boşluk azaltıldı */
   display:flex;
   justify-content:center;
 }
@@ -154,7 +155,7 @@ footer small{ color:#666; }
   width:94%;
   max-width:650px;
   margin:0 auto;
-  padding:14px 26px;
+  padding:12px 24px;         /* ⭐ çok hafif daraltıldı */
   border-radius:999px;
   border:none;
   cursor:pointer;
@@ -200,7 +201,7 @@ footer small{ color:#666; }
 .onboard-wrapper{
   width:94%;
   max-width:650px;
-  margin:18px auto 0;
+  margin:14px auto 0;     /* ⭐ boşluk azaltıldı */
 }
 
 .onboard-card{
@@ -218,13 +219,13 @@ footer small{ color:#666; }
 
 /* kart açıkken */
 .onboard-card.open{
-  max-height:900px;      /* yeterli yüksekliği veriyoruz */
+  max-height:2000px;      /* ⭐ 900 → 2000 yapıldı, tüm modlar görünür */
   opacity:1;
   transform:translateY(0);
 }
 
 .onboard-inner{
-  padding:40px 34px;
+  padding:34px 28px;      /* ⭐ daha compact görünüm */
 }
 
 /* --------- HEADER & LANG --------- */
@@ -232,7 +233,7 @@ footer small{ color:#666; }
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:18px;
+  margin-bottom:16px;
 }
 
 .onboard-title{
@@ -258,13 +259,13 @@ footer small{ color:#666; }
   text-align:center;
   font-size:17px;
   opacity:.9;
-  margin-bottom:28px;
+  margin-bottom:22px;   /* ⭐ boşluk azaltıldı */
 }
 
 /* --------- LABELS & INPUT --------- */
 .label{
   font-size:16px;
-  margin-bottom:8px;
+  margin-bottom:6px;   /* ⭐ azaltıldı */
   color:#ffd700;
 }
 
@@ -272,10 +273,10 @@ footer small{ color:#666; }
   width:100%;
   background:rgba(255,255,255,0.07);
   border:1px solid rgba(255,215,0,0.3);
-  padding:14px 16px;
+  padding:12px 14px;   /* ⭐ hafif daraltıldı */
   border-radius:14px;
   color:#fff;
-  margin-bottom:26px;
+  margin-bottom:22px;
   font-size:16px;
   outline:none;
   backdrop-filter:blur(10px);
@@ -285,17 +286,17 @@ footer small{ color:#666; }
 .chips{
   display:flex;
   flex-wrap:wrap;
-  gap:12px;
-  margin-bottom:30px;
+  gap:10px;             /* ⭐ chips arası boşluk daraldı */
+  margin-bottom:24px;
 }
 
 .chip{
-  padding:9px 18px;
+  padding:8px 16px;
   border-radius:20px;
   border:1px solid rgba(255,215,0,0.35);
   background:rgba(255,255,255,0.07);
   color:#fff;
-  font-size:14px;
+  font-size:13px;
   cursor:pointer;
   transition:.22s;
 }
@@ -311,7 +312,7 @@ footer small{ color:#666; }
 /* --------- CREATE BUTTON --------- */
 .create-btn{
   width:100%;
-  padding:15px 26px;
+  padding:14px 24px;
   border-radius:32px;
   border:none;
   cursor:pointer;
@@ -349,21 +350,20 @@ footer small{ color:#666; }
 /* --------- BOTTOM TEXT --------- */
 .bottom-box{
   text-align:center;
-  margin-top:26px;
+  margin-top:22px;
   font-size:15px;
   opacity:.95;
 }
 
 .bottom-ai{
-  margin-top:6px;
+  margin-top:4px;
   opacity:.75;
   font-style:italic;
 }
 
-/* mobile tweak */
 @media (max-width:480px){
   .onboard-inner{
-    padding:30px 20px;
+    padding:26px 18px;
   }
   .onboard-title{
     font-size:22px;
@@ -472,7 +472,9 @@ function toggleStarOnboard(){
 document.querySelectorAll("#styleChips .chip, #moodChips .chip").forEach(chip=>{
   chip.addEventListener("click",()=>{
     const group = chip.parentNode;
-    group.querySelectorAll(".chip").forEach(c=>c.classList.remove("active"));
+    group
+      .querySelectorAll(".chip")
+      .forEach(c=>c.classList.remove("active"));
     chip.classList.add("active");
   });
 });
