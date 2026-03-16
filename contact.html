@@ -12,17 +12,9 @@ body{
 margin:0;
 background:#02030a;
 overflow-x:hidden;
-font-family:sans-serif;
 }
 
-/* hero alan */
-
-.hero{
-height:300vh;
-position:relative;
-}
-
-/* yıldız arka plan */
+/* yıldızlar */
 
 .star{
 position:fixed;
@@ -30,8 +22,7 @@ width:2px;
 height:2px;
 background:#d4af37;
 border-radius:50%;
-opacity:.8;
-animation:twinkle 3s infinite ease-in-out alternate;
+animation:twinkle 2.5s infinite alternate;
 }
 
 @keyframes twinkle{
@@ -46,23 +37,30 @@ position:fixed;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-z-index:10;
-transition:opacity .4s, transform .4s;
+z-index:20;
+transition:all .3s;
 }
 
 .logo img{
 width:320px;
-filter:drop-shadow(0 0 35px #d4af37);
+animation:glow 2.5s infinite alternate;
 }
 
-/* floating images */
+@keyframes glow{
+0%{filter:drop-shadow(0 0 10px #ffd700)}
+100%{filter:drop-shadow(0 0 40px #ffd700)}
+}
+
+/* container */
 
 .container{
 position:fixed;
 inset:0;
 pointer-events:none;
-perspective:1200px;
+perspective:1400px;
 }
+
+/* floating */
 
 .float{
 position:absolute;
@@ -71,6 +69,7 @@ will-change:transform,opacity;
 
 .float img{
 width:240px;
+transform-style:preserve-3d;
 }
 
 </style>
@@ -78,38 +77,28 @@ width:240px;
 
 <body>
 
-<section class="hero">
-
 <div class="logo" id="logo">
 <img src="medastare-logo.png">
 </div>
 
-<div class="container" id="floating"></div>
-
-</section>
+<div class="container" id="container"></div>
 
 <script>
 
-/* yıldız oluştur */
+/* yıldız */
 
 for(let i=0;i<120;i++){
-
 const s=document.createElement("div")
-
 s.className="star"
-
 s.style.left=Math.random()*100+"vw"
 s.style.top=Math.random()*100+"vh"
-
-s.style.animationDelay=Math.random()*3+"s"
-
+s.style.animationDelay=Math.random()*2+"s"
 document.body.appendChild(s)
-
 }
 
 /* görseller */
 
-const images=[
+const imgs=[
 "calestial-1.png",
 "calestial-2.png",
 "calestial-3.png",
@@ -118,14 +107,11 @@ const images=[
 "calestial-7.png"
 ]
 
-const container=document.getElementById("floating")
+const container=document.getElementById("container")
 
 const items=[]
 
-images.forEach((src,i)=>{
-
-const angle=i/images.length*Math.PI*2
-const radius=20+Math.random()*20
+imgs.forEach((src,i)=>{
 
 const el=document.createElement("div")
 el.className="float"
@@ -136,19 +122,21 @@ img.src=src
 el.appendChild(img)
 container.appendChild(el)
 
+const angle=i/imgs.length*Math.PI*2
+const radius=20+Math.random()*20
+
 items.push({
-
 el,
-startX:50+Math.cos(angle)*radius,
-startY:50+Math.sin(angle)*radius,
-z:600+i*200,
+x:50+Math.cos(angle)*radius,
+y:50+Math.sin(angle)*radius,
+z:900+i*200,
+rotation:Math.random()*20-10,
 speed:.6+Math.random()*.4
-
 })
 
 })
 
-/* scroll animasyonu */
+/* scroll animasyon */
 
 window.addEventListener("scroll",()=>{
 
@@ -156,37 +144,62 @@ const s=window.scrollY
 
 items.forEach(it=>{
 
-const z=it.z-s*1.6*it.speed
+const z=it.z - s*2*it.speed
 
-const scale=1+(600-z)/350
+/* SCALE (yaklaşma efekti) */
+const scale=Math.max(0.3, 3 - z/300)
 
-const spread=1+(600-z)/800
+/* ROTATE 3D */
+const rotateY=(z/10)%360
+const rotateX=(z/20)%360
 
-const x=50+(it.startX-50)*spread
-const y=50+(it.startY-50)*spread
+/* yayılma */
+const spread=1+(1-z/800)
 
+const x=50+(it.x-50)*spread
+const y=50+(it.y-50)*spread
+
+/* opacity - tam kaybolma fix */
 let opacity=1
+if(z<100) opacity=z/100
+if(z<0) opacity=0
 
-if(z<80) opacity=z/80
+/* tamamen yok et */
+if(opacity<=0){
+it.el.style.display="none"
+return
+}else{
+it.el.style.display="block"
+}
 
 it.el.style.left=x+"%"
 it.el.style.top=y+"%"
 
 it.el.style.opacity=opacity
 
-it.el.style.transform=
-`translate(-50%,-50%) translateZ(${-z}px) scale(${scale})`
+it.el.style.transform=`
+translate(-50%,-50%)
+translateZ(${-z}px)
+scale(${scale})
+rotateY(${rotateY}deg)
+rotateX(${rotateX}deg)
+rotate(${it.rotation}deg)
+`
 
 })
 
-/* logo fade */
+/* LOGO EFFECT */
 
 const logo=document.getElementById("logo")
 
-logo.style.opacity=Math.max(0,1-s/400)
+const fade=Math.max(0,1 - s/400)
 
-logo.style.transform=
-`translate(-50%,-50%) scale(${1-s/1500})`
+logo.style.opacity=fade
+
+logo.style.transform=`
+translate(-50%,-50%)
+scale(${1 + (fade*0.2)})
+`
 
 })
 
