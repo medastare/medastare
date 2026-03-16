@@ -3,108 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MedaStaré</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
-
 <style>
-:root{
- --gold:#d4af37;
- --pink:#ff4da6;
-}
 
 body{
- margin:0;
- background:#000;
- color:white;
- font-family:Inter,sans-serif;
- overflow-x:hidden;
+margin:0;
+background:#02030a;
+overflow-x:hidden;
+font-family:sans-serif;
 }
 
-/* hero */
+/* hero alan */
 
 .hero{
- position:relative;
- height:250vh;
- background:radial-gradient(circle at center,#0a0a0a,#000);
+height:300vh;
+position:relative;
+}
+
+/* yıldız arka plan */
+
+.star{
+position:fixed;
+width:2px;
+height:2px;
+background:#d4af37;
+border-radius:50%;
+opacity:.8;
+animation:twinkle 3s infinite ease-in-out alternate;
+}
+
+@keyframes twinkle{
+0%{opacity:.2}
+100%{opacity:1}
 }
 
 /* logo */
 
-.hero-logo{
- position:fixed;
- top:50%;
- left:50%;
- transform:translate(-50%,-50%);
- z-index:5;
- transition:opacity .4s;
+.logo{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+z-index:10;
+transition:opacity .4s, transform .4s;
 }
 
-.hero-logo img{
- width:320px;
- filter:drop-shadow(0 0 40px var(--gold));
+.logo img{
+width:320px;
+filter:drop-shadow(0 0 35px #d4af37);
 }
 
-/* floating items */
+/* floating images */
 
-.floating-container{
- position:fixed;
- inset:0;
- perspective:1200px;
- pointer-events:none;
+.container{
+position:fixed;
+inset:0;
+pointer-events:none;
+perspective:1200px;
 }
 
 .float{
- position:absolute;
- transform-style:preserve-3d;
- will-change:transform,opacity;
+position:absolute;
+will-change:transform,opacity;
 }
 
 .float img{
- width:240px;
-}
-
-/* star background */
-
-.star{
- position:absolute;
- width:2px;
- height:2px;
- background:white;
- border-radius:50%;
- opacity:.7;
-}
-
-/* header */
-
-header{
- position:sticky;
- top:0;
- z-index:10;
- padding:20px 40px;
- display:flex;
- justify-content:space-between;
- background:rgba(0,0,0,.6);
- backdrop-filter:blur(8px);
- border-bottom:1px solid rgba(212,175,55,.2);
-}
-
-.logo{
- font-family:Playfair Display,serif;
- color:var(--gold);
- font-size:1.8rem;
-}
-
-nav a{
- color:white;
- text-decoration:none;
- margin:0 15px;
-}
-
-main{
- max-width:900px;
- margin:auto;
- padding:80px 20px;
+width:240px;
 }
 
 </style>
@@ -112,97 +78,115 @@ main{
 
 <body>
 
-<header>
-<div class="logo">MedaStaré</div>
-<nav>
-<a href="#">Home</a>
-<a href="#">Careers</a>
-<a href="#">Contact</a>
-</nav>
-</header>
-
 <section class="hero">
 
-<div class="hero-logo" id="logo">
-<img src="images/23BBFD80-C82B-4BBA-8423-138B4C5BB65A.png">
+<div class="logo" id="logo">
+<img src="medastare-logo.png">
 </div>
 
-<div class="floating-container" id="floating"></div>
+<div class="container" id="floating"></div>
 
 </section>
 
-<main>
-
-<h1>Contact</h1>
-
-<p>You can reach us via email.</p>
-
-</main>
-
 <script>
 
+/* yıldız oluştur */
+
+for(let i=0;i<120;i++){
+
+const s=document.createElement("div")
+
+s.className="star"
+
+s.style.left=Math.random()*100+"vw"
+s.style.top=Math.random()*100+"vh"
+
+s.style.animationDelay=Math.random()*3+"s"
+
+document.body.appendChild(s)
+
+}
+
+/* görseller */
+
 const images=[
-"images/A89BCD82-5DB9-4FFD-BA4B-1261FBA5B947.png",
-"images/A31E8023-EB03-46ED-B000-745DCB855891.png",
-"images/96320B25-7203-4C1B-80B8-E91AB0729FAE.png",
-"images/2D236DBE-9E76-4CC5-994A-11F076CE2624.png"
+"calestial-1.png",
+"calestial-2.png",
+"calestial-3.png",
+"calestial-4.png",
+"calestial-6.png",
+"calestial-7.png"
 ]
 
-const floating=document.getElementById("floating")
+const container=document.getElementById("floating")
 
 const items=[]
 
 images.forEach((src,i)=>{
 
- const angle=i/images.length*Math.PI*2
- const radius=20+Math.random()*20
+const angle=i/images.length*Math.PI*2
+const radius=20+Math.random()*20
 
- const el=document.createElement("div")
- el.className="float"
+const el=document.createElement("div")
+el.className="float"
 
- const img=document.createElement("img")
- img.src=src
+const img=document.createElement("img")
+img.src=src
 
- el.appendChild(img)
- floating.appendChild(el)
+el.appendChild(img)
+container.appendChild(el)
 
- items.push({
-  el,
-  startX:50+Math.cos(angle)*radius,
-  startY:50+Math.sin(angle)*radius,
-  z:600+i*200,
-  speed:.6+Math.random()*.4
- })
+items.push({
+
+el,
+startX:50+Math.cos(angle)*radius,
+startY:50+Math.sin(angle)*radius,
+z:600+i*200,
+speed:.6+Math.random()*.4
 
 })
 
+})
+
+/* scroll animasyonu */
+
 window.addEventListener("scroll",()=>{
 
- const s=window.scrollY
+const s=window.scrollY
 
- items.forEach(it=>{
+items.forEach(it=>{
 
-  const z=it.z-s*1.5*it.speed
-  const scale=1+(600-z)/300
-  const spread=1+(600-z)/800
+const z=it.z-s*1.6*it.speed
 
-  const x=50+(it.startX-50)*spread
-  const y=50+(it.startY-50)*spread
+const scale=1+(600-z)/350
 
-  let opacity=1
-  if(z<100) opacity=z/100
+const spread=1+(600-z)/800
 
-  it.el.style.left=x+"%"
-  it.el.style.top=y+"%"
-  it.el.style.opacity=opacity
+const x=50+(it.startX-50)*spread
+const y=50+(it.startY-50)*spread
 
-  it.el.style.transform=
-   `translate(-50%,-50%) translateZ(${-z}px) scale(${scale})`
+let opacity=1
 
- })
+if(z<80) opacity=z/80
 
- const logo=document.getElementById("logo")
- logo.style.opacity=Math.max(0,1-s/500)
+it.el.style.left=x+"%"
+it.el.style.top=y+"%"
+
+it.el.style.opacity=opacity
+
+it.el.style.transform=
+`translate(-50%,-50%) translateZ(${-z}px) scale(${scale})`
+
+})
+
+/* logo fade */
+
+const logo=document.getElementById("logo")
+
+logo.style.opacity=Math.max(0,1-s/400)
+
+logo.style.transform=
+`translate(-50%,-50%) scale(${1-s/1500})`
 
 })
 
