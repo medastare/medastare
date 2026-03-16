@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>MedaStaré</title>
 
 <style>
@@ -12,6 +11,7 @@ body{
 margin:0;
 background:#02030a;
 overflow-x:hidden;
+height:500vh; /* scroll alan */
 }
 
 /* yıldızlar */
@@ -22,7 +22,7 @@ width:2px;
 height:2px;
 background:#d4af37;
 border-radius:50%;
-animation:twinkle 2.5s infinite alternate;
+animation:twinkle 2s infinite alternate;
 }
 
 @keyframes twinkle{
@@ -30,7 +30,7 @@ animation:twinkle 2.5s infinite alternate;
 100%{opacity:1}
 }
 
-/* logo */
+/* LOGO */
 
 .logo{
 position:fixed;
@@ -38,17 +38,16 @@ top:50%;
 left:50%;
 transform:translate(-50%,-50%);
 z-index:20;
-transition:all .3s;
 }
 
 .logo img{
-width:320px;
-animation:glow 2.5s infinite alternate;
+width:300px;
+animation:glow 2s infinite alternate;
 }
 
 @keyframes glow{
 0%{filter:drop-shadow(0 0 10px #ffd700)}
-100%{filter:drop-shadow(0 0 40px #ffd700)}
+100%{filter:drop-shadow(0 0 50px #ffd700)}
 }
 
 /* container */
@@ -57,19 +56,18 @@ animation:glow 2.5s infinite alternate;
 position:fixed;
 inset:0;
 pointer-events:none;
-perspective:1400px;
+perspective:1200px;
 }
 
 /* floating */
 
 .float{
 position:absolute;
-will-change:transform,opacity;
+opacity:0; /* BAŞTA GÖRÜNMEZ */
 }
 
 .float img{
 width:240px;
-transform-style:preserve-3d;
 }
 
 </style>
@@ -92,7 +90,6 @@ const s=document.createElement("div")
 s.className="star"
 s.style.left=Math.random()*100+"vw"
 s.style.top=Math.random()*100+"vh"
-s.style.animationDelay=Math.random()*2+"s"
 document.body.appendChild(s)
 }
 
@@ -123,83 +120,68 @@ el.appendChild(img)
 container.appendChild(el)
 
 const angle=i/imgs.length*Math.PI*2
-const radius=20+Math.random()*20
 
 items.push({
 el,
-x:50+Math.cos(angle)*radius,
-y:50+Math.sin(angle)*radius,
-z:900+i*200,
-rotation:Math.random()*20-10,
-speed:.6+Math.random()*.4
+x:50+Math.cos(angle)*20,
+y:50+Math.sin(angle)*20,
+delay:i*100
 })
 
 })
 
-/* scroll animasyon */
+/* SCROLL ANIMATION */
 
 window.addEventListener("scroll",()=>{
 
 const s=window.scrollY
 
-items.forEach(it=>{
+/* LOGO FADE */
 
-const z=it.z - s*2*it.speed
+const logo=document.getElementById("logo")
+logo.style.opacity=Math.max(0,1 - s/300)
 
-/* SCALE (yaklaşma efekti) */
-const scale=Math.max(0.3, 3 - z/300)
+/* BURST EFFECT */
 
-/* ROTATE 3D */
-const rotateY=(z/10)%360
-const rotateX=(z/20)%360
+items.forEach((it,i)=>{
 
-/* yayılma */
-const spread=1+(1-z/800)
+/* sadece belirli scroll aralığında çalış */
+if(s > 100 + i*40 && s < 400 + i*40){
+
+const progress=(s - (100 + i*40)) / 200
+
+/* hızlı büyüme */
+const scale=progress * 6
+
+/* patlayarak yayılma */
+const spread=1 + progress * 4
 
 const x=50+(it.x-50)*spread
 const y=50+(it.y-50)*spread
 
-/* opacity - tam kaybolma fix */
+/* opacity: hızlı görün + kaybol */
 let opacity=1
-if(z<100) opacity=z/100
-if(z<0) opacity=0
+if(progress < 0.2) opacity=progress*5
+if(progress > 0.8) opacity=(1-progress)*5
 
-/* tamamen yok et */
-if(opacity<=0){
-it.el.style.display="none"
-return
-}else{
-it.el.style.display="block"
-}
+it.el.style.opacity=opacity
 
 it.el.style.left=x+"%"
 it.el.style.top=y+"%"
 
-it.el.style.opacity=opacity
-
 it.el.style.transform=`
 translate(-50%,-50%)
-translateZ(${-z}px)
 scale(${scale})
-rotateY(${rotateY}deg)
-rotateX(${rotateX}deg)
-rotate(${it.rotation}deg)
+rotate(${progress*180}deg)
 `
+
+}else{
+
+it.el.style.opacity=0
+
+}
 
 })
-
-/* LOGO EFFECT */
-
-const logo=document.getElementById("logo")
-
-const fade=Math.max(0,1 - s/400)
-
-logo.style.opacity=fade
-
-logo.style.transform=`
-translate(-50%,-50%)
-scale(${1 + (fade*0.2)})
-`
 
 })
 
