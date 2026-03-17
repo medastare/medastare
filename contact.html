@@ -63,7 +63,11 @@
       transform:translate(-50%,-50%) scale(1);
       transform-origin:center center;
       z-index:20;
-      transition:transform .08s linear, filter .08s linear, opacity .2s linear;
+      transition:transform .08s linear, filter .08s linear, opacity .22s linear;
+    }
+
+    .logo-wrap.hidden-in-bar{
+      opacity:0;
     }
 
     .logo-wrap img{
@@ -222,7 +226,6 @@
 
     .hidden{display:none !important}
 
-    /* progress */
     .progress-dots{
       position:fixed;
       right:18px;
@@ -256,12 +259,12 @@
       top:14px;
       left:50%;
       transform:translateX(-50%);
-      width:min(92vw, 980px);
-      height:56px;
+      width:min(94vw, 1120px);
+      height:64px;
       border-radius:999px;
       background:rgba(255,255,255,.05);
-      backdrop-filter:blur(16px);
-      -webkit-backdrop-filter:blur(16px);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
       border:1px solid rgba(255,255,255,.10);
       box-shadow:0 14px 34px rgba(0,0,0,.24);
       z-index:30;
@@ -282,20 +285,22 @@
     .ecosystem-left{
       display:flex;
       align-items:center;
-      gap:14px;
+      gap:16px;
       flex:0 0 auto;
     }
 
     .ecosystem-logo{
-      height:30px;
+      height:40px;
       width:auto;
       display:block;
-      filter:drop-shadow(0 0 10px rgba(212,175,55,.15));
+      filter:
+        drop-shadow(0 0 12px rgba(212,175,55,.16))
+        drop-shadow(0 0 26px rgba(212,175,55,.10));
     }
 
     .ecosystem-divider{
       width:1px;
-      height:24px;
+      height:28px;
       background:rgba(255,255,255,.10);
       flex:0 0 auto;
     }
@@ -307,6 +312,7 @@
       height:100%;
       display:flex;
       align-items:center;
+      min-width:0;
     }
 
     .ecosystem-marquee{
@@ -316,6 +322,7 @@
       white-space:nowrap;
       animation:marquee 18s linear infinite;
       will-change:transform;
+      padding-right:20px;
     }
 
     .ecosystem-marquee span{
@@ -331,12 +338,34 @@
       text-shadow:0 0 16px rgba(212,175,55,.18);
     }
 
+    .ecosystem-nail{
+      flex:0 0 auto;
+      appearance:none;
+      border:none;
+      height:42px;
+      padding:0 18px;
+      border-radius:999px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(212,175,55,.28);
+      color:var(--gold-soft);
+      font-size:14px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.22s ease;
+      box-shadow:0 0 16px rgba(212,175,55,.08);
+    }
+
+    .ecosystem-nail:hover{
+      transform:translateY(-1px);
+      border-color:rgba(212,175,55,.5);
+      box-shadow:0 0 22px rgba(212,175,55,.15);
+    }
+
     @keyframes marquee{
       from{ transform:translateX(0); }
       to{ transform:translateX(-50%); }
     }
 
-    /* Nail overlay */
     .nail-overlay{
       position:fixed;
       inset:0;
@@ -674,12 +703,19 @@
       }
       .logo-wrap img{ width:min(36vw,220px); }
       .ecosystem-bar{
-        width:min(94vw, 980px);
-        height:52px;
-        padding:0 14px;
+        width:min(96vw, 1120px);
+        height:58px;
+        padding:0 12px;
+        gap:12px;
       }
-      .ecosystem-logo{ height:26px; }
+      .ecosystem-logo{ height:34px; }
+      .ecosystem-marquee{ gap:22px; }
       .ecosystem-marquee span{ font-size:12.5px; }
+      .ecosystem-nail{
+        height:38px;
+        padding:0 14px;
+        font-size:12.5px;
+      }
       .nail-title{font-size:28px}
       .brandline{font-size:24px}
       .progress-dots{ right:12px; gap:8px; }
@@ -709,6 +745,7 @@
       <img src="medastare-logo.png" alt="MedaStaré" class="ecosystem-logo">
       <div class="ecosystem-divider"></div>
     </div>
+
     <div class="ecosystem-track">
       <div class="ecosystem-marquee" id="ecosystemMarquee">
         <span data-name="FashionStaré">FashionStaré</span>
@@ -725,6 +762,8 @@
         <span data-name="PetStaré">PetStaré</span>
       </div>
     </div>
+
+    <button class="ecosystem-nail" id="ecosystemNailButton">NailStaré</button>
   </div>
 
   <div class="content">
@@ -939,6 +978,7 @@
     const moduleText = document.getElementById("moduleText");
     const moduleDesc = document.getElementById("moduleDesc");
     const nailButton = document.getElementById("nailButton");
+    const ecosystemNailButton = document.getElementById("ecosystemNailButton");
     const nailCtaWrap = document.getElementById("nailCtaWrap");
     const ecosystemBar = document.getElementById("ecosystemBar");
     const progressDots = [...document.querySelectorAll(".progress-dot")];
@@ -968,7 +1008,9 @@
       const step = 430;
       const topBarStart = 1160;
 
-      ecosystemBar.classList.toggle("show", scrollY > topBarStart);
+      const showBar = scrollY > topBarStart;
+      ecosystemBar.classList.toggle("show", showBar);
+      logoWrap.classList.toggle("hidden-in-bar", showBar);
 
       if(scrollY < start){
         moduleStack.classList.remove("show");
@@ -1063,12 +1105,15 @@
     const nailIntroView = document.getElementById("nailIntroView");
     const nailApplicationView = document.getElementById("nailApplicationView");
 
-    nailButton.addEventListener("click", () => {
+    function openNailOverlay(){
       nailOverlay.classList.add("open");
       document.body.style.overflow = "hidden";
       nailIntroView.classList.remove("hidden");
       nailApplicationView.classList.add("hidden");
-    });
+    }
+
+    nailButton.addEventListener("click", openNailOverlay);
+    ecosystemNailButton.addEventListener("click", openNailOverlay);
 
     nailBackBtn.addEventListener("click", () => {
       if(!nailApplicationView.classList.contains("hidden")){
