@@ -11,7 +11,7 @@ body{
 margin:0;
 background:#02030a;
 overflow-x:hidden;
-height:500vh; /* scroll alan */
+height:500vh;
 }
 
 /* yıldızlar */
@@ -22,11 +22,11 @@ width:2px;
 height:2px;
 background:#d4af37;
 border-radius:50%;
-animation:twinkle 2s infinite alternate;
+animation:twinkle 2.5s infinite alternate;
 }
 
 @keyframes twinkle{
-0%{opacity:.2}
+0%{opacity:.3}
 100%{opacity:1}
 }
 
@@ -42,7 +42,7 @@ z-index:20;
 
 .logo img{
 width:300px;
-animation:glow 2s infinite alternate;
+animation:glow 2.5s infinite alternate;
 }
 
 @keyframes glow{
@@ -63,11 +63,16 @@ perspective:1200px;
 
 .float{
 position:absolute;
-opacity:0; /* BAŞTA GÖRÜNMEZ */
+opacity:0;
 }
 
 .float img{
 width:240px;
+
+/* HOLOGRAM GLOW */
+filter:
+drop-shadow(0 0 20px rgba(0,150,255,0.6))
+drop-shadow(0 0 60px rgba(0,150,255,0.3));
 }
 
 </style>
@@ -123,14 +128,14 @@ const angle=i/imgs.length*Math.PI*2
 
 items.push({
 el,
-x:50+Math.cos(angle)*20,
-y:50+Math.sin(angle)*20,
-delay:i*100
+x:50+Math.cos(angle)*25,
+y:50+Math.sin(angle)*25,
+delay:i*120
 })
 
 })
 
-/* SCROLL ANIMATION */
+/* SCROLL */
 
 window.addEventListener("scroll",()=>{
 
@@ -139,30 +144,36 @@ const s=window.scrollY
 /* LOGO FADE */
 
 const logo=document.getElementById("logo")
-logo.style.opacity=Math.max(0,1 - s/300)
+logo.style.opacity=Math.max(0,1 - s/350)
 
-/* BURST EFFECT */
+/* APPLE STYLE FLOW */
 
 items.forEach((it,i)=>{
 
-/* sadece belirli scroll aralığında çalış */
-if(s > 100 + i*40 && s < 400 + i*40){
+const start=120 + i*90
+const end=start + 260
 
-const progress=(s - (100 + i*40)) / 200
+if(s > start && s < end){
 
-/* hızlı büyüme */
-const scale=progress * 6
+const progress=(s-start)/(end-start)
 
-/* patlayarak yayılma */
-const spread=1 + progress * 4
+/* yavaş yaklaşma */
+const scale=0.6 + progress * 1.8
+
+/* hafif büyüme + center drift */
+const spread=1 + progress * 1.2
 
 const x=50+(it.x-50)*spread
 const y=50+(it.y-50)*spread
 
-/* opacity: hızlı görün + kaybol */
+/* opacity smooth + sudden cut */
 let opacity=1
-if(progress < 0.2) opacity=progress*5
-if(progress > 0.8) opacity=(1-progress)*5
+
+if(progress < 0.2) opacity=progress*4
+if(progress > 0.75) opacity=1 - (progress-0.75)*4
+
+/* SONDA ANİ KAYBOLMA */
+if(progress > 0.9) opacity=0
 
 it.el.style.opacity=opacity
 
@@ -172,7 +183,6 @@ it.el.style.top=y+"%"
 it.el.style.transform=`
 translate(-50%,-50%)
 scale(${scale})
-rotate(${progress*180}deg)
 `
 
 }else{
