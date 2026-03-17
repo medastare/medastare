@@ -1,331 +1,296 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MedaStaré</title>
   <style>
     :root{
-      --bg:#02030a;
+      --bg:#03050d;
       --gold:#d4af37;
-      --blue1:#6fd3ff;
-      --blue2:#2aa9ff;
-      --blue3:#b8ecff;
+      --gold-soft:#f3d76a;
+      --text:#ffffff;
     }
 
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
     body{
-      background: radial-gradient(circle at center, #041022 0%, #02030a 45%, #010208 100%);
+      font-family: Inter, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
       overflow-x:hidden;
-      height:500vh;
-      font-family: Arial, sans-serif;
     }
 
-    /* background stars */
+    .page{
+      position:relative;
+      min-height:400vh;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(212,175,55,.08), transparent 22%),
+        linear-gradient(180deg, #04060f 0%, #02040b 100%);
+    }
+
+    /* background tiny stars */
     .bg-star{
       position:fixed;
       width:2px;
       height:2px;
       border-radius:50%;
       background:var(--gold);
-      opacity:.65;
+      opacity:.55;
       pointer-events:none;
-      animation: twinkle 2.8s ease-in-out infinite alternate;
+      animation: twinkle 2.4s ease-in-out infinite alternate;
+      z-index:0;
     }
 
     @keyframes twinkle{
-      0%{opacity:.2; transform:scale(.8)}
-      100%{opacity:1; transform:scale(1.25)}
+      from{opacity:.18; transform:scale(.85)}
+      to{opacity:1; transform:scale(1.25)}
     }
 
-    /* main scene */
-    .scene{
+    /* hero scene */
+    .hero-scene{
       position:fixed;
       inset:0;
-      pointer-events:none;
-      perspective:1400px;
       overflow:hidden;
+      pointer-events:none;
+      z-index:5;
     }
 
-    /* logo */
     .logo-wrap{
       position:absolute;
-      top:50%;
       left:50%;
+      top:50%;
       transform:translate(-50%,-50%);
-      z-index:30;
-      transition:opacity .2s linear, transform .2s linear, filter .2s linear;
+      transform-origin:center center;
+      z-index:20;
+      transition: transform .08s linear, opacity .08s linear;
     }
 
     .logo-wrap img{
-      width:min(42vw, 320px);
+      width:min(40vw, 320px);
       display:block;
       filter:
-        drop-shadow(0 0 18px rgba(255,215,0,.45))
-        drop-shadow(0 0 42px rgba(255,215,0,.22));
+        drop-shadow(0 0 12px rgba(212,175,55,.35))
+        drop-shadow(0 0 38px rgba(212,175,55,.18));
     }
 
-    /* blue star stage */
-    .entity{
+    /* stars from logo */
+    .burst-star{
       position:absolute;
       left:50%;
       top:50%;
-      transform-style:preserve-3d;
-      will-change:transform, opacity, filter;
+      width:10px;
+      height:10px;
+      transform:translate(-50%,-50%) scale(0);
       opacity:0;
+      z-index:10;
+      will-change:transform, opacity;
     }
 
-    .entity-core{
-      position:relative;
-      width:100%;
-      height:100%;
-    }
-
-    /* star form */
-    .star-form{
+    .burst-star::before{
+      content:"✦";
       position:absolute;
       inset:0;
       display:flex;
       align-items:center;
       justify-content:center;
-      font-size:30px;
-      color:var(--blue3);
+      color:var(--gold-soft);
+      font-size:22px;
       text-shadow:
-        0 0 10px rgba(111,211,255,.95),
-        0 0 25px rgba(42,169,255,.8),
-        0 0 55px rgba(42,169,255,.45);
-      transition:opacity .18s linear;
+        0 0 8px rgba(243,215,106,.95),
+        0 0 18px rgba(212,175,55,.8),
+        0 0 36px rgba(212,175,55,.45);
     }
 
-    /* dress form */
-    .dress-form{
-      position:absolute;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      transition:opacity .18s linear, filter .18s linear;
-      opacity:0;
+    /* actual page content */
+    .content{
+      position:relative;
+      z-index:2;
+      padding-top:140vh;
     }
 
-    .dress-form img{
-      width:100%;
-      height:auto;
-      display:block;
-      filter:
-        drop-shadow(0 0 18px rgba(70,180,255,.85))
-        drop-shadow(0 0 60px rgba(70,180,255,.38));
+    .section{
+      min-height:100vh;
+      padding:100px 24px;
+      max-width:1100px;
+      margin:0 auto;
     }
 
-    /* subtle center glow */
-    .center-glow{
-      position:absolute;
-      top:50%;
-      left:50%;
-      width:420px;
-      height:420px;
-      transform:translate(-50%,-50%);
-      border-radius:50%;
-      background:
-        radial-gradient(circle, rgba(255,215,0,.16) 0%, rgba(50,140,255,.08) 30%, rgba(0,0,0,0) 68%);
-      filter: blur(16px);
-      pointer-events:none;
-      z-index:5;
-      transition:opacity .2s linear;
+    .section h1,.section h2{
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight:600;
+      letter-spacing:.2px;
+      margin:0 0 18px;
+      color:#fff;
+    }
+
+    .section p{
+      max-width:760px;
+      line-height:1.7;
+      color:rgba(255,255,255,.8);
+      font-size:1.02rem;
+    }
+
+    .cards{
+      margin-top:36px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:18px;
+    }
+
+    .card{
+      border:1px solid rgba(212,175,55,.16);
+      background:rgba(255,255,255,.03);
+      backdrop-filter: blur(8px);
+      border-radius:18px;
+      padding:22px;
+      min-height:160px;
+      box-shadow:0 10px 30px rgba(0,0,0,.18);
+    }
+
+    .card h3{
+      margin:0 0 10px;
+      color:var(--gold-soft);
+      font-size:1.05rem;
+    }
+
+    .card p{
+      margin:0;
+      font-size:.95rem;
     }
   </style>
 </head>
 <body>
+  <div class="page">
+    <div class="hero-scene" id="heroScene">
+      <div class="logo-wrap" id="logoWrap">
+        <img src="medastare-logo.png" alt="MedaStaré logo" />
+      </div>
+    </div>
 
-  <div class="center-glow" id="centerGlow"></div>
+    <div class="content">
+      <section class="section">
+        <h1>MedaStaré</h1>
+        <p>
+          Yapay zekâ, stil ve lüks algının birleştiği yeni nesil moda evreni.
+          Scroll indikçe sahne açılır, logo yerini alır ve içerik akışı başlar.
+        </p>
+      </section>
 
-  <!-- fixed scene -->
-  <div class="scene" id="scene">
-    <div class="logo-wrap" id="logoWrap">
-      <img src="medastare-logo.png" alt="MedaStaré logo" />
+      <section class="section">
+        <h2>Vision</h2>
+        <div class="cards">
+          <div class="card">
+            <h3>Luxury Interface</h3>
+            <p>Kozmik ama rafine bir dijital moda deneyimi.</p>
+          </div>
+          <div class="card">
+            <h3>AI Styling</h3>
+            <p>Kişisel stile göre şekillenen akıllı yönlendirme sistemi.</p>
+          </div>
+          <div class="card">
+            <h3>Global Identity</h3>
+            <p>Türkiye çıkışlı, dünyaya oynayan premium marka dili.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Future</h2>
+        <p>
+          Buraya sonrasında asıl landing içeriklerini, modülleri, waitlist veya intro
+          metinlerini koyacağız.
+        </p>
+      </section>
     </div>
   </div>
 
   <script>
-    /* --------------------------
-       BACKGROUND GOLD STARS
-    -------------------------- */
-    for(let i=0;i<130;i++){
+    // tiny background stars
+    for(let i=0;i<120;i++){
       const s=document.createElement("div");
       s.className="bg-star";
       s.style.left=Math.random()*100+"vw";
       s.style.top=Math.random()*100+"vh";
-      s.style.animationDelay=(Math.random()*3).toFixed(2)+"s";
-      s.style.opacity=(0.25 + Math.random()*0.75).toFixed(2);
+      s.style.animationDelay=(Math.random()*2.8).toFixed(2)+"s";
       s.style.width=s.style.height=(1 + Math.random()*2.2)+"px";
       document.body.appendChild(s);
     }
 
-    /* --------------------------
-       CONFIG
-    -------------------------- */
-    const IMAGE_FILES = [
-      "calestial-1.png",
-      "calestial-2.png",
-      "calestial-3.png",
-      "calestial-4.png",
-      "calestial-6.png",
-      "calestial-7.png"
-    ];
-
-    const scene = document.getElementById("scene");
+    const heroScene = document.getElementById("heroScene");
     const logoWrap = document.getElementById("logoWrap");
-    const centerGlow = document.getElementById("centerGlow");
 
-    /* --------------------------
-       CREATE ENTITIES
-    -------------------------- */
-    const entities = [];
+    // create burst stars
+    const burstStars = [];
+    const STAR_COUNT = 18;
 
-    IMAGE_FILES.forEach((src, i) => {
-      const angle = (i / IMAGE_FILES.length) * Math.PI * 2;
-      const radius = 18 + Math.random() * 18;
-
-      const entity = document.createElement("div");
-      entity.className = "entity";
-
-      const size = 38 + Math.random() * 12;
-      entity.style.width = size + "px";
-      entity.style.height = size + "px";
-
-      const core = document.createElement("div");
-      core.className = "entity-core";
-
+    for(let i=0;i<STAR_COUNT;i++){
       const star = document.createElement("div");
-      star.className = "star-form";
-      star.textContent = "✦";
+      star.className = "burst-star";
+      heroScene.appendChild(star);
 
-      const dress = document.createElement("div");
-      dress.className = "dress-form";
+      const angle = (i / STAR_COUNT) * Math.PI * 2;
+      const radius = 60 + Math.random() * 120;
 
-      const img = document.createElement("img");
-      img.src = src;
-      img.alt = "celestial dress";
-
-      dress.appendChild(img);
-      core.appendChild(star);
-      core.appendChild(dress);
-      entity.appendChild(core);
-      scene.appendChild(entity);
-
-      entities.push({
-        el: entity,
-        starEl: star,
-        dressEl: dress,
-        startX: 50 + Math.cos(angle) * radius,
-        startY: 50 + Math.sin(angle) * radius,
-        offset: i * 85,
-        speed: 1 + Math.random() * 0.15,
-        baseSize: size
+      burstStars.push({
+        el: star,
+        angle,
+        radius,
+        drift: 0.8 + Math.random() * 0.6
       });
-    });
+    }
 
-    /* --------------------------
-       TIMELINE
-       0 - 120 : only logo
-       120 - 260 : stars emerge
-       260 - 420 : stars become dresses
-       420 - 720 : dresses approach
-       720+      : gone
-    -------------------------- */
-    function clamp(v, min, max){
+    function clamp(v,min,max){
       return Math.max(min, Math.min(max, v));
     }
 
-    function map(v, inMin, inMax, outMin, outMax){
-      const t = clamp((v - inMin) / (inMax - inMin), 0, 1);
-      return outMin + (outMax - outMin) * t;
+    function map(v,inMin,inMax,outMin,outMax){
+      const t = clamp((v-inMin)/(inMax-inMin),0,1);
+      return outMin + (outMax-outMin) * t;
     }
 
     function updateScene(){
       const s = window.scrollY;
 
-      /* logo */
-      const logoOpacity = clamp(1 - s / 430, 0, 1);
-      const logoScale = clamp(1 + (1 - Math.min(s/430,1))*0.04, 0.9, 1.06);
-      const glowPower = clamp(44 - s * 0.06, 0, 44);
+      // phase 1: logo centered
+      // phase 2: stars burst from logo
+      // phase 3: logo moves top-left
+      const burstProgress = clamp((s - 40) / 220, 0, 1);
+      const moveProgress  = clamp((s - 180) / 380, 0, 1);
 
+      // logo movement to top-left
+      const left = map(moveProgress, 0, 1, 50, 10);
+      const top = map(moveProgress, 0, 1, 50, 9);
+      const scale = map(moveProgress, 0, 1, 1, 0.42);
+
+      logoWrap.style.left = left + "%";
+      logoWrap.style.top = top + "%";
+      logoWrap.style.transform = `translate(-50%,-50%) scale(${scale})`;
+
+      // logo glow fades slightly when pinned
+      const logoOpacity = map(moveProgress, 0, 1, 1, 0.95);
+      const glowA = map(moveProgress, 0, 1, 38, 14);
       logoWrap.style.opacity = logoOpacity;
-      logoWrap.style.transform = `translate(-50%,-50%) scale(${logoScale})`;
-      logoWrap.style.filter = `drop-shadow(0 0 ${glowPower}px rgba(255,215,0,.22))`;
+      logoWrap.style.filter = `drop-shadow(0 0 ${glowA}px rgba(212,175,55,.22))`;
 
-      centerGlow.style.opacity = clamp(1 - s / 520, 0, 1);
+      // burst stars animation
+      burstStars.forEach((star, i) => {
+        const local = clamp((s - (50 + i * 8)) / 220, 0, 1);
 
-      entities.forEach((item, i) => {
-        const local = s - item.offset;
+        // starts from logo, expands, grows, then fades
+        const x = Math.cos(star.angle) * star.radius * local * star.drift;
+        const y = Math.sin(star.angle) * star.radius * local * star.drift;
 
-        /* stage 1: star emerges from logo */
-        const emerge = clamp((local - 110) / 120, 0, 1);
+        const starScale = map(local, 0, 1, 0.15, 1.9);
+        let opacity = map(local, 0, 0.25, 0, 1);
 
-        /* stage 2: star -> dress morph */
-        const morph = clamp((local - 245) / 105, 0, 1);
-
-        /* stage 3: dress approaches */
-        const fly = clamp((local - 345) / 220, 0, 1);
-
-        /* stage 4: vanish quickly */
-        const vanish = clamp((local - 565) / 70, 0, 1);
-
-        /* overall visibility */
-        let opacity = 0;
-        if(local < 110){
-          opacity = 0;
-        }else if(local < 565){
-          opacity = 1;
-        }else{
-          opacity = 1 - vanish;
+        if(local > 0.72){
+          opacity = map(local, 0.72, 1, 1, 0);
         }
 
-        /* positions: start from center, spread outward slowly */
-        const spread = map(emerge, 0, 1, 0, 1);
-        const x = 50 + (item.startX - 50) * spread;
-        const y = 50 + (item.startY - 50) * spread;
-
-        /* size progression */
-        const starScale = map(emerge, 0, 1, 0.1, 1.0);
-        const dressScale = map(fly, 0, 1, 0.8, 4.6);
-
-        /* z travel for depth */
-        const z = map(fly, 0, 1, 0, 950) * item.speed;
-
-        /* blur: none in center, slight as it exits */
-        const blur = map(vanish, 0, 1, 0, 3);
-
-        /* star vs dress visibility */
-        const starOpacity = clamp(1 - morph * 1.25, 0, 1);
-        const dressOpacity = clamp(map(morph, 0, 1, 0, 1), 0, 1) * opacity;
-
-        item.starEl.style.opacity = starOpacity;
-        item.dressEl.style.opacity = dressOpacity;
-
-        /* hologram glow gets stronger while morphing */
-        item.dressEl.style.filter = `
-          drop-shadow(0 0 ${18 + fly*16}px rgba(70,180,255,.88))
-          drop-shadow(0 0 ${58 + fly*24}px rgba(70,180,255,.32))
-        `;
-
-        item.el.style.opacity = opacity;
-
-        /* use star scale before morph, then dress scale */
-        const finalScale = morph < 0.6
-          ? map(morph, 0, 0.6, starScale, 1.0)
-          : dressScale;
-
-        item.el.style.left = x + "%";
-        item.el.style.top = y + "%";
-        item.el.style.filter = `blur(${blur}px)`;
-
-        item.el.style.transform = `
-          translate(-50%, -50%)
-          translateZ(${z}px)
-          scale(${finalScale})
-        `;
+        star.el.style.opacity = opacity;
+        star.el.style.transform =
+          `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${starScale})`;
       });
     }
 
