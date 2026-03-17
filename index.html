@@ -1,1114 +1,2047 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>MedaStaré</title>
-<link rel="icon" type="image/png" href="medastare-logo.PNG" />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MedaStaré</title>
 
-<style>
-:root{
-  --black:#000; --gray:#1a1a1a; --light:#d9d9d9;
-  --gold:#d4af37; --pink:#ff4da6;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-  font-family:Inter,sans-serif;
-  background:linear-gradient(135deg,var(--light),var(--gray),var(--black));
-  color:#fff; overflow-x:hidden; position:relative;
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#000;
+      --gold:#d4af37;
+      --gold-soft:#f0d47a;
+      --white:#fff;
+      --muted:rgba(255,255,255,.78);
+      --muted2:rgba(255,255,255,.55);
+      --line:rgba(255,255,255,.10);
+      --glass:rgba(255,255,255,.05);
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;scroll-behavior:smooth}
+    body{
+      font-family:Inter,system-ui,sans-serif;
+      background:#000;
+      color:#fff;
+      overflow-x:hidden;
+      min-height:100vh;
+    }
+
+    .bg-star{
+      position:fixed;
+      width:2px;
+      height:2px;
+      border-radius:50%;
+      background:var(--gold);
+      opacity:.55;
+      pointer-events:none;
+      animation:twinkle 2.8s ease-in-out infinite alternate;
+      z-index:0;
+    }
+
+    @keyframes twinkle{
+      from{opacity:.18;transform:scale(.82)}
+      to{opacity:1;transform:scale(1.22)}
+    }
+
+    .hero-scene{
+      position:fixed;
+      inset:0;
+      overflow:hidden;
+      pointer-events:none;
+      z-index:10;
+    }
+
+    .logo-wrap{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform:translate(-50%,-50%) scale(1);
+      transform-origin:center center;
+      z-index:20;
+      transition:transform .08s linear, filter .08s linear, opacity .16s linear;
+      opacity:1;
+    }
+
+    .logo-wrap img{
+      width:min(70vw,600px);
+      display:block;
+      filter:
+        drop-shadow(0 0 14px rgba(212,175,55,.35))
+        drop-shadow(0 0 42px rgba(212,175,55,.16));
+    }
+
+    .burst-star{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:10px;
+      height:10px;
+      transform:translate(-50%,-50%) scale(0);
+      opacity:0;
+      z-index:10;
+      will-change:transform,opacity;
+    }
+
+    .burst-star::before{
+      content:"✦";
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--gold-soft);
+      font-size:22px;
+      text-shadow:
+        0 0 8px rgba(240,212,122,.95),
+        0 0 18px rgba(212,175,55,.8),
+        0 0 36px rgba(212,175,55,.42);
+    }
+
+    .content{
+      position:relative;
+      z-index:2;
+      padding-top:150vh;
+      padding-bottom:80px;
+    }
+
+    .modules-stage{
+      position:relative;
+      min-height:860vh;
+      width:100%;
+    }
+
+    .modules-layer{
+      position:fixed;
+      inset:0;
+      z-index:15;
+      pointer-events:none;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .module-viewport{
+      width:100%;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:0 20px;
+      position:relative;
+    }
+
+    .module-stack,
+    .nail-cta-wrap,
+    .phrase-stage-wrap,
+    .store-cta-wrap{
+      text-align:center;
+      max-width:min(92vw, 980px);
+      padding:0 20px;
+      opacity:0;
+      transform:translateY(18px) scale(.965);
+      transition:opacity .36s ease, transform .36s ease;
+      pointer-events:none;
+    }
+
+    .module-stack.show,
+    .nail-cta-wrap.show,
+    .phrase-stage-wrap.show,
+    .store-cta-wrap.show{
+      opacity:1;
+      transform:translateY(0) scale(1);
+      pointer-events:auto;
+    }
+
+    .module-title{
+      font-family:"Cormorant Garamond", serif;
+      font-size:clamp(52px, 11vw, 100px);
+      font-weight:700;
+      letter-spacing:.2px;
+      color:var(--gold);
+      text-align:center;
+      text-shadow:
+        0 0 18px rgba(212,175,55,.18),
+        0 0 46px rgba(212,175,55,.08);
+      margin:0;
+      line-height:.95;
+    }
+
+    .module-desc{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:clamp(14px, 2.2vw, 18px);
+      font-weight:500;
+      letter-spacing:.01em;
+      line-height:1.45;
+      text-align:center;
+      max-width:640px;
+      margin-left:auto;
+      margin-right:auto;
+      text-shadow:0 0 18px rgba(255,255,255,.04);
+    }
+
+    .hidden{display:none !important}
+
+    .progress-dots{
+      position:fixed;
+      right:18px;
+      top:50%;
+      transform:translateY(-50%);
+      z-index:18;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      pointer-events:none;
+    }
+
+    .progress-dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:rgba(255,255,255,.18);
+      transition:.25s ease;
+      box-shadow:none;
+    }
+
+    .progress-dot.active{
+      background:var(--gold);
+      box-shadow:0 0 14px rgba(212,175,55,.45);
+      transform:scale(1.2);
+    }
+
+    .ecosystem-bar{
+      position:fixed;
+      top:14px;
+      left:50%;
+      transform:translateX(-50%) translateY(-12px);
+      width:min(95vw, 1180px);
+      height:76px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 14px 34px rgba(0,0,0,.24);
+      z-index:160;
+      display:flex;
+      align-items:center;
+      gap:20px;
+      padding:0 20px;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .28s ease, transform .28s ease;
+    }
+
+    .ecosystem-bar.show{
+      opacity:1;
+      pointer-events:auto;
+      transform:translateX(-50%) translateY(0);
+    }
+
+    .ecosystem-left{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      flex:0 0 auto;
+    }
+
+    .ecosystem-logo{
+      height:56px;
+      width:auto;
+      display:block;
+      filter:
+        drop-shadow(0 0 14px rgba(212,175,55,.18))
+        drop-shadow(0 0 30px rgba(212,175,55,.10));
+    }
+
+    .ecosystem-divider{
+      width:1px;
+      height:34px;
+      background:rgba(255,255,255,.10);
+      flex:0 0 auto;
+    }
+
+    .ecosystem-track{
+      overflow:hidden;
+      position:relative;
+      flex:1 1 auto;
+      height:100%;
+      display:flex;
+      align-items:center;
+      min-width:0;
+    }
+
+    .ecosystem-marquee{
+      display:flex;
+      align-items:center;
+      gap:28px;
+      white-space:nowrap;
+      animation:marquee 18s linear infinite;
+      will-change:transform;
+      padding-right:20px;
+    }
+
+    .ecosystem-marquee span{
+      color:rgba(255,255,255,.55);
+      font-size:14px;
+      font-weight:600;
+      letter-spacing:.01em;
+      transition:.22s ease;
+    }
+
+    .ecosystem-marquee span.active{
+      color:var(--gold-soft);
+      text-shadow:0 0 16px rgba(212,175,55,.18);
+    }
+
+    .ecosystem-actions{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex:0 0 auto;
+    }
+
+    .ecosystem-nail{
+      flex:0 0 auto;
+      appearance:none;
+      border:none;
+      height:46px;
+      padding:0 20px;
+      border-radius:999px;
+      background:rgba(0,0,0,.42);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      border:1px solid rgba(212,175,55,.32);
+      color:var(--gold-soft);
+      font-size:14px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.22s ease;
+      box-shadow:0 0 16px rgba(212,175,55,.08);
+    }
+
+    .ecosystem-nail:hover{
+      transform:translateY(-1px);
+      border-color:rgba(212,175,55,.55);
+      box-shadow:0 0 22px rgba(212,175,55,.16);
+    }
+
+    .menu-toggle{
+      width:46px;
+      height:46px;
+      flex:0 0 46px;
+      border:none;
+      border-radius:50%;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.10);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      position:relative;
+      transition:.25s ease;
+      box-shadow:0 0 16px rgba(255,255,255,.04);
+      z-index:200;
+    }
+
+    .menu-toggle:hover{
+      border-color:rgba(212,175,55,.35);
+      box-shadow:0 0 20px rgba(212,175,55,.12);
+    }
+
+    .menu-toggle span{
+      position:absolute;
+      width:18px;
+      height:1.8px;
+      background:var(--gold-soft);
+      border-radius:999px;
+      transition:transform .34s ease, top .34s ease;
+    }
+
+    .menu-toggle span:nth-child(1){ top:18px; }
+    .menu-toggle span:nth-child(2){ top:26px; }
+
+    .menu-toggle.open span:nth-child(1){
+      top:22px;
+      transform:rotate(45deg);
+    }
+
+    .menu-toggle.open span:nth-child(2){
+      top:22px;
+      transform:rotate(-45deg);
+    }
+
+    .menu-overlay{
+      position:fixed;
+      inset:0;
+      z-index:120;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(212,175,55,.08), transparent 22%),
+        linear-gradient(180deg, rgba(6,8,20,.98) 0%, rgba(5,7,18,.98) 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      transition:opacity .34s ease, visibility .34s ease;
+    }
+
+    .menu-overlay.open{
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+    }
+
+    .menu-overlay-inner{
+      width:min(92vw, 760px);
+      max-width:760px;
+      text-align:center;
+      padding:100px 24px 46px;
+      position:relative;
+    }
+
+    .menu-links{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+      align-items:center;
+    }
+
+    .menu-links a,
+    .menu-links button{
+      color:var(--gold-soft);
+      text-decoration:none;
+      font-size:clamp(24px, 3.3vw, 38px);
+      letter-spacing:.05em;
+      font-weight:500;
+      transition:transform .22s ease, color .22s ease, text-shadow .22s ease;
+      position:relative;
+      background:none;
+      border:none;
+      cursor:pointer;
+      font-family:Inter, sans-serif;
+      padding:0;
+    }
+
+    .menu-links a::after,
+    .menu-links button::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-5px;
+      width:0;
+      height:1px;
+      background:linear-gradient(90deg, transparent, var(--gold-soft), transparent);
+      transition:width .28s ease;
+    }
+
+    .menu-links a:hover,
+    .menu-links button:hover{
+      transform:translateY(-1px);
+      text-shadow:0 0 18px rgba(212,175,55,.16);
+    }
+
+    .menu-links a:hover::after,
+    .menu-links button:hover::after{ width:100%; }
+
+    .menu-social{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      gap:34px;
+      margin-top:42px;
+    }
+
+    .menu-social a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      transition:transform .22s ease, opacity .22s ease;
+    }
+
+    .menu-social a:hover{
+      transform:scale(1.08);
+      opacity:1;
+    }
+
+    .menu-social img{
+      width:50px;
+      height:50px;
+      object-fit:contain;
+      display:block;
+      filter:drop-shadow(0 0 16px rgba(212,175,55,.08));
+    }
+
+    .menu-footer-links{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:10px;
+      margin-top:34px;
+    }
+
+    .menu-footer-links button{
+      color:rgba(255,255,255,.52);
+      font-size:14px;
+      text-decoration:none;
+      background:none;
+      border:none;
+      cursor:pointer;
+      font-family:Inter,sans-serif;
+    }
+
+    .menu-footer-links button:hover{ color:var(--gold-soft); }
+
+    .menu-copy{
+      margin-top:14px;
+      color:rgba(255,255,255,.42);
+      font-size:13px;
+    }
+
+    @keyframes marquee{
+      from{ transform:translateX(0); }
+      to{ transform:translateX(-50%); }
+    }
+
+ /* STARTRIP */
+.startrip-shell{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+  position:relative;
+  min-height:240px;
+  overflow:visible;
 }
 
-/* ===== Particles canvas (arka plan) ===== */
-#particles{
-  position:fixed; inset:0; display:block;
-  width:100vw; height:100vh; pointer-events:none;
-  z-index:0; opacity:.85; mix-blend-mode:screen;
+.startrip-plane{
+  position:absolute;
+  left:-24%;
+  top:40%;
+  width:160px;
+  height:54px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  animation:planeFlyStraight 4.8s linear infinite;
+  filter:drop-shadow(0 0 14px rgba(212,175,55,.35));
 }
 
-/* ===== Header ===== */
-header{
-  display:flex; justify-content:space-between; align-items:center;
-  padding:20px 40px; position:sticky; top:0; z-index:10;
-  background:rgba(0,0,0,.65); backdrop-filter:blur(8px);
-  transition:background .3s ease;
-}
-header.scrolled{ background:rgba(0,0,0,.9); }
-.logo{ font-family:"Playfair Display",serif; color:var(--gold); font-size:1.8rem; }
-nav a{
-  color:#fff; text-decoration:none; margin:0 15px; font-weight:500; transition:color .3s;
-}
-nav a:hover{ color:var(--gold); }
-.lang-toggle{
-  color:var(--pink); cursor:pointer; font-size:.9rem;
-  border:1px solid var(--pink); border-radius:10px; padding:4px 8px;
+.startrip-plane::before{
+  content:"✈";
+  font-size:38px;
+  color:var(--gold-soft);
+  text-shadow:
+    0 0 8px rgba(240,212,122,.55),
+    0 0 24px rgba(212,175,55,.22);
+  transform:rotate(0deg);
+  display:block;
+  position:relative;
+  z-index:2;
 }
 
-/* ===== Sections ===== */
-section{
-  max-width:1000px; margin:auto; text-align:center; padding:80px 20px;
-  position:relative; z-index:1;
+.startrip-plane::after{
+  content:"";
+  position:absolute;
+  left:0;
+  top:50%;
+  width:160px;
+  height:2px;
+  transform:translateY(-50%);
+  background:linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(240,212,122,.75) 25%,
+    rgba(240,212,122,.95) 55%,
+    transparent 100%
+  );
+  filter:blur(.2px);
+  opacity:.9;
+  z-index:1;
 }
-h1,h2{ font-family:"Playfair Display",serif; color:var(--gold); margin-bottom:20px; }
-p{ color:#ddd; line-height:1.7; font-size:1rem; }
 
-/* Hero */
-.hero img{
-  width:100%; max-width:850px; border-radius:16px;
-  box-shadow:0 0 40px rgba(0,0,0,.5);
-  animation:float 6s ease-in-out infinite;
+.startrip-maldives{
+  position:relative;
+  display:inline-block;
+  animation:maldivesGlow 2.8s ease-in-out infinite;
 }
-@keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
 
-/* Collections grid (alt alta responsive) */
-.grid{
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:25px; margin-top:60px;
+.startrip-maldives::after{
+  display:none;
+  content:none;
 }
-.grid-item{
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(212,175,55,.2);
-  border-radius:14px; overflow:hidden; backdrop-filter:blur(6px);
-  transition:transform .4s, box-shadow .4s;
-}
-.grid-item:hover{ transform:translateY(-10px); box-shadow:0 10px 25px rgba(212,175,55,.4); }
-.grid-item img{ width:100%; display:block; }
-.caption{ padding:20px; }
-.caption h3{ color:var(--gold); margin-bottom:10px; }
-.caption p{ font-size:.95rem; }
 
-/* Form */
-form{ max-width:500px; margin:auto; display:flex; flex-direction:column; gap:15px; margin-top:20px; }
-input{
-  border:none; border-bottom:1px solid #666; background:transparent;
-  padding:12px; color:#fff; font-size:1rem;
-}
-input:focus{ border-color:var(--gold); outline:none; }
-button{
-  background:linear-gradient(90deg,var(--pink),var(--gold));
-  border:none; padding:14px; border-radius:8px; font-weight:600; cursor:pointer; color:#000;
-}
-button:hover{ transform:scale(1.05); }
+    @keyframes planeFlyStraight{
+      0%{
+        opacity:0;
+        transform:translateX(-120px) translateY(0) scale(.82);
+      }
+      8%{
+        opacity:1;
+      }
+      60%{
+        opacity:1;
+        transform:translateX(420px) translateY(0) scale(1);
+      }
+      100%{
+        opacity:0;
+        transform:translateX(940px) translateY(0) scale(.82);
+      }
+    }
 
-/* Footer */
-footer{ background:#000; padding:50px 20px; text-align:center; }
-footer .grid{
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:30px; margin-bottom:30px;
-}
-footer h4{ color:var(--gold); margin-bottom:10px; }
-footer a{ color:#aaa; text-decoration:none; display:block; margin:5px 0; }
-footer a:hover{ color:var(--pink); }
-footer small{ color:#666; }
+    .startrip-maldives{
+      position:relative;
+      display:inline-block;
+      animation:maldivesGlow 2.8s ease-in-out infinite;
+    }
 
-/* Back to top */
-#backToTop{
-  position:fixed; right:20px; bottom:20px;
-  background:linear-gradient(135deg,var(--pink),var(--gold));
-  border:none; border-radius:50%; padding:14px; font-size:18px;
-  color:#000; cursor:pointer; opacity:0; transition:opacity .3s; z-index:9999;
-}
-#backToTop.show{ opacity:1; }
+    .startrip-maldives::after{
+      content:"";
+      position:absolute;
+      left:-12%;
+      top:50%;
+      width:124%;
+      height:1px;
+      background:linear-gradient(90deg, transparent, rgba(240,212,122,.85), transparent);
+      transform:translateY(20px);
+      opacity:.8;
+      filter:blur(.2px);
+    }
 
-@media (prefers-reduced-motion:reduce){
-  .hero img{ animation:none; }
-}
-</style>
+    @keyframes maldivesGlow{
+      0%,100%{
+        text-shadow:
+          0 0 12px rgba(212,175,55,.12),
+          0 0 34px rgba(212,175,55,.05);
+      }
+      50%{
+        text-shadow:
+          0 0 20px rgba(240,212,122,.36),
+          0 0 44px rgba(212,175,55,.18);
+      }
+    }
+
+    .buttonish.nail-dark{
+      appearance:none;
+      border:none;
+      min-width:min(88vw,560px);
+      padding:22px 36px;
+      border-radius:999px;
+      background:rgba(0,0,0,.42);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 18px 50px rgba(0,0,0,.24);
+      cursor:pointer;
+      color:var(--gold-soft);
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .buttonish.nail-dark:hover{
+      transform:scale(1.025);
+      border-color:rgba(212,175,55,.45);
+      box-shadow:
+        0 18px 50px rgba(0,0,0,.24),
+        0 0 22px rgba(212,175,55,.12);
+    }
+
+    .nail-cta-sub{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:14px;
+      font-weight:500;
+    }
+
+    /* PHRASE STAGE */
+    .phrase-stage-wrap{
+      min-height:220px;
+    }
+
+    .phrase-rail{
+      position:relative;
+      width:min(92vw,900px);
+      height:180px;
+      margin:0 auto;
+    }
+
+    .phrase-word{
+      position:absolute;
+      font-family:Inter,system-ui,sans-serif;
+      font-size:clamp(54px, 9vw, 92px);
+      font-weight:700;
+      letter-spacing:-0.04em;
+      color:var(--gold-soft);
+      opacity:0;
+      transform:translateY(20px) scale(.96);
+      text-shadow:
+        0 0 14px rgba(240,212,122,.16),
+        0 0 32px rgba(212,175,55,.08);
+      transition:opacity .42s ease, transform .42s ease;
+      white-space:nowrap;
+      top:50%;
+    }
+
+    .phrase-word.active{
+      opacity:1;
+      transform:translateY(0) scale(1);
+    }
+
+    .phrase-word.left{
+      left:6%;
+      transform:translateY(20px) scale(.96);
+    }
+
+    .phrase-word.center{
+      left:50%;
+      transform:translate(-50%,20px) scale(.96);
+    }
+
+    .phrase-word.right{
+      right:6%;
+      transform:translateY(20px) scale(.96);
+    }
+
+    .phrase-word.active.left{
+      transform:translateY(0) scale(1);
+    }
+
+    .phrase-word.active.center{
+      transform:translate(-50%,0) scale(1);
+    }
+
+    .phrase-word.active.right{
+      transform:translateY(0) scale(1);
+    }
+
+    .phrase-word.power{
+      font-size:clamp(64px, 10vw, 108px);
+      text-shadow:
+        0 0 18px rgba(240,212,122,.32),
+        0 0 44px rgba(212,175,55,.18);
+    }
+
+    .store-badges{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:18px;
+      margin-top:28px;
+      flex-wrap:wrap;
+    }
+
+    .store-badge-link{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      transition:transform .22s ease, opacity .22s ease;
+    }
+
+    .store-badge-link:hover{
+      transform:translateY(-2px) scale(1.02);
+      opacity:1;
+    }
+
+    .store-badge{
+      height:150px;
+      width:auto;
+      object-fit:contain;
+      display:block;
+      filter:
+        drop-shadow(0 0 14px rgba(212,175,55,.10))
+        drop-shadow(0 0 26px rgba(212,175,55,.08));
+    }
+
+    .store-copy{
+      margin-top:14px;
+      color:var(--muted2);
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    /* INFO MODAL */
+    .info-modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.58);
+      z-index:130;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      transition:.28s ease;
+      padding:20px;
+    }
+
+    .info-modal.open{
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+    }
+
+    .info-card{
+      width:min(92vw,760px);
+      border-radius:28px;
+      padding:28px 24px 24px;
+      background:rgba(8,8,10,.94);
+      border:1px solid rgba(255,255,255,.09);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      box-shadow:0 24px 60px rgba(0,0,0,.35);
+      position:relative;
+    }
+
+    .modal-star-close{
+      position:absolute;
+      top:16px;
+      right:16px;
+      width:34px;
+      height:34px;
+      border:none;
+      border-radius:50%;
+      background:rgba(255,255,255,.05);
+      color:var(--gold-soft);
+      cursor:pointer;
+      font-size:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid rgba(212,175,55,.18);
+      font-family:Inter,sans-serif;
+    }
+
+    .modal-star-close:hover{
+      box-shadow:0 0 16px rgba(212,175,55,.16);
+    }
+
+    .info-card h2{
+      font-family:Inter,system-ui,sans-serif;
+      color:var(--gold-soft);
+      font-size:clamp(28px,4vw,42px);
+      font-weight:700;
+      letter-spacing:-0.03em;
+      margin:0 0 14px;
+      text-align:center;
+    }
+
+    .info-card p{
+      margin:0 auto;
+      max-width:640px;
+      color:var(--muted);
+      line-height:1.7;
+      text-align:center;
+      font-size:15px;
+      font-family:Inter,system-ui,sans-serif;
+    }
+
+    .info-blog-grid{
+      margin-top:20px;
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+    }
+
+    .info-blog-item{
+      border-radius:20px;
+      padding:18px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .info-blog-item h3{
+      margin:0 0 10px;
+      color:var(--gold-soft);
+      font-size:18px;
+      font-family:Inter,system-ui,sans-serif;
+      font-weight:700;
+      letter-spacing:-0.02em;
+      text-align:left;
+    }
+
+    .info-blog-item p{
+      text-align:left;
+      font-size:13.5px;
+      max-width:none;
+      font-family:Inter,system-ui,sans-serif;
+    }
+
+    .contact-form-modal{
+      margin-top:20px;
+      display:grid;
+      gap:12px;
+    }
+
+    .contact-form-modal input,
+    .contact-form-modal textarea{
+      width:100%;
+      border:none;
+      outline:none;
+      border-radius:18px;
+      padding:14px 16px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      color:#fff;
+      font-family:Inter, sans-serif;
+      font-size:14px;
+    }
+
+    .contact-form-modal textarea{
+      min-height:140px;
+      resize:vertical;
+    }
+
+    .contact-form-modal button{
+      appearance:none;
+      border:none;
+      height:52px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:800;
+      color:#121212;
+      background:linear-gradient(135deg, #f0d47a, #d6a93d, #8d6a12);
+      box-shadow:0 0 22px rgba(212,175,55,.24);
+      font-family:Inter,sans-serif;
+    }
+
+    @media (max-width:980px){
+      .info-blog-grid{ grid-template-columns:1fr; }
+    }
+
+    .nail-overlay{
+      position:fixed;
+      inset:0;
+      z-index:200;
+      background:
+        radial-gradient(circle at 18% 18%, rgba(212,175,55,.10), transparent 22%),
+        radial-gradient(circle at 86% 72%, rgba(116,164,255,.05), transparent 20%),
+        linear-gradient(180deg, #0a0d16 0%, #05070e 100%);
+      display:none;
+      overflow:auto;
+    }
+
+    .nail-overlay.open{display:block}
+
+    .nail-shell{
+      max-width:980px;
+      margin:0 auto;
+      padding:24px 20px 64px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:18px;
+    }
+
+    .back-btn{
+      appearance:none;
+      border:none;
+      background:transparent;
+      color:var(--gold-soft);
+      font-size:16px;
+      font-weight:700;
+      cursor:pointer;
+      padding:10px 0;
+    }
+
+    .mini-logo{
+      font-family:"Cormorant Garamond", serif;
+      color:var(--gold-soft);
+      font-size:28px;
+      font-weight:700;
+    }
+
+    .glass{
+      width:100%;
+      border-radius:26px;
+      padding:18px;
+      background:var(--glass);
+      border:1px solid var(--line);
+      backdrop-filter:blur(16px);
+      box-shadow:0 18px 40px rgba(0,0,0,.18);
+    }
+
+    .glass + .glass{margin-top:16px}
+    .hero-card{margin-top:12px}
+
+    .nail-title{
+      font-size:34px;
+      font-weight:800;
+      margin:0 0 10px;
+      text-align:center;
+    }
+
+    .nail-subtitle{
+      text-align:center;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.5;
+      margin:0 auto 28px;
+      max-width:650px;
+    }
+
+    .section-title{
+      font-size:18px;
+      font-weight:800;
+      margin:0 0 12px;
+    }
+
+    .body-copy{
+      color:var(--muted);
+      line-height:1.58;
+      font-size:14px;
+    }
+
+    .feature-grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:12px;
+    }
+
+    .feature-card{
+      border-radius:22px;
+      padding:16px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+      min-height:160px;
+    }
+
+    .feature-icon{
+      width:40px;
+      height:40px;
+      border-radius:12px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      color:#151515;
+      background:linear-gradient(135deg, var(--gold-soft), #d6a93d);
+      font-size:18px;
+      font-weight:800;
+      margin-bottom:12px;
+      box-shadow:0 0 18px rgba(212,175,55,.22);
+    }
+
+    .feature-card h3{
+      margin:0 0 8px;
+      font-size:15px;
+      font-weight:800;
+    }
+
+    .feature-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:12.5px;
+      line-height:1.42;
+    }
+
+    .notice{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      color:var(--muted);
+      font-size:13.5px;
+      line-height:1.45;
+    }
+
+    .notice-badge{
+      color:var(--gold-soft);
+      font-weight:800;
+      margin-top:1px;
+    }
+
+    .primary-btn{
+      appearance:none;
+      border:none;
+      width:100%;
+      height:58px;
+      border-radius:999px;
+      cursor:pointer;
+      color:#151515;
+      font-size:15px;
+      font-weight:800;
+      background:linear-gradient(135deg, #f0d47a, #d6a93d, #8d6a12);
+      box-shadow:0 0 22px rgba(212,175,55,.24);
+      transition:transform .22s ease, box-shadow .22s ease;
+      font-family:Inter,sans-serif;
+    }
+
+    .primary-btn:hover{
+      transform:translateY(-1px) scale(1.01);
+      box-shadow:0 0 28px rgba(212,175,55,.32);
+    }
+
+    .muted-center{
+      text-align:center;
+      color:var(--muted2);
+      font-size:12.5px;
+      font-weight:600;
+      margin-top:10px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .field{margin-bottom:12px}
+    .field.full{grid-column:1 / -1}
+
+    .field label{
+      display:block;
+      margin-bottom:8px;
+      color:rgba(255,255,255,.92);
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .field input,
+    .field select{
+      width:100%;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.05);
+      color:#fff;
+      padding:14px 15px;
+      font-size:14px;
+      outline:none;
+    }
+
+    .field input:focus,
+    .field select:focus{
+      border-color:rgba(212,175,55,.8);
+      box-shadow:0 0 0 1px rgba(212,175,55,.35);
+    }
+
+    .brandline{
+      font-size:28px;
+      font-weight:900;
+      margin:2px 0 8px;
+      line-height:1.15;
+    }
+
+    .brandline span{color:var(--gold-soft)}
+
+    .powered{
+      color:var(--muted2);
+      font-size:12.5px;
+      font-weight:600;
+      margin-bottom:18px;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .chip{
+      border-radius:999px;
+      padding:10px 14px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+      color:rgba(255,255,255,.92);
+      font-size:12.5px;
+      font-weight:600;
+      cursor:pointer;
+      transition:.18s ease;
+    }
+
+    .chip.active{
+      border-color:var(--gold);
+      background:rgba(212,175,55,.16);
+      box-shadow:0 0 16px rgba(212,175,55,.14);
+    }
+
+    .package-card{
+      width:100%;
+      padding:16px;
+      border-radius:20px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+      margin-bottom:12px;
+      cursor:pointer;
+      transition:.2s ease;
+    }
+
+    .package-card.active{
+      border-color:var(--gold);
+      background:rgba(212,175,55,.14);
+      box-shadow:0 0 18px rgba(212,175,55,.12);
+    }
+
+    .package-title{
+      font-size:15px;
+      font-weight:800;
+      margin:0 0 6px;
+    }
+
+    .package-desc{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.45;
+      margin:0;
+    }
+
+    .success-modal{
+      position:fixed;
+      inset:0;
+      z-index:260;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      background:rgba(0,0,0,.48);
+      padding:20px;
+    }
+
+    .success-modal.open{display:flex}
+
+    .success-card{
+      width:min(92vw,520px);
+      border-radius:24px;
+      background:#111216;
+      border:1px solid rgba(255,255,255,.12);
+      padding:22px;
+      box-shadow:0 24px 60px rgba(0,0,0,.35);
+    }
+
+    .success-card h3{
+      margin:0 0 10px;
+      font-size:22px;
+      font-weight:800;
+    }
+
+    .success-card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.5;
+    }
+
+    .success-actions{
+      margin-top:18px;
+      display:flex;
+      justify-content:flex-end;
+    }
+
+    .text-btn{
+      appearance:none;
+      border:none;
+      background:transparent;
+      color:var(--gold-soft);
+      font-size:14px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    @media (max-width:780px){
+      .feature-grid,.form-grid{grid-template-columns:1fr}
+      .module-title{font-size:clamp(42px, 13vw, 74px)}
+      .logo-wrap img{ width:min(36vw,220px); }
+      .ecosystem-bar{
+        width:min(96vw, 1180px);
+        height:62px;
+        padding:0 12px;
+        gap:12px;
+      }
+      .ecosystem-logo{ height:42px; }
+      .ecosystem-marquee{ gap:22px; }
+      .ecosystem-marquee span{ font-size:12.5px; }
+      .ecosystem-nail{
+        height:38px;
+        padding:0 14px;
+        font-size:12.5px;
+      }
+      .menu-toggle{
+        width:40px;
+        height:40px;
+        flex:0 0 40px;
+      }
+      .menu-toggle span:nth-child(1){ top:15px; }
+      .menu-toggle span:nth-child(2){ top:23px; }
+      .menu-toggle.open span:nth-child(1),
+      .menu-toggle.open span:nth-child(2){ top:19px; }
+
+      .phrase-rail{
+        height:160px;
+      }
+
+      .phrase-word{
+        font-size:clamp(38px, 11vw, 62px);
+      }
+
+      .phrase-word.left{ left:4%; }
+      .phrase-word.right{ right:4%; }
+
+      .startrip-plane{
+        width:110px;
+        height:50px;
+        top:37%;
+      }
+
+      @keyframes planeFlyStraight{
+        0%{
+          opacity:0;
+          transform:translateX(-70px) translateY(0) scale(.82);
+        }
+        8%{
+          opacity:1;
+        }
+        60%{
+          opacity:1;
+          transform:translateX(180px) translateY(0) scale(1);
+        }
+        100%{
+          opacity:0;
+          transform:translateX(430px) translateY(0) scale(.82);
+        }
+      }
+
+      .nail-title{font-size:28px}
+      .brandline{font-size:24px}
+      .progress-dots{ right:12px; gap:8px; }
+      .store-badge{ height:48px; }
+      .menu-social img{ width:38px; height:38px; }
+      .menu-links a, .menu-links button{ font-size:clamp(22px, 7vw, 34px); }
+    }
+  </style>
 </head>
 <body>
 
-<canvas id="particles"></canvas>
+  <div class="hero-scene" id="heroScene">
+    <div class="logo-wrap" id="logoWrap">
+      <img src="medastare-logo.png" alt="MedaStaré logo" />
+    </div>
+  </div>
 
-<header id="top">
-  <div class="logo">MedaStaré</div>
-  <nav>
-    <a href="#about"  data-tr="Hakkımızda" data-en="About">About</a>
-    <a href="#vision" data-tr="Vizyon"     data-en="Vision">Vision</a>
-    <a href="#future" data-tr="Gelecek"    data-en="Future">Future</a>
-    <a href="#waitlist" data-tr="Bekleme Listesi" data-en="Waitlist">Waitlist</a>
-    <a href="#contact" data-tr="İletişim"  data-en="Contact">Contact</a>
-  </nav>
-  <div class="lang-toggle" onclick="toggleLang()">TR | EN</div>
-</header>
+  <div class="progress-dots" id="progressDots">
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+  </div>
 
-<section class="hero">
-  <img src="medastare-eiffel-elegance.jpeg" alt="Eiffel Elegance" />
-  <h1 data-tr="Küresel sahne artık senin gardırobunda" data-en="Global stage now in your wardrobe">Global stage now in your wardrobe</h1>
-  <p  data-tr="Her tarz ve bütçeye uygun koleksiyonlar, tek bir yerde." data-en="Collections for every style and budget, all in one place.">Collections for every style and budget, all in one place.</p>
-</section>
+  <div class="ecosystem-bar" id="ecosystemBar">
+    <div class="ecosystem-left">
+      <img src="medastare-logo.png" alt="MedaStaré" class="ecosystem-logo">
+      <div class="ecosystem-divider"></div>
+    </div>
 
-<!-- ⭐⭐ MedAI StarCard™ Onboarding Section ⭐⭐ -->
-
-<section id="star-onboarding">
-
-<style>
-/* --------- SECTION WRAPPER --------- */
-#star-onboarding{
-  width:100%;                /* ⭐ eklendi: sola kayma çözüldü */
-  padding:50px 0;           /* ⭐ eskiden 80px → boşluk azaltıldı */
-  display:flex;
-  justify-content:center;
-}
-
-/* --------- TOP TRIGGER BUTTON --------- */
-.medai-trigger{
-  width:94%;
-  max-width:650px;
-  margin:0 auto;
-  padding:12px 24px;         /* ⭐ çok hafif daraltıldı */
-  border-radius:999px;
-  border:none;
-  cursor:pointer;
-  font-weight:600;
-  font-size:16px;
-  color:#000;
-  background:linear-gradient(90deg,#ffd700,#ff44dd);
-  box-shadow:0 0 22px rgba(255,215,0,0.6);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  position:relative;
-  overflow:hidden;
-}
-
-/* küçük ışık animasyonu */
-.medai-trigger::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:-40%;
-  width:40%;
-  height:100%;
-  background:linear-gradient(120deg,rgba(255,255,255,.45),rgba(255,255,255,0));
-  transform:skewX(-20deg);
-  animation:triggerShine 5s infinite;
-}
-@keyframes triggerShine{
-  0%{transform:translateX(-120%) skewX(-20deg);}
-  40%{transform:translateX(220%) skewX(-20deg);}
-  100%{transform:translateX(220%) skewX(-20deg);}
-}
-
-.medai-trigger span{
-  position:relative;
-  z-index:1;
-}
-.medai-trigger .arrow{
-  font-size:18px;
-}
-
-/* --------- CARD WRAPPER (ACCORDION) --------- */
-.onboard-wrapper{
-  width:94%;
-  max-width:650px;
-  margin:14px auto 0;     /* ⭐ boşluk azaltıldı */
-}
-
-.onboard-card{
-  border-radius:30px;
-  background:rgba(20,18,30,0.55);
-  border:1px solid rgba(255,215,0,0.35);
-  backdrop-filter:blur(18px);
-  box-shadow:0 0 60px rgba(255,215,0,0.25);
-  overflow:hidden;
-  max-height:0;
-  opacity:0;
-  transform:translateY(10px);
-  transition:max-height .6s ease, opacity .5s ease, transform .5s ease;
-}
-
-/* kart açıkken */
-.onboard-card.open{
-  max-height:2000px;      /* ⭐ 900 → 2000 yapıldı, tüm modlar görünür */
-  opacity:1;
-  transform:translateY(0);
-}
-
-.onboard-inner{
-  padding:34px 28px;      /* ⭐ daha compact görünüm */
-}
-
-/* --------- HEADER & LANG --------- */
-.onboard-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:16px;
-}
-
-.onboard-title{
-  font-size:26px;
-  font-weight:600;
-  color:#ffd700;
-  text-shadow:0 0 18px rgba(255,215,0,0.7);
-}
-
-/* local EN/TR switch */
-.onboard-lang{
-  border-radius:999px;
-  padding:6px 14px;
-  border:1px solid rgba(255,215,0,0.6);
-  background:rgba(0,0,0,0.4);
-  color:#ffd700;
-  font-size:13px;
-  cursor:pointer;
-}
-
-/* --------- MEDAI MESSAGE --------- */
-.medai-text{
-  text-align:center;
-  font-size:17px;
-  opacity:.9;
-  margin-bottom:22px;   /* ⭐ boşluk azaltıldı */
-}
-
-/* --------- LABELS & INPUT --------- */
-.label{
-  font-size:16px;
-  margin-bottom:6px;   /* ⭐ azaltıldı */
-  color:#ffd700;
-}
-
-.input-box{
-  width:100%;
-  background:rgba(255,255,255,0.07);
-  border:1px solid rgba(255,215,0,0.3);
-  padding:12px 14px;   /* ⭐ hafif daraltıldı */
-  border-radius:14px;
-  color:#fff;
-  margin-bottom:22px;
-  font-size:16px;
-  outline:none;
-  backdrop-filter:blur(10px);
-}
-
-/* --------- CHIPS --------- */
-.chips{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;             /* ⭐ chips arası boşluk daraldı */
-  margin-bottom:24px;
-}
-
-.chip{
-  padding:8px 16px;
-  border-radius:20px;
-  border:1px solid rgba(255,215,0,0.35);
-  background:rgba(255,255,255,0.07);
-  color:#fff;
-  font-size:13px;
-  cursor:pointer;
-  transition:.22s;
-}
-
-.chip.active{
-  background:linear-gradient(90deg,#ffd700,#ff44cc);
-  color:#000;
-  border:none;
-  font-weight:600;
-  box-shadow:0 0 14px rgba(255,215,0,0.7);
-}
-
-/* --------- CREATE BUTTON --------- */
-.create-btn{
-  width:100%;
-  padding:14px 24px;
-  border-radius:32px;
-  border:none;
-  cursor:pointer;
-  font-weight:600;
-  font-size:16px;
-  background:linear-gradient(90deg,#ffd700,#ff44dd);
-  color:#000;
-  position:relative;
-  overflow:hidden;
-  transition:.25s;
-}
-
-.create-btn::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:-40%;
-  width:40%;
-  height:100%;
-  background:linear-gradient(120deg,rgba(255,255,255,.45),rgba(255,255,255,0));
-  transform:skewX(-20deg);
-  animation:btnShine 4s infinite;
-}
-@keyframes btnShine{
-  0%{transform:translateX(-130%) skewX(-20deg);}
-  50%{transform:translateX(230%) skewX(-20deg);}
-  100%{transform:translateX(230%) skewX(-20deg);}
-}
-
-.create-btn:hover{
-  transform:scale(1.04);
-  box-shadow:0 0 24px rgba(255,215,0,0.7);
-}
-
-/* --------- BOTTOM TEXT --------- */
-.bottom-box{
-  text-align:center;
-  margin-top:22px;
-  font-size:15px;
-  opacity:.95;
-}
-
-.bottom-ai{
-  margin-top:4px;
-  opacity:.75;
-  font-style:italic;
-}
-
-@media (max-width:480px){
-  .onboard-inner{
-    padding:26px 18px;
-  }
-  .onboard-title{
-    font-size:22px;
-  }
-}
-</style>
-
-
-<!-- ⭐ Trigger Button -->
-<button class="medai-trigger" type="button" onclick="toggleStarOnboard()">
-  <span>MedAI StarCard™</span>
-  <span class="arrow" id="starOnbArrow">▼</span>
-</button>
-
-<div class="onboard-wrapper">
-  <div id="onboardCard" class="onboard-card">
-    <div class="onboard-inner">
-
-      <!-- Header + local EN/TR -->
-      <div class="onboard-header">
-        <div class="onboard-title">MedAI StarCard™</div>
-        <button class="onboard-lang" type="button" id="onbLangBtn" onclick="toggleOnboardLang()">
-          EN / TR
-        </button>
+    <div class="ecosystem-track">
+      <div class="ecosystem-marquee" id="ecosystemMarquee">
+        <span data-name="FashionStaré">FashionStaré</span>
+        <span data-name="MedArena">MedArena</span>
+        <span data-name="StyleTrack">StyleTrack</span>
+        <span data-name="StyleStaré">StyleStaré</span>
+        <span data-name="MedaBeauté">MedaBeauté</span>
+        <span data-name="PetStaré">PetStaré</span>
+        <span data-name="FashionStaré">FashionStaré</span>
+        <span data-name="MedArena">MedArena</span>
+        <span data-name="StyleTrack">StyleTrack</span>
+        <span data-name="StyleStaré">StyleStaré</span>
+        <span data-name="MedaBeauté">MedaBeauté</span>
+        <span data-name="PetStaré">PetStaré</span>
       </div>
+    </div>
 
-      <!-- MedAI intro -->
-      <div id="medaiLine" class="medai-text">
-        Merhaba yıldızım, bugün senin enerjine uygun kombinini oluşturmaya hazırım.
-      </div>
-
-      <!-- Name -->
-      <div class="label" id="labelName">Adın nedir?</div>
-      <input id="userName" class="input-box" placeholder="Adın"/>
-
-      <!-- Style -->
-      <div class="label" id="labelStyle">Stilini seç:</div>
-      <div class="chips" id="styleChips">
-        <div class="chip">Modern</div>
-        <div class="chip">Modest</div>
-        <div class="chip">Mix</div>
-      </div>
-
-      <!-- Mood -->
-      <div class="label" id="labelMood">Bugünkü enerjin hangisi?</div>
-      <div class="chips" id="moodChips">
-        <div class="chip">Urban</div>
-        <div class="chip">Chill</div>
-        <div class="chip">Business</div>
-        <div class="chip">Hot Girl</div>
-        <div class="chip">Soft Girl</div>
-        <div class="chip">Elegant</div>
-        <div class="chip">Street</div>
-        <div class="chip">Cozy</div>
-        <div class="chip">Premium</div>
-        <div class="chip">Minimal</div>
-        <div class="chip">Party</div>
-        <div class="chip">Classy</div>
-        <div class="chip">Royal</div>
-        <div class="chip">Sporty</div>
-        <div class="chip">Glam</div>
-        <div class="chip">Basic</div>
-        <div class="chip">Diva</div>
-        <div class="chip">Academic</div>
-        <div class="chip">Dark</div>
-        <div class="chip">Artistic</div>
-      </div>
-
-      <!-- Create button -->
-      <button class="create-btn" type="button" onclick="goStarCard()"
-        id="createBtn">
-        StarCard’ımı Oluştur ✦
+    <div class="ecosystem-actions">
+      <button class="ecosystem-nail" id="ecosystemNailButton">NailStaré</button>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+        <span></span><span></span>
       </button>
+    </div>
+  </div>
 
-      <!-- Bottom text -->
-      <div class="bottom-box">
-        <span id="bottom1">Bugünkü yıldızını görmek ister misin? ✦</span>
-        <div id="bottom2" class="bottom-ai">
-          StarMode Activated.</span>
+  <div class="menu-overlay" id="menuOverlay">
+    <div class="menu-overlay-inner">
+      <div class="menu-links">
+        <a href="#storeStage" id="menuGetApp">GET THE APP</a>
+        <button type="button" data-modal="about">ABOUT US</button>
+        <button type="button" data-modal="blog">BLOG</button>
+        <a href="mailto:info@medastare.com">SUPPORT</a>
+        <button type="button" data-modal="contact">CONTACT</button>
+      </div>
+
+      <div class="menu-social">
+        <a href="https://www.linkedin.com/company/medastare/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <img src="linkedin-logo.png" alt="LinkedIn">
+        </a>
+        <a href="https://x.com/medastareapp" target="_blank" rel="noopener noreferrer" aria-label="X">
+          <img src="x-logo.png" alt="X">
+        </a>
+        <a href="https://www.instagram.com/medastare.co?igsh=MTJmNnZveDk3OHU4eA%3D%3D&utm_source=qr">
+          <img src="instagram-logo.png" alt="Instagram">
+        </a>
+      </div>
+
+      <div class="menu-footer-links">
+        <button type="button" data-modal="privacy">Privacy Policy</button>
+        <button type="button" data-modal="terms">Terms of Use</button>
+      </div>
+
+      <div class="menu-copy">© 2026 MedaStaré. All Rights Reserved.</div>
+    </div>
+  </div>
+
+  <div class="info-modal" id="infoModal">
+    <div class="info-card" id="infoCard"></div>
+  </div>
+
+  <div class="content">
+    <section class="modules-stage" id="modulesStage">
+      <div class="modules-layer" id="modulesLayer">
+        <div class="module-viewport">
+
+          <div class="module-stack" id="moduleStack">
+            <div class="startrip-shell hidden" id="starTripShell">
+              <div class="startrip-plane"></div>
+              <h2 class="module-title startrip-maldives">StarTrip: Maldives</h2>
+            </div>
+
+            <div class="normal-module hidden" id="normalModule">
+              <h2 class="module-title" id="moduleText">FashionStaré</h2>
+              <p class="module-desc" id="moduleDesc">AI styling, elevated for a luxury fashion ecosystem.</p>
+            </div>
+          </div>
+
+          <div class="nail-cta-wrap hidden" id="nailCtaWrap">
+            <button class="module-title buttonish nail-dark" id="nailButton">NailStaré</button>
+            <div class="nail-cta-sub">AI-powered salon growth system for selected partner salons.</div>
+          </div>
+
+          <div class="phrase-stage-wrap hidden" id="phraseStageWrap">
+            <div class="phrase-rail">
+              <div class="phrase-word left" id="phraseWord">AI.</div>
+            </div>
+          </div>
+
+          <div class="store-cta-wrap hidden" id="storeCtaWrap">
+            <h2 class="module-title" id="storeStage">Get the App</h2>
+            <p class="module-desc">Download MedaStaré and step into the ecosystem.</p>
+            <div class="store-badges">
+              <a class="store-badge-link" href="#" aria-label="Google Play">
+                <img class="store-badge" src="google-play.png" alt="Google Play">
+              </a>
+              <a class="store-badge-link" href="#" aria-label="App Store">
+                <img class="store-badge" src="app-store.png" alt="App Store">
+              </a>
+            </div>
+            <div class="store-copy">Available soon on App Store and Google Play.</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="nail-overlay" id="nailOverlay">
+    <div class="nail-shell">
+      <div class="topbar">
+        <button class="back-btn" id="nailBackBtn">← Back</button>
+        <div class="mini-logo">NailStaré</div>
+        <div style="width:60px"></div>
+      </div>
+
+      <div id="nailIntroView">
+        <div class="glass hero-card">
+          <h1 class="nail-title">NailStaré</h1>
+          <p class="nail-subtitle">AI-powered nail salon growth system.</p>
+
+          <div class="glass" style="margin-bottom:18px;">
+            <div class="section-title">What is NailStaré?</div>
+            <div class="body-copy">
+              A next-generation technology platform designed for customer experience, team development and salon performance.
+            </div>
+          </div>
+
+          <div class="feature-grid">
+            <div class="feature-card"><div class="feature-icon">✦</div><h3>AI Nail Analysis</h3><p>Smart recommendations based on hand and nail form.</p></div>
+            <div class="feature-card"><div class="feature-icon">3D</div><h3>3D Try-On</h3><p>Let clients preview nail colors virtually on their own hands.</p></div>
+            <div class="feature-card"><div class="feature-icon">↗</div><h3>Trend Radar</h3><p>Bring global nail trends directly into your salon.</p></div>
+            <div class="feature-card"><div class="feature-icon">A</div><h3>NailStaré Academy</h3><p>Education and growth tools designed for your team.</p></div>
+            <div class="feature-card"><div class="feature-icon">P</div><h3>Salon Performance</h3><p>Reports, growth insights and performance analytics.</p></div>
+            <div class="feature-card"><div class="feature-icon">♦</div><h3>Exclusive Collections</h3><p>StarAura, Moonlight and premium seasonal collection layers.</p></div>
+          </div>
+
+          <div class="glass" style="margin-top:18px;">
+            <div class="notice">
+              <div class="notice-badge">✦</div>
+              <div>The system can be customized for salon needs. Some modules are unlocked for selected partner salons only.</div>
+            </div>
+          </div>
+
+          <div style="margin-top:22px;">
+            <button class="primary-btn" id="goApplyBtn">Apply for Salon Access</button>
+            <div class="muted-center">Selected salons only.</div>
+          </div>
         </div>
       </div>
 
-    </div>
-  </div>
-</div>
+      <div id="nailApplicationView" class="hidden">
+        <div class="glass">
+          <div class="section-title" style="font-size:22px;">NailStaré Application</div>
+          <div class="brandline">NailStaré × <span id="liveSalonName">Your Salon Name</span></div>
+          <div class="powered">Powered by MedaStaré</div>
+          <div class="field">
+            <label for="salonName">Salon Name</label>
+            <input id="salonName" type="text" placeholder="Salon name" />
+          </div>
+        </div>
 
-<script>
-/* local dil durumu */
-let onboardLang = "tr";
+        <div class="glass">
+          <div class="section-title">Salon Information</div>
+          <div class="form-grid">
+            <div class="field"><label for="ownerName">Owner / Manager Name</label><input id="ownerName" type="text" placeholder="Owner / manager name" /></div>
+            <div class="field"><label for="phone">Phone</label><input id="phone" type="text" placeholder="Phone" /></div>
+            <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="Email" /></div>
+            <div class="field">
+              <label for="salonType">Salon Type</label>
+              <select id="salonType">
+                <option value="">Select salon type</option>
+                <option>Nail Bar</option>
+                <option>Beauty Center</option>
+                <option>Boutique Nail Studio</option>
+                <option>Home Studio</option>
+              </select>
+            </div>
+            <div class="field"><label for="country">Country</label><input id="country" type="text" placeholder="Country" /></div>
+            <div class="field"><label for="city">City</label><input id="city" type="text" placeholder="City" /></div>
+          </div>
+        </div>
 
-/* trigger accordion */
-function toggleStarOnboard(){
-  const card  = document.getElementById("onboardCard");
-  const arrow = document.getElementById("starOnbArrow");
-  const isOpen = card.classList.contains("open");
-  if(isOpen){
-    card.classList.remove("open");
-    arrow.textContent = "▼";
-  }else{
-    card.classList.add("open");
-    arrow.textContent = "▲";
-  }
-}
+        <div class="glass">
+          <div class="section-title">Capacity & Services</div>
+          <div class="form-grid">
+            <div class="field"><label for="staffCount">Number of Staff</label><input id="staffCount" type="number" placeholder="Number of staff" /></div>
+            <div class="field"><label for="dailyClients">Average Daily Clients</label><input id="dailyClients" type="number" placeholder="Average daily clients" /></div>
+            <div class="field full">
+              <label>Services Offered</label>
+              <div class="chips" id="serviceChips">
+                <div class="chip">Nail Extensions</div>
+                <div class="chip">Nail Art</div>
+                <div class="chip">Manicure</div>
+                <div class="chip">Pedicure</div>
+                <div class="chip">Nail Care</div>
+                <div class="chip">Gel Polish</div>
+                <div class="chip">Builder / Extension Services</div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-/* chip selection (tek seçim) */
-document.querySelectorAll("#styleChips .chip, #moodChips .chip").forEach(chip=>{
-  chip.addEventListener("click",()=>{
-    const group = chip.parentNode;
-    group
-      .querySelectorAll(".chip")
-      .forEach(c=>c.classList.remove("active"));
-    chip.classList.add("active");
-  });
-});
+        <div class="glass">
+          <div class="section-title">Social Media</div>
+          <div class="field" style="margin-bottom:0;">
+            <label for="instagram">Instagram Account</label>
+            <input id="instagram" type="text" placeholder="Instagram account" />
+          </div>
+        </div>
 
-/* karttan starcard.html'e geç */
-function goStarCard(){
-  window.location.href = "starcard.html";
-}
+        <div class="glass">
+          <div class="section-title">NailStaré Packages</div>
+          <div class="package-card" data-package="basic"><div class="package-title">Basic</div><p class="package-desc">Salon panel, AI Nail Analysis, Trend Radar and core visibility tools.</p></div>
+          <div class="package-card" data-package="premium"><div class="package-title">Premium</div><p class="package-desc">Academy access, advanced reports, trend radar and exclusive collection support.</p></div>
+          <div class="package-card" data-package="vip"><div class="package-title">VIP</div><p class="package-desc">3D Try-On, AI client analysis, Hologram Nail Workshop and VIP visibility layers.</p></div>
+        </div>
 
-/* TR / EN text data */
-const styleLabels = {
-  tr:["Modern","Modest","Mix"],
-  en:["Modern","Modest","Mixed"]
-};
+        <div class="glass">
+          <div class="section-title">Primary Need</div>
+          <div class="field" style="margin-bottom:0;">
+            <label for="primaryNeed">What do you want NailStaré to help your salon with most?</label>
+            <select id="primaryNeed">
+              <option value="">Select primary need</option>
+              <option>Client Acquisition</option>
+              <option>Salon Management</option>
+              <option>Education</option>
+              <option>Trend Tracking</option>
+              <option>Technology Integration</option>
+            </select>
+          </div>
+        </div>
 
-const moodLabels = {
-  tr:["Urban","Chill","Business","Hot Girl","Soft Girl","Elegant","Street","Cozy",
-      "Premium","Minimal","Party","Classy","Royal","Sporty","Glam","Basic",
-      "Diva","Academic","Dark","Artistic"],
-  en:["Urban","Chill","Business","Hot Girl","Soft Girl","Elegant","Street","Cozy",
-      "Premium","Minimal","Party","Classy","Royal","Sporty","Glam","Basic",
-      "Diva","Academic","Dark","Artistic"]
-};
+        <div class="glass">
+          <div class="notice">
+            <div class="notice-badge">✦</div>
+            <div>Applications are reviewed by the NailStaré operations team. Suitable salons will be contacted.</div>
+          </div>
+        </div>
 
-/* tüm metinleri güncelle */
-function applyOnboardTexts(){
-  if(onboardLang==="tr"){
-    document.getElementById("medaiLine").textContent =
-      "Merhaba yıldızım, bugün senin enerjine uygun kombinini oluşturmaya hazırım.";
-    document.getElementById("labelName").textContent = "Adın nedir?";
-    document.getElementById("userName").placeholder  = "Adın";
-    document.getElementById("labelStyle").textContent = "Stilini seç:";
-    document.getElementById("labelMood").textContent  = "Bugünkü enerjin hangisi?";
-    document.getElementById("createBtn").textContent  = "StarCard’ımı Oluştur ✦";
-    document.getElementById("bottom1").textContent    = "Bugünkü yıldızını görmek ister misin? ✦";
-    document.getElementById("bottom2").textContent    =
-      "StarMode Activated.";
-  }else{
-    document.getElementById("medaiLine").textContent =
-      "Hello star, I’m ready to design your outfit for today’s energy.";
-    document.getElementById("labelName").textContent = "What’s your name?";
-    document.getElementById("userName").placeholder  = "Your name";
-    document.getElementById("labelStyle").textContent = "Choose your style:";
-    document.getElementById("labelMood").textContent  = "What's your energy today?";
-    document.getElementById("createBtn").textContent  = "Create my StarCard ✦";
-    document.getElementById("bottom1").textContent    = "Would you like to see today’s star? ✦";
-    document.getElementById("bottom2").textContent    =
-      "StarMode Activated.";
-  }
-
-  /* chips */
-  document.querySelectorAll("#styleChips .chip").forEach((chip,i)=>{
-    chip.textContent = styleLabels[onboardLang][i];
-  });
-  document.querySelectorAll("#moodChips .chip").forEach((chip,i)=>{
-    chip.textContent = moodLabels[onboardLang][i];
-  });
-}
-
-/* local EN / TR toggle */
-function toggleOnboardLang(){
-  onboardLang = (onboardLang==="tr") ? "en" : "tr";
-  applyOnboardTexts();
-}
-
-/* ilk yüklemede TR metinleri uygula */
-applyOnboardTexts();
-</script>
-
-</section>
-  
-<section id="collections">
-  <h2 data-tr="Koleksiyonlar" data-en="Collections">Collections</h2>
-  <div class="grid">
-    <div class="grid-item">
-      <img src="medabeaute-perfume-01.jpeg" alt="MedaBeauté" />
-      <div class="caption">
-        <h3>MedaBeauté</h3>
-        <p data-tr="Kozmetik, parfüm, makyaj ve bakımda global dokunuş." data-en="Global cosmetics, perfume, makeup & skincare by MedaBeauté.">Global cosmetics, perfume, makeup & skincare by MedaBeauté.</p>
-      </div>
-    </div>
-    <div class="grid-item">
-      <img src="medastare-business-01.jpeg" alt="Business Collection" />
-      <div class="caption">
-        <h3>Business Collection</h3>
-        <p data-tr="Modern ve sofistike çizgilerle iş dünyasına stil." data-en="Modern and sophisticated business silhouettes.">Modern and sophisticated business silhouettes.</p>
-      </div>
-    </div>
-    <div class="grid-item">
-      <img src="medastare-femmesport-01.jpeg" alt="FemmeSport" />
-      <div class="caption">
-        <h3>FemmeSport</h3>
-        <p data-tr="Sportif şıklıkla birleşen zarif detaylar." data-en="Elegant activewear with refined energy.">Elegant activewear with refined energy.</p>
-      </div>
-    </div>
-    <div class="grid-item">
-      <img src="medastare-glamcouture-01.jpeg" alt="GlamCouture" />
-      <div class="caption">
-        <h3>GlamCouture</h3>
-        <p data-tr="Kırmızı halıya layık couture parçalarla yıldız gibi parlaman için." data-en="Red carpet couture pieces to make you shine.">Red carpet couture pieces to make you shine.</p>
-      </div>
-    </div>
-    <div class="grid-item">
-      <img src="medastare-minimal-01.jpg" alt="Minimal Elegance" />
-      <div class="caption">
-        <h3>Minimal Elegance</h3>
-        <p data-tr="Sade zarafet ve minimal çizgilerle global ikonlar bir arada." data-en="Global icons of minimalist elegance.">Global icons of minimalist elegance.</p>
-      </div>
-    </div>
-    <div class="grid-item">
-      <img src="medastare-urbanflare-01.jpeg" alt="UrbanFlare" />
-      <div class="caption">
-        <h3>UrbanFlare</h3>
-        <p data-tr="Şehrin enerjisini yansıtan global parçalar tek platformda." data-en="City-inspired global pieces in one universe.">City-inspired global pieces in one universe.</p>
-      </div>
-    </div>
-    <div class="grid-item">
-      <img src="petstare.PNG" alt="PetStaré" />
-      <div class="caption">
-        <h3>PetStaré</h3>
-        <p data-tr="Teknoloji, sadece insanlar için değil; en sadık dostlarımız için de." data-en="Technology designed for our most loyal friends.">Technology designed for our most loyal friends.</p>
+        <div style="margin-top:20px;">
+          <button class="primary-btn" id="submitApplicationBtn">Submit Application</button>
+          <div class="muted-center">Selected salons only.</div>
+        </div>
       </div>
     </div>
   </div>
-</section>
 
-  <section class="waitlist" id="waitlist">
-  <h2 data-tr="Bekleme Listesine Katıl" data-en="Join the Waitlist">Join the Waitlist</h2>
-  <p data-tr="Özel, benzersiz içerik ve modüllere ilk erişen sen ol."
-     data-en="Be the first to access exclusive, unique content and modules.">
-    Be the first to access exclusive collections and previews.
-  </p>
-
-  <!-- DOĞRUDAN VERCEL API'YE POST -->
-  <form id="waitlist-form"
-        action="https://medastare.vercel.app/api/waitlist"
-        method="post"
-        accept-charset="utf-8"
-        enctype="application/x-www-form-urlencoded">
-    <input name="name"  type="text"  placeholder="Full Name"     required autocomplete="name" />
-    <input name="email" type="email" placeholder="Email Address" required autocomplete="email" />
-    <button type="submit" class="waitlist-btn">Sign Up ✦</button>
-  </form>
-</section>
-
-<style>
-  @keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-  @keyframes buttonGlow{0%{box-shadow:0 0 10px rgba(212,175,55,.3),0 0 20px rgba(255,77,166,.1)}
-                        50%{box-shadow:0 0 30px rgba(212,175,55,.6),0 0 60px rgba(255,77,166,.4)}
-                        100%{box-shadow:0 0 10px rgba(212,175,55,.3),0 0 20px rgba(255,77,166,.1)}}
-  .waitlist-btn{
-    background:linear-gradient(90deg,#ff4da6,#d4af37,#ff4da6);
-    background-size:300% 300%;
-    animation:gradientShift 4s ease infinite,buttonGlow 3s ease-in-out infinite;
-    border:none;border-radius:10px;color:#000;font-weight:600;font-size:1.05rem;
-    padding:14px 30px;cursor:pointer;transition:transform .3s ease
-  }
-  .waitlist-btn:hover{transform:scale(1.07)}
-  .waitlist-btn:active{transform:scale(.99)}
-</style>
-
-<!-- (opsiyonel) Bu sayfa Vercel'de açılırsa relative'a çevirir -->
-<script>
-  (function(){
-    const f=document.getElementById('waitlist-form');
-    if(!f) return;
-    if(/vercel\.app$/i.test(location.hostname)) f.action='/api/waitlist';
-  })();
-</script>
-
- <!-- ⚜️ MedAİ Floating Chat (Luxury Gold Glow Edition – Connected Edition v12.4 / Fixed API & Styled Buttons) -->
-<div id="medai-launcher"></div>
-<div id="medai-panel" style="display:none;"></div>
-
-<script>
-// ✨ GOLDEN FLOATING BUTTON
-const medaiLauncher = document.getElementById("medai-launcher");
-const medaiPanel = document.getElementById("medai-panel");
-
-medaiLauncher.innerHTML = `
-  <div id="medaiButton" style="
-    position: fixed;
-    bottom: 40px;
-    left: 50px;
-    background: linear-gradient(135deg,#000000,#1a1a1a);
-    border: 1px solid rgba(212,175,55,0.8);
-    border-radius: 50px;
-    color: #d4af37;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    padding: 14px 38px;
-    font-size: 15px;
-    cursor: pointer;
-    box-shadow: 0 0 25px rgba(212,175,55,0.45);
-    animation: pulseGold 3s infinite ease-in-out;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    z-index: 9999;
-  ">
-    MedAI
-  </div>
-`;
-
-medaiPanel.innerHTML = `
-  <div style="
-    position: fixed;
-    bottom: 110px;
-    left: 40px;
-    background: linear-gradient(160deg, rgba(0,0,0,0.9), rgba(30,30,30,0.95));
-    border: 1px solid rgba(212,175,55,0.4);
-    border-radius: 26px;
-    width: 380px;
-    max-height: 520px;
-    color: #fff;
-    font-family: 'Inter', sans-serif;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 0 40px rgba(212,175,55,0.3);
-    backdrop-filter: blur(20px);
-    animation: fadeIn 0.5s ease forwards;
-    z-index: 9999;
-  ">
-    <div style="
-      background: linear-gradient(90deg,#d4af37,#000);
-      padding: 16px;
-      text-align: center;
-      font-weight: 600;
-      font-size: 16px;
-      color: #000;
-    ">
-        MedAI.m1
-    </div>
-    <div id="chatBody" style="
-      flex: 1;
-      padding: 18px;
-      overflow-y: auto;
-      background: rgba(0,0,0,0.3);
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      scrollbar-width: thin;
-      scrollbar-color: #d4af37 transparent;
-    "></div>
-    <div style="
-      display:flex;
-      align-items:center;
-      padding:14px;
-      background: rgba(255,255,255,0.05);
-      border-top: 1px solid rgba(212,175,55,0.25);
-    ">
-      <textarea id="userMessage" placeholder="Bana yaz..." 
-        style="flex:1;background:rgba(255,255,255,0.1);border:none;
-        border-radius:12px;padding:10px 14px;color:#fff;font-size:14px;
-        resize:none;outline:none;height:46px;"></textarea>
-      <button id="sendMessage" style="
-        background:linear-gradient(135deg,#d4af37,#f9e9b0);
-        border:none;border-radius:50%;width:46px;height:46px;
-        margin-left:10px;color:black;font-size:18px;cursor:pointer;
-        transition:transform 0.2s;box-shadow:0 0 12px rgba(212,175,55,0.4);
-      ">➤</button>
-    </div>
-  </div>
-`;
-
-// 🌌 Animasyonlar
-const style = document.createElement("style");
-style.innerHTML = `
-@keyframes pulseGold {
-  0%,100% { box-shadow: 0 0 25px rgba(212,175,55,0.3); transform: scale(1); }
-  50% { box-shadow: 0 0 40px rgba(255,215,0,0.7); transform: scale(1.08); }
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-@keyframes starPulse {
-  0%, 100% { opacity: 0.3; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1.2); }
-}
-.typing-stars {
-  display: flex;
-  gap: 6px;
-  justify-content: center;
-  margin: 10px 0;
-}
-.typing-star {
-  color: #d4af37;
-  font-size: 20px;
-  animation: starPulse 1.2s infinite;
-}
-.voice-btn, .stop-btn {
-  background: linear-gradient(135deg,#ff4da6,#ffd700);
-  border: none;
-  color: #000;
-  border-radius: 14px;
-  padding: 6px 14px;
-  margin-top: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.2s;
-  box-shadow: 0 0 8px rgba(255,192,203,0.4);
-}
-.stop-btn { display: none; } /* 💫 sustur başta görünmesin */
-.voice-btn:hover, .stop-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 12px rgba(255,215,0,0.6);
-}
-.feedback {
-  background: linear-gradient(135deg,#d4af37,#f9e9b0);
-  border:none;
-  border-radius:18px;
-  color:black;
-  font-weight:600;
-  padding:6px 12px;
-  margin:4px;
-  cursor:pointer;
-  transition:transform 0.2s;
-}
-.feedback:hover { transform: scale(1.08); }
-`;
-document.head.appendChild(style);
-
-// 💫 Hafıza
-let chatMemory = JSON.parse(localStorage.getItem("medaiMemory") || "[]");
-function updateMemory(message) {
-  chatMemory.push(message);
-  if (chatMemory.length > 3) chatMemory.shift();
-  localStorage.setItem("medaiMemory", JSON.stringify(chatMemory));
-}
-
-// 💬 Aç/Kapat
-let isOpen = false;
-const button = document.getElementById("medaiButton");
-button.addEventListener("click", () => {
-  isOpen = !isOpen;
-  medaiPanel.style.display = isOpen ? "flex" : "none";
-  button.innerHTML = isOpen ? "Kapat" : "MedAI";
-  if (isOpen) {
-    const chatBody = document.getElementById("chatBody");
-    chatBody.innerHTML = `
-      <div style="
-        align-self:flex-start;
-        background: linear-gradient(90deg, rgba(212,175,55,0.9), rgba(255,230,160,0.8));
-        color: #111;
-        padding: 12px 15px;
-        border-radius: 15px 15px 15px 5px;
-        font-size: 14px;
-        box-shadow: 0 0 10px rgba(212,175,55,0.4);
-        animation: fadeIn 0.6s ease;
-      ">
-        Hoş geldin, Ben MedAİ.<br>
-        Bugün enerjin yüksek hissediliyor...<br>
-        Birlikte stiline yıldız tozu katalım mı? ✨
+  <div class="success-modal" id="successModal">
+    <div class="success-card">
+      <h3>Application Received</h3>
+      <p>Your application has been successfully received. Our NailStaré operations team will contact you after the eligibility review.</p>
+      <div class="success-actions">
+        <button class="text-btn" id="successOkBtn">OK</button>
       </div>
-    `;
-  }
-});
+    </div>
+  </div>
 
-// 🔊 Sesli okuma & susturma
-let currentUtterance = null;
-function speak(text, id) {
-  stopSpeak(); // diğerleri kapanır
-  const stopBtn = document.querySelector(`#${id} .stop-btn`);
-  if (stopBtn) stopBtn.style.display = "inline-block"; // sadece bu aktif
+  <script>
+    for(let i=0;i<120;i++){
+      const s=document.createElement("div");
+      s.className="bg-star";
+      s.style.left=Math.random()*100+"vw";
+      s.style.top=Math.random()*100+"vh";
+      s.style.animationDelay=(Math.random()*2.8).toFixed(2)+"s";
+      s.style.width=s.style.height=(1 + Math.random()*2.2)+"px";
+      document.body.appendChild(s);
+    }
 
-  currentUtterance = new SpeechSynthesisUtterance(text);
-  currentUtterance.lang = "tr-TR";
-  currentUtterance.rate = 1.05;
-  currentUtterance.pitch = 1;
-  currentUtterance.onend = () => {
-    if (stopBtn) stopBtn.style.display = "none"; // bitince kaybol
-  };
-  speechSynthesis.speak(currentUtterance);
-}
-function stopSpeak() {
-  speechSynthesis.cancel();
-  document.querySelectorAll(".stop-btn").forEach(btn => (btn.style.display = "none"));
-}
+    const heroScene = document.getElementById("heroScene");
+    const logoWrap = document.getElementById("logoWrap");
+    const burstStars = [];
+    const STAR_COUNT = 18;
 
-// 🚀 Mesaj Gönderme + ⭐ Yazıyor animasyonu + IP + API bağlantısı
-document.addEventListener("click", async (e) => {
-  const chatBody = document.getElementById("chatBody");
+    for(let i=0;i<STAR_COUNT;i++){
+      const star = document.createElement("div");
+      star.className = "burst-star";
+      heroScene.appendChild(star);
 
-  if (e.target.id === "sendMessage") {
-    const userMessage = document.getElementById("userMessage").value.trim();
-    if (!userMessage) return;
+      const angle = (i / STAR_COUNT) * Math.PI * 2;
+      const radius = 70 + Math.random() * 120;
 
-    updateMemory({ role: "user", content: userMessage });
-    chatBody.innerHTML += `<div style="
-      align-self:flex-end;background:rgba(255,255,255,0.1);
-      padding:10px 14px;border-radius:15px 15px 5px 15px;
-      font-size:14px;max-width:75%;animation:fadeIn 0.4s ease;">
-      ${userMessage}
-    </div>`;
-    document.getElementById("userMessage").value = "";
+      burstStars.push({
+        el: star,
+        angle,
+        radius,
+        drift: 0.8 + Math.random() * 0.6
+      });
+    }
 
-    const typingDiv = document.createElement("div");
-    typingDiv.classList.add("typing-stars");
-    typingDiv.innerHTML = `<span class="typing-star">★</span><span class="typing-star">★</span><span class="typing-star">★</span>`;
-    chatBody.appendChild(typingDiv);
-    chatBody.scrollTop = chatBody.scrollHeight;
+    function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
+    function map(v,inMin,inMax,outMin,outMax){
+      const t = clamp((v-inMin)/(inMax-inMin),0,1);
+      return outMin + (outMax-outMin) * t;
+    }
 
-    try {
-      const userIP = await fetch("https://api.ipify.org?format=json")
-        .then(res => res.json())
-        .then(d => d.ip);
+    const moduleStack = document.getElementById("moduleStack");
+    const moduleText = document.getElementById("moduleText");
+    const moduleDesc = document.getElementById("moduleDesc");
+    const starTripShell = document.getElementById("starTripShell");
+    const normalModule = document.getElementById("normalModule");
+    const nailButton = document.getElementById("nailButton");
+    const ecosystemNailButton = document.getElementById("ecosystemNailButton");
+    const nailCtaWrap = document.getElementById("nailCtaWrap");
+    const phraseStageWrap = document.getElementById("phraseStageWrap");
+    const storeCtaWrap = document.getElementById("storeCtaWrap");
+    const ecosystemBar = document.getElementById("ecosystemBar");
+    const progressDots = [...document.querySelectorAll(".progress-dot")];
+    const marqueeItems = [...document.querySelectorAll("#ecosystemMarquee span")];
+    const menuToggle = document.getElementById("menuToggle");
+    const menuOverlay = document.getElementById("menuOverlay");
+    const infoModal = document.getElementById("infoModal");
+    const infoCard = document.getElementById("infoCard");
 
-      const response = await fetch("https://medastare.vercel.app/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMessage, memory: chatMemory, userIP }),
+    const phraseWord = document.getElementById("phraseWord");
+    const phraseSequence = [
+      { text:"AI.", cls:"left", duration:1300 },
+      { text:"Fashion.", cls:"center", duration:1300 },
+      { text:"Beauty.", cls:"right", duration:1300 },
+      { text:"Power.", cls:"center power", duration:1700 }
+    ];
+    let phraseIndex = 0;
+    let phraseInterval = null;
+    let autoStoreTriggered = false;
+
+    const modules = [
+      { title:"StarTrip: Maldives", desc:"", special:"startrip" },
+      { title:"FashionStaré", desc:"AI styling, elevated for a luxury fashion ecosystem." },
+      { title:"MedArena", desc:"Challenges, visibility and momentum across the MedaStaré universe." },
+      { title:"StyleTrack", desc:"Your style memory, visualized with intelligent tracking." },
+      { title:"StyleStaré", desc:"Curated identity refined by AI and premium aesthetic logic." },
+      { title:"MedaBeauté", desc:"Beauty intelligence meets luxury rituals and elevated discovery." },
+      { title:"PetStaré", desc:"Care, style and smart companionship in one elegant layer." }
+    ];
+
+    const modalContent = {
+      about: `
+        <button class="modal-star-close" type="button" onclick="closeInfoModal()">✦</button>
+        <h2>About Us</h2>
+        <p>
+          MedaStaré is a luxury AI-powered beauty and fashion ecosystem designed to merge intelligent personalization with elevated digital experience.
+          We are building more than an app. We are shaping a refined universe where styling, beauty discovery, self-expression and future technology exist in one seamless destination.
+          From fashion intelligence to beauty rituals, from premium challenges to signature experiences, MedaStaré is created for those who want elegance, innovation and power in the same space.
+        </p>
+      `,
+      blog: `
+        <button class="modal-star-close" type="button" onclick="closeInfoModal()">✦</button>
+        <h2>Blog</h2>
+        <div class="info-blog-grid">
+          <div class="info-blog-item">
+            <h3>The Future of AI Beauty</h3>
+            <p>Beauty is moving beyond product discovery into intelligent personalization. MedaStaré explores a world where AI understands taste, mood and identity with premium precision.</p>
+          </div>
+          <div class="info-blog-item">
+            <h3>Fashion, Identity and Digital Luxury</h3>
+            <p>Style is no longer just what you wear. It is your visual language. Our ecosystem is designed to translate that language into sharper, more elevated decisions.</p>
+          </div>
+          <div class="info-blog-item">
+            <h3>Why MedaStaré Is Building More Than an App</h3>
+            <p>We believe the future belongs to ecosystems, not isolated tools. MedaStaré connects fashion, beauty, AI and aspiration under one signature world.</p>
+          </div>
+        </div>
+      `,
+      contact: `
+        <button class="modal-star-close" type="button" onclick="closeInfoModal()">✦</button>
+        <h2>Contact</h2>
+        <p>Leave your details and message below.</p>
+        <form class="contact-form-modal">
+          <input type="text" placeholder="Name Surname">
+          <input type="email" placeholder="Email">
+          <textarea placeholder="Your message"></textarea>
+          <button type="button">Send Message</button>
+        </form>
+      `,
+      privacy: `
+        <button class="modal-star-close" type="button" onclick="closeInfoModal()">✦</button>
+        <h2>Privacy Policy</h2>
+        <p>This area can be replaced with your full privacy policy text later.</p>
+      `,
+      terms: `
+        <button class="modal-star-close" type="button" onclick="closeInfoModal()">✦</button>
+        <h2>Terms of Use</h2>
+        <p>This area can be replaced with your full terms of use text later.</p>
+      `
+    };
+
+    function openInfoModal(type){
+      infoCard.innerHTML = modalContent[type] || "";
+      infoModal.classList.add("open");
+    }
+
+    function closeInfoModal(){
+      infoModal.classList.remove("open");
+    }
+
+    window.closeInfoModal = closeInfoModal;
+
+    infoModal.addEventListener("click", (e)=>{
+      if(e.target === infoModal) closeInfoModal();
+    });
+
+    document.querySelectorAll("[data-modal]").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        openInfoModal(btn.dataset.modal);
+      });
+    });
+
+    function runPhraseStep(){
+      const step = phraseSequence[phraseIndex];
+      phraseWord.className = "phrase-word " + step.cls;
+      phraseWord.textContent = step.text;
+
+      requestAnimationFrame(() => {
+        phraseWord.classList.add("active");
       });
 
-      const data = await response.json();
-      const reply = data.reply || "Bağlantı kurulamadı 💫";
-      updateMemory({ role: "assistant", content: reply });
-      const messageId = "msg_" + Date.now();
+      setTimeout(() => {
+        phraseWord.classList.remove("active");
+      }, step.duration);
 
-      typingDiv.remove();
-      chatBody.innerHTML += `<div id="${messageId}" style="
-        align-self:flex-start;
-        background: linear-gradient(90deg, rgba(212,175,55,0.9), rgba(255,230,160,0.8));
-        color:#111;padding:12px 15px;border-radius:15px 15px 15px 5px;
-        font-size:14px;box-shadow:0 0 10px rgba(212,175,55,0.3);
-        animation:fadeIn 0.5s ease;">
-        ${reply}
-        <br>
-        <button class="voice-btn" onclick="speak(\`${reply.replace(/[`']/g, '')}\`, '${messageId}')">Dinle</button>
-        <button class="stop-btn" onclick="stopSpeak()">Sustur</button>
-        <div style="text-align:center;margin-top:5px;">
-          <button class="feedback" data-type="like">💖 Beğendim</button>
-          <button class="feedback" data-type="dislike">😐 Beğenmedim</button>
-        </div>
-      </div>`;
-      chatBody.scrollTop = chatBody.scrollHeight;
-    } catch (err) {
-      console.error("❌ Bağlantı hatası:", err);
-      typingDiv.remove();
-      chatBody.innerHTML += `<div style="
-        align-self:flex-start;background:#111;color:#d4af37;
-        padding:10px 14px;border-radius:15px;font-size:14px;">
-        Bağlantıda bir sorun oluştu 💫
-      </div>`;
+      phraseIndex = (phraseIndex + 1) % phraseSequence.length;
     }
-  }
 
-  // 💖 Feedback handler
-  if (e.target.classList.contains("feedback")) {
-    const feedback = e.target.dataset.type;
-    await fetch("https://medastare.vercel.app/api/chat", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ feedback }),
-    });
-    e.target.parentNode.innerHTML = `<div class="thanks">Geri bildirimin için teşekkürler!</div>`;
-  }
-});
-</script>
-<!-- ⚜️ MedAİ Floating Chat Bitiş -->
-  
-<section id="about">
-  <h2 data-tr="Hakkımızda" data-en="About MedaStaré">About MedaStaré</h2>
-  <p data-tr="MedaStaré, yapay zekayı moda ve güzellikle buluşturan, Türkiye'den dünyaya uzanan ilk moda teknolojisi ekosistemidir. Kadın girişimciliğini, global markalarla yerel inovasyonu aynı platformda birleştirir."
-     data-en="MedaStaré brings AI together with fashion and beauty — a tech ecosystem born in Turkey, expanding globally. It unites female entrepreneurship, global brands, and local innovation on one elegant platform.">
-    MedaStaré brings AI together with fashion and beauty a tech ecosystem born in Turkey, expanding globally. It unites female entrepreneurship, global brands, and local innovation on one elegant platform.
-  </p>
-</section>
-
-<section id="vision">
-  <h2 data-tr="Vizyonumuz" data-en="Our Vision">Our Vision</h2>
-  <p data-tr="Türkiye’nin ilk yapay zekâ destekli moda ve güzellik ekosistemini kuruyoruz. 9 patent başvurusu, 50'den fazla özel içerik ve uluslararası işbirliğiyle geleceğin dijital moda deneyimini inşa ediyoruz."
-     data-en="We are building Turkey’s first AI-powered fashion and beauty ecosystem with 9 patent applications, 50+ proprietary contents, and international collaborations shaping the digital future.">
-    We are building Turkey’s first AI-powered fashion and beauty ecosystem with 9 patent applications, 50+ proprietary contents, and international collaborations shaping the digital future.
-  </p>
-</section>
-
-<section id="future">
-  <h2 data-tr="Gelecek Potansiyeli" data-en="Future Potential">Future Potential</h2>
-  <p data-tr="Küresel moda ve güzellik pazarı 3 trilyon doları aşıyor. MedaStaré, technopark projesi statüsüyle ve hızla artan küresel görünürlüğüyle bu pazarda yeni bir dönemi temsil ediyor."
-     data-en="The global fashion & beauty market exceeds $3 trillion. With technopark project status and rapidly growing international visibility, MedaStaré represents a new era in this market.">
-    The global fashion & beauty market exceeds $3 trillion. With technopark project status and rapidly growing international visibility, MedaStaré represents a new era in this market.
-  </p>
-</section>
-
-  <!-- Founder Button -->
-<div style="margin-top:45px;text-align:center;">
-  <a href="founder.html"
-     style="
-       display:inline-block;
-       padding:14px 38px;
-       background:linear-gradient(90deg,#FFD700,#F5C542,#D4AF37);
-       color:#000;
-       font-family:'Playfair Display',serif;
-       font-weight:600;
-       font-size:1.15rem;
-       border-radius:40px;
-       text-decoration:none;
-       position:relative;
-       overflow:hidden;
-       transition:all .4s ease;
-       box-shadow:0 0 25px rgba(255,215,0,.4);
-       animation:goldPulse 3s ease-in-out infinite;
-     "
-     onmouseover="this.style.transform='scale(1.08)';this.style.boxShadow='0 0 40px rgba(255,230,150,0.8)';"
-     onmouseout="this.style.transform='scale(1)';this.style.boxShadow='0 0 25px rgba(255,215,0,.4)';"
-  >
-    Meet the Founder & CEO 
-  </a>
-</div>
-
-<!-- Inline Animation -->
-<style>
-@keyframes goldPulse {
-  0%,100% { box-shadow:0 0 20px rgba(255,215,0,0.4); }
-  50%     { box-shadow:0 0 40px rgba(255,215,0,0.9); }
-}
-</style>
-  
-<footer id="contact">
-  <div class="grid">
-    <div>
-      <h4 data-tr="Şirket" data-en="Company">Company</h4>
-      <a href="/careers.html">Careers</a>
-      <a href="/contact.html">Contact</a>
-    </div>
-    <div>
-      <h4 data-tr="Sosyal" data-en="Social">Social</h4>
-      <a href="https://www.instagram.com/medastareapp" target="_blank">Instagram</a>
-      <a href="https://x.com/medastareapp" target="_blank">X (Twitter)</a>
-      <a href="https://www.linkedin.com/company/medastare/" target="_blank">LinkedIn</a>
-      <a href="https://www.crunchbase.com/organization/medastar%C3%A9" target="_blank">Crunchbase</a>
-    </div>
-  </div>
-  <!-- Reserved metni BİLEREK İngilizce bırakıldı -->
-  <small>© 2025 MedaStaré. All rights reserved.</small>
-</footer>
-
-<button id="backToTop" aria-label="Back to top">↑</button>
-
-<script>
-/* ===== Header scroll bg ===== */
-document.addEventListener("scroll", ()=>{
-  const h=document.querySelector("header");
-  if(!h) return;
-  h.classList.toggle("scrolled", window.scrollY>50);
-}, {passive:true});
-
-/* ===== Back to top ===== */
-(function(){
-  const btn=document.getElementById("backToTop");
-  if(!btn) return;
-  const toggle=()=>btn.classList.toggle("show", window.scrollY>200);
-  toggle();
-  window.addEventListener("scroll", toggle, {passive:true});
-  btn.addEventListener("click", ()=>window.scrollTo({top:0,behavior:"smooth"}));
-})();
-
-/* ===== Language toggle (nav + başlıklar + açıklamalar + footer başlıkları) ===== */
-let LANG="en";
-function toggleLang(){
-  LANG=(LANG==="en")?"tr":"en";
-  document.querySelectorAll("[data-tr]").forEach(el=>{
-    const tr=el.getAttribute("data-tr");
-    const en=el.getAttribute("data-en") || el.textContent;
-    if(!el.getAttribute("data-en")) el.setAttribute("data-en", el.textContent);
-    el.textContent=(LANG==="tr")?tr:el.getAttribute("data-en");
-  });
-  const t=document.querySelector(".lang-toggle");
-  if(t) t.textContent=(LANG==="tr")?"EN | TR":"TR | EN";
-}
-
-/* ===== Particles (retina + bağ çizgili) ===== */
-(function(){
-  const canvas=document.getElementById("particles");
-  if(!canvas) return;
-  const ctx=canvas.getContext("2d");
-  const DPR=Math.min(window.devicePixelRatio||1,2);
-  const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  function resize(){
-    const w=Math.floor(window.innerWidth*DPR);
-    const h=Math.floor(window.innerHeight*DPR);
-    canvas.width=w; canvas.height=h;
-    canvas.style.width=window.innerWidth+"px";
-    canvas.style.height=window.innerHeight+"px";
-  }
-  resize(); window.addEventListener("resize", resize, {passive:true});
-
-  const N=110, maxDist=140*DPR, speed=0.35*DPR;
-  const P=Array.from({length:N}, ()=>({
-    x:Math.random()*canvas.width,
-    y:Math.random()*canvas.height,
-    dx:(Math.random()-.5)*speed,
-    dy:(Math.random()-.5)*speed,
-    r:(1.1+Math.random()*2.1)*DPR
-  }));
-
-  function draw(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    // dots
-    for(const p of P){
-      ctx.beginPath();
-      ctx.fillStyle="rgba(212,175,55,0.85)";
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fill();
+    function startPhraseLoop(){
+      if(phraseInterval) return;
+      runPhraseStep();
+      phraseInterval = setInterval(runPhraseStep, 1600);
     }
-    // links
-    for(let i=0;i<N;i++){
-      for(let j=i+1;j<N;j++){
-        const a=P[i], b=P[j];
-        const dx=a.x-b.x, dy=a.y-b.y;
-        const d2=dx*dx+dy*dy;
-        if(d2<maxDist*maxDist){
-          const alpha=0.25*(1-Math.sqrt(d2)/maxDist);
-          ctx.strokeStyle=`rgba(212,175,55,${alpha})`;
-          ctx.lineWidth=DPR*0.6;
-          ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); ctx.stroke();
-        }
+
+    function stopPhraseLoop(){
+      if(phraseInterval){
+        clearInterval(phraseInterval);
+        phraseInterval = null;
+      }
+      phraseIndex = 0;
+      phraseWord.className = "phrase-word left";
+      phraseWord.textContent = "AI.";
+      phraseWord.classList.remove("active");
+    }
+
+    function openMenu(){
+      menuOverlay.classList.add("open");
+      menuToggle.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeMenu(){
+      menuOverlay.classList.remove("open");
+      menuToggle.classList.remove("open");
+      if(!document.getElementById("nailOverlay").classList.contains("open")){
+        document.body.style.overflow = "";
       }
     }
-  }
-  function step(){
-    for(const p of P){
-      p.x+=p.dx; p.y+=p.dy;
-      if(p.x<0||p.x>canvas.width)  p.dx*=-1;
-      if(p.y<0||p.y>canvas.height) p.dy*=-1;
+
+    menuToggle.addEventListener("click", () => {
+      if(menuOverlay.classList.contains("open")) closeMenu();
+      else openMenu();
+    });
+
+    menuOverlay.querySelectorAll("a, button").forEach(link => {
+      link.addEventListener("click", (e) => {
+        if(e.currentTarget.dataset.modal) return;
+        closeMenu();
+      });
+    });
+
+    function updateProgress(activeIndex){
+      progressDots.forEach((dot,i)=>{
+        dot.classList.toggle("active", i === activeIndex);
+      });
+
+      marqueeItems.forEach(item=>{
+        item.classList.toggle("active", item.dataset.name === (modules[activeIndex]?.title || ""));
+      });
     }
-  }
-  function loop(){ draw(); if(!reduced){ step(); requestAnimationFrame(loop); } }
-  document.addEventListener("visibilitychange", ()=>{ if(!document.hidden && !reduced) requestAnimationFrame(loop); });
-  loop();
-})();
-</script>
+
+    function hideAllStages(){
+      moduleStack.classList.remove("show");
+      nailCtaWrap.classList.remove("show");
+      phraseStageWrap.classList.remove("show");
+      storeCtaWrap.classList.remove("show");
+
+      nailCtaWrap.classList.add("hidden");
+      phraseStageWrap.classList.add("hidden");
+      storeCtaWrap.classList.add("hidden");
+      moduleStack.classList.add("hidden");
+    }
+
+    function scrollToStoreStage(){
+      const start = 760;
+      const step = 430;
+      const modulesEnd = start + (modules.length * step);
+      const nailStageStart = modulesEnd;
+      const phraseStageStart = nailStageStart + step;
+      const storeStageStart = phraseStageStart + step;
+      window.scrollTo({ top: storeStageStart + 8, behavior: "smooth" });
+    }
+
+    function updateModules(scrollY){
+      const start = 760;
+      const step = 430;
+      const modulesEnd = start + (modules.length * step);
+      const topBarStart = modulesEnd - 200;
+      const nailStageStart = modulesEnd;
+      const phraseStageStart = nailStageStart + step;
+      const storeStageStart = phraseStageStart + step;
+
+      const showBar = scrollY > topBarStart;
+      ecosystemBar.classList.toggle("show", showBar);
+
+      if(scrollY < start){
+        hideAllStages();
+        moduleStack.classList.remove("hidden");
+        progressDots.forEach(dot=>dot.classList.remove("active"));
+        stopPhraseLoop();
+        autoStoreTriggered = false;
+        return;
+      }
+
+      const relative = scrollY - start;
+      const index = Math.floor(relative / step);
+
+      if(index >= 0 && index < modules.length){
+        const local = relative - index * step;
+
+        hideAllStages();
+        moduleStack.classList.remove("hidden");
+        stopPhraseLoop();
+        autoStoreTriggered = false;
+
+        if(modules[index].special === "startrip"){
+          starTripShell.classList.remove("hidden");
+          normalModule.classList.add("hidden");
+        }else{
+          starTripShell.classList.add("hidden");
+          normalModule.classList.remove("hidden");
+          moduleText.textContent = modules[index].title;
+          moduleDesc.textContent = modules[index].desc;
+        }
+
+        const visible = local > 30 && local < 320;
+        moduleStack.classList.toggle("show", visible);
+        updateProgress(index);
+        return;
+      }
+
+      if(scrollY >= nailStageStart && scrollY < phraseStageStart){
+        const local = scrollY - nailStageStart;
+        hideAllStages();
+        nailCtaWrap.classList.remove("hidden");
+        nailCtaWrap.classList.toggle("show", local > 40);
+        stopPhraseLoop();
+        autoStoreTriggered = false;
+        updateProgress(7);
+        return;
+      }
+
+      if(scrollY >= phraseStageStart && scrollY < storeStageStart){
+        const local = scrollY - phraseStageStart;
+        hideAllStages();
+        phraseStageWrap.classList.remove("hidden");
+        phraseStageWrap.classList.toggle("show", local > 40);
+        startPhraseLoop();
+        updateProgress(8);
+
+        if(local > 120 && !autoStoreTriggered){
+          autoStoreTriggered = true;
+          setTimeout(() => {
+            const currentY = window.scrollY;
+            if(currentY >= phraseStageStart && currentY < storeStageStart){
+              scrollToStoreStage();
+            }
+          }, 6200);
+        }
+        return;
+      }
+
+      if(scrollY >= storeStageStart){
+        const local = scrollY - storeStageStart;
+        hideAllStages();
+        storeCtaWrap.classList.remove("hidden");
+        storeCtaWrap.classList.toggle("show", local > 40);
+        stopPhraseLoop();
+        updateProgress(9);
+        return;
+      }
+    }
+
+    function updateScene(){
+      const s = window.scrollY;
+
+      const moveProgress = clamp((s - 180) / 380, 0, 1);
+      const left = map(moveProgress, 0, 1, 50, 11);
+      const top  = map(moveProgress, 0, 1, 50, 9);
+      const scale = map(moveProgress, 0, 1, 1, 0.62);
+
+      logoWrap.style.left = left + "%";
+      logoWrap.style.top = top + "%";
+      logoWrap.style.transform = `translate(-50%,-50%) scale(${scale})`;
+
+      const glowA = map(moveProgress, 0, 1, 38, 14);
+      logoWrap.style.filter = `drop-shadow(0 0 ${glowA}px rgba(212,175,55,.18))`;
+
+      const vanishStart = 0.78;
+      const vanishProgress = clamp((moveProgress - vanishStart) / (1 - vanishStart), 0, 1);
+      const sideOpacity = 1 - vanishProgress;
+      logoWrap.style.opacity = sideOpacity;
+
+      burstStars.forEach((star, i) => {
+        const local = clamp((s - (50 + i * 8)) / 220, 0, 1);
+        const x = Math.cos(star.angle) * star.radius * local * star.drift;
+        const y = Math.sin(star.angle) * star.radius * local * star.drift;
+        const starScale = map(local, 0, 1, 0.15, 1.8);
+
+        let opacity = map(local, 0, 0.25, 0, 1);
+        if(local > 0.72){
+          opacity = map(local, 0.72, 1, 1, 0);
+        }
+
+        star.el.style.opacity = opacity;
+        star.el.style.transform =
+          `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${starScale})`;
+      });
+
+      updateModules(s);
+    }
+
+    window.addEventListener("scroll", updateScene, { passive:true });
+    updateScene();
+
+    document.getElementById("menuGetApp").addEventListener("click", (e)=>{
+      e.preventDefault();
+      closeMenu();
+      setTimeout(() => scrollToStoreStage(), 160);
+    });
+
+    const nailOverlay = document.getElementById("nailOverlay");
+    const nailBackBtn = document.getElementById("nailBackBtn");
+    const goApplyBtn = document.getElementById("goApplyBtn");
+    const nailIntroView = document.getElementById("nailIntroView");
+    const nailApplicationView = document.getElementById("nailApplicationView");
+
+    function openNailOverlay(){
+      nailOverlay.classList.add("open");
+      document.body.style.overflow = "hidden";
+      nailIntroView.classList.remove("hidden");
+      nailApplicationView.classList.add("hidden");
+    }
+
+    nailButton.addEventListener("click", openNailOverlay);
+    ecosystemNailButton.addEventListener("click", openNailOverlay);
+
+    nailBackBtn.addEventListener("click", () => {
+      if(!nailApplicationView.classList.contains("hidden")){
+        nailApplicationView.classList.add("hidden");
+        nailIntroView.classList.remove("hidden");
+        return;
+      }
+      nailOverlay.classList.remove("open");
+      if(!menuOverlay.classList.contains("open")){
+        document.body.style.overflow = "";
+      }
+    });
+
+    goApplyBtn.addEventListener("click", () => {
+      nailIntroView.classList.add("hidden");
+      nailApplicationView.classList.remove("hidden");
+      nailOverlay.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    const salonName = document.getElementById("salonName");
+    const liveSalonName = document.getElementById("liveSalonName");
+
+    salonName.addEventListener("input", () => {
+      liveSalonName.textContent = salonName.value.trim() || "Your Salon Name";
+    });
+
+    document.querySelectorAll("#serviceChips .chip").forEach(chip => {
+      chip.addEventListener("click", () => chip.classList.toggle("active"));
+    });
+
+    document.querySelectorAll(".package-card").forEach(card => {
+      card.addEventListener("click", () => {
+        document.querySelectorAll(".package-card").forEach(c => c.classList.remove("active"));
+        card.classList.add("active");
+      });
+    });
+
+    const submitApplicationBtn = document.getElementById("submitApplicationBtn");
+    const successModal = document.getElementById("successModal");
+    const successOkBtn = document.getElementById("successOkBtn");
+
+    submitApplicationBtn.addEventListener("click", () => {
+      successModal.classList.add("open");
+    });
+
+    successOkBtn.addEventListener("click", () => {
+      successModal.classList.remove("open");
+    });
+  </script>
 </body>
 </html>
