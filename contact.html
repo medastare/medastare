@@ -15,7 +15,7 @@
       --gold:#d4af37;
       --gold-soft:#f0d47a;
       --white:#fff;
-      --muted:rgba(255,255,255,.72);
+      --muted:rgba(255,255,255,.78);
       --muted2:rgba(255,255,255,.55);
       --line:rgba(255,255,255,.10);
       --glass:rgba(255,255,255,.05);
@@ -63,7 +63,7 @@
       transform:translate(-50%,-50%) scale(1);
       transform-origin:center center;
       z-index:20;
-      transition:transform .08s linear, filter .08s linear;
+      transition:transform .08s linear, filter .08s linear, opacity .2s linear;
     }
 
     .logo-wrap img{
@@ -110,7 +110,7 @@
 
     .modules-stage{
       position:relative;
-      min-height:420vh;
+      min-height:470vh;
       width:100%;
     }
 
@@ -131,6 +131,21 @@
       align-items:center;
       justify-content:center;
       padding:0 20px;
+      position:relative;
+    }
+
+    .module-stack{
+      text-align:center;
+      max-width:min(92vw, 900px);
+      padding:0 20px;
+      opacity:0;
+      transform:translateY(18px) scale(.965);
+      transition:opacity .34s ease, transform .34s ease;
+    }
+
+    .module-stack.show{
+      opacity:1;
+      transform:translateY(0) scale(1);
     }
 
     .module-title{
@@ -143,14 +158,36 @@
       text-shadow:
         0 0 18px rgba(212,175,55,.18),
         0 0 46px rgba(212,175,55,.08);
+      margin:0;
+      line-height:.95;
+    }
+
+    .module-desc{
+      margin-top:14px;
+      color:var(--muted);
+      font-size:clamp(14px, 2.2vw, 18px);
+      font-weight:500;
+      letter-spacing:.01em;
+      line-height:1.45;
+      text-align:center;
+      max-width:640px;
+      margin-left:auto;
+      margin-right:auto;
+      text-shadow:0 0 18px rgba(255,255,255,.04);
+    }
+
+    .nail-cta-wrap{
+      text-align:center;
       opacity:0;
       transform:translateY(18px) scale(.965);
       transition:opacity .34s ease, transform .34s ease;
+      pointer-events:none;
     }
 
-    .module-title.show{
+    .nail-cta-wrap.show{
       opacity:1;
       transform:translateY(0) scale(1);
+      pointer-events:auto;
     }
 
     .module-title.buttonish{
@@ -164,7 +201,7 @@
       backdrop-filter:blur(14px);
       box-shadow:0 18px 50px rgba(0,0,0,.24);
       cursor:pointer;
-      pointer-events:auto;
+      color:var(--gold);
       transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease, opacity .34s ease;
     }
 
@@ -176,8 +213,130 @@
         0 0 22px rgba(212,175,55,.14);
     }
 
+    .nail-cta-sub{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:14px;
+      font-weight:500;
+    }
+
     .hidden{display:none !important}
 
+    /* progress */
+    .progress-dots{
+      position:fixed;
+      right:18px;
+      top:50%;
+      transform:translateY(-50%);
+      z-index:18;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      pointer-events:none;
+    }
+
+    .progress-dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:rgba(255,255,255,.18);
+      transition:.25s ease;
+      box-shadow:none;
+    }
+
+    .progress-dot.active{
+      background:var(--gold);
+      box-shadow:0 0 14px rgba(212,175,55,.45);
+      transform:scale(1.2);
+    }
+
+    /* top ecosystem bar */
+    .ecosystem-bar{
+      position:fixed;
+      top:14px;
+      left:50%;
+      transform:translateX(-50%);
+      width:min(92vw, 980px);
+      height:56px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 14px 34px rgba(0,0,0,.24);
+      z-index:30;
+      display:flex;
+      align-items:center;
+      gap:18px;
+      padding:0 18px;
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .28s ease, transform .28s ease;
+    }
+
+    .ecosystem-bar.show{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    .ecosystem-left{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      flex:0 0 auto;
+    }
+
+    .ecosystem-logo{
+      height:30px;
+      width:auto;
+      display:block;
+      filter:drop-shadow(0 0 10px rgba(212,175,55,.15));
+    }
+
+    .ecosystem-divider{
+      width:1px;
+      height:24px;
+      background:rgba(255,255,255,.10);
+      flex:0 0 auto;
+    }
+
+    .ecosystem-track{
+      overflow:hidden;
+      position:relative;
+      flex:1 1 auto;
+      height:100%;
+      display:flex;
+      align-items:center;
+    }
+
+    .ecosystem-marquee{
+      display:flex;
+      align-items:center;
+      gap:28px;
+      white-space:nowrap;
+      animation:marquee 18s linear infinite;
+      will-change:transform;
+    }
+
+    .ecosystem-marquee span{
+      color:rgba(255,255,255,.55);
+      font-size:14px;
+      font-weight:600;
+      letter-spacing:.01em;
+      transition:.22s ease;
+    }
+
+    .ecosystem-marquee span.active{
+      color:var(--gold-soft);
+      text-shadow:0 0 16px rgba(212,175,55,.18);
+    }
+
+    @keyframes marquee{
+      from{ transform:translateX(0); }
+      to{ transform:translateX(-50%); }
+    }
+
+    /* Nail overlay */
     .nail-overlay{
       position:fixed;
       inset:0;
@@ -234,7 +393,6 @@
     }
 
     .glass + .glass{margin-top:16px}
-
     .hero-card{margin-top:12px}
 
     .nail-title{
@@ -508,17 +666,23 @@
     }
 
     @media (max-width:780px){
-      .feature-grid, .form-grid{grid-template-columns:1fr}
+      .feature-grid,.form-grid{grid-template-columns:1fr}
       .module-title{font-size:clamp(42px, 13vw, 74px)}
       .module-title.buttonish{
         min-width:min(90vw,520px);
         padding:20px 24px;
       }
-      .logo-wrap img{
-        width:min(36vw, 220px);
+      .logo-wrap img{ width:min(36vw,220px); }
+      .ecosystem-bar{
+        width:min(94vw, 980px);
+        height:52px;
+        padding:0 14px;
       }
+      .ecosystem-logo{ height:26px; }
+      .ecosystem-marquee span{ font-size:12.5px; }
       .nail-title{font-size:28px}
       .brandline{font-size:24px}
+      .progress-dots{ right:12px; gap:8px; }
     }
   </style>
 </head>
@@ -530,12 +694,52 @@
     </div>
   </div>
 
+  <div class="progress-dots" id="progressDots">
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+    <div class="progress-dot"></div>
+  </div>
+
+  <div class="ecosystem-bar" id="ecosystemBar">
+    <div class="ecosystem-left">
+      <img src="medastare-logo.png" alt="MedaStaré" class="ecosystem-logo">
+      <div class="ecosystem-divider"></div>
+    </div>
+    <div class="ecosystem-track">
+      <div class="ecosystem-marquee" id="ecosystemMarquee">
+        <span data-name="FashionStaré">FashionStaré</span>
+        <span data-name="MedArena">MedArena</span>
+        <span data-name="StyleTrack">StyleTrack</span>
+        <span data-name="StyleStaré">StyleStaré</span>
+        <span data-name="MedaBeauté">MedaBeauté</span>
+        <span data-name="PetStaré">PetStaré</span>
+        <span data-name="FashionStaré">FashionStaré</span>
+        <span data-name="MedArena">MedArena</span>
+        <span data-name="StyleTrack">StyleTrack</span>
+        <span data-name="StyleStaré">StyleStaré</span>
+        <span data-name="MedaBeauté">MedaBeauté</span>
+        <span data-name="PetStaré">PetStaré</span>
+      </div>
+    </div>
+  </div>
+
   <div class="content">
     <section class="modules-stage" id="modulesStage">
       <div class="modules-layer" id="modulesLayer">
         <div class="module-viewport">
-          <div class="module-title" id="moduleText">FashionStaré</div>
-          <button class="module-title buttonish hidden" id="nailButton">NailStaré</button>
+          <div class="module-stack" id="moduleStack">
+            <h2 class="module-title" id="moduleText">FashionStaré</h2>
+            <p class="module-desc" id="moduleDesc">AI styling, elevated for a luxury fashion ecosystem.</p>
+          </div>
+
+          <div class="nail-cta-wrap hidden" id="nailCtaWrap">
+            <button class="module-title buttonish" id="nailButton">NailStaré</button>
+            <div class="nail-cta-sub">AI-powered salon growth system for selected partner salons.</div>
+          </div>
         </div>
       </div>
     </section>
@@ -731,67 +935,86 @@
       return outMin + (outMax-outMin) * t;
     }
 
+    const moduleStack = document.getElementById("moduleStack");
     const moduleText = document.getElementById("moduleText");
+    const moduleDesc = document.getElementById("moduleDesc");
     const nailButton = document.getElementById("nailButton");
+    const nailCtaWrap = document.getElementById("nailCtaWrap");
+    const ecosystemBar = document.getElementById("ecosystemBar");
+    const progressDots = [...document.querySelectorAll(".progress-dot")];
+    const marqueeItems = [...document.querySelectorAll("#ecosystemMarquee span")];
 
-    const moduleNames = [
-      "FashionStaré",
-      "MedArena",
-      "StyleTrack",
-      "StyleStaré",
-      "MedaBeauté",
-      "PetStaré"
+    const modules = [
+      { title:"FashionStaré", desc:"AI styling, elevated for a luxury fashion ecosystem." },
+      { title:"MedArena", desc:"Challenges, visibility and momentum across the MedaStaré universe." },
+      { title:"StyleTrack", desc:"Your style memory, visualized with intelligent tracking." },
+      { title:"StyleStaré", desc:"Curated identity refined by AI and premium aesthetic logic." },
+      { title:"MedaBeauté", desc:"Beauty intelligence meets luxury rituals and elevated discovery." },
+      { title:"PetStaré", desc:"Care, style and smart companionship in one elegant layer." }
     ];
+
+    function updateProgress(activeIndex){
+      progressDots.forEach((dot,i)=>{
+        dot.classList.toggle("active", i === activeIndex);
+      });
+
+      marqueeItems.forEach(item=>{
+        item.classList.toggle("active", item.dataset.name === (modules[activeIndex]?.title || ""));
+      });
+    }
 
     function updateModules(scrollY){
       const start = 820;
-      const step = 420;
+      const step = 430;
+      const topBarStart = 1160;
+
+      ecosystemBar.classList.toggle("show", scrollY > topBarStart);
 
       if(scrollY < start){
-        moduleText.classList.remove("show");
-        nailButton.classList.add("hidden");
-        nailButton.classList.remove("show");
+        moduleStack.classList.remove("show");
+        nailCtaWrap.classList.remove("show");
+        nailCtaWrap.classList.add("hidden");
+        moduleStack.classList.remove("hidden");
+        progressDots.forEach(dot=>dot.classList.remove("active"));
         return;
       }
 
       const relative = scrollY - start;
       const index = Math.floor(relative / step);
 
-      if(index >= 0 && index < moduleNames.length){
+      // Regular modules
+      if(index >= 0 && index < modules.length){
         const local = relative - index * step;
 
-        nailButton.classList.add("hidden");
-        nailButton.classList.remove("show");
+        nailCtaWrap.classList.remove("show");
+        nailCtaWrap.classList.add("hidden");
 
-        moduleText.classList.remove("hidden");
-        moduleText.textContent = moduleNames[index];
+        moduleStack.classList.remove("hidden");
+        moduleText.textContent = modules[index].title;
+        moduleDesc.textContent = modules[index].desc;
 
-        if(local > 40 && local < 290){
-          moduleText.classList.add("show");
-        } else {
-          moduleText.classList.remove("show");
-        }
+        const visible = local > 30 && local < 300;
+        moduleStack.classList.toggle("show", visible);
+        updateProgress(index);
         return;
       }
 
-      if(index === moduleNames.length){
+      // NailStaré CTA
+      if(index === modules.length){
         const local = relative - index * step;
 
-        moduleText.classList.remove("show");
-        moduleText.classList.add("hidden");
+        moduleStack.classList.remove("show");
+        moduleStack.classList.add("hidden");
 
-        nailButton.classList.remove("hidden");
+        nailCtaWrap.classList.remove("hidden");
+        nailCtaWrap.classList.toggle("show", local > 40);
 
-        if(local > 40){
-          nailButton.classList.add("show");
-        } else {
-          nailButton.classList.remove("show");
-        }
+        updateProgress(6);
         return;
       }
 
-      moduleText.classList.remove("show");
-      nailButton.classList.remove("show");
+      moduleStack.classList.remove("show");
+      nailCtaWrap.classList.remove("show");
     }
 
     function updateScene(){
@@ -895,5 +1118,3 @@
   </script>
 </body>
 </html>
-
-
