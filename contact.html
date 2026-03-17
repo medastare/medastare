@@ -510,44 +510,74 @@
       to{ transform:translateX(-50%); }
     }
 
-    /* STARTRIP */
-    .startrip-shell{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:18px;
-      position:relative;
-      min-height:240px;
-      overflow:visible;
-    }
+ /* STARTRIP */
+.startrip-shell{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:18px;
+  position:relative;
+  min-height:240px;
+  overflow:visible;
+}
 
-    .startrip-plane{
-      position:absolute;
-      left:-24%;
-      top:40%;
-      width:160px;
-      height:54px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      pointer-events:none;
-      animation:planeFlyStraight 4.8s linear infinite;
-      filter:drop-shadow(0 0 14px rgba(212,175,55,.35));
-    }
+.startrip-plane{
+  position:absolute;
+  left:-24%;
+  top:40%;
+  width:160px;
+  height:54px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  pointer-events:none;
+  animation:planeFlyStraight 4.8s linear infinite;
+  filter:drop-shadow(0 0 14px rgba(212,175,55,.35));
+}
 
-    .startrip-plane::before{
-      content:"✈";
-      font-size:38px;
-      color:var(--gold-soft);
-      text-shadow:
-        0 0 8px rgba(240,212,122,.55),
-        0 0 24px rgba(212,175,55,.22);
-      transform:rotate(0deg);
-      display:block;
-      position:relative;
-      z-index:2;
-    }
+.startrip-plane::before{
+  content:"✈";
+  font-size:38px;
+  color:var(--gold-soft);
+  text-shadow:
+    0 0 8px rgba(240,212,122,.55),
+    0 0 24px rgba(212,175,55,.22);
+  transform:rotate(0deg);
+  display:block;
+  position:relative;
+  z-index:2;
+}
 
+.startrip-plane::after{
+  content:"";
+  position:absolute;
+  left:0;
+  top:50%;
+  width:160px;
+  height:2px;
+  transform:translateY(-50%);
+  background:linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(240,212,122,.75) 25%,
+    rgba(240,212,122,.95) 55%,
+    transparent 100%
+  );
+  filter:blur(.2px);
+  opacity:.9;
+  z-index:1;
+}
+
+.startrip-maldives{
+  position:relative;
+  display:inline-block;
+  animation:maldivesGlow 2.8s ease-in-out infinite;
+}
+
+.startrip-maldives::after{
+  display:none;
+  content:none;
+}
 
     @keyframes planeFlyStraight{
       0%{
@@ -720,7 +750,7 @@
     }
 
     .store-badge{
-      height:54px;
+      height:150px;
       width:auto;
       object-fit:contain;
       display:block;
