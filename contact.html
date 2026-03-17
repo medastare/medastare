@@ -63,11 +63,8 @@
       transform:translate(-50%,-50%) scale(1);
       transform-origin:center center;
       z-index:20;
-      transition:transform .08s linear, filter .08s linear, opacity .22s linear;
-    }
-
-    .logo-wrap.hidden-in-bar{
-      opacity:0;
+      transition:transform .08s linear, filter .08s linear, opacity .16s linear;
+      opacity:1;
     }
 
     .logo-wrap img{
@@ -253,14 +250,13 @@
       transform:scale(1.2);
     }
 
-    /* top ecosystem bar */
     .ecosystem-bar{
       position:fixed;
       top:14px;
       left:50%;
-      transform:translateX(-50%);
-      width:min(94vw, 1120px);
-      height:64px;
+      transform:translateX(-50%) translateY(-12px);
+      width:min(95vw, 1180px);
+      height:76px;
       border-radius:999px;
       background:rgba(255,255,255,.05);
       backdrop-filter:blur(18px);
@@ -270,8 +266,8 @@
       z-index:30;
       display:flex;
       align-items:center;
-      gap:18px;
-      padding:0 18px;
+      gap:20px;
+      padding:0 20px;
       opacity:0;
       pointer-events:none;
       transition:opacity .28s ease, transform .28s ease;
@@ -280,27 +276,28 @@
     .ecosystem-bar.show{
       opacity:1;
       pointer-events:auto;
+      transform:translateX(-50%) translateY(0);
     }
 
     .ecosystem-left{
       display:flex;
       align-items:center;
-      gap:16px;
+      gap:18px;
       flex:0 0 auto;
     }
 
     .ecosystem-logo{
-      height:40px;
+      height:56px;
       width:auto;
       display:block;
       filter:
-        drop-shadow(0 0 12px rgba(212,175,55,.16))
-        drop-shadow(0 0 26px rgba(212,175,55,.10));
+        drop-shadow(0 0 14px rgba(212,175,55,.18))
+        drop-shadow(0 0 30px rgba(212,175,55,.10));
     }
 
     .ecosystem-divider{
       width:1px;
-      height:28px;
+      height:34px;
       background:rgba(255,255,255,.10);
       flex:0 0 auto;
     }
@@ -342,8 +339,8 @@
       flex:0 0 auto;
       appearance:none;
       border:none;
-      height:42px;
-      padding:0 18px;
+      height:46px;
+      padding:0 20px;
       border-radius:999px;
       background:rgba(255,255,255,.06);
       border:1px solid rgba(212,175,55,.28);
@@ -703,12 +700,12 @@
       }
       .logo-wrap img{ width:min(36vw,220px); }
       .ecosystem-bar{
-        width:min(96vw, 1120px);
-        height:58px;
+        width:min(96vw, 1180px);
+        height:62px;
         padding:0 12px;
         gap:12px;
       }
-      .ecosystem-logo{ height:34px; }
+      .ecosystem-logo{ height:42px; }
       .ecosystem-marquee{ gap:22px; }
       .ecosystem-marquee span{ font-size:12.5px; }
       .ecosystem-nail{
@@ -935,7 +932,6 @@
   </div>
 
   <script>
-    // background stars
     for(let i=0;i<120;i++){
       const s=document.createElement("div");
       s.className="bg-star";
@@ -946,7 +942,6 @@
       document.body.appendChild(s);
     }
 
-    // logo burst
     const heroScene = document.getElementById("heroScene");
     const logoWrap = document.getElementById("logoWrap");
     const burstStars = [];
@@ -1006,11 +1001,11 @@
     function updateModules(scrollY){
       const start = 820;
       const step = 430;
-      const topBarStart = 1160;
+      const modulesEnd = start + (modules.length * step);
+      const topBarStart = modulesEnd + 120;
 
       const showBar = scrollY > topBarStart;
       ecosystemBar.classList.toggle("show", showBar);
-      logoWrap.classList.toggle("hidden-in-bar", showBar);
 
       if(scrollY < start){
         moduleStack.classList.remove("show");
@@ -1024,7 +1019,6 @@
       const relative = scrollY - start;
       const index = Math.floor(relative / step);
 
-      // Regular modules
       if(index >= 0 && index < modules.length){
         const local = relative - index * step;
 
@@ -1041,7 +1035,6 @@
         return;
       }
 
-      // NailStaré CTA
       if(index === modules.length){
         const local = relative - index * step;
 
@@ -1062,7 +1055,6 @@
     function updateScene(){
       const s = window.scrollY;
 
-      // logo animation
       const moveProgress = clamp((s - 180) / 380, 0, 1);
       const left = map(moveProgress, 0, 1, 50, 11);
       const top  = map(moveProgress, 0, 1, 50, 9);
@@ -1075,7 +1067,11 @@
       const glowA = map(moveProgress, 0, 1, 38, 14);
       logoWrap.style.filter = `drop-shadow(0 0 ${glowA}px rgba(212,175,55,.18))`;
 
-      // burst stars
+      const vanishStart = 0.78;
+      const vanishProgress = clamp((moveProgress - vanishStart) / (1 - vanishStart), 0, 1);
+      const sideOpacity = 1 - vanishProgress;
+      logoWrap.style.opacity = sideOpacity;
+
       burstStars.forEach((star, i) => {
         const local = clamp((s - (50 + i * 8)) / 220, 0, 1);
         const x = Math.cos(star.angle) * star.radius * local * star.drift;
@@ -1098,7 +1094,6 @@
     window.addEventListener("scroll", updateScene, { passive:true });
     updateScene();
 
-    // Nail overlay
     const nailOverlay = document.getElementById("nailOverlay");
     const nailBackBtn = document.getElementById("nailBackBtn");
     const goApplyBtn = document.getElementById("goApplyBtn");
