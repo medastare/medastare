@@ -4,38 +4,33 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MedaStaré</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#04060f;
-      --bg2:#070b18;
+      --bg:#000000;
       --gold:#d4af37;
       --gold-soft:#f0d47a;
-      --gold-deep:#8d6a12;
       --white:#ffffff;
       --muted:rgba(255,255,255,.72);
-      --muted2:rgba(255,255,255,.55);
-      --glass:rgba(255,255,255,.055);
-      --line:rgba(255,255,255,.11);
-      --blue:rgba(116,164,255,.08);
+      --line:rgba(255,255,255,.10);
+      --glass:rgba(255,255,255,.05);
     }
 
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
     body{
       font-family:Inter,system-ui,sans-serif;
-      background:
-        radial-gradient(circle at 50% 25%, rgba(212,175,55,.08), transparent 20%),
-        radial-gradient(circle at 82% 68%, rgba(116,164,255,.06), transparent 18%),
-        linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
-      color:var(--white);
+      background:#000;
+      color:#fff;
       overflow-x:hidden;
       min-height:100vh;
     }
 
+    /* background stars */
     .bg-star{
       position:fixed;
       width:2px;
@@ -44,15 +39,16 @@
       background:var(--gold);
       opacity:.55;
       pointer-events:none;
-      animation:twinkle 2.6s ease-in-out infinite alternate;
+      animation:twinkle 2.8s ease-in-out infinite alternate;
       z-index:0;
     }
 
     @keyframes twinkle{
       from{opacity:.18;transform:scale(.82)}
-      to{opacity:1;transform:scale(1.25)}
+      to{opacity:1;transform:scale(1.22)}
     }
 
+    /* hero scene */
     .hero-scene{
       position:fixed;
       inset:0;
@@ -65,18 +61,18 @@
       position:absolute;
       left:50%;
       top:50%;
-      transform:translate(-50%,-50%);
+      transform:translate(-50%,-50%) scale(1);
       transform-origin:center center;
       z-index:20;
       transition:transform .08s linear, opacity .08s linear, filter .08s linear;
     }
 
     .logo-wrap img{
-      width:min(42vw,320px);
+      width:min(44vw,340px);
       display:block;
       filter:
-        drop-shadow(0 0 12px rgba(212,175,55,.35))
-        drop-shadow(0 0 36px rgba(212,175,55,.18));
+        drop-shadow(0 0 14px rgba(212,175,55,.35))
+        drop-shadow(0 0 38px rgba(212,175,55,.16));
     }
 
     .burst-star{
@@ -103,7 +99,7 @@
       text-shadow:
         0 0 8px rgba(240,212,122,.95),
         0 0 18px rgba(212,175,55,.8),
-        0 0 36px rgba(212,175,55,.45);
+        0 0 36px rgba(212,175,55,.42);
     }
 
     .content{
@@ -114,22 +110,21 @@
     }
 
     .modules-stage{
-      min-height:260vh;
+      min-height:360vh;
       width:100%;
       position:relative;
     }
 
     .module-item{
       position:sticky;
-      top:38vh;
-      width:100%;
+      top:0;
+      height:100vh;
       display:flex;
       justify-content:center;
       align-items:center;
-      min-height:100vh;
       opacity:0;
-      transform:translateY(40px) scale(.94);
-      transition:opacity .35s ease, transform .35s ease;
+      transform:translateY(18px) scale(.965);
+      transition:opacity .34s ease, transform .34s ease;
       pointer-events:none;
     }
 
@@ -139,14 +134,15 @@
     }
 
     .module-title{
-      font-family:"Playfair Display", serif;
-      font-size: clamp(38px, 7vw, 82px);
-      letter-spacing:.3px;
+      font-family:"Cormorant Garamond", serif;
+      font-size:clamp(52px, 9vw, 100px);
+      font-weight:700;
+      letter-spacing:.2px;
       color:var(--gold);
-      text-shadow:
-        0 0 18px rgba(212,175,55,.22),
-        0 0 42px rgba(212,175,55,.10);
       text-align:center;
+      text-shadow:
+        0 0 18px rgba(212,175,55,.18),
+        0 0 46px rgba(212,175,55,.08);
       padding:0 20px;
     }
 
@@ -154,10 +150,10 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-width:min(88vw, 560px);
-      padding:24px 34px;
+      min-width:min(88vw,560px);
+      padding:22px 36px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.12);
       background:rgba(255,255,255,.05);
       backdrop-filter:blur(14px);
       box-shadow:0 18px 50px rgba(0,0,0,.24);
@@ -167,25 +163,25 @@
     }
 
     .module-title.buttonish:hover{
-      transform:scale(1.03);
-      border-color:rgba(212,175,55,.55);
+      transform:scale(1.025);
+      border-color:rgba(212,175,55,.5);
       box-shadow:
-        0 20px 55px rgba(0,0,0,.28),
-        0 0 26px rgba(212,175,55,.16);
+        0 18px 50px rgba(0,0,0,.24),
+        0 0 22px rgba(212,175,55,.14);
     }
 
+    /* Nail overlay */
     .nail-overlay{
       position:fixed;
       inset:0;
       z-index:200;
       background:
-        radial-gradient(circle at 18% 18%, rgba(212,175,55,.13), transparent 22%),
-        radial-gradient(circle at 86% 72%, rgba(116,164,255,.08), transparent 20%),
+        radial-gradient(circle at 18% 18%, rgba(212,175,55,.10), transparent 22%),
+        radial-gradient(circle at 86% 72%, rgba(116,164,255,.05), transparent 20%),
         linear-gradient(180deg, #0a0d16 0%, #05070e 100%);
       display:none;
       overflow:auto;
     }
-
     .nail-overlay.open{display:block}
 
     .nail-shell{
@@ -213,9 +209,9 @@
     }
 
     .mini-logo{
-      font-family:"Playfair Display", serif;
+      font-family:"Cormorant Garamond", serif;
       color:var(--gold-soft);
-      font-size:22px;
+      font-size:28px;
       font-weight:700;
       letter-spacing:.2px;
     }
@@ -229,15 +225,12 @@
       backdrop-filter:blur(16px);
       box-shadow:0 18px 40px rgba(0,0,0,.18);
     }
-
     .glass + .glass{margin-top:16px}
 
-    .hero-card{
-      margin-top:12px;
-    }
+    .hero-card{ margin-top:12px; }
 
     .nail-title{
-      font-size:32px;
+      font-size:34px;
       font-weight:800;
       margin:0 0 10px;
       text-align:center;
@@ -344,7 +337,7 @@
 
     .muted-center{
       text-align:center;
-      color:var(--muted2);
+      color:rgba(255,255,255,.55);
       font-size:12.5px;
       font-weight:600;
       margin-top:10px;
@@ -358,11 +351,8 @@
       gap:12px;
     }
 
-    .field{
-      margin-bottom:12px;
-    }
-
-    .field.full{grid-column:1 / -1}
+    .field{ margin-bottom:12px; }
+    .field.full{ grid-column:1 / -1; }
 
     .field label{
       display:block;
@@ -404,12 +394,10 @@
       line-height:1.15;
     }
 
-    .brandline span{
-      color:var(--gold-soft);
-    }
+    .brandline span{ color:var(--gold-soft); }
 
     .powered{
-      color:var(--muted2);
+      color:rgba(255,255,255,.55);
       font-size:12.5px;
       font-weight:600;
       margin-bottom:18px;
@@ -485,7 +473,7 @@
     .success-modal.open{display:flex}
 
     .success-card{
-      width:min(92vw, 520px);
+      width:min(92vw,520px);
       border-radius:24px;
       background:#111216;
       border:1px solid rgba(255,255,255,.12);
@@ -522,27 +510,23 @@
     }
 
     @media (max-width: 780px){
-      .feature-grid,
-      .form-grid{
-        grid-template-columns:1fr;
-      }
+      .feature-grid, .form-grid{ grid-template-columns:1fr; }
 
       .module-title{
-        font-size: clamp(32px, 10vw, 58px);
+        font-size:clamp(44px, 13vw, 74px);
       }
 
       .module-title.buttonish{
-        min-width:min(90vw, 520px);
-        padding:20px 26px;
+        min-width:min(90vw,520px);
+        padding:20px 24px;
       }
 
-      .nail-title{
-        font-size:28px;
+      .logo-wrap img{
+        width:min(34vw, 210px);
       }
 
-      .brandline{
-        font-size:24px;
-      }
+      .nail-title{ font-size:28px; }
+      .brandline{ font-size:24px; }
     }
   </style>
 </head>
@@ -557,54 +541,30 @@
   <div class="content">
     <section class="modules-stage" id="modulesStage">
 
-      <div class="module-item" data-step="0">
-        <div class="module-title">FashionStaré</div>
-      </div>
-
-      <div class="module-item" data-step="1">
-        <div class="module-title">MedArena</div>
-      </div>
-
-      <div class="module-item" data-step="2">
-        <div class="module-title">StyleTrack</div>
-      </div>
-
-      <div class="module-item" data-step="3">
-        <div class="module-title">StyleStaré</div>
-      </div>
-
-      <div class="module-item" data-step="4">
-        <div class="module-title">MedaBeauté</div>
-      </div>
-
-      <div class="module-item" data-step="5">
-        <div class="module-title">PetStaré</div>
-      </div>
-
-      <div class="module-item" data-step="6">
-        <button class="module-title buttonish" id="nailButton">NailStaré</button>
-      </div>
+      <div class="module-item" data-step="0"><div class="module-title">FashionStaré</div></div>
+      <div class="module-item" data-step="1"><div class="module-title">MedArena</div></div>
+      <div class="module-item" data-step="2"><div class="module-title">StyleTrack</div></div>
+      <div class="module-item" data-step="3"><div class="module-title">StyleStaré</div></div>
+      <div class="module-item" data-step="4"><div class="module-title">MedaBeauté</div></div>
+      <div class="module-item" data-step="5"><div class="module-title">PetStaré</div></div>
+      <div class="module-item" data-step="6"><button class="module-title buttonish" id="nailButton">NailStaré</button></div>
 
     </section>
   </div>
 
-  <!-- NailStare overlay -->
+  <!-- Nail overlay -->
   <div class="nail-overlay" id="nailOverlay">
     <div class="nail-shell">
-
       <div class="topbar">
         <button class="back-btn" id="nailBackBtn">← Back</button>
         <div class="mini-logo">NailStaré</div>
         <div style="width:60px"></div>
       </div>
 
-      <!-- INTRO SCREEN -->
       <div id="nailIntroView">
         <div class="glass hero-card">
           <h1 class="nail-title">NailStaré</h1>
-          <p class="nail-subtitle">
-            AI-powered nail salon growth system.
-          </p>
+          <p class="nail-subtitle">AI-powered nail salon growth system.</p>
 
           <div class="glass" style="margin-bottom:18px;">
             <div class="section-title">What is NailStaré?</div>
@@ -614,49 +574,18 @@
           </div>
 
           <div class="feature-grid">
-            <div class="feature-card">
-              <div class="feature-icon">✦</div>
-              <h3>AI Nail Analysis</h3>
-              <p>Smart recommendations based on hand and nail form.</p>
-            </div>
-
-            <div class="feature-card">
-              <div class="feature-icon">3D</div>
-              <h3>3D Try-On</h3>
-              <p>Let clients preview nail colors virtually on their own hands.</p>
-            </div>
-
-            <div class="feature-card">
-              <div class="feature-icon">↗</div>
-              <h3>Trend Radar</h3>
-              <p>Bring global nail trends directly into your salon.</p>
-            </div>
-
-            <div class="feature-card">
-              <div class="feature-icon">A</div>
-              <h3>NailStaré Academy</h3>
-              <p>Education and growth tools designed for your team.</p>
-            </div>
-
-            <div class="feature-card">
-              <div class="feature-icon">P</div>
-              <h3>Salon Performance</h3>
-              <p>Reports, growth insights and performance analytics.</p>
-            </div>
-
-            <div class="feature-card">
-              <div class="feature-icon">♦</div>
-              <h3>Exclusive Collections</h3>
-              <p>StarAura, Moonlight and premium seasonal collection layers.</p>
-            </div>
+            <div class="feature-card"><div class="feature-icon">✦</div><h3>AI Nail Analysis</h3><p>Smart recommendations based on hand and nail form.</p></div>
+            <div class="feature-card"><div class="feature-icon">3D</div><h3>3D Try-On</h3><p>Let clients preview nail colors virtually on their own hands.</p></div>
+            <div class="feature-card"><div class="feature-icon">↗</div><h3>Trend Radar</h3><p>Bring global nail trends directly into your salon.</p></div>
+            <div class="feature-card"><div class="feature-icon">A</div><h3>NailStaré Academy</h3><p>Education and growth tools designed for your team.</p></div>
+            <div class="feature-card"><div class="feature-icon">P</div><h3>Salon Performance</h3><p>Reports, growth insights and performance analytics.</p></div>
+            <div class="feature-card"><div class="feature-icon">♦</div><h3>Exclusive Collections</h3><p>StarAura, Moonlight and premium seasonal collection layers.</p></div>
           </div>
 
           <div class="glass" style="margin-top:18px;">
             <div class="notice">
               <div class="notice-badge">✦</div>
-              <div>
-                The system can be customized for salon needs. Some modules are unlocked for selected partner salons only.
-              </div>
+              <div>The system can be customized for salon needs. Some modules are unlocked for selected partner salons only.</div>
             </div>
           </div>
 
@@ -667,18 +596,11 @@
         </div>
       </div>
 
-      <!-- APPLICATION SCREEN -->
       <div id="nailApplicationView" class="hidden">
-
         <div class="glass">
           <div class="section-title" style="font-size:22px;">NailStaré Application</div>
-
-          <div class="brandline">
-            NailStaré × <span id="liveSalonName">Your Salon Name</span>
-          </div>
-
+          <div class="brandline">NailStaré × <span id="liveSalonName">Your Salon Name</span></div>
           <div class="powered">Powered by MedaStaré</div>
-
           <div class="field">
             <label for="salonName">Salon Name</label>
             <input id="salonName" type="text" placeholder="Salon name" />
@@ -687,23 +609,10 @@
 
         <div class="glass">
           <div class="section-title">Salon Information</div>
-
           <div class="form-grid">
-            <div class="field">
-              <label for="ownerName">Owner / Manager Name</label>
-              <input id="ownerName" type="text" placeholder="Owner / manager name" />
-            </div>
-
-            <div class="field">
-              <label for="phone">Phone</label>
-              <input id="phone" type="text" placeholder="Phone" />
-            </div>
-
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" type="email" placeholder="Email" />
-            </div>
-
+            <div class="field"><label for="ownerName">Owner / Manager Name</label><input id="ownerName" type="text" placeholder="Owner / manager name" /></div>
+            <div class="field"><label for="phone">Phone</label><input id="phone" type="text" placeholder="Phone" /></div>
+            <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="Email" /></div>
             <div class="field">
               <label for="salonType">Salon Type</label>
               <select id="salonType">
@@ -714,33 +623,16 @@
                 <option>Home Studio</option>
               </select>
             </div>
-
-            <div class="field">
-              <label for="country">Country</label>
-              <input id="country" type="text" placeholder="Country" />
-            </div>
-
-            <div class="field">
-              <label for="city">City</label>
-              <input id="city" type="text" placeholder="City" />
-            </div>
+            <div class="field"><label for="country">Country</label><input id="country" type="text" placeholder="Country" /></div>
+            <div class="field"><label for="city">City</label><input id="city" type="text" placeholder="City" /></div>
           </div>
         </div>
 
         <div class="glass">
           <div class="section-title">Capacity & Services</div>
-
           <div class="form-grid">
-            <div class="field">
-              <label for="staffCount">Number of Staff</label>
-              <input id="staffCount" type="number" placeholder="Number of staff" />
-            </div>
-
-            <div class="field">
-              <label for="dailyClients">Average Daily Clients</label>
-              <input id="dailyClients" type="number" placeholder="Average daily clients" />
-            </div>
-
+            <div class="field"><label for="staffCount">Number of Staff</label><input id="staffCount" type="number" placeholder="Number of staff" /></div>
+            <div class="field"><label for="dailyClients">Average Daily Clients</label><input id="dailyClients" type="number" placeholder="Average daily clients" /></div>
             <div class="field full">
               <label>Services Offered</label>
               <div class="chips" id="serviceChips">
@@ -766,27 +658,9 @@
 
         <div class="glass">
           <div class="section-title">NailStaré Packages</div>
-
-          <div class="package-card" data-package="basic">
-            <div class="package-title">Basic</div>
-            <p class="package-desc">
-              Salon panel, AI Nail Analysis, Trend Radar and core visibility tools.
-            </p>
-          </div>
-
-          <div class="package-card" data-package="premium">
-            <div class="package-title">Premium</div>
-            <p class="package-desc">
-              Academy access, advanced reports, trend radar and exclusive collection support.
-            </p>
-          </div>
-
-          <div class="package-card" data-package="vip">
-            <div class="package-title">VIP</div>
-            <p class="package-desc">
-              3D Try-On, AI client analysis, Hologram Nail Workshop and VIP visibility layers.
-            </p>
-          </div>
+          <div class="package-card" data-package="basic"><div class="package-title">Basic</div><p class="package-desc">Salon panel, AI Nail Analysis, Trend Radar and core visibility tools.</p></div>
+          <div class="package-card" data-package="premium"><div class="package-title">Premium</div><p class="package-desc">Academy access, advanced reports, trend radar and exclusive collection support.</p></div>
+          <div class="package-card" data-package="vip"><div class="package-title">VIP</div><p class="package-desc">3D Try-On, AI client analysis, Hologram Nail Workshop and VIP visibility layers.</p></div>
         </div>
 
         <div class="glass">
@@ -807,9 +681,7 @@
         <div class="glass">
           <div class="notice">
             <div class="notice-badge">✦</div>
-            <div>
-              Applications are reviewed by the NailStaré operations team. Suitable salons will be contacted.
-            </div>
+            <div>Applications are reviewed by the NailStaré operations team. Suitable salons will be contacted.</div>
           </div>
         </div>
 
@@ -818,16 +690,13 @@
           <div class="muted-center">Selected salons only.</div>
         </div>
       </div>
-
     </div>
   </div>
 
   <div class="success-modal" id="successModal">
     <div class="success-card">
       <h3>Application Received</h3>
-      <p>
-        Your application has been successfully received. Our NailStaré operations team will contact you after the eligibility review.
-      </p>
+      <p>Your application has been successfully received. Our NailStaré operations team will contact you after the eligibility review.</p>
       <div class="success-actions">
         <button class="text-btn" id="successOkBtn">OK</button>
       </div>
@@ -846,7 +715,7 @@
       document.body.appendChild(s);
     }
 
-    // hero logo + burst stars
+    // logo burst
     const heroScene = document.getElementById("heroScene");
     const logoWrap = document.getElementById("logoWrap");
     const burstStars = [];
@@ -858,7 +727,7 @@
       heroScene.appendChild(star);
 
       const angle = (i / STAR_COUNT) * Math.PI * 2;
-      const radius = 60 + Math.random() * 120;
+      const radius = 70 + Math.random() * 120;
 
       burstStars.push({
         el: star,
@@ -868,10 +737,7 @@
       });
     }
 
-    function clamp(v,min,max){
-      return Math.max(min, Math.min(max, v));
-    }
-
+    function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
     function map(v,inMin,inMax,outMin,outMax){
       const t = clamp((v-inMin)/(inMax-inMin),0,1);
       return outMin + (outMax-outMin) * t;
@@ -880,27 +746,28 @@
     function updateScene(){
       const s = window.scrollY;
 
-      const burstProgress = clamp((s - 40) / 220, 0, 1);
-      const moveProgress  = clamp((s - 180) / 380, 0, 1);
+      // logo animation
+      const moveProgress = clamp((s - 180) / 380, 0, 1);
 
-      const left = map(moveProgress, 0, 1, 50, 10);
-      const top = map(moveProgress, 0, 1, 50, 9);
-      const scale = map(moveProgress, 0, 1, 1, 0.42);
+      const left = map(moveProgress, 0, 1, 50, 11);
+      const top  = map(moveProgress, 0, 1, 50, 9);
+      const scale = map(moveProgress, 0, 1, 1, 0.62);
 
       logoWrap.style.left = left + "%";
       logoWrap.style.top = top + "%";
       logoWrap.style.transform = `translate(-50%,-50%) scale(${scale})`;
 
       const glowA = map(moveProgress, 0, 1, 38, 14);
-      logoWrap.style.filter = `drop-shadow(0 0 ${glowA}px rgba(212,175,55,.22))`;
+      logoWrap.style.filter = `drop-shadow(0 0 ${glowA}px rgba(212,175,55,.18))`;
 
+      // burst stars
       burstStars.forEach((star, i) => {
         const local = clamp((s - (50 + i * 8)) / 220, 0, 1);
 
         const x = Math.cos(star.angle) * star.radius * local * star.drift;
         const y = Math.sin(star.angle) * star.radius * local * star.drift;
 
-        const starScale = map(local, 0, 1, 0.15, 1.9);
+        const starScale = map(local, 0, 1, 0.15, 1.8);
         let opacity = map(local, 0, 0.25, 0, 1);
 
         if(local > 0.72){
@@ -912,10 +779,10 @@
           `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${starScale})`;
       });
 
-      // module reveal
+      // module sequence centered
       document.querySelectorAll(".module-item").forEach((item, index) => {
-        const start = 760 + index * 420;
-        const end = start + 260;
+        const start = 820 + index * 360;
+        const end   = start + 240;
         const active = s >= start && s < end;
         item.classList.toggle("active", active);
       });
@@ -958,19 +825,16 @@
     // live salon name
     const salonName = document.getElementById("salonName");
     const liveSalonName = document.getElementById("liveSalonName");
-
     salonName.addEventListener("input", () => {
       liveSalonName.textContent = salonName.value.trim() || "Your Salon Name";
     });
 
-    // services chips
+    // chips
     document.querySelectorAll("#serviceChips .chip").forEach(chip => {
-      chip.addEventListener("click", () => {
-        chip.classList.toggle("active");
-      });
+      chip.addEventListener("click", () => chip.classList.toggle("active"));
     });
 
-    // package cards
+    // packages
     document.querySelectorAll(".package-card").forEach(card => {
       card.addEventListener("click", () => {
         document.querySelectorAll(".package-card").forEach(c => c.classList.remove("active"));
@@ -978,7 +842,7 @@
       });
     });
 
-    // submit
+    // success modal
     const submitApplicationBtn = document.getElementById("submitApplicationBtn");
     const successModal = document.getElementById("successModal");
     const successOkBtn = document.getElementById("successOkBtn");
