@@ -11,11 +11,12 @@
 
   <style>
     :root{
-      --bg:#000000;
+      --bg:#000;
       --gold:#d4af37;
       --gold-soft:#f0d47a;
-      --white:#ffffff;
+      --white:#fff;
       --muted:rgba(255,255,255,.72);
+      --muted2:rgba(255,255,255,.55);
       --line:rgba(255,255,255,.10);
       --glass:rgba(255,255,255,.05);
     }
@@ -30,7 +31,6 @@
       min-height:100vh;
     }
 
-    /* background stars */
     .bg-star{
       position:fixed;
       width:2px;
@@ -48,7 +48,6 @@
       to{opacity:1;transform:scale(1.22)}
     }
 
-    /* hero scene */
     .hero-scene{
       position:fixed;
       inset:0;
@@ -64,15 +63,15 @@
       transform:translate(-50%,-50%) scale(1);
       transform-origin:center center;
       z-index:20;
-      transition:transform .08s linear, opacity .08s linear, filter .08s linear;
+      transition:transform .08s linear, filter .08s linear;
     }
 
     .logo-wrap img{
-      width:min(44vw,340px);
+      width:min(46vw,350px);
       display:block;
       filter:
         drop-shadow(0 0 14px rgba(212,175,55,.35))
-        drop-shadow(0 0 38px rgba(212,175,55,.16));
+        drop-shadow(0 0 42px rgba(212,175,55,.16));
     }
 
     .burst-star{
@@ -110,32 +109,33 @@
     }
 
     .modules-stage{
-      min-height:360vh;
-      width:100%;
       position:relative;
+      min-height:420vh;
+      width:100%;
     }
 
-    .module-item{
-      position:sticky;
-      top:0;
-      height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      opacity:0;
-      transform:translateY(18px) scale(.965);
-      transition:opacity .34s ease, transform .34s ease;
+    .modules-layer{
+      position:fixed;
+      inset:0;
+      z-index:15;
       pointer-events:none;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
 
-    .module-item.active{
-      opacity:1;
-      transform:translateY(0) scale(1);
+    .module-viewport{
+      width:100%;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:0 20px;
     }
 
     .module-title{
       font-family:"Cormorant Garamond", serif;
-      font-size:clamp(52px, 9vw, 100px);
+      font-size:clamp(52px, 11vw, 100px);
       font-weight:700;
       letter-spacing:.2px;
       color:var(--gold);
@@ -143,13 +143,19 @@
       text-shadow:
         0 0 18px rgba(212,175,55,.18),
         0 0 46px rgba(212,175,55,.08);
-      padding:0 20px;
+      opacity:0;
+      transform:translateY(18px) scale(.965);
+      transition:opacity .34s ease, transform .34s ease;
+    }
+
+    .module-title.show{
+      opacity:1;
+      transform:translateY(0) scale(1);
     }
 
     .module-title.buttonish{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
+      appearance:none;
+      border:none;
       min-width:min(88vw,560px);
       padding:22px 36px;
       border-radius:999px;
@@ -159,7 +165,7 @@
       box-shadow:0 18px 50px rgba(0,0,0,.24);
       cursor:pointer;
       pointer-events:auto;
-      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease, opacity .34s ease;
     }
 
     .module-title.buttonish:hover{
@@ -170,7 +176,8 @@
         0 0 22px rgba(212,175,55,.14);
     }
 
-    /* Nail overlay */
+    .hidden{display:none !important}
+
     .nail-overlay{
       position:fixed;
       inset:0;
@@ -182,6 +189,7 @@
       display:none;
       overflow:auto;
     }
+
     .nail-overlay.open{display:block}
 
     .nail-shell{
@@ -213,7 +221,6 @@
       color:var(--gold-soft);
       font-size:28px;
       font-weight:700;
-      letter-spacing:.2px;
     }
 
     .glass{
@@ -225,9 +232,10 @@
       backdrop-filter:blur(16px);
       box-shadow:0 18px 40px rgba(0,0,0,.18);
     }
+
     .glass + .glass{margin-top:16px}
 
-    .hero-card{ margin-top:12px; }
+    .hero-card{margin-top:12px}
 
     .nail-title{
       font-size:34px;
@@ -337,13 +345,11 @@
 
     .muted-center{
       text-align:center;
-      color:rgba(255,255,255,.55);
+      color:var(--muted2);
       font-size:12.5px;
       font-weight:600;
       margin-top:10px;
     }
-
-    .hidden{display:none !important}
 
     .form-grid{
       display:grid;
@@ -351,8 +357,8 @@
       gap:12px;
     }
 
-    .field{ margin-bottom:12px; }
-    .field.full{ grid-column:1 / -1; }
+    .field{margin-bottom:12px}
+    .field.full{grid-column:1 / -1}
 
     .field label{
       display:block;
@@ -363,8 +369,7 @@
     }
 
     .field input,
-    .field select,
-    .field textarea{
+    .field select{
       width:100%;
       border-radius:18px;
       border:1px solid rgba(255,255,255,.10);
@@ -375,14 +380,8 @@
       outline:none;
     }
 
-    .field textarea{
-      resize:vertical;
-      min-height:120px;
-    }
-
     .field input:focus,
-    .field select:focus,
-    .field textarea:focus{
+    .field select:focus{
       border-color:rgba(212,175,55,.8);
       box-shadow:0 0 0 1px rgba(212,175,55,.35);
     }
@@ -394,10 +393,10 @@
       line-height:1.15;
     }
 
-    .brandline span{ color:var(--gold-soft); }
+    .brandline span{color:var(--gold-soft)}
 
     .powered{
-      color:rgba(255,255,255,.55);
+      color:var(--muted2);
       font-size:12.5px;
       font-weight:600;
       margin-bottom:18px;
@@ -419,7 +418,6 @@
       font-size:12.5px;
       font-weight:600;
       cursor:pointer;
-      user-select:none;
       transition:.18s ease;
     }
 
@@ -509,24 +507,18 @@
       cursor:pointer;
     }
 
-    @media (max-width: 780px){
-      .feature-grid, .form-grid{ grid-template-columns:1fr; }
-
-      .module-title{
-        font-size:clamp(44px, 13vw, 74px);
-      }
-
+    @media (max-width:780px){
+      .feature-grid, .form-grid{grid-template-columns:1fr}
+      .module-title{font-size:clamp(42px, 13vw, 74px)}
       .module-title.buttonish{
         min-width:min(90vw,520px);
         padding:20px 24px;
       }
-
       .logo-wrap img{
-        width:min(34vw, 210px);
+        width:min(36vw, 220px);
       }
-
-      .nail-title{ font-size:28px; }
-      .brandline{ font-size:24px; }
+      .nail-title{font-size:28px}
+      .brandline{font-size:24px}
     }
   </style>
 </head>
@@ -540,19 +532,15 @@
 
   <div class="content">
     <section class="modules-stage" id="modulesStage">
-
-      <div class="module-item" data-step="0"><div class="module-title">FashionStaré</div></div>
-      <div class="module-item" data-step="1"><div class="module-title">MedArena</div></div>
-      <div class="module-item" data-step="2"><div class="module-title">StyleTrack</div></div>
-      <div class="module-item" data-step="3"><div class="module-title">StyleStaré</div></div>
-      <div class="module-item" data-step="4"><div class="module-title">MedaBeauté</div></div>
-      <div class="module-item" data-step="5"><div class="module-title">PetStaré</div></div>
-      <div class="module-item" data-step="6"><button class="module-title buttonish" id="nailButton">NailStaré</button></div>
-
+      <div class="modules-layer" id="modulesLayer">
+        <div class="module-viewport">
+          <div class="module-title" id="moduleText">FashionStaré</div>
+          <button class="module-title buttonish hidden" id="nailButton">NailStaré</button>
+        </div>
+      </div>
     </section>
   </div>
 
-  <!-- Nail overlay -->
   <div class="nail-overlay" id="nailOverlay">
     <div class="nail-shell">
       <div class="topbar">
@@ -743,12 +731,74 @@
       return outMin + (outMax-outMin) * t;
     }
 
+    const moduleText = document.getElementById("moduleText");
+    const nailButton = document.getElementById("nailButton");
+
+    const moduleNames = [
+      "FashionStaré",
+      "MedArena",
+      "StyleTrack",
+      "StyleStaré",
+      "MedaBeauté",
+      "PetStaré"
+    ];
+
+    function updateModules(scrollY){
+      const start = 820;
+      const step = 420;
+
+      if(scrollY < start){
+        moduleText.classList.remove("show");
+        nailButton.classList.add("hidden");
+        nailButton.classList.remove("show");
+        return;
+      }
+
+      const relative = scrollY - start;
+      const index = Math.floor(relative / step);
+
+      if(index >= 0 && index < moduleNames.length){
+        const local = relative - index * step;
+
+        nailButton.classList.add("hidden");
+        nailButton.classList.remove("show");
+
+        moduleText.classList.remove("hidden");
+        moduleText.textContent = moduleNames[index];
+
+        if(local > 40 && local < 290){
+          moduleText.classList.add("show");
+        } else {
+          moduleText.classList.remove("show");
+        }
+        return;
+      }
+
+      if(index === moduleNames.length){
+        const local = relative - index * step;
+
+        moduleText.classList.remove("show");
+        moduleText.classList.add("hidden");
+
+        nailButton.classList.remove("hidden");
+
+        if(local > 40){
+          nailButton.classList.add("show");
+        } else {
+          nailButton.classList.remove("show");
+        }
+        return;
+      }
+
+      moduleText.classList.remove("show");
+      nailButton.classList.remove("show");
+    }
+
     function updateScene(){
       const s = window.scrollY;
 
       // logo animation
       const moveProgress = clamp((s - 180) / 380, 0, 1);
-
       const left = map(moveProgress, 0, 1, 50, 11);
       const top  = map(moveProgress, 0, 1, 50, 9);
       const scale = map(moveProgress, 0, 1, 1, 0.62);
@@ -763,13 +813,11 @@
       // burst stars
       burstStars.forEach((star, i) => {
         const local = clamp((s - (50 + i * 8)) / 220, 0, 1);
-
         const x = Math.cos(star.angle) * star.radius * local * star.drift;
         const y = Math.sin(star.angle) * star.radius * local * star.drift;
-
         const starScale = map(local, 0, 1, 0.15, 1.8);
-        let opacity = map(local, 0, 0.25, 0, 1);
 
+        let opacity = map(local, 0, 0.25, 0, 1);
         if(local > 0.72){
           opacity = map(local, 0.72, 1, 1, 0);
         }
@@ -779,20 +827,13 @@
           `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${starScale})`;
       });
 
-      // module sequence centered
-      document.querySelectorAll(".module-item").forEach((item, index) => {
-        const start = 820 + index * 360;
-        const end   = start + 240;
-        const active = s >= start && s < end;
-        item.classList.toggle("active", active);
-      });
+      updateModules(s);
     }
 
     window.addEventListener("scroll", updateScene, { passive:true });
     updateScene();
 
-    // Nail overlay flow
-    const nailButton = document.getElementById("nailButton");
+    // Nail overlay
     const nailOverlay = document.getElementById("nailOverlay");
     const nailBackBtn = document.getElementById("nailBackBtn");
     const goApplyBtn = document.getElementById("goApplyBtn");
@@ -822,19 +863,17 @@
       nailOverlay.scrollTo({ top: 0, behavior: "smooth" });
     });
 
-    // live salon name
     const salonName = document.getElementById("salonName");
     const liveSalonName = document.getElementById("liveSalonName");
+
     salonName.addEventListener("input", () => {
       liveSalonName.textContent = salonName.value.trim() || "Your Salon Name";
     });
 
-    // chips
     document.querySelectorAll("#serviceChips .chip").forEach(chip => {
       chip.addEventListener("click", () => chip.classList.toggle("active"));
     });
 
-    // packages
     document.querySelectorAll(".package-card").forEach(card => {
       card.addEventListener("click", () => {
         document.querySelectorAll(".package-card").forEach(c => c.classList.remove("active"));
@@ -842,7 +881,6 @@
       });
     });
 
-    // success modal
     const submitApplicationBtn = document.getElementById("submitApplicationBtn");
     const successModal = document.getElementById("successModal");
     const successOkBtn = document.getElementById("successOkBtn");
@@ -857,3 +895,5 @@
   </script>
 </body>
 </html>
+
+
