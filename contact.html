@@ -111,7 +111,7 @@
 
     .modules-stage{
       position:relative;
-      min-height:760vh;
+      min-height:860vh;
       width:100%;
     }
 
@@ -360,7 +360,7 @@
       height:1.8px;
       background:var(--gold-soft);
       border-radius:999px;
-      transition:transform .34s ease, top .34s ease, opacity .24s ease;
+      transition:transform .34s ease, top .34s ease;
     }
 
     .menu-toggle span:nth-child(1){ top:18px; }
@@ -494,6 +494,7 @@
       background:none;
       border:none;
       cursor:pointer;
+      font-family:Inter,sans-serif;
     }
 
     .menu-footer-links button:hover{ color:var(--gold-soft); }
@@ -522,54 +523,57 @@
 
     .startrip-plane{
       position:absolute;
-      left:-18%;
-      top:10%;
-      width:120px;
-      height:120px;
+      left:-24%;
+      top:36%;
+      width:160px;
+      height:54px;
       display:flex;
       align-items:center;
       justify-content:center;
       pointer-events:none;
-      animation:planeFly 4.8s ease-in-out infinite;
+      animation:planeFlyStraight 4.8s linear infinite;
       filter:drop-shadow(0 0 14px rgba(212,175,55,.35));
     }
 
     .startrip-plane::before{
       content:"✈";
-      font-size:42px;
+      font-size:38px;
       color:var(--gold-soft);
       text-shadow:
         0 0 8px rgba(240,212,122,.55),
         0 0 24px rgba(212,175,55,.22);
-      transform:rotate(12deg);
+      transform:rotate(0deg);
       display:block;
+      position:relative;
+      z-index:2;
     }
 
     .startrip-plane::after{
       content:"";
       position:absolute;
-      width:170px;
+      width:180px;
       height:2px;
       background:linear-gradient(90deg, transparent, rgba(240,212,122,.75), transparent);
-      opacity:.75;
+      opacity:.78;
       filter:blur(.25px);
+      z-index:1;
     }
 
-    @keyframes planeFly{
+    @keyframes planeFlyStraight{
       0%{
         opacity:0;
-        transform:translateX(-120px) translateY(0) scale(.75);
+        transform:translateX(-120px) translateY(0) scale(.82);
       }
-      10%{
+      8%{
         opacity:1;
       }
-      55%{
+      60%{
         opacity:1;
-        transform:translateX(320px) translateY(-6px) scale(1);
+        transform:translateX(420px) translateY(0) scale(1);
       }
       100%{
         opacity:0;
-        transform:translateX(760px) translateY(-12px) scale(.72);
+        transform:translateX(940px) translateY(0) scale(.82);
       }
     }
 
@@ -636,37 +640,72 @@
       font-weight:500;
     }
 
+    /* PHRASE STAGE */
+    .phrase-stage-wrap{
+      min-height:220px;
+    }
+
     .phrase-rail{
       position:relative;
-      min-height:130px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      overflow:hidden;
+      width:min(92vw,900px);
+      height:180px;
+      margin:0 auto;
     }
 
     .phrase-word{
       position:absolute;
-      font-family:"Cormorant Garamond", serif;
-      font-size:clamp(56px, 10vw, 96px);
+      font-family:Inter,system-ui,sans-serif;
+      font-size:clamp(54px, 9vw, 92px);
+      font-weight:700;
+      letter-spacing:-0.04em;
       color:var(--gold-soft);
       opacity:0;
-      transform:translateX(-60px) scale(.96);
+      transform:translateY(20px) scale(.96);
       text-shadow:
         0 0 14px rgba(240,212,122,.16),
         0 0 32px rgba(212,175,55,.08);
       transition:opacity .42s ease, transform .42s ease;
       white-space:nowrap;
+      top:50%;
     }
 
     .phrase-word.active{
       opacity:1;
-      transform:translateX(0) scale(1);
+      transform:translateY(0) scale(1);
     }
 
-    .phrase-word.exit{
-      opacity:0;
-      transform:translateX(60px) scale(1.02);
+    .phrase-word.left{
+      left:6%;
+      transform:translateY(20px) scale(.96);
+    }
+
+    .phrase-word.center{
+      left:50%;
+      transform:translate(-50%,20px) scale(.96);
+    }
+
+    .phrase-word.right{
+      right:6%;
+      transform:translateY(20px) scale(.96);
+    }
+
+    .phrase-word.active.left{
+      transform:translateY(0) scale(1);
+    }
+
+    .phrase-word.active.center{
+      transform:translate(-50%,0) scale(1);
+    }
+
+    .phrase-word.active.right{
+      transform:translateY(0) scale(1);
+    }
+
+    .phrase-word.power{
+      font-size:clamp(64px, 10vw, 108px);
+      text-shadow:
+        0 0 18px rgba(240,212,122,.32),
+        0 0 44px rgba(212,175,55,.18);
     }
 
     .store-badges{
@@ -757,6 +796,7 @@
       align-items:center;
       justify-content:center;
       border:1px solid rgba(212,175,55,.18);
+      font-family:Inter,sans-serif;
     }
 
     .modal-star-close:hover{
@@ -764,10 +804,12 @@
     }
 
     .info-card h2{
-      font-family:"Cormorant Garamond", serif;
+      font-family:Inter,system-ui,sans-serif;
       color:var(--gold-soft);
-      font-size:clamp(36px,5vw,56px);
-      margin:0 0 12px;
+      font-size:clamp(28px,4vw,42px);
+      font-weight:700;
+      letter-spacing:-0.03em;
+      margin:0 0 14px;
       text-align:center;
     }
 
@@ -778,6 +820,7 @@
       line-height:1.7;
       text-align:center;
       font-size:15px;
+      font-family:Inter,system-ui,sans-serif;
     }
 
     .info-blog-grid{
@@ -789,22 +832,26 @@
 
     .info-blog-item{
       border-radius:20px;
-      padding:16px;
+      padding:18px;
       background:rgba(255,255,255,.04);
       border:1px solid rgba(255,255,255,.08);
     }
 
     .info-blog-item h3{
-      margin:0 0 8px;
+      margin:0 0 10px;
       color:var(--gold-soft);
-      font-size:20px;
-      font-family:"Cormorant Garamond", serif;
+      font-size:18px;
+      font-family:Inter,system-ui,sans-serif;
+      font-weight:700;
+      letter-spacing:-0.02em;
+      text-align:left;
     }
 
     .info-blog-item p{
       text-align:left;
       font-size:13.5px;
       max-width:none;
+      font-family:Inter,system-ui,sans-serif;
     }
 
     .contact-form-modal{
@@ -842,6 +889,7 @@
       color:#121212;
       background:linear-gradient(135deg, #f0d47a, #d6a93d, #8d6a12);
       box-shadow:0 0 22px rgba(212,175,55,.24);
+      font-family:Inter,sans-serif;
     }
 
     @media (max-width:980px){
@@ -1005,6 +1053,7 @@
       background:linear-gradient(135deg, #f0d47a, #d6a93d, #8d6a12);
       box-shadow:0 0 22px rgba(212,175,55,.24);
       transition:transform .22s ease, box-shadow .22s ease;
+      font-family:Inter,sans-serif;
     }
 
     .primary-btn:hover{
@@ -1203,20 +1252,48 @@
       .menu-toggle span:nth-child(2){ top:23px; }
       .menu-toggle.open span:nth-child(1),
       .menu-toggle.open span:nth-child(2){ top:19px; }
+
+      .phrase-rail{
+        height:160px;
+      }
+
+      .phrase-word{
+        font-size:clamp(38px, 11vw, 62px);
+      }
+
+      .phrase-word.left{ left:4%; }
+      .phrase-word.right{ right:4%; }
+
+      .startrip-plane{
+        width:110px;
+        height:50px;
+        top:37%;
+      }
+
+      @keyframes planeFlyStraight{
+        0%{
+          opacity:0;
+          transform:translateX(-70px) translateY(0) scale(.82);
+        }
+        8%{
+          opacity:1;
+        }
+        60%{
+          opacity:1;
+          transform:translateX(180px) translateY(0) scale(1);
+        }
+        100%{
+          opacity:0;
+          transform:translateX(430px) translateY(0) scale(.82);
+        }
+      }
+
       .nail-title{font-size:28px}
       .brandline{font-size:24px}
       .progress-dots{ right:12px; gap:8px; }
       .store-badge{ height:48px; }
       .menu-social img{ width:38px; height:38px; }
       .menu-links a, .menu-links button{ font-size:clamp(22px, 7vw, 34px); }
-      .startrip-plane{ width:84px;height:84px; top:8%; }
-      .startrip-plane::before{ font-size:34px; }
-      @keyframes planeFly{
-        0%{opacity:0;transform:translateX(-80px) translateY(0) scale(.75);}
-        10%{opacity:1;}
-        55%{opacity:1;transform:translateX(180px) translateY(-4px) scale(1);}
-        100%{opacity:0;transform:translateX(420px) translateY(-10px) scale(.72);}
-      }
     }
   </style>
 </head>
@@ -1333,7 +1410,7 @@
 
           <div class="phrase-stage-wrap hidden" id="phraseStageWrap">
             <div class="phrase-rail">
-              <div class="phrase-word" id="phraseWord">AI.</div>
+              <div class="phrase-word left" id="phraseWord">AI.</div>
             </div>
           </div>
 
@@ -1563,9 +1640,15 @@
     const infoCard = document.getElementById("infoCard");
 
     const phraseWord = document.getElementById("phraseWord");
-    const phraseWords = ["AI.", "Beauty.", "Fashion.", "Power."];
+    const phraseSequence = [
+      { text:"AI.", cls:"left", duration:1300 },
+      { text:"Fashion.", cls:"center", duration:1300 },
+      { text:"Beauty.", cls:"right", duration:1300 },
+      { text:"Power.", cls:"center power", duration:1700 }
+    ];
     let phraseIndex = 0;
-    let phraseIntervalStarted = false;
+    let phraseInterval = null;
+    let autoStoreTriggered = false;
 
     const modules = [
       { title:"StarTrip: Maldives", desc:"", special:"startrip" },
@@ -1649,27 +1732,37 @@
       });
     });
 
+    function runPhraseStep(){
+      const step = phraseSequence[phraseIndex];
+      phraseWord.className = "phrase-word " + step.cls;
+      phraseWord.textContent = step.text;
+
+      requestAnimationFrame(() => {
+        phraseWord.classList.add("active");
+      });
+
+      setTimeout(() => {
+        phraseWord.classList.remove("active");
+      }, step.duration);
+
+      phraseIndex = (phraseIndex + 1) % phraseSequence.length;
+    }
+
     function startPhraseLoop(){
-      if(phraseIntervalStarted) return;
-      phraseIntervalStarted = true;
+      if(phraseInterval) return;
+      runPhraseStep();
+      phraseInterval = setInterval(runPhraseStep, 1600);
+    }
 
-      const run = () => {
-        phraseWord.classList.remove("active","exit");
-        phraseWord.textContent = phraseWords[phraseIndex];
-        requestAnimationFrame(() => {
-          phraseWord.classList.add("active");
-        });
-
-        setTimeout(() => {
-          phraseWord.classList.remove("active");
-          phraseWord.classList.add("exit");
-        }, 1300);
-
-        phraseIndex = (phraseIndex + 1) % phraseWords.length;
-      };
-
-      run();
-      setInterval(run, 1800);
+    function stopPhraseLoop(){
+      if(phraseInterval){
+        clearInterval(phraseInterval);
+        phraseInterval = null;
+      }
+      phraseIndex = 0;
+      phraseWord.className = "phrase-word left";
+      phraseWord.textContent = "AI.";
+      phraseWord.classList.remove("active");
     }
 
     function openMenu(){
@@ -1746,6 +1839,8 @@
         hideAllStages();
         moduleStack.classList.remove("hidden");
         progressDots.forEach(dot=>dot.classList.remove("active"));
+        stopPhraseLoop();
+        autoStoreTriggered = false;
         return;
       }
 
@@ -1757,6 +1852,8 @@
 
         hideAllStages();
         moduleStack.classList.remove("hidden");
+        stopPhraseLoop();
+        autoStoreTriggered = false;
 
         if(modules[index].special === "startrip"){
           starTripShell.classList.remove("hidden");
@@ -1779,6 +1876,8 @@
         hideAllStages();
         nailCtaWrap.classList.remove("hidden");
         nailCtaWrap.classList.toggle("show", local > 40);
+        stopPhraseLoop();
+        autoStoreTriggered = false;
         updateProgress(7);
         return;
       }
@@ -1790,6 +1889,16 @@
         phraseStageWrap.classList.toggle("show", local > 40);
         startPhraseLoop();
         updateProgress(8);
+
+        if(local > 120 && !autoStoreTriggered){
+          autoStoreTriggered = true;
+          setTimeout(() => {
+            const currentY = window.scrollY;
+            if(currentY >= phraseStageStart && currentY < storeStageStart){
+              scrollToStoreStage();
+            }
+          }, 6200);
+        }
         return;
       }
 
@@ -1798,6 +1907,7 @@
         hideAllStages();
         storeCtaWrap.classList.remove("hidden");
         storeCtaWrap.classList.toggle("show", local > 40);
+        stopPhraseLoop();
         updateProgress(9);
         return;
       }
