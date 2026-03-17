@@ -313,8 +313,10 @@
       height:46px;
       padding:0 20px;
       border-radius:999px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(212,175,55,.28);
+      background:rgba(0,0,0,.42);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      border:1px solid rgba(212,175,55,.32);
       color:var(--gold-soft);
       font-size:14px;
       font-weight:700;
@@ -325,8 +327,8 @@
 
     .ecosystem-nail:hover{
       transform:translateY(-1px);
-      border-color:rgba(212,175,55,.5);
-      box-shadow:0 0 22px rgba(212,175,55,.15);
+      border-color:rgba(212,175,55,.55);
+      box-shadow:0 0 22px rgba(212,175,55,.16);
     }
 
     .menu-toggle{
@@ -344,6 +346,7 @@
       position:relative;
       transition:.25s ease;
       box-shadow:0 0 16px rgba(255,255,255,.04);
+      z-index:140;
     }
 
     .menu-toggle:hover{
@@ -357,7 +360,7 @@
       height:1.8px;
       background:var(--gold-soft);
       border-radius:999px;
-      transition:transform .34s ease, opacity .22s ease, top .34s ease;
+      transition:transform .34s ease, top .34s ease, opacity .24s ease;
     }
 
     .menu-toggle span:nth-child(1){ top:18px; }
@@ -410,7 +413,8 @@
       align-items:center;
     }
 
-    .menu-links a{
+    .menu-links a,
+    .menu-links button{
       color:var(--gold-soft);
       text-decoration:none;
       font-size:clamp(24px, 3.3vw, 38px);
@@ -418,9 +422,15 @@
       font-weight:500;
       transition:transform .22s ease, color .22s ease, text-shadow .22s ease;
       position:relative;
+      background:none;
+      border:none;
+      cursor:pointer;
+      font-family:Inter, sans-serif;
+      padding:0;
     }
 
-    .menu-links a::after{
+    .menu-links a::after,
+    .menu-links button::after{
       content:"";
       position:absolute;
       left:0;
@@ -431,12 +441,14 @@
       transition:width .28s ease;
     }
 
-    .menu-links a:hover{
+    .menu-links a:hover,
+    .menu-links button:hover{
       transform:translateY(-1px);
       text-shadow:0 0 18px rgba(212,175,55,.16);
     }
 
-    .menu-links a:hover::after{ width:100%; }
+    .menu-links a:hover::after,
+    .menu-links button:hover::after{ width:100%; }
 
     .menu-social{
       display:flex;
@@ -475,13 +487,16 @@
       margin-top:34px;
     }
 
-    .menu-footer-links a{
+    .menu-footer-links button{
       color:rgba(255,255,255,.52);
       font-size:14px;
       text-decoration:none;
+      background:none;
+      border:none;
+      cursor:pointer;
     }
 
-    .menu-footer-links a:hover{ color:var(--gold-soft); }
+    .menu-footer-links button:hover{ color:var(--gold-soft); }
 
     .menu-copy{
       margin-top:14px;
@@ -501,94 +516,61 @@
       align-items:center;
       gap:18px;
       position:relative;
+      min-height:240px;
     }
 
-    .startrip-top{
+    .startrip-plane{
+      position:absolute;
+      left:58%;
+      top:36%;
+      width:110px;
+      height:110px;
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:18px;
-      flex-wrap:wrap;
+      pointer-events:none;
+      animation:planeFly 4.4s ease-in-out infinite;
+      filter:drop-shadow(0 0 14px rgba(212,175,55,.35));
     }
 
-    .hourglass-wrap{
-      position:relative;
-      width:68px;
-      height:68px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      animation:hourglassSpin 8s linear infinite;
-      filter:drop-shadow(0 0 18px rgba(212,175,55,.22));
-    }
-
-    .hourglass-wrap::before{
-      content:"⌛";
-      font-size:46px;
+    .startrip-plane::before{
+      content:"✈";
+      font-size:42px;
       color:var(--gold-soft);
       text-shadow:
-        0 0 8px rgba(240,212,122,.65),
-        0 0 24px rgba(212,175,55,.24);
-      animation:hourglassPulse 2.2s ease-in-out infinite;
+        0 0 8px rgba(240,212,122,.55),
+        0 0 24px rgba(212,175,55,.22);
+      transform:rotate(-28deg);
+      display:block;
     }
 
-    .hourglass-ring{
-      position:absolute;
-      inset:-10px;
-      border-radius:50%;
-      border:1px solid rgba(212,175,55,.16);
-      animation:hourglassRing 2.8s ease-in-out infinite;
-    }
-
-    @keyframes hourglassSpin{
-      0%{transform:rotate(0deg)}
-      100%{transform:rotate(360deg)}
-    }
-
-    @keyframes hourglassPulse{
-      0%,100%{opacity:.72;transform:scale(.96)}
-      50%{opacity:1;transform:scale(1.06)}
-    }
-
-    @keyframes hourglassRing{
-      0%{transform:scale(.86);opacity:.18}
-      70%{transform:scale(1.12);opacity:.42}
-      100%{transform:scale(1.22);opacity:0}
-    }
-
-    .startrip-comet{
-      position:absolute;
-      top:50%;
-      left:50%;
-      width:220px;
-      height:2px;
-      background:linear-gradient(90deg, transparent, rgba(240,212,122,.95), transparent);
-      transform:translate(-50%,-50%) rotate(-18deg);
-      filter:blur(.2px);
-      opacity:.0;
-      animation:cometSweep 4.4s ease-in-out infinite;
-    }
-
-    .startrip-comet::before{
+    .startrip-plane::after{
       content:"";
       position:absolute;
-      right:24px;
-      top:50%;
-      width:10px;
-      height:10px;
-      border-radius:50%;
-      background:var(--gold-soft);
-      transform:translateY(-50%);
-      box-shadow:
-        0 0 10px rgba(240,212,122,.85),
-        0 0 26px rgba(212,175,55,.45);
+      width:160px;
+      height:2px;
+      background:linear-gradient(90deg, transparent, rgba(240,212,122,.75), transparent);
+      transform:rotate(-24deg);
+      opacity:.85;
+      filter:blur(.25px);
     }
 
-    @keyframes cometSweep{
-      0%,20%{opacity:0;transform:translate(-62%,-50%) rotate(-18deg) scaleX(.68)}
-      42%{opacity:1}
-      62%{opacity:.95;transform:translate(-38%,-50%) rotate(-18deg) scaleX(1)}
-      100%{opacity:0;transform:translate(-18%,-50%) rotate(-18deg) scaleX(.76)}
+    @keyframes planeFly{
+      0%{
+        opacity:0;
+        transform:translate(26px,24px) scale(.72);
+      }
+      12%{
+        opacity:1;
+      }
+      55%{
+        opacity:1;
+        transform:translate(-70px,-34px) scale(1);
+      }
+      100%{
+        opacity:0;
+        transform:translate(-230px,-128px) scale(.62);
+      }
     }
 
     .startrip-maldives{
@@ -623,7 +605,36 @@
       }
     }
 
-    .nail-cta-sub{ margin-top:12px; color:var(--muted); font-size:14px; font-weight:500; }
+    .buttonish.nail-dark{
+      appearance:none;
+      border:none;
+      min-width:min(88vw,560px);
+      padding:22px 36px;
+      border-radius:999px;
+      background:rgba(0,0,0,.42);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 18px 50px rgba(0,0,0,.24);
+      cursor:pointer;
+      color:var(--gold-soft);
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+
+    .buttonish.nail-dark:hover{
+      transform:scale(1.025);
+      border-color:rgba(212,175,55,.45);
+      box-shadow:
+        0 18px 50px rgba(0,0,0,.24),
+        0 0 22px rgba(212,175,55,.12);
+    }
+
+    .nail-cta-sub{
+      margin-top:12px;
+      color:var(--muted);
+      font-size:14px;
+      font-weight:500;
+    }
 
     .phrase-rail{
       position:relative;
@@ -656,14 +667,6 @@
     .phrase-word.exit{
       opacity:0;
       transform:translateX(60px) scale(1.02);
-    }
-
-    .phrase-sub{
-      margin-top:18px;
-      color:var(--muted2);
-      font-size:14px;
-      letter-spacing:.08em;
-      text-transform:uppercase;
     }
 
     .store-badges{
@@ -704,150 +707,102 @@
       line-height:1.5;
     }
 
-    .section-shell{
-      position:relative;
-      z-index:4;
-      width:min(92vw, 1180px);
-      margin:0 auto 24px;
-      border-radius:32px;
-      background:rgba(255,255,255,.035);
-      border:1px solid rgba(255,255,255,.08);
-      backdrop-filter:blur(12px);
-      box-shadow:0 24px 56px rgba(0,0,0,.22);
-      padding:34px 26px;
+    /* INFO MODAL */
+    .info-modal{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.58);
+      z-index:130;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+      transition:.28s ease;
+      padding:20px;
     }
 
-    .section-shell h2{
+    .info-modal.open{
+      opacity:1;
+      visibility:visible;
+      pointer-events:auto;
+    }
+
+    .info-card{
+      width:min(92vw,760px);
+      border-radius:28px;
+      padding:28px 24px;
+      background:rgba(8,8,10,.94);
+      border:1px solid rgba(255,255,255,.09);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      box-shadow:0 24px 60px rgba(0,0,0,.35);
+      position:relative;
+    }
+
+    .info-card h2{
       font-family:"Cormorant Garamond", serif;
-      font-size:clamp(40px, 5vw, 64px);
       color:var(--gold-soft);
-      margin:0 0 14px;
+      font-size:clamp(36px,5vw,56px);
+      margin:0 0 12px;
       text-align:center;
     }
 
-    .section-shell p{
+    .info-card p{
+      margin:0 auto;
+      max-width:640px;
       color:var(--muted);
       line-height:1.7;
-      font-size:15px;
-      margin:0 auto;
-      max-width:860px;
       text-align:center;
+      font-size:15px;
     }
 
-    .blog-grid{
-      margin-top:26px;
+    .info-blog-grid{
+      margin-top:20px;
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:16px;
+      gap:14px;
     }
 
-    .blog-card{
-      border-radius:24px;
-      padding:22px 18px;
+    .info-blog-item{
+      border-radius:20px;
+      padding:16px;
       background:rgba(255,255,255,.04);
       border:1px solid rgba(255,255,255,.08);
-      min-height:210px;
     }
 
-    .blog-card h3{
-      margin:0 0 10px;
+    .info-blog-item h3{
+      margin:0 0 8px;
       color:var(--gold-soft);
-      font-size:22px;
+      font-size:20px;
       font-family:"Cormorant Garamond", serif;
     }
 
-    .blog-card p{
+    .info-blog-item p{
       text-align:left;
+      font-size:13.5px;
       max-width:none;
-      font-size:14px;
-      color:var(--muted);
     }
 
-    .contact-grid{
-      margin-top:24px;
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:18px;
-    }
-
-    .contact-card{
-      border-radius:24px;
-      padding:20px;
-      background:rgba(255,255,255,.04);
-      border:1px solid rgba(255,255,255,.08);
-    }
-
-    .contact-card h3{
-      margin:0 0 14px;
-      color:var(--gold-soft);
-      font-size:26px;
-      font-family:"Cormorant Garamond", serif;
-    }
-
-    .contact-form{
-      display:grid;
-      gap:12px;
-    }
-
-    .contact-form input,
-    .contact-form textarea{
-      width:100%;
-      border:none;
-      outline:none;
-      border-radius:18px;
-      padding:14px 16px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.08);
-      color:#fff;
-      font-family:Inter, sans-serif;
-      font-size:14px;
-    }
-
-    .contact-form textarea{
-      min-height:140px;
-      resize:vertical;
-    }
-
-    .contact-form button{
-      appearance:none;
-      border:none;
-      height:52px;
-      border-radius:999px;
-      cursor:pointer;
-      font-weight:800;
-      color:#121212;
-      background:linear-gradient(135deg, #f0d47a, #d6a93d, #8d6a12);
-      box-shadow:0 0 22px rgba(212,175,55,.24);
-    }
-
-    .contact-links{
+    .info-contact-links{
+      margin-top:20px;
       display:flex;
       flex-direction:column;
-      gap:14px;
-      margin-top:10px;
+      gap:12px;
+      align-items:center;
     }
 
-    .contact-links a{
+    .info-contact-links a{
       color:var(--muted);
       text-decoration:none;
       font-size:15px;
     }
 
-    .contact-links a:hover{ color:var(--gold-soft); }
+    .info-contact-links a:hover{ color:var(--gold-soft); }
 
-    .support-mini{
-      margin-top:16px;
-      color:rgba(255,255,255,.5);
-      font-size:13px;
-      line-height:1.6;
-    }
-
-    .footer-copy{
-      margin:32px auto 0;
-      text-align:center;
-      color:rgba(255,255,255,.42);
-      font-size:14px;
-      letter-spacing:.02em;
+    @media (max-width:980px){
+      .info-blog-grid{ grid-template-columns:1fr; }
     }
 
     .nail-overlay{
@@ -1178,18 +1133,9 @@
       cursor:pointer;
     }
 
-    @media (max-width:980px){
-      .blog-grid{ grid-template-columns:1fr; }
-      .contact-grid{ grid-template-columns:1fr; }
-    }
-
     @media (max-width:780px){
       .feature-grid,.form-grid{grid-template-columns:1fr}
       .module-title{font-size:clamp(42px, 13vw, 74px)}
-      .module-title.buttonish{
-        min-width:min(90vw,520px);
-        padding:20px 24px;
-      }
       .logo-wrap img{ width:min(36vw,220px); }
       .ecosystem-bar{
         width:min(96vw, 1180px);
@@ -1219,9 +1165,9 @@
       .progress-dots{ right:12px; gap:8px; }
       .store-badge{ height:48px; }
       .menu-social img{ width:38px; height:38px; }
-      .menu-links a{ font-size:clamp(22px, 7vw, 34px); }
-      .hourglass-wrap{ width:58px;height:58px; }
-      .hourglass-wrap::before{ font-size:40px; }
+      .menu-links a, .menu-links button{ font-size:clamp(22px, 7vw, 34px); }
+      .startrip-plane{ width:84px;height:84px; }
+      .startrip-plane::before{ font-size:34px; }
     }
   </style>
 </head>
@@ -1282,11 +1228,11 @@
   <div class="menu-overlay" id="menuOverlay">
     <div class="menu-overlay-inner">
       <div class="menu-links">
-        <a href="#storeStage">GET THE APP</a>
-        <a href="#aboutus">ABOUT US</a>
-        <a href="#blog">BLOG</a>
+        <a href="#storeStage" id="menuGetApp">GET THE APP</a>
+        <button type="button" data-modal="about">ABOUT US</button>
+        <button type="button" data-modal="blog">BLOG</button>
         <a href="mailto:info@medastare.com">SUPPORT</a>
-        <a href="#contactus">CONTACT</a>
+        <button type="button" data-modal="contact">CONTACT</button>
       </div>
 
       <div class="menu-social">
@@ -1302,12 +1248,16 @@
       </div>
 
       <div class="menu-footer-links">
-        <a href="#privacy">Privacy Policy</a>
-        <a href="#terms">Terms of Use</a>
+        <button type="button" data-modal="privacy">Privacy Policy</button>
+        <button type="button" data-modal="terms">Terms of Use</button>
       </div>
 
       <div class="menu-copy">© 2026 MedaStaré. All Rights Reserved.</div>
     </div>
+  </div>
+
+  <div class="info-modal" id="infoModal">
+    <div class="info-card" id="infoCard"></div>
   </div>
 
   <div class="content">
@@ -1317,13 +1267,8 @@
 
           <div class="module-stack" id="moduleStack">
             <div class="startrip-shell hidden" id="starTripShell">
-              <div class="startrip-comet"></div>
-              <div class="startrip-top">
-                <div class="hourglass-wrap">
-                  <div class="hourglass-ring"></div>
-                </div>
-                <h2 class="module-title startrip-maldives">StarTrip: Maldives</h2>
-              </div>
+              <div class="startrip-plane"></div>
+              <h2 class="module-title startrip-maldives">StarTrip: Maldives</h2>
             </div>
 
             <div class="normal-module hidden" id="normalModule">
@@ -1333,7 +1278,7 @@
           </div>
 
           <div class="nail-cta-wrap hidden" id="nailCtaWrap">
-            <button class="module-title buttonish" id="nailButton">NailStaré</button>
+            <button class="module-title buttonish nail-dark" id="nailButton">NailStaré</button>
             <div class="nail-cta-sub">AI-powered salon growth system for selected partner salons.</div>
           </div>
 
@@ -1341,7 +1286,6 @@
             <div class="phrase-rail">
               <div class="phrase-word" id="phraseWord">AI.</div>
             </div>
-            <div class="phrase-sub">Beauty. Fashion. Power.</div>
           </div>
 
           <div class="store-cta-wrap hidden" id="storeCtaWrap">
@@ -1360,84 +1304,6 @@
 
         </div>
       </div>
-    </section>
-
-    <section class="section-shell" id="aboutus">
-      <h2>About Us</h2>
-      <p>
-        MedaStaré is a luxury AI-powered beauty and fashion ecosystem designed to merge intelligent personalization with elevated digital experience.
-        We are building more than an app: we are shaping a refined universe where styling, beauty discovery, self-expression and future technology exist in one seamless destination.
-        From fashion intelligence to beauty rituals, from challenge culture to premium user journeys, MedaStaré is created for those who want elegance, innovation and power in the same space.
-      </p>
-    </section>
-
-    <section class="section-shell" id="blog">
-      <h2>Blog</h2>
-      <div class="blog-grid">
-        <div class="blog-card">
-          <h3>The Future of AI Beauty</h3>
-          <p>
-            Beauty is moving beyond product discovery into intelligent personalization. MedaStaré explores a world where AI understands taste, mood and visual identity with premium precision.
-          </p>
-        </div>
-        <div class="blog-card">
-          <h3>Fashion, Identity and Digital Luxury</h3>
-          <p>
-            Style is no longer just what you wear. It is your visual language. Our ecosystem is designed to translate that language into sharper, more elevated decisions.
-          </p>
-        </div>
-        <div class="blog-card">
-          <h3>Why MedaStaré Is Building More Than an App</h3>
-          <p>
-            We believe the future belongs to ecosystems, not isolated tools. MedaStaré connects fashion, beauty, AI and aspiration under one signature world.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-shell" id="contactus">
-      <h2>Contact</h2>
-      <div class="contact-grid">
-        <div class="contact-card">
-          <h3>Contact Us</h3>
-          <form class="contact-form">
-            <input type="text" placeholder="Name Surname">
-            <input type="email" placeholder="Email">
-            <textarea placeholder="Message"></textarea>
-            <button type="button">Send Message</button>
-          </form>
-        </div>
-
-        <div class="contact-card">
-          <h3>Support</h3>
-          <div class="contact-links">
-            <a href="mailto:hello@medastare.com">hello@medastare.com</a>
-            <a href="mailto:info@medastare.com">info@medastare.com</a>
-            <a href="https://www.instagram.com/medastareapp" target="_blank" rel="noopener noreferrer">Instagram</a>
-            <a href="https://x.com/medastareapp" target="_blank" rel="noopener noreferrer">X</a>
-            <a href="https://www.linkedin.com/company/medastare/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-          </div>
-          <div class="support-mini">
-            For support requests, partnership discussions and general inquiries, you can reach us directly via email.
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-copy">© 2026 MedaStaré. All Rights Reserved.</div>
-    </section>
-
-    <section class="section-shell" id="privacy">
-      <h2>Privacy Policy</h2>
-      <p>
-        This section can be replaced with your full privacy policy text when ready.
-      </p>
-    </section>
-
-    <section class="section-shell" id="terms">
-      <h2>Terms of Use</h2>
-      <p>
-        This section can be replaced with your full terms of use text when ready.
-      </p>
     </section>
   </div>
 
@@ -1644,11 +1510,14 @@
     const marqueeItems = [...document.querySelectorAll("#ecosystemMarquee span")];
     const menuToggle = document.getElementById("menuToggle");
     const menuOverlay = document.getElementById("menuOverlay");
+    const infoModal = document.getElementById("infoModal");
+    const infoCard = document.getElementById("infoCard");
 
     const phraseWord = document.getElementById("phraseWord");
     const phraseWords = ["AI.", "Beauty.", "Fashion.", "Power."];
     let phraseIndex = 0;
     let phraseIntervalStarted = false;
+    let autoStoreTriggered = false;
 
     const modules = [
       { title:"StarTrip: Maldives", desc:"", special:"startrip" },
@@ -1659,6 +1528,72 @@
       { title:"MedaBeauté", desc:"Beauty intelligence meets luxury rituals and elevated discovery." },
       { title:"PetStaré", desc:"Care, style and smart companionship in one elegant layer." }
     ];
+
+    const modalContent = {
+      about: `
+        <h2>About Us</h2>
+        <p>
+          MedaStaré is a luxury AI-powered beauty and fashion ecosystem designed to merge intelligent personalization with elevated digital experience.
+          We are building more than an app. We are shaping a refined universe where styling, beauty discovery, self-expression and future technology exist in one seamless destination.
+          From fashion intelligence to beauty rituals, from premium challenges to signature experiences, MedaStaré is created for those who want elegance, innovation and power in the same space.
+        </p>
+      `,
+      blog: `
+        <h2>Blog</h2>
+        <div class="info-blog-grid">
+          <div class="info-blog-item">
+            <h3>The Future of AI Beauty</h3>
+            <p>Beauty is moving beyond product discovery into intelligent personalization. MedaStaré explores a world where AI understands taste, mood and identity with premium precision.</p>
+          </div>
+          <div class="info-blog-item">
+            <h3>Fashion, Identity and Digital Luxury</h3>
+            <p>Style is no longer just what you wear. It is your visual language. Our ecosystem is designed to translate that language into sharper, more elevated decisions.</p>
+          </div>
+          <div class="info-blog-item">
+            <h3>Why MedaStaré Is Building More Than an App</h3>
+            <p>We believe the future belongs to ecosystems, not isolated tools. MedaStaré connects fashion, beauty, AI and aspiration under one signature world.</p>
+          </div>
+        </div>
+      `,
+      contact: `
+        <h2>Contact</h2>
+        <p>You can reach MedaStaré directly through the channels below.</p>
+        <div class="info-contact-links">
+          <a href="mailto:hello@medastare.com">hello@medastare.com</a>
+          <a href="mailto:info@medastare.com">info@medastare.com</a>
+          <a href="https://www.instagram.com/medastareapp" target="_blank" rel="noopener noreferrer">Instagram</a>
+          <a href="https://x.com/medastareapp" target="_blank" rel="noopener noreferrer">X</a>
+          <a href="https://www.linkedin.com/company/medastare/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      `,
+      privacy: `
+        <h2>Privacy Policy</h2>
+        <p>This area can be replaced with your full privacy policy text later.</p>
+      `,
+      terms: `
+        <h2>Terms of Use</h2>
+        <p>This area can be replaced with your full terms of use text later.</p>
+      `
+    };
+
+    function openInfoModal(type){
+      infoCard.innerHTML = modalContent[type] || "";
+      infoModal.classList.add("open");
+    }
+
+    function closeInfoModal(){
+      infoModal.classList.remove("open");
+    }
+
+    infoModal.addEventListener("click", (e)=>{
+      if(e.target === infoModal) closeInfoModal();
+    });
+
+    document.querySelectorAll("[data-modal]").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        openInfoModal(btn.dataset.modal);
+      });
+    });
 
     function startPhraseLoop(){
       if(phraseIntervalStarted) return;
@@ -1674,13 +1609,13 @@
         setTimeout(() => {
           phraseWord.classList.remove("active");
           phraseWord.classList.add("exit");
-        }, 1350);
+        }, 1150);
 
         phraseIndex = (phraseIndex + 1) % phraseWords.length;
       };
 
       run();
-      setInterval(run, 1900);
+      setInterval(run, 1600);
     }
 
     function openMenu(){
@@ -1702,8 +1637,11 @@
       else openMenu();
     });
 
-    menuOverlay.querySelectorAll("a").forEach(link => {
-      link.addEventListener("click", closeMenu);
+    menuOverlay.querySelectorAll("a, button").forEach(link => {
+      link.addEventListener("click", (e) => {
+        if(e.currentTarget.dataset.modal) return;
+        closeMenu();
+      });
     });
 
     function updateProgress(activeIndex){
@@ -1728,6 +1666,16 @@
       moduleStack.classList.add("hidden");
     }
 
+    function scrollToStoreStage(){
+      const start = 760;
+      const step = 430;
+      const modulesEnd = start + (modules.length * step);
+      const nailStageStart = modulesEnd;
+      const phraseStageStart = nailStageStart + step;
+      const storeStageStart = phraseStageStart + step;
+      window.scrollTo({ top: storeStageStart + 8, behavior: "smooth" });
+    }
+
     function updateModules(scrollY){
       const start = 760;
       const step = 430;
@@ -1744,6 +1692,7 @@
         hideAllStages();
         moduleStack.classList.remove("hidden");
         progressDots.forEach(dot=>dot.classList.remove("active"));
+        autoStoreTriggered = false;
         return;
       }
 
@@ -1778,6 +1727,7 @@
         nailCtaWrap.classList.remove("hidden");
         nailCtaWrap.classList.toggle("show", local > 40);
         updateProgress(7);
+        autoStoreTriggered = false;
         return;
       }
 
@@ -1788,6 +1738,16 @@
         phraseStageWrap.classList.toggle("show", local > 40);
         startPhraseLoop();
         updateProgress(8);
+
+        if(local > 50 && !autoStoreTriggered){
+          autoStoreTriggered = true;
+          setTimeout(() => {
+            const currentY = window.scrollY;
+            if(currentY >= phraseStageStart && currentY < storeStageStart){
+              scrollToStoreStage();
+            }
+          }, 5200);
+        }
         return;
       }
 
@@ -1842,6 +1802,12 @@
 
     window.addEventListener("scroll", updateScene, { passive:true });
     updateScene();
+
+    document.getElementById("menuGetApp").addEventListener("click", (e)=>{
+      e.preventDefault();
+      closeMenu();
+      setTimeout(() => scrollToStoreStage(), 160);
+    });
 
     const nailOverlay = document.getElementById("nailOverlay");
     const nailBackBtn = document.getElementById("nailBackBtn");
