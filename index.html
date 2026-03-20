@@ -1,14 +1,13 @@
+x.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MedaStaré</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Cormorant+Garamond:wght@600;700&amp;display=swap" rel="stylesheet">
   <style>
     :root{
       --bg:#000;
@@ -19,8 +18,10 @@
       --muted2:rgba(255,255,255,.55);
       --line:rgba(255,255,255,.10);
       --glass:rgba(255,255,255,.05);
+      --ease-premium:cubic-bezier(.22,.78,.2,1);
+      --shadow-premium:0 20px 40px rgba(0,0,0,.24), 0 0 24px rgba(212,175,55,.08);
+      --shadow-premium-soft:0 14px 28px rgba(0,0,0,.18), 0 0 18px rgba(212,175,55,.08);
     }
-
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;scroll-behavior:smooth}
     body{
@@ -29,8 +30,14 @@
       color:#fff;
       overflow-x:hidden;
       min-height:100vh;
+      -webkit-tap-highlight-color:transparent;
     }
-
+    button,
+    a,
+    .chip,
+    .package-card{
+      touch-action:manipulation;
+    }
     .bg-star{
       position:fixed;
       width:2px;
@@ -42,12 +49,10 @@
       animation:twinkle 2.8s ease-in-out infinite alternate;
       z-index:0;
     }
-
     @keyframes twinkle{
       from{opacity:.18;transform:scale(.82)}
       to{opacity:1;transform:scale(1.22)}
     }
-
     .hero-scene{
       position:fixed;
       inset:0;
@@ -55,7 +60,6 @@
       pointer-events:none;
       z-index:10;
     }
-
     .logo-wrap{
       position:absolute;
       left:50%;
@@ -66,7 +70,6 @@
       transition:transform .08s linear, filter .08s linear, opacity .16s linear;
       opacity:1;
     }
-
     .logo-wrap img{
       width:min(70vw,600px);
       display:block;
@@ -74,7 +77,6 @@
         drop-shadow(0 0 14px rgba(212,175,55,.35))
         drop-shadow(0 0 42px rgba(212,175,55,.16));
     }
-
     .burst-star{
       position:absolute;
       left:50%;
@@ -86,7 +88,6 @@
       z-index:10;
       will-change:transform,opacity;
     }
-
     .burst-star::before{
       content:"✦";
       position:absolute;
@@ -101,20 +102,17 @@
         0 0 18px rgba(212,175,55,.8),
         0 0 36px rgba(212,175,55,.42);
     }
-
     .content{
       position:relative;
       z-index:2;
       padding-top:150vh;
       padding-bottom:80px;
     }
-
     .modules-stage{
       position:relative;
       min-height:860vh;
       width:100%;
     }
-
     .modules-layer{
       position:fixed;
       inset:0;
@@ -124,7 +122,6 @@
       align-items:center;
       justify-content:center;
     }
-
     .module-viewport{
       width:100%;
       min-height:100vh;
@@ -134,7 +131,6 @@
       padding:0 20px;
       position:relative;
     }
-
     .module-stack,
     .nail-cta-wrap,
     .phrase-stage-wrap,
@@ -147,7 +143,6 @@
       transition:opacity .36s ease, transform .36s ease;
       pointer-events:none;
     }
-
     .module-stack.show,
     .nail-cta-wrap.show,
     .phrase-stage-wrap.show,
@@ -156,7 +151,6 @@
       transform:translateY(0) scale(1);
       pointer-events:auto;
     }
-
     .module-title{
       font-family:"Cormorant Garamond", serif;
       font-size:clamp(52px, 11vw, 100px);
@@ -170,7 +164,6 @@
       margin:0;
       line-height:.95;
     }
-
     .module-desc{
       margin-top:14px;
       color:var(--muted);
@@ -184,9 +177,7 @@
       margin-right:auto;
       text-shadow:0 0 18px rgba(255,255,255,.04);
     }
-
     .hidden{display:none !important}
-
     .progress-dots{
       position:fixed;
       right:18px;
@@ -198,7 +189,6 @@
       gap:10px;
       pointer-events:none;
     }
-
     .progress-dot{
       width:7px;
       height:7px;
@@ -207,13 +197,11 @@
       transition:.25s ease;
       box-shadow:none;
     }
-
     .progress-dot.active{
       background:var(--gold);
       box-shadow:0 0 14px rgba(212,175,55,.45);
       transform:scale(1.2);
     }
-
     .ecosystem-bar{
       position:fixed;
       top:14px;
@@ -236,20 +224,17 @@
       pointer-events:none;
       transition:opacity .28s ease, transform .28s ease;
     }
-
     .ecosystem-bar.show{
       opacity:1;
       pointer-events:auto;
       transform:translateX(-50%) translateY(0);
     }
-
     .ecosystem-left{
       display:flex;
       align-items:center;
       gap:18px;
       flex:0 0 auto;
     }
-
     .ecosystem-logo{
       height:56px;
       width:auto;
@@ -258,14 +243,12 @@
         drop-shadow(0 0 14px rgba(212,175,55,.18))
         drop-shadow(0 0 30px rgba(212,175,55,.10));
     }
-
     .ecosystem-divider{
       width:1px;
       height:34px;
       background:rgba(255,255,255,.10);
       flex:0 0 auto;
     }
-
     .ecosystem-track{
       overflow:hidden;
       position:relative;
@@ -275,7 +258,6 @@
       align-items:center;
       min-width:0;
     }
-
     .ecosystem-marquee{
       display:flex;
       align-items:center;
@@ -285,7 +267,6 @@
       will-change:transform;
       padding-right:20px;
     }
-
     .ecosystem-marquee span{
       color:rgba(255,255,255,.55);
       font-size:14px;
@@ -293,19 +274,16 @@
       letter-spacing:.01em;
       transition:.22s ease;
     }
-
     .ecosystem-marquee span.active{
       color:var(--gold-soft);
       text-shadow:0 0 16px rgba(212,175,55,.18);
     }
-
     .ecosystem-actions{
       display:flex;
       align-items:center;
       gap:12px;
       flex:0 0 auto;
     }
-
     .ecosystem-nail{
       flex:0 0 auto;
       appearance:none;
@@ -313,47 +291,32 @@
       height:46px;
       padding:0 20px;
       border-radius:999px;
-      background:rgba(0,0,0,.42);
+      background:linear-gradient(180deg, rgba(18,18,22,.92), rgba(7,7,9,.78));
       backdrop-filter:blur(16px);
       -webkit-backdrop-filter:blur(16px);
-      border:1px solid rgba(212,175,55,.32);
+      border:1px solid rgba(212,175,55,.28);
       color:var(--gold-soft);
       font-size:14px;
       font-weight:700;
       cursor:pointer;
-      transition:.22s ease;
-      box-shadow:0 0 16px rgba(212,175,55,.08);
+      box-shadow:var(--shadow-premium-soft), inset 0 1px 0 rgba(255,255,255,.06);
     }
-
-    .ecosystem-nail:hover{
-      transform:translateY(-1px);
-      border-color:rgba(212,175,55,.55);
-      box-shadow:0 0 22px rgba(212,175,55,.16);
-    }
-
     .menu-toggle{
       width:46px;
       height:46px;
       flex:0 0 46px;
       border:none;
       border-radius:50%;
-      background:rgba(255,255,255,.04);
+      background:linear-gradient(180deg, rgba(19,19,22,.9), rgba(7,7,9,.76));
       border:1px solid rgba(255,255,255,.10);
       display:flex;
       align-items:center;
       justify-content:center;
       cursor:pointer;
       position:relative;
-      transition:.25s ease;
-      box-shadow:0 0 16px rgba(255,255,255,.04);
+      box-shadow:var(--shadow-premium-soft), inset 0 1px 0 rgba(255,255,255,.04);
       z-index:200;
     }
-
-    .menu-toggle:hover{
-      border-color:rgba(212,175,55,.35);
-      box-shadow:0 0 20px rgba(212,175,55,.12);
-    }
-
     .menu-toggle span{
       position:absolute;
       width:18px;
@@ -362,20 +325,16 @@
       border-radius:999px;
       transition:transform .34s ease, top .34s ease;
     }
-
     .menu-toggle span:nth-child(1){ top:18px; }
     .menu-toggle span:nth-child(2){ top:26px; }
-
     .menu-toggle.open span:nth-child(1){
       top:22px;
       transform:rotate(45deg);
     }
-
     .menu-toggle.open span:nth-child(2){
       top:22px;
       transform:rotate(-45deg);
     }
-
     .menu-overlay{
       position:fixed;
       inset:0;
@@ -391,13 +350,11 @@
       pointer-events:none;
       transition:opacity .34s ease, visibility .34s ease;
     }
-
     .menu-overlay.open{
       opacity:1;
       visibility:visible;
       pointer-events:auto;
     }
-
     .menu-overlay-inner{
       width:min(92vw, 760px);
       max-width:760px;
@@ -405,14 +362,12 @@
       padding:100px 24px 46px;
       position:relative;
     }
-
     .menu-links{
       display:flex;
       flex-direction:column;
       gap:18px;
       align-items:center;
     }
-
     .menu-links a,
     .menu-links button{
       color:var(--gold-soft);
@@ -428,7 +383,6 @@
       font-family:Inter, sans-serif;
       padding:0;
     }
-
     .menu-links a::after,
     .menu-links button::after{
       content:"";
@@ -440,37 +394,22 @@
       background:linear-gradient(90deg, transparent, var(--gold-soft), transparent);
       transition:width .28s ease;
     }
-
-    .menu-links a:hover,
-    .menu-links button:hover{
-      transform:translateY(-1px);
-      text-shadow:0 0 18px rgba(212,175,55,.16);
-    }
-
     .menu-links a:hover::after,
     .menu-links button:hover::after{ width:100%; }
-
     .menu-social{
       display:flex;
       justify-content:center;
       align-items:center;
-      gap:34px;
+      gap:24px;
       margin-top:42px;
     }
-
     .menu-social a{
       display:inline-flex;
       align-items:center;
       justify-content:center;
       text-decoration:none;
-      transition:transform .22s ease, opacity .22s ease;
+      border-radius:18px;
     }
-
-    .menu-social a:hover{
-      transform:scale(1.08);
-      opacity:1;
-    }
-
     .menu-social img{
       width:50px;
       height:50px;
@@ -478,7 +417,6 @@
       display:block;
       filter:drop-shadow(0 0 16px rgba(212,175,55,.08));
     }
-
     .menu-footer-links{
       display:flex;
       flex-direction:column;
@@ -486,7 +424,6 @@
       gap:10px;
       margin-top:34px;
     }
-
     .menu-footer-links button{
       color:rgba(255,255,255,.52);
       font-size:14px;
@@ -496,113 +433,92 @@
       cursor:pointer;
       font-family:Inter,sans-serif;
     }
-
     .menu-footer-links button:hover{ color:var(--gold-soft); }
-
     .menu-copy{
       margin-top:14px;
       color:rgba(255,255,255,.42);
       font-size:13px;
     }
-
     @keyframes marquee{
       from{ transform:translateX(0); }
       to{ transform:translateX(-50%); }
     }
-
- /* STARTRIP */
-.startrip-shell{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:18px;
-  position:relative;
-  min-height:240px;
-  overflow:visible;
-}
-
-.startrip-plane{
-  position:absolute;
-  left:-24%;
-  top:40%;
-  width:160px;
-  height:54px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  pointer-events:none;
-  animation:planeFlyStraight 4.8s linear infinite;
-  filter:drop-shadow(0 0 14px rgba(212,175,55,.35));
-}
-
-.startrip-plane::before{
-  content:"✈";
-  font-size:38px;
-  color:var(--gold-soft);
-  text-shadow:
-    0 0 8px rgba(240,212,122,.55),
-    0 0 24px rgba(212,175,55,.22);
-  transform:rotate(0deg);
-  display:block;
-  position:relative;
-  z-index:2;
-}
-
-.startrip-plane::after{
-  content:"";
-  position:absolute;
-  left:0;
-  top:50%;
-  width:160px;
-  height:2px;
-  transform:translateY(-50%);
-  background:linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(240,212,122,.75) 25%,
-    rgba(240,212,122,.95) 55%,
-    transparent 100%
-  );
-  filter:blur(.2px);
-  opacity:.9;
-  z-index:1;
-}
-
-.startrip-maldives{
-  position:relative;
-  display:inline-block;
-  animation:maldivesGlow 2.8s ease-in-out infinite;
-}
-
-.startrip-maldives::after{
-  display:none;
-  content:none;
-}
-
-    @keyframes planeFlyStraight{
+    .startrip-shell{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:18px;
+      position:relative;
+      min-height:240px;
+      overflow:visible;
+    }
+    .startrip-plane{
+      position:absolute;
+      left:-28%;
+      top:39%;
+      width:240px;
+      height:72px;
+      pointer-events:none;
+      opacity:0;
+      will-change:transform,opacity,filter;
+      animation:planeSweep 6.2s var(--ease-premium) infinite;
+      filter:drop-shadow(0 0 0 rgba(212,175,55,0));
+    }
+    .startrip-plane::before{
+      content:"";
+      position:absolute;
+      right:18px;
+      top:50%;
+      width:88px;
+      height:30px;
+      transform:translateY(-60%) rotate(-4deg);
+      clip-path:polygon(0 52%, 18% 39%, 34% 3%, 46% 3%, 40% 41%, 74% 41%, 100% 50%, 74% 59%, 40% 59%, 46% 97%, 34% 97%, 18% 64%);
+      background:linear-gradient(135deg, rgba(255,255,255,.98) 0%, rgba(247,235,193,.98) 34%, rgba(236,205,107,.96) 68%, rgba(140,102,19,.94) 100%);
+      box-shadow:
+        0 0 18px rgba(240,212,122,.20),
+        0 12px 26px rgba(0,0,0,.18);
+    }
+    .startrip-plane::after{
+      content:"";
+      position:absolute;
+      left:20px;
+      right:84px;
+      bottom:18px;
+      height:1px;
+      background:linear-gradient(90deg, transparent 0%, rgba(240,212,122,.10) 10%, rgba(240,212,122,.88) 52%, rgba(240,212,122,.10) 90%, transparent 100%);
+      box-shadow:0 0 14px rgba(240,212,122,.28);
+      opacity:.92;
+    }
+    @keyframes planeSweep{
       0%{
         opacity:0;
-        transform:translateX(-120px) translateY(0) scale(.82);
+        transform:translate3d(-160px, 18px, 0) scale(.82);
+        filter:drop-shadow(0 0 0 rgba(212,175,55,0));
       }
-      8%{
-        opacity:1;
+      10%{
+        opacity:.95;
+        transform:translate3d(-36px, 10px, 0) scale(.9);
       }
-      60%{
+      42%{
         opacity:1;
-        transform:translateX(420px) translateY(0) scale(1);
+        transform:translate3d(270px, 0, 0) scale(1);
+        filter:drop-shadow(0 0 22px rgba(212,175,55,.14));
+      }
+      74%{
+        opacity:.7;
+        transform:translate3d(640px, -6px, 0) scale(.98);
       }
       100%{
         opacity:0;
-        transform:translateX(940px) translateY(0) scale(.82);
+        transform:translate3d(980px, -14px, 0) scale(.92);
+        filter:drop-shadow(0 0 18px rgba(212,175,55,.10));
       }
     }
-
     .startrip-maldives{
       position:relative;
       display:inline-block;
       animation:maldivesGlow 2.8s ease-in-out infinite;
     }
-
     .startrip-maldives::after{
       content:"";
       position:absolute;
@@ -610,12 +526,11 @@
       top:50%;
       width:124%;
       height:1px;
-      background:linear-gradient(90deg, transparent, rgba(240,212,122,.85), transparent);
+      background:linear-gradient(90deg, transparent, rgba(240,212,122,.82), transparent);
       transform:translateY(20px);
-      opacity:.8;
+      opacity:.78;
       filter:blur(.2px);
     }
-
     @keyframes maldivesGlow{
       0%,100%{
         text-shadow:
@@ -628,50 +543,35 @@
           0 0 44px rgba(212,175,55,.18);
       }
     }
-
     .buttonish.nail-dark{
       appearance:none;
       border:none;
       min-width:min(88vw,560px);
       padding:22px 36px;
       border-radius:999px;
-      background:rgba(0,0,0,.42);
+      background:linear-gradient(180deg, rgba(18,18,22,.94), rgba(6,6,8,.78));
       backdrop-filter:blur(18px);
       -webkit-backdrop-filter:blur(18px);
       border:1px solid rgba(255,255,255,.08);
-      box-shadow:0 18px 50px rgba(0,0,0,.24);
+      box-shadow:var(--shadow-premium), inset 0 1px 0 rgba(255,255,255,.06);
       cursor:pointer;
       color:var(--gold-soft);
-      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
     }
-
-    .buttonish.nail-dark:hover{
-      transform:scale(1.025);
-      border-color:rgba(212,175,55,.45);
-      box-shadow:
-        0 18px 50px rgba(0,0,0,.24),
-        0 0 22px rgba(212,175,55,.12);
-    }
-
     .nail-cta-sub{
       margin-top:12px;
       color:var(--muted);
       font-size:14px;
       font-weight:500;
     }
-
-    /* PHRASE STAGE */
     .phrase-stage-wrap{
       min-height:220px;
     }
-
     .phrase-rail{
       position:relative;
       width:min(92vw,900px);
       height:180px;
       margin:0 auto;
     }
-
     .phrase-word{
       position:absolute;
       font-family:Inter,system-ui,sans-serif;
@@ -688,85 +588,154 @@
       white-space:nowrap;
       top:50%;
     }
-
     .phrase-word.active{
       opacity:1;
       transform:translateY(0) scale(1);
     }
-
     .phrase-word.left{
       left:6%;
       transform:translateY(20px) scale(.96);
     }
-
     .phrase-word.center{
       left:50%;
       transform:translate(-50%,20px) scale(.96);
     }
-
     .phrase-word.right{
       right:6%;
       transform:translateY(20px) scale(.96);
     }
-
     .phrase-word.active.left{
       transform:translateY(0) scale(1);
     }
-
     .phrase-word.active.center{
       transform:translate(-50%,0) scale(1);
     }
-
     .phrase-word.active.right{
       transform:translateY(0) scale(1);
     }
-
     .phrase-word.power{
       font-size:clamp(64px, 10vw, 108px);
       text-shadow:
         0 0 18px rgba(240,212,122,.32),
         0 0 44px rgba(212,175,55,.18);
     }
-
     .store-badges{
-      display:flex;
+      display:grid;
+      grid-template-columns:repeat(2, minmax(190px, 228px));
       align-items:center;
       justify-content:center;
-      gap:18px;
-      margin-top:28px;
-      flex-wrap:wrap;
+      gap:12px;
+      margin-top:24px;
     }
-
     .store-badge-link{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      transition:transform .22s ease, opacity .22s ease;
+      min-height:86px;
+      padding:10px 14px;
+      border-radius:24px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:var(--shadow-premium-soft);
     }
-
-    .store-badge-link:hover{
-      transform:translateY(-2px) scale(1.02);
-      opacity:1;
-    }
-
     .store-badge{
-      height:150px;
-      width:auto;
+      width:100%;
+      max-width:190px;
+      max-height:62px;
+      height:auto;
       object-fit:contain;
       display:block;
       filter:
         drop-shadow(0 0 14px rgba(212,175,55,.10))
         drop-shadow(0 0 26px rgba(212,175,55,.08));
     }
-
     .store-copy{
       margin-top:14px;
       color:var(--muted2);
       font-size:14px;
       line-height:1.5;
     }
-
-    /* INFO MODAL */
+    .premium-interactive{
+      position:relative;
+      isolation:isolate;
+      transition:
+        transform .32s var(--ease-premium),
+        box-shadow .32s var(--ease-premium),
+        border-color .32s var(--ease-premium),
+        background-color .32s var(--ease-premium),
+        filter .32s var(--ease-premium),
+        opacity .28s ease;
+      will-change:transform,box-shadow;
+      backface-visibility:hidden;
+    }
+    .ecosystem-nail,
+    .menu-toggle,
+    .menu-social a,
+    .store-badge-link,
+    .buttonish.nail-dark,
+    .back-btn,
+    .primary-btn,
+    .text-btn,
+    .modal-star-close,
+    .contact-form-modal button,
+    .chip,
+    .package-card{
+      overflow:hidden;
+    }
+    .premium-interactive::before{
+      content:"";
+      position:absolute;
+      inset:-1px;
+      border-radius:inherit;
+      background:linear-gradient(118deg, transparent 18%, rgba(255,255,255,.14) 44%, rgba(240,212,122,.16) 52%, transparent 76%);
+      transform:translateX(-135%);
+      opacity:0;
+      pointer-events:none;
+      z-index:0;
+      mix-blend-mode:screen;
+    }
+    @media (hover:hover){
+      .premium-interactive:hover{
+        transform:translateY(-1.5px) scale(1.012);
+        box-shadow:0 22px 40px rgba(0,0,0,.22), 0 0 28px rgba(212,175,55,.12);
+        filter:saturate(1.03);
+      }
+      .premium-interactive:hover::before{
+        opacity:1;
+        transform:translateX(135%);
+        transition:transform .82s var(--ease-premium), opacity .24s ease;
+      }
+      .menu-links .premium-interactive:hover{
+        text-shadow:0 0 18px rgba(212,175,55,.16);
+      }
+    }
+    .premium-interactive:active{
+      transform:translateY(0) scale(.985);
+      transition-duration:.14s;
+    }
+    .premium-interactive:focus-visible{
+      outline:none;
+      box-shadow:
+        0 0 0 1px rgba(240,212,122,.42),
+        0 0 0 6px rgba(240,212,122,.08),
+        0 18px 32px rgba(0,0,0,.20);
+    }
+    .press-flash{
+      animation:premiumPressPulse .56s ease;
+    }
+    @keyframes premiumPressPulse{
+      0%{
+        transform:translateY(0) scale(.985);
+        filter:brightness(1);
+      }
+      35%{
+        filter:brightness(1.08) saturate(1.06);
+      }
+      100%{
+        transform:translateY(0) scale(1);
+        filter:brightness(1);
+      }
+    }
     .info-modal{
       position:fixed;
       inset:0;
@@ -781,13 +750,11 @@
       transition:.28s ease;
       padding:20px;
     }
-
     .info-modal.open{
       opacity:1;
       visibility:visible;
       pointer-events:auto;
     }
-
     .info-card{
       width:min(92vw,760px);
       border-radius:28px;
@@ -799,7 +766,6 @@
       box-shadow:0 24px 60px rgba(0,0,0,.35);
       position:relative;
     }
-
     .modal-star-close{
       position:absolute;
       top:16px;
@@ -808,7 +774,7 @@
       height:34px;
       border:none;
       border-radius:50%;
-      background:rgba(255,255,255,.05);
+      background:linear-gradient(180deg, rgba(21,21,24,.9), rgba(8,8,10,.76));
       color:var(--gold-soft);
       cursor:pointer;
       font-size:18px;
@@ -817,12 +783,8 @@
       justify-content:center;
       border:1px solid rgba(212,175,55,.18);
       font-family:Inter,sans-serif;
+      box-shadow:var(--shadow-premium-soft);
     }
-
-    .modal-star-close:hover{
-      box-shadow:0 0 16px rgba(212,175,55,.16);
-    }
-
     .info-card h2{
       font-family:Inter,system-ui,sans-serif;
       color:var(--gold-soft);
@@ -832,7 +794,6 @@
       margin:0 0 14px;
       text-align:center;
     }
-
     .info-card p{
       margin:0 auto;
       max-width:640px;
@@ -842,21 +803,18 @@
       font-size:15px;
       font-family:Inter,system-ui,sans-serif;
     }
-
     .info-blog-grid{
       margin-top:20px;
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
       gap:14px;
     }
-
     .info-blog-item{
       border-radius:20px;
       padding:18px;
       background:rgba(255,255,255,.04);
       border:1px solid rgba(255,255,255,.08);
     }
-
     .info-blog-item h3{
       margin:0 0 10px;
       color:var(--gold-soft);
@@ -866,20 +824,17 @@
       letter-spacing:-0.02em;
       text-align:left;
     }
-
     .info-blog-item p{
       text-align:left;
       font-size:13.5px;
       max-width:none;
       font-family:Inter,system-ui,sans-serif;
     }
-
     .contact-form-modal{
       margin-top:20px;
       display:grid;
       gap:12px;
     }
-
     .contact-form-modal input,
     .contact-form-modal textarea{
       width:100%;
@@ -893,12 +848,10 @@
       font-family:Inter, sans-serif;
       font-size:14px;
     }
-
     .contact-form-modal textarea{
       min-height:140px;
       resize:vertical;
     }
-
     .contact-form-modal button{
       appearance:none;
       border:none;
@@ -907,15 +860,13 @@
       cursor:pointer;
       font-weight:800;
       color:#121212;
-      background:linear-gradient(135deg, #f0d47a, #d6a93d, #8d6a12);
-      box-shadow:0 0 22px rgba(212,175,55,.24);
+      background:linear-gradient(145deg, #fcf0ba 0%, #efcd72 34%, #c9952b 72%, #8d6a12 100%);
+      box-shadow:0 0 22px rgba(212,175,55,.24), inset 0 1px 0 rgba(255,255,255,.38);
       font-family:Inter,sans-serif;
     }
-
     @media (max-width:980px){
       .info-blog-grid{ grid-template-columns:1fr; }
     }
-
     .nail-overlay{
       position:fixed;
       inset:0;
@@ -927,22 +878,18 @@
       display:none;
       overflow:auto;
     }
-
     .nail-overlay.open{display:block}
-
     .nail-shell{
       max-width:980px;
       margin:0 auto;
       padding:24px 20px 64px;
     }
-
     .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
       margin-bottom:18px;
     }
-
     .back-btn{
       appearance:none;
       border:none;
@@ -952,15 +899,14 @@
       font-weight:700;
       cursor:pointer;
       padding:10px 0;
+      border-radius:999px;
     }
-
     .mini-logo{
       font-family:"Cormorant Garamond", serif;
       color:var(--gold-soft);
       font-size:28px;
       font-weight:700;
     }
-
     .glass{
       width:100%;
       border-radius:26px;
@@ -970,17 +916,14 @@
       backdrop-filter:blur(16px);
       box-shadow:0 18px 40px rgba(0,0,0,.18);
     }
-
     .glass + .glass{margin-top:16px}
     .hero-card{margin-top:12px}
-
     .nail-title{
       font-size:34px;
       font-weight:800;
       margin:0 0 10px;
       text-align:center;
     }
-
     .nail-subtitle{
       text-align:center;
       color:var(--muted);
@@ -989,26 +932,22 @@
       margin:0 auto 28px;
       max-width:650px;
     }
-
     .section-title{
       font-size:18px;
       font-weight:800;
       margin:0 0 12px;
     }
-
     .body-copy{
       color:var(--muted);
       line-height:1.58;
       font-size:14px;
     }
-
     .feature-grid{
       margin-top:18px;
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
       gap:12px;
     }
-
     .feature-card{
       border-radius:22px;
       padding:16px;
@@ -1016,7 +955,6 @@
       border:1px solid rgba(255,255,255,.10);
       min-height:160px;
     }
-
     .feature-icon{
       width:40px;
       height:40px;
@@ -1031,20 +969,17 @@
       margin-bottom:12px;
       box-shadow:0 0 18px rgba(212,175,55,.22);
     }
-
     .feature-card h3{
       margin:0 0 8px;
       font-size:15px;
       font-weight:800;
     }
-
     .feature-card p{
       margin:0;
       color:var(--muted);
       font-size:12.5px;
       line-height:1.42;
     }
-
     .notice{
       display:flex;
       gap:10px;
@@ -1053,13 +988,11 @@
       font-size:13.5px;
       line-height:1.45;
     }
-
     .notice-badge{
       color:var(--gold-soft);
       font-weight:800;
       margin-top:1px;
     }
-
     .primary-btn{
       appearance:none;
       border:none;
@@ -1070,17 +1003,10 @@
       color:#151515;
       font-size:15px;
       font-weight:800;
-      background:linear-gradient(135deg, #f0d47a, #d6a93d, #8d6a12);
-      box-shadow:0 0 22px rgba(212,175,55,.24);
-      transition:transform .22s ease, box-shadow .22s ease;
+      background:linear-gradient(145deg, #fcf0ba 0%, #efcd72 34%, #c9952b 72%, #8d6a12 100%);
+      box-shadow:0 0 22px rgba(212,175,55,.24), inset 0 1px 0 rgba(255,255,255,.38);
       font-family:Inter,sans-serif;
     }
-
-    .primary-btn:hover{
-      transform:translateY(-1px) scale(1.01);
-      box-shadow:0 0 28px rgba(212,175,55,.32);
-    }
-
     .muted-center{
       text-align:center;
       color:var(--muted2);
@@ -1088,16 +1014,13 @@
       font-weight:600;
       margin-top:10px;
     }
-
     .form-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:12px;
     }
-
     .field{margin-bottom:12px}
     .field.full{grid-column:1 / -1}
-
     .field label{
       display:block;
       margin-bottom:8px;
@@ -1105,7 +1028,6 @@
       font-size:13px;
       font-weight:700;
     }
-
     .field input,
     .field select{
       width:100%;
@@ -1117,36 +1039,30 @@
       font-size:14px;
       outline:none;
     }
-
     .field input:focus,
     .field select:focus{
       border-color:rgba(212,175,55,.8);
       box-shadow:0 0 0 1px rgba(212,175,55,.35);
     }
-
     .brandline{
       font-size:28px;
       font-weight:900;
       margin:2px 0 8px;
       line-height:1.15;
     }
-
     .brandline span{color:var(--gold-soft)}
-
     .powered{
       color:var(--muted2);
       font-size:12.5px;
       font-weight:600;
       margin-bottom:18px;
     }
-
     .chips{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
       margin-top:10px;
     }
-
     .chip{
       border-radius:999px;
       padding:10px 14px;
@@ -1156,15 +1072,12 @@
       font-size:12.5px;
       font-weight:600;
       cursor:pointer;
-      transition:.18s ease;
     }
-
     .chip.active{
       border-color:var(--gold);
       background:rgba(212,175,55,.16);
       box-shadow:0 0 16px rgba(212,175,55,.14);
     }
-
     .package-card{
       width:100%;
       padding:16px;
@@ -1173,28 +1086,23 @@
       border:1px solid rgba(255,255,255,.10);
       margin-bottom:12px;
       cursor:pointer;
-      transition:.2s ease;
     }
-
     .package-card.active{
       border-color:var(--gold);
       background:rgba(212,175,55,.14);
       box-shadow:0 0 18px rgba(212,175,55,.12);
     }
-
     .package-title{
       font-size:15px;
       font-weight:800;
       margin:0 0 6px;
     }
-
     .package-desc{
       color:var(--muted);
       font-size:13px;
       line-height:1.45;
       margin:0;
     }
-
     .success-modal{
       position:fixed;
       inset:0;
@@ -1205,9 +1113,7 @@
       background:rgba(0,0,0,.48);
       padding:20px;
     }
-
     .success-modal.open{display:flex}
-
     .success-card{
       width:min(92vw,520px);
       border-radius:24px;
@@ -1216,25 +1122,21 @@
       padding:22px;
       box-shadow:0 24px 60px rgba(0,0,0,.35);
     }
-
     .success-card h3{
       margin:0 0 10px;
       font-size:22px;
       font-weight:800;
     }
-
     .success-card p{
       margin:0;
       color:var(--muted);
       line-height:1.5;
     }
-
     .success-actions{
       margin-top:18px;
       display:flex;
       justify-content:flex-end;
     }
-
     .text-btn{
       appearance:none;
       border:none;
@@ -1243,8 +1145,9 @@
       font-size:14px;
       font-weight:800;
       cursor:pointer;
+      border-radius:999px;
+      padding:8px 14px;
     }
-
     @media (max-width:780px){
       .feature-grid,.form-grid{grid-template-columns:1fr}
       .module-title{font-size:clamp(42px, 13vw, 74px)}
@@ -1272,59 +1175,85 @@
       .menu-toggle span:nth-child(2){ top:23px; }
       .menu-toggle.open span:nth-child(1),
       .menu-toggle.open span:nth-child(2){ top:19px; }
-
-      .phrase-rail{
-        height:160px;
-      }
-
-      .phrase-word{
-        font-size:clamp(38px, 11vw, 62px);
-      }
-
+      .phrase-rail{ height:160px; }
+      .phrase-word{ font-size:clamp(38px, 11vw, 62px); }
       .phrase-word.left{ left:4%; }
       .phrase-word.right{ right:4%; }
-
       .startrip-plane{
-        width:110px;
-        height:50px;
+        width:168px;
+        height:58px;
         top:37%;
       }
-
-      @keyframes planeFlyStraight{
+      .startrip-plane::before{
+        width:68px;
+        height:24px;
+        right:10px;
+      }
+      .startrip-plane::after{
+        left:10px;
+        right:62px;
+        bottom:15px;
+      }
+      @keyframes planeSweep{
         0%{
           opacity:0;
-          transform:translateX(-70px) translateY(0) scale(.82);
+          transform:translate3d(-90px, 16px, 0) scale(.82);
+          filter:drop-shadow(0 0 0 rgba(212,175,55,0));
         }
-        8%{
-          opacity:1;
+        10%{
+          opacity:.95;
+          transform:translate3d(-18px, 9px, 0) scale(.88);
         }
-        60%{
+        44%{
           opacity:1;
-          transform:translateX(180px) translateY(0) scale(1);
+          transform:translate3d(142px, 0, 0) scale(1);
+          filter:drop-shadow(0 0 16px rgba(212,175,55,.12));
+        }
+        74%{
+          opacity:.68;
+          transform:translate3d(282px, -4px, 0) scale(.98);
         }
         100%{
           opacity:0;
-          transform:translateX(430px) translateY(0) scale(.82);
+          transform:translate3d(440px, -10px, 0) scale(.92);
+          filter:drop-shadow(0 0 12px rgba(212,175,55,.10));
         }
       }
-
       .nail-title{font-size:28px}
       .brandline{font-size:24px}
       .progress-dots{ right:12px; gap:8px; }
-      .store-badge{ height:48px; }
+      .store-badges{
+        grid-template-columns:minmax(0, 264px);
+        gap:10px;
+      }
+      .store-badge-link{
+        min-height:80px;
+      }
+      .store-badge{
+        max-width:186px;
+        max-height:56px;
+      }
       .menu-social img{ width:38px; height:38px; }
       .menu-links a, .menu-links button{ font-size:clamp(22px, 7vw, 34px); }
+    }
+    @media (prefers-reduced-motion: reduce){
+      *,
+      *::before,
+      *::after{
+        animation-duration:.01ms !important;
+        animation-iteration-count:1 !important;
+        transition-duration:.01ms !important;
+        scroll-behavior:auto !important;
+      }
     }
   </style>
 </head>
 <body>
-
   <div class="hero-scene" id="heroScene">
     <div class="logo-wrap" id="logoWrap">
       <img src="medastare-logo.png" alt="MedaStaré logo" />
     </div>
   </div>
-
   <div class="progress-dots" id="progressDots">
     <div class="progress-dot"></div>
     <div class="progress-dot"></div>
@@ -1337,13 +1266,11 @@
     <div class="progress-dot"></div>
     <div class="progress-dot"></div>
   </div>
-
   <div class="ecosystem-bar" id="ecosystemBar">
     <div class="ecosystem-left">
       <img src="medastare-logo.png" alt="MedaStaré" class="ecosystem-logo">
       <div class="ecosystem-divider"></div>
     </div>
-
     <div class="ecosystem-track">
       <div class="ecosystem-marquee" id="ecosystemMarquee">
         <span data-name="FashionStaré">FashionStaré</span>
@@ -1360,7 +1287,6 @@
         <span data-name="PetStaré">PetStaré</span>
       </div>
     </div>
-
     <div class="ecosystem-actions">
       <button class="ecosystem-nail" id="ecosystemNailButton">NailStaré</button>
       <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
@@ -1368,7 +1294,6 @@
       </button>
     </div>
   </div>
-
   <div class="menu-overlay" id="menuOverlay">
     <div class="menu-overlay-inner">
       <div class="menu-links">
@@ -1378,7 +1303,6 @@
         <a href="mailto:info@medastare.com">SUPPORT</a>
         <button type="button" data-modal="contact">CONTACT</button>
       </div>
-
       <div class="menu-social">
         <a href="https://www.linkedin.com/company/medastare/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
           <img src="linkedin-logo.png" alt="LinkedIn">
@@ -1386,52 +1310,43 @@
         <a href="https://x.com/medastareapp" target="_blank" rel="noopener noreferrer" aria-label="X">
           <img src="x-logo.png" alt="X">
         </a>
-        <a href="https://www.instagram.com/medastare.co?igsh=MTJmNnZveDk3OHU4eA%3D%3D&utm_source=qr">
+        <a href="https://www.instagram.com/medastare.co?igsh=MTJmNnZveDk3OHU4eA%3D%3D&amp;utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <img src="instagram-logo.png" alt="Instagram">
         </a>
       </div>
-
       <div class="menu-footer-links">
-  <button type="button" disabled style="pointer-events:none; opacity:.55; cursor:default;">Privacy Policy</button>
-  <button type="button" disabled style="pointer-events:none; opacity:.55; cursor:default;">Terms of Use</button>
-</div>
-
+        <button type="button" disabled style="pointer-events:none; opacity:.55; cursor:default;">Privacy Policy</button>
+        <button type="button" disabled style="pointer-events:none; opacity:.55; cursor:default;">Terms of Use</button>
+      </div>
       <div class="menu-copy">© 2026 MedaStaré. All Rights Reserved.</div>
     </div>
   </div>
-
   <div class="info-modal" id="infoModal">
     <div class="info-card" id="infoCard"></div>
   </div>
-
   <div class="content">
     <section class="modules-stage" id="modulesStage">
       <div class="modules-layer" id="modulesLayer">
         <div class="module-viewport">
-
           <div class="module-stack" id="moduleStack">
             <div class="startrip-shell hidden" id="starTripShell">
               <div class="startrip-plane"></div>
               <h2 class="module-title startrip-maldives">StarTrip: Maldives</h2>
             </div>
-
             <div class="normal-module hidden" id="normalModule">
               <h2 class="module-title" id="moduleText">FashionStaré</h2>
               <p class="module-desc" id="moduleDesc">AI styling, elevated for a luxury fashion ecosystem.</p>
             </div>
           </div>
-
           <div class="nail-cta-wrap hidden" id="nailCtaWrap">
             <button class="module-title buttonish nail-dark" id="nailButton">NailStaré</button>
             <div class="nail-cta-sub">AI-powered salon growth system for selected partner salons.</div>
           </div>
-
           <div class="phrase-stage-wrap hidden" id="phraseStageWrap">
             <div class="phrase-rail">
               <div class="phrase-word left" id="phraseWord">AI.</div>
             </div>
           </div>
-
           <div class="store-cta-wrap hidden" id="storeCtaWrap">
             <h2 class="module-title" id="storeStage">Get the App</h2>
             <p class="module-desc">Download MedaStaré and step into the ecosystem.</p>
@@ -1445,12 +1360,10 @@
             </div>
             <div class="store-copy">Available soon on App Store and Google Play.</div>
           </div>
-
         </div>
       </div>
     </section>
   </div>
-
   <div class="nail-overlay" id="nailOverlay">
     <div class="nail-shell">
       <div class="topbar">
@@ -1458,19 +1371,16 @@
         <div class="mini-logo">NailStaré</div>
         <div style="width:60px"></div>
       </div>
-
       <div id="nailIntroView">
         <div class="glass hero-card">
           <h1 class="nail-title">NailStaré</h1>
           <p class="nail-subtitle">AI-powered nail salon growth system.</p>
-
           <div class="glass" style="margin-bottom:18px;">
             <div class="section-title">What is NailStaré?</div>
             <div class="body-copy">
               A next-generation technology platform designed for customer experience, team development and salon performance.
             </div>
           </div>
-
           <div class="feature-grid">
             <div class="feature-card"><div class="feature-icon">✦</div><h3>AI Nail Analysis</h3><p>Smart recommendations based on hand and nail form.</p></div>
             <div class="feature-card"><div class="feature-icon">3D</div><h3>3D Try-On</h3><p>Let clients preview nail colors virtually on their own hands.</p></div>
@@ -1479,21 +1389,18 @@
             <div class="feature-card"><div class="feature-icon">P</div><h3>Salon Performance</h3><p>Reports, growth insights and performance analytics.</p></div>
             <div class="feature-card"><div class="feature-icon">♦</div><h3>Exclusive Collections</h3><p>StarAura, Moonlight and premium seasonal collection layers.</p></div>
           </div>
-
           <div class="glass" style="margin-top:18px;">
             <div class="notice">
               <div class="notice-badge">✦</div>
               <div>The system can be customized for salon needs. Some modules are unlocked for selected partner salons only.</div>
             </div>
           </div>
-
           <div style="margin-top:22px;">
             <button class="primary-btn" id="goApplyBtn">Apply for Salon Access</button>
             <div class="muted-center">Selected salons only.</div>
           </div>
         </div>
       </div>
-
       <div id="nailApplicationView" class="hidden">
         <div class="glass">
           <div class="section-title" style="font-size:22px;">NailStaré Application</div>
@@ -1504,7 +1411,6 @@
             <input id="salonName" type="text" placeholder="Salon name" />
           </div>
         </div>
-
         <div class="glass">
           <div class="section-title">Salon Information</div>
           <div class="form-grid">
@@ -1525,9 +1431,8 @@
             <div class="field"><label for="city">City</label><input id="city" type="text" placeholder="City" /></div>
           </div>
         </div>
-
         <div class="glass">
-          <div class="section-title">Capacity & Services</div>
+          <div class="section-title">Capacity &amp; Services</div>
           <div class="form-grid">
             <div class="field"><label for="staffCount">Number of Staff</label><input id="staffCount" type="number" placeholder="Number of staff" /></div>
             <div class="field"><label for="dailyClients">Average Daily Clients</label><input id="dailyClients" type="number" placeholder="Average daily clients" /></div>
@@ -1545,7 +1450,6 @@
             </div>
           </div>
         </div>
-
         <div class="glass">
           <div class="section-title">Social Media</div>
           <div class="field" style="margin-bottom:0;">
@@ -1553,14 +1457,12 @@
             <input id="instagram" type="text" placeholder="Instagram account" />
           </div>
         </div>
-
         <div class="glass">
           <div class="section-title">NailStaré Packages</div>
           <div class="package-card" data-package="basic"><div class="package-title">Basic</div><p class="package-desc">Salon panel, AI Nail Analysis, Trend Radar and core visibility tools.</p></div>
           <div class="package-card" data-package="premium"><div class="package-title">Premium</div><p class="package-desc">Academy access, advanced reports, trend radar and exclusive collection support.</p></div>
           <div class="package-card" data-package="vip"><div class="package-title">VIP</div><p class="package-desc">3D Try-On, AI client analysis, Hologram Nail Workshop and VIP visibility layers.</p></div>
         </div>
-
         <div class="glass">
           <div class="section-title">Primary Need</div>
           <div class="field" style="margin-bottom:0;">
@@ -1575,14 +1477,12 @@
             </select>
           </div>
         </div>
-
         <div class="glass">
           <div class="notice">
             <div class="notice-badge">✦</div>
             <div>Applications are reviewed by the NailStaré operations team. Suitable salons will be contacted.</div>
           </div>
         </div>
-
         <div style="margin-top:20px;">
           <button class="primary-btn" id="submitApplicationBtn">Submit Application</button>
           <div class="muted-center">Selected salons only.</div>
@@ -1590,7 +1490,6 @@
       </div>
     </div>
   </div>
-
   <div class="success-modal" id="successModal">
     <div class="success-card">
       <h3>Application Received</h3>
@@ -1600,7 +1499,6 @@
       </div>
     </div>
   </div>
-
   <script>
     for(let i=0;i<120;i++){
       const s=document.createElement("div");
@@ -1611,20 +1509,16 @@
       s.style.width=s.style.height=(1 + Math.random()*2.2)+"px";
       document.body.appendChild(s);
     }
-
     const heroScene = document.getElementById("heroScene");
     const logoWrap = document.getElementById("logoWrap");
     const burstStars = [];
     const STAR_COUNT = 18;
-
     for(let i=0;i<STAR_COUNT;i++){
       const star = document.createElement("div");
       star.className = "burst-star";
       heroScene.appendChild(star);
-
       const angle = (i / STAR_COUNT) * Math.PI * 2;
       const radius = 70 + Math.random() * 120;
-
       burstStars.push({
         el: star,
         angle,
@@ -1632,13 +1526,11 @@
         drift: 0.8 + Math.random() * 0.6
       });
     }
-
     function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
     function map(v,inMin,inMax,outMin,outMax){
       const t = clamp((v-inMin)/(inMax-inMin),0,1);
       return outMin + (outMax-outMin) * t;
     }
-
     const moduleStack = document.getElementById("moduleStack");
     const moduleText = document.getElementById("moduleText");
     const moduleDesc = document.getElementById("moduleDesc");
@@ -1656,7 +1548,6 @@
     const menuOverlay = document.getElementById("menuOverlay");
     const infoModal = document.getElementById("infoModal");
     const infoCard = document.getElementById("infoCard");
-
     const phraseWord = document.getElementById("phraseWord");
     const phraseSequence = [
       { text:"AI.", cls:"left", duration:1300 },
@@ -1667,7 +1558,6 @@
     let phraseIndex = 0;
     let phraseInterval = null;
     let autoStoreTriggered = false;
-
     const modules = [
       { title:"StarTrip: Maldives", desc:"", special:"startrip" },
       { title:"FashionStaré", desc:"AI styling, elevated for a luxury fashion ecosystem." },
@@ -1677,10 +1567,9 @@
       { title:"MedaBeauté", desc:"Beauty intelligence meets luxury rituals and elevated discovery." },
       { title:"PetStaré", desc:"Care, style and smart companionship in one elegant layer." }
     ];
-
     const modalContent = {
       about: `
-        <button class="modal-star-close" type="button" onclick="closeInfoModal()">✦</button>
+        <button class="modal-star-close premium-interactive" type="button" onclick="closeInfoModal()">✦</button>
         <h2>About Us</h2>
         <p>
           MedaStaré is a luxury AI-powered beauty and fashion ecosystem designed to merge intelligent personalization with elevated digital experience.
@@ -1689,7 +1578,7 @@
         </p>
       `,
       blog: `
-        <button class="modal-star-close" type="button" onclick="closeInfoModal()">✦</button>
+        <button class="modal-star-close premium-interactive" type="button" onclick="closeInfoModal()">✦</button>
         <h2>Blog</h2>
         <div class="info-blog-grid">
           <div class="info-blog-item">
@@ -1707,71 +1596,61 @@
         </div>
       `,
       contact: `
-        <button class="modal-star-close" type="button" onclick="closeInfoModal()">✦</button>
+        <button class="modal-star-close premium-interactive" type="button" onclick="closeInfoModal()">✦</button>
         <h2>Contact</h2>
         <p>Leave your details and message below.</p>
         <form class="contact-form-modal">
           <input type="text" placeholder="Name Surname">
           <input type="email" placeholder="Email">
           <textarea placeholder="Your message"></textarea>
-          <button type="button">Send Message</button>
+          <button class="premium-interactive" type="button">Send Message</button>
         </form>
       `,
       privacy: `
-        <button class="modal-star-close" type="button" onclick="closeInfoModal()">✦</button>
+        <button class="modal-star-close premium-interactive" type="button" onclick="closeInfoModal()">✦</button>
         <h2>Privacy Policy</h2>
         <p>This area can be replaced with your full privacy policy text later.</p>
       `,
       terms: `
-        <button class="modal-star-close" type="button" onclick="closeInfoModal()">✦</button>
+        <button class="modal-star-close premium-interactive" type="button" onclick="closeInfoModal()">✦</button>
         <h2>Terms of Use</h2>
         <p>This area can be replaced with your full terms of use text later.</p>
       `
     };
-
     function openInfoModal(type){
       infoCard.innerHTML = modalContent[type] || "";
       infoModal.classList.add("open");
+      wirePremiumInteractions(infoCard);
     }
-
     function closeInfoModal(){
       infoModal.classList.remove("open");
     }
-
     window.closeInfoModal = closeInfoModal;
-
     infoModal.addEventListener("click", (e)=>{
       if(e.target === infoModal) closeInfoModal();
     });
-
     document.querySelectorAll("[data-modal]").forEach(btn=>{
       btn.addEventListener("click", ()=>{
         openInfoModal(btn.dataset.modal);
       });
     });
-
     function runPhraseStep(){
       const step = phraseSequence[phraseIndex];
       phraseWord.className = "phrase-word " + step.cls;
       phraseWord.textContent = step.text;
-
       requestAnimationFrame(() => {
         phraseWord.classList.add("active");
       });
-
       setTimeout(() => {
         phraseWord.classList.remove("active");
       }, step.duration);
-
       phraseIndex = (phraseIndex + 1) % phraseSequence.length;
     }
-
     function startPhraseLoop(){
       if(phraseInterval) return;
       runPhraseStep();
       phraseInterval = setInterval(runPhraseStep, 1600);
     }
-
     function stopPhraseLoop(){
       if(phraseInterval){
         clearInterval(phraseInterval);
@@ -1782,13 +1661,11 @@
       phraseWord.textContent = "AI.";
       phraseWord.classList.remove("active");
     }
-
     function openMenu(){
       menuOverlay.classList.add("open");
       menuToggle.classList.add("open");
       document.body.style.overflow = "hidden";
     }
-
     function closeMenu(){
       menuOverlay.classList.remove("open");
       menuToggle.classList.remove("open");
@@ -1796,41 +1673,34 @@
         document.body.style.overflow = "";
       }
     }
-
     menuToggle.addEventListener("click", () => {
       if(menuOverlay.classList.contains("open")) closeMenu();
       else openMenu();
     });
-
     menuOverlay.querySelectorAll("a, button").forEach(link => {
       link.addEventListener("click", (e) => {
         if(e.currentTarget.dataset.modal) return;
         closeMenu();
       });
     });
-
     function updateProgress(activeIndex){
       progressDots.forEach((dot,i)=>{
         dot.classList.toggle("active", i === activeIndex);
       });
-
       marqueeItems.forEach(item=>{
         item.classList.toggle("active", item.dataset.name === (modules[activeIndex]?.title || ""));
       });
     }
-
     function hideAllStages(){
       moduleStack.classList.remove("show");
       nailCtaWrap.classList.remove("show");
       phraseStageWrap.classList.remove("show");
       storeCtaWrap.classList.remove("show");
-
       nailCtaWrap.classList.add("hidden");
       phraseStageWrap.classList.add("hidden");
       storeCtaWrap.classList.add("hidden");
       moduleStack.classList.add("hidden");
     }
-
     function scrollToStoreStage(){
       const start = 760;
       const step = 430;
@@ -1840,7 +1710,6 @@
       const storeStageStart = phraseStageStart + step;
       window.scrollTo({ top: storeStageStart + 8, behavior: "smooth" });
     }
-
     function updateModules(scrollY){
       const start = 760;
       const step = 430;
@@ -1849,10 +1718,8 @@
       const nailStageStart = modulesEnd;
       const phraseStageStart = nailStageStart + step;
       const storeStageStart = phraseStageStart + step;
-
       const showBar = scrollY > topBarStart;
       ecosystemBar.classList.toggle("show", showBar);
-
       if(scrollY < start){
         hideAllStages();
         moduleStack.classList.remove("hidden");
@@ -1861,18 +1728,14 @@
         autoStoreTriggered = false;
         return;
       }
-
       const relative = scrollY - start;
       const index = Math.floor(relative / step);
-
       if(index >= 0 && index < modules.length){
         const local = relative - index * step;
-
         hideAllStages();
         moduleStack.classList.remove("hidden");
         stopPhraseLoop();
         autoStoreTriggered = false;
-
         if(modules[index].special === "startrip"){
           starTripShell.classList.remove("hidden");
           normalModule.classList.add("hidden");
@@ -1882,13 +1745,11 @@
           moduleText.textContent = modules[index].title;
           moduleDesc.textContent = modules[index].desc;
         }
-
         const visible = local > 30 && local < 320;
         moduleStack.classList.toggle("show", visible);
         updateProgress(index);
         return;
       }
-
       if(scrollY >= nailStageStart && scrollY < phraseStageStart){
         const local = scrollY - nailStageStart;
         hideAllStages();
@@ -1899,7 +1760,6 @@
         updateProgress(7);
         return;
       }
-
       if(scrollY >= phraseStageStart && scrollY < storeStageStart){
         const local = scrollY - phraseStageStart;
         hideAllStages();
@@ -1907,7 +1767,6 @@
         phraseStageWrap.classList.toggle("show", local > 40);
         startPhraseLoop();
         updateProgress(8);
-
         if(local > 120 && !autoStoreTriggered){
           autoStoreTriggered = true;
           setTimeout(() => {
@@ -1919,7 +1778,6 @@
         }
         return;
       }
-
       if(scrollY >= storeStageStart){
         const local = scrollY - storeStageStart;
         hideAllStages();
@@ -1927,74 +1785,91 @@
         storeCtaWrap.classList.toggle("show", local > 40);
         stopPhraseLoop();
         updateProgress(9);
-        return;
       }
     }
-
     function updateScene(){
       const s = window.scrollY;
-
       const moveProgress = clamp((s - 180) / 380, 0, 1);
       const left = map(moveProgress, 0, 1, 50, 11);
       const top  = map(moveProgress, 0, 1, 50, 9);
       const scale = map(moveProgress, 0, 1, 1, 0.62);
-
       logoWrap.style.left = left + "%";
       logoWrap.style.top = top + "%";
       logoWrap.style.transform = `translate(-50%,-50%) scale(${scale})`;
-
       const glowA = map(moveProgress, 0, 1, 38, 14);
       logoWrap.style.filter = `drop-shadow(0 0 ${glowA}px rgba(212,175,55,.18))`;
-
       const vanishStart = 0.78;
       const vanishProgress = clamp((moveProgress - vanishStart) / (1 - vanishStart), 0, 1);
-      const sideOpacity = 1 - vanishProgress;
-      logoWrap.style.opacity = sideOpacity;
-
+      logoWrap.style.opacity = 1 - vanishProgress;
       burstStars.forEach((star, i) => {
         const local = clamp((s - (50 + i * 8)) / 220, 0, 1);
         const x = Math.cos(star.angle) * star.radius * local * star.drift;
         const y = Math.sin(star.angle) * star.radius * local * star.drift;
         const starScale = map(local, 0, 1, 0.15, 1.8);
-
         let opacity = map(local, 0, 0.25, 0, 1);
         if(local > 0.72){
           opacity = map(local, 0.72, 1, 1, 0);
         }
-
         star.el.style.opacity = opacity;
         star.el.style.transform =
           `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${starScale})`;
       });
-
       updateModules(s);
     }
-
+    function wirePremiumInteractions(scope = document){
+      const premiumSelectors = [
+        ".ecosystem-nail",
+        ".menu-toggle",
+        ".menu-links a",
+        ".menu-links button",
+        ".menu-social a",
+        ".store-badge-link",
+        ".buttonish",
+        ".back-btn",
+        ".primary-btn",
+        ".text-btn",
+        ".modal-star-close",
+        ".contact-form-modal button",
+        ".chip",
+        ".package-card"
+      ].join(",");
+      scope.querySelectorAll(premiumSelectors).forEach(node => {
+        if(node.dataset.premiumBound === "true") return;
+        node.dataset.premiumBound = "true";
+        node.classList.add("premium-interactive");
+        node.addEventListener("pointerdown", () => {
+          node.classList.remove("press-flash");
+          void node.offsetWidth;
+          node.classList.add("press-flash");
+        });
+        node.addEventListener("animationend", (event) => {
+          if(event.animationName === "premiumPressPulse"){
+            node.classList.remove("press-flash");
+          }
+        });
+      });
+    }
     window.addEventListener("scroll", updateScene, { passive:true });
     updateScene();
-
+    wirePremiumInteractions();
     document.getElementById("menuGetApp").addEventListener("click", (e)=>{
       e.preventDefault();
       closeMenu();
       setTimeout(() => scrollToStoreStage(), 160);
     });
-
     const nailOverlay = document.getElementById("nailOverlay");
     const nailBackBtn = document.getElementById("nailBackBtn");
     const goApplyBtn = document.getElementById("goApplyBtn");
     const nailIntroView = document.getElementById("nailIntroView");
     const nailApplicationView = document.getElementById("nailApplicationView");
-
     function openNailOverlay(){
       nailOverlay.classList.add("open");
       document.body.style.overflow = "hidden";
       nailIntroView.classList.remove("hidden");
       nailApplicationView.classList.add("hidden");
     }
-
     nailButton.addEventListener("click", openNailOverlay);
     ecosystemNailButton.addEventListener("click", openNailOverlay);
-
     nailBackBtn.addEventListener("click", () => {
       if(!nailApplicationView.classList.contains("hidden")){
         nailApplicationView.classList.add("hidden");
@@ -2006,39 +1881,31 @@
         document.body.style.overflow = "";
       }
     });
-
     goApplyBtn.addEventListener("click", () => {
       nailIntroView.classList.add("hidden");
       nailApplicationView.classList.remove("hidden");
       nailOverlay.scrollTo({ top: 0, behavior: "smooth" });
     });
-
     const salonName = document.getElementById("salonName");
     const liveSalonName = document.getElementById("liveSalonName");
-
     salonName.addEventListener("input", () => {
       liveSalonName.textContent = salonName.value.trim() || "Your Salon Name";
     });
-
     document.querySelectorAll("#serviceChips .chip").forEach(chip => {
       chip.addEventListener("click", () => chip.classList.toggle("active"));
     });
-
     document.querySelectorAll(".package-card").forEach(card => {
       card.addEventListener("click", () => {
         document.querySelectorAll(".package-card").forEach(c => c.classList.remove("active"));
         card.classList.add("active");
       });
     });
-
     const submitApplicationBtn = document.getElementById("submitApplicationBtn");
     const successModal = document.getElementById("successModal");
     const successOkBtn = document.getElementById("successOkBtn");
-
     submitApplicationBtn.addEventListener("click", () => {
       successModal.classList.add("open");
     });
-
     successOkBtn.addEventListener("click", () => {
       successModal.classList.remove("open");
     });
