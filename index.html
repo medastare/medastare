@@ -3182,7 +3182,7 @@ html,body{margin:0;padding:0;scroll-behavior:smooth;width:100%;overflow-x:clip;o
       const moveProgress = clamp((s - 180) / 380, 0, 1);
       const left = map(moveProgress, 0, 1, 50, 11);
       const top = map(moveProgress, 0, 1, 50, 9);
-      const scale = map(moveProgress, 0, 1, 1, 0.62);
+      const scale = map(moveProgress, 0, 1, 1, 0.36);
       logoWrap.style.left = left + "%";
       logoWrap.style.top = top + "%";
       logoWrap.style.transform = `translate(-50%,-50%) scale(${scale})`;
