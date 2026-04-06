@@ -2402,24 +2402,137 @@ html,body{margin:0;padding:0;scroll-behavior:smooth;width:100%;overflow-x:clip;o
         transform:scale(1.01) translateY(24px) !important;
       }
     }
+/* =========================
+   LOGO CINEMATIC FULL PACK
+   ========================= */
 
-  </style>
+.logo-cinematic-layer{
+  position:absolute;
+  inset:-40% -50%;
+  pointer-events:none;
+  z-index:-1;
+}
+
+/* GLOW */
+.logo-glow{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:520px;
+  height:520px;
+  transform:translate(-50%,-50%);
+  background:radial-gradient(circle, rgba(255,215,130,0.18), rgba(255,215,130,0.08) 40%, transparent 70%);
+  filter:blur(45px);
+  opacity:0;
+}
+
+/* HORIZON */
+.logo-horizon{
+  position:absolute;
+  top:60%;
+  left:50%;
+  width:160%;
+  height:2px;
+  transform:translateX(-50%) scaleX(.5);
+  background:linear-gradient(90deg, transparent, rgba(255,255,255,0.2), rgba(240,212,122,0.6), rgba(255,255,255,0.2), transparent);
+  opacity:0;
+  filter:blur(2px);
+}
+
+/* DUST */
+.logo-dust{
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(255,255,255,0.06), transparent 40%),
+    radial-gradient(circle at 70% 60%, rgba(240,212,122,0.08), transparent 50%);
+  opacity:0;
+  filter:blur(20px);
+}
+
+/* ACTIVE */
+
+.logo-wrap.active .logo-glow{
+  animation:glowAnim 1.8s ease forwards;
+}
+
+.logo-wrap.active .logo-horizon{
+  animation:horizonAnim 1.5s ease forwards;
+}
+
+.logo-wrap.active .logo-dust{
+  animation:dustFade 2s ease forwards;
+}
+
+/* ANIMATIONS */
+
+@keyframes glowAnim{
+  0%{opacity:0; transform:translate(-50%,-50%) scale(.8);}
+  40%{opacity:.7;}
+  100%{opacity:0; transform:translate(-50%,-50%) scale(1.2);}
+}
+
+@keyframes horizonAnim{
+  0%{opacity:0; transform:translateX(-50%) scaleX(.4);}
+  40%{opacity:.7;}
+  100%{opacity:0; transform:translateX(-50%) scaleX(1.2);}
+}
+
+@keyframes dustFade{
+  0%{opacity:0;}
+  30%{opacity:.5;}
+  100%{opacity:0;}
+}
+
+</style>
 </head>
+
 <body>
-  <div class="hero-scene" id="heroScene">
-    <div class="hero-ambient" aria-hidden="true">
-      <div class="sky-ribbon one"></div>
-      <div class="sky-ribbon two"></div>
-      <div class="light-orb one"></div>
-      <div class="light-orb two"></div>
-      <div class="light-orb three"></div>
-      <div class="shooting-star one"></div>
-      <div class="shooting-star two"></div>
-      <div class="shooting-star three"></div>
+
+<div class="hero-scene" id="heroScene">
+  <div class="hero-ambient" aria-hidden="true">
+    <div class="sky-ribbon one"></div>
+    <div class="sky-ribbon two"></div>
+    <div class="light-orb one"></div>
+    <div class="light-orb two"></div>
+    <div class="light-orb three"></div>
+    <div class="shooting-star one"></div>
+    <div class="shooting-star two"></div>
+    <div class="shooting-star three"></div>
+  </div>
+
+  <!-- ✅ LOGO BAŞLANGIÇ -->
+  <div class="logo-wrap" id="logoWrap">
+
+    <img src="medastare-logo.png" alt="MedaStaré logo" />
+
+    <!-- CINEMATIC BACKGROUND -->
+    <div class="logo-cinematic-layer">
+
+      <div class="logo-glow"></div>
+      <div class="logo-horizon"></div>
+      <div class="logo-dust"></div>
+
     </div>
-    <div class="logo-wrap" id="logoWrap">
-      <img src="medastare-logo.png" alt="MedaStaré logo" />
-    </div>
+
+  </div>
+  <!-- ✅ LOGO BİTTİ -->
+
+</div>
+
+<!-- JS EKLE -->
+<script>
+window.addEventListener("load", () => {
+  const logo = document.getElementById("logoWrap");
+  if (!logo) return;
+
+  setTimeout(() => {
+    logo.classList.add("active");
+  }, 250);
+});
+</script>
+
+</div>
   </div>
   <div class="lux-noise" aria-hidden="true"></div>
   <div class="pointer-glow" aria-hidden="true"></div>
