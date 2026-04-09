@@ -2350,70 +2350,87 @@ html,body{margin:0;padding:0;scroll-behavior:smooth;width:100%;overflow-x:clip;o
 
     /* Recreated plane flyby */
     .startrip-plane{
+      left:-26% !important;
+      top:34.5% !important;
+      width:clamp(180px, 22vw, 280px) !important;
+      height:auto !important;
+      aspect-ratio:420 / 132 !important;
       position:absolute;
-      left:-28% !important;
-      top:39% !important;
-      width:240px !important;
-      height:72px !important;
+      display:block !important;
       pointer-events:none;
       opacity:0;
-      will-change:transform,opacity,filter;
-      animation:planeSweep 6.2s var(--ease-premium) infinite !important;
-      filter:drop-shadow(0 0 0 rgba(212,175,55,0)) !important;
-      transform-origin:center center;
+      transform-origin:center center !important;
+      will-change:transform,opacity !important;
+      backface-visibility:hidden;
+      -webkit-font-smoothing:antialiased;
+      animation:planeFlyby 9.2s cubic-bezier(.22,.78,.2,1) infinite !important;
+      filter:none !important;
+      text-shadow:none !important;
+      contain:layout paint;
       z-index:2;
+      font-size:0 !important;
+      color:transparent !important;
     }
+    .startrip-plane svg{
+      position:relative;
+      z-index:1;
+      display:block !important;
+      width:100%;
+      height:100%;
+      overflow:visible;
+    }
+    .startrip-plane .plane-shell,
+    .startrip-plane .plane-fold,
+    .startrip-plane .plane-edge,
+    .startrip-plane .plane-spark,
+    .startrip-plane .plane-glow{
+      stroke:none;
+    }
+    .startrip-plane .plane-shell{opacity:.98;}
+    .startrip-plane .plane-fold{opacity:.92;}
+    .startrip-plane .plane-edge{opacity:.28;}
+    .startrip-plane .plane-spark{opacity:.86;}
     .startrip-plane::before{
       content:"" !important;
-      display:block !important;
       position:absolute;
-      right:18px;
-      top:50%;
-      width:88px;
-      height:30px;
-      transform:translateY(-60%) rotate(-4deg);
-      clip-path:polygon(0 52%, 18% 39%, 34% 3%, 46% 3%, 40% 41%, 74% 41%, 100% 50%, 74% 59%, 40% 59%, 46% 97%, 34% 97%, 18% 64%);
-      background:linear-gradient(135deg, rgba(255,255,255,.98) 0%, rgba(247,235,193,.98) 34%, rgba(236,205,107,.96) 68%, rgba(140,102,19,.94) 100%);
-      box-shadow:0 0 18px rgba(240,212,122,.20), 0 12px 26px rgba(0,0,0,.18);
+      inset:18% 10%;
+      border-radius:999px;
+      background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.24), rgba(255,255,255,0) 70%);
+      opacity:.46;
       pointer-events:none;
+      display:block !important;
+      z-index:0;
     }
     .startrip-plane::after{
       content:"" !important;
-      display:block !important;
       position:absolute;
-      left:20px;
-      right:84px;
-      bottom:18px;
-      height:1px;
-      background:linear-gradient(90deg, transparent 0%, rgba(240,212,122,.10) 10%, rgba(240,212,122,.88) 52%, rgba(240,212,122,.10) 90%, transparent 100%);
-      box-shadow:0 0 14px rgba(240,212,122,.28);
-      opacity:.92;
-      pointer-events:none;
-    }
-    .startrip-plane svg{display:none !important;}
-    .startrip-maldives{
-      position:relative;
-      display:inline-block;
-      animation:maldivesGlow 2.8s ease-in-out infinite;
-    }
-    .startrip-maldives::after{
-      content:"";
-      position:absolute;
-      left:-12%;
+      left:-132px;
+      right:78px;
       top:50%;
-      width:124%;
-      height:1px;
-      background:linear-gradient(90deg, transparent, rgba(240,212,122,.82), transparent);
-      transform:translateY(20px);
-      opacity:.78;
-      filter:blur(.2px);
+      height:2px;
+      transform:translateY(-50%);
+      display:block !important;
+      background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,.06) 12%, rgba(240,212,122,.50) 46%, rgba(255,255,255,.12) 74%, transparent 100%);
+      opacity:.56;
+      z-index:0;
     }
-    @keyframes planeSweep{
-      0%{opacity:0;transform:translate3d(-160px,18px,0) scale(.82);filter:drop-shadow(0 0 0 rgba(212,175,55,0));}
-      10%{opacity:.95;transform:translate3d(-36px,10px,0) scale(.9);}
-      42%{opacity:1;transform:translate3d(270px,0,0) scale(1);filter:drop-shadow(0 0 22px rgba(212,175,55,.14));}
-      74%{opacity:.7;transform:translate3d(640px,-6px,0) scale(.98);}
-      100%{opacity:0;transform:translate3d(980px,-14px,0) scale(.92);filter:drop-shadow(0 0 18px rgba(212,175,55,.10));}
+    .startrip-coming::before,
+    .startrip-coming::after{
+      display:none !important;
+      content:none !important;
+      background:none !important;
+      box-shadow:none !important;
+      opacity:0 !important;
+      width:0 !important;
+    }
+    @keyframes planeFlyby{
+      0%{opacity:0;transform:translate3d(-280px,30px,0) rotate(-10deg) scale(.82);}
+      8%{opacity:1;transform:translate3d(-180px,18px,0) rotate(-8deg) scale(.88);}
+      22%{opacity:1;transform:translate3d(-18px,6px,0) rotate(-4deg) scale(.95);}
+      40%{opacity:1;transform:translate3d(252px,-4px,0) rotate(-1deg) scale(1);}
+      58%{opacity:1;transform:translate3d(516px,-10px,0) rotate(1deg) scale(1.01);}
+      76%{opacity:.95;transform:translate3d(812px,0,0) rotate(3deg) scale(.99);}
+      100%{opacity:0;transform:translate3d(1180px,16px,0) rotate(5deg) scale(.94);}
     }
     .module-stack.show .normal-module.has-screen .module-screen-stage:not(.hidden) .module-screen-shell img{
       object-position:center 46px !important;
@@ -2421,27 +2438,10 @@ html,body{margin:0;padding:0;scroll-behavior:smooth;width:100%;overflow-x:clip;o
     }
     @media (max-width:780px){
       .startrip-plane{
-        left:-28% !important;
-        top:39% !important;
-        width:168px !important;
-        height:58px !important;
-      }
-      .startrip-plane::before{
-        width:68px;
-        height:24px;
-        right:10px;
-      }
-      .startrip-plane::after{
-        left:10px;
-        right:62px;
-        bottom:15px;
-      }
-      @keyframes planeSweep{
-        0%{opacity:0;transform:translate3d(-90px,16px,0) scale(.82);filter:drop-shadow(0 0 0 rgba(212,175,55,0));}
-        10%{opacity:.95;transform:translate3d(-18px,9px,0) scale(.88);}
-        44%{opacity:1;transform:translate3d(142px,0,0) scale(1);filter:drop-shadow(0 0 16px rgba(212,175,55,.12));}
-        74%{opacity:.68;transform:translate3d(282px,-4px,0) scale(.98);}
-        100%{opacity:0;transform:translate3d(440px,-10px,0) scale(.92);filter:drop-shadow(0 0 12px rgba(212,175,55,.10));}
+        left:-22% !important;
+        top:35% !important;
+        width:clamp(130px, 28vw, 180px) !important;
+        animation-duration:10.2s !important;
       }
       .module-stack.show .normal-module.has-screen .module-screen-stage:not(.hidden) .module-screen-shell img{
         object-position:center 38px !important;
@@ -2553,7 +2553,32 @@ html,body{margin:0;padding:0;scroll-behavior:smooth;width:100%;overflow-x:clip;o
         <div class="module-viewport">
           <div class="module-stack" id="moduleStack">
             <div class="startrip-shell hidden" id="starTripShell">
-              <div class="startrip-plane" aria-hidden="true"></div>
+              <div class="startrip-plane" aria-hidden="true">
+                <svg viewBox="0 0 420 132" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                  <defs>
+                    <linearGradient id="planeBodyGradient" x1="28" y1="28" x2="392" y2="104" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stop-color="#fff7cf"/>
+                      <stop offset="42%" stop-color="#ffd75c"/>
+                      <stop offset="78%" stop-color="#f3c13d"/>
+                      <stop offset="100%" stop-color="#a16a0e"/>
+                    </linearGradient>
+                    <linearGradient id="planeFoldGradient" x1="120" y1="44" x2="306" y2="88" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stop-color="#fffdf0" stop-opacity=".96"/>
+                      <stop offset="100%" stop-color="#f3d38f" stop-opacity=".78"/>
+                    </linearGradient>
+                    <radialGradient id="planeGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(186 66) scale(158 24)">
+                      <stop offset="0%" stop-color="#fffdf4" stop-opacity=".34"/>
+                      <stop offset="50%" stop-color="#f0d47a" stop-opacity=".16"/>
+                      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+                    </radialGradient>
+                  </defs>
+                  <ellipse class="plane-glow" cx="186" cy="66" rx="156" ry="22" fill="url(#planeGlow)"/>
+                  <path class="plane-shell" d="M28 66L392 28L306 66L392 104L28 66Z" fill="url(#planeBodyGradient)"/>
+                  <path class="plane-fold" d="M120 58L306 66L120 74Z" fill="url(#planeFoldGradient)"/>
+                  <path class="plane-edge" d="M28 66L120 58L120 74L28 66Z" fill="#ffffff" fill-opacity=".18"/>
+                  <circle class="plane-spark" cx="246" cy="66" r="5.5" fill="#fff7de"/>
+                </svg>
+              </div>
               <h2 class="module-title startrip-maldives">StarTrip: Maldives</h2>
               <div class="startrip-coming"><span>COMING SOON</span></div>
             </div>
