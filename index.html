@@ -4,9 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>MedaStaré</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Cormorant+Garamond:wght@600;700&amp;display=swap" rel="stylesheet">
+
   <style>
     :root{
       --bg:#000;
@@ -21,22 +23,28 @@
       --shadow-premium:0 20px 40px rgba(0,0,0,.24), 0 0 24px rgba(212,175,55,.08);
       --shadow-premium-soft:0 14px 28px rgba(0,0,0,.18), 0 0 18px rgba(212,175,55,.08);
     }
+
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;scroll-behavior:smooth}
     body{
       font-family:Inter,system-ui,sans-serif;
-      background:#000;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(92,124,255,.18), transparent 24%),
+        radial-gradient(circle at 82% 14%, rgba(240,212,122,.12), transparent 22%),
+        linear-gradient(180deg, #05070f 0%, #000 34%, #010204 100%);
       color:#fff;
       overflow-x:hidden;
       min-height:100vh;
       -webkit-tap-highlight-color:transparent;
     }
+
     button,
     a,
     .chip,
     .package-card{
       touch-action:manipulation;
     }
+
     .bg-star{
       position:fixed;
       width:2px;
@@ -48,10 +56,12 @@
       animation:twinkle 2.8s ease-in-out infinite alternate;
       z-index:0;
     }
+
     @keyframes twinkle{
       from{opacity:.18;transform:scale(.82)}
       to{opacity:1;transform:scale(1.22)}
     }
+
     .hero-scene{
       position:fixed;
       inset:0;
@@ -59,102 +69,117 @@
       pointer-events:none;
       z-index:10;
     }
+
     .hero-ambient{
       position:absolute;
       inset:0;
       overflow:hidden;
       pointer-events:none;
     }
+
     .hero-ambient::before,
     .hero-ambient::after{
       content:"";
       position:absolute;
       border-radius:50%;
-      filter:blur(74px);
+      filter:blur(72px);
+      opacity:.42;
       mix-blend-mode:screen;
-      opacity:.34;
       animation:ambientFloat 18s ease-in-out infinite alternate;
     }
+
     .hero-ambient::before{
-      width:min(44vw,560px);
-      height:min(44vw,560px);
-      top:2vh;
-      left:-10vw;
-      background:radial-gradient(circle, rgba(240,212,122,.22) 0%, rgba(240,212,122,.08) 34%, rgba(240,212,122,0) 74%);
+      width:min(42vw, 560px);
+      height:min(42vw, 560px);
+      left:-8vw;
+      top:6vh;
+      background:radial-gradient(circle, rgba(240,212,122,.24) 0%, rgba(240,212,122,.08) 34%, rgba(240,212,122,0) 74%);
     }
+
     .hero-ambient::after{
-      width:min(38vw,500px);
-      height:min(38vw,500px);
-      right:-10vw;
-      bottom:6vh;
-      background:radial-gradient(circle, rgba(120,160,255,.20) 0%, rgba(120,160,255,.06) 34%, rgba(120,160,255,0) 74%);
-      animation-duration:24s;
+      width:min(38vw, 500px);
+      height:min(38vw, 500px);
+      right:-8vw;
+      bottom:10vh;
+      background:radial-gradient(circle, rgba(111,148,255,.24) 0%, rgba(111,148,255,.08) 34%, rgba(111,148,255,0) 74%);
+      animation-duration:22s;
     }
+
     .sky-ribbon{
       position:absolute;
-      width:86vw;
+      width:80vw;
       height:22vh;
       border-radius:999px;
       filter:blur(54px);
+      opacity:.18;
       mix-blend-mode:screen;
-      opacity:.16;
       animation:ribbonGlide 22s ease-in-out infinite alternate;
     }
+
     .sky-ribbon.one{
-      top:14vh;
-      left:-18vw;
-      background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.06), rgba(240,212,122,.14), rgba(255,255,255,0));
+      top:16vh;
+      left:-12vw;
+      background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.08), rgba(240,212,122,.16), rgba(255,255,255,0));
     }
+
     .sky-ribbon.two{
-      bottom:18vh;
-      right:-20vw;
-      background:linear-gradient(90deg, rgba(255,255,255,0), rgba(122,160,255,.18), rgba(255,255,255,.08), rgba(255,255,255,0));
+      bottom:20vh;
+      right:-16vw;
+      background:linear-gradient(90deg, rgba(255,255,255,0), rgba(122,160,255,.20), rgba(255,255,255,.08), rgba(255,255,255,0));
       animation-duration:28s;
     }
+
     .light-orb{
       position:absolute;
       border-radius:50%;
       pointer-events:none;
-      filter:blur(18px);
+      filter:blur(20px);
+      opacity:.28;
       mix-blend-mode:screen;
-      opacity:.24;
       animation:orbDrift 14s ease-in-out infinite alternate;
     }
+
     .light-orb.one{
       width:180px;
       height:180px;
       left:12%;
-      top:20%;
-      background:radial-gradient(circle, rgba(240,212,122,.24) 0%, rgba(240,212,122,0) 74%);
+      top:18%;
+      background:radial-gradient(circle, rgba(240,212,122,.26) 0%, rgba(240,212,122,0) 72%);
     }
+
     .light-orb.two{
       width:210px;
       height:210px;
-      right:12%;
-      top:28%;
+      right:14%;
+      top:26%;
       background:radial-gradient(circle, rgba(255,255,255,.16) 0%, rgba(255,255,255,0) 72%);
       animation-duration:18s;
     }
+
     .light-orb.three{
       width:190px;
       height:190px;
       left:42%;
-      bottom:16%;
-      background:radial-gradient(circle, rgba(112,148,255,.16) 0%, rgba(112,148,255,0) 72%);
+      bottom:18%;
+      background:radial-gradient(circle, rgba(100,139,255,.18) 0%, rgba(100,139,255,0) 72%);
       animation-duration:20s;
     }
+
     @keyframes ambientFloat{
       from{transform:translate3d(0,0,0) scale(1)}
-      to{transform:translate3d(24px,-18px,0) scale(1.08)}
+      to{transform:translate3d(22px,-18px,0) scale(1.08)}
     }
+
     @keyframes ribbonGlide{
       from{transform:translate3d(0,0,0) rotate(-4deg)}
-      to{transform:translate3d(26px,-16px,0) rotate(3deg)}
+      to{transform:translate3d(24px,-18px,0) rotate(3deg)}
     }
+
     @keyframes orbDrift{
       from{transform:translate3d(0,0,0) scale(1)}
       to{transform:translate3d(28px,-20px,0) scale(1.12)}
     }
+
     .logo-wrap{
       position:absolute;
       left:50%;
@@ -165,6 +190,7 @@
       transition:transform .08s linear, filter .08s linear, opacity .16s linear;
       opacity:1;
     }
+
     .logo-wrap img{
       width:min(70vw,600px);
       display:block;
@@ -172,6 +198,7 @@
         drop-shadow(0 0 14px rgba(212,175,55,.35))
         drop-shadow(0 0 42px rgba(212,175,55,.16));
     }
+
     .burst-star{
       position:absolute;
       left:50%;
@@ -183,6 +210,7 @@
       z-index:10;
       will-change:transform,opacity;
     }
+
     .burst-star::before{
       content:"✦";
       position:absolute;
@@ -197,17 +225,20 @@
         0 0 18px rgba(212,175,55,.8),
         0 0 36px rgba(212,175,55,.42);
     }
+
     .content{
       position:relative;
       z-index:2;
       padding-top:150vh;
       padding-bottom:80px;
     }
+
     .modules-stage{
       position:relative;
-      min-height:860vh;
+      min-height:1040vh;
       width:100%;
     }
+
     .modules-layer{
       position:fixed;
       inset:0;
@@ -217,6 +248,7 @@
       align-items:center;
       justify-content:center;
     }
+
     .module-viewport{
       width:100%;
       min-height:100vh;
@@ -226,18 +258,20 @@
       padding:0 20px;
       position:relative;
     }
+
     .module-stack,
     .nail-cta-wrap,
     .phrase-stage-wrap,
     .store-cta-wrap{
       text-align:center;
-      max-width:min(92vw, 980px);
+      max-width:min(94vw, 1220px);
       padding:0 20px;
       opacity:0;
       transform:translateY(18px) scale(.965);
       transition:opacity .36s ease, transform .36s ease;
       pointer-events:none;
     }
+
     .module-stack.show,
     .nail-cta-wrap.show,
     .phrase-stage-wrap.show,
@@ -246,6 +280,73 @@
       transform:translateY(0) scale(1);
       pointer-events:auto;
     }
+
+    .module-stack{
+      --copy-shift:0px;
+      --visual-shift:0px;
+      --visual-tilt:0deg;
+    }
+
+    .module-shell{
+      width:min(94vw, 1160px);
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:30px;
+      justify-content:center;
+      margin:0 auto;
+      position:relative;
+    }
+
+    .module-shell::before{
+      content:"";
+      position:absolute;
+      inset:16% 14% auto;
+      height:46%;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,255,255,.04) 0%, rgba(255,255,255,0) 72%);
+      filter:blur(26px);
+      pointer-events:none;
+      opacity:.82;
+    }
+
+    .module-copy{
+      position:relative;
+      z-index:2;
+      text-align:center;
+      max-width:760px;
+      transform:translateY(var(--copy-shift));
+      transition:transform .6s var(--ease-premium);
+    }
+
+    .module-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 16px;
+      border-radius:999px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.10);
+      backdrop-filter:blur(14px);
+      -webkit-backdrop-filter:blur(14px);
+      color:rgba(255,255,255,.74);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+      box-shadow:0 14px 30px rgba(0,0,0,.18);
+      margin-bottom:20px;
+    }
+
+    .module-kicker::before{
+      content:"";
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:linear-gradient(135deg, var(--gold-soft), #fff2c0);
+      box-shadow:0 0 16px rgba(240,212,122,.32);
+    }
+
     .module-title{
       font-family:"Cormorant Garamond", serif;
       font-size:clamp(52px, 11vw, 100px);
@@ -259,6 +360,7 @@
       margin:0;
       line-height:.95;
     }
+
     .module-desc{
       margin-top:14px;
       color:var(--muted);
@@ -272,155 +374,382 @@
       margin-right:auto;
       text-shadow:0 0 18px rgba(255,255,255,.04);
     }
-    .module-screen-stage{
-      --screen-shift:0px;
-      --screen-scale:1;
+
+    .module-meta-row{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:12px;
+      margin-top:22px;
+    }
+
+    .meta-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      color:rgba(255,255,255,.72);
+      font-size:12px;
+      font-weight:600;
+      letter-spacing:.02em;
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      box-shadow:0 14px 26px rgba(0,0,0,.14);
+    }
+
+    .meta-pill::before{
+      content:"✦";
+      color:var(--gold-soft);
+      font-size:11px;
+    }
+
+    .module-visual-wrap{
       position:relative;
-      width:min(74vw,320px);
-      margin:34px auto 0;
-      opacity:0;
-      transform:translateY(28px) scale(.94);
-      transition:opacity .72s var(--ease-premium), transform .88s var(--ease-premium), filter .48s ease;
-      filter:saturate(.98) brightness(.96);
-      pointer-events:none;
-    }
-    .normal-module.has-screen .module-screen-stage{
-      display:block;
-    }
-    .module-stack.show .normal-module.has-screen .module-screen-stage:not(.hidden){
-      opacity:1;
-      transform:translateY(var(--screen-shift)) scale(var(--screen-scale));
-      filter:saturate(1.03) brightness(1);
-    }
-    .module-screen-glow{
-      position:absolute;
-      inset:auto 8% -5% 8%;
-      height:28%;
-      border-radius:50%;
-      background:radial-gradient(circle, rgba(240,212,122,.24) 0%, rgba(240,212,122,.07) 32%, rgba(240,212,122,0) 72%);
-      filter:blur(24px);
-      opacity:.74;
-      pointer-events:none;
-    }
-    .module-screen-shell{
-      position:relative;
-      width:100%;
-      aspect-ratio:430 / 932;
-      border-radius:34px;
-      overflow:hidden;
-      background:
-        linear-gradient(180deg, rgba(14,14,18,.96), rgba(5,6,8,.98));
-      border:1px solid rgba(255,255,255,.10);
-      box-shadow:
-        0 34px 64px rgba(0,0,0,.34),
-        0 0 28px rgba(212,175,55,.10),
-        inset 0 1px 0 rgba(255,255,255,.10);
+      width:min(92vw, 760px);
+      min-height:clamp(430px, 58vh, 680px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
       isolation:isolate;
+      perspective:1800px;
+      transform:translateY(var(--visual-shift)) rotateZ(var(--visual-tilt));
+      transition:transform .68s var(--ease-premium), filter .4s ease;
     }
-    .module-screen-shell::before{
+
+    .module-aura{
+      position:absolute;
+      border-radius:50%;
+      filter:blur(28px);
+      pointer-events:none;
+      mix-blend-mode:screen;
+      opacity:.3;
+      animation:auraDrift 10s ease-in-out infinite alternate;
+    }
+
+    .module-aura.one{
+      width:min(46vw, 360px);
+      height:min(46vw, 360px);
+      top:8%;
+      left:14%;
+      background:radial-gradient(circle, rgba(240,212,122,.24) 0%, rgba(240,212,122,.08) 34%, rgba(240,212,122,0) 74%);
+    }
+
+    .module-aura.two{
+      width:min(40vw, 300px);
+      height:min(40vw, 300px);
+      bottom:6%;
+      right:16%;
+      background:radial-gradient(circle, rgba(118,159,255,.18) 0%, rgba(118,159,255,.06) 36%, rgba(118,159,255,0) 74%);
+      animation-duration:12s;
+    }
+
+    @keyframes auraDrift{
+      from{transform:translate3d(0,0,0) scale(1)}
+      to{transform:translate3d(16px,-14px,0) scale(1.08)}
+    }
+
+    .device-shell{
+      position:relative;
+      width:auto;
+      height:min(70vh, 720px);
+      aspect-ratio:430 / 932;
+      border-radius:54px;
+      background:linear-gradient(180deg, rgba(19,20,25,.96) 0%, rgba(8,9,13,.92) 100%);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:
+        0 36px 90px rgba(0,0,0,.46),
+        0 0 48px rgba(212,175,55,.10),
+        inset 0 1px 0 rgba(255,255,255,.06);
+      padding:12px;
+      transform-style:preserve-3d;
+      overflow:hidden;
+      animation:deviceFloat 8.5s ease-in-out infinite alternate;
+    }
+
+    .device-shell::before{
       content:"";
       position:absolute;
       inset:1px;
-      border-radius:33px;
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,0));
+      border-radius:52px;
+      background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,0));
       opacity:.22;
       pointer-events:none;
-      z-index:2;
     }
-    .module-screen-shell img{
+
+    .device-shell::after{
+      content:"";
+      position:absolute;
+      top:-14%;
+      left:18%;
+      width:64%;
+      height:24%;
+      background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,0));
+      filter:blur(18px);
+      opacity:.28;
+      transform:rotate(6deg);
+      pointer-events:none;
+    }
+
+    @keyframes deviceFloat{
+      from{transform:translateY(0) rotateX(6deg) rotateY(-10deg)}
+      to{transform:translateY(-16px) rotateX(-3deg) rotateY(10deg)}
+    }
+
+    .device-topbar{
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:60px;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      z-index:3;
+      pointer-events:none;
+    }
+
+    .device-notch{
+      position:relative;
+      width:42%;
+      max-width:162px;
+      height:34px;
+      border-radius:0 0 24px 24px;
+      background:linear-gradient(180deg, rgba(7,8,10,.98), rgba(14,15,18,.98));
+      border:1px solid rgba(255,255,255,.04);
+      box-shadow:0 12px 22px rgba(0,0,0,.30);
+    }
+
+    .device-notch::before,
+    .device-notch::after{
+      content:"";
+      position:absolute;
+      top:13px;
+      border-radius:999px;
+      background:rgba(255,255,255,.12);
+    }
+
+    .device-notch::before{
+      left:26%;
+      width:44%;
+      height:8px;
+    }
+
+    .device-notch::after{
+      right:18%;
+      width:9px;
+      height:9px;
+      background:rgba(255,255,255,.16);
+      box-shadow:0 0 0 3px rgba(255,255,255,.03);
+    }
+
+    .device-screen{
+      position:relative;
+      width:100%;
+      height:100%;
+      border-radius:42px;
+      overflow:hidden;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,.06), transparent 28%),
+        linear-gradient(180deg, rgba(17,19,26,.98) 0%, rgba(8,9,12,.98) 100%);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .module-screen-image{
       position:absolute;
       inset:0;
       width:100%;
       height:100%;
       object-fit:cover;
       object-position:top center;
-      display:block;
-      transform:scale(1.03) translateY(0);
-      transition:transform .95s var(--ease-premium), opacity .65s ease;
       opacity:0;
+      transform:scale(1.06);
+      transition:
+        opacity .82s var(--ease-premium),
+        transform 1.05s var(--ease-premium),
+        filter .72s ease;
+      filter:saturate(1.04) contrast(1.02) brightness(.92);
+      z-index:1;
     }
-    .module-stack.show .normal-module.has-screen .module-screen-stage:not(.hidden) .module-screen-shell img{
+
+    .module-screen-image.active{
       opacity:1;
-      transform:scale(1.01) translateY(-6px);
+      transform:scale(1);
+      filter:saturate(1.08) contrast(1.03) brightness(.98);
     }
-    .screen-sheen{
+
+    .screen-placeholder{
       position:absolute;
-      inset:-20% auto -10% -22%;
-      width:42%;
-      background:linear-gradient(90deg, rgba(255,255,255,.18), rgba(255,255,255,.04), rgba(255,255,255,0));
-      transform:skewX(-18deg);
-      filter:blur(10px);
-      opacity:0;
-      animation:sheenSweep 6.4s ease-in-out infinite;
-      z-index:3;
-      pointer-events:none;
+      inset:0;
+      z-index:1;
+      padding:84px 24px 24px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      background:
+        radial-gradient(circle at 14% 10%, rgba(255,255,255,.14), transparent 28%),
+        radial-gradient(circle at 84% 16%, rgba(240,212,122,.18), transparent 24%),
+        linear-gradient(180deg, rgba(22,24,32,.98) 0%, rgba(8,9,13,.98) 100%);
     }
-    @keyframes sheenSweep{
-      0%{transform:translateX(-40%) skewX(-18deg);opacity:0}
-      18%{opacity:.12}
-      48%{transform:translateX(155%) skewX(-18deg);opacity:.24}
-      100%{transform:translateX(200%) skewX(-18deg);opacity:0}
+
+    .placeholder-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
     }
-    .module-note-rail{
-      position:absolute;
-      inset:-16px -56px auto;
-      pointer-events:none;
-      opacity:0;
-      transition:opacity .48s ease;
-      z-index:4;
+
+    .placeholder-badge{
+      border-radius:22px;
+      min-height:120px;
+      padding:14px;
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 20px 30px rgba(0,0,0,.18);
     }
-    .module-stack.show .normal-module.has-screen .module-screen-stage:not(.hidden) .module-note-rail{
-      opacity:1;
+
+    .placeholder-badge.tall{
+      min-height:170px;
+      grid-column:1 / -1;
+      background:
+        radial-gradient(circle at top right, rgba(240,212,122,.20), transparent 26%),
+        linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
     }
-    .module-note{
-      position:absolute;
-      max-width:220px;
-      color:rgba(240,212,122,.9);
-      font-size:10px;
-      font-weight:600;
-      letter-spacing:.28em;
-      text-transform:uppercase;
-      line-height:1.6;
-      text-shadow:0 0 18px rgba(212,175,55,.14);
-      opacity:0;
-      transform:translateY(12px);
-      animation:noteBlink 5.6s ease-in-out infinite;
-      animation-play-state:paused;
-    }
-    .module-stack.show .normal-module.has-screen .module-screen-stage:not(.hidden) .module-note{
-      animation-play-state:running;
-    }
-    .module-note.primary{
-      top:12%;
-      left:-12%;
+
+    .placeholder-copy{
       text-align:left;
     }
-    .module-note.secondary{
-      right:-18%;
-      bottom:16%;
-      text-align:right;
-      animation-delay:1.15s;
-    }
-    @keyframes noteBlink{
-      0%,100%{opacity:0;transform:translateY(12px)}
-      18%,58%{opacity:1;transform:translateY(0)}
-      78%{opacity:0;transform:translateY(-6px)}
-    }
-    .startrip-coming{
-      margin-top:14px;
-      color:rgba(240,212,122,.82);
+
+    .placeholder-eyebrow{
+      display:inline-block;
+      color:rgba(255,255,255,.54);
       font-size:11px;
       font-weight:700;
-      letter-spacing:.42em;
+      letter-spacing:.18em;
       text-transform:uppercase;
-      text-shadow:0 0 16px rgba(212,175,55,.14);
-      animation:comingShimmer 3.8s ease-in-out infinite;
+      margin-bottom:12px;
     }
-    @keyframes comingShimmer{
-      0%,100%{opacity:.44;transform:translateY(0)}
-      50%{opacity:1;transform:translateY(-2px)}
+
+    .placeholder-title{
+      font-family:"Cormorant Garamond", serif;
+      color:var(--gold-soft);
+      font-size:clamp(38px, 11vw, 54px);
+      line-height:.9;
+      margin:0 0 10px;
+      text-shadow:0 0 20px rgba(212,175,55,.14);
     }
+
+    .placeholder-desc{
+      color:rgba(255,255,255,.72);
+      font-size:14px;
+      line-height:1.5;
+      margin:0;
+      max-width:210px;
+    }
+
+    .device-reflection{
+      position:absolute;
+      inset:-12% auto -10% -18%;
+      width:42%;
+      background:linear-gradient(90deg, rgba(255,255,255,.20), rgba(255,255,255,.03), rgba(255,255,255,0));
+      transform:skewX(-18deg);
+      filter:blur(10px);
+      opacity:.22;
+      pointer-events:none;
+      animation:reflectionSweep 7.5s ease-in-out infinite;
+      z-index:2;
+    }
+
+    .device-orb{
+      position:absolute;
+      border-radius:50%;
+      pointer-events:none;
+      filter:blur(18px);
+      mix-blend-mode:screen;
+      opacity:.24;
+      z-index:0;
+    }
+
+    .device-orb.one{
+      width:130px;
+      height:130px;
+      left:-8%;
+      top:12%;
+      background:radial-gradient(circle, rgba(240,212,122,.34) 0%, rgba(240,212,122,0) 72%);
+      animation:smallOrb 8s ease-in-out infinite alternate;
+    }
+
+    .device-orb.two{
+      width:150px;
+      height:150px;
+      right:-10%;
+      bottom:12%;
+      background:radial-gradient(circle, rgba(118,159,255,.24) 0%, rgba(118,159,255,0) 74%);
+      animation:smallOrb 10s ease-in-out infinite alternate-reverse;
+    }
+
+    @keyframes smallOrb{
+      from{transform:translateY(0) scale(1)}
+      to{transform:translateY(-16px) scale(1.08)}
+    }
+
+    @keyframes reflectionSweep{
+      0%{transform:translateX(-42%) skewX(-18deg); opacity:.10}
+      52%{transform:translateX(138%) skewX(-18deg); opacity:.22}
+      100%{transform:translateX(184%) skewX(-18deg); opacity:0}
+    }
+
+    .visual-float{
+      position:absolute;
+      min-width:158px;
+      padding:14px 16px;
+      border-radius:24px;
+      background:rgba(8,10,16,.74);
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow:0 22px 36px rgba(0,0,0,.24);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      animation:floatCard 7s ease-in-out infinite alternate;
+      z-index:3;
+    }
+
+    .visual-float.left{
+      left:max(0px, calc(50% - 332px));
+      top:14%;
+    }
+
+    .visual-float.right{
+      right:max(0px, calc(50% - 332px));
+      bottom:14%;
+      animation-duration:9s;
+    }
+
+    .visual-float span{
+      display:block;
+      color:rgba(255,255,255,.54);
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      margin-bottom:8px;
+    }
+
+    .visual-float strong{
+      display:block;
+      color:var(--gold-soft);
+      font-size:17px;
+      font-weight:700;
+      letter-spacing:-0.03em;
+    }
+
+    @keyframes floatCard{
+      from{transform:translateY(0)}
+      to{transform:translateY(-12px)}
+    }
+
     .hidden{display:none !important}
+
     .progress-dots{
       position:fixed;
       right:18px;
@@ -432,6 +761,7 @@
       gap:10px;
       pointer-events:none;
     }
+
     .progress-dot{
       width:7px;
       height:7px;
@@ -440,11 +770,13 @@
       transition:.25s ease;
       box-shadow:none;
     }
+
     .progress-dot.active{
       background:var(--gold);
       box-shadow:0 0 14px rgba(212,175,55,.45);
       transform:scale(1.2);
     }
+
     .ecosystem-bar{
       position:fixed;
       top:14px;
@@ -467,17 +799,20 @@
       pointer-events:none;
       transition:opacity .28s ease, transform .28s ease;
     }
+
     .ecosystem-bar.show{
       opacity:1;
       pointer-events:auto;
       transform:translateX(-50%) translateY(0);
     }
+
     .ecosystem-left{
       display:flex;
       align-items:center;
       gap:18px;
       flex:0 0 auto;
     }
+
     .ecosystem-logo{
       height:56px;
       width:auto;
@@ -486,12 +821,14 @@
         drop-shadow(0 0 14px rgba(212,175,55,.18))
         drop-shadow(0 0 30px rgba(212,175,55,.10));
     }
+
     .ecosystem-divider{
       width:1px;
       height:34px;
       background:rgba(255,255,255,.10);
       flex:0 0 auto;
     }
+
     .ecosystem-track{
       overflow:hidden;
       position:relative;
@@ -501,6 +838,7 @@
       align-items:center;
       min-width:0;
     }
+
     .ecosystem-marquee{
       display:flex;
       align-items:center;
@@ -510,6 +848,7 @@
       will-change:transform;
       padding-right:20px;
     }
+
     .ecosystem-marquee span{
       color:rgba(255,255,255,.55);
       font-size:14px;
@@ -517,16 +856,19 @@
       letter-spacing:.01em;
       transition:.22s ease;
     }
+
     .ecosystem-marquee span.active{
       color:var(--gold-soft);
       text-shadow:0 0 16px rgba(212,175,55,.18);
     }
+
     .ecosystem-actions{
       display:flex;
       align-items:center;
       gap:12px;
       flex:0 0 auto;
     }
+
     .ecosystem-nail{
       flex:0 0 auto;
       appearance:none;
@@ -544,6 +886,7 @@
       cursor:pointer;
       box-shadow:var(--shadow-premium-soft), inset 0 1px 0 rgba(255,255,255,.06);
     }
+
     .menu-toggle{
       width:46px;
       height:46px;
@@ -560,6 +903,7 @@
       box-shadow:var(--shadow-premium-soft), inset 0 1px 0 rgba(255,255,255,.04);
       z-index:200;
     }
+
     .menu-toggle span{
       position:absolute;
       width:18px;
@@ -568,16 +912,20 @@
       border-radius:999px;
       transition:transform .34s ease, top .34s ease;
     }
+
     .menu-toggle span:nth-child(1){ top:18px; }
     .menu-toggle span:nth-child(2){ top:26px; }
+
     .menu-toggle.open span:nth-child(1){
       top:22px;
       transform:rotate(45deg);
     }
+
     .menu-toggle.open span:nth-child(2){
       top:22px;
       transform:rotate(-45deg);
     }
+
     .menu-overlay{
       position:fixed;
       inset:0;
@@ -593,11 +941,13 @@
       pointer-events:none;
       transition:opacity .34s ease, visibility .34s ease;
     }
+
     .menu-overlay.open{
       opacity:1;
       visibility:visible;
       pointer-events:auto;
     }
+
     .menu-overlay-inner{
       width:min(92vw, 760px);
       max-width:760px;
@@ -605,12 +955,14 @@
       padding:100px 24px 46px;
       position:relative;
     }
+
     .menu-links{
       display:flex;
       flex-direction:column;
       gap:18px;
       align-items:center;
     }
+
     .menu-links a,
     .menu-links button{
       color:var(--gold-soft);
@@ -626,6 +978,7 @@
       font-family:Inter, sans-serif;
       padding:0;
     }
+
     .menu-links a::after,
     .menu-links button::after{
       content:"";
@@ -637,8 +990,10 @@
       background:linear-gradient(90deg, transparent, var(--gold-soft), transparent);
       transition:width .28s ease;
     }
+
     .menu-links a:hover::after,
     .menu-links button:hover::after{ width:100%; }
+
     .menu-social{
       display:flex;
       justify-content:center;
@@ -646,6 +1001,7 @@
       gap:24px;
       margin-top:42px;
     }
+
     .menu-social a{
       display:inline-flex;
       align-items:center;
@@ -653,6 +1009,7 @@
       text-decoration:none;
       border-radius:18px;
     }
+
     .menu-social img{
       width:50px;
       height:50px;
@@ -660,6 +1017,7 @@
       display:block;
       filter:drop-shadow(0 0 16px rgba(212,175,55,.08));
     }
+
     .menu-footer-links{
       display:flex;
       flex-direction:column;
@@ -667,6 +1025,7 @@
       gap:10px;
       margin-top:34px;
     }
+
     .menu-footer-links button{
       color:rgba(255,255,255,.52);
       font-size:14px;
@@ -676,16 +1035,20 @@
       cursor:pointer;
       font-family:Inter,sans-serif;
     }
+
     .menu-footer-links button:hover{ color:var(--gold-soft); }
+
     .menu-copy{
       margin-top:14px;
       color:rgba(255,255,255,.42);
       font-size:13px;
     }
+
     @keyframes marquee{
       from{ transform:translateX(0); }
       to{ transform:translateX(-50%); }
     }
+
     .startrip-shell{
       display:flex;
       flex-direction:column;
@@ -695,6 +1058,7 @@
       min-height:240px;
       overflow:visible;
     }
+
     .startrip-plane{
       position:absolute;
       left:-28%;
@@ -707,6 +1071,7 @@
       animation:planeSweep 6.2s var(--ease-premium) infinite;
       filter:drop-shadow(0 0 0 rgba(212,175,55,0));
     }
+
     .startrip-plane::before{
       content:"";
       position:absolute;
@@ -721,6 +1086,7 @@
         0 0 18px rgba(240,212,122,.20),
         0 12px 26px rgba(0,0,0,.18);
     }
+
     .startrip-plane::after{
       content:"";
       position:absolute;
@@ -732,6 +1098,7 @@
       box-shadow:0 0 14px rgba(240,212,122,.28);
       opacity:.92;
     }
+
     @keyframes planeSweep{
       0%{
         opacity:0;
@@ -757,11 +1124,13 @@
         filter:drop-shadow(0 0 18px rgba(212,175,55,.10));
       }
     }
+
     .startrip-maldives{
       position:relative;
       display:inline-block;
       animation:maldivesGlow 2.8s ease-in-out infinite;
     }
+
     .startrip-maldives::after{
       content:"";
       position:absolute;
@@ -774,6 +1143,7 @@
       opacity:.78;
       filter:blur(.2px);
     }
+
     @keyframes maldivesGlow{
       0%,100%{
         text-shadow:
@@ -786,6 +1156,7 @@
           0 0 44px rgba(212,175,55,.18);
       }
     }
+
     .buttonish.nail-dark{
       appearance:none;
       border:none;
@@ -800,21 +1171,25 @@
       cursor:pointer;
       color:var(--gold-soft);
     }
+
     .nail-cta-sub{
       margin-top:12px;
       color:var(--muted);
       font-size:14px;
       font-weight:500;
     }
+
     .phrase-stage-wrap{
       min-height:220px;
     }
+
     .phrase-rail{
       position:relative;
       width:min(92vw,900px);
       height:180px;
       margin:0 auto;
     }
+
     .phrase-word{
       position:absolute;
       font-family:Inter,system-ui,sans-serif;
@@ -831,37 +1206,46 @@
       white-space:nowrap;
       top:50%;
     }
+
     .phrase-word.active{
       opacity:1;
       transform:translateY(0) scale(1);
     }
+
     .phrase-word.left{
       left:6%;
       transform:translateY(20px) scale(.96);
     }
+
     .phrase-word.center{
       left:50%;
       transform:translate(-50%,20px) scale(.96);
     }
+
     .phrase-word.right{
       right:6%;
       transform:translateY(20px) scale(.96);
     }
+
     .phrase-word.active.left{
       transform:translateY(0) scale(1);
     }
+
     .phrase-word.active.center{
       transform:translate(-50%,0) scale(1);
     }
+
     .phrase-word.active.right{
       transform:translateY(0) scale(1);
     }
+
     .phrase-word.power{
       font-size:clamp(64px, 10vw, 108px);
       text-shadow:
         0 0 18px rgba(240,212,122,.32),
         0 0 44px rgba(212,175,55,.18);
     }
+
     .store-badges{
       display:grid;
       grid-template-columns:repeat(2, minmax(190px, 228px));
@@ -870,6 +1254,7 @@
       gap:12px;
       margin-top:24px;
     }
+
     .store-badge-link{
       display:inline-flex;
       align-items:center;
@@ -881,6 +1266,7 @@
       border:1px solid rgba(255,255,255,.08);
       box-shadow:var(--shadow-premium-soft);
     }
+
     .store-badge{
       width:100%;
       max-width:190px;
@@ -892,12 +1278,14 @@
         drop-shadow(0 0 14px rgba(212,175,55,.10))
         drop-shadow(0 0 26px rgba(212,175,55,.08));
     }
+
     .store-copy{
       margin-top:14px;
       color:var(--muted2);
       font-size:14px;
       line-height:1.5;
     }
+
     .premium-interactive{
       position:relative;
       isolation:isolate;
@@ -911,6 +1299,7 @@
       will-change:transform,box-shadow;
       backface-visibility:hidden;
     }
+
     .ecosystem-nail,
     .menu-toggle,
     .menu-social a,
@@ -925,6 +1314,7 @@
     .package-card{
       overflow:hidden;
     }
+
     .premium-interactive::before{
       content:"";
       position:absolute;
@@ -937,25 +1327,30 @@
       z-index:0;
       mix-blend-mode:screen;
     }
+
     @media (hover:hover){
       .premium-interactive:hover{
         transform:translateY(-1.5px) scale(1.012);
         box-shadow:0 22px 40px rgba(0,0,0,.22), 0 0 28px rgba(212,175,55,.12);
         filter:saturate(1.03);
       }
+
       .premium-interactive:hover::before{
         opacity:1;
         transform:translateX(135%);
         transition:transform .82s var(--ease-premium), opacity .24s ease;
       }
+
       .menu-links .premium-interactive:hover{
         text-shadow:0 0 18px rgba(212,175,55,.16);
       }
     }
+
     .premium-interactive:active{
       transform:translateY(0) scale(.985);
       transition-duration:.14s;
     }
+
     .premium-interactive:focus-visible{
       outline:none;
       box-shadow:
@@ -963,9 +1358,11 @@
         0 0 0 6px rgba(240,212,122,.08),
         0 18px 32px rgba(0,0,0,.20);
     }
+
     .press-flash{
       animation:premiumPressPulse .56s ease;
     }
+
     @keyframes premiumPressPulse{
       0%{
         transform:translateY(0) scale(.985);
@@ -979,6 +1376,7 @@
         filter:brightness(1);
       }
     }
+
     .info-modal{
       position:fixed;
       inset:0;
@@ -993,11 +1391,13 @@
       transition:.28s ease;
       padding:20px;
     }
+
     .info-modal.open{
       opacity:1;
       visibility:visible;
       pointer-events:auto;
     }
+
     .info-card{
       width:min(92vw,760px);
       border-radius:28px;
@@ -1009,6 +1409,7 @@
       box-shadow:0 24px 60px rgba(0,0,0,.35);
       position:relative;
     }
+
     .modal-star-close{
       position:absolute;
       top:16px;
@@ -1028,6 +1429,7 @@
       font-family:Inter,sans-serif;
       box-shadow:var(--shadow-premium-soft);
     }
+
     .info-card h2{
       font-family:Inter,system-ui,sans-serif;
       color:var(--gold-soft);
@@ -1037,6 +1439,7 @@
       margin:0 0 14px;
       text-align:center;
     }
+
     .info-card p{
       margin:0 auto;
       max-width:640px;
@@ -1046,18 +1449,21 @@
       font-size:15px;
       font-family:Inter,system-ui,sans-serif;
     }
+
     .info-blog-grid{
       margin-top:20px;
       display:grid;
       grid-template-columns:repeat(3,minmax(0,1fr));
       gap:14px;
     }
+
     .info-blog-item{
       border-radius:20px;
       padding:18px;
       background:rgba(255,255,255,.04);
       border:1px solid rgba(255,255,255,.08);
     }
+
     .info-blog-item h3{
       margin:0 0 10px;
       color:var(--gold-soft);
@@ -1067,17 +1473,20 @@
       letter-spacing:-0.02em;
       text-align:left;
     }
+
     .info-blog-item p{
       text-align:left;
       font-size:13.5px;
       max-width:none;
       font-family:Inter,system-ui,sans-serif;
     }
+
     .contact-form-modal{
       margin-top:20px;
       display:grid;
       gap:12px;
     }
+
     .contact-form-modal input,
     .contact-form-modal textarea{
       width:100%;
@@ -1091,10 +1500,12 @@
       font-family:Inter, sans-serif;
       font-size:14px;
     }
+
     .contact-form-modal textarea{
       min-height:140px;
       resize:vertical;
     }
+
     .contact-form-modal button{
       appearance:none;
       border:none;
@@ -1107,9 +1518,11 @@
       box-shadow:0 0 22px rgba(212,175,55,.24), inset 0 1px 0 rgba(255,255,255,.38);
       font-family:Inter,sans-serif;
     }
+
     @media (max-width:980px){
       .info-blog-grid{ grid-template-columns:1fr; }
     }
+
     .nail-overlay{
       position:fixed;
       inset:0;
@@ -1121,18 +1534,22 @@
       display:none;
       overflow:auto;
     }
+
     .nail-overlay.open{display:block}
+
     .nail-shell{
       max-width:980px;
       margin:0 auto;
       padding:24px 20px 64px;
     }
+
     .topbar{
       display:flex;
       align-items:center;
       justify-content:space-between;
       margin-bottom:18px;
     }
+
     .back-btn{
       appearance:none;
       border:none;
@@ -1144,12 +1561,14 @@
       padding:10px 0;
       border-radius:999px;
     }
+
     .mini-logo{
       font-family:"Cormorant Garamond", serif;
       color:var(--gold-soft);
       font-size:28px;
       font-weight:700;
     }
+
     .glass{
       width:100%;
       border-radius:26px;
@@ -1159,14 +1578,17 @@
       backdrop-filter:blur(16px);
       box-shadow:0 18px 40px rgba(0,0,0,.18);
     }
+
     .glass + .glass{margin-top:16px}
     .hero-card{margin-top:12px}
+
     .nail-title{
       font-size:34px;
       font-weight:800;
       margin:0 0 10px;
       text-align:center;
     }
+
     .nail-subtitle{
       text-align:center;
       color:var(--muted);
@@ -1175,22 +1597,26 @@
       margin:0 auto 28px;
       max-width:650px;
     }
+
     .section-title{
       font-size:18px;
       font-weight:800;
       margin:0 0 12px;
     }
+
     .body-copy{
       color:var(--muted);
       line-height:1.58;
       font-size:14px;
     }
+
     .feature-grid{
       margin-top:18px;
       display:grid;
       grid-template-columns:repeat(2,minmax(0,1fr));
       gap:12px;
     }
+
     .feature-card{
       border-radius:22px;
       padding:16px;
@@ -1198,6 +1624,7 @@
       border:1px solid rgba(255,255,255,.10);
       min-height:160px;
     }
+
     .feature-icon{
       width:40px;
       height:40px;
@@ -1212,17 +1639,20 @@
       margin-bottom:12px;
       box-shadow:0 0 18px rgba(212,175,55,.22);
     }
+
     .feature-card h3{
       margin:0 0 8px;
       font-size:15px;
       font-weight:800;
     }
+
     .feature-card p{
       margin:0;
       color:var(--muted);
       font-size:12.5px;
       line-height:1.42;
     }
+
     .notice{
       display:flex;
       gap:10px;
@@ -1231,11 +1661,13 @@
       font-size:13.5px;
       line-height:1.45;
     }
+
     .notice-badge{
       color:var(--gold-soft);
       font-weight:800;
       margin-top:1px;
     }
+
     .primary-btn{
       appearance:none;
       border:none;
@@ -1250,6 +1682,7 @@
       box-shadow:0 0 22px rgba(212,175,55,.24), inset 0 1px 0 rgba(255,255,255,.38);
       font-family:Inter,sans-serif;
     }
+
     .muted-center{
       text-align:center;
       color:var(--muted2);
@@ -1257,13 +1690,16 @@
       font-weight:600;
       margin-top:10px;
     }
+
     .form-grid{
       display:grid;
       grid-template-columns:1fr 1fr;
       gap:12px;
     }
+
     .field{margin-bottom:12px}
     .field.full{grid-column:1 / -1}
+
     .field label{
       display:block;
       margin-bottom:8px;
@@ -1271,6 +1707,7 @@
       font-size:13px;
       font-weight:700;
     }
+
     .field input,
     .field select{
       width:100%;
@@ -1282,30 +1719,36 @@
       font-size:14px;
       outline:none;
     }
+
     .field input:focus,
     .field select:focus{
       border-color:rgba(212,175,55,.8);
       box-shadow:0 0 0 1px rgba(212,175,55,.35);
     }
+
     .brandline{
       font-size:28px;
       font-weight:900;
       margin:2px 0 8px;
       line-height:1.15;
     }
+
     .brandline span{color:var(--gold-soft)}
+
     .powered{
       color:var(--muted2);
       font-size:12.5px;
       font-weight:600;
       margin-bottom:18px;
     }
+
     .chips{
       display:flex;
       flex-wrap:wrap;
       gap:10px;
       margin-top:10px;
     }
+
     .chip{
       border-radius:999px;
       padding:10px 14px;
@@ -1316,11 +1759,13 @@
       font-weight:600;
       cursor:pointer;
     }
+
     .chip.active{
       border-color:var(--gold);
       background:rgba(212,175,55,.16);
       box-shadow:0 0 16px rgba(212,175,55,.14);
     }
+
     .package-card{
       width:100%;
       padding:16px;
@@ -1330,22 +1775,26 @@
       margin-bottom:12px;
       cursor:pointer;
     }
+
     .package-card.active{
       border-color:var(--gold);
       background:rgba(212,175,55,.14);
       box-shadow:0 0 18px rgba(212,175,55,.12);
     }
+
     .package-title{
       font-size:15px;
       font-weight:800;
       margin:0 0 6px;
     }
+
     .package-desc{
       color:var(--muted);
       font-size:13px;
       line-height:1.45;
       margin:0;
     }
+
     .success-modal{
       position:fixed;
       inset:0;
@@ -1356,7 +1805,9 @@
       background:rgba(0,0,0,.48);
       padding:20px;
     }
+
     .success-modal.open{display:flex}
+
     .success-card{
       width:min(92vw,520px);
       border-radius:24px;
@@ -1365,21 +1816,25 @@
       padding:22px;
       box-shadow:0 24px 60px rgba(0,0,0,.35);
     }
+
     .success-card h3{
       margin:0 0 10px;
       font-size:22px;
       font-weight:800;
     }
+
     .success-card p{
       margin:0;
       color:var(--muted);
       line-height:1.5;
     }
+
     .success-actions{
       margin-top:18px;
       display:flex;
       justify-content:flex-end;
     }
+
     .text-btn{
       appearance:none;
       border:none;
@@ -1391,33 +1846,51 @@
       border-radius:999px;
       padding:8px 14px;
     }
+
+    @media (max-width:1100px){
+      .visual-float{ display:none; }
+      .module-shell{ gap:24px; }
+    }
+
     @media (max-width:780px){
       .feature-grid,.form-grid{grid-template-columns:1fr}
       .module-title{font-size:clamp(42px, 13vw, 74px)}
-      .module-screen-stage{
-        width:min(76vw,300px);
-        margin-top:28px;
+      .module-kicker{
+        font-size:10.5px;
+        letter-spacing:.14em;
+        padding:9px 14px;
       }
-      .module-note-rail{
-        inset:auto 0 -52px;
-        position:relative;
+      .module-desc{
+        font-size:14px;
+        max-width:92%;
+      }
+      .module-meta-row{
+        gap:10px;
         margin-top:18px;
-        min-height:38px;
       }
-      .module-note{
-        position:absolute;
-        left:50% !important;
-        right:auto !important;
-        top:0 !important;
-        bottom:auto !important;
-        transform:translateX(-50%) translateY(12px);
-        text-align:center !important;
-        max-width:240px;
+      .meta-pill{
+        font-size:11px;
+        padding:9px 12px;
       }
-      @keyframes noteBlink{
-        0%,100%{opacity:0;transform:translateX(-50%) translateY(12px)}
-        18%,58%{opacity:1;transform:translateX(-50%) translateY(0)}
-        78%{opacity:0;transform:translateX(-50%) translateY(-6px)}
+      .module-visual-wrap{
+        width:100%;
+        min-height:520px;
+      }
+      .device-shell{
+        height:min(62vh, 620px);
+        border-radius:46px;
+        padding:10px;
+      }
+      .device-shell::before{ border-radius:44px; }
+      .device-screen{ border-radius:36px; }
+      .screen-placeholder{
+        padding:76px 20px 20px;
+      }
+      .placeholder-badge{
+        min-height:108px;
+      }
+      .placeholder-badge.tall{
+        min-height:150px;
       }
       .logo-wrap img{ width:min(36vw,220px); }
       .ecosystem-bar{
@@ -1504,15 +1977,7 @@
       .menu-social img{ width:38px; height:38px; }
       .menu-links a, .menu-links button{ font-size:clamp(22px, 7vw, 34px); }
     }
-    @media (max-height:760px){
-      .module-screen-stage{
-        width:min(60vw,260px);
-        margin-top:24px;
-      }
-      .module-desc{
-        max-width:560px;
-      }
-    }
+
     @media (prefers-reduced-motion: reduce){
       *,
       *::before,
@@ -1538,6 +2003,7 @@
       <img src="medastare-logo.png" alt="MedaStaré logo" />
     </div>
   </div>
+
   <div class="progress-dots" id="progressDots">
     <div class="progress-dot"></div>
     <div class="progress-dot"></div>
@@ -1551,11 +2017,13 @@
     <div class="progress-dot"></div>
     <div class="progress-dot"></div>
   </div>
+
   <div class="ecosystem-bar" id="ecosystemBar">
     <div class="ecosystem-left">
       <img src="medastare-logo.png" alt="MedaStaré" class="ecosystem-logo">
       <div class="ecosystem-divider"></div>
     </div>
+
     <div class="ecosystem-track">
       <div class="ecosystem-marquee" id="ecosystemMarquee">
         <span data-name="MedaStaré">MedaStaré</span>
@@ -1574,6 +2042,7 @@
         <span data-name="PetStaré">PetStaré</span>
       </div>
     </div>
+
     <div class="ecosystem-actions">
       <button class="ecosystem-nail" id="ecosystemNailButton">NailStaré</button>
       <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
@@ -1581,6 +2050,7 @@
       </button>
     </div>
   </div>
+
   <div class="menu-overlay" id="menuOverlay">
     <div class="menu-overlay-inner">
       <div class="menu-links">
@@ -1590,6 +2060,7 @@
         <a href="mailto:info@medastare.com">SUPPORT</a>
         <button type="button" data-modal="contact">CONTACT</button>
       </div>
+
       <div class="menu-social">
         <a href="https://www.linkedin.com/company/medastare/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
           <img src="linkedin-logo.png" alt="LinkedIn">
@@ -1601,16 +2072,20 @@
           <img src="instagram-logo.png" alt="Instagram">
         </a>
       </div>
+
       <div class="menu-footer-links">
         <button type="button" disabled style="pointer-events:none; opacity:.55; cursor:default;">Privacy Policy</button>
         <button type="button" disabled style="pointer-events:none; opacity:.55; cursor:default;">Terms of Use</button>
       </div>
+
       <div class="menu-copy">© 2026 MedaStaré. All Rights Reserved.</div>
     </div>
   </div>
+
   <div class="info-modal" id="infoModal">
     <div class="info-card" id="infoCard"></div>
   </div>
+
   <div class="content">
     <section class="modules-stage" id="modulesStage">
       <div class="modules-layer" id="modulesLayer">
@@ -1619,33 +2094,75 @@
             <div class="startrip-shell hidden" id="starTripShell">
               <div class="startrip-plane"></div>
               <h2 class="module-title startrip-maldives">StarTrip: Maldives</h2>
-              <div class="startrip-coming">COMING SOON</div>
             </div>
+
             <div class="normal-module hidden" id="normalModule">
-              <h2 class="module-title" id="moduleText">MedaStaré</h2>
-              <p class="module-desc" id="moduleDesc">The signature home of the ecosystem.</p>
-              <div class="module-screen-stage hidden" id="moduleScreenStage">
-                <div class="module-note-rail">
-                  <div class="module-note primary hidden" id="moduleNotePrimary"></div>
-                  <div class="module-note secondary hidden" id="moduleNoteSecondary"></div>
+              <div class="module-shell">
+                <div class="module-copy">
+                  <div class="module-kicker" id="moduleKicker">Core Experience</div>
+                  <h2 class="module-title" id="moduleText">MedaStaré</h2>
+                  <p class="module-desc" id="moduleDesc">The signature home of the ecosystem, where AI beauty, fashion and elevated identity live in one cinematic flow.</p>
+                  <div class="module-meta-row" id="moduleMetaRow"></div>
                 </div>
-                <div class="module-screen-glow"></div>
-                <div class="module-screen-shell">
-                  <img id="moduleScreenImage" alt="">
-                  <div class="screen-sheen"></div>
+
+                <div class="module-visual-wrap" id="moduleVisualWrap">
+                  <div class="module-aura one"></div>
+                  <div class="module-aura two"></div>
+
+                  <div class="visual-float left">
+                    <span id="visualFloatLeftLabel">Signature Layer</span>
+                    <strong id="visualFloatLeftValue">Luxury Interface</strong>
+                  </div>
+
+                  <div class="visual-float right">
+                    <span id="visualFloatRightLabel">Live Motion</span>
+                    <strong id="visualFloatRightValue">Immersive Flow</strong>
+                  </div>
+
+                  <div class="device-orb one"></div>
+                  <div class="device-orb two"></div>
+
+                  <div class="device-shell">
+                    <div class="device-topbar">
+                      <div class="device-notch"></div>
+                    </div>
+
+                    <div class="device-screen">
+                      <img class="module-screen-image" id="moduleScreenImage" alt="" />
+
+                      <div class="screen-placeholder" id="screenPlaceholder">
+                        <div class="placeholder-grid">
+                          <div class="placeholder-badge"></div>
+                          <div class="placeholder-badge"></div>
+                          <div class="placeholder-badge tall"></div>
+                        </div>
+
+                        <div class="placeholder-copy">
+                          <span class="placeholder-eyebrow" id="placeholderEyebrow">Luxury Interface</span>
+                          <h3 class="placeholder-title" id="placeholderTitle">MedaStaré</h3>
+                          <p class="placeholder-desc" id="placeholderDesc">A cinematic preview of the MedaStaré universe appears here.</p>
+                        </div>
+                      </div>
+
+                      <div class="device-reflection"></div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
           <div class="nail-cta-wrap hidden" id="nailCtaWrap">
             <button class="module-title buttonish nail-dark" id="nailButton">NailStaré</button>
             <div class="nail-cta-sub">AI-powered salon growth system for selected partner salons.</div>
           </div>
+
           <div class="phrase-stage-wrap hidden" id="phraseStageWrap">
             <div class="phrase-rail">
               <div class="phrase-word left" id="phraseWord">AI.</div>
             </div>
           </div>
+
           <div class="store-cta-wrap hidden" id="storeCtaWrap">
             <h2 class="module-title" id="storeStage">Get the App</h2>
             <p class="module-desc">Download MedaStaré and step into the ecosystem.</p>
@@ -1663,6 +2180,7 @@
       </div>
     </section>
   </div>
+
   <div class="nail-overlay" id="nailOverlay">
     <div class="nail-shell">
       <div class="topbar">
@@ -1670,16 +2188,19 @@
         <div class="mini-logo">NailStaré</div>
         <div style="width:60px"></div>
       </div>
+
       <div id="nailIntroView">
         <div class="glass hero-card">
           <h1 class="nail-title">NailStaré</h1>
           <p class="nail-subtitle">AI-powered nail salon growth system.</p>
+
           <div class="glass" style="margin-bottom:18px;">
             <div class="section-title">What is NailStaré?</div>
             <div class="body-copy">
               A next-generation technology platform designed for customer experience, team development and salon performance.
             </div>
           </div>
+
           <div class="feature-grid">
             <div class="feature-card"><div class="feature-icon">✦</div><h3>AI Nail Analysis</h3><p>Smart recommendations based on hand and nail form.</p></div>
             <div class="feature-card"><div class="feature-icon">3D</div><h3>3D Try-On</h3><p>Let clients preview nail colors virtually on their own hands.</p></div>
@@ -1688,18 +2209,21 @@
             <div class="feature-card"><div class="feature-icon">P</div><h3>Salon Performance</h3><p>Reports, growth insights and performance analytics.</p></div>
             <div class="feature-card"><div class="feature-icon">♦</div><h3>Exclusive Collections</h3><p>StarAura, Moonlight and premium seasonal collection layers.</p></div>
           </div>
+
           <div class="glass" style="margin-top:18px;">
             <div class="notice">
               <div class="notice-badge">✦</div>
               <div>The system can be customized for salon needs. Some modules are unlocked for selected partner salons only.</div>
             </div>
           </div>
+
           <div style="margin-top:22px;">
             <button class="primary-btn" id="goApplyBtn">Apply for Salon Access</button>
             <div class="muted-center">Selected salons only.</div>
           </div>
         </div>
       </div>
+
       <div id="nailApplicationView" class="hidden">
         <div class="glass">
           <div class="section-title" style="font-size:22px;">NailStaré Application</div>
@@ -1710,6 +2234,7 @@
             <input id="salonName" type="text" placeholder="Salon name" />
           </div>
         </div>
+
         <div class="glass">
           <div class="section-title">Salon Information</div>
           <div class="form-grid">
@@ -1730,6 +2255,7 @@
             <div class="field"><label for="city">City</label><input id="city" type="text" placeholder="City" /></div>
           </div>
         </div>
+
         <div class="glass">
           <div class="section-title">Capacity &amp; Services</div>
           <div class="form-grid">
@@ -1749,6 +2275,7 @@
             </div>
           </div>
         </div>
+
         <div class="glass">
           <div class="section-title">Social Media</div>
           <div class="field" style="margin-bottom:0;">
@@ -1756,12 +2283,14 @@
             <input id="instagram" type="text" placeholder="Instagram account" />
           </div>
         </div>
+
         <div class="glass">
           <div class="section-title">NailStaré Packages</div>
           <div class="package-card" data-package="basic"><div class="package-title">Basic</div><p class="package-desc">Salon panel, AI Nail Analysis, Trend Radar and core visibility tools.</p></div>
           <div class="package-card" data-package="premium"><div class="package-title">Premium</div><p class="package-desc">Academy access, advanced reports, trend radar and exclusive collection support.</p></div>
           <div class="package-card" data-package="vip"><div class="package-title">VIP</div><p class="package-desc">3D Try-On, AI client analysis, Hologram Nail Workshop and VIP visibility layers.</p></div>
         </div>
+
         <div class="glass">
           <div class="section-title">Primary Need</div>
           <div class="field" style="margin-bottom:0;">
@@ -1776,12 +2305,14 @@
             </select>
           </div>
         </div>
+
         <div class="glass">
           <div class="notice">
             <div class="notice-badge">✦</div>
             <div>Applications are reviewed by the NailStaré operations team. Suitable salons will be contacted.</div>
           </div>
         </div>
+
         <div style="margin-top:20px;">
           <button class="primary-btn" id="submitApplicationBtn">Submit Application</button>
           <div class="muted-center">Selected salons only.</div>
@@ -1789,6 +2320,7 @@
       </div>
     </div>
   </div>
+
   <div class="success-modal" id="successModal">
     <div class="success-card">
       <h3>Application Received</h3>
@@ -1798,6 +2330,7 @@
       </div>
     </div>
   </div>
+
   <script>
     for(let i=0;i<120;i++){
       const s=document.createElement("div");
@@ -1818,8 +2351,10 @@
       const star = document.createElement("div");
       star.className = "burst-star";
       heroScene.appendChild(star);
+
       const angle = (i / STAR_COUNT) * Math.PI * 2;
       const radius = 70 + Math.random() * 120;
+
       burstStars.push({
         el: star,
         angle,
@@ -1837,10 +2372,18 @@
     const moduleStack = document.getElementById("moduleStack");
     const moduleText = document.getElementById("moduleText");
     const moduleDesc = document.getElementById("moduleDesc");
-    const moduleScreenStage = document.getElementById("moduleScreenStage");
+    const moduleKicker = document.getElementById("moduleKicker");
+    const moduleMetaRow = document.getElementById("moduleMetaRow");
+    const moduleVisualWrap = document.getElementById("moduleVisualWrap");
     const moduleScreenImage = document.getElementById("moduleScreenImage");
-    const moduleNotePrimary = document.getElementById("moduleNotePrimary");
-    const moduleNoteSecondary = document.getElementById("moduleNoteSecondary");
+    const screenPlaceholder = document.getElementById("screenPlaceholder");
+    const placeholderEyebrow = document.getElementById("placeholderEyebrow");
+    const placeholderTitle = document.getElementById("placeholderTitle");
+    const placeholderDesc = document.getElementById("placeholderDesc");
+    const visualFloatLeftLabel = document.getElementById("visualFloatLeftLabel");
+    const visualFloatLeftValue = document.getElementById("visualFloatLeftValue");
+    const visualFloatRightLabel = document.getElementById("visualFloatRightLabel");
+    const visualFloatRightValue = document.getElementById("visualFloatRightValue");
     const starTripShell = document.getElementById("starTripShell");
     const normalModule = document.getElementById("normalModule");
     const nailButton = document.getElementById("nailButton");
@@ -1863,7 +2406,6 @@
       { text:"Beauty.", cls:"right", duration:1300 },
       { text:"Power.", cls:"center power", duration:1700 }
     ];
-
     let phraseIndex = 0;
     let phraseInterval = null;
     let autoStoreTriggered = false;
@@ -1873,39 +2415,85 @@
       { title:"StarTrip: Maldives", desc:"", special:"startrip" },
       {
         title:"MedaStaré",
+        kicker:"Core Experience",
         desc:"The signature home of the ecosystem, where AI beauty, fashion and elevated identity live in one cinematic flow.",
-        hasScreen:true,
-        screen:"Home_screen.jpeg",
-        notePrimary:"PRIVATE AI LUXURY",
-        noteSecondary:"ELEVATED HOME FLOW"
+        image:"Home_screen.jpeg",
+        placeholderEyebrow:"Signature Home",
+        visualTitle:"MedaStaré",
+        visualCopy:"A refined home feed that opens the full universe with editorial calm, soft light and premium motion.",
+        pills:["AI Home Feed", "Luxury Motion", "Editorial Onboarding"],
+        floatLeft:{ label:"App Core", value:"Home Screen" },
+        floatRight:{ label:"Feel", value:"Cinematic Flow" }
       },
       {
         title:"FashionStaré",
-        desc:"AI styling, elevated for a luxury fashion ecosystem.",
-        hasScreen:true,
-        screen:"FashionStare_Screen.jpeg",
-        notePrimary:"CURATED BY AI",
-        noteSecondary:"RUNWAY CALM"
+        kicker:"Style Intelligence",
+        desc:"AI styling, elevated for a luxury fashion ecosystem with editorial rhythm and soft couture detail.",
+        image:"FashionStare_Screen.jpeg",
+        placeholderEyebrow:"Fashion Direction",
+        visualTitle:"Fashion",
+        visualCopy:"Visual styling, refined recommendations and premium shopping energy in one elegant frame.",
+        pills:["AI Styling", "Luxury Curation", "Editorial Discovery"],
+        floatLeft:{ label:"Style Layer", value:"Signature Looks" },
+        floatRight:{ label:"Mood", value:"Runway Flow" }
       },
       {
         title:"MedArena",
-        desc:"Challenges, visibility and momentum across the MedaStaré universe.",
-        hasScreen:true,
-        screen:"Medarena_screen.jpeg",
-        notePrimary:"PRESTIGE IN MOTION",
-        noteSecondary:"LIVE STATUS"
+        kicker:"Momentum Engine",
+        desc:"Challenges, visibility and momentum across the MedaStaré universe, presented with prestige and motion.",
+        image:"Medarena_screen.jpeg",
+        placeholderEyebrow:"Competitive Luxury",
+        visualTitle:"Arena",
+        visualCopy:"High-energy progression, spotlight moments and social momentum wrapped in a premium UI language.",
+        pills:["Challenge Flow", "Visibility", "Reward Layers"],
+        floatLeft:{ label:"Energy", value:"Live Arena" },
+        floatRight:{ label:"Signal", value:"Prestige Boost" }
       },
       {
         title:"StyleTrack",
-        desc:"Your style memory, visualized with intelligent tracking.",
-        hasScreen:true,
-        screen:"Styletrack_screen.jpeg",
-        notePrimary:"MEMORY OF STYLE",
-        noteSecondary:"REFINED SIGNAL"
+        kicker:"Memory Layer",
+        desc:"Your style memory, visualized with intelligent tracking, sharp recall and a private couture archive feel.",
+        image:"Styletrack_screen.jpeg",
+        placeholderEyebrow:"Visual Archive",
+        visualTitle:"Track",
+        visualCopy:"Looks, preferences and visual identity become a living memory with elegant analytical depth.",
+        pills:["Visual Memory", "Smart Tracking", "Private Archive"],
+        floatLeft:{ label:"Insight", value:"Style Recall" },
+        floatRight:{ label:"Mode", value:"Quiet Luxury" }
       },
-      { title:"StyleStaré", desc:"Curated identity refined by AI and premium aesthetic logic.", hasScreen:false },
-      { title:"MedaBeauté", desc:"Beauty intelligence meets luxury rituals and elevated discovery.", hasScreen:false },
-      { title:"PetStaré", desc:"Care, style and smart companionship in one elegant layer.", hasScreen:false }
+      {
+        title:"StyleStaré",
+        kicker:"Identity Studio",
+        desc:"Curated identity refined by AI and premium aesthetic logic for a more distinctive and personal fashion voice.",
+        placeholderEyebrow:"Identity Studio",
+        visualTitle:"StyleStaré",
+        visualCopy:"A couture-facing identity layer with deeply personal selections and polished visual confidence.",
+        pills:["Identity Edit", "Taste Mapping", "Couture Logic"],
+        floatLeft:{ label:"Identity", value:"Curated Self" },
+        floatRight:{ label:"Result", value:"Refined Aura" }
+      },
+      {
+        title:"MedaBeauté",
+        kicker:"Beauty Intelligence",
+        desc:"Beauty intelligence meets luxury rituals, elevated discovery and sensorial recommendations shaped around you.",
+        placeholderEyebrow:"Beauty Rituals",
+        visualTitle:"Beauté",
+        visualCopy:"Future-facing beauty guidance with polished rituals, discovery layers and soft luminescent motion.",
+        pills:["Beauty AI", "Ritual Design", "Premium Discovery"],
+        floatLeft:{ label:"Ritual", value:"Glow Logic" },
+        floatRight:{ label:"Focus", value:"Soft Power" }
+      },
+      {
+        title:"PetStaré",
+        kicker:"Companion Style",
+        desc:"Care, style and smart companionship in one elegant layer with premium warmth and playful polish.",
+        placeholderEyebrow:"Pet Universe",
+        visualTitle:"PetStaré",
+        visualCopy:"A softer expression of the ecosystem, balancing care, charm and premium utility in one place.",
+        pills:["Smart Care", "Elegant Utility", "Playful Prestige"],
+        floatLeft:{ label:"Care", value:"Companion AI" },
+        floatRight:{ label:"Tone", value:"Soft Luxe" }
+      }
     ];
 
     const modalContent = {
@@ -1985,12 +2573,15 @@
       const step = phraseSequence[phraseIndex];
       phraseWord.className = "phrase-word " + step.cls;
       phraseWord.textContent = step.text;
+
       requestAnimationFrame(() => {
         phraseWord.classList.add("active");
       });
+
       setTimeout(() => {
         phraseWord.classList.remove("active");
       }, step.duration);
+
       phraseIndex = (phraseIndex + 1) % phraseSequence.length;
     }
 
@@ -2037,10 +2628,70 @@
       });
     });
 
+    function setModuleDepth(local, step){
+      const progress = clamp(local / step, 0, 1);
+      moduleStack.style.setProperty("--copy-shift", `${map(progress, 0, 1, 12, -12)}px`);
+      moduleStack.style.setProperty("--visual-shift", `${map(progress, 0, 1, 20, -20)}px`);
+      moduleStack.style.setProperty("--visual-tilt", `${map(progress, 0, 1, -1.2, 1.2)}deg`);
+    }
+
+    function resetModuleDepth(){
+      moduleStack.style.setProperty("--copy-shift", "0px");
+      moduleStack.style.setProperty("--visual-shift", "0px");
+      moduleStack.style.setProperty("--visual-tilt", "0deg");
+    }
+
+    function renderModule(index){
+      const module = modules[index];
+      if(!module || module.special || activeModuleIndex === index) return;
+
+      activeModuleIndex = index;
+      moduleText.textContent = module.title;
+      moduleDesc.textContent = module.desc;
+      moduleKicker.textContent = module.kicker || "Signature Experience";
+      moduleMetaRow.innerHTML = (module.pills || [])
+        .map(text => `<span class="meta-pill">${text}</span>`)
+        .join("");
+
+      placeholderEyebrow.textContent = module.placeholderEyebrow || module.kicker || "Luxury Interface";
+      placeholderTitle.textContent = module.visualTitle || module.title;
+      placeholderDesc.textContent = module.visualCopy || module.desc;
+      visualFloatLeftLabel.textContent = module.floatLeft?.label || "Signature Layer";
+      visualFloatLeftValue.textContent = module.floatLeft?.value || "Luxury Interface";
+      visualFloatRightLabel.textContent = module.floatRight?.label || "Live Motion";
+      visualFloatRightValue.textContent = module.floatRight?.value || "Immersive Flow";
+
+      moduleScreenImage.classList.remove("active");
+      moduleScreenImage.hidden = true;
+      screenPlaceholder.classList.remove("hidden");
+      moduleScreenImage.removeAttribute("src");
+      moduleScreenImage.alt = "";
+
+      if(!module.image) return;
+
+      const targetImage = module.image;
+      moduleScreenImage.dataset.target = targetImage;
+      moduleScreenImage.onload = () => {
+        if(moduleScreenImage.dataset.target !== targetImage) return;
+        moduleScreenImage.hidden = false;
+        moduleScreenImage.classList.add("active");
+        screenPlaceholder.classList.add("hidden");
+      };
+      moduleScreenImage.onerror = () => {
+        if(moduleScreenImage.dataset.target !== targetImage) return;
+        moduleScreenImage.hidden = true;
+        moduleScreenImage.classList.remove("active");
+        screenPlaceholder.classList.remove("hidden");
+      };
+      moduleScreenImage.src = targetImage;
+      moduleScreenImage.alt = `${module.title} screen preview`;
+    }
+
     function updateProgress(activeIndex){
       progressDots.forEach((dot,i)=>{
         dot.classList.toggle("active", i === activeIndex);
       });
+
       marqueeItems.forEach(item=>{
         item.classList.toggle("active", item.dataset.name === (modules[activeIndex]?.title || ""));
       });
@@ -2051,15 +2702,17 @@
       nailCtaWrap.classList.remove("show");
       phraseStageWrap.classList.remove("show");
       storeCtaWrap.classList.remove("show");
+
       nailCtaWrap.classList.add("hidden");
       phraseStageWrap.classList.add("hidden");
       storeCtaWrap.classList.add("hidden");
       moduleStack.classList.add("hidden");
+      resetModuleDepth();
     }
 
     function scrollToStoreStage(){
       const start = 760;
-      const step = 430;
+      const step = 520;
       const modulesEnd = start + (modules.length * step);
       const nailStageStart = modulesEnd;
       const phraseStageStart = nailStageStart + step;
@@ -2067,64 +2720,11 @@
       window.scrollTo({ top: storeStageStart + 8, behavior: "smooth" });
     }
 
-    function setScreenMotion(local, step){
-      const progress = clamp(local / step, 0, 1);
-      const shift = map(progress, 0, 1, 12, -10);
-      const scale = map(progress, 0, 1, 1, 1.018);
-      moduleScreenStage.style.setProperty("--screen-shift", `${shift}px`);
-      moduleScreenStage.style.setProperty("--screen-scale", scale.toFixed(3));
-    }
-
-    function setScreenContent(module){
-      moduleScreenStage.classList.add("hidden");
-      normalModule.classList.toggle("has-screen", !!module.hasScreen);
-      moduleNotePrimary.textContent = module.notePrimary || "";
-      moduleNoteSecondary.textContent = module.noteSecondary || "";
-      moduleNotePrimary.classList.toggle("hidden", !module.notePrimary);
-      moduleNoteSecondary.classList.toggle("hidden", !module.noteSecondary);
-      moduleScreenImage.removeAttribute("src");
-      moduleScreenImage.removeAttribute("alt");
-
-      if(!module.hasScreen || !module.screen){
-        normalModule.classList.remove("has-screen");
-        return;
-      }
-
-      const target = module.screen;
-      moduleScreenImage.dataset.target = target;
-      moduleScreenImage.onload = () => {
-        if(moduleScreenImage.dataset.target !== target) return;
-        moduleScreenStage.classList.remove("hidden");
-        normalModule.classList.add("has-screen");
-      };
-      moduleScreenImage.onerror = () => {
-        if(moduleScreenImage.dataset.target !== target) return;
-        moduleScreenStage.classList.add("hidden");
-        normalModule.classList.remove("has-screen");
-      };
-      moduleScreenImage.src = target;
-      moduleScreenImage.alt = `${module.title} screen`;
-    }
-
-    function renderModule(index){
-      const module = modules[index];
-      if(!module || module.special) return;
-      if(activeModuleIndex !== index){
-        moduleText.textContent = module.title;
-        moduleDesc.textContent = module.desc;
-        setScreenContent(module);
-        activeModuleIndex = index;
-      }
-      if(module.hasScreen){
-        setScreenMotion(window.__currentModuleLocal || 0, 430);
-      }
-    }
-
     function updateModules(scrollY){
       const start = 760;
-      const step = 430;
+      const step = 520;
       const modulesEnd = start + (modules.length * step);
-      const topBarStart = modulesEnd - 200;
+      const topBarStart = modulesEnd - 240;
       const nailStageStart = modulesEnd;
       const phraseStageStart = nailStageStart + step;
       const storeStageStart = phraseStageStart + step;
@@ -2147,13 +2747,15 @@
 
       if(index >= 0 && index < modules.length){
         const local = relative - index * step;
-        window.__currentModuleLocal = local;
+
         hideAllStages();
         moduleStack.classList.remove("hidden");
         stopPhraseLoop();
         autoStoreTriggered = false;
+        setModuleDepth(local, step);
 
         if(modules[index].special === "startrip"){
+          resetModuleDepth();
           starTripShell.classList.remove("hidden");
           normalModule.classList.add("hidden");
         }else{
@@ -2162,7 +2764,7 @@
           renderModule(index);
         }
 
-        const visible = local > 30 && local < 320;
+        const visible = local > 34 && local < 420;
         moduleStack.classList.toggle("show", visible);
         updateProgress(index);
         return;
@@ -2186,6 +2788,7 @@
         phraseStageWrap.classList.toggle("show", local > 40);
         startPhraseLoop();
         updateProgress(9);
+
         if(local > 120 && !autoStoreTriggered){
           autoStoreTriggered = true;
           setTimeout(() => {
@@ -2210,15 +2813,19 @@
 
     function updateScene(){
       const s = window.scrollY;
+
       const moveProgress = clamp((s - 180) / 380, 0, 1);
       const left = map(moveProgress, 0, 1, 50, 11);
-      const top = map(moveProgress, 0, 1, 50, 9);
+      const top  = map(moveProgress, 0, 1, 50, 9);
       const scale = map(moveProgress, 0, 1, 1, 0.62);
+
       logoWrap.style.left = left + "%";
       logoWrap.style.top = top + "%";
       logoWrap.style.transform = `translate(-50%,-50%) scale(${scale})`;
+
       const glowA = map(moveProgress, 0, 1, 38, 14);
       logoWrap.style.filter = `drop-shadow(0 0 ${glowA}px rgba(212,175,55,.18))`;
+
       const vanishStart = 0.78;
       const vanishProgress = clamp((moveProgress - vanishStart) / (1 - vanishStart), 0, 1);
       logoWrap.style.opacity = 1 - vanishProgress;
@@ -2228,12 +2835,15 @@
         const x = Math.cos(star.angle) * star.radius * local * star.drift;
         const y = Math.sin(star.angle) * star.radius * local * star.drift;
         const starScale = map(local, 0, 1, 0.15, 1.8);
+
         let opacity = map(local, 0, 0.25, 0, 1);
         if(local > 0.72){
           opacity = map(local, 0.72, 1, 1, 0);
         }
+
         star.el.style.opacity = opacity;
-        star.el.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${starScale})`;
+        star.el.style.transform =
+          `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${starScale})`;
       });
 
       updateModules(s);
@@ -2261,11 +2871,13 @@
         if(node.dataset.premiumBound === "true") return;
         node.dataset.premiumBound = "true";
         node.classList.add("premium-interactive");
+
         node.addEventListener("pointerdown", () => {
           node.classList.remove("press-flash");
           void node.offsetWidth;
           node.classList.add("press-flash");
         });
+
         node.addEventListener("animationend", (event) => {
           if(event.animationName === "premiumPressPulse"){
             node.classList.remove("press-flash");
@@ -2320,6 +2932,7 @@
 
     const salonName = document.getElementById("salonName");
     const liveSalonName = document.getElementById("liveSalonName");
+
     salonName.addEventListener("input", () => {
       liveSalonName.textContent = salonName.value.trim() || "Your Salon Name";
     });
