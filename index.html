@@ -2358,42 +2358,21 @@ html,body{margin:0;padding:0;scroll-behavior:smooth;width:100%;overflow-x:clip;o
       align-items:center !important;
       justify-content:center !important;
       font-family:"Segoe UI Symbol","Apple Symbols","Noto Sans Symbols 2","Arial Unicode MS",sans-serif !important;
-      font-size:128px !important;
+      font-size:168px !important;
       font-weight:700 !important;
       line-height:1 !important;
       letter-spacing:0 !important;
       color:#ffcf33 !important;
       opacity:0;
       transform-origin:center center !important;
-      will-change:transform,opacity !important;
-      backface-visibility:hidden;
-      -webkit-font-smoothing:antialiased;
-      animation:planeSweep 8.6s linear infinite !important;
-      filter:none !important;
-      text-shadow:none !important;
+      animation:planeSweep 7.8s cubic-bezier(.22,.78,.2,1) infinite !important;
+      filter:drop-shadow(0 0 18px rgba(255,207,51,.56)) drop-shadow(0 0 40px rgba(212,175,55,.30)) !important;
+      text-shadow:0 0 16px rgba(255,207,51,.34), 0 0 36px rgba(212,175,55,.22) !important;
       z-index:2;
     }
-    .startrip-plane::before{
-      content:"";
-      position:absolute;
-      inset:20% 12%;
-      border-radius:999px;
-      background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.18), rgba(255,255,255,0) 68%);
-      opacity:.42;
-      pointer-events:none;
-    }
-    .startrip-plane::after{
-      content:"";
-      position:absolute;
-      left:-104px;
-      right:72px;
-      top:50%;
-      height:2px;
-      transform:translateY(-50%);
-      background:linear-gradient(90deg, transparent 0%, rgba(255,255,255,.04) 14%, rgba(240,212,122,.28) 52%, rgba(255,255,255,.06) 78%, transparent 100%);
-      opacity:.6;
-    }
-    .startrip-plane svg{display:none !important;}
+    .startrip-plane::before,
+    .startrip-plane::after,
+    .startrip-plane svg{display:none !important;content:none !important;background:none !important;box-shadow:none !important;}
     .startrip-coming::before,
     .startrip-coming::after{
       display:none !important;
@@ -2405,19 +2384,19 @@ html,body{margin:0;padding:0;scroll-behavior:smooth;width:100%;overflow-x:clip;o
     }
     @keyframes planeSweep{
       0%{opacity:0;transform:translate3d(-260px,18px,0) rotate(0deg) scale(.92);}
-      10%{opacity:1;transform:translate3d(-110px,10px,0) rotate(-1deg) scale(.96);}
-      26%{opacity:1;transform:translate3d(110px,-4px,0) rotate(-1.2deg) scale(.99);}
-      46%{opacity:1;transform:translate3d(420px,-10px,0) rotate(-.5deg) scale(1.02);}
-      68%{opacity:1;transform:translate3d(760px,-2px,0) rotate(.75deg) scale(1.01);}
-      86%{opacity:.92;transform:translate3d(1040px,10px,0) rotate(1.4deg) scale(.98);}
-      100%{opacity:0;transform:translate3d(1320px,22px,0) rotate(1.8deg) scale(.95);}
+      8%{opacity:1;transform:translate3d(-120px,10px,0) rotate(-1deg) scale(.96);}
+      24%{opacity:1;transform:translate3d(120px,-4px,0) rotate(-1.5deg) scale(1);}
+      44%{opacity:1;transform:translate3d(420px,-10px,0) rotate(-.5deg) scale(1.03);}
+      66%{opacity:1;transform:translate3d(760px,-2px,0) rotate(.75deg) scale(1.02);}
+      84%{opacity:.95;transform:translate3d(1040px,10px,0) rotate(1.5deg) scale(.99);}
+      100%{opacity:0;transform:translate3d(1320px,22px,0) rotate(2deg) scale(.95);}
     }
     .module-stack.show .normal-module.has-screen .module-screen-stage:not(.hidden) .module-screen-shell img{
       object-position:center 46px !important;
       transform:scale(1.005) translateY(28px) !important;
     }
     @media (max-width:780px){
-      .startrip-plane{font-size:96px !important;left:-19% !important;top:35% !important;color:#ffcf33 !important;}
+      .startrip-plane{font-size:116px !important;left:-19% !important;top:35% !important;color:#ffcf33 !important;}
       .module-stack.show .normal-module.has-screen .module-screen-stage:not(.hidden) .module-screen-shell img{
         object-position:center 38px !important;
         transform:scale(1.01) translateY(24px) !important;
