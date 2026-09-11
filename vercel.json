@@ -1,9 +1,11 @@
 {
   "version": 2,
   "builds": [
-    { "src": "api/chat.js", "use": "@vercel/node" }
+    { "src": "api/chat.js", "use": "@vercel/node" },
+    { "src": "api/send-verification.js", "use": "@vercel/node" }
   ],
   "routes": [
+    { "src": "/api/send-verification", "dest": "api/send-verification.js" },
     { "src": "/api/(.*)", "dest": "api/chat.js" }
   ],
   "headers": [
